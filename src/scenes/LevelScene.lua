@@ -61,7 +61,7 @@ function LevelScene:destroy()
 
 	LevelScene:superClass().destroy(self);
 
-	--SimpleAudioEngine:sharedEngine():stopBackgroundMusic(true);
+	SimpleAudioEngine:sharedEngine():stopMusic(true);
 end
 
 --------------------------------

@@ -35,7 +35,7 @@ end
 function ChooseLocation:destroy()
 	ChooseLocation:superClass().destroy(self);
 
-	--SimpleAudioEngine:sharedEngine():stopBackgroundMusic(true);
+	SimpleAudioEngine:sharedEngine():stopMusic(true);
 end
 
 --------------------------------

@@ -27,7 +27,7 @@ end
 function ChooseLevel:destroy()
 	ChooseLevel:superClass().destroy(self);
 
-	--SimpleAudioEngine:sharedEngine():stopBackgroundMusic(true);
+	SimpleAudioEngine:sharedEngine():stopMusic(true);
 end
 
 --------------------------------
