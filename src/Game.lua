@@ -15,18 +15,18 @@ Game.mScale = 1
 Game.mLocations = {}
 
 local SUPPORTED_RESOLUTION = {
-	{ size = CCSizeMake(480, 320), scale = 1, searchPath = "resources-iphone"},
-	{ size = CCSizeMake(700, 350), scale = 2, searchPath = "resources-iphonehd"}, -- for android 480x800
-	{ size = CCSizeMake(960, 640), scale = 2, searchPath = "resources-iphonehd"},
-	{ size = CCSizeMake(1024, 768), scale = 2, searchPath = "resources-iphonehd"},
-	{ size = CCSizeMake(1024 * 2, 768 * 2), scale = 2, searchPath = "resources-iphonehd"}
+	{ size = cc.size(480, 320), scale = 1, searchPath = "resources-iphone"},
+	{ size = cc.size(700, 350), scale = 2, searchPath = "resources-iphonehd"}, -- for android 480x800
+	{ size = cc.size(960, 640), scale = 2, searchPath = "resources-iphonehd"},
+	{ size = cc.size(1024, 768), scale = 2, searchPath = "resources-iphonehd"},
+	{ size = cc.size(1024 * 2, 768 * 2), scale = 2, searchPath = "resources-iphonehd"}
 }
 
 local RESOURCE_DIRECTORIES = {
 	"Published-iOS", "Maps"
 }
 
-local DESIGN_RESOLUTION_SIZE = CCSizeMake(480, 320);
+local DESIGN_RESOLUTION_SIZE = cc.size(480, 320);
 
 ---------------------------------
 function Game:getLocations()
@@ -59,12 +59,12 @@ end
 
 ---------------------------------
 function Game:isLevelOpened(locationId, level)
-	return CCUserDefault:sharedUserDefault():getBoolForKey(locationId .. tostring(level));
+	return CCUserDefault:getInstance():getBoolForKey(locationId .. tostring(level));
 end
 
 ---------------------------------
 function Game:openLevel(locationId, level)
-	CCUserDefault:sharedUserDefault():setBoolForKey(locationId .. tostring(level), true);
+	CCUserDefault:getInstance():setBoolForKey(locationId .. tostring(level), true);
 end
 
 ---------------------------------
@@ -103,7 +103,7 @@ end
 ---------------------------------
 function Game:init()
 
-	CCUserDefault:sharedUserDefault();
+	CCUserDefault:getInstance();
 	local xmlFilePath = CCUserDefault:getXMLFilePath();
 	print("Game:init xmlFilePath ", xmlFilePath);
 

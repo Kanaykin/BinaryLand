@@ -16,18 +16,18 @@ function getPosition(object, pos)
 	local parent = object:getParent();
 	if(parent == nil) then
 		parentSize = CCDirector:getInstance():getVisibleSize();
-		parentPos = CCPointMake(0, 0);
+		parentPos = cc.p(0, 0);
 	else
 		parentSize = parent:getContentSize();
 		local xPos, yPos = parent:getPosition();
-		parentPos = CCPointMake(xPos, yPos);
+		parentPos = cc.p(xPos, yPos);
 	end
 	local objSize = object:getContentSize();
 	-- compute pos
 	local X = parentSize.width * pos.relX + pos.absX;-- + objSize.width / 2.0;
 	local Y = parentSize.height * pos.relY + pos.absY;
 
-	return CCPointMake(X, Y);
+	return cc.p(X, Y);
 end
 
 ----------------------------------

@@ -31,7 +31,7 @@ function FoxObject:init(field, node, needReverse)
 
 	self.mLastDir = 2;
 	if not self.mIsFemale then
-		tolua.cast(self.mAnimationNode, "cc.Sprite"):setFlipX(true);
+		tolua.cast(self.mAnimationNode, "cc.Sprite"):setFlippedX(true);
 	end
 end
 
@@ -43,8 +43,8 @@ end
 ---------------------------------
 function FoxObject:getBoundingBox()
 	local pos = FoxObject:superClass().getBoundingBox(self);
-	local size = self.mAnimationNode:boundingBox();
-	return CCRectMake(pos.x, pos.y, size.width, size.width);
+	local size = self.mAnimationNode:getBoundingBox();
+	return cc.rect(pos.x, pos.y, size.width, size.width);
 end
 
 --------------------------------
@@ -64,7 +64,7 @@ function FoxObject:setFightActivated(activated)
 	if activated then
 		self.mEffectAnimations[1]:play();
 		self.mEffectAnimations[1]:setStopAfterDone(false);
-		SimpleAudioEngine:sharedEngine():playEffect(gSounds.PLAYER_ATTACK_SOUND)
+		SimpleAudioEngine:getInstance():playEffect(gSounds.PLAYER_ATTACK_SOUND)
 	else
 		--self.mEffectNode:stopAllActions();
 		--self.mEffectAnimations[1]:stop();
@@ -97,7 +97,7 @@ function FoxObject:updateFlipNode(node)
 			flip = not flip;
 		end
 		--flip = (self.mIsFemale) and (not flip) or flip;
-		tolua.cast(node, "cc.Sprite"):setFlipX(flip);
+		tolua.cast(node, "cc.Sprite"):setFlippedX(flip);
 	end
 	return flip; 
 end
@@ -169,7 +169,7 @@ function FoxObject:initAnimation()
 	--local texture = tolua.cast(self.mAnimationNode, "cc.Sprite"):getTexture();
 	local textureName = self:getPrefixTexture() .. ".png";
 	print("FoxObject:initAnimation textureName ", textureName);
-	local texture = CCTextureCache:sharedTextureCache():addImage(textureName);
+	local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
 
 	self.mAnimations = {}
 	
@@ -182,7 +182,7 @@ function FoxObject:initAnimation()
 	self.mAnimations[-2] = RandomAnimation:create();
 	self.mAnimations[-2]:init();
 	textureName = self:getPrefixTexture() .. "Back.png";
-	local texture = CCTextureCache:sharedTextureCache():addImage(textureName);
+	local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
 	self:createIdleAnimation(self.mAnimations[-2], "FoxBackIdle1.plist", texture, self.mAnimationNode:getContentSize());
 	self:createIdleAnimation(self.mAnimations[-2], "FoxBackIdle2.plist", texture, self.mAnimationNode:getContentSize());
 	self:createIdleAnimation(self.mAnimations[-2], "FoxBackIdle3.plist", texture, self.mAnimationNode:getContentSize());

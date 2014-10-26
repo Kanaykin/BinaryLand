@@ -59,8 +59,8 @@ function ScrollView:setClickable(clickable)
 	if clickable then
 		--------------------
 		local function onTouchHandler(action, var1, var2)
-			print("onTouchHandler ", action, "var1 ", var, "var2 ", var2);
-			print("onTouchHandler ", action, "x = ", var1, " y = ", var2);
+			--print("onTouchHandler ", action, "var1 ", var, "var2 ", var2);
+			--print("onTouchHandler ", action, "x = ", var1, " y = ", var2);
     		scrollView:onTouchHandler(action, cc.p(var1, var2));
     		return true;
     	end
@@ -91,9 +91,9 @@ function ScrollView:initLayers(layers)
 		height = height + layerSize.height;
 	end
 
-	scrollviewlayer:setContentSize(CCSizeMake(visibleSize.width, height));
+	scrollviewlayer:setContentSize(cc.size(visibleSize.width, height));
 
-	self.mScroll = CCScrollView:create(CCSizeMake(visibleSize.width, visibleSize.height), scrollviewlayer);
+	self.mScroll = CCScrollView:create(cc.size(visibleSize.width, visibleSize.height), scrollviewlayer);
 	self.mScroll:setBounceable(false);
 	self.mScroll:setZoomScale(3.0, false);
 
@@ -114,9 +114,9 @@ function ScrollView:init(sizeScale, images)
 	self.mClickableChildren = {};
 	local visibleSize = CCDirector:getInstance():getVisibleSize();
 	local scrollviewlayer = CCLayer:create();
-	scrollviewlayer:setContentSize(CCSizeMake(visibleSize.width * sizeScale.width, visibleSize.height * sizeScale.height));
+	scrollviewlayer:setContentSize(cc.size(visibleSize.width * sizeScale.width, visibleSize.height * sizeScale.height));
 
-	self.mScroll = CCScrollView:create(CCSizeMake(visibleSize.width, visibleSize.height), scrollviewlayer);
+	self.mScroll = CCScrollView:create(cc.size(visibleSize.width, visibleSize.height), scrollviewlayer);
 	self.mScroll:setBounceable(false);
 	self.mScroll:setZoomScale(3.0, false);
 

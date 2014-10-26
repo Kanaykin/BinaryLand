@@ -33,7 +33,7 @@ end
 function FieldNode:setScrollPos(pos)
 	--print("FieldNode:setScrollPos ");
 	if self.mScrollView.setContentOffset then
-		self.mScrollView:setContentOffset(CCPointMake(0, -pos.y));
+		self.mScrollView:setContentOffset(cc.p(0, -pos.y));
 	end
 end
 
@@ -67,7 +67,7 @@ function FieldNode:init(nodes, layer, field)
 		end]]
 	end
 
-	self.mSize = CCSizeMake(width, height);
+	self.mSize = cc.size(width, height);
 	local newLayer = CCLayer:create();
 	newLayer:setContentSize(self.mSize);
 	self.mLayer = newLayer;

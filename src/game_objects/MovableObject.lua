@@ -74,7 +74,7 @@ function MovableObject:tick(dt)
 		--print("[MovableObject:moveTo] tick val ", val);
 		local cur = self.mSrcPos + self.mDelta - val;
 		--print("[MovableObject:moveTo] tick cur.x ", cur.x, " y ", cur.y);
-		self.mNode:setPosition(CCPointMake(cur.x, cur.y));
+		self.mNode:setPosition(cc.p(cur.x, cur.y));
 		self.mMoveTime = self.mMoveTime - dt;
 		--print("[MovableObject:moveTo] tick mMoveTime ", self.mMoveTime);
 		self.mGridPosition = Vector.new(self.mField:getGridPosition(self.mNode));
@@ -83,7 +83,7 @@ function MovableObject:tick(dt)
 			local dest = self.mField:gridPosToReal(self.mDestGridPos);
 			dest.x= dest.x + self.mField.mCellSize / 2;
 			dest.y= dest.y + self.mField.mCellSize / 2;
-			self.mNode:setPosition(CCPointMake(dest.x, dest.y));
+			self.mNode:setPosition(cc.p(dest.x, dest.y));
 
 			self.mGridPosition = self.mDestGridPos;--Vector.new(self.mField:getGridPosition(self.mNode));
 			--print("[MovableObject:moveTo] grid pos ", self.mGridPosition.x, " y ", self.mGridPosition.y);

@@ -290,7 +290,7 @@ end
 --------------------------------
 function Field:onEnemyEnterTrigger(enemy)
 	print("Field:onEnemyEnterTrigger ", enemy);
-	SimpleAudioEngine:sharedEngine():playEffect(gSounds.MOB_DEATH_SOUND)
+	SimpleAudioEngine:getInstance():playEffect(gSounds.MOB_DEATH_SOUND)
 	
 	self:removeObject(enemy);
 	self:removeEnemy(enemy)
@@ -347,7 +347,7 @@ end
 --------------------------------
 function Field:getGridPosition(node)
 	local posX, posY = node:getPosition();
-	local anchor = CCPointMake(0, 0);--node:getAnchorPoint();
+	local anchor = cc.p(0, 0);--node:getAnchorPoint();
 	local nodeSize = node:getContentSize();
 	
 	local leftBottom = Vector.new(posX - anchor.x * nodeSize.width, posY - anchor.y * nodeSize.height);
@@ -383,12 +383,12 @@ end
 function Field:createSnareTrigger(pos)
 	print("Field:createSnareTrigger x= ", pos.x, " y= ", pos.y);
 	local node = CCNode:create();
-	node:setContentSize(CCSizeMake(self:getCellSize(), self:getCellSize()));
+	node:setContentSize(cc.size(self:getCellSize(), self:getCellSize()));
 	self:getFieldNode():addChild(node);
 
 	-- #FIXME: anchor point for fox scene
-	node:setAnchorPoint(CCPointMake(0.5, 0.5));
-	node:setPosition(CCPointMake(pos.x, pos.y));
+	node:setAnchorPoint(cc.p(0.5, 0.5));
+	node:setPosition(cc.p(pos.x, pos.y));
 
 	local web = SnareTrigger:create();
 	web:init(self, node, Callback.new(self, Field.onPlayerEnterMob), Callback.new(self, Field.onPlayerLeaveWeb));

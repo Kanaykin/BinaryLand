@@ -58,7 +58,7 @@ function Trigger:tick(dt)
 			local contained = false;
 			if self.mContainedObj.mNode then
 				local pointX, pointY = self.mContainedObj.mNode:getPosition();
-				contained = Rect.new(self.mNode:boundingBox()):containsPoint(CCPointMake(pointX, pointY));
+				contained = Rect.new(self.mNode:getBoundingBox()):containsPoint(cc.p(pointX, pointY));
 			end
 			if not contained then
 				if self.mLeaveCallback then
@@ -71,8 +71,8 @@ function Trigger:tick(dt)
 			for i, player in ipairs(players) do
 				local pointX, pointY = player.mNode:getPosition();
 				--print("Trigger:tick obj x ", pointX, " y ", pointY);
-				--print("Trigger:tick x ", self.mNode:boundingBox().origin.x, " y ", self.mNode:boundingBox().origin.y );
-                local contained = Rect.new(self.mNode:boundingBox()):containsPoint(CCPointMake(pointX, pointY));
+				--print("Trigger:tick x ", self.mNode:getBoundingBox().origin.x, " y ", self.mNode:boundingBox().origin.y );
+                local contained = Rect.new(self.mNode:getBoundingBox()):containsPoint(cc.p(pointX, pointY));
 				--print("contained ", contained);
 				if contained then
 					self:onEnter(player)

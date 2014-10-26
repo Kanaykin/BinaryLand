@@ -8,7 +8,7 @@ FinishObject.mFinishAnimation = nil;
 
 --------------------------------
 function FinishObject:createAnimation(nameAnimation)
-	local texture = CCTextureCache:sharedTextureCache():addImage(nameAnimation);
+	local texture = cc.Director:getInstance():getTextureCache():addImage(nameAnimation);
 	texture:retain();
 
 	local anim1 = EmptyAnimation:create(); 

@@ -39,6 +39,6 @@ function EmptyAnimation:play()
 		print("EmptyAnimation:play self.mNode ", self.mNode);
 		print("EmptyAnimation:play self.mTextureSize ", self.mTextureSize.width);
 		tolua.cast(self.mNode, "cc.Sprite"):setTexture(self.mTexture);
-		tolua.cast(self.mNode, "cc.Sprite"):setTextureRect(CCRectMake(0, 0, self.mTextureSize.width, self.mTextureSize.height));
+		tolua.cast(self.mNode, "cc.Sprite"):setTextureRect(cc.rect(0, 0, self.mTextureSize.width, self.mTextureSize.height));
 	end
 end

@@ -30,8 +30,8 @@ end
 
 --------------------------------
 function FightButton:onDown()
-	local cache = CCSpriteFrameCache:sharedSpriteFrameCache();
-	local frame = cache:spriteFrameByName("fire_button_pressed.png");
+	local cache = CCSpriteFrameCache:getInstance();
+	local frame = cache:getSpriteFrame("fire_button_pressed.png");
 	print("frame ", frame);
 	self.mButtonNode:setDisplayFrame(frame);
 	self.mPressed = true;
@@ -39,8 +39,8 @@ end
 
 --------------------------------
 function FightButton:onUp()
-	local cache = CCSpriteFrameCache:sharedSpriteFrameCache();
-	local frame = cache:spriteFrameByName("fire_button.png");
+	local cache = CCSpriteFrameCache:getInstance();
+	local frame = cache:getSpriteFrame("fire_button.png");
 	print("frame ", frame);
 	self.mButtonNode:setDisplayFrame(frame);
 	self.mPressed = false;
@@ -74,10 +74,10 @@ function FightButton:init(guiLayer)
 
 		self.mButtonNode = tolua.cast(node, "cc.Sprite");
 
-		local cache = CCSpriteFrameCache:sharedSpriteFrameCache();
-		cache:addSpriteFramesWithFile("fight_button_map.plist");
+		local cache = CCSpriteFrameCache:getInstance();
+		cache:addSpriteFrames("fight_button_map.plist");
 
-		self:superClass().init(self, node:boundingBox());
+		self:superClass().init(self, node:getBoundingBox());
 
 		local parent = node:getParent();
 		

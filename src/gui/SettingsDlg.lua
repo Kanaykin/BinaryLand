@@ -75,7 +75,7 @@ function SettingsDlg:initGuiElements()
 
 	local panel = nodeBase:getChildByTag(SettingsDlg.INTERACTIVE_PANEL);
 	if panel then
-		self:setTouchBBox(panel:boundingBox());
+		self:setTouchBBox(panel:getBoundingBox());
 	end
 
 	self:initHideButton(nodeBase);

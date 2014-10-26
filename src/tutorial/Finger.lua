@@ -122,7 +122,7 @@ end
 
 --------------------------------
 function Finger:setPosition(position)
-	self.mNode:setPosition(CCPointMake(position.x, position.y));
+	self.mNode:setPosition(cc.p(position.x, position.y));
 	self.mGridPosition = Vector.new(self.mField:getGridPosition(self.mNode));
 end
 
@@ -133,10 +133,10 @@ function Finger:tick(dt)
 	if self.mDelta then
 		local val = self.mDelta:normalized() * self.mVelocity * self.mMoveTime;
 		local cur = self.mSrcPos + self.mDelta - val;
-		self.mNode:setPosition(CCPointMake(cur.x, cur.y));
+		self.mNode:setPosition(cc.p(cur.x, cur.y));
 		self.mMoveTime = self.mMoveTime - dt;
 		if self.mMoveTime <= 0 then
-			self.mNode:setPosition(CCPointMake(self.mDestPos.x, self.mDestPos.y));
+			self.mNode:setPosition(cc.p(self.mDestPos.x, self.mDestPos.y));
 
 			self.mDelta = nil;
 			self:onMoveFinished();

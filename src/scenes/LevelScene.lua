@@ -28,7 +28,7 @@ end
 function LevelScene:onStateLose()
 	print("LevelScene: LOSE !!!");
 	self.mMainUI:onStateLose();
-	SimpleAudioEngine:sharedEngine():playMusic(gSounds.GAME_OVER_MUSIC, false)
+	SimpleAudioEngine:getInstance():playMusic(gSounds.GAME_OVER_MUSIC, false)
 end
 
 ---------------------------------
@@ -41,8 +41,8 @@ function LevelScene:onStateWin()
 	self.mSceneManager.mGame:openLevel(locationId, self.mLevel:getIndex() + 1);
 	self.mMainUI:onStateWin();
 
-	SimpleAudioEngine:sharedEngine():playMusic(gSounds.VICTORY_MUSIC, false)
-	--SimpleAudioEngine:sharedEngine():playEffect(gSounds.VICTORY_MUSIC)
+	SimpleAudioEngine:getInstance():playMusic(gSounds.VICTORY_MUSIC, false)
+	--SimpleAudioEngine:getInstance():playEffect(gSounds.VICTORY_MUSIC)
 end
 
 ---------------------------------
@@ -61,7 +61,7 @@ function LevelScene:destroy()
 
 	LevelScene:superClass().destroy(self);
 
-	SimpleAudioEngine:sharedEngine():stopMusic(true);
+	SimpleAudioEngine:getInstance():stopMusic(true);
 end
 
 --------------------------------
@@ -84,7 +84,7 @@ function LevelScene:init(sceneMan, params)
 	end
 
 	self.mPlayerController = PlayerController:create();
-	self.mPlayerController:init(self.mGuiLayer:boundingBox(), self.mField:getPlayerObjects(), self.mField,
+	self.mPlayerController:init(self.mGuiLayer:getBoundingBox(), self.mField:getPlayerObjects(), self.mField,
 		self.mMainUI:getJoystick(), self.mMainUI:getFightButton());
 	self.mMainUI:setTouchListener(self.mPlayerController);
 
@@ -95,7 +95,7 @@ function LevelScene:init(sceneMan, params)
 
 	-- play music
 	if self.mLevel:getData().backgroundMusic then
-		SimpleAudioEngine:sharedEngine():playMusic(self.mLevel:getData().backgroundMusic, true)
+		SimpleAudioEngine:getInstance():playMusic(self.mLevel:getData().backgroundMusic, true)
 	end
 
 end
@@ -134,7 +134,7 @@ function LevelScene:initScene()
 			table.insert(nodes, fieldNode);
 			local layerSize = node:getContentSize();
 			local fieldSize = fieldNode:getContentSize();
-			node:setContentSize(CCSizeMake(layerSize.width, fieldSize.height));
+			node:setContentSize(cc.size(layerSize.width, fieldSize.height));
 		end
 		self.mScrollView = ScrollView:create();
 		self.mScrollView:initLayers(layers);

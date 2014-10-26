@@ -54,8 +54,8 @@ function PlistAnimation:init(plistName, node, anchor, texture)
     local frames = array["frames"];
     print("PlistAnimation:init ", array["frames"]);
 
-	local cache = CCSpriteFrameCache:sharedSpriteFrameCache();
-   	cache:addSpriteFramesWithFile(plistName);
+	local cache = CCSpriteFrameCache:getInstance();
+   	cache:addSpriteFrames(plistName);
 
    	self.mAnimation = CCAnimation:create();
 
@@ -73,7 +73,7 @@ function PlistAnimation:init(plistName, node, anchor, texture)
    	end );
 
    	for i, val in ipairs(arrayFrames) do
-   		local frame = cache:spriteFrameByName(val);
+   		local frame = cache:getSpriteFrame(val);
    		print("PlistAnimation frame ", frame);
    		self.mAnimation:addSpriteFrame(frame);
    	end

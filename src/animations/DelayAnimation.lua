@@ -45,7 +45,7 @@ function DelayAnimationSoftImpl:play()
 	--print("DelayAnimation:play")
 	if self.mTexture then
 		tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setTexture(self.mTexture);
-		tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setTextureRect(CCRectMake(0, 0, self.mTextureSize.width, self.mTextureSize.height));
+		tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setTextureRect(cc.rect(0, 0, self.mTextureSize.width, self.mTextureSize.height));
 	end
 	self.mAnimation:play();
 end

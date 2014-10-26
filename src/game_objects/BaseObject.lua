@@ -28,13 +28,13 @@ end
 
 ---------------------------------
 function BaseObject:getScreenPos()
-	local point = self.mNode:convertToWorldSpace(CCPointMake(0, 0)); --self.mField:fieldToScreen(Vector.new(self.mNode:getPosition()));
+	local point = self.mNode:convertToWorldSpace(cc.p(0, 0)); --self.mField:fieldToScreen(Vector.new(self.mNode:getPosition()));
 	return Vector.new(point.x, point.y);
 end
 
 ---------------------------------
 function BaseObject:getBoundingBox()
-	return self.mNode:boundingBox();
+	return self.mNode:getBoundingBox();
 end
 
 --------------------------------

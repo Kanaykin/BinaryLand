@@ -54,7 +54,7 @@ function YouLooseDlg:initGuiElements()
 	end
 
 	local workPlace = nodeBase:getChildByTag(YouLooseDlg.WORK_PLACE);	
-	self:setTouchBBox(workPlace:boundingBox());
+	self:setTouchBBox(workPlace:getBoundingBox());
 
 	self.mAnimator = self.mReader:getActionManager();
 

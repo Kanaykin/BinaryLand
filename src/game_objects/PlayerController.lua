@@ -38,8 +38,8 @@ function PlayerController:touchObject(object, point)
 	local scale = self.mField.mGame:getScale();
 
 	local width = PlayerController.mClickSize * scale;
-	local box = CCRectMake(pos.x - width / 2, pos.y - width / 2, width, width);
-	return Rect.new(box):containsPoint(CCPointMake(point.x, point.y));
+	local box = cc.rect(pos.x - width / 2, pos.y - width / 2, width, width);
+	return Rect.new(box):containsPoint(cc.p(point.x, point.y));
 end
 
 ----------------------------------------

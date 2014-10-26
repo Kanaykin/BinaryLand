@@ -65,7 +65,7 @@ function YouWinDlg:initGuiElements()
 	end
 
 	local workPlace = nodeBase:getChildByTag(YouWinDlg.WORK_PLACE);	
-	self:setTouchBBox(workPlace:boundingBox());
+	self:setTouchBBox(workPlace:getBoundingBox());
 
 	self.mAnimator = self.mReader:getActionManager();
 

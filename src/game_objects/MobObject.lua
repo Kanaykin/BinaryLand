@@ -60,7 +60,7 @@ function MobObject:init(field, node)
 	self.mVelocity = self.mVelocity * field.mGame:getScale();
 
 	-- set size of cell
-	self.mNode:setContentSize(CCSizeMake(self.mField:getCellSize(), self.mField:getCellSize()));
+	self.mNode:setContentSize(cc.size(self.mField:getCellSize(), self.mField:getCellSize()));
 
 	self.mTrigger:init(self.mField, self.mNode, Callback.new(self, MobObject.onPlayerEnter), Callback.new(self, MobObject.onPlayerLeave));
 
@@ -100,7 +100,7 @@ function MobObject:tick(dt)
 	if self.mDelta then
 		local val = self.mDelta:normalized();
 		--print("MobObject:tick mDestGridPos ", val.x, ":", val.y);
-		tolua.cast(self.mNode, "cc.Sprite"):setFlipX(val.x < 0);
+		tolua.cast(self.mNode, "cc.Sprite"):setFlippedX(val.x < 0);
 	end
 
 	if self.mState == MobObject.IDLE then

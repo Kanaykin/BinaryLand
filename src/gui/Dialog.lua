@@ -8,7 +8,7 @@ function BaseDialog:show(scene)
 	print("BaseDialog:show ", scene.mGuiLayer);
 
 	local sprite = CCScale9Sprite:create("status_frame.png");
-	sprite:setPreferredSize(CCSizeMake(400,320));
+	sprite:setPreferredSize(cc.size(400,320));
 	sprite:setInsetLeft(15);
 	sprite:setInsetRight(15);
 	sprite:setInsetTop(15);

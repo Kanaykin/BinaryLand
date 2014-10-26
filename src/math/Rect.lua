@@ -9,7 +9,7 @@ function Rect.new(val1, val2, width, height)
 end
 
 function Rect:containsPoint(point)
-    print("Rect:containsPoint point x ", point.x, " y ", point.y);
+    --print("Rect:containsPoint point x ", point.x, " y ", point.y);
     return point.x >= self.x and point.y >= self.y
         and point.x <= self.x + self.width and point.y <= self.y + self.height;
 end

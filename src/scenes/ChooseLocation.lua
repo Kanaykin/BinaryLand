@@ -35,13 +35,13 @@ end
 function ChooseLocation:destroy()
 	ChooseLocation:superClass().destroy(self);
 
-	SimpleAudioEngine:sharedEngine():stopMusic(true);
+	SimpleAudioEngine:getInstance():stopMusic(true);
 end
 
 --------------------------------
 function ChooseLocation:initScene()
 	self.mScrollView = ScrollView:create();
-	self.mScrollView:init(CCSizeMake(2.5, 1), {LOADSCEENIMAGE, LOADSCEENIMAGE, LOADSCEENIMAGE, LOADSCEENIMAGE});
+	self.mScrollView:init(cc.size(2.5, 1), {LOADSCEENIMAGE, LOADSCEENIMAGE, LOADSCEENIMAGE, LOADSCEENIMAGE});
 	self.mScrollView:setClickable(true);
 	self.mSceneGame:addChild(self.mScrollView.mScroll);
 
@@ -103,5 +103,5 @@ function ChooseLocation:init(sceneMan, params)
 	-- init gui
 	self:initGui();
 
-	SimpleAudioEngine:sharedEngine():playMusic(gSounds.CHOOSE_LOCATION_MUSIC, true)
+	SimpleAudioEngine:getInstance():playMusic(gSounds.CHOOSE_LOCATION_MUSIC, true)
 end

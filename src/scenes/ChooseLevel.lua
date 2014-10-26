@@ -20,14 +20,14 @@ function ChooseLevel:init(sceneMan, params)
 
 	self:initGui();
 
-	SimpleAudioEngine:sharedEngine():playMusic(gSounds.CHOOSE_LEVEL_MUSIC, true)
+	SimpleAudioEngine:getInstance():playMusic(gSounds.CHOOSE_LEVEL_MUSIC, true)
 end
 
 ---------------------------------
 function ChooseLevel:destroy()
 	ChooseLevel:superClass().destroy(self);
 
-	SimpleAudioEngine:sharedEngine():stopMusic(true);
+	SimpleAudioEngine:getInstance():stopMusic(true);
 end
 
 --------------------------------

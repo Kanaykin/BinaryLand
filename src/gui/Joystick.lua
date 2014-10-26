@@ -120,7 +120,7 @@ function Joystick:init(guiLayer)
 
 	if node:isVisible() then
 		--scene.mGuiLayer:addChild(node);
-		self:superClass().init(self, node:boundingBox());
+		self:superClass().init(self, node:getBoundingBox());
 		
 		-- set touch enabled for joystick 
 		local function onTouchHandler(action, var)

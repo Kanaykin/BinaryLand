@@ -37,7 +37,7 @@ function CCBBaseDialog:doModal()
 	self:show();
 	local function onTouchHandler(action, var1, var2)
 		print("!!! CCBBaseDialog onTouchHandler ", var1, ", ", var2);
-		return not self.mTouchBBox:containsPoint(CCPointMake(var1, var2));
+		return not self.mTouchBBox:containsPoint(cc.p(var1, var2));
     end
 
 	local layer = tolua.cast(self.mNode, "cc.Layer");
@@ -55,7 +55,7 @@ function CCBBaseDialog:init(game, uiLayer, ccbFile)
 	uiLayer:addChild(node);
 
 	self.mNode = node;
-	self.mTouchBBox = self.mNode:boundingBox();
+	self.mTouchBBox = self.mNode:getBoundingBox();
 	self.mUILayer = uiLayer;
 	self.mReader = reader;
 	self.mNode:setVisible(false);

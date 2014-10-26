@@ -6,11 +6,11 @@ FightTrigger.mActivated = false;
 --------------------------------
 function FightTrigger:init(field)
 	local node = CCNode:create();
-	node:setContentSize(CCSizeMake(field:getCellSize(), field:getCellSize()));
+	node:setContentSize(cc.size(field:getCellSize(), field:getCellSize()));
 	field:getFieldNode():addChild(node);
 
 	-- #FIXME: anchor point for fox scene
-	node:setAnchorPoint(CCPointMake(0.5, 0.5));
+	node:setAnchorPoint(cc.p(0.5, 0.5));
 
 	print("FightTrigger node ", node);
 	FightTrigger:superClass().init(self, field, node, Callback.new(field, Field.onEnemyEnterTrigger), Callback.new(field, Field.onEnemyLeaveTrigger));

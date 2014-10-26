@@ -44,15 +44,15 @@ PlayerObject.PLAYER_STATE = {
 PlayerObject.mStateInTrap = PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP;
 
 ANIMATION_MALE = {
-		{name = "_left", frames = 2, anchorFight = CCPointMake(0.5, 0.5), anchorFightFemale = CCPointMake(0.5, 0.5)},
-		{name = "_right", frames = 2, anchorFight = CCPointMake(0.5, 0.5), anchorFightFemale = CCPointMake(0.5, 0.5)},
-		{name = "_up", frames = 2, anchorFight = CCPointMake(0.5, 0.5), anchorFightFemale = CCPointMake(0.5, 0.5)},
-		{name = "_down", frames = 2, anchorFight = CCPointMake(0.5, 0.5), anchorFightFemale = CCPointMake(0.5, 0.5)},
-		{name = "_trap", frames = 2, anchorFight = CCPointMake(0.5, 0.5), anchorFightFemale = CCPointMake(0.5, 0.5)},
-		{name = "_fight_left", frames = 2, anchorFight = CCPointMake(0.75, 0.5), anchorFightFemale = CCPointMake(0.25, 0.5)},
-		{name = "_fight_right", frames = 2, anchorFight = CCPointMake(0.25, 0.5), anchorFightFemale = CCPointMake(0.75, 0.5)},
-		{name = "_fight_up", frames = 2, anchorFight = CCPointMake(0.45, 0.25), anchorFightFemale = CCPointMake(0.45, 0.25)},
-		{name = "_fight_down", frames = 2, anchorFight = CCPointMake(0.48, 0.75), anchorFightFemale = CCPointMake(0.48, 0.75)}
+		{name = "_left", frames = 2, anchorFight = cc.p(0.5, 0.5), anchorFightFemale = cc.p(0.5, 0.5)},
+		{name = "_right", frames = 2, anchorFight = cc.p(0.5, 0.5), anchorFightFemale = cc.p(0.5, 0.5)},
+		{name = "_up", frames = 2, anchorFight = cc.p(0.5, 0.5), anchorFightFemale = cc.p(0.5, 0.5)},
+		{name = "_down", frames = 2, anchorFight = cc.p(0.5, 0.5), anchorFightFemale = cc.p(0.5, 0.5)},
+		{name = "_trap", frames = 2, anchorFight = cc.p(0.5, 0.5), anchorFightFemale = cc.p(0.5, 0.5)},
+		{name = "_fight_left", frames = 2, anchorFight = cc.p(0.75, 0.5), anchorFightFemale = cc.p(0.25, 0.5)},
+		{name = "_fight_right", frames = 2, anchorFight = cc.p(0.25, 0.5), anchorFightFemale = cc.p(0.75, 0.5)},
+		{name = "_fight_up", frames = 2, anchorFight = cc.p(0.45, 0.25), anchorFightFemale = cc.p(0.45, 0.25)},
+		{name = "_fight_down", frames = 2, anchorFight = cc.p(0.48, 0.75), anchorFightFemale = cc.p(0.48, 0.75)}
 	}
 
 
@@ -233,7 +233,7 @@ function PlayerObject:fight()
 			
 			local newDir = DIRECTIONS[self.mLastDir]:clone() * self.mReverse;
 
-			self.mFightTrigger.mNode:setPosition(CCPointMake(selfPosX + self.mField:getCellSize() * newDir.x, selfPosY + self.mField:getCellSize() * newDir.y));
+			self.mFightTrigger.mNode:setPosition(cc.p(selfPosX + self.mField:getCellSize() * newDir.x, selfPosY + self.mField:getCellSize() * newDir.y));
 		end
 
 		return true;
@@ -277,7 +277,7 @@ function PlayerObject:move(dt)
 		if self:collisionDetect(DIRECTIONS[button] * self.mReverse, newDir) then --self.mField:isFreePoint(newGridPos) then
 			curPosition = curPosition + newDir * self.mVelocity * dt;
 			if not self.mField:collideObject(self, curPosition) then
-				self.mNode:setPosition(CCPointMake(curPosition.x, curPosition.y));
+				self.mNode:setPosition(cc.p(curPosition.x, curPosition.y));
 				self.mGridPosition = Vector.new(self.mField:getGridPosition(self.mNode));
 				print("PlayerObject:move x ", self.mGridPosition.x, ", y", self.mGridPosition.y);
 				self:updateOrder();
