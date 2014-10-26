@@ -43,7 +43,7 @@ end
 --------------------------------
 function findContainPoint(box, arrayPoints)
 	for i, point in pairs(arrayPoints) do
-		if Rect.new(box):containsPoint(CCPointMake(point.x, point.y)) then
+		if Rect.new(box):containsPoint(cc.p(point.x, point.y)) then
 			return i;
 		end
 	end
@@ -78,7 +78,7 @@ function TouchWidget:onTouchHandler(action, var)
 			local indx = findContainPoint(self.mBBox, arrayPoints);
 			self.mTouchId = indx;
 		else
-			if not Rect.new(self.mBBox):containsPoint(CCPointMake(arrayPoints[self.mTouchId].x, arrayPoints[self.mTouchId].y)) then
+			if not Rect.new(self.mBBox):containsPoint(cc.p(arrayPoints[self.mTouchId].x, arrayPoints[self.mTouchId].y)) then
 				self.mTouchId = nil;
 			end
 		end

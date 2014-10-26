@@ -35,9 +35,9 @@ end
 
 ---------------------------------
 function PlistAnimation:isDone()
-	--print("PlistAnimation:isDone ", CCDirector:sharedDirector():getActionManager():numberOfRunningActionsInTarget(self.mAction:getTarget()));
+	--print("PlistAnimation:isDone ", CCDirector:getInstance():getActionManager():numberOfRunningActionsInTarget(self.mAction:getTarget()));
 	return self.mAction and self.mAction:isDone() or 
-		CCDirector:sharedDirector():getActionManager():getNumberOfRunningActionsInTarget(self.mAction:getTarget()) == 0;
+		CCDirector:getInstance():getActionManager():getNumberOfRunningActionsInTarget(self.mAction:getTarget()) == 0;
 end
 
 --------------------------------

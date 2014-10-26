@@ -32,7 +32,7 @@ function StartScene:createMenuElements()
     end
 
     menuToolsItem:registerScriptTapHandler(onPlayGamePressed);
-    local menuTools = CCMenu:createWithItem(menuToolsItem);
+    local menuTools = cc.Menu:createWithItem(menuToolsItem);
     
     self.mGuiLayer:addChild(menuTools);
 end

@@ -73,7 +73,7 @@ end
 
 --------------------------------
 function ChooseLevel:initGui()
-	local visibleSize = CCDirector:sharedDirector():getVisibleSize();
+	local visibleSize = CCDirector:getInstance():getVisibleSize();
     
     self:createGuiLayer();
 
@@ -90,7 +90,7 @@ function ChooseLevel:initGui()
 
     menuToolsItem:registerScriptTapHandler(onReturnPressed);
 
-    local menuTools = CCMenu:createWithItem(menuToolsItem);
+    local menuTools = cc.Menu:createWithItem(menuToolsItem);
     
     self.mGuiLayer:addChild(menuTools);
 end

@@ -70,7 +70,7 @@ end
 ---------------------------------
 function Game:initResolution()
 	-- compute resolution scale
-	local visibleSize = CCDirector:sharedDirector():getVisibleSize();
+	local visibleSize = CCDirector:getInstance():getVisibleSize();
 
 	local resolutionInfo = nil;
 	for i = #SUPPORTED_RESOLUTION, 1, -1  do
@@ -83,15 +83,15 @@ function Game:initResolution()
 	end
 
 	if resolutionInfo then 
-		--CCDirector:sharedDirector():getOpenGLView():setDesignResolutionSize(resolutionInfo.size.width, resolutionInfo.size.height, 1);
+		--CCDirector:getInstance():getOpenGLView():setDesignResolutionSize(resolutionInfo.size.width, resolutionInfo.size.height, 1);
 		local scale = math.min(visibleSize.width / DESIGN_RESOLUTION_SIZE.width, visibleSize.height / DESIGN_RESOLUTION_SIZE.height);
 		print("SCALE ", scale);
 		self.mScale = scale;
         print("CCBReader ", cc.CCBReader);
 
 		cc.CCBReader:setResolutionScale(scale);
-		CCDirector:sharedDirector():setContentScaleFactor( (1 / scale) * resolutionInfo.scale);
-		local fileUtils = CCFileUtils:sharedFileUtils();
+		CCDirector:getInstance():setContentScaleFactor( (1 / scale) * resolutionInfo.scale);
+		local fileUtils = CCFileUtils:getInstance();
 		-- add resource directories
 		for i, val in ipairs(RESOURCE_DIRECTORIES) do
 			fileUtils:addSearchPath(val);
@@ -125,6 +125,6 @@ function Game:init()
 		g_game:tick(dt);
 	end
 
-	CCDirector:sharedDirector():getScheduler():scheduleScriptFunc(tick, 0, false)
+	CCDirector:getInstance():getScheduler():scheduleScriptFunc(tick, 0, false)
 
 end

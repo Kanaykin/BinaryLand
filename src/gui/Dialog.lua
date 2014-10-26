@@ -15,7 +15,7 @@ function BaseDialog:show(scene)
 	sprite:setInsetBottom(15);
 
 	local closeButtonItem = CCMenuItemImage:create("close_button.png", "close_button_pressed.png");
-	local closeButton = CCMenu:createWithItem(closeButtonItem);
+	local closeButton = cc.Menu:createWithItem(closeButtonItem);
 
 	local layer = scene.mGuiLayer;
 	local function onCloseButtonPressed()

@@ -40,7 +40,7 @@ function ScrollView:onTouchHandler(action, position)
     		self.mIsMoved = true;
     	end
     elseif action == "ended" and not self.mIsMoved then
-    	local locinfo = self:findChildByPoint(CCPointMake(position.x - offset.x, position.y - offset.y ));
+    	local locinfo = self:findChildByPoint(cc.p(position.x - offset.x, position.y - offset.y ));
     	if(locinfo ~= nil) then
     		locinfo[2][locinfo[3]](locinfo[2]);
     	end
@@ -61,7 +61,7 @@ function ScrollView:setClickable(clickable)
 		local function onTouchHandler(action, var1, var2)
 			print("onTouchHandler ", action, "var1 ", var, "var2 ", var2);
 			print("onTouchHandler ", action, "x = ", var1, " y = ", var2);
-    		scrollView:onTouchHandler(action, CCPointMake(var1, var2));
+    		scrollView:onTouchHandler(action, cc.p(var1, var2));
     		return true;
     	end
 
@@ -81,7 +81,7 @@ end
 
 ------------------------------
 function ScrollView:initLayers(layers)
-	local visibleSize = CCDirector:sharedDirector():getVisibleSize();
+	local visibleSize = CCDirector:getInstance():getVisibleSize();
 	local scrollviewlayer = CCLayer:create();
 
 	-- compute size
@@ -112,7 +112,7 @@ end
 ------------------------------
 function ScrollView:init(sizeScale, images)
 	self.mClickableChildren = {};
-	local visibleSize = CCDirector:sharedDirector():getVisibleSize();
+	local visibleSize = CCDirector:getInstance():getVisibleSize();
 	local scrollviewlayer = CCLayer:create();
 	scrollviewlayer:setContentSize(CCSizeMake(visibleSize.width * sizeScale.width, visibleSize.height * sizeScale.height));
 

@@ -123,7 +123,7 @@ function Field:updateScrollPos()
 		min = math.min(min, y);
 		max = math.max(max, y);
 	end
-	local visibleSize = CCDirector:sharedDirector():getVisibleSize();
+	local visibleSize = CCDirector:getInstance():getVisibleSize();
 	local pos = max - visibleSize.height / 2;
 	pos = math.max(pos, 0);
 	--print ("Field:updateScrollPos ", pos); 

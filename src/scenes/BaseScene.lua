@@ -52,7 +52,7 @@ function BaseScene:init(sceneMan, params)
 	self:createBackgroundLayer();
 	
 	if backgroundImageName ~= nil then
-		local visibleSize = CCDirector:sharedDirector():getVisibleSize();
+		local visibleSize = CCDirector:getInstance():getVisibleSize();
     
 		local bg = CCSprite:create(backgroundImageName);
 

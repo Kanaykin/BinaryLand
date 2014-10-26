@@ -58,11 +58,11 @@ function ChooseLocation:initScene()
 		-- grass images
 		local pos = Coord(position, 0, 50, 50);
 		local grass = CCSprite:create("grass.png");
-		parallax:addChild(grass, 1, CCPointMake(0.4, 1.0), getPosition(grass, pos));
+		parallax:addChild(grass, 1, cc.p(0.4, 1.0), getPosition(grass, pos));
 		-- cloud images
 		local posCloud = Coord(position, 0.8, 50, 50);
 		local cloud = CCSprite:create("cloud1.png");
-		parallax:addChild(cloud, 1, CCPointMake(0.4, 1.0), getPosition(cloud, posCloud));
+		parallax:addChild(cloud, 1, cc.p(0.4, 1.0), getPosition(cloud, posCloud));
 		position = position + delta;
 	end
 
@@ -70,7 +70,7 @@ end
 
 --------------------------------
 function ChooseLocation:initGui()
-	local visibleSize = CCDirector:sharedDirector():getVisibleSize();
+	local visibleSize = CCDirector:getInstance():getVisibleSize();
     
     self:createGuiLayer();
 
@@ -87,7 +87,7 @@ function ChooseLocation:initGui()
 
     menuToolsItem:registerScriptTapHandler(onReturnPressed);
 
-    local menuTools = CCMenu:createWithItem(menuToolsItem);
+    local menuTools = cc.Menu:createWithItem(menuToolsItem);
     
     self.mGuiLayer:addChild(menuTools);
 end

@@ -37,14 +37,14 @@ function SceneManager:runPrevScene(params)
 	end
 
 	self:getCurrentScene():init(self, params);
-	CCDirector:sharedDirector():pushScene(self:getCurrentScene().mSceneGame);
+	CCDirector:getInstance():pushScene(self:getCurrentScene().mSceneGame);
 end
 
 ---------------------------------
 function SceneManager:destroyCurrentScene()
 	if self:getCurrentScene() ~= nil then
 		self:getCurrentScene():destroy();
-		CCDirector:sharedDirector():popScene();
+		CCDirector:getInstance():popScene();
 	end
 end
 
@@ -53,7 +53,7 @@ function SceneManager:runScene(index, params)
 	self.mCurrentSceneId = index;
 	print("mCurrentSceneId ", self.mCurrentSceneId);
 	self:getCurrentScene():init(self, params);
-	CCDirector:sharedDirector():pushScene(self:getCurrentScene().mSceneGame);
+	CCDirector:getInstance():pushScene(self:getCurrentScene().mSceneGame);
 end
 
 ---------------------------------
@@ -107,7 +107,7 @@ function SceneManager:runLevelScene(params)
 
 	self.mCurrentSceneId = SCENE_TYPE_ID.LEVEL;
 	self:getCurrentScene():init(self, params);
-	CCDirector:sharedDirector():pushScene(self:getCurrentScene().mSceneGame);
+	CCDirector:getInstance():pushScene(self:getCurrentScene().mSceneGame);
 end
 
 ---------------------------------
@@ -123,7 +123,7 @@ function SceneManager:init(game)
 
 	-- add fake scene
 	local fakeScene = CCScene:create();
-	CCDirector:sharedDirector():pushScene(fakeScene);
+	CCDirector:getInstance():pushScene(fakeScene);
 
 	-- loading scene initialize
 	self.mScenes[SCENE_TYPE_ID.LOADING_SCENE] = LoadingScene:create();
