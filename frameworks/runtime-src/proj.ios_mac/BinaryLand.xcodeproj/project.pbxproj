@@ -117,9 +117,7 @@
 		50D7C96E17EBBEE6005D0B91 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7C96D17EBBEE6005D0B91 /* AppKit.framework */; };
 		50D7C97017EBBEEC005D0B91 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7C96F17EBBEEC005D0B91 /* IOKit.framework */; };
 		A5C6DF6319FADBD400EA4747 /* src in Resources */ = {isa = PBXBuildFile; fileRef = A5C6DF6219FADBD400EA4747 /* src */; };
-		A5C6DF6619FADC2900EA4747 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = A5C6DF6519FADC2900EA4747 /* sounds */; };
-		A5C6DF6819FADC3600EA4747 /* Maps in Resources */ = {isa = PBXBuildFile; fileRef = A5C6DF6719FADC3600EA4747 /* Maps */; };
-		A5C6DF6A19FADC4F00EA4747 /* Published-iOS in Resources */ = {isa = PBXBuildFile; fileRef = A5C6DF6919FADC4F00EA4747 /* Published-iOS */; };
+		A5C7527319FEBDB900389E67 /* res in Resources */ = {isa = PBXBuildFile; fileRef = A5C7527219FEBDB900389E67 /* res */; };
 		C06E23C418CEF9740093C81A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C06E23C318CEF9740093C81A /* main.cpp */; };
 		D6B061351803AC000077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B061341803AC000077942B /* CoreMotion.framework */; };
 		F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
@@ -265,9 +263,7 @@
 		50D7C96D17EBBEE6005D0B91 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		50D7C96F17EBBEEC005D0B91 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		A5C6DF6219FADBD400EA4747 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../../src; sourceTree = "<group>"; };
-		A5C6DF6519FADC2900EA4747 /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sounds; path = ../../../res/Resources/sounds; sourceTree = "<group>"; };
-		A5C6DF6719FADC3600EA4747 /* Maps */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Maps; path = ../../../res/Resources/Maps; sourceTree = "<group>"; };
-		A5C6DF6919FADC4F00EA4747 /* Published-iOS */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Published-iOS"; path = "../../../res/Published-iOS"; sourceTree = "<group>"; };
+		A5C7527219FEBDB900389E67 /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../../../res; sourceTree = "<group>"; };
 		C03781AE18BF654500FE4F13 /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../../cocos2d-x/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		C06E23C318CEF9740093C81A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D6B061341803AC000077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
@@ -427,16 +423,6 @@
 			name = Icons;
 			sourceTree = "<group>";
 		};
-		A5C6DF6419FADC0F00EA4747 /* res */ = {
-			isa = PBXGroup;
-			children = (
-				A5C6DF6919FADC4F00EA4747 /* Published-iOS */,
-				A5C6DF6719FADC3600EA4747 /* Maps */,
-				A5C6DF6519FADC2900EA4747 /* sounds */,
-			);
-			name = res;
-			sourceTree = "<group>";
-		};
 		C03781AF18BF654500FE4F13 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,7 +494,7 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A5C6DF6419FADC0F00EA4747 /* res */,
+				A5C7527219FEBDB900389E67 /* res */,
 				A5C6DF6219FADBD400EA4747 /* src */,
 			);
 			name = Resources;
@@ -680,7 +666,6 @@
 			files = (
 				15AA96E6199C66E600725633 /* experimentalUIConstants.lua in Resources */,
 				15A8A4491834C64F00142BE0 /* Icon-114.png in Resources */,
-				A5C6DF6A19FADC4F00EA4747 /* Published-iOS in Resources */,
 				5023811D17EBBCAC00990C9B /* Icon-120.png in Resources */,
 				5091733B17ECE17A00D62437 /* Icon-100.png in Resources */,
 				5023811B17EBBCAC00990C9B /* Default@2x.png in Resources */,
@@ -702,6 +687,7 @@
 				15D1FE4D1998730800302043 /* Cocos2dConstants.lua in Resources */,
 				15D1FE4F1998730800302043 /* DeprecatedCocos2dClass.lua in Resources */,
 				5091733A17ECE17A00D62437 /* Icon-80.png in Resources */,
+				A5C7527319FEBDB900389E67 /* res in Resources */,
 				15D1FE6A1998732700302043 /* DeprecatedCocosDenshionClass.lua in Resources */,
 				15AA96CC199C66B500725633 /* DeprecatedExtensionEnum.lua in Resources */,
 				15D1FE571998730800302043 /* DrawPrimitives.lua in Resources */,
@@ -715,8 +701,6 @@
 				15D1FE531998730800302043 /* DeprecatedCocos2dFunc.lua in Resources */,
 				15AA96DA199C66D500725633 /* DeprecatedNetworkFunc.lua in Resources */,
 				15AA96D8199C66D500725633 /* DeprecatedNetworkEnum.lua in Resources */,
-				A5C6DF6619FADC2900EA4747 /* sounds in Resources */,
-				A5C6DF6819FADC3600EA4747 /* Maps in Resources */,
 				15AA96B8199C668400725633 /* DeprecatedCocosBuilderClass.lua in Resources */,
 				15AA96C0199C66A100725633 /* DeprecatedCocoStudioClass.lua in Resources */,
 				15D1FE591998730800302043 /* extern.lua in Resources */,

@@ -94,8 +94,9 @@ function Game:initResolution()
 		local fileUtils = CCFileUtils:getInstance();
 		-- add resource directories
 		for i, val in ipairs(RESOURCE_DIRECTORIES) do
-			fileUtils:addSearchPath(val);
-			fileUtils:addSearchPath(val.."/"..resolutionInfo.searchPath);
+			fileUtils:addSearchPath("res");
+			fileUtils:addSearchPath("res/"..val);
+			fileUtils:addSearchPath("res/"..val.."/"..resolutionInfo.searchPath);
 		end
 	end
 end
