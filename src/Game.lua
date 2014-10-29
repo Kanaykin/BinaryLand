@@ -102,6 +102,44 @@ function Game:initResolution()
 end
 
 ---------------------------------
+function Game:setSoundEnabled(enabled)
+    print("Game:setSoundEnabled ", enabled);
+    local value = enabled and 1 or 0;
+	CCUserDefault:getInstance():setIntegerForKey("SoundValue", value);
+    cc.SimpleAudioEngine:getInstance():setEffectsVolume(value);
+end
+
+---------------------------------
+function Game:getSoundEnabled()
+    local soundVolume = cc.SimpleAudioEngine:getInstance():getEffectsVolume();
+    print("soundVolume ", soundVolume);
+    return soundVolume ~= 0;
+end
+
+---------------------------------
+function Game:setMusicEnabled(enabled)
+    print("Game:setSoundEnabled ", enabled);
+    local value = enabled and 1 or 0;
+	CCUserDefault:getInstance():setIntegerForKey("MusicValue", value);
+    cc.SimpleAudioEngine:getInstance():setMusicVolume(value);
+end
+
+---------------------------------
+function Game:getMusicEnabled()
+    local musicVolume = cc.SimpleAudioEngine:getInstance():getMusicVolume();
+    print("musicVolume ", musicVolume);
+    return musicVolume ~= 0;
+end
+
+---------------------------------
+function Game:setConfiguration()
+    local musicVal = CCUserDefault:getInstance():getIntegerForKey("MusicValue", 100);
+    cc.SimpleAudioEngine:getInstance():setMusicVolume(musicVal);
+    local soundVal = CCUserDefault:getInstance():getIntegerForKey("SoundValue", 100);
+    cc.SimpleAudioEngine:getInstance():setEffectsVolume(soundVal);
+end
+
+---------------------------------
 function Game:init()
 
 	CCUserDefault:getInstance();
@@ -112,6 +150,9 @@ function Game:init()
 
 	-- create locations
 	self:createLocation();
+
+    -- set game configuration
+    self:setConfiguration();
 
 	-- create scene manager
 	self.mSceneMan = SceneManager:create();

@@ -12,7 +12,13 @@ SettingsDlg.CHOOSE_LEVEL_MENU_ITEM_TAG = 61;
 SettingsDlg.REPLAY_MENU_TAG = 70;
 SettingsDlg.REPLAY_MENU_ITEM_TAG = 71;
 SettingsDlg.INTERACTIVE_PANEL = 80;
+SettingsDlg.SOUND_MENU_TAG = 10;
+SettingsDlg.SOUND_MENU_ITEM_TAG = 11;
+SettingsDlg.MUSIC_MENU_TAG = 20;
+SettingsDlg.MUSIC_MENU_ITEM_TAG = 21;
 SettingsDlg.mAnimator = nil;
+SettingsDlg.mSoundButton = nil;
+SettingsDlg.mMusicButton = nil;
 
 --------------------------------
 function SettingsDlg:doModal()
@@ -32,6 +38,53 @@ function SettingsDlg:hidePanel()
 	self.mAnimator:setCallFuncForLuaCallbackNamed(callFunc, "0:finish");
 
 	self.mAnimator:runAnimationsForSequenceNamed("Hide");
+end
+
+--------------------------------
+function SettingsDlg:updateSoundButton()
+    if not self.mGame:getSoundEnabled() then
+        changeMenuItemFrame(self.mSoundButton, "sound_dis_normal.png", "sound_dis_pressed.png");
+    else
+        changeMenuItemFrame(self.mSoundButton, "sound_normal.png", "sound_pressed.png");
+    end
+
+end
+
+--------------------------------
+function SettingsDlg:initSoundButton(nodeBase)
+    self.mSoundButton = getMenuItem(nodeBase, SettingsDlg.SOUND_MENU_TAG, SettingsDlg.SOUND_MENU_ITEM_TAG);
+    self:updateSoundButton();
+
+    local function onSoundButtonPressed(val, val2)
+        print("onSoundButtonPressed ");
+        self.mGame:setSoundEnabled(not self.mGame:getSoundEnabled());
+        self:updateSoundButton();
+    end
+
+    setMenuCallback(nodeBase, SettingsDlg.SOUND_MENU_TAG, SettingsDlg.SOUND_MENU_ITEM_TAG, onSoundButtonPressed);
+end
+
+--------------------------------
+function SettingsDlg:updateMusicButton()
+    if not self.mGame:getMusicEnabled() then
+        changeMenuItemFrame(self.mMusicButton, "music_dis_normal.png", "music_dis_pressed.png");
+    else
+        changeMenuItemFrame(self.mMusicButton, "music_normal.png", "music_pressed.png");
+    end
+end
+
+--------------------------------
+function SettingsDlg:initMusicButton(nodeBase)
+    self.mMusicButton = getMenuItem(nodeBase, SettingsDlg.MUSIC_MENU_TAG, SettingsDlg.MUSIC_MENU_ITEM_TAG);
+    self:updateMusicButton();
+
+    local function onMusicButtonPressed(val, val2)
+        print("onMusicButtonPressed ");
+        self.mGame:setMusicEnabled(not self.mGame:getMusicEnabled());
+        self:updateMusicButton();
+    end
+
+    setMenuCallback(nodeBase, SettingsDlg.MUSIC_MENU_TAG, SettingsDlg.MUSIC_MENU_ITEM_TAG, onMusicButtonPressed);
 end
 
 --------------------------------
@@ -81,6 +134,8 @@ function SettingsDlg:initGuiElements()
 	self:initHideButton(nodeBase);
 	self:initReplayButton(nodeBase);
 	self:initChooseLevelButton(nodeBase);
+    self:initSoundButton(nodeBase);
+    self:initMusicButton(nodeBase);
 end
 
 --------------------------------
