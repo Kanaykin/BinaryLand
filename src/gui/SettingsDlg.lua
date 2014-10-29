@@ -134,8 +134,8 @@ function SettingsDlg:initGuiElements()
 	self:initHideButton(nodeBase);
 	self:initReplayButton(nodeBase);
 	self:initChooseLevelButton(nodeBase);
-    self:initSoundButton(nodeBase);
     self:initMusicButton(nodeBase);
+    self:initSoundButton(nodeBase);
 end
 
 --------------------------------
