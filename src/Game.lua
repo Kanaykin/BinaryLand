@@ -140,6 +140,8 @@ end
 ---------------------------------
 function Game:init()
 
+    extend.Statistic:getInstance();
+
 	CCUserDefault:getInstance();
 	local xmlFilePath = CCUserDefault:getXMLFilePath();
 	print("Game:init xmlFilePath ", xmlFilePath);
