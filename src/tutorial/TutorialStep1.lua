@@ -9,7 +9,8 @@ TutorialStep1.mFinishPosition = Vector.new(10, 6);
 
 TutorialStep1.mCCBFileName = "Step1";
 TutorialStep1.mTriggerTag = FactoryObject.TUTORIAL_TRIGGER_1;
-TutorialStep1.mTrigger = nil;--FactoryObject.TUTORIAL_TRIGGER_1;
+TutorialStep1.mTrigger = nil;
+TutorialStep1.FOX_BABY_TAG = 1;
 
 ---------------------------------
 function TutorialStep1:destroy()
@@ -36,6 +37,21 @@ function TutorialStep1:onTouchHandler()
 end
 
 --------------------------------
+function TutorialStep1:foxBabyAnimation()
+    print("TutorialStep1:foxBabyAnimation self.mNode ", self.mNode);
+    local foxBaby = self.mNode:getChildByTag(TutorialStep1.FOX_BABY_TAG);
+    print("TutorialStep1:foxBabyAnimation ", foxBaby);
+
+    local animation = PlistAnimation:create();
+    animation:init("FoxBabyTutorAnim.plist", foxBaby, foxBaby:getAnchorPoint());
+
+    local repeatAnimation = RepeatAnimation:create();
+    repeatAnimation:init(animation);
+    repeatAnimation:play();
+
+end
+
+--------------------------------
 function TutorialStep1:init(gameScene, field, tutorialManager)
 	TutorialStep1:superClass().init(self, gameScene, field, tutorialManager, self.mCCBFileName);
 
@@ -57,6 +73,8 @@ function TutorialStep1:init(gameScene, field, tutorialManager)
 	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.BOTTOM);
 
 	self.mTutorialManager:getMainUI():getFightButton():setBlocked(true);
+
+    self:foxBabyAnimation();
 end
 
 --------------------------------

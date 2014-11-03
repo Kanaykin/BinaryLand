@@ -90,6 +90,10 @@
 			<key>path</key>
 			<string>Resources/Tutorial</string>
 		</dict>
+		<dict>
+			<key>path</key>
+			<string>Resources/fonts</string>
+		</dict>
 	</array>
 	<key>versionStr</key>
 	<string>Version: 3.0-alpha5
