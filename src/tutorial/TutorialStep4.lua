@@ -4,6 +4,7 @@ TutorialStep4 =  inheritsFrom(TutorialStep1)
 TutorialStep4.mCCBFileName = "Step4";
 TutorialStep4.mFinishPosition = Vector.new(10, 6);
 TutorialStep4.mTriggerTag = FactoryObject.TUTORIAL_TRIGGER_1;
+TutorialStep4.mPlayerIndex = 2;
 
 --------------------------------
 function TutorialStep4:init(gameScene, field, tutorialManager)

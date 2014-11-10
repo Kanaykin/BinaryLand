@@ -1,3 +1,17 @@
+local DEFAULT_FONT = "res/fonts/Minecrafter.ttf";
+
+-----------------------------
+function setDefaultFont(label, scale)
+    print("setDefaultFont scale ", scale);
+    local config = label:getTTFConfig();
+    config.fontFilePath = DEFAULT_FONT;
+    config.fontSize = label:getSystemFontSize();
+    if scale then
+        config.fontSize = config.fontSize * scale / 2;
+    end
+    label:setTTFConfig(config);
+end
+
 -----------------------------
 function getSpriteFrame(name, size)
     local cache = cc.SpriteFrameCache:getInstance();

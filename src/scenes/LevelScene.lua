@@ -104,7 +104,7 @@ end
 function LevelScene:initScene()
 
 	if self.mLevel:getData().tileMap then
-		local tileMap = CCTMXTiledMap:create(self.mLevel:getData().tileMap);
+		local tileMap = cc.TMXTiledMap:create(self.mLevel:getData().tileMap);
 		print(" LevelScene:initScene tileMap ", tileMap);
 		self.mSceneGame:addChild(tileMap);
 	end

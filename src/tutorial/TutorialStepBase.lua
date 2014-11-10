@@ -24,6 +24,22 @@ function TutorialStepBase:destroy()
 end
 
 --------------------------------
+function TutorialStepBase:foxBabyAnimation()
+    print("TutorialStep1:foxBabyAnimation self.mNode ", self.mNode);
+    local foxBaby = self.mNode:getChildByTag(TutorialStep1.FOX_BABY_TAG);
+    print("TutorialStep1:foxBabyAnimation ", foxBaby);
+
+    if foxBaby then
+        local animation = PlistAnimation:create();
+        animation:init("FoxBabyTutorAnim.plist", foxBaby, foxBaby:getAnchorPoint());
+
+        local repeatAnimation = RepeatAnimation:create();
+        repeatAnimation:init(animation);
+        repeatAnimation:play();
+    end
+end
+
+--------------------------------
 function TutorialStepBase:onBeginAnimationFinished()
 	print("TutorialStepBase:onBeginAnimationFinished");
 end

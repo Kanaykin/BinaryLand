@@ -71,7 +71,7 @@ function Trigger:tick(dt)
 			for i, player in ipairs(players) do
 				local pointX, pointY = player.mNode:getPosition();
 				--print("Trigger:tick obj x ", pointX, " y ", pointY);
-				--print("Trigger:tick x ", self.mNode:getBoundingBox().origin.x, " y ", self.mNode:boundingBox().origin.y );
+				--print("Trigger:tick x ", self.mNode:getBoundingBox().x, " y ", self.mNode:getBoundingBox().y );
                 local contained = Rect.new(self.mNode:getBoundingBox()):containsPoint(cc.p(pointX, pointY));
 				--print("contained ", contained);
 				if contained then

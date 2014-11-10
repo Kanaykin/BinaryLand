@@ -52,7 +52,7 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>72</real>
+							<real>0.0</real>
 							<integer>4</integer>
 						</array>
 					</dict>
@@ -176,9 +176,20 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>33.75</real>
-							<real>79.300003051757812</real>
+							<real>100</real>
+							<real>7.1875</real>
 							<integer>4</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>anchorPoint</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>1.3500000238418579</real>
+							<real>0.0</real>
 						</array>
 					</dict>
 					<dict>
@@ -220,7 +231,7 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>50</real>
+							<real>37</real>
 							<real>7.5</real>
 							<integer>1</integer>
 						</array>
@@ -278,6 +289,8 @@
 						<real>0.0</real>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -301,9 +314,9 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>220</real>
-							<real>266</real>
-							<integer>0</integer>
+							<real>66.25</real>
+							<real>10.300000190734863</real>
+							<integer>4</integer>
 						</array>
 					</dict>
 					<dict>
@@ -332,6 +345,14 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>tag</string>
+						<key>type</key>
+						<string>Integer</string>
+						<key>value</key>
+						<integer>2</integer>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>ignoreAnchorPointForPosition</string>
 						<key>type</key>
 						<string>Check</string>
@@ -344,7 +365,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Minecrafter.ttf</string>
+						<string>Helvetica</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -403,7 +424,7 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>hjjh</string>
+						<string>Move fox by finger.</string>
 					</dict>
 				</array>
 			</dict>
@@ -429,8 +450,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>89.583335876464844</real>
-							<real>87.5</real>
+							<real>100</real>
+							<real>14.875</real>
 							<integer>4</integer>
 						</array>
 					</dict>
@@ -441,7 +462,7 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
+							<real>1</real>
 							<real>0.5</real>
 						</array>
 					</dict>
@@ -486,8 +507,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>animatedProperties</key>

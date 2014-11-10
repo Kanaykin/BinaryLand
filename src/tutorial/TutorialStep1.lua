@@ -2,15 +2,17 @@ require "src/tutorial/TutorialStepBase"
 
 TutorialStep1 =  inheritsFrom(TutorialStepBase)
 TutorialStep1.mPlayer = nil;
+TutorialStep1.mPlayerIndex = 1;
 TutorialStep1.FREE_TIME = 2.0;
 TutorialStep1.mCurrentFingerTime = nil;
 
-TutorialStep1.mFinishPosition = Vector.new(10, 6);
+TutorialStep1.mFinishPosition = Vector.new(6, 6);
 
 TutorialStep1.mCCBFileName = "Step1";
-TutorialStep1.mTriggerTag = FactoryObject.TUTORIAL_TRIGGER_1;
+TutorialStep1.mTriggerTag = FactoryObject.WEB_TAG;--FactoryObject.TUTORIAL_TRIGGER_1;
 TutorialStep1.mTrigger = nil;
 TutorialStep1.FOX_BABY_TAG = 1;
+TutorialStep1.LABEL_TAG = 2;
 
 ---------------------------------
 function TutorialStep1:destroy()
@@ -37,21 +39,6 @@ function TutorialStep1:onTouchHandler()
 end
 
 --------------------------------
-function TutorialStep1:foxBabyAnimation()
-    print("TutorialStep1:foxBabyAnimation self.mNode ", self.mNode);
-    local foxBaby = self.mNode:getChildByTag(TutorialStep1.FOX_BABY_TAG);
-    print("TutorialStep1:foxBabyAnimation ", foxBaby);
-
-    local animation = PlistAnimation:create();
-    animation:init("FoxBabyTutorAnim.plist", foxBaby, foxBaby:getAnchorPoint());
-
-    local repeatAnimation = RepeatAnimation:create();
-    repeatAnimation:init(animation);
-    repeatAnimation:play();
-
-end
-
---------------------------------
 function TutorialStep1:init(gameScene, field, tutorialManager)
 	TutorialStep1:superClass().init(self, gameScene, field, tutorialManager, self.mCCBFileName);
 
@@ -60,7 +47,7 @@ function TutorialStep1:init(gameScene, field, tutorialManager)
 	dest.y = dest.y + field.mCellSize / 2;
 	self.mFinishPosition = dest;
 
-	self.mPlayer = self.mField:getPlayerObjects()[2];
+	self.mPlayer = self.mField:getPlayerObjects()[self.mPlayerIndex];
 
 	self.mTrigger = self.mField:getObjetcByTag(self.mTriggerTag);
 	print("TutorialStep1:init self.mTrigger ", self.mTrigger);
@@ -75,6 +62,14 @@ function TutorialStep1:init(gameScene, field, tutorialManager)
 	self.mTutorialManager:getMainUI():getFightButton():setBlocked(true);
 
     self:foxBabyAnimation();
+
+    local label = tolua.cast(self.mNode:getChildByTag(TutorialStep1.LABEL_TAG), "cc.Label");
+    print("TutorialStep1:init label ", label);
+
+    if label then
+        setDefaultFont(label, field.mGame:getScale());
+    end
+
 end
 
 --------------------------------
@@ -87,6 +82,7 @@ function TutorialStep1:tick(dt)
 			print("TutorialStep1:tick FINISH Step");
 			self.mIsFinished = true;
 		end
+        --print("TutorialStep1:tick ContainedObj ", self.mTrigger:getContainedObj())
 
 		self.mCurrentFingerTime = self.mCurrentFingerTime + dt;
 

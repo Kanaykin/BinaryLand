@@ -5,6 +5,7 @@ TutorialStep3.mCCBFileName = "Step3";
 TutorialStep3.mSecondPlayer = nil;
 TutorialStep3.mCurrentFingerTime = nil;
 TutorialStep3.FREE_TIME = 2.0;
+TutorialStep3.mPlayerIndex = 2;
 
 --------------------------------
 function TutorialStep3:init(gameScene, field, tutorialManager)
@@ -22,6 +23,12 @@ function TutorialStep3:init(gameScene, field, tutorialManager)
 	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.BOTTOM);
 
 	self.mTutorialManager:getMainUI():getFightButton():setBlocked(false);
+
+    self:foxBabyAnimation();
+    local label = tolua.cast(self.mNode:getChildByTag(TutorialStep1.LABEL_TAG), "cc.Label");
+    if label then
+        setDefaultFont(label, field.mGame:getScale());
+    end
 end
 
 --------------------------------

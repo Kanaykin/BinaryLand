@@ -2,6 +2,7 @@ require "src/tutorial/TutorialStep1"
 
 TutorialStep6 =  inheritsFrom(TutorialStep1)
 TutorialStep6.mCCBFileName = "Step6";
+TutorialStep6.mPlayerIndex = 2;
 
 --------------------------------
 function TutorialStep6:init(gameScene, field, tutorialManager)
