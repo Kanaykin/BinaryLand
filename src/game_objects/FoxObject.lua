@@ -193,7 +193,7 @@ function FoxObject:initAnimation()
 	-- create empty animation
 	for i, info in ipairs(ANIMATION_MALE) do
 		if info.name then
-			self.mAnimations[i] = self:createRepeatAnimation(self.mAnimationNode, "FoxWalk.plist");
+            self.mAnimations[i] = self:createRepeatAnimation(self.mAnimationNode, self:getPrefixTexture().."Walk.plist");
 		end
 	end
 
