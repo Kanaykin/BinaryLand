@@ -58,9 +58,11 @@ end
 
 ----------------------------------------
 function TouchWidget:onTouchHandler(action, var)
+    print("TouchWidget:onTouchHandler ", action, " var ", var, " self ", self);
+
 	local arrayPoints = self:convertToPoints(var);
 
-	--print("TouchWidget.mTouchId ", self.mTouchId, " var ", var);
+	print("TouchWidget.mTouchId ", self.mTouchId, " var ", var);
 
 	if self.mTouchId ~= nil and not arrayPoints[self.mTouchId] then
 		return;

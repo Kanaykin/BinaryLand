@@ -10,6 +10,8 @@ TutorialStepBase.mNode = nil;
 
 ---------------------------------
 function TutorialStepBase:destroy()
+    self.mTutorialManager:getMainUI():removeListener(self);
+
 	if self.mFinger then
 		self.mFinger:destroy();
 		self.mFinger = nil;
@@ -80,8 +82,7 @@ function TutorialStepBase:initFromCCB(ccbfile, gameScene)
 		self:onTouchHandler();
 	end
 
-	--layer:registerScriptTouchHandler(onTouchHandler, true, 2, false);
-	--layer:setTouchEnabled(true);
+    self.mTutorialManager:getMainUI():addTouchListener(self);
 
 end
 

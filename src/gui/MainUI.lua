@@ -12,6 +12,7 @@ MainUI.mSettingsDlg = nil;
 MainUI.mYouLooseDlg = nil;
 MainUI.mYouWinDlg = nil;
 MainUI.mTimeLabel = nil;
+MainUI.mListener = nil;
 
 MainUI.SETTINGS_MENU_TAG = 50;
 MainUI.SETTINGS_MENU_ITEM_TAG = 51;
@@ -59,20 +60,41 @@ function MainUI:onStateWin()
 end
 
 --------------------------------
-function MainUI:setTouchListener(listener)
-	local function onTouchHandler(action, var)
-		print("MainUI:onTouchHandler ", action);
-		return listener:onTouchHandler(action, var);
-    end
+function MainUI:getTouchListener()
+    return self.mListener;
+end
 
-    local layer = tolua.cast(self.mNode:getChildByTag(MainUI.MAIN_LAYER_TAG), "cc.Layer");
-    if layer then
-        layer:registerScriptTouchHandler(onTouchHandler, true, 2, false);
-        layer:setTouchEnabled(true);
+--------------------------------
+function MainUI:onTouchHandler(action, var)
+    return self.mListener:onTouchHandler(action, var);
+end
+
+--------------------------------
+function MainUI:removeListener(listener)
+    if self.mListener == listener then
+        self.mListener = nil;
     else
-        print("ERROR: MainUI:setTouchListener not found layer !!!");
+        if self.mListener.mFirstListener == listener then
+            self.mListener = self.mListener.mSecondListener;
+        elseif self.mListener.mSecondListener == listener then
+            self.mListener = self.mListener.mFirstListener;
+        end
     end
+end
 
+--------------------------------
+function MainUI:addTouchListener(listener)
+    if self.mListener then
+        local newListener = ListenerGlue.new(self.mListener, listener);
+        self.mListener = newListener;
+    else
+        self.mListener = listener;
+    end
+end
+
+--------------------------------
+function MainUI:setTouchListener(listener)
+    self.mListener = listener;
 end
 
 --------------------------------
@@ -121,4 +143,17 @@ function MainUI:init(game, uiLayer, ccbFile)
 	-------------------------
 	self.mTimeLabel = tolua.cast(self.mNode:getChildByTag(MainUI.TIMER_TAG), "cc.Label");
 	self.mTimeLabel:setVisible(false);
+
+    local function onTouchHandler(action, var)
+        print("MainUI:onTouchHandler ", action, "self.mListener ", self.mListener);
+        return self:onTouchHandler(action, var);
+    end
+
+    local layer = tolua.cast(self.mNode:getChildByTag(MainUI.MAIN_LAYER_TAG), "cc.Layer");
+    if layer then
+        layer:registerScriptTouchHandler(onTouchHandler, true, 2, false);
+        layer:setTouchEnabled(true);
+    else
+        print("ERROR: MainUI:setTouchListener not found layer !!!");
+    end
 end
