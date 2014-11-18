@@ -46,9 +46,13 @@ function PlistAnimation:tick(dt)
 end
 
 --------------------------------
-function PlistAnimation:init(plistName, node, anchor, texture)
+function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
 
 	PlistAnimation:superClass().init(self, texture, node, anchor);
+
+    if not delayPerUnit then
+        delayPerUnit = 1 / 10;
+    end
 
     local array = cc.FileUtils:getInstance():getValueMapFromFile(plistName);
     local frames = array["frames"];
@@ -68,8 +72,8 @@ function PlistAnimation:init(plistName, node, anchor, texture)
    		table.insert(arrayFrames, nameStr);
    	end
 
-   	table.sort( arrayFrames, function(x, y) 
-   		return y < x;
+   	table.sort( arrayFrames, function(x, y)
+   		return y > x;
    	end );
 
    	for i, val in ipairs(arrayFrames) do
@@ -78,7 +82,7 @@ function PlistAnimation:init(plistName, node, anchor, texture)
    		self.mAnimation:addSpriteFrame(frame);
    	end
 
-   	self.mAnimation:setDelayPerUnit(1 / 10);
+   	self.mAnimation:setDelayPerUnit(delayPerUnit);
 	self.mAnimation:setRestoreOriginalFrame(true);
 
 	local action = CCAnimate:create(self.mAnimation);

@@ -7,9 +7,11 @@ DelayAnimation.mImpl = nil
 DelayAnimationSoftImpl = inheritsFrom(IAnimation)
 DelayAnimationSoftImpl.mAnimation = nil
 DelayAnimationSoftImpl.mTexture = nil
+DelayAnimationSoftImpl.mTextureName = nil
 
 --------------------------------
-function DelayAnimationSoftImpl:init(animation, delay, texture, textureSize)
+function DelayAnimationSoftImpl:init(animation, delay, texture, textureSize, textureName)
+    print("DelayAnimationSoftImpl:init ");
 	local action = animation:getAction();
 	local delayAction = cc.DelayTime:create(delay);
 	local seq = cc.Sequence:create(delayAction, action);
@@ -22,6 +24,7 @@ function DelayAnimationSoftImpl:init(animation, delay, texture, textureSize)
 	if texture and textureSize then
 		self.mTexture = texture;
 		self.mTextureSize = textureSize;
+        self.mTextureName = textureName;
 	elseif animation.getNode then
 		local node = animation:getNode();
 		local texture = tolua.cast(node, "cc.Sprite"):getTexture();
@@ -42,10 +45,16 @@ end
 
 ----------------------------
 function DelayAnimationSoftImpl:play()
-	--print("DelayAnimation:play")
+	print("DelayAnimation:play ")
 	if self.mTexture then
-		tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setTexture(self.mTexture);
-		tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setTextureRect(cc.rect(0, 0, self.mTextureSize.width, self.mTextureSize.height));
+        if self.mTextureName then
+            local sprite = GuiHelper.getSpriteFrame(self.mTextureName, self.mTextureSize);
+            print("DelayAnimationSoftImpl:play sprite ", sprite);
+            tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setSpriteFrame(sprite);
+        else
+            tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setTexture(self.mTexture);
+            tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setTextureRect(cc.rect(0, 0, self.mTextureSize.width, self.mTextureSize.height));
+        end
 	end
 	self.mAnimation:play();
 end
@@ -98,10 +107,10 @@ end
 
 --////////////////////////////////////////
 --------------------------------
-function DelayAnimation:init(animation, delay, texture, textureSize)
+function DelayAnimation:init(animation, delay, texture, textureSize, textureName)
 	if animation:getAction() then
 		self.mImpl = DelayAnimationSoftImpl:create();
-		self.mImpl:init(animation, delay, texture, textureSize);
+		self.mImpl:init(animation, delay, texture, textureSize, textureName);
 	else 
 		self.mImpl = DelayAnimationHardImpl:create();
 		self.mImpl:init(animation, delay);

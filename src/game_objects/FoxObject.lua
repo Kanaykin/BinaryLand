@@ -112,9 +112,9 @@ function FoxObject:tick(dt)
 end
 
 --------------------------------
-function FoxObject:createRepeatAnimation(node, nameAnimation, soft)
+function FoxObject:createRepeatAnimation(node, nameAnimation, soft, delayPerUnit)
 	local animation = PlistAnimation:create();
-	animation:init(nameAnimation, node, node:getAnchorPoint());
+	animation:init(nameAnimation, node, node:getAnchorPoint(), nil, delayPerUnit);
 
 	local repeatAnimation = RepeatAnimation:create();
 	repeatAnimation:init(animation, soft);
@@ -127,11 +127,11 @@ function FoxObject:getAnimationNode()
 end
 
 --------------------------------
-function FoxObject:createIdleAnimation(animation, nameAnimation, texture, textureSize)
+function FoxObject:createIdleAnimation(animation, nameAnimation, texture, textureSize, textureName)
 	local idle = PlistAnimation:create();
 	idle:init(nameAnimation, self.mAnimationNode, self.mAnimationNode:getAnchorPoint());
 	local delayAnim = DelayAnimation:create();
-	delayAnim:init(idle, math.random(), texture, textureSize);
+	delayAnim:init(idle, math.random(2, 5), texture, textureSize, textureName);
 	animation:addAnimation(delayAnim);
 end
 
@@ -170,22 +170,23 @@ function FoxObject:initAnimation()
 	local textureName = self:getPrefixTexture() .. ".png";
 	print("FoxObject:initAnimation textureName ", textureName);
 	local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
+    local contentSize = {width = texture:getPixelsWide(), height = texture:getPixelsHigh()} --self.mAnimationNode:getContentSize()
 
 	self.mAnimations = {}
 	
 	self.mAnimations[-1] = RandomAnimation:create();
 	self.mAnimations[-1]:init();
-	self:createIdleAnimation(self.mAnimations[-1], "FoxIdle1.plist", texture, self.mAnimationNode:getContentSize());
-	self:createIdleAnimation(self.mAnimations[-1], "FoxIdle2.plist", texture, self.mAnimationNode:getContentSize());
-	self:createIdleAnimation(self.mAnimations[-1], "FoxIdle3.plist", texture, self.mAnimationNode:getContentSize());
+	self:createIdleAnimation(self.mAnimations[-1], self:getPrefixTexture().."Idle1.plist", texture, contentSize, textureName);
+	self:createIdleAnimation(self.mAnimations[-1], self:getPrefixTexture().."Idle2.plist", texture, contentSize, textureName);
+	--self:createIdleAnimation(self.mAnimations[-1], "FoxIdle3.plist", texture, contentSize);
 
 	self.mAnimations[-2] = RandomAnimation:create();
 	self.mAnimations[-2]:init();
 	textureName = self:getPrefixTexture() .. "Back.png";
 	local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
-	self:createIdleAnimation(self.mAnimations[-2], "FoxBackIdle1.plist", texture, self.mAnimationNode:getContentSize());
-	self:createIdleAnimation(self.mAnimations[-2], "FoxBackIdle2.plist", texture, self.mAnimationNode:getContentSize());
-	self:createIdleAnimation(self.mAnimations[-2], "FoxBackIdle3.plist", texture, self.mAnimationNode:getContentSize());
+	self:createIdleAnimation(self.mAnimations[-2], "FoxBackIdle1.plist", texture, contentSize, textureName);
+	self:createIdleAnimation(self.mAnimations[-2], "FoxBackIdle2.plist", texture, contentSize, textureName);
+	self:createIdleAnimation(self.mAnimations[-2], "FoxBackIdle3.plist", texture, contentSize, textureName);
 
 	self.mIdleAnimation = self.mAnimations[-1];
 	self.mBackIdleAnimation = self.mAnimations[-2];
@@ -193,11 +194,13 @@ function FoxObject:initAnimation()
 	-- create empty animation
 	for i, info in ipairs(ANIMATION_MALE) do
 		if info.name then
-            self.mAnimations[i] = self:createRepeatAnimation(self.mAnimationNode, self:getPrefixTexture().."Walk.plist");
+            self.mAnimations[i] = self:createRepeatAnimation(self.mAnimationNode, self:getPrefixTexture().."Walk.plist", nil, 1 / 4);
 		end
 	end
 
-	self.mAnimations[PlayerObject.PLAYER_STATE.PS_TOP] = self:createRepeatAnimation(self.mAnimationNode, "FoxWalkBack.plist");
+	self.mAnimations[PlayerObject.PLAYER_STATE.PS_TOP] = self:createRepeatAnimation(self.mAnimationNode, self:getPrefixTexture().."WalkBack.plist", nil, 1 / 4);
+
+    self.mAnimations[PlayerObject.PLAYER_STATE.PS_BOTTOM] = self:createRepeatAnimation(self.mAnimationNode, self:getPrefixTexture().."WalkFront.plist", nil, 1 / 4);
 
 	for i = PlayerObject.PLAYER_STATE.PS_FIGHT_LEFT, PlayerObject.PLAYER_STATE.PS_FIGHT_DOWN do
 		self.mAnimations[i] = self:createRepeatAnimation(self.mAnimationNode, "FoxFight.plist", true);
@@ -207,7 +210,7 @@ function FoxObject:initAnimation()
 
 	self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE] = EmptyAnimation:create();
 	local frontTexture = tolua.cast(self.mAnimationNode, "cc.Sprite"):getTexture();
-	self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE]:init(frontTexture, self.mAnimationNode, self.mAnimationNode:getAnchorPoint());
+	self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE]:init(frontTexture, self.mAnimationNode, contentSize);
 
 	self:initEffectAnimations();
 

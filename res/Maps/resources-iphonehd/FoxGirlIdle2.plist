@@ -4,345 +4,345 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>boy_stand_02_big_cut_0000_Layer-Comp-1 copy 2.png</key>
+            <key>girl_stand_02_big_cut_0000_Layer-Comp-1 copy 2.png</key>
             <dict>
                 <key>height</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>offsetX</key>
                 <real>0</real>
                 <key>offsetY</key>
                 <real>0</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>x</key>
                 <integer>2</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0000_Layer-Comp-1 copy.png</key>
+            <key>girl_stand_02_big_cut_0000_Layer-Comp-1 copy.png</key>
             <dict>
                 <key>height</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>offsetX</key>
                 <real>0</real>
                 <key>offsetY</key>
                 <real>0</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>x</key>
                 <integer>2</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0000_Layer-Comp-1.png</key>
+            <key>girl_stand_02_big_cut_0000_Layer-Comp-1.png</key>
             <dict>
                 <key>height</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>offsetX</key>
                 <real>0</real>
                 <key>offsetY</key>
                 <real>0</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>x</key>
                 <integer>2</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0001_Layer-Comp-2 copy 2.png</key>
+            <key>girl_stand_02_big_cut_0001_Layer-Comp-2 copy 2.png</key>
             <dict>
                 <key>height</key>
-                <integer>112</integer>
+                <integer>114</integer>
                 <key>offsetX</key>
-                <real>-2</real>
+                <real>0</real>
                 <key>offsetY</key>
                 <real>-3</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>78</integer>
+                <integer>76</integer>
                 <key>x</key>
-                <integer>254</integer>
+                <integer>236</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0001_Layer-Comp-2 copy.png</key>
+            <key>girl_stand_02_big_cut_0001_Layer-Comp-2 copy.png</key>
             <dict>
                 <key>height</key>
-                <integer>112</integer>
+                <integer>114</integer>
                 <key>offsetX</key>
-                <real>-2</real>
+                <real>0</real>
                 <key>offsetY</key>
                 <real>-3</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>78</integer>
+                <integer>76</integer>
                 <key>x</key>
-                <integer>254</integer>
+                <integer>236</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0001_Layer-Comp-2.png</key>
+            <key>girl_stand_02_big_cut_0001_Layer-Comp-2.png</key>
             <dict>
                 <key>height</key>
-                <integer>112</integer>
+                <integer>114</integer>
                 <key>offsetX</key>
-                <real>-2</real>
+                <real>0</real>
                 <key>offsetY</key>
                 <real>-3</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>78</integer>
+                <integer>76</integer>
                 <key>x</key>
-                <integer>254</integer>
+                <integer>236</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0002_Layer-Comp-3.png</key>
+            <key>girl_stand_02_big_cut_0002_Layer-Comp-3.png</key>
             <dict>
                 <key>height</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>offsetX</key>
                 <real>0</real>
                 <key>offsetY</key>
                 <real>0</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>x</key>
-                <integer>86</integer>
+                <integer>80</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0003_Layer-Comp-4.png</key>
+            <key>girl_stand_02_big_cut_0003_Layer-Comp-4.png</key>
             <dict>
                 <key>height</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>offsetX</key>
                 <real>0</real>
                 <key>offsetY</key>
                 <real>0</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>x</key>
                 <integer>2</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0004_Layer-Comp-5.png</key>
+            <key>girl_stand_02_big_cut_0004_Layer-Comp-5.png</key>
             <dict>
                 <key>height</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>offsetX</key>
                 <real>0</real>
                 <key>offsetY</key>
                 <real>0</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>x</key>
-                <integer>170</integer>
+                <integer>158</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0005_Layer-Comp-6 copy 2.png</key>
+            <key>girl_stand_02_big_cut_0005_Layer-Comp-6 copy 2.png</key>
             <dict>
                 <key>height</key>
-                <integer>112</integer>
+                <integer>114</integer>
                 <key>offsetX</key>
-                <real>-2</real>
+                <real>0</real>
                 <key>offsetY</key>
                 <real>-3</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>78</integer>
+                <integer>76</integer>
                 <key>x</key>
-                <integer>334</integer>
+                <integer>314</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0005_Layer-Comp-6 copy.png</key>
+            <key>girl_stand_02_big_cut_0005_Layer-Comp-6 copy.png</key>
             <dict>
                 <key>height</key>
-                <integer>112</integer>
+                <integer>114</integer>
                 <key>offsetX</key>
-                <real>-2</real>
+                <real>0</real>
                 <key>offsetY</key>
                 <real>-3</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>78</integer>
+                <integer>76</integer>
                 <key>x</key>
-                <integer>334</integer>
+                <integer>314</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0005_Layer-Comp-6.png</key>
+            <key>girl_stand_02_big_cut_0005_Layer-Comp-6.png</key>
             <dict>
                 <key>height</key>
-                <integer>112</integer>
+                <integer>114</integer>
                 <key>offsetX</key>
-                <real>-2</real>
+                <real>0</real>
                 <key>offsetY</key>
                 <real>-3</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>78</integer>
+                <integer>76</integer>
                 <key>x</key>
-                <integer>334</integer>
+                <integer>314</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0006_Layer-Comp-7 copy 2.png</key>
+            <key>girl_stand_02_big_cut_0006_Layer-Comp-7 copy 2.png</key>
             <dict>
                 <key>height</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>offsetX</key>
                 <real>0</real>
                 <key>offsetY</key>
                 <real>0</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>x</key>
                 <integer>2</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0006_Layer-Comp-7 copy.png</key>
+            <key>girl_stand_02_big_cut_0006_Layer-Comp-7 copy.png</key>
             <dict>
                 <key>height</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>offsetX</key>
                 <real>0</real>
                 <key>offsetY</key>
                 <real>0</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>x</key>
                 <integer>2</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0006_Layer-Comp-7.png</key>
+            <key>girl_stand_02_big_cut_0006_Layer-Comp-7.png</key>
             <dict>
                 <key>height</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>offsetX</key>
                 <real>0</real>
                 <key>offsetY</key>
                 <real>0</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>x</key>
                 <integer>2</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0007_Layer-Comp-8 copy 2.png</key>
+            <key>girl_stand_02_big_cut_0007_Layer-Comp-8 copy 2.png</key>
             <dict>
                 <key>height</key>
-                <integer>112</integer>
+                <integer>114</integer>
                 <key>offsetX</key>
-                <real>-2</real>
+                <real>0</real>
                 <key>offsetY</key>
                 <real>-3</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>78</integer>
+                <integer>76</integer>
                 <key>x</key>
-                <integer>254</integer>
+                <integer>236</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0007_Layer-Comp-8 copy.png</key>
+            <key>girl_stand_02_big_cut_0007_Layer-Comp-8 copy.png</key>
             <dict>
                 <key>height</key>
-                <integer>112</integer>
+                <integer>114</integer>
                 <key>offsetX</key>
-                <real>-2</real>
+                <real>0</real>
                 <key>offsetY</key>
                 <real>-3</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>78</integer>
+                <integer>76</integer>
                 <key>x</key>
-                <integer>254</integer>
+                <integer>236</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_stand_02_big_cut_0007_Layer-Comp-8.png</key>
+            <key>girl_stand_02_big_cut_0007_Layer-Comp-8.png</key>
             <dict>
                 <key>height</key>
-                <integer>112</integer>
+                <integer>114</integer>
                 <key>offsetX</key>
-                <real>-2</real>
+                <real>0</real>
                 <key>offsetY</key>
                 <real>-3</real>
                 <key>originalHeight</key>
-                <integer>118</integer>
+                <integer>120</integer>
                 <key>originalWidth</key>
-                <integer>82</integer>
+                <integer>76</integer>
                 <key>width</key>
-                <integer>78</integer>
+                <integer>76</integer>
                 <key>x</key>
-                <integer>254</integer>
+                <integer>236</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
@@ -352,20 +352,20 @@
             <key>format</key>
             <integer>0</integer>
             <key>realTextureFileName</key>
-            <string>FoxIdle2.png</string>
+            <string>FoxGirlIdle2.png</string>
             <key>size</key>
-            <string>{414,122}</string>
+            <string>{392,124}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:3b69198159ee1d303a976df116918269:95df031ac6c9e7bee3ba3101eed2ea42:67ea9562ff0aad0be899e3086b7e032b$</string>
+            <string>$TexturePacker:SmartUpdate:8e6a4543358acd43a54db5f8ba781380:4754528948f81c9a8e5d295b7d062371:fcf6873119fd40fac6bcc382b632ee8d$</string>
             <key>textureFileName</key>
-            <string>FoxIdle2.png</string>
+            <string>FoxGirlIdle2.png</string>
         </dict>
         <key>texture</key>
         <dict>
             <key>height</key>
-            <integer>122</integer>
+            <integer>124</integer>
             <key>width</key>
-            <integer>414</integer>
+            <integer>392</integer>
         </dict>
     </dict>
 </plist>

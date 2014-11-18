@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>boy_walk_back_0000_Layer-Comp-1.png</key>
+            <key>boy_walk_front_0000_Layer-Comp-1.png</key>
             <dict>
                 <key>height</key>
                 <integer>118</integer>
@@ -23,7 +23,7 @@
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_walk_back_0001_Layer-Comp-2.png</key>
+            <key>boy_walk_front_0001_Layer-Comp-2.png</key>
             <dict>
                 <key>height</key>
                 <integer>114</integer>
@@ -42,7 +42,7 @@
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_walk_back_0002_Layer-Comp-3.png</key>
+            <key>boy_walk_front_0002_Layer-Comp-3.png</key>
             <dict>
                 <key>height</key>
                 <integer>118</integer>
@@ -61,7 +61,7 @@
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>boy_walk_back_0003_Layer-Comp-4.png</key>
+            <key>boy_walk_front_0003_Layer-Comp-4.png</key>
             <dict>
                 <key>height</key>
                 <integer>114</integer>
@@ -86,13 +86,13 @@
             <key>format</key>
             <integer>0</integer>
             <key>realTextureFileName</key>
-            <string>FoxWalkBack.png</string>
+            <string>FoxWalkFront.png</string>
             <key>size</key>
             <string>{312,122}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:f37c96352f1a6a555e32f720b699c38f:140f52fe9ee36361e0be6ce52e5c0da4:692a0ddb195c626be7535949c3b35869$</string>
+            <string>$TexturePacker:SmartUpdate:e7c8cfd9141e66bbdf9f2e6eec64fe3f:365954c0b68d31e7207fb30af5ef8441:f360671886c0fe61d8f2b881f18f53d6$</string>
             <key>textureFileName</key>
-            <string>FoxWalkBack.png</string>
+            <string>FoxWalkFront.png</string>
         </dict>
         <key>texture</key>
         <dict>
