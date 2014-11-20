@@ -103,10 +103,12 @@ end
 --------------------------------
 function LevelScene:initScene()
 
+    local tileMap = nil;
 	if self.mLevel:getData().tileMap then
-		local tileMap = cc.TMXTiledMap:create(self.mLevel:getData().tileMap);
-		print(" LevelScene:initScene tileMap ", tileMap);
-		self.mSceneGame:addChild(tileMap);
+		tileMap = cc.TMXTiledMap:create(self.mLevel:getData().tileMap);
+        local visibleSize = CCDirector:getInstance():getVisibleSize();
+        tileMap:setAnchorPoint(cc.p(0.5, 0.0));
+        tileMap:setPosition(cc.p(visibleSize.width / 2.0, 0));
 	end
 
 	if type(self.mLevel:getData().ccbFile) == "string" then
@@ -115,6 +117,9 @@ function LevelScene:initScene()
 		
 		local node = ccpproxy:readCCBFromFile(self.mLevel:getData().ccbFile, reader, false);
 
+        if tileMap then
+            self.mSceneGame:addChild(tileMap);
+        end
 		self.mSceneGame:addChild(node);
 
 		-- create field
@@ -139,6 +144,10 @@ function LevelScene:initScene()
 		self.mScrollView = ScrollView:create();
 		self.mScrollView:initLayers(layers);
 		self.mScrollView:setTouchEnabled(false);
+
+        if tileMap then
+            self.mScrollView:addChild(tileMap);
+        end
 		
 		self.mSceneGame:addChild(self.mScrollView.mScroll);
 		self.mField = Field:create();

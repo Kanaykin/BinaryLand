@@ -88,6 +88,7 @@ function ScrollView:initLayers(layers)
 	local height = 0;
 	for i, layer in ipairs(layers) do
 		local layerSize = layer:getContentSize();
+        print("ScrollView:initLayers layerSize.height ", layerSize.height)
 		height = height + layerSize.height;
 	end
 

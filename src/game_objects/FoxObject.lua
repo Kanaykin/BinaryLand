@@ -170,7 +170,7 @@ function FoxObject:initAnimation()
 	local textureName = self:getPrefixTexture() .. ".png";
 	print("FoxObject:initAnimation textureName ", textureName);
 	local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
-    local contentSize = {width = texture:getPixelsWide(), height = texture:getPixelsHigh()} --self.mAnimationNode:getContentSize()
+    local contentSize = texture:getContentSize() -- {width = texture:getPixelsWide(), height = texture:getPixelsHigh()}
 
 	self.mAnimations = {}
 	

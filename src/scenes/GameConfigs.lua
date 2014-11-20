@@ -10,7 +10,7 @@ gLocations = {
 			{
 				--opened = true,
 				ccbFile = "Level1_1p1",
-				tileMap = "Level1_2_map.tmx",
+				tileMap = "Level1_1_map.tmx",
 				cellSize = 32,
 				tutorial = true,
 				backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3"
