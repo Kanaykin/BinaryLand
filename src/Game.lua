@@ -140,7 +140,9 @@ end
 ---------------------------------
 function Game:init()
 
-    extend.Statistic:getInstance();
+    local statistic = extend.Statistic:getInstance();
+    print("Game:init statistic ", statistic);
+    statistic:sendEvent("init");
 
 	CCUserDefault:getInstance();
 	local xmlFilePath = CCUserDefault:getXMLFilePath();

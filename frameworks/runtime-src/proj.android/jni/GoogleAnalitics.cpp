@@ -2,7 +2,7 @@
 #include "platform/android/jni/JniHelper.h"
 #include <jni.h>
 
-#define  CLASS_NAME "org/cocos2dx/lib/Cocos2dxHelper"
+#define  CLASS_NAME "org/myextend/MyExtendHelper"
 
 namespace myextend {
     namespace android {
@@ -12,11 +12,12 @@ void GoogleAnalitics::sendEvent(const std::string& event)
 {
     cocos2d::JniMethodInfo methodInfo;
     
-    if (! getJNIStaticMethodInfo(methodInfo, "sendEventToStatistic", "()V")) {
+    if (!getJNIStaticMethodInfo(methodInfo, "sendEventToStatistic", "(Ljava/lang/String;)V")) {
         return;
     }
     
-    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID);
+    jstring stringArg = methodInfo.env->NewStringUTF(event.c_str());
+    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, stringArg);
     methodInfo.env->DeleteLocalRef(methodInfo.classID);
 }
 

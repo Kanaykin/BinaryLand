@@ -30,10 +30,14 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 
 import android.os.Bundle;
 
+import org.myextend.MyExtendHelper;
+
 public class AppActivity extends Cocos2dxActivity {
 	
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		MyExtendHelper.init(this);
 	}
 }

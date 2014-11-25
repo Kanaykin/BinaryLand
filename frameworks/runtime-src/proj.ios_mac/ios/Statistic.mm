@@ -1,9 +1,16 @@
 
 #include "Statistic.h"
+#include "GoogleAnalitics.h"
 
 using namespace myextend;
 
+static Statistic *s_pEngine = 0;
+
 Statistic* Statistic::getInstance()
 {
-    return 0;
+    if (! s_pEngine) {
+        s_pEngine = new ios::GoogleAnalitics();
+    }
+    
+    return s_pEngine;
 }
