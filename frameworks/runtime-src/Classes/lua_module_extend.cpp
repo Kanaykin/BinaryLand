@@ -30,14 +30,20 @@ int lua_cocos2dx_Statistic_sendEvent(lua_State* tolua_S)
 #endif
     
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 1)
+    if (argc == 2)
     {
         std::string arg0;
         
         ok &= luaval_to_std_string(tolua_S, 2,&arg0, "myextend:Statistic:sendEvent");
         if(!ok)
             return 0;
-        cobj->sendEvent(arg0);
+        
+        std::string arg2;
+        
+        ok &= luaval_to_std_string(tolua_S, 3,&arg2, "myextend:Statistic:sendEvent");
+        if(!ok)
+            return 0;
+        cobj->sendEvent(arg0, arg2);
         return 0;
     }
     CCLOG("%s has wrong number of arguments: %d, was expecting %d \n", "myextend:Statistic:sendEvent",argc, 1);

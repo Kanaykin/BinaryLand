@@ -4,7 +4,7 @@
 namespace myextend {
     namespace ios {
         
-        void GoogleAnalitics::sendEvent(const std::string& event)
+        void GoogleAnalitics::sendEvent(const std::string& eventName, const std::string& eventValue)
         {
         }
     }

@@ -8,16 +8,17 @@ namespace myextend {
     namespace android {
 
 //-----------------------------
-void GoogleAnalitics::sendEvent(const std::string& event)
+void GoogleAnalitics::sendEvent(const std::string& eventName, const std::string& eventValue)
 {
     cocos2d::JniMethodInfo methodInfo;
     
-    if (!getJNIStaticMethodInfo(methodInfo, "sendEventToStatistic", "(Ljava/lang/String;)V")) {
+    if (!getJNIStaticMethodInfo(methodInfo, "sendEventToStatistic", "(Ljava/lang/String;Ljava/lang/String;)V")) {
         return;
     }
     
-    jstring stringArg = methodInfo.env->NewStringUTF(event.c_str());
-    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, stringArg);
+    jstring stringArg = methodInfo.env->NewStringUTF(eventName.c_str());
+    jstring stringArgValue = methodInfo.env->NewStringUTF(eventValue.c_str());
+    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, stringArg, stringArgValue);
     methodInfo.env->DeleteLocalRef(methodInfo.classID);
 }
 

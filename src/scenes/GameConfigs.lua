@@ -13,7 +13,8 @@ gLocations = {
 				tileMap = "Level1_1_map.tmx",
 				cellSize = 32,
 				tutorial = true,
-				backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3"
+				backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                id = "1_1"
 			},
 			{
 				--opened = true,
@@ -22,7 +23,8 @@ gLocations = {
 				cellSize = 32,
 				tutorial = false,
 				time = 120,
-				backgroundMusic = "sounds/Music/TrainOfConsequences.mp3"
+				backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                id = "1_2"
 			},
 			{
 			},

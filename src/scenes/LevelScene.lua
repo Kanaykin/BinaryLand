@@ -98,6 +98,8 @@ function LevelScene:init(sceneMan, params)
 		SimpleAudioEngine:getInstance():playMusic(self.mLevel:getData().backgroundMusic, true)
 	end
 
+    local statistic = extend.Statistic:getInstance();
+    statistic:sendEvent("setScreenName", "LevelScene"..self.mLevel:getData().id);
 end
 
 --------------------------------

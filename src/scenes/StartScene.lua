@@ -13,6 +13,9 @@ function StartScene:init(sceneMan, params)
 
 	-- create menu elements
 	self:createMenuElements();
+
+    local statistic = extend.Statistic:getInstance();
+    statistic:sendEvent("setScreenName", "StartScene");
 end
 
 --------------------------------

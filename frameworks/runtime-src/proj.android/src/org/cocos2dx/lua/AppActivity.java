@@ -39,5 +39,6 @@ public class AppActivity extends Cocos2dxActivity {
 		super.onCreate(savedInstanceState);
 		
 		MyExtendHelper.init(this);
+		
 	}
 }

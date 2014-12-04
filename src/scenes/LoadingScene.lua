@@ -17,6 +17,9 @@ end
 function LoadingScene:init(sceneMan, params)
 	self:superClass().init(self, sceneMan, {background = LOADSCEENIMAGE});
 	print("LoadingScene:init");
+
+    local statistic = extend.Statistic:getInstance();
+    statistic:sendEvent("setScreenName", "LoadingScene");
 end
 
 ---------------------------------
