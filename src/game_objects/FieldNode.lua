@@ -83,15 +83,41 @@ function FieldNode:init(nodes, layer, field)
 		--newLayer:setAnchorPoint(nodes[1]:getAnchorPoint());
 	end
 
+    local bricks_array = {};
 	-- move to new layers
 	local count = self.mChildren:count();
 	for i = 1, count do
 		local child = tolua.cast(self.mChildren:objectAtIndex(i - 1), "cc.Node");
 		child:getParent():removeChild(child, false);
 		local posGridX, posGridY = field:getGridPosition(child);
-		--print("posGridY ", posGridY);
-		newLayer:addChild(child, -posGridY * 2);
+
+        local  tag = child:getTag();
+        if tag == FactoryObject.BRICK_TAG then
+            local index = -posGridY * 2;
+            --print("brick !!!! index ", index);
+            if bricks_array[index] == nil then
+                bricks_array[index] = {}
+            end
+            bricks_array[index][#bricks_array[index] + 1] = child;
+        else
+            newLayer:addChild(child, -posGridY * 2);
+        end
 		
 		--child:setVertexZ(-posGridY);
 	end
+
+	for index, node in pairs(bricks_array) do
+        for i = 1, #bricks_array[index] do
+            local posGridX, posGridY = field:getGridPosition(bricks_array[index][i]);
+            if posGridX % 2 == 1 then
+                newLayer:addChild(bricks_array[index][i], index);
+            end
+        end
+        for i = 1, #bricks_array[index] do
+            local posGridX, posGridY = field:getGridPosition(bricks_array[index][i]);
+            if posGridX % 2 == 0 then
+                newLayer:addChild(bricks_array[index][i], index);
+            end
+        end
+    end
 end
