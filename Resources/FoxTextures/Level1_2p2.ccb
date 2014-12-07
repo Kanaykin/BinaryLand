@@ -1856,10 +1856,12 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>love_cage_fox.png</string>
+									<string>Baby.png</string>
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>

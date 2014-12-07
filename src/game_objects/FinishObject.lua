@@ -5,6 +5,7 @@ require "src/animations/SequenceAnimation"
 FinishObject = inheritsFrom(BaseObject)
 
 FinishObject.mFinishAnimation = nil;
+FinishObject.mAnimation = nil;
 
 --------------------------------
 function FinishObject:createAnimation(nameAnimation)
@@ -22,9 +23,28 @@ function FinishObject:createAnimation(nameAnimation)
 end
 
 --------------------------------
+function FinishObject:createIdleAnimation(animation, nameAnimation, node, texture, textureSize, textureName)
+    local idle = PlistAnimation:create();
+    idle:init(nameAnimation, node, node:getAnchorPoint());
+    --local delayAnim = DelayAnimation:create();
+    --delayAnim:init(idle, math.random(2, 5), texture, textureSize, textureName);
+    --animation:addAnimation(delayAnim);
+    animation:addAnimation(idle);
+end
+
+--------------------------------
 function FinishObject:init(field, node)
 	print("FinishObject:init ");
 	FinishObject:superClass().init(self, field, node);
+
+    local texture = tolua.cast(node, "cc.Sprite"):getTexture();
+
+	local randomAnim = RandomAnimation:create();
+    randomAnim:init();
+	self:createIdleAnimation(randomAnim, "BabyIdle1.plist", node, texture, contentSize, textureName);
+    self:createIdleAnimation(randomAnim, "BabyIdle2.plist", node, texture, contentSize, textureName);
+    self.mAnimation = randomAnim;
+    self.mAnimation:play();
 
 	self.mFinishAnimation = SequenceAnimation:create();
 	self.mFinishAnimation:init();
@@ -37,6 +57,8 @@ function FinishObject:tick(dt)
 	FinishObject:superClass().tick(self, dt);
 
 	self.mFinishAnimation:tick(dt);
+
+    self.mAnimation:tick(dt);
 end
 
 ---------------------------------
