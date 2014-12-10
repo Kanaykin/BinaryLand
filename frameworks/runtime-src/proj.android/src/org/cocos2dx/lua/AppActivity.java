@@ -31,14 +31,80 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 import android.os.Bundle;
 
 import org.myextend.MyExtendHelper;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.Scopes;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.games.Games;
+import com.google.android.gms.games.GamesActivityResultCodes;
+import com.google.android.gms.games.multiplayer.Invitation;
+import com.google.android.gms.games.multiplayer.Multiplayer;
+import com.google.android.gms.games.request.GameRequest;
+import com.google.android.gms.plus.Plus;
 
-public class AppActivity extends Cocos2dxActivity {
+public class AppActivity extends Cocos2dxActivity implements GoogleApiClient.ConnectionCallbacks,
+GoogleApiClient.OnConnectionFailedListener
+{
 	
+	private GoogleApiClient 		mPlusClient;
+		
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		MyExtendHelper.init(this);
+		//mPlusClient =  new GoogleApiClient.Builder(this)
+	    //	.addApi(Plus.API)
+	    //	.addScope(Plus.SCOPE_PLUS_LOGIN)
+	    //	.build();
+        /*int result = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if((result != ConnectionResult.SERVICE_MISSING &&
+        		result != ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED &&
+        		result != ConnectionResult.SERVICE_DISABLED)) {
+        	
+        	GoogleApiClient.Builder builder = new GoogleApiClient.Builder(this, this, this);
+            builder.addApi(Games.API);
+            builder.addScope(Games.SCOPE_GAMES);
+			//builder.addApi(Plus.API);
+        	//builder.addScope(Plus.SCOPE_PLUS_LOGIN);
+        	//builder.addScope(Plus.SCOPE_PLUS_PROFILE);
+        	mPlusClient = builder.build();
+        }*/
 		
+		//mPlusClient = new GoogleApiClient.Builder(this)
+        //.addApi(Plus.API)
+        //.addScope(Plus.SCOPE_PLUS_LOGIN)
+        //.build();
+
+		MyExtendHelper.init(this);
 	}
+	
+    @Override
+    public void onConnected(Bundle connectionHint){
+    	
+    }
+    
+    @Override
+    public void onConnectionSuspended(int cause) {
+    	
+    }
+	
+    @Override
+    public void onConnectionFailed(ConnectionResult result){
+    	
+    }
+    
+	protected void onStart() {
+        super.onStart();
+        //if(!mPlusClient.isConnected())
+        //	mPlusClient.connect();
+    }
+	
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //mPlusClient.disconnect();
+    }
+
 }
