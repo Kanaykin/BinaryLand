@@ -16,18 +16,33 @@ ChooseLocation.mScrollView = nil;
 function ChooseLocation:createLocationImages()
 	local locations = self.mSceneManager.mGame:getLocations();
 	for i, location in pairs(locations) do
-		local locationImage = CCSprite:create(location:getImage());
-		self.mScrollView:addClickableChild(locationImage, location, "onLocationPressed");
-		setPosition(locationImage, location:getPosition());
-		
+        local menuToolsItem = CCMenuItemImage:create(location:getImage(), location:getImage());
+
+        local function onLocationPressed()
+            print("onLocationPressed");
+            location:onLocationPressed();
+        end
+
+        menuToolsItem:registerScriptTapHandler(onLocationPressed);
+
+        local menuTools = cc.Menu:createWithItem(menuToolsItem);
+
+        self.mScrollView:addChild(menuTools);
+
+        menuTools:setPosition(getPosition(menuTools, location:getPosition()));
+
+        --[[local locationImage = CCSprite:create(location:getImage());
+		--self.mScrollView:addClickableChild(locationImage, location, "onLocationPressed");
+		--setPosition(locationImage, location:getPosition());
+		]]
 		-- if location is locked
 		if not location:isOpened() then
 			local lock = CCSprite:create("lock.png");
-			locationImage:addChild(lock);
+			menuToolsItem:addChild(lock);
 			setPosition(lock, Coord(0.5, 0.5, 0, 0));
 			lock:setScaleX(2);
 			lock:setScaleY(2);
-		end 
+		end
 	end
 end
 
