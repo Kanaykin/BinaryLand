@@ -10,7 +10,6 @@ public class MyExtendHelper {
 	
 	public static void init(final Activity activity) {
 		MyExtendHelper.sGoogleStatistic = new GoogleStatistic(activity);
-		
 	}
 	
 	public static void sendEventToStatistic(final String eventName, final String eventValue) {

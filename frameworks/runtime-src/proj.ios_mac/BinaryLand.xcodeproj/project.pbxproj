@@ -116,6 +116,7 @@
 		50D7C96C17EBBEDF005D0B91 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7C96B17EBBEDF005D0B91 /* OpenGL.framework */; };
 		50D7C96E17EBBEE6005D0B91 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7C96D17EBBEE6005D0B91 /* AppKit.framework */; };
 		50D7C97017EBBEEC005D0B91 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7C96F17EBBEEC005D0B91 /* IOKit.framework */; };
+		A513F1571A3E2983001D052A /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A513F1561A3E2983001D052A /* Logger.cpp */; };
 		A5BFD99F1A1FC71700A6A552 /* GoogleAnalitics.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5BFD99E1A1FC71700A6A552 /* GoogleAnalitics.mm */; };
 		A5BFD9A01A1FC71700A6A552 /* GoogleAnalitics.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5BFD99E1A1FC71700A6A552 /* GoogleAnalitics.mm */; };
 		A5C6DF6319FADBD400EA4747 /* src in Resources */ = {isa = PBXBuildFile; fileRef = A5C6DF6219FADBD400EA4747 /* src */; };
@@ -266,6 +267,8 @@
 		50D7C96B17EBBEDF005D0B91 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		50D7C96D17EBBEE6005D0B91 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		50D7C96F17EBBEEC005D0B91 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		A513F1531A3C079A001D052A /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logger.h; path = ../Classes/Logger.h; sourceTree = "<group>"; };
+		A513F1561A3E2983001D052A /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Logger.cpp; path = ../Classes/Logger.cpp; sourceTree = "<group>"; };
 		A5BFD99D1A1FC6F000A6A552 /* GoogleAnalitics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAnalitics.h; sourceTree = "<group>"; };
 		A5BFD99E1A1FC71700A6A552 /* GoogleAnalitics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GoogleAnalitics.mm; sourceTree = "<group>"; };
 		A5C6DF6219FADBD400EA4747 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../../src; sourceTree = "<group>"; };
@@ -503,6 +506,8 @@
 				F293BB7F15EB831F00256477 /* AppDelegate.h */,
 				A5C752791A0354A600389E67 /* lua_module_extend.cpp */,
 				A5CAB54C1A0418C500660D14 /* Statistic.h */,
+				A513F1531A3C079A001D052A /* Logger.h */,
+				A513F1561A3E2983001D052A /* Logger.cpp */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -785,6 +790,7 @@
 				A5C7527A1A0354A600389E67 /* lua_module_extend.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
 				A5BFD99F1A1FC71700A6A552 /* GoogleAnalitics.mm in Sources */,
+				A513F1571A3E2983001D052A /* Logger.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
 				A5CAB5531A052BA600660D14 /* Statistic.mm in Sources */,
