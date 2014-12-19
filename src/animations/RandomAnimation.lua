@@ -27,7 +27,7 @@ end
 function RandomAnimation:playNext()
 	--print("RandomAnimation:playNext ", not self.mCurrentAnimation or self.mCurrentAnimation:isDone());
 	if not self.mCurrentAnimation or self.mCurrentAnimation:isDone() then
-		local animNum = math.random (1, #self.mAnimations);
+		local animNum = math.fmod(math.random (1, 32767), #self.mAnimations) + 1;
 		self.mCurrentAnimation = self.mAnimations[animNum];
 		self.mCurrentAnimation:play();
 	end

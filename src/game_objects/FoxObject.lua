@@ -14,8 +14,9 @@ FoxObject.mEffectAnimations = nil;
 FoxObject.OBJECT_NODE_TAG = 5;
 FoxObject.EFFECT_NODE_TAG = 6;
 
-FoxObject.mIdleAnimation = nil;
+FoxObject.mFrontIdleAnimation = nil;
 FoxObject.mBackIdleAnimation = nil;
+FoxObject.mSideIdleAnimation = nil;
 
 --------------------------------
 function FoxObject:init(field, node, needReverse)
@@ -127,11 +128,11 @@ function FoxObject:getAnimationNode()
 end
 
 --------------------------------
-function FoxObject:createIdleAnimation(animation, nameAnimation, texture, textureSize, textureName)
+function FoxObject:createIdleAnimation(animation, nameAnimation, texture, textureSize, textureName, delayPerUnit)
 	local idle = PlistAnimation:create();
-	idle:init(nameAnimation, self.mAnimationNode, self.mAnimationNode:getAnchorPoint());
+	idle:init(nameAnimation, self.mAnimationNode, self.mAnimationNode:getAnchorPoint(), nil, delayPerUnit);
 	local delayAnim = DelayAnimation:create();
-	delayAnim:init(idle, math.random(2, 5), texture, textureSize, textureName);
+	delayAnim:init(idle, math.random(0, 2), texture, textureSize, textureName);
 	animation:addAnimation(delayAnim);
 end
 
@@ -145,12 +146,11 @@ end
 function FoxObject:playAnimation(button)
 	if button == PlayerObject.PLAYER_STATE.PS_TOP then
 		self.mAnimations[-1] = self.mBackIdleAnimation;
-		self.mAnimations[-2] = self.mIdleAnimation;
 	elseif button == PlayerObject.PLAYER_STATE.PS_LEFT or 
-		button == PlayerObject.PLAYER_STATE.PS_RIGHT or 
-		button == PlayerObject.PLAYER_STATE.PS_BOTTOM then
-		self.mAnimations[-1] = self.mIdleAnimation;
-		self.mAnimations[-2] = self.mBackIdleAnimation;
+		button == PlayerObject.PLAYER_STATE.PS_RIGHT then
+		self.mAnimations[-1] = self.mSideIdleAnimation;
+    elseif button == PlayerObject.PLAYER_STATE.PS_BOTTOM then
+        self.mAnimations[-1] = self.mFrontIdleAnimation;
 	end
 	FoxObject:superClass().playAnimation(self, button);
 end
@@ -165,31 +165,55 @@ function FoxObject:getPrefixTexture()
 end
 
 --------------------------------
-function FoxObject:initAnimation()
-	--local texture = tolua.cast(self.mAnimationNode, "cc.Sprite"):getTexture();
-	local textureName = self:getPrefixTexture() .. ".png";
-	print("FoxObject:initAnimation textureName ", textureName);
-	local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
+function FoxObject:createSideIdleAnimation()
+    --local texture = tolua.cast(self.mAnimationNode, "cc.Sprite"):getTexture();
+    local textureName = self:getPrefixTexture() .. ".png";
+    print("FoxObject:initAnimation textureName ", textureName);
+    local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
+    if texture then
+        local contentSize = texture:getContentSize() -- {width = texture:getPixelsWide(), height = texture:getPixelsHigh()}
+
+        self.mAnimations[-1] = RandomAnimation:create();
+        self.mAnimations[-1]:init();
+        self:createIdleAnimation(self.mAnimations[-1], self:getPrefixTexture().."Idle1.plist", texture, contentSize, textureName);
+        self:createIdleAnimation(self.mAnimations[-1], self:getPrefixTexture().."Idle2.plist", texture, contentSize, textureName);
+
+        self.mSideIdleAnimation = self.mAnimations[-1];
+    end
+end
+
+--------------------------------
+function FoxObject:createBackIdleAnimation()
+    self.mAnimations[-2] = RandomAnimation:create();
+    self.mAnimations[-2]:init();
+    local textureName = self:getPrefixTexture() .. "Back.png";
+    local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
+    if texture then
+        local contentSize = texture:getContentSize() -- {width = texture:getPixelsWide(), height = texture:getPixelsHigh()}
+        self:createIdleAnimation(self.mAnimations[-2], self:getPrefixTexture().."BackIdle1.plist", texture, contentSize, textureName, 0.3);
+
+        self.mBackIdleAnimation = self.mAnimations[-2];
+    end
+end
+
+--------------------------------
+function FoxObject:createFrontIdleAnimation()
+    self.mFrontIdleAnimation = RandomAnimation:create();
+    self.mFrontIdleAnimation:init();
+    local textureName = self:getPrefixTexture() .. "Front.png";
+    local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
     local contentSize = texture:getContentSize() -- {width = texture:getPixelsWide(), height = texture:getPixelsHigh()}
+    self:createIdleAnimation(self.mFrontIdleAnimation, self:getPrefixTexture().."FrontIdle1.plist", texture, contentSize, textureName);
 
+end
+
+--------------------------------
+function FoxObject:initAnimation()
 	self.mAnimations = {}
-	
-	self.mAnimations[-1] = RandomAnimation:create();
-	self.mAnimations[-1]:init();
-	self:createIdleAnimation(self.mAnimations[-1], self:getPrefixTexture().."Idle1.plist", texture, contentSize, textureName);
-	self:createIdleAnimation(self.mAnimations[-1], self:getPrefixTexture().."Idle2.plist", texture, contentSize, textureName);
-	--self:createIdleAnimation(self.mAnimations[-1], "FoxIdle3.plist", texture, contentSize);
 
-	self.mAnimations[-2] = RandomAnimation:create();
-	self.mAnimations[-2]:init();
-	textureName = self:getPrefixTexture() .. "Back.png";
-	local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
-	self:createIdleAnimation(self.mAnimations[-2], "FoxBackIdle1.plist", texture, contentSize, textureName);
-	self:createIdleAnimation(self.mAnimations[-2], "FoxBackIdle2.plist", texture, contentSize, textureName);
-	self:createIdleAnimation(self.mAnimations[-2], "FoxBackIdle3.plist", texture, contentSize, textureName);
-
-	self.mIdleAnimation = self.mAnimations[-1];
-	self.mBackIdleAnimation = self.mAnimations[-2];
+    self:createSideIdleAnimation();
+    self:createBackIdleAnimation();
+    self:createFrontIdleAnimation();
 	
 	-- create empty animation
 	for i, info in ipairs(ANIMATION_MALE) do
