@@ -23,13 +23,17 @@ function FinishObject:createAnimation(nameAnimation)
 end
 
 --------------------------------
-function FinishObject:createIdleAnimation(animation, nameAnimation, node, texture, textureSize, textureName)
+function FinishObject:createIdleAnimation(animation, nameAnimation, node, texture, textureSize, textureName,
+                                        times, delayPerUnit)
+    local repeat_idle = RepeatAnimation:create();
+
     local idle = PlistAnimation:create();
-    idle:init(nameAnimation, node, node:getAnchorPoint());
+    idle:init(nameAnimation, node, node:getAnchorPoint(), nil, delayPerUnit);
     --local delayAnim = DelayAnimation:create();
     --delayAnim:init(idle, math.random(2, 5), texture, textureSize, textureName);
     --animation:addAnimation(delayAnim);
-    animation:addAnimation(idle);
+    repeat_idle:init(idle, false, times);
+    animation:addAnimation(repeat_idle);
 end
 
 --------------------------------
@@ -41,8 +45,8 @@ function FinishObject:init(field, node)
 
 	local randomAnim = RandomAnimation:create();
     randomAnim:init();
-	self:createIdleAnimation(randomAnim, "BabyIdle1.plist", node, texture, contentSize, textureName);
-    self:createIdleAnimation(randomAnim, "BabyIdle2.plist", node, texture, contentSize, textureName);
+	self:createIdleAnimation(randomAnim, "BabyIdle1.plist", node, texture, contentSize, textureName, 3);
+    self:createIdleAnimation(randomAnim, "BabyIdle2.plist", node, texture, contentSize, textureName, 1, 0.15);
     self.mAnimation = randomAnim;
     self.mAnimation:play();
 

@@ -8,9 +8,11 @@ RepeatAnimationSoftImpl = inheritsFrom(IAnimation)
 RepeatAnimationSoftImpl.mAnimation = nil
 
 --------------------------------
-function RepeatAnimationSoftImpl:init(animation)
+function RepeatAnimationSoftImpl:init(animation, times)
+    print("RepeatAnimationSoftImpl:init ( ", times);
+
 	local action = animation:getAction();
-	local repeatAction = CCRepeatForever:create(action);
+	local repeatAction = times ~= nil and CCRepeat:create(action, times) or CCRepeatForever:create(action);
 	animation:setAction(repeatAction);
 
 	self.mAnimation = animation;
@@ -88,13 +90,13 @@ end
 
 --///////////////////////////////
 --------------------------------
-function RepeatAnimation:init(animation, soft)
+function RepeatAnimation:init(animation, soft, time)
 	if soft then
 		self.mImpl = RepeatAnimationHardImpl:create();
 		self.mImpl:init(animation);
 	else
 		self.mImpl = RepeatAnimationSoftImpl:create();
-		self.mImpl:init(animation);
+		self.mImpl:init(animation, time);
 	end
 end
 

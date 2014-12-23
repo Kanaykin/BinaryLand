@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>baby_idle_1.png</key>
+            <key>baby_crying_02_0000_Layer-Comp-1 copy 2.png</key>
             <dict>
                 <key>height</key>
                 <integer>104</integer>
@@ -23,7 +23,102 @@
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>baby_idle_2 copy 2.png</key>
+            <key>baby_crying_02_0000_Layer-Comp-1 copy 3.png</key>
+            <dict>
+                <key>height</key>
+                <integer>104</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>0</real>
+                <key>originalHeight</key>
+                <integer>104</integer>
+                <key>originalWidth</key>
+                <integer>84</integer>
+                <key>width</key>
+                <integer>84</integer>
+                <key>x</key>
+                <integer>2</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>baby_crying_02_0000_Layer-Comp-1 copy 4.png</key>
+            <dict>
+                <key>height</key>
+                <integer>104</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>0</real>
+                <key>originalHeight</key>
+                <integer>104</integer>
+                <key>originalWidth</key>
+                <integer>84</integer>
+                <key>width</key>
+                <integer>84</integer>
+                <key>x</key>
+                <integer>2</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>baby_crying_02_0000_Layer-Comp-1 copy 5.png</key>
+            <dict>
+                <key>height</key>
+                <integer>104</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>0</real>
+                <key>originalHeight</key>
+                <integer>104</integer>
+                <key>originalWidth</key>
+                <integer>84</integer>
+                <key>width</key>
+                <integer>84</integer>
+                <key>x</key>
+                <integer>2</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>baby_crying_02_0000_Layer-Comp-1 copy.png</key>
+            <dict>
+                <key>height</key>
+                <integer>104</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>0</real>
+                <key>originalHeight</key>
+                <integer>104</integer>
+                <key>originalWidth</key>
+                <integer>84</integer>
+                <key>width</key>
+                <integer>84</integer>
+                <key>x</key>
+                <integer>2</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>baby_crying_02_0000_Layer-Comp-1.png</key>
+            <dict>
+                <key>height</key>
+                <integer>104</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>0</real>
+                <key>originalHeight</key>
+                <integer>104</integer>
+                <key>originalWidth</key>
+                <integer>84</integer>
+                <key>width</key>
+                <integer>84</integer>
+                <key>x</key>
+                <integer>2</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>baby_crying_02_0001_Layer-Comp-2 copy.png</key>
             <dict>
                 <key>height</key>
                 <integer>104</integer>
@@ -42,7 +137,7 @@
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>baby_idle_2 copy.png</key>
+            <key>baby_crying_02_0001_Layer-Comp-2.png</key>
             <dict>
                 <key>height</key>
                 <integer>104</integer>
@@ -61,26 +156,7 @@
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>baby_idle_2.png</key>
-            <dict>
-                <key>height</key>
-                <integer>104</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>104</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>84</integer>
-                <key>x</key>
-                <integer>88</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>baby_idle_3 copy.png</key>
+            <key>baby_crying_02_0002_Layer-Comp-3 copy 2.png</key>
             <dict>
                 <key>height</key>
                 <integer>104</integer>
@@ -99,7 +175,7 @@
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>baby_idle_3.png</key>
+            <key>baby_crying_02_0002_Layer-Comp-3 copy.png</key>
             <dict>
                 <key>height</key>
                 <integer>104</integer>
@@ -118,7 +194,7 @@
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>baby_idle_4 copy 2.png</key>
+            <key>baby_crying_02_0002_Layer-Comp-3.png</key>
             <dict>
                 <key>height</key>
                 <integer>104</integer>
@@ -133,11 +209,11 @@
                 <key>width</key>
                 <integer>84</integer>
                 <key>x</key>
-                <integer>174</integer>
+                <integer>2</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>baby_idle_4 copy 3.png</key>
+            <key>baby_crying_02_0003_Layer-Comp-4.png</key>
             <dict>
                 <key>height</key>
                 <integer>104</integer>
@@ -156,83 +232,7 @@
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>baby_idle_4 copy 4.png</key>
-            <dict>
-                <key>height</key>
-                <integer>104</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>104</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>84</integer>
-                <key>x</key>
-                <integer>174</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>baby_idle_4 copy 5.png</key>
-            <dict>
-                <key>height</key>
-                <integer>104</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>104</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>84</integer>
-                <key>x</key>
-                <integer>174</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>baby_idle_4 copy.png</key>
-            <dict>
-                <key>height</key>
-                <integer>104</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>104</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>84</integer>
-                <key>x</key>
-                <integer>174</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>baby_idle_4.png</key>
-            <dict>
-                <key>height</key>
-                <integer>104</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>104</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>84</integer>
-                <key>x</key>
-                <integer>174</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>baby_idle_5 copy 2.png</key>
+            <key>baby_crying_02_0004_Layer-Comp-5.png</key>
             <dict>
                 <key>height</key>
                 <integer>104</integer>
@@ -251,197 +251,7 @@
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>baby_idle_5 copy 3.png</key>
-            <dict>
-                <key>height</key>
-                <integer>104</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>104</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>84</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>baby_idle_5 copy 4.png</key>
-            <dict>
-                <key>height</key>
-                <integer>104</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>104</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>84</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>baby_idle_5 copy 5.png</key>
-            <dict>
-                <key>height</key>
-                <integer>104</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>104</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>84</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>baby_idle_5 copy.png</key>
-            <dict>
-                <key>height</key>
-                <integer>104</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>104</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>84</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>baby_idle_5.png</key>
-            <dict>
-                <key>height</key>
-                <integer>104</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>104</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>84</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>baby_idle_6 copy 2.png</key>
-            <dict>
-                <key>height</key>
-                <integer>104</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>104</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>84</integer>
-                <key>x</key>
-                <integer>260</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>baby_idle_6 copy 3.png</key>
-            <dict>
-                <key>height</key>
-                <integer>104</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>104</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>84</integer>
-                <key>x</key>
-                <integer>260</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>baby_idle_6 copy 4.png</key>
-            <dict>
-                <key>height</key>
-                <integer>104</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>104</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>84</integer>
-                <key>x</key>
-                <integer>260</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>baby_idle_6 copy 5.png</key>
-            <dict>
-                <key>height</key>
-                <integer>104</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>104</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>84</integer>
-                <key>x</key>
-                <integer>260</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>baby_idle_6 copy.png</key>
-            <dict>
-                <key>height</key>
-                <integer>104</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>104</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>84</integer>
-                <key>x</key>
-                <integer>260</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>baby_idle_6.png</key>
+            <key>baby_crying_02_0005_Layer-Comp-6.png</key>
             <dict>
                 <key>height</key>
                 <integer>104</integer>
@@ -470,7 +280,7 @@
             <key>size</key>
             <string>{346,108}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:9284ce31c30a8d513e904e9c7c009a3d:eb60eceafa557b496d4e5cbdab926ff4:170b3d9539307daab190c6396c1b4e07$</string>
+            <string>$TexturePacker:SmartUpdate:aebd729269f5addc71b88417e0a114de:be902c59cccb8715c241bb6159afad3b:170b3d9539307daab190c6396c1b4e07$</string>
             <key>textureFileName</key>
             <string>BabyIdle2.png</string>
         </dict>
