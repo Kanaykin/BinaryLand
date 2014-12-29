@@ -13,6 +13,17 @@ getSpriteFrame = function(name, size)
         frame = cc.SpriteFrame:createWithTexture(texture, size);
     end
     return frame;
+end,
+
+-----------------------------
+updateScale9SpriteByScale = function(widget, scale)
+    print("updateScale9SpriteByScale (", widget, ", ", scale, ")");
+    local widget9Sprite = tolua.cast(widget, "ccui.Scale9Sprite");
+    print("updateScale9SpriteByScale widget9Sprite ", widget9Sprite);
+    widget9Sprite:setInsetRight(widget9Sprite:getInsetRight() * scale);
+    widget9Sprite:setInsetLeft(widget9Sprite:getInsetLeft() * scale);
+    widget9Sprite:setInsetTop(widget9Sprite:getInsetTop() * scale);
+    widget9Sprite:setInsetBottom(widget9Sprite:getInsetBottom() * scale);
 end
 
 }

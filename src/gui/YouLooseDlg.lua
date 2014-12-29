@@ -9,6 +9,9 @@ YouLooseDlg.CHOOSE_LEVEL_MENU_ITEM_TAG = 61;
 YouLooseDlg.REPLAY_MENU_TAG = 70;
 YouLooseDlg.REPLAY_MENU_ITEM_TAG = 71;
 YouLooseDlg.WORK_PLACE = 72;
+YouLooseDlg.LABEL_BACK = 74;
+YouLooseDlg.ANIM_SPRITE = 75;
+YouLooseDlg.LABEL_TAG = 2;
 YouLooseDlg.mAnimator = nil;
 
 --------------------------------
@@ -55,9 +58,30 @@ function YouLooseDlg:initGuiElements()
 
 	local workPlace = nodeBase:getChildByTag(YouLooseDlg.WORK_PLACE);	
 	self:setTouchBBox(workPlace:getBoundingBox());
+    GuiHelper.updateScale9SpriteByScale(workPlace, self.mGame:getScale());
+
+    local labelPlace = nodeBase:getChildByTag(YouLooseDlg.LABEL_BACK);
+    GuiHelper.updateScale9SpriteByScale(labelPlace, self.mGame:getScale());
 
 	self.mAnimator = self.mReader:getActionManager();
 
 	self:initReplayButton(nodeBase);
 	self:initChooseLevelButton(nodeBase);
+
+    local label = tolua.cast(nodeBase:getChildByTag(YouLooseDlg.LABEL_TAG), "cc.Label");
+    print("YouLooseDlg:initGuiElements label ", label);
+
+    if label then
+        setDefaultFont(label, self.mGame:getScale());
+    end
+
+    local animationNode  = nodeBase:getChildByTag(YouLooseDlg.ANIM_SPRITE);
+
+    local animation = PlistAnimation:create();
+    animation:init("LevelFailedAnim.plist", animationNode, animationNode:getAnchorPoint(), nil, 0.3);
+
+    self.mAnimation = RepeatAnimation:create();
+    self.mAnimation:init(animation);
+    self.mAnimation:play();
+
 end
