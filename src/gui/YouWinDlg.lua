@@ -66,6 +66,7 @@ function YouWinDlg:initGuiElements()
 
 	local workPlace = nodeBase:getChildByTag(YouWinDlg.WORK_PLACE);	
 	self:setTouchBBox(workPlace:getBoundingBox());
+    GuiHelper.updateScale9SpriteByScale(workPlace, self.mGame:getScale());
 
 	self.mAnimator = self.mReader:getActionManager();
 

@@ -314,7 +314,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>dlg_back.png</string>
+									<string>FrameBack.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -324,7 +324,7 @@
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>30.299999237060547</real>
+									<real>45.299999237060547</real>
 									<real>25</real>
 									<integer>1</integer>
 								</array>
@@ -355,7 +355,7 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>4</real>
+								<real>24</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -363,7 +363,7 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>4</real>
+								<real>24</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -371,7 +371,7 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>4</real>
+								<real>24</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -379,9 +379,11 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>4</real>
+								<real>24</real>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -1107,8 +1109,6 @@
 								<true/>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>

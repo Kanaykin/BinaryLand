@@ -3,6 +3,7 @@ require "src/gui/SettingsDlg"
 require "src/gui/GuiHelper"
 require "src/gui/YouLooseDlg"
 require "src/gui/YouWinDlg"
+require "src/gui/LevelTimer"
 
 MainUI = inheritsFrom(CCBBaseDialog)
 
@@ -12,14 +13,14 @@ MainUI.mSettingsDlg = nil;
 MainUI.mYouLooseDlg = nil;
 MainUI.mYouWinDlg = nil;
 MainUI.mTimeLabel = nil;
+MainUI.mTimer = nil;
 MainUI.mListener = nil;
 
 MainUI.SETTINGS_MENU_TAG = 50;
 MainUI.SETTINGS_MENU_ITEM_TAG = 51;
+MainUI.TIMER_TAG = 52;
 
 MainUI.MAIN_LAYER_TAG = 1;
-
-MainUI.TIMER_TAG = 30;
 
 --------------------------------
 function MainUI:getJoystick()
@@ -99,18 +100,17 @@ end
 
 --------------------------------
 function MainUI:setTimerEnabled(val)
-	self.mTimeLabel:setVisible(val);
+    self.mTimer:setVisible(val);
 end
 
+--------------------------------
+function MainUI:setTimerInitValue(value)
+    self.mTimer:setTimerInitValue(value);
+end
 
 --------------------------------
 function MainUI:setTime(time)
-	if time < 0 then
-		time = 0
-	end
-	local second = math.floor(time);
-	local minute = math.floor(second / 60)
-	self.mTimeLabel:setString(tostring(minute)..":"..string.format("%02d", (second - minute * 60)));
+    self.mTimer:setTime(time);
 end
 
 --------------------------------
@@ -141,8 +141,10 @@ function MainUI:init(game, uiLayer, ccbFile)
 	self.mYouWinDlg:init(self.mGame, self.mUILayer);
 
 	-------------------------
-	self.mTimeLabel = tolua.cast(self.mNode:getChildByTag(MainUI.TIMER_TAG), "cc.Label");
-	self.mTimeLabel:setVisible(false);
+    self.mTimer = LevelTimer:create();
+    self.mTimer:init(self.mNode:getChildByTag(MainUI.TIMER_TAG), game);
+    self.mTimer:setVisible(false);
+    -------------------------
 
     local function onTouchHandler(action, var)
         print("MainUI:onTouchHandler ", action, "self.mListener ", self.mListener);

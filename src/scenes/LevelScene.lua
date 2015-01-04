@@ -182,6 +182,7 @@ function LevelScene:initGui()
 
 	if self.mField:getTimer() then
 		self.mMainUI:setTimerEnabled(true);
+        self.mMainUI:setTimerInitValue(self.mField:getTimer());
 	end
 
 	self.mMainUI:show();
