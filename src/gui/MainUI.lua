@@ -4,6 +4,7 @@ require "src/gui/GuiHelper"
 require "src/gui/YouLooseDlg"
 require "src/gui/YouWinDlg"
 require "src/gui/LevelTimer"
+require "src/gui/LevelScore"
 
 MainUI = inheritsFrom(CCBBaseDialog)
 
@@ -14,11 +15,13 @@ MainUI.mYouLooseDlg = nil;
 MainUI.mYouWinDlg = nil;
 MainUI.mTimeLabel = nil;
 MainUI.mTimer = nil;
+MainUI.mScore = nil;
 MainUI.mListener = nil;
 
 MainUI.SETTINGS_MENU_TAG = 50;
 MainUI.SETTINGS_MENU_ITEM_TAG = 51;
 MainUI.TIMER_TAG = 52;
+MainUI.SCORE_TAG = 53;
 
 MainUI.MAIN_LAYER_TAG = 1;
 
@@ -114,6 +117,11 @@ function MainUI:setTime(time)
 end
 
 --------------------------------
+function MainUI:setScore(score)
+    self.mScore:setValue(score);
+end
+
+--------------------------------
 function MainUI:init(game, uiLayer, ccbFile)
 	self:superClass().init(self, game, uiLayer, ccbFile);
 
@@ -144,6 +152,10 @@ function MainUI:init(game, uiLayer, ccbFile)
     self.mTimer = LevelTimer:create();
     self.mTimer:init(self.mNode:getChildByTag(MainUI.TIMER_TAG), game);
     self.mTimer:setVisible(false);
+    -------------------------
+
+    self.mScore = LevelScore:create();
+    self.mScore:init(self.mNode:getChildByTag(MainUI.SCORE_TAG), game);
     -------------------------
 
     local function onTouchHandler(action, var)

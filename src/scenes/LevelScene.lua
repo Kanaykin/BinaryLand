@@ -171,6 +171,8 @@ function LevelScene:tick(dt)
 	if self.mField:getTimer() then
 		self.mMainUI:setTime(self.mField:getTimer());
 	end
+
+    self.mMainUI:setScore(self.mField:getScore());
 end
 
 --------------------------------

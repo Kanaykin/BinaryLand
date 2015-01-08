@@ -382,8 +382,6 @@
 								<real>24</real>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -600,7 +598,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>level_list_button_normal.png</string>
+											<string>home_normal.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -611,7 +609,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>level_list_button_pressed.png</string>
+											<string>home_pressed.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -626,6 +624,8 @@
 										</array>
 									</dict>
 								</array>
+								<key>selected</key>
+								<true/>
 							</dict>
 						</array>
 						<key>customClass</key>

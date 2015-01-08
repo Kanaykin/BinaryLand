@@ -3,8 +3,6 @@ require "src/algorithms/WavePathFinder"
 require "src/game_objects/SnareTrigger"
 require "src/game_objects/PlayerObject"
 
---local MobObjectImpl = createClass(MovableObject, SnareTrigger;
-
 MobObject = inheritsFrom(MovableObject)
 
 MobObject.IDLE = 1;

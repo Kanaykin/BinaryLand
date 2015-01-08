@@ -11,6 +11,7 @@ Field.mEnemyObjects = nil;
 Field.mFinishTrigger = nil;
 Field.mGame = nil;
 Field.mTime = nil;
+Field.mScore = nil;
 
 Field.mPlayerObjects = nil;
 
@@ -288,6 +289,12 @@ function Field:removeEnemy(enemy)
 end
 
 --------------------------------
+function Field:onEnterBonusTrigger(player)
+    print("Field:onEnterBonusTrigger ");
+    self.mScore = self.mScore + 100;
+end
+
+--------------------------------
 function Field:onEnemyEnterTrigger(enemy)
 	print("Field:onEnemyEnterTrigger ", enemy);
 	SimpleAudioEngine:getInstance():playEffect(gSounds.MOB_DEATH_SOUND)
@@ -295,6 +302,8 @@ function Field:onEnemyEnterTrigger(enemy)
 	self:removeObject(enemy);
 	self:removeEnemy(enemy)
 	enemy:destroy();
+
+    self.mScore = self.mScore + 50;
 end
 
 --------------------------------
@@ -446,9 +455,15 @@ function Field:getTimer()
 end
 
 --------------------------------
+function Field:getScore()
+    return self.mScore;
+end
+
+--------------------------------
 function Field:init(fieldNode, layer, fieldData, game)
 
 	self.mState = Field.IN_GAME;
+    self.mScore = 0;
 
 	local objectType = _G[fieldData.playerType];
 	local mobType = _G[fieldData.mobType];

@@ -26,7 +26,7 @@ end
 
 ---------------------------------
 function Trigger:onEnter(player)
-	print("Trigger:onEnter");
+	print("Trigger:onEnter ", self.mEnterCallback);
 	if self.mEnterCallback then
 		self.mEnterCallback(player, Vector.new(self.mNode:getPosition()));
 	end
