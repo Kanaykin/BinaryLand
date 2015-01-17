@@ -39,6 +39,8 @@ function LevelScene:onStateWin()
 	-- TODO: open location
 
 	self.mSceneManager.mGame:openLevel(locationId, self.mLevel:getIndex() + 1);
+    self.mSceneManager.mGame:setLevelStar(locationId, self.mLevel:getIndex(), 2);
+
 	self.mMainUI:onStateWin();
 
 	SimpleAudioEngine:getInstance():playMusic(gSounds.VICTORY_MUSIC, false)

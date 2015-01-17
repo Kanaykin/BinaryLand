@@ -219,13 +219,15 @@ end
 function Field:tick(dt)
 	self:updateState();
 
-	if self.mState ~= Field.PAUSE then
+	if self.mState == Field.IN_GAME then
+        if self.mTime then
+            self.mTime = self.mTime - dt;
+        end
+    end
+
+    if self.mState ~= Field.PAUSE then
 		for i, obj in ipairs(self.mObjects) do
 			obj:tick(dt);
-		end
-		
-		if self.mTime then
-			self.mTime = self.mTime - dt;
 		end
 
 		self:updateScrollPos();

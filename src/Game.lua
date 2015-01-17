@@ -59,12 +59,23 @@ end
 
 ---------------------------------
 function Game:isLevelOpened(locationId, level)
-return CCUserDefault:getInstance():getBoolForKey(locationId .. tostring(level));
+    return CCUserDefault:getInstance():getBoolForKey(locationId .. tostring(level));
 end
 
 ---------------------------------
 function Game:openLevel(locationId, level)
 	CCUserDefault:getInstance():setBoolForKey(locationId .. tostring(level), true);
+end
+
+---------------------------------
+function Game:setLevelStar(locationId, level, star)
+    self.mLocations[locationId].mLevels[level]:setCountStar(star);
+	CCUserDefault:getInstance():setIntegerForKey(locationId .. tostring(level) .. "_star", star);
+end
+
+---------------------------------
+function Game:getLevelStar(locationId, level)
+    return CCUserDefault:getInstance():getIntegerForKey(locationId .. tostring(level) .. "_star", 0);
 end
 
 ---------------------------------

@@ -10,6 +10,7 @@ YouWinDlg.CHOOSE_LEVEL_MENU_TAG = 60;
 YouWinDlg.CHOOSE_LEVEL_MENU_ITEM_TAG = 61;
 YouWinDlg.NEXT_LEVEL_MENU_TAG = 80;
 YouWinDlg.NEXT_LEVEL_MENU_ITEM_TAG = 81;
+YouWinDlg.LABEL_TAG = 2;
 
 --------------------------------
 function YouWinDlg:init(game, uiLayer)
@@ -58,7 +59,7 @@ end
 --------------------------------
 function YouWinDlg:initGuiElements()
 	local nodeBase = self.mNode:getChildByTag(YouWinDlg.BASE_NODE_TAG);
-	print("YouLooseDlg:initGuiElements nodeBase ", nodeBase );
+	print("YouWinDlg:initGuiElements nodeBase ", nodeBase );
 	
 	if not nodeBase then
 		return;
@@ -73,4 +74,12 @@ function YouWinDlg:initGuiElements()
 	self:initReplayButton(nodeBase);
 	self:initChooseLevelButton(nodeBase);
 	self:initNextLevelButton(nodeBase);
+
+    local label = tolua.cast(nodeBase:getChildByTag(YouLooseDlg.LABEL_TAG), "cc.Label");
+    print("YouWinDlg:initGuiElements label ", label);
+
+    if label then
+        setDefaultFont(label, self.mGame:getScale());
+    end
+
 end

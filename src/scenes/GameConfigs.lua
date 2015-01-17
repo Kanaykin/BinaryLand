@@ -27,6 +27,14 @@ gLocations = {
                 id = "1_2"
 			},
 			{
+                --opened = true,
+                ccbFile = "Level1_1p1",
+                tileMap = "Level1_1_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 12,
+                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                id = "1_3"
 			},
 			{
 

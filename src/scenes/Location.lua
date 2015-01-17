@@ -52,7 +52,9 @@ function Location:initLevels(locationData)
 	if type(locationData.levels) == "table" then
 		for i, levelData in ipairs(locationData.levels) do
 			local level = Level:create();
-			level:init(levelData, self, i);
+
+            local locationId = self:getId();
+            level:init(levelData, self, i, self.mGame:getLevelStar(locationId, i));
 			table.insert(self.mLevels, level);
 		end
 	end

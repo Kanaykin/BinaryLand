@@ -10,10 +10,16 @@ Level.DUMMY_TAG = 20;
 Level.FIRST_STAR_TAG = 21;
 Level.mLocation = nil;
 Level.mIndex = nil;
+Level.mCountStar = 0;
+
+-----------------------------------
+function Level:setCountStar(countStar)
+    self.mCountStar = countStar;
+end
 
 -----------------------------------
 function Level:getCountStar()
-	return 0;
+	return self.mCountStar;
 end
 
 -----------------------------------
@@ -94,11 +100,12 @@ function Level:initVisual(primaryAnimator, animManager, nameFrame, node)
 end
 
 ---------------------------------
-function Level:init(levelData, location, index)
+function Level:init(levelData, location, index, countStar)
 	self.mLocation = location;
 	self.mIndex = index;
 	self.mData = levelData;
 	if(levelData.opened ~= nil ) then
 		self.mOpened = levelData.opened; 
 	end
+    self:setCountStar(countStar);
 end
