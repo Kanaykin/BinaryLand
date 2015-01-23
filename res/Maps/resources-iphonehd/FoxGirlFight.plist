@@ -4,212 +4,212 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>stroke_man_01.png</key>
+            <key>stroke_girl_01.png</key>
             <dict>
                 <key>height</key>
-                <integer>118</integer>
-                <key>offsetX</key>
-                <real>-22</real>
-                <key>offsetY</key>
-                <real>3</real>
-                <key>originalHeight</key>
-                <integer>128</integer>
-                <key>originalWidth</key>
-                <integer>130</integer>
-                <key>width</key>
-                <integer>82</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>130</integer>
-            </dict>
-            <key>stroke_man_02.png</key>
-            <dict>
-                <key>height</key>
-                <integer>118</integer>
-                <key>offsetX</key>
-                <real>-22</real>
-                <key>offsetY</key>
-                <real>3</real>
-                <key>originalHeight</key>
-                <integer>128</integer>
-                <key>originalWidth</key>
-                <integer>130</integer>
-                <key>width</key>
-                <integer>82</integer>
-                <key>x</key>
-                <integer>86</integer>
-                <key>y</key>
-                <integer>130</integer>
-            </dict>
-            <key>stroke_man_03.png</key>
-            <dict>
-                <key>height</key>
-                <integer>118</integer>
-                <key>offsetX</key>
-                <real>-23</real>
-                <key>offsetY</key>
-                <real>3</real>
-                <key>originalHeight</key>
-                <integer>128</integer>
-                <key>originalWidth</key>
-                <integer>130</integer>
-                <key>width</key>
-                <integer>80</integer>
-                <key>x</key>
-                <integer>170</integer>
-                <key>y</key>
-                <integer>128</integer>
-            </dict>
-            <key>stroke_man_04.png</key>
-            <dict>
-                <key>height</key>
-                <integer>118</integer>
-                <key>offsetX</key>
-                <real>-27</real>
-                <key>offsetY</key>
-                <real>3</real>
-                <key>originalHeight</key>
-                <integer>128</integer>
-                <key>originalWidth</key>
-                <integer>130</integer>
-                <key>width</key>
-                <integer>72</integer>
-                <key>x</key>
-                <integer>238</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>stroke_man_05.png</key>
-            <dict>
-                <key>height</key>
-                <integer>118</integer>
-                <key>offsetX</key>
-                <real>-27</real>
-                <key>offsetY</key>
-                <real>3</real>
-                <key>originalHeight</key>
-                <integer>128</integer>
-                <key>originalWidth</key>
-                <integer>130</integer>
-                <key>width</key>
-                <integer>72</integer>
-                <key>x</key>
-                <integer>252</integer>
-                <key>y</key>
-                <integer>122</integer>
-            </dict>
-            <key>stroke_man_06.png</key>
-            <dict>
-                <key>height</key>
-                <integer>118</integer>
-                <key>offsetX</key>
-                <real>-27</real>
-                <key>offsetY</key>
-                <real>3</real>
-                <key>originalHeight</key>
-                <integer>128</integer>
-                <key>originalWidth</key>
-                <integer>130</integer>
-                <key>width</key>
-                <integer>72</integer>
-                <key>x</key>
-                <integer>312</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>stroke_man_07.png</key>
-            <dict>
-                <key>height</key>
-                <integer>118</integer>
-                <key>offsetX</key>
-                <real>-27</real>
-                <key>offsetY</key>
-                <real>3</real>
-                <key>originalHeight</key>
-                <integer>128</integer>
-                <key>originalWidth</key>
-                <integer>130</integer>
-                <key>width</key>
-                <integer>72</integer>
-                <key>x</key>
-                <integer>326</integer>
-                <key>y</key>
-                <integer>122</integer>
-            </dict>
-            <key>stroke_man_08.png</key>
-            <dict>
-                <key>height</key>
-                <integer>112</integer>
-                <key>offsetX</key>
-                <real>-19</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>128</integer>
-                <key>originalWidth</key>
-                <integer>130</integer>
-                <key>width</key>
-                <integer>90</integer>
-                <key>x</key>
-                <integer>400</integer>
-                <key>y</key>
-                <integer>116</integer>
-            </dict>
-            <key>stroke_man_09.png</key>
-            <dict>
-                <key>height</key>
-                <integer>112</integer>
+                <integer>120</integer>
                 <key>offsetX</key>
                 <real>-14</real>
                 <key>offsetY</key>
-                <real>0</real>
+                <real>1</real>
                 <key>originalHeight</key>
-                <integer>128</integer>
-                <key>originalWidth</key>
                 <integer>130</integer>
+                <key>originalWidth</key>
+                <integer>144</integer>
                 <key>width</key>
-                <integer>100</integer>
+                <integer>76</integer>
                 <key>x</key>
-                <integer>386</integer>
+                <integer>466</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>stroke_man_10.png</key>
+            <key>stroke_girl_02.png</key>
             <dict>
                 <key>height</key>
-                <integer>124</integer>
+                <integer>120</integer>
                 <key>offsetX</key>
                 <real>-12</real>
                 <key>offsetY</key>
                 <real>1</real>
                 <key>originalHeight</key>
-                <integer>128</integer>
-                <key>originalWidth</key>
                 <integer>130</integer>
+                <key>originalWidth</key>
+                <integer>144</integer>
                 <key>width</key>
-                <integer>104</integer>
+                <integer>80</integer>
                 <key>x</key>
-                <integer>132</integer>
+                <integer>302</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>stroke_man_11.png</key>
+            <key>stroke_girl_03.png</key>
             <dict>
                 <key>height</key>
-                <integer>126</integer>
+                <integer>120</integer>
                 <key>offsetX</key>
-                <real>1</real>
+                <real>-12</real>
                 <key>offsetY</key>
-                <real>-1</real>
+                <real>1</real>
                 <key>originalHeight</key>
-                <integer>128</integer>
-                <key>originalWidth</key>
                 <integer>130</integer>
+                <key>originalWidth</key>
+                <integer>144</integer>
                 <key>width</key>
-                <integer>128</integer>
+                <integer>80</integer>
+                <key>x</key>
+                <integer>384</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>stroke_girl_04.png</key>
+            <dict>
+                <key>height</key>
+                <integer>120</integer>
+                <key>offsetX</key>
+                <real>-20</real>
+                <key>offsetY</key>
+                <real>1</real>
+                <key>originalHeight</key>
+                <integer>130</integer>
+                <key>originalWidth</key>
+                <integer>144</integer>
+                <key>width</key>
+                <integer>64</integer>
+                <key>x</key>
+                <integer>694</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>stroke_girl_05.png</key>
+            <dict>
+                <key>height</key>
+                <integer>120</integer>
+                <key>offsetX</key>
+                <real>-27</real>
+                <key>offsetY</key>
+                <real>1</real>
+                <key>originalHeight</key>
+                <integer>130</integer>
+                <key>originalWidth</key>
+                <integer>144</integer>
+                <key>width</key>
+                <integer>70</integer>
+                <key>x</key>
+                <integer>622</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>stroke_girl_06.png</key>
+            <dict>
+                <key>height</key>
+                <integer>122</integer>
+                <key>offsetX</key>
+                <real>-28</real>
+                <key>offsetY</key>
+                <real>1</real>
+                <key>originalHeight</key>
+                <integer>130</integer>
+                <key>originalWidth</key>
+                <integer>144</integer>
+                <key>width</key>
+                <integer>72</integer>
+                <key>x</key>
+                <integer>228</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>stroke_girl_07.png</key>
+            <dict>
+                <key>height</key>
+                <integer>120</integer>
+                <key>offsetX</key>
+                <real>-30</real>
+                <key>offsetY</key>
+                <real>1</real>
+                <key>originalHeight</key>
+                <integer>130</integer>
+                <key>originalWidth</key>
+                <integer>144</integer>
+                <key>width</key>
+                <integer>76</integer>
+                <key>x</key>
+                <integer>544</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>stroke_girl_08.png</key>
+            <dict>
+                <key>height</key>
+                <integer>114</integer>
+                <key>offsetX</key>
+                <real>-16</real>
+                <key>offsetY</key>
+                <real>-2</real>
+                <key>originalHeight</key>
+                <integer>130</integer>
+                <key>originalWidth</key>
+                <integer>144</integer>
+                <key>width</key>
+                <integer>106</integer>
+                <key>x</key>
+                <integer>760</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>stroke_girl_09.png</key>
+            <dict>
+                <key>height</key>
+                <integer>114</integer>
+                <key>offsetX</key>
+                <real>-3</real>
+                <key>offsetY</key>
+                <real>-2</real>
+                <key>originalHeight</key>
+                <integer>130</integer>
+                <key>originalWidth</key>
+                <integer>144</integer>
+                <key>width</key>
+                <integer>100</integer>
+                <key>x</key>
+                <integer>868</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>stroke_girl_10.png</key>
+            <dict>
+                <key>height</key>
+                <integer>124</integer>
+                <key>offsetX</key>
+                <real>-4</real>
+                <key>offsetY</key>
+                <real>0</real>
+                <key>originalHeight</key>
+                <integer>130</integer>
+                <key>originalWidth</key>
+                <integer>144</integer>
+                <key>width</key>
+                <integer>98</integer>
                 <key>x</key>
                 <integer>2</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>stroke_girl_11.png</key>
+            <dict>
+                <key>height</key>
+                <integer>122</integer>
+                <key>offsetX</key>
+                <real>9</real>
+                <key>offsetY</key>
+                <real>1</real>
+                <key>originalHeight</key>
+                <integer>130</integer>
+                <key>originalWidth</key>
+                <integer>144</integer>
+                <key>width</key>
+                <integer>124</integer>
+                <key>x</key>
+                <integer>102</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
@@ -219,20 +219,20 @@
             <key>format</key>
             <integer>0</integer>
             <key>realTextureFileName</key>
-            <string>FoxFight.png</string>
+            <string>FoxGirlFight.png</string>
             <key>size</key>
-            <string>{492,250}</string>
+            <string>{970,128}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:c10957e3537ffd67e028ceee787cb8ac:97d2a7faf70e1fe1ca2ebb272bb03047:4bce7fcba49f2cf8e062af14cf0be71d$</string>
+            <string>$TexturePacker:SmartUpdate:2d107398aa483bf764b669a2c7592c5a:94234960cbdd1e5a3aa2c91d137c0cc1:d6ae4999a903607feb822758ac201388$</string>
             <key>textureFileName</key>
-            <string>FoxFight.png</string>
+            <string>FoxGirlFight.png</string>
         </dict>
         <key>texture</key>
         <dict>
             <key>height</key>
-            <integer>250</integer>
+            <integer>128</integer>
             <key>width</key>
-            <integer>492</integer>
+            <integer>970</integer>
         </dict>
     </dict>
 </plist>

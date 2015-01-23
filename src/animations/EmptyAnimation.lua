@@ -12,12 +12,20 @@ function EmptyAnimation:init(texture, node, anchor)
 	self.mTexture = texture;
 	self.mAnchor = anchor;
 	self.mTextureSize = self.mNode:getContentSize();
+    if texture then
+        self.mTextureSize = texture:getContentSize();
+    end
 	print("EmptyAnimation:init ", self.mTextureSize.width, ", ", self.mTextureSize.height);
 end
 
 --------------------------------
 function EmptyAnimation:getAction()
 	return nil;
+end
+
+--------------------------------
+function EmptyAnimation:setAnchor(anchor)
+    self.mAnchor = anchor;
 end
 
 --------------------------------
