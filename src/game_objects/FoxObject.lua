@@ -273,6 +273,31 @@ function FoxObject:createFightAnimation()
 end
 
 --------------------------------
+function FoxObject:createInTrapAnimation()
+    local sequence = SequenceAnimation:create();
+    sequence:init();
+
+    local animation = PlistAnimation:create();
+
+    local textureName = self:getPrefixTexture().."InTrapFirst.png"
+    local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
+
+    animation:init(self:getPrefixTexture().."InTrap.plist", self.mAnimationNode, self.mAnimationNode:getAnchorPoint(), texture, 0.2);
+
+    sequence:addAnimation(animation);
+
+    local textureEmptyName = self:getPrefixTexture().."InTrapStatic.png"
+    local textureEmpty = cc.Director:getInstance():getTextureCache():addImage(textureEmptyName);
+
+    local empty = EmptyAnimation:create();
+    empty:init(textureEmpty, self.mAnimationNode, self.mAnimationNode:getAnchorPoint())
+
+    sequence:addAnimation(empty);
+
+    self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = sequence;
+end
+
+--------------------------------
 function FoxObject:initAnimation()
 	self.mAnimations = {}
 
@@ -293,7 +318,7 @@ function FoxObject:initAnimation()
 
     self:createFightAnimation();
 
-	self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self:createRepeatAnimation(self.mAnimationNode, "FoxInTrap.plist");
+    self:createInTrapAnimation();
 
 	self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE] = EmptyAnimation:create();
 	local frontTexture = tolua.cast(self.mAnimationNode, "cc.Sprite"):getTexture();

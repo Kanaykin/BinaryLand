@@ -84,7 +84,10 @@ function PlayerObject:enterTrap(pos, stateInTrap)
 	
 	self.mStateInTrap = stateInTrap and stateInTrap or PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP;
 
-	self:playAnimation(nil);
+    if self.mLastButtonPressed ~= self.mStateInTrap then
+        self:playAnimation(nil);
+    end
+
 	if pos then
 		print("PlayerObject:enterTrap x= ", pos.x, " y= ", pos.y);
 		local posTo = Vector.new(self.mField:positionToGrid(pos));
@@ -295,6 +298,7 @@ end
 --------------------------------
 function PlayerObject:animationTick(dt)
 	local animationButton = (self.mLastButtonPressed == nil) and -1 or self.mLastButtonPressed;
+--    print("PlayerObject:animationTick ", animationButton);
 	self.mAnimations[animationButton]:tick(dt);
 end
 

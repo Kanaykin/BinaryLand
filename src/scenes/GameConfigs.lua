@@ -28,7 +28,7 @@ gLocations = {
 			},
 			{
                 --opened = true,
-                ccbFile = "Level1_1p1",
+                ccbFile = "Level1_3p1",
                 tileMap = "Level1_1_map.tmx",
                 cellSize = 32,
                 tutorial = false,
