@@ -1,4 +1,5 @@
 require "src/game_objects/PlayerObject"
+require "src/game_objects/FoxHelpEffect"
 require "src/animations/PlistAnimation"
 require "src/animations/RandomAnimation"
 require "src/animations/DelayAnimation"
@@ -9,6 +10,9 @@ FoxObject = inheritsFrom(PlayerObject)
 FoxObject.mVelocity = 45;
 FoxObject.mAnimationNode = nil;
 FoxObject.mEffectNode = nil;
+
+FoxObject.mNewEffect = nil;
+
 FoxObject.mEffectAnimations = nil;
 FoxObject.mFightPlistAnimations = nil;
 
@@ -23,7 +27,11 @@ FoxObject.mSideIdleAnimation = nil;
 function FoxObject:init(field, node, needReverse)
 	self.mAnimationNode  = node:getChildByTag(FoxObject.OBJECT_NODE_TAG);
 	self.mEffectNode = node:getChildByTag(FoxObject.EFFECT_NODE_TAG);
-	self.mEffectNode:setVisible(false);
+	self.mEffectNode:setVisible(true);
+
+    self.mNewEffect = FoxHelpEffect:create();
+    self.mNewEffect:init(node, field.mGame);
+    self.mNewEffect:setVisible(false);
 
 	print("FoxObject:init node_obj ", self.mAnimationNode);
 	
@@ -117,6 +125,13 @@ function FoxObject:tick(dt)
 	self:updateFlipNode(self.mAnimationNode);
 
 	self.mEffectAnimations[1]:tick();
+
+    local currAnim = self:getCurrentAnimation();
+    local curr = currAnim:currentAnimation();
+
+    if self.mNewEffect:getDependAnimation() == curr then
+        self.mNewEffect:setVisible(true);
+    end
 end
 
 --------------------------------
@@ -233,17 +248,20 @@ function FoxObject:getAnchorFightAnimation()
     local mult = sprite:isFlippedX() and 1 or -1;
 
     if self.mIsFemale then
-        return { x = 0.5 + 0.195 / 2 * mult, y = 0.35 + 0.04 / 2};
+        return { x = 0.5 + 0.195 / 2 * mult, y = 0.35 + 0.04 / 2}, sprite:isFlippedX();
     else
-        return { x = 0.5 + 0.34 / 2 * mult, y = 0.35 + 0.065 / 2};
+        return { x = 0.5 + 0.34 / 2 * mult, y = 0.35 + 0.065 / 2}, sprite:isFlippedX();
     end
 end
 
 --------------------------------
 function FoxObject:updateAnchorFightAnimation()
+    local anchor, flipped = self:getAnchorFightAnimation();
 	for i, animation in ipairs(self.mFightPlistAnimations) do
-        animation:setAnchor(self:getAnchorFightAnimation());
+        animation:setAnchor(anchor);
     end
+
+    self.mNewEffect:updateFlip(flipped);
 end
 
 --------------------------------
@@ -273,16 +291,27 @@ function FoxObject:createFightAnimation()
 end
 
 --------------------------------
+function FoxObject:getInTrapAnchor(anchorOrigin)
+    if self.mIsFemale then
+        return anchorOrigin;
+    else
+        return { x = anchorOrigin.x, y = anchorOrigin.y + 0.05};
+    end
+end
+
+--------------------------------
 function FoxObject:createInTrapAnimation()
     local sequence = SequenceAnimation:create();
     sequence:init();
+
+    local anchor = self:getInTrapAnchor(self.mAnimationNode:getAnchorPoint());
 
     local animation = PlistAnimation:create();
 
     local textureName = self:getPrefixTexture().."InTrapFirst.png"
     local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
 
-    animation:init(self:getPrefixTexture().."InTrap.plist", self.mAnimationNode, self.mAnimationNode:getAnchorPoint(), texture, 0.2);
+    animation:init(self:getPrefixTexture().."InTrap.plist", self.mAnimationNode, anchor, texture, 0.2);
 
     sequence:addAnimation(animation);
 
@@ -290,9 +319,10 @@ function FoxObject:createInTrapAnimation()
     local textureEmpty = cc.Director:getInstance():getTextureCache():addImage(textureEmptyName);
 
     local empty = EmptyAnimation:create();
-    empty:init(textureEmpty, self.mAnimationNode, self.mAnimationNode:getAnchorPoint())
+    empty:init(textureEmpty, self.mAnimationNode, anchor)
 
     sequence:addAnimation(empty);
+    self.mNewEffect:setDependAnimation(empty);
 
     self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = sequence;
 end

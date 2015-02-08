@@ -10,6 +10,11 @@ end
 function IAnimation:stop()
 end
 
+----------------------------
+function IAnimation:currentAnimation()
+    return self;
+end
+
 ---------------------------------
 function IAnimation:destroy()
 	

@@ -296,6 +296,12 @@ function PlayerObject:move(dt)
 end
 
 --------------------------------
+function PlayerObject:getCurrentAnimation()
+    local animationButton = (self.mLastButtonPressed == nil) and -1 or self.mLastButtonPressed;
+    return self.mAnimations[animationButton];
+end
+
+--------------------------------
 function PlayerObject:animationTick(dt)
 	local animationButton = (self.mLastButtonPressed == nil) and -1 or self.mLastButtonPressed;
 --    print("PlayerObject:animationTick ", animationButton);

@@ -10,6 +10,11 @@ function SequenceAnimation:init()
 	self.mAnimations = {}
 end
 
+----------------------------
+function SequenceAnimation:currentAnimation()
+    return self.mCurrentAnimation and self.mAnimations[self.mCurrentAnimation]:currentAnimation() or self;
+end
+
 --------------------------------
 function SequenceAnimation:addAnimation(animation)
 	self.mAnimations[#self.mAnimations + 1] = animation
@@ -29,7 +34,8 @@ function SequenceAnimation:playNext()
 	if not self.mCurrentAnimation then
 		self.mCurrentAnimation = 1;
 		needPlay = true;
-	elseif self.mAnimations[self.mCurrentAnimation] and self.mAnimations[self.mCurrentAnimation]:isDone() then
+	elseif self.mAnimations[self.mCurrentAnimation] and self.mAnimations[self.mCurrentAnimation]:isDone()
+            and self.mAnimations[self.mCurrentAnimation + 1] then
 		self.mCurrentAnimation = self.mCurrentAnimation + 1;
 		needPlay = true;
 	end
