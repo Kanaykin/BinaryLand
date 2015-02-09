@@ -3361,7 +3361,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>0.5</real>
+									<real>0.34999999403953552</real>
 								</array>
 							</dict>
 							<dict>
@@ -3401,7 +3401,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Mario.png</string>
+									<string>Hunter.png</string>
 								</array>
 							</dict>
 						</array>
@@ -4861,8 +4861,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
