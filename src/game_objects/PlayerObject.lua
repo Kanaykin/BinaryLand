@@ -236,7 +236,7 @@ function PlayerObject:fight()
 			
 			local newDir = DIRECTIONS[self.mLastDir]:clone() * self.mReverse;
 
-			self.mFightTrigger.mNode:setPosition(cc.p(selfPosX + self.mField:getCellSize() * newDir.x, selfPosY + self.mField:getCellSize() * newDir.y));
+            self.mFightTrigger:setDateTransform(Vector.new(selfPosX, selfPosY), Vector.new(self.mField:getCellSize() * newDir.x, self.mField:getCellSize() * newDir.y));
 		end
 
 		return true;

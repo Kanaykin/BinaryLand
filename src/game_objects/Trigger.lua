@@ -49,6 +49,11 @@ function Trigger:getCollisionObjects()
 end
 
 --------------------------------
+function Trigger:contained(point)
+    return Rect.new(self.mNode:getBoundingBox()):containsPoint(cc.p(point.x, point.y));
+end
+
+--------------------------------
 function Trigger:tick(dt)
 	Trigger:superClass().tick(self, dt);
 
@@ -58,7 +63,7 @@ function Trigger:tick(dt)
 			local contained = false;
 			if self.mContainedObj.mNode then
 				local pointX, pointY = self.mContainedObj.mNode:getPosition();
-				contained = Rect.new(self.mNode:getBoundingBox()):containsPoint(cc.p(pointX, pointY));
+                contained = self:contained(Vector.new(pointX, pointY));
 			end
 			if not contained then
 				if self.mLeaveCallback then
@@ -72,7 +77,7 @@ function Trigger:tick(dt)
 				local pointX, pointY = player.mNode:getPosition();
 				--print("Trigger:tick obj x ", pointX, " y ", pointY);
 				--print("Trigger:tick x ", self.mNode:getBoundingBox().x, " y ", self.mNode:getBoundingBox().y );
-                local contained = Rect.new(self.mNode:getBoundingBox()):containsPoint(cc.p(pointX, pointY));
+                local contained = self:contained(Vector.new(pointX, pointY));
 				--print("contained ", contained);
 				if contained then
 					self:onEnter(player)
