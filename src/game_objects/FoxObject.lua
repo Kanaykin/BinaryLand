@@ -131,6 +131,8 @@ function FoxObject:tick(dt)
 
     if self.mNewEffect:getDependAnimation() == curr then
         self.mNewEffect:setVisible(true);
+    else
+        self.mNewEffect:setVisible(false);
     end
 end
 
