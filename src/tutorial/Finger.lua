@@ -3,7 +3,7 @@ require "src/game_objects/MovableObject"
 
 Finger =  inheritsFrom(BaseObject)
 
-Finger.mVelocity = 100;
+Finger.mVelocity = 60;
 Finger.mIsMoving = false;
 Finger.mAnimator = nil;
 Finger.mDestPos = nil;
@@ -21,6 +21,7 @@ function Finger:init(gameScene, field)
 	local animator = reader:getActionManager();
 	self.mAnimator = animator;
 
+    self.mVelocity = self.mVelocity * field:getGame():getScale();
 	---------
 	function callbackHideFinish()
 		print("Finger callbackHideFinish");

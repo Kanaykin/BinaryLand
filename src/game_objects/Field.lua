@@ -462,6 +462,11 @@ function Field:getScore()
 end
 
 --------------------------------
+function Field:getGame()
+    return self.mGame;
+end
+
+--------------------------------
 function Field:init(fieldNode, layer, fieldData, game)
 
 	self.mState = Field.IN_GAME;

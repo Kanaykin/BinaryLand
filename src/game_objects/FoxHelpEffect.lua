@@ -21,7 +21,8 @@ function FoxHelpEffect:init(node, game)
     node:addChild(nodeCCB);
 
     self.mBaseNode = nodeCCB:getChildByTag(FoxHelpEffect.BASE_NODE_TAG);
-    self.mAnchorBaseNode = self.mBaseNode:getAnchorPoint();
+    local anchor = self.mBaseNode:getAnchorPoint();
+    self.mAnchorBaseNode = anchor--{ x = anchor.x * game:getScale(), y = anchor.y * game:getScale()};
 
     self.mBubbleSprite = tolua.cast(self.mBaseNode:getChildByTag(FoxHelpEffect.BUBBLE_NODE_TAG), "cc.Sprite");
     self.mGame = game;

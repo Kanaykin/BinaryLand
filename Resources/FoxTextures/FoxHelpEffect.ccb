@@ -275,7 +275,7 @@
 						<array>
 							<real>42</real>
 							<real>14</real>
-							<integer>0</integer>
+							<integer>5</integer>
 						</array>
 					</dict>
 					<dict>
@@ -285,8 +285,8 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>-1.7000000476837158</real>
-							<real>-3</real>
+							<real>-0.89999997615814209</real>
+							<real>-1.2000000476837158</real>
 						</array>
 					</dict>
 					<dict>

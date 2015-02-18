@@ -60,7 +60,8 @@ function TutorialStep3:tick(dt)
 
 		self.mCurrentFingerTime = self.mCurrentFingerTime + dt;
 
-		if self.mCurrentFingerTime > self.FREE_TIME and not self.mFinger:IsMoving() then
+		if self.mCurrentFingerTime > self.FREE_TIME and not self.mFinger:IsMoving()
+            and self.mField:getState() ~= Field.PAUSE then
 			self.mFinger:setPosition(self:getPlayerPos());
 			self.mFinger:playDoubleTapAnimation();
 		end

@@ -6,6 +6,7 @@ YouWinDlg.BASE_NODE_TAG = 49;
 YouWinDlg.WORK_PLACE = 72;
 YouWinDlg.REPLAY_MENU_TAG = 70;
 YouWinDlg.REPLAY_MENU_ITEM_TAG = 71;
+YouWinDlg.LABEL_BACK = 74;
 YouWinDlg.CHOOSE_LEVEL_MENU_TAG = 60;
 YouWinDlg.CHOOSE_LEVEL_MENU_ITEM_TAG = 61;
 YouWinDlg.NEXT_LEVEL_MENU_TAG = 80;
@@ -68,6 +69,9 @@ function YouWinDlg:initGuiElements()
 	local workPlace = nodeBase:getChildByTag(YouWinDlg.WORK_PLACE);	
 	self:setTouchBBox(workPlace:getBoundingBox());
     GuiHelper.updateScale9SpriteByScale(workPlace, self.mGame:getScale());
+
+    local labelPlace = nodeBase:getChildByTag(YouWinDlg.LABEL_BACK);
+    GuiHelper.updateScale9SpriteByScale(labelPlace, self.mGame:getScale());
 
 	self.mAnimator = self.mReader:getActionManager();
 

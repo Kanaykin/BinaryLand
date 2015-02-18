@@ -7,7 +7,7 @@ require "src/scenes/SoundConfigs"
 
 FoxObject = inheritsFrom(PlayerObject)
 
-FoxObject.mVelocity = 45;
+FoxObject.mVelocity = 60;
 FoxObject.mAnimationNode = nil;
 FoxObject.mEffectNode = nil;
 
