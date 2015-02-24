@@ -46,6 +46,11 @@ function MovableObject:moveTo(posDest)
 end
 
 --------------------------------
+function MovableObject:getPrevOrderPos()
+    return self.mPrevOrderPos;
+end
+
+--------------------------------
 function MovableObject:updateOrder()
 	local newOrderPos = -self.mGridPosition.y * 2;
 	if self.mPrevOrderPos ~= newOrderPos then

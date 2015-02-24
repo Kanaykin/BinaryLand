@@ -36,6 +36,11 @@ function MobObject:onPlayerEnter(player, pos)
 end
 
 --------------------------------
+function MobObject:getBonus()
+    return 100;
+end
+
+--------------------------------
 function MobObject:onPlayerLeave(player)
 	print("MobObject.onPlayerLeave");
 	--player:leaveTrap(nil);

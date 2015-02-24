@@ -175,6 +175,7 @@ function LevelScene:tick(dt)
 	end
 
     self.mMainUI:setScore(self.mField:getScore());
+    self.mMainUI:tick(dt);
 end
 
 --------------------------------
@@ -189,5 +190,6 @@ function LevelScene:initGui()
         self.mMainUI:setTimerInitValue(self.mField:getTimer());
 	end
 
+    self.mField:setMainUi(self.mMainUI);
 	self.mMainUI:show();
 end

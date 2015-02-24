@@ -28,6 +28,11 @@ function CCBBaseDialog:destroy()
 end
 
 --------------------------------
+function CCBBaseDialog:getNode()
+    return self.mNode;
+end
+
+--------------------------------
 function CCBBaseDialog:show()
 	self.mNode:setVisible(true);
 end

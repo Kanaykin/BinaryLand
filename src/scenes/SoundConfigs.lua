@@ -5,5 +5,6 @@ gSounds = {
 	GAME_OVER_MUSIC = "sounds/Music/14-game-over.mp3",
 
 	PLAYER_ATTACK_SOUND = "sounds/Effects/SFX_Attk_Sword.wav",
-	MOB_DEATH_SOUND = "sounds/Effects/Death7.wav"
+	MOB_DEATH_SOUND = "sounds/Effects/Death7.wav",
+	BONUS_SOUND = "sounds/Effects/bucks_count.mp3"
 }

@@ -5,6 +5,7 @@ require "src/gui/YouLooseDlg"
 require "src/gui/YouWinDlg"
 require "src/gui/LevelTimer"
 require "src/gui/LevelScore"
+require "src/gui/GettingBonusEffect"
 
 MainUI = inheritsFrom(CCBBaseDialog)
 
@@ -17,6 +18,7 @@ MainUI.mTimeLabel = nil;
 MainUI.mTimer = nil;
 MainUI.mScore = nil;
 MainUI.mListener = nil;
+MainUI.mEffects = nil;
 
 MainUI.SETTINGS_MENU_TAG = 50;
 MainUI.SETTINGS_MENU_ITEM_TAG = 51;
@@ -69,6 +71,17 @@ function MainUI:getTouchListener()
 end
 
 --------------------------------
+function MainUI:createGettingBonus(position, bonus)
+    local gettingBonus = GettingBonusEffect:create();
+    print("MainUI:createGettingBonus gettingBonus ", gettingBonus);
+    gettingBonus:init(self.mGame, self.mUILayer, bonus);
+    gettingBonus:getNode():setPosition(cc.p(position.x, position.y));
+    gettingBonus:show();
+
+    self.mEffects[#self.mEffects + 1] = gettingBonus
+end
+
+--------------------------------
 function MainUI:onTouchHandler(action, var)
     return self.mListener:onTouchHandler(action, var);
 end
@@ -116,6 +129,19 @@ function MainUI:setTime(time)
     self.mTimer:setTime(time);
 end
 
+---------------------------------
+function MainUI:tick(dt)
+    local i=1;
+    while i <= #self.mEffects do
+        if self.mEffects[i]:finished() then
+            print("MainUI: remove effect i ", i);
+            table.remove(self.mEffects, i)
+        else
+            i = i + 1
+        end
+    end
+end
+
 --------------------------------
 function MainUI:setScore(score)
     self.mScore:setValue(score);
@@ -124,6 +150,8 @@ end
 --------------------------------
 function MainUI:init(game, uiLayer, ccbFile)
 	self:superClass().init(self, game, uiLayer, ccbFile);
+
+    self.mEffects = {}
 
 	self.mJoystick = Joystick:create();
 	self.mJoystick:init(self.mNode);

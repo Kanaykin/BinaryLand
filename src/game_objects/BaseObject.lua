@@ -26,10 +26,22 @@ function BaseObject:getTag()
 	return nil;
 end
 
+--------------------------------
+function BaseObject:setOrder(orderPos)
+    local parent = self.mNode:getParent();
+    parent:removeChild(self.mNode, false);
+    parent:addChild(self.mNode, orderPos);
+end
+
 ---------------------------------
 function BaseObject:getScreenPos()
 	local point = self.mNode:convertToWorldSpace(cc.p(0, 0)); --self.mField:fieldToScreen(Vector.new(self.mNode:getPosition()));
 	return Vector.new(point.x, point.y);
+end
+
+---------------------------------
+function BaseObject:getPosition()
+    return Vector.new(self.mNode:getPosition());
 end
 
 ---------------------------------

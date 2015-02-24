@@ -12,6 +12,7 @@ Field.mFinishTrigger = nil;
 Field.mGame = nil;
 Field.mTime = nil;
 Field.mScore = nil;
+Field.mMainUi = nil;
 
 Field.mPlayerObjects = nil;
 
@@ -20,6 +21,7 @@ local MAX_NUMBER = math.huge;
 local MIN_NUMBER = -math.huge;
 
 Field.mObjects = nil;
+Field.mNeedDestroyObjects = nil;
 Field.mFreePoints = nil;
 Field.mCellSize = nil;
 Field.mState = nil;
@@ -61,6 +63,15 @@ function Field:destroy()
 	end
 end
 
+--------------------------------
+function Field:setMainUi(mainUi)
+    self.mMainUi = mainUi;
+end
+
+--------------------------------
+function Field:getMainUi()
+    return self.mMainUi;
+end
 --------------------------------
 function Field:getObjetcByTag(tag)
 	for _, obj in ipairs(self.mObjects) do
@@ -219,6 +230,12 @@ end
 function Field:tick(dt)
 	self:updateState();
 
+    for i, obj in ipairs(self.mNeedDestroyObjects) do
+        self:removeObject(obj);
+        obj:destroy();
+    end
+    self.mNeedDestroyObjects = {}
+
 	if self.mState == Field.IN_GAME then
         if self.mTime then
             self.mTime = self.mTime - dt;
@@ -291,21 +308,47 @@ function Field:removeEnemy(enemy)
 end
 
 --------------------------------
+function Field:createBonus(rect, position, orderPos, bonusVal)
+    local texture = cc.Director:getInstance():getTextureCache():addImage("Coin.png");
+    print("Field:createBonus texture ", texture, " rect ", rect, "bonus ", bonus);
+    local sprite = cc.Sprite:createWithTexture(texture, rect);
+    self:getFieldNode():addChild(sprite);
+
+    sprite:setAnchorPoint(cc.p(0.5, 0.5));
+    sprite:setPosition(cc.p(position.x, position.y));
+    local bonus = FactoryObject:createBonusObject(self, sprite);
+    bonus:setScore(bonusVal);
+    bonus:setOrder(orderPos);
+end
+
+
+--------------------------------
+function Field:addScore(score)
+    self.mScore = self.mScore + score;
+end
+
+--------------------------------
 function Field:onEnterBonusTrigger(player)
     print("Field:onEnterBonusTrigger ");
-    self.mScore = self.mScore + 100;
+--    self.mScore = self.mScore + 100;
+    SimpleAudioEngine:getInstance():playEffect(gSounds.BONUS_SOUND);
 end
 
 --------------------------------
 function Field:onEnemyEnterTrigger(enemy)
 	print("Field:onEnemyEnterTrigger ", enemy);
 	SimpleAudioEngine:getInstance():playEffect(gSounds.MOB_DEATH_SOUND)
-	
+
+    if enemy.getBonus then
+        local rect = enemy:getBoundingBox();
+        local pos = enemy:getPosition();
+        local orderPos = enemy:getPrevOrderPos();
+        self:createBonus(rect, pos, orderPos - 1, enemy:getBonus());
+    end
+
 	self:removeObject(enemy);
 	self:removeEnemy(enemy)
 	enemy:destroy();
-
-    self.mScore = self.mScore + 50;
 end
 
 --------------------------------
@@ -467,6 +510,11 @@ function Field:getGame()
 end
 
 --------------------------------
+function Field:delayDelete(object)
+    self.mNeedDestroyObjects[#self.mNeedDestroyObjects + 1] = object;
+end
+
+--------------------------------
 function Field:init(fieldNode, layer, fieldData, game)
 
 	self.mState = Field.IN_GAME;
@@ -534,4 +582,6 @@ function Field:init(fieldNode, layer, fieldData, game)
 	if fieldData.time then
 		self.mTime = fieldData.time;
 	end
+
+    self.mNeedDestroyObjects = {};
 end
