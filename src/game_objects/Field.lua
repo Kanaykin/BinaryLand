@@ -26,6 +26,7 @@ Field.mFreePoints = nil;
 Field.mCellSize = nil;
 Field.mState = nil;
 Field.mStateListener = nil;
+Field.mId = nil;
 
 -- states
 Field.PAUSE = 1;
@@ -190,6 +191,8 @@ end
 
 ---------------------------------
 function Field:onStateWin()
+    --check bonus level
+
 	self.mState = Field.WIN;
 	print("WIN !!!");
 	if self.mStateListener then
@@ -230,6 +233,7 @@ end
 function Field:tick(dt)
 	self:updateState();
 
+    --print("Field:tick self.mId ", self.mId);
     for i, obj in ipairs(self.mNeedDestroyObjects) do
         self:removeObject(obj);
         obj:destroy();
@@ -519,6 +523,7 @@ function Field:init(fieldNode, layer, fieldData, game)
 
 	self.mState = Field.IN_GAME;
     self.mScore = 0;
+    self.mId = fieldData.id;
 
 	local objectType = _G[fieldData.playerType];
 	local mobType = _G[fieldData.mobType];

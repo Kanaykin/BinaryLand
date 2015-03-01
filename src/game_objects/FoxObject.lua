@@ -12,6 +12,7 @@ FoxObject.mAnimationNode = nil;
 FoxObject.mEffectNode = nil;
 
 FoxObject.mNewEffect = nil;
+FoxObject.mFirstUpdate = 0;
 
 FoxObject.mEffectAnimations = nil;
 FoxObject.mFightPlistAnimations = nil;
@@ -121,6 +122,10 @@ end
 --------------------------------
 function FoxObject:tick(dt)
 	FoxObject:superClass().tick(self, dt);
+    if self.mFirstUpdate <= 2 then
+        self.mFirstUpdate = self.mFirstUpdate + 1;
+        self:updateOrder();
+    end
 
 	self:updateFlipNode(self.mAnimationNode);
 
