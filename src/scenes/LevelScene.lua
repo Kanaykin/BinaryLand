@@ -32,38 +32,96 @@ function LevelScene:onStateLose()
 end
 
 ---------------------------------
-function LevelScene:onStateWin()
-	print("LevelScene: WIN !!!");
-	local locationId = self.mLevel:getLocation():getId();
+function LevelScene:bonusStart()
+    print("LevelScene:bonusStart");
+    self:destroyLevelComponent();
+    local data = self.mLevel:getData().bonusLevel;
+    data.isBonus = true;
+	self:initScene(data);
+    self:initGui();
+    self:postInitScene(data);
+end
 
-	-- TODO: open location
+---------------------------------
+function LevelScene:onStateBonusStart()
+    self:winOpenLevel();
+    self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.bonusStart));
+end
 
-	self.mSceneManager.mGame:openLevel(locationId, self.mLevel:getIndex() + 1);
+---------------------------------
+function LevelScene:winOpenLevel()
+    print("LevelScene: WIN !!!");
+    local locationId = self.mLevel:getLocation():getId();
+
+    -- TODO: open location
+
+    self.mSceneManager.mGame:openLevel(locationId, self.mLevel:getIndex() + 1);
     self.mSceneManager.mGame:setLevelStar(locationId, self.mLevel:getIndex(), 2);
 
-	self.mMainUI:onStateWin();
+    SimpleAudioEngine:getInstance():playMusic(gSounds.VICTORY_MUSIC, false)
+    --SimpleAudioEngine:getInstance():playEffect(gSounds.VICTORY_MUSIC)
+end
 
-	SimpleAudioEngine:getInstance():playMusic(gSounds.VICTORY_MUSIC, false)
-	--SimpleAudioEngine:getInstance():playEffect(gSounds.VICTORY_MUSIC)
+---------------------------------
+function LevelScene:onStateWin()
+    self:winOpenLevel();
+	self.mMainUI:onStateWin();
+end
+
+---------------------------------
+function LevelScene:destroyLevelComponent()
+
+    if self.mMainUI then
+        self.mMainUI:destroy();
+    end
+
+    if self.mField then
+        self.mField:destroy();
+    end
+
+    self.mPlayerController:destroy();
+
 end
 
 ---------------------------------
 function LevelScene:destroy()
 	print("LevelScene:destroy ");
 
-	if self.mMainUI then
-		self.mMainUI:destroy();
-	end
-
-	if self.mField then
-		self.mField:destroy();
-	end
-
-	self.mPlayerController:destroy();
+    self:destroyLevelComponent();
 
 	LevelScene:superClass().destroy(self);
 
 	SimpleAudioEngine:getInstance():stopMusic(true);
+end
+
+--------------------------------
+function LevelScene:postInitScene(levelData)
+    if levelData.tutorial then
+        self.mTutorial = TutorialManager:create();
+        self.mTutorial:init(self.mSceneGame, self.mField, self.mMainUI);
+    end
+
+    -- set joystick to players
+    local players = self.mField:getPlayerObjects();
+    if players then
+        for i, player in ipairs(players) do
+            player:setJoystick(self.mMainUI:getJoystick());
+            player:setFightButton(self.mMainUI:getFightButton());
+        end
+    end
+
+    self.mPlayerController = PlayerController:create();
+    self.mPlayerController:init(self.mGuiLayer:getBoundingBox(), self.mField:getPlayerObjects(), self.mField,
+    self.mMainUI:getJoystick(), self.mMainUI:getFightButton());
+    self.mMainUI:setTouchListener(self.mPlayerController);
+
+    -- play music
+    if levelData.backgroundMusic then
+        SimpleAudioEngine:getInstance():playMusic(self.mLevel:getData().backgroundMusic, true)
+    end
+
+    local statistic = extend.Statistic:getInstance();
+    statistic:sendEvent("setScreenName", "LevelScene"..levelData.id);
 end
 
 --------------------------------
@@ -72,54 +130,29 @@ function LevelScene:init(sceneMan, params)
 	LevelScene:superClass().init(self, sceneMan, params);
 	self.mLevel = params;
 
-	self:initScene();
+	self:initScene(self.mLevel:getData());
 
 	self:initGui();
 
-	-- set joystick to players
-	local players = self.mField:getPlayerObjects();
-	if players then
-		for i, player in ipairs(players) do
-			player:setJoystick(self.mMainUI:getJoystick());
-			player:setFightButton(self.mMainUI:getFightButton());
-		end
-	end
-
-	self.mPlayerController = PlayerController:create();
-	self.mPlayerController:init(self.mGuiLayer:getBoundingBox(), self.mField:getPlayerObjects(), self.mField,
-		self.mMainUI:getJoystick(), self.mMainUI:getFightButton());
-	self.mMainUI:setTouchListener(self.mPlayerController);
-
-	if self.mLevel:getData().tutorial then
-		self.mTutorial = TutorialManager:create();
-		self.mTutorial:init(self.mSceneGame, self.mField, self.mMainUI);
-	end
-
-	-- play music
-	if self.mLevel:getData().backgroundMusic then
-		SimpleAudioEngine:getInstance():playMusic(self.mLevel:getData().backgroundMusic, true)
-	end
-
-    local statistic = extend.Statistic:getInstance();
-    statistic:sendEvent("setScreenName", "LevelScene"..self.mLevel:getData().id);
+    self:postInitScene(self.mLevel:getData());
 end
 
 --------------------------------
-function LevelScene:initScene()
+function LevelScene:initScene(levelData)
 
     local tileMap = nil;
-	if self.mLevel:getData().tileMap then
-		tileMap = cc.TMXTiledMap:create(self.mLevel:getData().tileMap);
+	if levelData.tileMap then
+		tileMap = cc.TMXTiledMap:create(levelData.tileMap);
         local visibleSize = CCDirector:getInstance():getVisibleSize();
         tileMap:setAnchorPoint(cc.p(0.5, 0.0));
         tileMap:setPosition(cc.p(visibleSize.width / 2.0, 0));
 	end
 
-	if type(self.mLevel:getData().ccbFile) == "string" then
+	if type(levelData.ccbFile) == "string" then
 		local ccpproxy = CCBProxy:create();
 		local reader = ccpproxy:createCCBReader();
 		
-		local node = ccpproxy:readCCBFromFile(self.mLevel:getData().ccbFile, reader, false);
+		local node = ccpproxy:readCCBFromFile(levelData.ccbFile, reader, false);
 
         if tileMap then
             self.mSceneGame:addChild(tileMap);
@@ -130,11 +163,11 @@ function LevelScene:initScene()
 		local fieldNode = node:getChildByTag(LevelScene.FIELD_NODE_TAG);
 
 		self.mField = Field:create();
-		self.mField:init({ fieldNode }, node, self.mLevel:getData(), self.mSceneManager.mGame);
-	elseif type(self.mLevel:getData().ccbFile) == "table" then
+		self.mField:init({ fieldNode }, node, levelData, self.mSceneManager.mGame);
+	elseif type(levelData.ccbFile) == "table" then
 		local layers = {};
 		local nodes = {};
-		for i, fileName in ipairs(self.mLevel:getData().ccbFile) do
+		for i, fileName in ipairs(levelData.ccbFile) do
 			local ccpproxy = CCBProxy:create();
 			local reader = ccpproxy:createCCBReader();
 			local node = ccpproxy:readCCBFromFile(fileName, reader, false);
@@ -155,7 +188,7 @@ function LevelScene:initScene()
 		
 		self.mSceneGame:addChild(self.mScrollView.mScroll);
 		self.mField = Field:create();
-		self.mField:init(nodes, self.mScrollView.mScroll, self.mLevel:getData(), self.mSceneManager.mGame);
+		self.mField:init(nodes, self.mScrollView.mScroll, levelData, self.mSceneManager.mGame);
 	end
 	self.mField:setStateListener(self);
 end

@@ -6,6 +6,7 @@ require "src/gui/YouWinDlg"
 require "src/gui/LevelTimer"
 require "src/gui/LevelScore"
 require "src/gui/GettingBonusEffect"
+require "src/gui/BonusDlg"
 
 MainUI = inheritsFrom(CCBBaseDialog)
 
@@ -14,6 +15,7 @@ MainUI.mFightButton = nil;
 MainUI.mSettingsDlg = nil;
 MainUI.mYouLooseDlg = nil;
 MainUI.mYouWinDlg = nil;
+MainUI.mBonusDlg = nil;
 MainUI.mTimeLabel = nil;
 MainUI.mTimer = nil;
 MainUI.mScore = nil;
@@ -43,6 +45,7 @@ function MainUI:destroy()
 	self.mSettingsDlg:destroy();
 	self.mYouLooseDlg:destroy();
 	self.mYouWinDlg:destroy();
+    self.mBonusDlg:destroy();
 
 	self:superClass().destroy(self);
 end
@@ -57,6 +60,12 @@ end
 ---------------------------------
 function MainUI:onStateLose()
 	self.mYouLooseDlg:doModal();
+end
+
+---------------------------------
+function MainUI:onStateBonusStart(callback)
+    self.mBonusDlg:setCallBack(callback);
+    self.mBonusDlg:doModal();
 end
 
 ---------------------------------
@@ -171,6 +180,10 @@ function MainUI:init(game, uiLayer, ccbFile)
 	-------------------------
 	self.mYouLooseDlg = YouLooseDlg:create();
 	self.mYouLooseDlg:init(self.mGame, self.mUILayer);
+
+	-------------------------
+    self.mBonusDlg = BonusDlg:create();
+	self.mBonusDlg:init(self.mGame, self.mUILayer);
 
 	-------------------------
 	self.mYouWinDlg = YouWinDlg:create();

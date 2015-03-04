@@ -13,6 +13,8 @@ Field.mGame = nil;
 Field.mTime = nil;
 Field.mScore = nil;
 Field.mMainUi = nil;
+Field.mBonusLevel = nil;
+Field.mIsBonusLevel = nil;
 
 Field.mPlayerObjects = nil;
 
@@ -185,18 +187,26 @@ function Field:onStateLose()
 	self.mState = Field.LOSE;
 	print("LOSE !!!");
 	if self.mStateListener then
-		self.mStateListener:onStateLose();
+        if self.mIsBonusLevel then
+            self.mStateListener:onStateWin();
+        else
+            self.mStateListener:onStateLose();
+        end
 	end
 end
 
 ---------------------------------
 function Field:onStateWin()
-    --check bonus level
 
 	self.mState = Field.WIN;
 	print("WIN !!!");
 	if self.mStateListener then
-		self.mStateListener:onStateWin();
+        --check bonus level
+        if self.mBonusLevel then
+            self.mStateListener:onStateBonusStart();
+        else
+            self.mStateListener:onStateWin();
+        end
 	end
 
 	for _, object in ipairs(self.mObjects) do
@@ -524,6 +534,9 @@ function Field:init(fieldNode, layer, fieldData, game)
 	self.mState = Field.IN_GAME;
     self.mScore = 0;
     self.mId = fieldData.id;
+    self.mBonusLevel = fieldData.bonusLevel;
+    self.mIsBonusLevel = fieldData.isBonus;
+    print("Field:init self.mBonusLevel ", self.mBonusLevel);
 
 	local objectType = _G[fieldData.playerType];
 	local mobType = _G[fieldData.mobType];
@@ -539,10 +552,6 @@ function Field:init(fieldNode, layer, fieldData, game)
 	self.mLeftBottom = Vector.new(0, 0);
 	self.mFieldNode = FieldNode:create();
 	self.mFieldNode:init(fieldNode, layer, self);
-
-	if not self.mFieldNode then
-		return;
-	end
 
 	local children = self.mFieldNode:getChildren();
 	local count = children:count();

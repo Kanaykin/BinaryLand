@@ -38,6 +38,16 @@ function FieldNode:setScrollPos(pos)
 end
 
 --------------------------------
+function FieldNode:getNodes()
+	return self.mNodes;
+end
+
+--------------------------------
+function FieldNode:getScrollView()
+    return self.mScrollView;
+end
+
+--------------------------------
 function FieldNode:init(nodes, layer, field)
 	self.mNodes = nodes;
 	self.mChildren = CCArray:create();

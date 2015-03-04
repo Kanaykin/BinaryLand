@@ -35,7 +35,7 @@ gLocations = {
                 time = 12,
                 backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
                 id = "1_3",
-                bonus_level = {
+                bonusLevel = {
                     --opened = true,
                     ccbFile = "Level1_4p1",
                     tileMap = "Level1_1_map.tmx",
@@ -43,12 +43,19 @@ gLocations = {
                     tutorial = false,
                     time = 30,
                     backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
-                    id = "1_4"
+                    id = "1_3_bonus"
                 }
 
 			},
 			{
-
+                --opened = true,
+                ccbFile = {"Level1_2p1", "Level1_2p2"},
+                tileMap = "Level1_2_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                id = "1_4"
 			},
 			{
 
