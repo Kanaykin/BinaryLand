@@ -23,6 +23,8 @@ FoxObject.EFFECT_NODE_TAG = 6;
 FoxObject.mFrontIdleAnimation = nil;
 FoxObject.mBackIdleAnimation = nil;
 FoxObject.mSideIdleAnimation = nil;
+FoxObject.mDebugBox = nil;
+FoxObject.mSize = nil;
 
 --------------------------------
 function FoxObject:init(field, node, needReverse)
@@ -45,6 +47,25 @@ function FoxObject:init(field, node, needReverse)
     self:updateAnchorFightAnimation();
 
 	self.mVelocity = self.mVelocity * field.mGame:getScale();
+
+    local nodeBox = cc.DrawNode:create();
+    self.mAnimationNode:addChild(nodeBox);
+    self.mDebugBox = nodeBox;
+    self.mSize = self.mAnimationNode:getBoundingBox();
+end
+
+--------------------------------
+function FoxObject:updateDebugBox()
+    if self.mDebugBox then
+        local box = self:getBoundingBox();
+        box.x = 0;
+        box.y = 0;
+        self.mDebugBox:clear();
+        self.mDebugBox:drawLine(cc.p(box.x, box.y), cc.p(box.x + box.width, box.y), {r = 0, g = 0, b = 0, a = 100});
+        self.mDebugBox:drawLine(cc.p(box.x, box.y), cc.p(box.x, box.y + box.height), {r = 0, g = 0, b = 0, a = 100});
+        self.mDebugBox:drawLine(cc.p(box.x + box.width, box.y), cc.p(box.x + box.width, box.y  + box.height), {r = 0, g = 0, b = 0, a = 100});
+        self.mDebugBox:drawLine(cc.p(box.x, box.y + box.height), cc.p(box.x + box.width, box.y  + box.height), {r = 0, g = 0, b = 0, a = 100});
+    end
 end
 
 --------------------------------
@@ -55,7 +76,7 @@ end
 ---------------------------------
 function FoxObject:getBoundingBox()
 	local pos = FoxObject:superClass().getBoundingBox(self);
-	local size = self.mAnimationNode:getBoundingBox();
+	local size = self.mSize;
 	return cc.rect(pos.x, pos.y, size.width, size.width);
 end
 
@@ -139,6 +160,7 @@ function FoxObject:tick(dt)
     else
         self.mNewEffect:setVisible(false);
     end
+    self:updateDebugBox();
 end
 
 --------------------------------

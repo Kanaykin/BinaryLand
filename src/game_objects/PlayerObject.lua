@@ -96,6 +96,8 @@ function PlayerObject:enterTrap(pos, stateInTrap)
 		self:playAnimation(self.mStateInTrap);
 	end
 	self.mInTrap = true;
+
+    print("PlayerObject:enterTrap ???");
 end
 
 --------------------------------

@@ -381,9 +381,6 @@ function Field:collideObject(player, destPos)
 			--check bbox
 			local boxl = player:getBoundingBox();
 			
-			--local anchor = player.mAnimationNode:getAnchorPoint();
-			--local leftBottom = Vector.new(anchor.x * boxl.size.width, anchor.y * boxl.size.height);
-
 			boxl.x = destPos.x-- + boxl.origin.x;
 			boxl.y = destPos.y-- + boxl.origin.y;
 			print("Field:collideObject1 x ", boxl.x, " y ", boxl.y);
