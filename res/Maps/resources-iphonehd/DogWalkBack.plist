@@ -4,81 +4,81 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>dog_side_walk_0000_Layer-Comp-1.png</key>
-            <dict>
-                <key>height</key>
-                <integer>68</integer>
-                <key>offsetX</key>
-                <real>1</real>
-                <key>offsetY</key>
-                <real>0</real>
-                <key>originalHeight</key>
-                <integer>68</integer>
-                <key>originalWidth</key>
-                <integer>84</integer>
-                <key>width</key>
-                <integer>78</integer>
-                <key>x</key>
-                <integer>86</integer>
-                <key>y</key>
-                <integer>2</integer>
-            </dict>
-            <key>dog_side_walk_0001_Layer-Comp-2.png</key>
+            <key>dog_back_walk_0000_Layer-Comp-1.png</key>
             <dict>
                 <key>height</key>
                 <integer>66</integer>
                 <key>offsetX</key>
-                <real>2</real>
+                <real>0</real>
                 <key>offsetY</key>
-                <real>-1</real>
+                <real>0</real>
                 <key>originalHeight</key>
-                <integer>68</integer>
+                <integer>66</integer>
                 <key>originalWidth</key>
-                <integer>84</integer>
+                <integer>46</integer>
                 <key>width</key>
-                <integer>80</integer>
+                <integer>46</integer>
                 <key>x</key>
-                <integer>166</integer>
+                <integer>2</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>dog_side_walk_0002_Layer-Comp-3.png</key>
+            <key>dog_back_walk_0001_Layer-Comp-2.png</key>
             <dict>
                 <key>height</key>
-                <integer>68</integer>
+                <integer>64</integer>
+                <key>offsetX</key>
+                <real>-1</real>
+                <key>offsetY</key>
+                <real>-1</real>
+                <key>originalHeight</key>
+                <integer>66</integer>
+                <key>originalWidth</key>
+                <integer>46</integer>
+                <key>width</key>
+                <integer>44</integer>
+                <key>x</key>
+                <integer>2</integer>
+                <key>y</key>
+                <integer>204</integer>
+            </dict>
+            <key>dog_back_walk_0002_Layer-Comp-3.png</key>
+            <dict>
+                <key>height</key>
+                <integer>66</integer>
                 <key>offsetX</key>
                 <real>-1</real>
                 <key>offsetY</key>
                 <real>0</real>
                 <key>originalHeight</key>
-                <integer>68</integer>
+                <integer>66</integer>
                 <key>originalWidth</key>
-                <integer>84</integer>
+                <integer>46</integer>
                 <key>width</key>
-                <integer>82</integer>
+                <integer>44</integer>
                 <key>x</key>
                 <integer>2</integer>
                 <key>y</key>
-                <integer>2</integer>
+                <integer>136</integer>
             </dict>
-            <key>dog_side_walk_0003_Layer-Comp-4.png</key>
+            <key>dog_back_walk_0003_Layer-Comp-4.png</key>
             <dict>
                 <key>height</key>
-                <integer>66</integer>
+                <integer>64</integer>
                 <key>offsetX</key>
-                <real>3</real>
+                <real>0</real>
                 <key>offsetY</key>
                 <real>-1</real>
                 <key>originalHeight</key>
-                <integer>68</integer>
+                <integer>66</integer>
                 <key>originalWidth</key>
-                <integer>84</integer>
+                <integer>46</integer>
                 <key>width</key>
-                <integer>78</integer>
+                <integer>46</integer>
                 <key>x</key>
-                <integer>248</integer>
-                <key>y</key>
                 <integer>2</integer>
+                <key>y</key>
+                <integer>70</integer>
             </dict>
         </dict>
         <key>metadata</key>
@@ -86,20 +86,20 @@
             <key>format</key>
             <integer>0</integer>
             <key>realTextureFileName</key>
-            <string>DogWalk.png</string>
+            <string>DogWalkBack.png</string>
             <key>size</key>
-            <string>{328,72}</string>
+            <string>{50,270}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:a14cb4a2a7b5f85aaafff51067ecfd80:21648285eeb5f23b2bda19f92cd87bea:462846c7ca1f732b2ab5351ea0dce4ac$</string>
+            <string>$TexturePacker:SmartUpdate:269bd2b0e31138dce95e26168cec215e:22cc45353949729d7a9473513d7e3b82:8850745ba7d723e7162f330f849519ba$</string>
             <key>textureFileName</key>
-            <string>DogWalk.png</string>
+            <string>DogWalkBack.png</string>
         </dict>
         <key>texture</key>
         <dict>
             <key>height</key>
-            <integer>72</integer>
+            <integer>270</integer>
             <key>width</key>
-            <integer>328</integer>
+            <integer>50</integer>
         </dict>
     </dict>
 </plist>

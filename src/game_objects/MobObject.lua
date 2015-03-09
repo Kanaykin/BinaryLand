@@ -12,6 +12,30 @@ MobObject.mState = MobObject.IDLE;
 MobObject.mPath = nil;
 MobObject.mTrigger = nil;
 
+MobObject.DIRECTIONS = {
+    SIDE = 1,
+    FRONT = 2,
+    BACK = 3
+};
+
+MobObject.mAnimation = nil;
+
+MobObject.mAnimations = nil;
+
+--------------------------------
+function MobObject:getAnimationByDirection()
+    if self.mDelta then
+        local val = self.mDelta:normalized();
+        --print("HunterObject:tick self.mDelta ", val.y);
+        if val.y >= 1 then
+            return MobObject.DIRECTIONS.BACK;
+        elseif val.y <= -1 then
+            return MobObject.DIRECTIONS.FRONT;
+        end
+    end
+    return MobObject.DIRECTIONS.SIDE;
+end
+
 --------------------------------
 function MobObject:initAnimation()
 	print("MobObject:initAnimation");
