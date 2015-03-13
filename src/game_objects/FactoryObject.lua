@@ -48,7 +48,7 @@ end
 function FactoryObject:createBrick(field, node)
 	print("FactoryObject:createBrick ", field, ", ", node);
 	field:addBrick(node);
-	return node;
+    return nil;--node;
 end
 
 ------------------------------

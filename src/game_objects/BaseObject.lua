@@ -45,6 +45,10 @@ function BaseObject:getPosition()
 end
 
 ---------------------------------
+function BaseObject:setCustomProperties(properties)
+end
+
+---------------------------------
 function BaseObject:getBoundingBox()
 	return self.mNode:getBoundingBox();
 end

@@ -29,6 +29,7 @@ Field.mCellSize = nil;
 Field.mState = nil;
 Field.mStateListener = nil;
 Field.mId = nil;
+Field.mCustomProperties = nil;
 
 -- states
 Field.PAUSE = 1;
@@ -526,6 +527,23 @@ function Field:delayDelete(object)
 end
 
 --------------------------------
+function Field:getCustomProperties(gridPosX, gridPosY, tag)
+    if self.mCustomProperties then
+        return self.mCustomProperties[tostring(gridPosX).."_"..tostring(gridPosY).."_"..tostring(tag)];
+    end
+end
+
+--------------------------------
+function Field:loadCustomProperties(fieldData)
+    print("Field:loadCustomProperties( ", fieldData.customProperties);
+    if fieldData.customProperties ~= nil then
+        local customProperties = require(fieldData.customProperties);
+        print("Field:loadCustomProperties customProperties ", customProperties);
+        self.mCustomProperties = customProperties;
+    end
+end
+
+--------------------------------
 function Field:init(fieldNode, layer, fieldData, game)
 
 	self.mState = Field.IN_GAME;
@@ -577,11 +595,23 @@ function Field:init(fieldNode, layer, fieldData, game)
 		end
 	end
 
+    self:loadCustomProperties(fieldData);
 	for i = 1, count do
 		local brick = tolua.cast(children:objectAtIndex(i - 1), "cc.Node");
 
 		local object = FactoryObject:createObject(self, brick);
-		print("create object ", object);
+        if object then
+            local pos = object:getPosition();
+            print("create object x ", pos.x, " y ", pos.y);
+            local gridPosX, gridPosY = self:positionToGrid(pos);
+            print("create object grid x ", gridPosX, " y ", gridPosY);
+            local tag = brick:getTag();
+            print("create tag ", tag);
+            local properties = self:getCustomProperties(gridPosX, gridPosY, tag);
+            if properties then
+                object:setCustomProperties(properties);
+            end
+        end
 	end
 
 	self:addArrayBorder();

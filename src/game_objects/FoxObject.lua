@@ -54,6 +54,17 @@ function FoxObject:init(field, node, needReverse)
     self.mSize = self.mAnimationNode:getBoundingBox();
 end
 
+---------------------------------
+function FoxObject:setCustomProperties(properties)
+    print("FoxObject:setCustomProperties properties.state ", properties.state);
+    if properties.state then
+        self:playAnimation(properties.state);
+        self.mAnimations[self.mLastButtonPressed]:setCurrentAnimation(2);
+        self.mInTrap = true;
+        self.mField:createSnareTrigger(Vector.new(self.mNode:getPosition()));
+    end
+end
+
 --------------------------------
 function FoxObject:updateDebugBox()
     if self.mDebugBox then

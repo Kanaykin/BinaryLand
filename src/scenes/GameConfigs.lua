@@ -14,6 +14,7 @@ gLocations = {
 				cellSize = 32,
 				tutorial = true,
 				backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                customProperties = "src/levels/Level1_1",
                 id = "1_1"
 			},
 			{
@@ -43,6 +44,7 @@ gLocations = {
                     tutorial = false,
                     time = 30,
                     backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                    customProperties = "src/levels/Level1_3_bonus",
                     id = "1_3_bonus"
                 }
 

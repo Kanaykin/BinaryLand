@@ -45,6 +45,11 @@ function PlistAnimation:tick(dt)
 	--print("animation is done :", self.mAction:isDone());
 end
 
+----------------------------
+function PlistAnimation:stop()
+	self.mNode:stopAction(self.mAction);
+end
+
 --------------------------------
 function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
 

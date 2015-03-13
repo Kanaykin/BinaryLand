@@ -22,10 +22,20 @@ end
 
 --------------------------------
 function SequenceAnimation:tick(dt)
+    print("SequenceAnimation:tick self.mCurrentAnimation ", self.mCurrentAnimation);
 	if self.mCurrentAnimation and self.mAnimations[self.mCurrentAnimation] then
 		self.mAnimations[self.mCurrentAnimation]:tick(dt)
 		self:playNext();
 	end
+end
+
+--------------------------------
+function SequenceAnimation:setCurrentAnimation(num)
+    if self.mCurrentAnimation then
+        self.mAnimations[self.mCurrentAnimation]:stop();
+    end
+    self.mCurrentAnimation = num;
+    self.mAnimations[self.mCurrentAnimation]:play();
 end
 
 --------------------------------
@@ -47,5 +57,6 @@ end
 --------------------------------
 function SequenceAnimation:play()
 	print("SequenceAnimation:play");
+    self.mCurrentAnimation = nil;
 	self:playNext();
 end
