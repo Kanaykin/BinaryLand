@@ -39,6 +39,7 @@ function LevelTimer:setTime(time)
     local minute = math.floor(second / 60)
     self.mTimeLabel:setString(tostring(minute)..":"..string.format("%02d", (second - minute * 60)));
 
+    self.mProgressMaxValue = math.max(self.mProgressMaxValue, time);
     -- set progress
     self.mProgress:setScaleX(time / self.mProgressMaxValue);
 end

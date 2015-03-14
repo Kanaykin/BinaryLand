@@ -24,6 +24,7 @@ FactoryObject.DOG_TAG = 107;
 FactoryObject.FOX_TAG = 108;
 FactoryObject.FOX2_TAG = 109;
 FactoryObject.BONUS_TAG = 110;
+FactoryObject.BONUS_TIME_TAG = 111;
 
 -- tutorial
 FactoryObject.TUTORIAL_TRIGGER_1 = 200;
@@ -127,7 +128,16 @@ end
 function FactoryObject:createBonusObject(field, node)
     print("FactoryObject:createBonusObject ", field, ", ", node);
     local bonus = BonusObject:create();
-    bonus:init(field, node);
+    bonus:init(field, node, nil, BonusObject.COINS_TYPE);
+    field:addObject(bonus);
+    return bonus;
+end
+
+------------------------------
+function FactoryObject:createBonusTimerObject(field, node)
+    print("FactoryObject:createBonusTimerObject ", field, ", ", node);
+    local bonus = BonusObject:create();
+    bonus:init(field, node, nil, BonusObject.TIME_TYPE);
     field:addObject(bonus);
     return bonus;
 end
@@ -155,6 +165,7 @@ FactoryObject.CreateFunctions = {
 	[FactoryObject.FOX2_TAG] = FactoryObject.createFoxPlayer,
 	[FactoryObject.LOVE_CAGE_TAG] = FactoryObject.createFinishObject,
 	[FactoryObject.BONUS_TAG] = FactoryObject.createBonusObject,
+	[FactoryObject.BONUS_TIME_TAG] = FactoryObject.createBonusTimerObject,
 	[FactoryObject.TUTORIAL_TRIGGER_1] = FactoryObject.createTrigger,
 	[FactoryObject.TUTORIAL_TRIGGER_2] = FactoryObject.createTrigger,
 	[FactoryObject.TUTORIAL_TRIGGER_3] = FactoryObject.createTrigger

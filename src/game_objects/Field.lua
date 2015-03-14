@@ -343,6 +343,11 @@ function Field:addScore(score)
 end
 
 --------------------------------
+function Field:addTime(score)
+    self.mTime = self.mTime + score;
+end
+
+--------------------------------
 function Field:onEnterBonusTrigger(player)
     print("Field:onEnterBonusTrigger ");
 --    self.mScore = self.mScore + 100;

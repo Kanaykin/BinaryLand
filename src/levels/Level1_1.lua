@@ -1,0 +1,5 @@
+local CustomProperties = {
+
+}
+
+return CustomProperties;

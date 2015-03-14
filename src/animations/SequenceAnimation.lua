@@ -22,7 +22,7 @@ end
 
 --------------------------------
 function SequenceAnimation:tick(dt)
-    print("SequenceAnimation:tick self.mCurrentAnimation ", self.mCurrentAnimation);
+    --print("SequenceAnimation:tick self.mCurrentAnimation ", self.mCurrentAnimation);
 	if self.mCurrentAnimation and self.mAnimations[self.mCurrentAnimation] then
 		self.mAnimations[self.mCurrentAnimation]:tick(dt)
 		self:playNext();
