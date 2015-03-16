@@ -190,7 +190,7 @@ function PlayerObject:collisionDetect(delta, newDir)
 	local destGrid = Vector.new(self.mField:positionToGrid(destPos));
 	--print("destGrid ", destGrid.x, " ", destGrid.y);
 
-	if self.mField:isFreePoint(destGrid) then
+	if self.mField:isFreePointForPlayer(destGrid) then
 		local centerCell = self.mField:gridPosToReal(destGrid) + Vector.new(self.mField:getCellSize() / 2, self.mField:getCellSize() / 2);
 		local centerSelf = self.mField:gridPosToReal(Vector.new(self.mField:positionToGrid(currentPos))) + Vector.new(self.mField:getCellSize() / 2, self.mField:getCellSize() / 2);
 		--print("centerCell ", centerCell.x, " ", centerCell.y);

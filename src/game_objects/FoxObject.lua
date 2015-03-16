@@ -48,9 +48,9 @@ function FoxObject:init(field, node, needReverse)
 
 	self.mVelocity = self.mVelocity * field.mGame:getScale();
 
-    local nodeBox = cc.DrawNode:create();
-    self.mAnimationNode:addChild(nodeBox);
-    self.mDebugBox = nodeBox;
+    --local nodeBox = cc.DrawNode:create();
+    --self.mAnimationNode:addChild(nodeBox);
+    --self.mDebugBox = nodeBox;
     self.mSize = self.mAnimationNode:getBoundingBox();
 end
 

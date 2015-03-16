@@ -197,6 +197,14 @@ function Field:onStateLose()
 end
 
 ---------------------------------
+function Field:onEnterBonusRoomDoor()
+    print("Field:onEnterBonusRoomDoor");
+    if self.mStateListener then
+        self.mStateListener:onEnterBonusRoomDoor();
+    end
+end
+
+---------------------------------
 function Field:onStateWin()
 
 	self.mState = Field.WIN;
@@ -410,6 +418,11 @@ function Field:isFreePoint( point )
 end
 
 --------------------------------
+function Field:isFreePointForPlayer( point )
+    return self.mArray[COORD(point.x, point.y, self.mSize.x)] ~= 1;
+end
+
+--------------------------------
 function Field:positionToGrid(position)
 	local leftBottom = Vector.new(position.x - self.mLeftBottom.x, position.y - self.mLeftBottom.y);
 	return math.floor(leftBottom.x / self.mCellSize) + 1, math.floor(leftBottom.y / self.mCellSize) + 1;
@@ -509,6 +522,15 @@ end
 --------------------------------
 function Field:addObject(object)
 	table.insert(self.mObjects, object);
+end
+
+
+--------------------------------
+function Field:addBonusRoomDoor(object)
+    self:addObject(object);
+    local brick = object:getNode();
+    local x, y = self:getGridPosition(brick);
+    self.mArray[COORD(x, y, self.mSize.x)] = 2;
 end
 
 --------------------------------

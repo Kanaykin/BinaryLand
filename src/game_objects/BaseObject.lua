@@ -15,6 +15,11 @@ function BaseObject:destroyNode()
 end
 
 ---------------------------------
+function BaseObject:getNode()
+    return self.mNode;
+end
+
+---------------------------------
 function BaseObject:onStateWin()
 end
 

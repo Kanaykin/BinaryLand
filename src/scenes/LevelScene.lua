@@ -43,6 +43,11 @@ function LevelScene:bonusStart()
 end
 
 ---------------------------------
+function LevelScene:onEnterBonusRoomDoor()
+    self:bonusStart();
+end
+
+---------------------------------
 function LevelScene:onStateBonusStart()
     self:winOpenLevel();
     self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.bonusStart));

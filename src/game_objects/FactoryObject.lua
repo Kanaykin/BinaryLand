@@ -6,6 +6,7 @@ require "src/game_objects/DogObject"
 require "src/game_objects/FinishTrigger"
 require "src/game_objects/FinishObject"
 require "src/game_objects/BonusObject"
+require "src/game_objects/BonusRoomDoor"
 require "src/tutorial/TutorialTrigger"
 
 FactoryObject = {}
@@ -25,6 +26,7 @@ FactoryObject.FOX_TAG = 108;
 FactoryObject.FOX2_TAG = 109;
 FactoryObject.BONUS_TAG = 110;
 FactoryObject.BONUS_TIME_TAG = 111;
+FactoryObject.BONUS_ROOM_DOOR_TAG = 112;
 
 -- tutorial
 FactoryObject.TUTORIAL_TRIGGER_1 = 200;
@@ -143,6 +145,16 @@ function FactoryObject:createBonusTimerObject(field, node)
 end
 
 ------------------------------
+function FactoryObject:createBonusRoomDoor(field, node)
+    print("FactoryObject:createBonusRoomDoor ", field, ", ", node);
+    local bonusRoom = BonusRoomDoor:create();
+
+    bonusRoom:init(field, node, Callback.new(field, Field.onEnterBonusRoomDoor));
+    field:addBonusRoomDoor(bonusRoom);
+    return bonus;
+end
+
+------------------------------
 function FactoryObject:createFoxPlayer(field, node)
 	print("FactoryObject:createFoxPlayer ", field, ", ", node);
 	local player = FoxObject:create(); --PlayerObject:create();
@@ -168,5 +180,6 @@ FactoryObject.CreateFunctions = {
 	[FactoryObject.BONUS_TIME_TAG] = FactoryObject.createBonusTimerObject,
 	[FactoryObject.TUTORIAL_TRIGGER_1] = FactoryObject.createTrigger,
 	[FactoryObject.TUTORIAL_TRIGGER_2] = FactoryObject.createTrigger,
-	[FactoryObject.TUTORIAL_TRIGGER_3] = FactoryObject.createTrigger
+	[FactoryObject.TUTORIAL_TRIGGER_3] = FactoryObject.createTrigger,
+	[FactoryObject.BONUS_ROOM_DOOR_TAG] = FactoryObject.createBonusRoomDoor
 }
