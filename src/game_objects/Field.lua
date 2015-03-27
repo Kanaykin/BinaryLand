@@ -5,6 +5,7 @@ require "src/game_objects/FactoryObject"
 
 Field = inheritsFrom(nil)
 Field.mArray = nil;
+Field.mPlayerFreeArray = nil;
 Field.mSize = nil;
 Field.mFieldNode = nil;
 Field.mEnemyObjects = nil;
@@ -15,6 +16,7 @@ Field.mScore = nil;
 Field.mMainUi = nil;
 Field.mBonusLevel = nil;
 Field.mIsBonusLevel = nil;
+Field.mObjectsById = nil;
 
 Field.mPlayerObjects = nil;
 
@@ -197,11 +199,54 @@ function Field:onStateLose()
 end
 
 ---------------------------------
-function Field:onEnterBonusRoomDoor()
-    print("Field:onEnterBonusRoomDoor");
-    if self.mStateListener then
-        self.mStateListener:onEnterBonusRoomDoor();
+function Field:restore(data)
+    print("Field:restore ");
+    if not data.field then
+        print("Invalid field data");
+        return;
     end
+    self.mTime = data.field.time;
+    self.mScore = data.field.score;
+    print("Field:restore objects ", data.field.objects);
+    for id, objectData in pairs(data.field.objects) do
+        local object = self:getObjectById(id);
+        print("Field:restore id ", id, " object ", object);
+        if object then
+            object:restore(objectData);
+        end
+    end
+    -- remove object
+    for _, object in ipairs(self.mObjects) do
+        local id = object:getId();
+        if id and not data.field.objects[id] then
+            self:delayDelete(object);
+        end
+    end
+
+end
+
+---------------------------------
+function Field:store(data)
+    data.field = {}
+    data.field.time = self.mTime;
+    data.field.score = self.mScore;
+    -- store objects
+    data.field.objects = {}
+    for _, object in ipairs(self.mObjects) do
+        data.field.objects[object:getId()] = {};
+        print("Field:store obj ", object:getId());
+        object:store(data.field.objects[object:getId()]);
+    end
+end
+
+---------------------------------
+function Field:onEnterBonusRoomDoor(player)
+    print("Field:onEnterBonusRoomDoor ", player);
+    player:onEnterBonusRoomDoor();
+    if self.mStateListener then
+        self.mStateListener:onEnterBonusRoomDoor(player:isFemale());
+    end
+    print("Field:onEnterBonusRoomDoor end");
 end
 
 ---------------------------------
@@ -255,6 +300,7 @@ function Field:tick(dt)
     --print("Field:tick self.mId ", self.mId);
     for i, obj in ipairs(self.mNeedDestroyObjects) do
         self:removeObject(obj);
+        self:removeEnemy(obj);
         obj:destroy();
     end
     self.mNeedDestroyObjects = {}
@@ -419,7 +465,7 @@ end
 
 --------------------------------
 function Field:isFreePointForPlayer( point )
-    return self.mArray[COORD(point.x, point.y, self.mSize.x)] ~= 1;
+    return self.mArray[COORD(point.x, point.y, self.mSize.x)] == 0 or self.mPlayerFreeArray[COORD(point.x, point.y, self.mSize.x)];
 end
 
 --------------------------------
@@ -520,8 +566,17 @@ function Field:addPlayer(player)
 end
 
 --------------------------------
+function Field:getObjectById(id)
+    return self.mObjectsById[id];
+end
+
+--------------------------------
 function Field:addObject(object)
 	table.insert(self.mObjects, object);
+    local id = object:getId();
+    if id then
+        self.mObjectsById[id] = object;
+    end
 end
 
 
@@ -530,7 +585,16 @@ function Field:addBonusRoomDoor(object)
     self:addObject(object);
     local brick = object:getNode();
     local x, y = self:getGridPosition(brick);
-    self.mArray[COORD(x, y, self.mSize.x)] = 2;
+    self.mArray[COORD(x, y, self.mSize.x)] = 1;
+    self.mPlayerFreeArray[COORD(x, y, self.mSize.x)] = 1;
+end
+
+--------------------------------
+function Field:removeBonusRoomDoor(object)
+    local brick = object:getNode();
+    local x, y = self:getGridPosition(brick);
+    self.mArray[COORD(x, y, self.mSize.x)] = 1;
+    self.mPlayerFreeArray[COORD(x, y, self.mSize.x)] = nil;
 end
 
 --------------------------------
@@ -541,6 +605,11 @@ end
 --------------------------------
 function Field:getScore()
     return self.mScore;
+end
+
+--------------------------------
+function Field:setScore(score)
+    self.mScore = score;
 end
 
 --------------------------------
@@ -556,7 +625,8 @@ end
 --------------------------------
 function Field:getCustomProperties(gridPosX, gridPosY, tag)
     if self.mCustomProperties then
-        return self.mCustomProperties[tostring(gridPosX).."_"..tostring(gridPosY).."_"..tostring(tag)];
+        print("Field:getCustomProperties ", BaseObject:convertToId(gridPosX, gridPosY, tag));
+        return self.mCustomProperties[BaseObject:convertToId(gridPosX, gridPosY, tag)];
     end
 end
 
@@ -591,6 +661,7 @@ function Field:init(fieldNode, layer, fieldData, game)
 	self.mPlayerObjects = {};
 	self.mEnemyObjects = {};
 	self.mFinishTrigger = {};
+    self.mObjectsById = {};
 	self.mLeftBottom = Vector.new(0, 0);
 	self.mFieldNode = FieldNode:create();
 	self.mFieldNode:init(fieldNode, layer, self);
@@ -614,6 +685,7 @@ function Field:init(fieldNode, layer, fieldData, game)
 
 	print("maxValue x ", maxValue.x, " y ", maxValue.y);
 	self.mArray = {};
+    self.mPlayerFreeArray = {};
 	self.mSize = maxValue;
 	-- fill zero 
 	for i = 0, maxValue.x do

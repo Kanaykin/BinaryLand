@@ -14,7 +14,20 @@ function MovableObject:init(field, node)
 	MovableObject:superClass().init(self, field, node);
 
 	self.mGridPosition = Vector.new(field:getGridPosition(node));
-	print("mGridPosition ", self.mGridPosition.x, ", ", self.mGridPosition.y);
+end
+
+---------------------------------
+function MovableObject:store(data)
+    MovableObject:superClass().store(self, data);
+    data.nodePosition = Vector.new(self.mNode:getPosition());
+end
+
+---------------------------------
+function MovableObject:restore(data)
+    MovableObject:superClass().restore(self, data);
+    self.mNode:setPosition(cc.p(data.nodePosition.x, data.nodePosition.y));
+	self.mGridPosition = Vector.new(self.mField:getGridPosition(self.mNode));
+    self:updateOrder();
 end
 
 --------------------------------

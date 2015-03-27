@@ -15,6 +15,7 @@ PlayerObject.mNameTexture = "penguin";
 PlayerObject.mIsFemale = false;
 PlayerObject.mFightTrigger = nil;
 PlayerObject.mInTrap = false;
+PlayerObject.mBonusRoomDoorPosition = nil;
 
 PlayerObject.MALE_PREFIX = "penguin";
 PlayerObject.FEMALE_PREFIX = "penguin_girl";
@@ -55,16 +56,53 @@ ANIMATION_MALE = {
 		{name = "_fight_down", frames = 2, anchorFight = cc.p(0.48, 0.75), anchorFightFemale = cc.p(0.48, 0.75)}
 	}
 
+---------------------------------
+function PlayerObject:store(data)
+    PlayerObject:superClass().store(self, data);
+    --data.lastButtonPressed = self.mLastButtonPressed;
+    if self.mBonusRoomDoorPosition then
+        data.nodePosition = self.mBonusRoomDoorPosition;
+    end
+end
+
+---------------------------------
+function PlayerObject:restore(data)
+    PlayerObject:superClass().restore(self, data);
+    --self.mLastButtonPressed = data.lastButtonPressed;
+end
+
+---------------------------------
+function PlayerObject:setCustomProperties(properties)
+    print("PlayerObject:setCustomProperties properties.state ", properties.state);
+
+    PlayerObject:superClass().setCustomProperties(self, properties);
+
+    if properties.isFemale ~= nil then
+        print("PlayerObject:setCustomProperties ", properties.isFemale)
+        self.mIsFemale = properties.isFemale;
+        self.mReverse = self.mIsFemale and Vector.new(-1, 1) or Vector.new(1, 1);
+        self.mNameTexture = self.mIsFemale and PlayerObject.FEMALE_PREFIX or PlayerObject.FEMALE_PREFIX;
+        self.mLastButtonPressed = -1;
+        self:destroyAnimation();
+        self:initAnimation();
+        self:playAnimation(nil);
+    end
+end
+
+---------------------------------
+function PlayerObject:destroyAnimation()
+    for i, animation in pairs(self.mAnimations) do
+        if animation then
+            animation:destroy();
+        end
+    end
+end
 
 ---------------------------------
 function PlayerObject:destroy()
 	PlayerObject:superClass().destroy(self);
 
-	for i, animation in pairs(self.mAnimations) do
-		if animation then
-			animation:destroy();
-		end
-	end
+    self:destroyAnimation();
 end
 
 ---------------------------------
@@ -127,6 +165,11 @@ function PlayerObject:initAnimation()
 	end
 	self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE] = EmptyAnimation:create();
 	self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE]:init(texture, self.mNode, self.mNode:getAnchorPoint());
+end
+
+--------------------------------
+function PlayerObject:isFemale()
+    return self.mIsFemale;
 end
 
 --------------------------------
@@ -253,6 +296,28 @@ end
 function PlayerObject:IsMoving()
 	local button = self.mJoystick:getButtonPressed();
 	return button ~= nil;
+end
+
+---------------------------------
+function PlayerObject:onEnterBonusRoomDoor()
+    print("PlayerObject:onEnterBonusRoomDoor");
+    print("PlayerObject:onEnterBonusRoomDoor mGridPosition ", self.mGridPosition.x, "y ", self.mGridPosition.y);
+    print("PlayerObject:onEnterBonusRoomDoor mDelta ", self.mDelta);
+    if self.mDestGridPos then
+        print("PlayerObject:onEnterBonusRoomDoor mDestGridPos ", self.mDestGridPos.x, "y ", self.mDestGridPos.y);
+    end
+    if self.mLastDir then
+        print("PlayerObject:onEnterBonusRoomDoor self.mLastDir ", self.mLastDir);
+
+        local curPosition = Vector.new(self.mNode:getPosition());
+
+        local newDir = DIRECTIONS[self.mLastDir]:clone() * self.mReverse;
+        print("PlayerObject:onEnterBonusRoomDoor curPosition ", curPosition.x, " y ", curPosition.y);
+        curPosition = curPosition - newDir * self.mField:getCellSize() * 0.5;
+        print("PlayerObject:onEnterBonusRoomDoor curPosition ", curPosition.x, " y ", curPosition.y);
+        --self.mNode:setPosition(cc.p(curPosition.x, curPosition.y));
+        self.mBonusRoomDoorPosition = curPosition;
+    end
 end
 
 --------------------------------

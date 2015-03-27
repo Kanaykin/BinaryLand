@@ -57,6 +57,9 @@ end
 ---------------------------------
 function FoxObject:setCustomProperties(properties)
     print("FoxObject:setCustomProperties properties.state ", properties.state);
+
+    FoxObject:superClass().setCustomProperties(self, properties);
+
     if properties.state then
         self:playAnimation(properties.state);
         self.mAnimations[self.mLastButtonPressed]:setCurrentAnimation(2);

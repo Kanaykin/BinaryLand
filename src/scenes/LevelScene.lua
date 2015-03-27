@@ -15,6 +15,7 @@ LevelScene.mPlayerController = nil;
 LevelScene.FIELD_NODE_TAG = 10;
 LevelScene.mMainUI = nil;
 LevelScene.mTutorial = nil;
+LevelScene.mStoredLevel = nil;
 
 local LOADSCEENIMAGE = "choseLevel.png"
 
@@ -32,19 +33,57 @@ function LevelScene:onStateLose()
 end
 
 ---------------------------------
-function LevelScene:bonusStart()
+function LevelScene:bonusStart(bonusData)
     print("LevelScene:bonusStart");
     self:destroyLevelComponent();
-    local data = self.mLevel:getData().bonusLevel;
+    local data = bonusData and bonusData or self.mLevel:getData().bonusLevel;
     data.isBonus = true;
 	self:initScene(data);
     self:initGui();
     self:postInitScene(data);
+    if bonusData.score then
+        self.mField:setScore(bonusData.score);
+    end
 end
 
 ---------------------------------
-function LevelScene:onEnterBonusRoomDoor()
-    self:bonusStart();
+function LevelScene:storeScene()
+    self.mStoredLevel = {}
+    self.mField:store(self.mStoredLevel);
+end
+
+---------------------------------
+function LevelScene:restoreScene()
+    self:destroyLevelComponent();
+    self:initScene(self.mLevel:getData());
+    self:initGui();
+    self:postInitScene(self.mLevel:getData());
+
+    self.mField:restore(self.mStoredLevel);
+    if self.mLevel:getData().bonusRoom.score then
+        self.mField:setScore(self.mLevel:getData().bonusRoom.score);
+    end
+    self.mStoredLevel = nil;
+end
+
+---------------------------------
+function LevelScene:bonusRoomStart()
+    self:bonusStart(self.mLevel:getData().bonusRoom);
+end
+
+---------------------------------
+function LevelScene:onEnterBonusRoomDoor(isFemale)
+    local score = self.mField:getScore();
+    print("LevelScene:onEnterBonusRoomDoor score ", score);
+    if self.mStoredLevel == nil then
+        self.mLevel:getData().bonusRoom.isFemale = isFemale;
+        self.mLevel:getData().bonusRoom.score = score;
+        self:storeScene();
+        self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.bonusRoomStart), "ShortShow");
+    else
+        self.mLevel:getData().bonusRoom.score = score;
+        self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.restoreScene), "ShortShow");
+    end
 end
 
 ---------------------------------
@@ -101,6 +140,7 @@ end
 
 --------------------------------
 function LevelScene:postInitScene(levelData)
+    print("LevelScene:postInitScene ", levelData.isFemale);
     if levelData.tutorial then
         self.mTutorial = TutorialManager:create();
         self.mTutorial:init(self.mSceneGame, self.mField, self.mMainUI);
@@ -108,10 +148,14 @@ function LevelScene:postInitScene(levelData)
 
     -- set joystick to players
     local players = self.mField:getPlayerObjects();
+    print("LevelScene:postInitScene players ", players);
     if players then
         for i, player in ipairs(players) do
             player:setJoystick(self.mMainUI:getJoystick());
             player:setFightButton(self.mMainUI:getFightButton());
+        end
+        if levelData.isFemale ~= nil then
+            players[1]:setCustomProperties({isFemale = levelData.isFemale});
         end
     end
 

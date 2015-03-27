@@ -36,6 +36,11 @@ function MobObject:getAnimationByDirection()
     return MobObject.DIRECTIONS.SIDE;
 end
 
+---------------------------------
+function MobObject:isMob()
+    return true;
+end
+
 --------------------------------
 function MobObject:initAnimation()
 	print("MobObject:initAnimation");

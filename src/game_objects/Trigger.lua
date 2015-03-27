@@ -80,7 +80,9 @@ function Trigger:tick(dt)
                 local contained = self:contained(Vector.new(pointX, pointY));
 				--print("contained ", contained);
 				if contained then
+                    print("self:onEnter begin ");
 					self:onEnter(player)
+                    print("self:onEnter end ");
 				end
 			end
 		end

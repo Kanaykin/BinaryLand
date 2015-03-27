@@ -63,8 +63,11 @@ function MainUI:onStateLose()
 end
 
 ---------------------------------
-function MainUI:onStateBonusStart(callback)
+function MainUI:onStateBonusStart(callback, animationShow)
     self.mBonusDlg:setCallBack(callback);
+    if animationShow then
+        self.mBonusDlg:setAnimationShow(animationShow);
+    end
     self.mBonusDlg:doModal();
 end
 

@@ -3,6 +3,31 @@ require "src/base/Inheritance"
 BaseObject = inheritsFrom(nil)
 BaseObject.mNode = nil;
 BaseObject.mField = nil;
+BaseObject.mId = nil;
+
+--------------------------------
+function BaseObject:setId(id)
+    print("BaseObject:setId ", id);
+    self.mId = id;
+end
+
+--------------------------------
+function BaseObject:getId()
+    return self.mId;
+end
+
+---------------------------------
+function BaseObject:isMob()
+    return false;
+end
+
+---------------------------------
+function BaseObject:store(data)
+end
+
+--------------------------------
+function BaseObject:restore(data)
+end
 
 --------------------------------
 function BaseObject:destroyNode()
@@ -12,6 +37,11 @@ function BaseObject:destroyNode()
 		self.mNode:release();
 		self.mNode = nil;
 	end
+end
+
+--------------------------------
+function BaseObject:convertToId(gridPosX, gridPosY, tag)
+    return tostring(gridPosX).."_"..tostring(gridPosY).."_"..tostring(tag);
 end
 
 ---------------------------------
@@ -63,6 +93,10 @@ function BaseObject:init(field, node)
 	self.mNode = node;
 	self.mNode:retain();
 	self.mField = field;
+
+    local gridPosition = Vector.new(field:getGridPosition(node));
+
+    self:setId(BaseObject:convertToId(gridPosition.x, gridPosition.y, self:getNode():getTag()));
 end
 
 ---------------------------------

@@ -8,6 +8,8 @@ BonusDlg.WORK_PLACE = 72;
 BonusDlg.LABEL_BACK = 74;
 BonusDlg.LABEL_TAG = 2;
 
+BonusDlg.mAnimationShow = "Show";
+
 --------------------------------
 function BonusDlg:init(game, uiLayer)
     self:superClass().init(self, game, uiLayer, "BonusDlg");
@@ -21,10 +23,15 @@ function BonusDlg:setCallBack(callback)
 end
 
 --------------------------------
+function BonusDlg:setAnimationShow(animationShow)
+    self.mAnimationShow = animationShow;
+end
+
+--------------------------------
 function BonusDlg:doModal()
     print("BonusDlg:doModal");
     self:superClass().doModal(self);
-    self.mAnimator:runAnimationsForSequenceNamed("Show");
+    self.mAnimator:runAnimationsForSequenceNamed(self.mAnimationShow);
 end
 
 --------------------------------
