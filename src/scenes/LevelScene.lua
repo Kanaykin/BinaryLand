@@ -33,10 +33,11 @@ function LevelScene:onStateLose()
 end
 
 ---------------------------------
-function LevelScene:bonusStart(bonusData)
-    print("LevelScene:bonusStart");
+function LevelScene:bonusStart(self_fake, bonusData)
+    print("LevelScene:bonusStart bonusData ", bonusData);
     self:destroyLevelComponent();
     local data = bonusData and bonusData or self.mLevel:getData().bonusLevel;
+    print("LevelScene:bonusStart ccbFile ", data.ccbFile);
     data.isBonus = true;
 	self:initScene(data);
     self:initGui();
@@ -60,15 +61,12 @@ function LevelScene:restoreScene()
     self:postInitScene(self.mLevel:getData());
 
     self.mField:restore(self.mStoredLevel);
-    if self.mLevel:getData().bonusRoom.score then
-        self.mField:setScore(self.mLevel:getData().bonusRoom.score);
-    end
     self.mStoredLevel = nil;
 end
 
 ---------------------------------
 function LevelScene:bonusRoomStart()
-    self:bonusStart(self.mLevel:getData().bonusRoom);
+    self:bonusStart(self, self.mLevel:getData().bonusRoom);
 end
 
 ---------------------------------
@@ -81,7 +79,7 @@ function LevelScene:onEnterBonusRoomDoor(isFemale)
         self:storeScene();
         self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.bonusRoomStart), "ShortShow");
     else
-        self.mLevel:getData().bonusRoom.score = score;
+        self.mStoredLevel.field.score = score;
         self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.restoreScene), "ShortShow");
     end
 end
@@ -140,7 +138,7 @@ end
 
 --------------------------------
 function LevelScene:postInitScene(levelData)
-    print("LevelScene:postInitScene ", levelData.isFemale);
+    print("LevelScene:postInitScene ", levelData);
     if levelData.tutorial then
         self.mTutorial = TutorialManager:create();
         self.mTutorial:init(self.mSceneGame, self.mField, self.mMainUI);
