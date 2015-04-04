@@ -7,13 +7,18 @@ Location.mVisualNode = nil; -- image
 Location.mOpened = false;
 Location.mData = nil; -- static data of locations
 Location.mGame = nil;
-Location.mLevels = {};
+Location.mLevels = nil;
 
 
 ---------------------------------
 function Location:onLocationPressed()
 	print("onLocationPressed opened ", self.mOpened);
-	if not self.mOpened then
+    print("onLocationPressed self.mLevels ", #self.mLevels);
+
+    local locationId = self:getId();
+    print("Location:onLocationPressed locationId ", locationId)
+
+    if not self.mOpened then
 		local dlg = BaseDialog:create();
 		dlg:show(self.mGame.mSceneMan:getCurrentScene());
 	else
@@ -49,21 +54,25 @@ end
 
 ---------------------------------
 function Location:initLevels(locationData)
+    print("Location:initLevels !");
 	if type(locationData.levels) == "table" then
 		for i, levelData in ipairs(locationData.levels) do
 			local level = Level:create();
 
             local locationId = self:getId();
+            print("Location:initLevels levelData.id ", levelData.id)
             level:init(levelData, self, i, self.mGame:getLevelStar(locationId, i));
 			table.insert(self.mLevels, level);
 		end
 	end
+    print("Location:initLevels self.mLevels ", #self.mLevels);
 end
 
 ---------------------------------
 function Location:init(locationData, game)
 	self.mData = locationData;
 	self.mGame = game;
+    self.mLevels = {};
 	-- check preferences
 	if(locationData.opened ~= nil ) then
 		self.mOpened = locationData.opened; 

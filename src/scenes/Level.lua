@@ -25,7 +25,7 @@ end
 -----------------------------------
 function Level:isOpened()
 	local locationId = self:getLocation():getId();
-	return self.mLocation.mGame:isLevelOpened(locationId, self:getIndex()); --self.mOpened;
+	return self.mOpened or self.mLocation.mGame:isLevelOpened(locationId, self:getIndex()); --self.mOpened;
 end
 
 -----------------------------------

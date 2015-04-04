@@ -77,7 +77,33 @@ gLocations = {
 	{
 		id = "venus",
 		image = "venus.png",
-		position = Coord(0.32, 0.5, 0, -215)
+		position = Coord(0.32, 0.5, 0, -215),
+        opened = true,
+        levels = {
+            {
+                opened = true,
+                ccbFile = {"Level2_1p1", "Level2_1p2"},
+                tileMap = "Level2_1_map.tmx",
+                cellSize = 32,
+                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                id = "2_1"
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            }
+        }
 	},
 	{
 		id = "earth",
