@@ -12,6 +12,8 @@ YouWinDlg.CHOOSE_LEVEL_MENU_ITEM_TAG = 61;
 YouWinDlg.NEXT_LEVEL_MENU_TAG = 80;
 YouWinDlg.NEXT_LEVEL_MENU_ITEM_TAG = 81;
 YouWinDlg.LABEL_TAG = 2;
+YouWinDlg.ANIM_SPRITE = 75;
+YouWinDlg.mAnimator = nil;
 
 --------------------------------
 function YouWinDlg:init(game, uiLayer)
@@ -85,5 +87,14 @@ function YouWinDlg:initGuiElements()
     if label then
         setDefaultFont(label, self.mGame:getScale());
     end
+
+    local animationNode  = nodeBase:getChildByTag(YouWinDlg.ANIM_SPRITE);
+
+    local animation = PlistAnimation:create();
+    animation:init("LevelClearedAnim.plist", animationNode, animationNode:getAnchorPoint(), nil, 0.3);
+
+    self.mAnimation = RepeatAnimation:create();
+    self.mAnimation:init(animation);
+    self.mAnimation:play();
 
 end
