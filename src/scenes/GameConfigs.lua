@@ -71,7 +71,17 @@ gLocations = {
 			},
 			{
 
-			}
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            }
+
 		}
 	},
 	{
@@ -87,6 +97,12 @@ gLocations = {
                 cellSize = 32,
                 backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
                 id = "2_1"
+            },
+            {
+
+            },
+            {
+
             },
             {
 
