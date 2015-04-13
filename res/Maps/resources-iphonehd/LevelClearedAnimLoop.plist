@@ -4,43 +4,62 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>foxie_happy_01.png</key>
+            <key>foxie_happy_03.png</key>
             <dict>
                 <key>height</key>
-                <integer>105</integer>
+                <integer>121</integer>
                 <key>offsetX</key>
                 <real>0</real>
                 <key>offsetY</key>
-                <real>-10</real>
+                <real>-2</real>
                 <key>originalHeight</key>
                 <integer>151</integer>
                 <key>originalWidth</key>
                 <integer>162</integer>
                 <key>width</key>
-                <integer>160</integer>
+                <integer>104</integer>
                 <key>x</key>
-                <integer>144</integer>
+                <integer>2</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>foxie_happy_02.05.png</key>
+            <key>foxie_happy_04.07.png</key>
             <dict>
                 <key>height</key>
-                <integer>109</integer>
+                <integer>125</integer>
                 <key>offsetX</key>
-                <real>2</real>
+                <real>0</real>
                 <key>offsetY</key>
-                <real>-8</real>
+                <real>0</real>
                 <key>originalHeight</key>
                 <integer>151</integer>
                 <key>originalWidth</key>
                 <integer>162</integer>
                 <key>width</key>
-                <integer>140</integer>
+                <integer>96</integer>
                 <key>x</key>
                 <integer>2</integer>
                 <key>y</key>
+                <integer>248</integer>
+            </dict>
+            <key>foxie_happy_06.png</key>
+            <dict>
+                <key>height</key>
+                <integer>121</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>-2</real>
+                <key>originalHeight</key>
+                <integer>151</integer>
+                <key>originalWidth</key>
+                <integer>162</integer>
+                <key>width</key>
+                <integer>104</integer>
+                <key>x</key>
                 <integer>2</integer>
+                <key>y</key>
+                <integer>125</integer>
             </dict>
         </dict>
         <key>metadata</key>
@@ -48,20 +67,20 @@
             <key>format</key>
             <integer>0</integer>
             <key>realTextureFileName</key>
-            <string>LevelClearedAnim.png</string>
+            <string>LevelClearedAnimLoop.png</string>
             <key>size</key>
-            <string>{306,113}</string>
+            <string>{108,375}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:8d2e61891ca12548139e696772509255:08438873e25cdbb911c1cd5d3b22baf2:674c1f414648956c23595d6a914c4c5d$</string>
+            <string>$TexturePacker:SmartUpdate:4ea812af06277b69743979da1cbbb92e:49e7e89fd2f9a82dcf0aa6c4e68d9c6a:ee5e73c30ed58611b7e1a45c61917c15$</string>
             <key>textureFileName</key>
-            <string>LevelClearedAnim.png</string>
+            <string>LevelClearedAnimLoop.png</string>
         </dict>
         <key>texture</key>
         <dict>
             <key>height</key>
-            <integer>113</integer>
+            <integer>375</integer>
             <key>width</key>
-            <integer>306</integer>
+            <integer>108</integer>
         </dict>
     </dict>
 </plist>

@@ -59,6 +59,11 @@ function YouWinDlg:initNextLevelButton(nodeBase)
     setMenuCallback(nodeBase, YouWinDlg.NEXT_LEVEL_MENU_TAG, YouWinDlg.NEXT_LEVEL_MENU_ITEM_TAG, onNextLevelPressed);
 end
 
+---------------------------------
+function YouWinDlg:tick(dt)
+    self.mAnimation:tick(dt);
+end
+
 --------------------------------
 function YouWinDlg:initGuiElements()
 	local nodeBase = self.mNode:getChildByTag(YouWinDlg.BASE_NODE_TAG);
@@ -90,11 +95,30 @@ function YouWinDlg:initGuiElements()
 
     local animationNode  = nodeBase:getChildByTag(YouWinDlg.ANIM_SPRITE);
 
-    local animation = PlistAnimation:create();
-    animation:init("LevelClearedAnim.plist", animationNode, animationNode:getAnchorPoint(), nil, 0.3);
+--    local animation = PlistAnimation:create();
+--    animation:init("LevelClearedAnim.plist", animationNode, animationNode:getAnchorPoint(), nil, 0.3);
 
-    self.mAnimation = RepeatAnimation:create();
-    self.mAnimation:init(animation);
-    self.mAnimation:play();
+    local animationBegin = PlistAnimation:create();
+    animationBegin:init("LevelClearedAnim.plist", animationNode, animationNode:getAnchorPoint(), nil, 0.3);
+
+    local animation = PlistAnimation:create();
+    animation:init("LevelClearedAnimLoop.plist", animationNode, animationNode:getAnchorPoint(), nil, 0.3);
+    local repAnimation = RepeatAnimation:create();
+    repAnimation:init(animation);
+
+    local sequence = SequenceAnimation:create();
+    sequence:init();
+
+    sequence:addAnimation(animationBegin);
+    sequence:addAnimation(repAnimation);
+
+    self.mAnimation = sequence;
+    function start_callback()
+        print("start_callback ");
+        self.mAnimation:play();
+    end
+
+    local starCallFunc = CCCallFunc:create(start_callback);
+    self.mAnimator:setCallFuncForLuaCallbackNamed(starCallFunc, "0:animationStart");
 
 end

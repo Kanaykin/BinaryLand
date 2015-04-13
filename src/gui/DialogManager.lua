@@ -5,7 +5,6 @@ DialogManager.mModalDlg = nil;
 
 --------------------------------------
 function DialogManager:isModal(dlg)
-	print("DialogManager:isModal ", self.mModalDlg == dlg)
 	return self.mModalDlg == dlg;
 end
 

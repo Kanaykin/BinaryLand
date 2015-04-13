@@ -810,7 +810,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>level_failed_foxie_sad.png</string>
+									<string>level_cleared_foxie_glad.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1607,7 +1607,24 @@
 			<key>callbackChannel</key>
 			<dict>
 				<key>keyframes</key>
-				<array/>
+				<array>
+					<dict>
+						<key>easing</key>
+						<dict>
+							<key>type</key>
+							<integer>0</integer>
+						</dict>
+						<key>time</key>
+						<real>3</real>
+						<key>type</key>
+						<integer>10</integer>
+						<key>value</key>
+						<array>
+							<string>animationStart</string>
+							<integer>0</integer>
+						</array>
+					</dict>
+				</array>
 				<key>type</key>
 				<integer>10</integer>
 			</dict>
@@ -1618,9 +1635,9 @@
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
-			<real>0.0</real>
+			<real>1.1796045303344727</real>
 			<key>position</key>
-			<real>3.0333333015441895</real>
+			<real>3.5</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>

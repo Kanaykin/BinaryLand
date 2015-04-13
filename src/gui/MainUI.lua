@@ -152,6 +152,9 @@ function MainUI:tick(dt)
             i = i + 1
         end
     end
+    if self.mGame.mDialogManager:isModal(self.mYouWinDlg) then
+        self.mYouWinDlg:tick(dt);
+    end
 end
 
 --------------------------------
