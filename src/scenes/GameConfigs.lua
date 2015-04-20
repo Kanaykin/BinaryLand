@@ -95,6 +95,8 @@ gLocations = {
                 ccbFile = {"Level2_1p1", "Level2_1p2"},
                 tileMap = "Level2_1_map.tmx",
                 cellSize = 32,
+                tutorial = false,
+                time = 120,
                 backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
                 id = "2_1"
             },
@@ -124,7 +126,41 @@ gLocations = {
 	{
 		id = "earth",
 		image = "earth.png",
-		position = Coord(0.52, 0.5, 0, -235)
+		position = Coord(0.52, 0.5, 0, -235),
+        opened = true,
+        levels = {
+            {
+                opened = true,
+                ccbFile = {"Level3_1p1", "Level2_1p2"},
+                tileMap = "Level3_1_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                id = "3_1"
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            }
+        }
 	},
 	{
 		id = "mars",
