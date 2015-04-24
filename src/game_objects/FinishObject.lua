@@ -6,6 +6,7 @@ FinishObject = inheritsFrom(BaseObject)
 
 FinishObject.mFinishAnimation = nil;
 FinishObject.mAnimation = nil;
+FinishObject.mWinState = false;
 
 --------------------------------
 function FinishObject:createAnimation(nameAnimation)
@@ -19,7 +20,7 @@ function FinishObject:createAnimation(nameAnimation)
 	delayAnim:init(anim1, 1);
 
 
-	self.mFinishAnimation:addAnimation(delayAnim);
+	--self.mFinishAnimation:addAnimation(delayAnim);
 end
 
 --------------------------------
@@ -29,9 +30,6 @@ function FinishObject:createIdleAnimation(animation, nameAnimation, node, textur
 
     local idle = PlistAnimation:create();
     idle:init(nameAnimation, node, node:getAnchorPoint(), nil, delayPerUnit);
-    --local delayAnim = DelayAnimation:create();
-    --delayAnim:init(idle, math.random(2, 5), texture, textureSize, textureName);
-    --animation:addAnimation(delayAnim);
     repeat_idle:init(idle, false, times);
     animation:addAnimation(repeat_idle);
 end
@@ -50,24 +48,43 @@ function FinishObject:init(field, node)
     self.mAnimation = randomAnim;
     self.mAnimation:play();
 
-	self.mFinishAnimation = SequenceAnimation:create();
-	self.mFinishAnimation:init();
-	self:createAnimation("love_cage_fox_free.png");
-	self:createAnimation("love_cage_fox_free_litle.png");
+    local textureName = "save_baby.png"
+    local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
+    local anim = PlistAnimation:create();
+    local anchor = {x=0.47, y=0.158};
+    anim:init("SaveBaby.plist", node, anchor, texture, 0.06);
+
+    local texture_end = cc.Director:getInstance():getTextureCache():addImage("save_baby_end.png");
+    local empty = EmptyAnimation:create();
+    empty:init(texture_end, node, anchor);
+
+    local sequence = SequenceAnimation:create();
+    sequence:init();
+
+    sequence:addAnimation(anim);
+    sequence:addAnimation(empty);
+
+    self.mFinishAnimation = sequence;
 end
 
 --------------------------------
 function FinishObject:tick(dt)
 	FinishObject:superClass().tick(self, dt);
 
-	self.mFinishAnimation:tick(dt);
-
-    self.mAnimation:tick(dt);
+    if self.mWinState then
+        self.mFinishAnimation:tick(dt);
+    else
+        self.mAnimation:tick(dt);
+    end
 end
 
 ---------------------------------
 function FinishObject:onStateWin()
 	FinishObject:superClass().onStateWin(self);
 
+    self.mNode:stopAllActions();
+    self.mWinState = true;
+    --self.mAnimation:stop();
 	self.mFinishAnimation:play();
+    self.mFinishAnimation:tick(0);
 end

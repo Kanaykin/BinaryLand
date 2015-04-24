@@ -282,6 +282,7 @@ function FoxObject:createFrontIdleAnimation()
     local contentSize = texture:getContentSize() -- {width = texture:getPixelsWide(), height = texture:getPixelsHigh()}
     self:createIdleAnimation(self.mFrontIdleAnimation, self:getPrefixTexture().."FrontIdle1.plist", texture, contentSize, textureName);
 
+self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE] = self.mFrontIdleAnimation;
 end
 
 --------------------------------
@@ -393,9 +394,9 @@ function FoxObject:initAnimation()
 
     self:createInTrapAnimation();
 
-	self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE] = EmptyAnimation:create();
-	local frontTexture = tolua.cast(self.mAnimationNode, "cc.Sprite"):getTexture();
-	self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE]:init(frontTexture, self.mAnimationNode, contentSize);
+	--self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE] = EmptyAnimation:create();
+	--local frontTexture = tolua.cast(self.mAnimationNode, "cc.Sprite"):getTexture();
+	--self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE]:init(frontTexture, self.mAnimationNode, contentSize);
 
 	self:initEffectAnimations();
 
