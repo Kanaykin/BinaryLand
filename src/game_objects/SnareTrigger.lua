@@ -1,6 +1,7 @@
 require "src/game_objects/Trigger"
 
 SnareTrigger = inheritsFrom(Trigger)
+SnareTrigger.mTimeDestroy = nil;
 
 --------------------------------
 function SnareTrigger:init(field, node, enterCallback, leaveCallback)
@@ -21,4 +22,22 @@ function SnareTrigger:onEnter(player)
 	end
 end
 
+---------------------------------
+function SnareTrigger:tick(dt)
+    SnareTrigger:superClass().tick(self, dt);
+    if self.mTimeDestroy then
+        self.mTimeDestroy = self.mTimeDestroy - dt;
+        if self.mTimeDestroy <= 0 then
+            self.mField:removeObject(self);
+            self.mField:removeEnemy(self)
+            self:destroy();
+        end
+    end
+end
+
+---------------------------------
+function SnareTrigger:onEnterFightTrigger()
+    self.mEnterCallback = nil;
+    self.mTimeDestroy = 0.5;
+end
 

@@ -66,6 +66,11 @@ function PlayerObject:store(data)
 end
 
 ---------------------------------
+function PlayerObject:getLastButtonPressed()
+    return self.mLastButtonPressed
+end
+
+---------------------------------
 function PlayerObject:restore(data)
     PlayerObject:superClass().restore(self, data);
     --self.mLastButtonPressed = data.lastButtonPressed;

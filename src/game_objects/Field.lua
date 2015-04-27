@@ -158,7 +158,7 @@ function Field:checkFinishGame()
 	local allObjectInTrigger = true;
 	for _, trigger in ipairs(self.mFinishTrigger) do
 		local obj = trigger:getContainedObj();
-		if not obj then
+        if not obj or PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP == obj:getLastButtonPressed() then
 			allObjectInTrigger = false;
 		end
 	end
@@ -409,20 +409,21 @@ function Field:onEnterBonusTrigger(player)
 end
 
 --------------------------------
-function Field:onEnemyEnterTrigger(enemy)
-	print("Field:onEnemyEnterTrigger ", enemy);
-	SimpleAudioEngine:getInstance():playEffect(gSounds.MOB_DEATH_SOUND)
-
+function Field:addBonus(enemy)
     if enemy.getBonus then
         local rect = enemy:getBoundingBox();
         local pos = enemy:getPosition();
         local orderPos = enemy:getPrevOrderPos();
         self:createBonus(rect, pos, orderPos - 1, enemy:getBonus());
     end
+end
 
-	self:removeObject(enemy);
-	self:removeEnemy(enemy)
-	enemy:destroy();
+--------------------------------
+function Field:onEnemyEnterTrigger(enemy)
+	print("Field:onEnemyEnterTrigger ", enemy);
+	SimpleAudioEngine:getInstance():playEffect(gSounds.MOB_DEATH_SOUND)
+
+    enemy:onEnterFightTrigger();
 end
 
 --------------------------------

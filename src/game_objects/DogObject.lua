@@ -4,8 +4,6 @@ require "src/animations/RepeatAnimation"
 
 DogObject = inheritsFrom(MobObject)
 
-DogObject.mAnimation = nil;
-
 --------------------------------
 function DogObject:initAnimation()
 	print("HunterObject:initAnimation");
@@ -44,11 +42,4 @@ end
 --------------------------------
 function DogObject:tick(dt)
 	DogObject:superClass().tick(self, dt);
-
-    local anim = self:getAnimationByDirection();
-    if anim ~= self.mAnimation then
-        self.mAnimation = anim;
-        self.mNode:stopAllActions();
-        self.mAnimations[self.mAnimation]:play();
-    end
 end

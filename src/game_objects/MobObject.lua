@@ -7,6 +7,7 @@ MobObject = inheritsFrom(MovableObject)
 
 MobObject.IDLE = 1;
 MobObject.MOVING = 2;
+MobObject.DEAD = 3;
 
 MobObject.mState = MobObject.IDLE;
 MobObject.mPath = nil;
@@ -21,15 +22,15 @@ MobObject.DIRECTIONS = {
 MobObject.mAnimation = nil;
 
 MobObject.mAnimations = nil;
+MobObject.mTimeDestroy = nil;
 
 --------------------------------
 function MobObject:getAnimationByDirection()
     if self.mDelta then
         local val = self.mDelta:normalized();
-        --print("HunterObject:tick self.mDelta ", val.y);
-        if val.y >= 1 then
+        if val.y >= 0.9 then
             return MobObject.DIRECTIONS.BACK;
-        elseif val.y <= -1 then
+        elseif val.y <= -0.9 then
             return MobObject.DIRECTIONS.FRONT;
         end
     end
@@ -61,7 +62,9 @@ end
 --------------------------------
 function MobObject:onPlayerEnter(player, pos)
 	print("MobObject.onPlayerEnter ", player.mNode:getTag());
-	self.mField:createSnareTrigger(Vector.new(player.mNode:getPosition()));
+    if self.mState ~= MobObject.DEAD then
+        self.mField:createSnareTrigger(Vector.new(player.mNode:getPosition()));
+    end
 end
 
 --------------------------------
@@ -121,8 +124,28 @@ function MobObject:onMoveFinished( )
 	self:moveToNextPoint();
 end
 
+---------------------------------
+function MobObject:onEnterFightTrigger()
+    self.mTimeDestroy = 0.5;
+    self.mState = MobObject.DEAD;
+--    self.mNode:stopAllActions();
+end
+
 --------------------------------
 function MobObject:tick(dt)
+    if self.mState == MobObject.DEAD then
+        if self.mTimeDestroy then
+            self.mTimeDestroy = self.mTimeDestroy - dt;
+            if self.mTimeDestroy <= 0 then
+                self.mField:addBonus(self);
+                self.mField:removeObject(self);
+                self.mField:removeEnemy(self)
+                self:destroy();
+            end
+        end
+--        return;
+    end
+
 	MobObject:superClass().tick(self, dt);
 
 	if self.mTrigger then
@@ -146,4 +169,12 @@ function MobObject:tick(dt)
 		table.remove(self.mPath, 1);
 		self:moveToNextPoint();
 	end
+
+    local anim = self:getAnimationByDirection();
+    if anim ~= self.mAnimation then
+        self.mAnimation = anim;
+        self.mNode:stopAllActions();
+        self.mAnimations[self.mAnimation]:play();
+    end
+
 end

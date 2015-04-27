@@ -440,7 +440,7 @@
 						<key>value</key>
 						<array>
 							<real>95.199996948242188</real>
-							<real>134</real>
+							<real>144.60000610351562</real>
 							<integer>4</integer>
 						</array>
 					</dict>
@@ -535,7 +535,7 @@
 						<key>value</key>
 						<array>
 							<real>95.199996948242188</real>
-							<real>134</real>
+							<real>144.60000610351562</real>
 							<integer>4</integer>
 						</array>
 					</dict>
@@ -591,6 +591,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -1136,8 +1138,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
