@@ -64,8 +64,13 @@ function ScrollView:setClickable(clickable)
     		scrollView:onTouchHandler(action, cc.p(var1, var2));
     		return true;
     	end
+        --------------------
+        local function onKeypadHandler(action, var1, var2)
+			print("onKeypadHandler ", action, "var1 ", var, "var2 ", var2);
+        end
 
     	scrollviewlayer:registerScriptTouchHandler(onTouchHandler, false, 1, false);
+        scrollviewlayer:registerScriptKeypadHandler(onKeypadHandler);
 	else
 		scrollviewlayer:unregisterScriptTouchHandler();
 	end
