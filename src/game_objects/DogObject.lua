@@ -1,14 +1,15 @@
 require "src/game_objects/MobObject"
 require "src/animations/PlistAnimation"
 require "src/animations/RepeatAnimation"
+require "src/base/Log"
 
 DogObject = inheritsFrom(MobObject)
 
 --------------------------------
 function DogObject:initAnimation()
-	print("HunterObject:initAnimation");
+	info_log("HunterObject:initAnimation");
 
-	print("Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
+	info_log("Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
 	local animation = PlistAnimation:create();
 	animation:init("DogWalk.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.16);
 

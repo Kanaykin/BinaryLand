@@ -1,11 +1,12 @@
 require "src/base/Inheritance"
+require "src/base/Log"
 
 BaseDialog = inheritsFrom(nil)
 
 ---------------------------------
 function BaseDialog:show(scene)
 
-	print("BaseDialog:show ", scene.mGuiLayer);
+	info_log("BaseDialog:show ", scene.mGuiLayer);
 
 	local sprite = CCScale9Sprite:create("status_frame.png");
 	sprite:setPreferredSize(cc.size(400,320));
@@ -19,7 +20,7 @@ function BaseDialog:show(scene)
 
 	local layer = scene.mGuiLayer;
 	local function onCloseButtonPressed()
-    	print("onCloseButtonPressed");
+    	info_log("onCloseButtonPressed");
     	layer:removeChild(sprite, true);
     end
 

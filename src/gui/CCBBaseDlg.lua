@@ -1,4 +1,5 @@
 require "src/base/Inheritance"
+require "src/base/Log"
 
 CCBBaseDialog = inheritsFrom(nil)
 
@@ -15,7 +16,7 @@ end
 
 ---------------------------------
 function CCBBaseDialog:destroy()
-	print("CCBBaseDialog:destroy ", self.mGame.mDialogManager:isModal(self));
+	info_log("CCBBaseDialog:destroy ", self.mGame.mDialogManager:isModal(self));
 	if self.mGame.mDialogManager:isModal(self) then 
 		self.mGame.mDialogManager:deactivateModal(self);
 	end
@@ -41,7 +42,7 @@ end
 function CCBBaseDialog:doModal()
 	self:show();
 	local function onTouchHandler(action, var1, var2)
-		print("!!! CCBBaseDialog onTouchHandler ", var1, ", ", var2);
+		info_log("!!! CCBBaseDialog onTouchHandler ", var1, ", ", var2);
 		return not self.mTouchBBox:containsPoint(cc.p(var1, var2));
     end
 

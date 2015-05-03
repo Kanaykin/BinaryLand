@@ -1,4 +1,5 @@
 require "src/game_objects/Trigger"
+require "src/base/Log"
 
 BonusObject = inheritsFrom(Trigger)
 
@@ -11,9 +12,9 @@ BonusObject.TIME_TYPE = 2;
 
 --------------------------------
 function BonusObject:initAnimation()
-    print("HunterObject:initAnimation");
+    info_log("HunterObject:initAnimation");
 
-    print("Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
+    info_log("Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
     local animation = PlistAnimation:create();
 
     if self.mType == BonusObject.COINS_TYPE then
@@ -35,7 +36,7 @@ end
 
 --------------------------------
 function BonusObject:init(field, node, score, type)
-    print("BonusObject:init ")
+    info_log("BonusObject:init ")
     BonusObject:superClass().init(self, field, node, Callback.new(field, Field.onEnterBonusTrigger));
 
     if score ~= nil then
@@ -49,7 +50,7 @@ end
 ---------------------------------
 function BonusObject:onEnter(player)
     BonusObject:superClass().onEnter(self, player);
-    print("BonusObject:onEnter score ", self.mScore);
+    info_log("BonusObject:onEnter score ", self.mScore);
 
     if self.mType == BonusObject.COINS_TYPE then
         self.mField:addScore(self.mScore);

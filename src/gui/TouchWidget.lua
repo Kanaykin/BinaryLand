@@ -1,5 +1,6 @@
 require "src/base/Inheritance"
 require "src/math/Vector"
+require "src/base/Log"
 
 TouchWidget = inheritsFrom(nil)
 TouchWidget.mTouchId = nil;
@@ -13,7 +14,7 @@ function TouchWidget:convertToPoints(var)
 	local array_points = {};
 	
 	for i = 1, #var, 3 do
-		print("onTouchHandler [", var[i + 2], "]=", var[i], ", ", var[i + 1]);
+		info_log("onTouchHandler [", var[i + 2], "]=", var[i], ", ", var[i + 1]);
 		array_points[var[i + 2]] = Vector.new(var[i], var[i + 1]);
 	end
 
@@ -22,22 +23,22 @@ end
 
 ----------------------------------------
 function TouchWidget:onTouchBegan(point)
-	print("TouchWidget:onTouchBegan ");
+	info_log("TouchWidget:onTouchBegan ");
 end
 
 ----------------------------------------
 function TouchWidget:onDoubleTouch(point)
-	print("TouchWidget:onDoubleTouch ");
+	info_log("TouchWidget:onDoubleTouch ");
 end
 
 ----------------------------------------
 function TouchWidget:onTouchMoved(point)
-	print("TouchWidget:onTouchMoved ");
+	info_log("TouchWidget:onTouchMoved ");
 end
 
 ----------------------------------------
 function TouchWidget:onTouchEnded(point)
-	print("TouchWidget:onTouchEnded ");
+	info_log("TouchWidget:onTouchEnded ");
 end
 
 --------------------------------
@@ -58,11 +59,11 @@ end
 
 ----------------------------------------
 function TouchWidget:onTouchHandler(action, var)
-    print("TouchWidget:onTouchHandler ", action, " var ", var, " self ", self);
+    info_log("TouchWidget:onTouchHandler ", action, " var ", var, " self ", self);
 
 	local arrayPoints = self:convertToPoints(var);
 
-	print("TouchWidget.mTouchId ", self.mTouchId, " var ", var);
+	info_log("TouchWidget.mTouchId ", self.mTouchId, " var ", var);
 
 	if self.mTouchId ~= nil and not arrayPoints[self.mTouchId] then
 		return;
@@ -105,7 +106,7 @@ end
 ---------------------------------
 function TouchWidget:tick(dt)
 	self.mDeltaTime = self.mDeltaTime + dt;
-	--print("TouchWidget:tick ", self.mDeltaTime);
+	--info_log("TouchWidget:tick ", self.mDeltaTime);
 end
 
 --------------------------------

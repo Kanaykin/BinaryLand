@@ -4,6 +4,7 @@ require "src/scenes/StartScene"
 require "src/scenes/ChooseLocation"
 require "src/scenes/ChooseLevel"
 require "src/scenes/LevelScene"
+require "src/base/Log"
 
 --[[
 It is class for controlling of scenes.
@@ -51,7 +52,7 @@ end
 ---------------------------------
 function SceneManager:runScene(index, params)
 	self.mCurrentSceneId = index;
-	print("mCurrentSceneId ", self.mCurrentSceneId);
+	info_log("mCurrentSceneId ", self.mCurrentSceneId);
 	self:getCurrentScene():init(self, params);
 	CCDirector:getInstance():pushScene(self:getCurrentScene().mSceneGame);
 end
@@ -68,7 +69,7 @@ function SceneManager:runNextScene(params)
 	if index == SCENE_TYPE_ID.CHOOSE_LOCATION then
 		local locationId = "mercury";
 		local isLevelOpened = self.mGame:isLevelOpened(locationId, 1);
-		print("First start is level opened ", isLevelOpened);
+		info_log("First start is level opened ", isLevelOpened);
 		if not isLevelOpened then
 			self.mGame:openLevel(locationId, 1);
 			-- run tutorial
@@ -84,7 +85,7 @@ end
 
 ---------------------------------
 function SceneManager:replayScene()
-	print("SceneManager:replayScene");
+	info_log("SceneManager:replayScene");
 	self:runLevelScene(self:getCurrentScene():getLevel());
 end
 

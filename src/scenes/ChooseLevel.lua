@@ -1,5 +1,6 @@
 require "src/scenes/BaseScene"
 require "src/scenes/SoundConfigs"
+require "src/base/Log"
 
 ChooseLevel = inheritsFrom(BaseScene)
 ChooseLevel.mCurLocation = nil;
@@ -17,7 +18,7 @@ end
 
 --------------------------------
 function ChooseLevel:init(sceneMan, params)
-	print("ChooseLevel:init ", params.location);
+	info_log("ChooseLevel:init ", params.location);
 	self.mCurLocation = params.location;
 	self:superClass().init(self, sceneMan, {background = LOADSCEENIMAGE});
 
@@ -61,13 +62,13 @@ function ChooseLevel:initScene()
     animator:retain();
 
 	local arrayAnimator = reader:getAnimationManagersForNodes();
-    print("ChooseLevel:initScene arrayAnimator ", arrayAnimator );
+    info_log("ChooseLevel:initScene arrayAnimator ", arrayAnimator );
 
     table.sort(arrayAnimator, function(a, b)
 		local animManagerA = tolua.cast(a, "cc.CCBAnimationManager");
 		local animManagerB = tolua.cast(b, "cc.CCBAnimationManager");
-        print("animManager:getRootNode() ", animManagerA:getRootNode():getTag());
-        print("animManager:getRootNode() ", animManagerB:getRootNode():getTag());
+        --info_log("animManager:getRootNode() ", animManagerA:getRootNode():getTag());
+        --info_log("animManager:getRootNode() ", animManagerB:getRootNode():getTag());
 
         return animManagerA:getRootNode():getTag() < animManagerB:getRootNode():getTag();
     end)
@@ -77,11 +78,11 @@ function ChooseLevel:initScene()
 	for i = 1, minCount do
 		local nameFrame = "0:frame"..i;
 
-        print("nameFrame ", nameFrame);
+        info_log("nameFrame ", nameFrame);
 
 		local animManager = tolua.cast(arrayAnimator[i + 1], "cc.CCBAnimationManager");
 
-        print("animManager:getRootNode() ", animManager:getRootNode():getTag());
+        --info_log("animManager:getRootNode() ", animManager:getRootNode():getTag());
 
         local child = node:getChildByTag(i);
 		self.mCurLocation.mLevels[i]:initVisual(animator, animManager, nameFrame, child);
@@ -100,7 +101,7 @@ end
 --------------------------------
 function ChooseLevel:initChooseLevelButton(nodeBase)
     local function onReturnPressed(val, val2)
-        print("onReturnPressed");
+        info_log("onReturnPressed");
         self.mSceneManager:runPrevScene();
     end
 

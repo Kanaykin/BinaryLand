@@ -1,4 +1,5 @@
 require "src/scenes/BaseScene"
+require "src/base/Log"
 
 local LOADSCEENIMAGE = "Loading.png"
 local TIME_SHOWING = 3.0
@@ -16,7 +17,7 @@ end
 --------------------------------
 function LoadingScene:init(sceneMan, params)
 	self:superClass().init(self, sceneMan, {background = LOADSCEENIMAGE});
-	print("LoadingScene:init");
+	info_log("LoadingScene:init");
 
     local statistic = extend.Statistic:getInstance();
     statistic:sendEvent("setScreenName", "LoadingScene");

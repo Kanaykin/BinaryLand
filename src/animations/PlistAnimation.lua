@@ -1,4 +1,5 @@
 require "src/animations/EmptyAnimation"
+require "src/base/Log"
 
 PlistAnimation = inheritsFrom(EmptyAnimation)
 PlistAnimation.mAnimation = nil;
@@ -24,25 +25,25 @@ end
 
 ----------------------------
 function PlistAnimation:play()
---	print("PlistAnimation:play");
+--	debug_log("PlistAnimation:play");
 	PlistAnimation:superClass().play(self);
 
 	self.mNode:stopAction(self.mAction);
-	print("PlistAnimation:play mNode ", self.mNode);
-	print("PlistAnimation:play mAction ", self.mAction);
+	debug_log("PlistAnimation:play mNode ", self.mNode);
+	debug_log("PlistAnimation:play mAction ", self.mAction);
 	self.mNode:runAction(self.mAction);
 end
 
 ---------------------------------
 function PlistAnimation:isDone()
-	--print("PlistAnimation:isDone ", CCDirector:getInstance():getActionManager():numberOfRunningActionsInTarget(self.mAction:getTarget()));
+	--debug_log("PlistAnimation:isDone ", CCDirector:getInstance():getActionManager():numberOfRunningActionsInTarget(self.mAction:getTarget()));
 	return self.mAction and self.mAction:isDone() or 
 		CCDirector:getInstance():getActionManager():getNumberOfRunningActionsInTarget(self.mAction:getTarget()) == 0;
 end
 
 --------------------------------
 function PlistAnimation:tick(dt)
-	--print("animation is done :", self.mAction:isDone());
+	--debug_log("animation is done :", self.mAction:isDone());
 end
 
 ----------------------------
@@ -61,7 +62,7 @@ function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
 
     local array = cc.FileUtils:getInstance():getValueMapFromFile(plistName);
     local frames = array["frames"];
-    print("PlistAnimation:init ", array["frames"]);
+    info_log("PlistAnimation:init ", array["frames"]);
 
 	local cache = CCSpriteFrameCache:getInstance();
    	cache:addSpriteFrames(plistName);
@@ -70,8 +71,8 @@ function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
 
    	local arrayFrames = {};
     for key, val in pairs(frames) do
-        print("PlistAnimation:init key ", key);
-        print("PlistAnimation:init val ", val);
+        info_log("PlistAnimation:init key ", key);
+        info_log("PlistAnimation:init val ", val);
 
         local nameStr = key;
    		table.insert(arrayFrames, nameStr);
@@ -83,7 +84,7 @@ function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
 
    	for i, val in ipairs(arrayFrames) do
    		local frame = cache:getSpriteFrame(val);
-   		print("PlistAnimation frame ", frame);
+   		info_log("PlistAnimation frame ", frame);
    		self.mAnimation:addSpriteFrame(frame);
    	end
 

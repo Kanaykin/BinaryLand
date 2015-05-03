@@ -15,10 +15,29 @@ namespace myextend {
     class HackConsole : public cocos2d::Console
     {
     public:
+        HackConsole():mFile(0){}
+        
         virtual void log(const char *buf){
-            fprintf(stdout, "cocos2d hack: %s", buf);
-            fflush(stdout);
+            //fprintf(stdout, "cocos2d hack: %s", buf);
+            //fflush(stdout);
+            fputs (buf, mFile);
+            fflush (mFile);
         }
+        ~HackConsole() {
+            if(mFile)
+                fclose (mFile);
+        }
+        
+        void init(const std::string& docPath) {
+            mFile = fopen ((docPath + "/console.log").c_str(), "w");
+            log("pipec");
+            //fprintf(stdout, "cocos2d: %s", "temp");
+            //fflush(stdout);
+            //stdout = fopen(doc_path.c_str(), "w");
+            CCLOG("[LUA-print] Logger::setLogFile %s", "");
+        }
+    private:
+        FILE * mFile;
     };
     
     //---------------------------------
@@ -32,11 +51,12 @@ namespace myextend {
         delete console;
         HackConsole* hack = new HackConsole();
         cocos2d::Director::getInstance()->setConsole(hack);
+        hack->init(doc_path);
         
-        freopen ((doc_path + "/console.log").c_str(), "w", stdout);
+        //freopen ((doc_path + "/console.log").c_str(), "w", stdout);
         //fprintf(stdout, "cocos2d: %s", "temp");
         //fflush(stdout);
         //stdout = fopen(doc_path.c_str(), "w");
-        CCLOG("[LUA-print] Logger::setLogFile %s", "");
+        //CCLOG("[LUA-print] Logger::setLogFile %s", "");
     }
 }

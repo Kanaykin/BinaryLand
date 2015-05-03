@@ -1,4 +1,5 @@
 require "src/gui/CCBBaseDlg"
+require "src/base/Log"
 
 YouWinDlg = inheritsFrom(CCBBaseDialog)
 
@@ -24,7 +25,7 @@ end
 
 --------------------------------
 function YouWinDlg:doModal()
-	print("YouWinDlg:doModal");
+	info_log("YouWinDlg:doModal");
 	self:superClass().doModal(self);
 	self.mAnimator:runAnimationsForSequenceNamed("Default Timeline");
 end
@@ -32,7 +33,7 @@ end
 --------------------------------
 function YouWinDlg:initChooseLevelButton(nodeBase)
 	local function onChooseLevelPressed(val, val2)
-    	print("onChooseLevelPressed ");
+    	info_log("onChooseLevelPressed ");
     	self.mGame.mSceneMan:runPrevScene({location = self.mGame.mSceneMan:getCurrentScene():getLevel():getLocation()});
     end
 
@@ -42,7 +43,7 @@ end
 --------------------------------
 function YouWinDlg:initReplayButton(nodeBase)
 	local function onReplayButtonPressed(val, val2)
-    	print("onReplayButtonPressed ");
+    	info_log("onReplayButtonPressed ");
     	self.mGame.mSceneMan:replayScene();
     end
 
@@ -52,7 +53,7 @@ end
 --------------------------------
 function YouWinDlg:initNextLevelButton(nodeBase)
 	local function onNextLevelPressed(val, val2)
-    	print("onNextLevelPressed ");
+    	info_log("onNextLevelPressed ");
     	self.mGame.mSceneMan:runNextLevelScene();
     end
 
@@ -67,7 +68,7 @@ end
 --------------------------------
 function YouWinDlg:initGuiElements()
 	local nodeBase = self.mNode:getChildByTag(YouWinDlg.BASE_NODE_TAG);
-	print("YouWinDlg:initGuiElements nodeBase ", nodeBase );
+	info_log("YouWinDlg:initGuiElements nodeBase ", nodeBase );
 	
 	if not nodeBase then
 		return;
@@ -87,7 +88,7 @@ function YouWinDlg:initGuiElements()
 	self:initNextLevelButton(nodeBase);
 
     local label = tolua.cast(nodeBase:getChildByTag(YouLooseDlg.LABEL_TAG), "cc.Label");
-    print("YouWinDlg:initGuiElements label ", label);
+    info_log("YouWinDlg:initGuiElements label ", label);
 
     if label then
         setDefaultFont(label, self.mGame:getScale());
@@ -114,7 +115,7 @@ function YouWinDlg:initGuiElements()
 
     self.mAnimation = sequence;
     function start_callback()
-        print("start_callback ");
+        info_log("start_callback ");
         self.mAnimation:play();
     end
 

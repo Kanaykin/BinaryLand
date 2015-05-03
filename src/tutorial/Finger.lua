@@ -1,5 +1,6 @@
 require "src/base/Inheritance"
 require "src/game_objects/MovableObject"
+require "src/base/Log"
 
 Finger =  inheritsFrom(BaseObject)
 
@@ -24,7 +25,7 @@ function Finger:init(gameScene, field)
     self.mVelocity = self.mVelocity * field:getGame():getScale();
 	---------
 	function callbackHideFinish()
-		print("Finger callbackHideFinish");
+		info_log("Finger callbackHideFinish");
 		self.mIsMoving = false;
 	end
 
@@ -34,7 +35,7 @@ function Finger:init(gameScene, field)
 
 	---------
 	function callbackShowFinish()
-		print("Finger callbackShowFinish");
+		info_log("Finger callbackShowFinish");
 		self:moveTo(self.mDestPos);
 	end
 
@@ -44,7 +45,7 @@ function Finger:init(gameScene, field)
 
 	---------
 	function callbackDoubleTapFinish()
-		print("Finger callbackDoubleTapFinish");
+		info_log("Finger callbackDoubleTapFinish");
 		self.mIsMoving = false;
 	end
 
@@ -62,7 +63,7 @@ end
 --------------------------------
 function Finger:stop()
 	self:stopMoving();
-	print("Finger:stop ", self.mAnimator:getRunningSequenceName());
+	info_log("Finger:stop ", self.mAnimator:getRunningSequenceName());
 	if self:IsMoving() and self.mAnimator:getRunningSequenceName() ~= "Hide" then
 		self.mAnimator:runAnimationsForSequenceNamed("Hide");
 	end
@@ -84,13 +85,13 @@ end
 --------------------------------
 function Finger:moveTo(dest)
 	local src = Vector.new(self.mNode:getPosition()); --self.mField:gridPosToReal(self.mGridPosition);
-	print("[Finger:moveTo] src.x ", src.x, " src.y ", src.y);
-	print("[Finger:moveTo] dest.x ", dest.x, " dest.y ", dest.y);
+	info_log("[Finger:moveTo] src.x ", src.x, " src.y ", src.y);
+	info_log("[Finger:moveTo] dest.x ", dest.x, " dest.y ", dest.y);
 	local delta = dest - src;
 	self.mMoveTime = delta:len() / self.mVelocity;
 	self.mDelta = delta;
-	print("[MovableObject:moveTo] delta.x ", delta.x, " delta.y ", delta.y);
-	print("[MovableObject:moveTo] moveTime ", self.mMoveTime);
+	info_log("[MovableObject:moveTo] delta.x ", delta.x, " delta.y ", delta.y);
+	info_log("[MovableObject:moveTo] moveTime ", self.mMoveTime);
 	local x, y = self.mNode:getPosition();
 	self.mSrcPos = Vector.new(x, y);
 	self.mDestGridPos = posDest;

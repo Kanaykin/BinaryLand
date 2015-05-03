@@ -1,4 +1,5 @@
 require "src/base/Inheritance"
+require "src/base/Log"
 
 Level = inheritsFrom(nil)
 Level.mOpened = false;
@@ -62,7 +63,7 @@ end
 
 -----------------------------------
 function Level:onLevelIconPressed()
-	print("onLevelIconPressed !!!");
+	info_log("onLevelIconPressed !!!");
 	if self:isOpened() then
 		self.mLocation.mGame.mSceneMan:runLevelScene(self);
 	end
@@ -77,7 +78,7 @@ function Level:initButton(node)
 	local menu = node:getChildByTag(Level.MENU_TAG);
 	if menu then
 		local menuItem = menu:getChildByTag(Level.MENU_ITEM_TAG);
-        print("Level:initButton menuItem ", menuItem);
+        info_log("Level:initButton menuItem ", menuItem);
 		tolua.cast(menuItem, "cc.MenuItem"):registerScriptTapHandler(onLevelIconPressed);
 	end
 end
@@ -102,7 +103,7 @@ function Level:initVisual(primaryAnimator, animManager, nameFrame, node)
 
     for i = 1, self:getCountStar() do
         function star_callback()
-            print("star_callback ", i);
+            info_log("star_callback ", i);
 			local star = node:getChildByTag(Level.FIRST_STAR_TAG + (i - 1));
             star:setVisible(true);
             self.mStarAnimations[i]:play();

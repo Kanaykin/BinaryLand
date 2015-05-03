@@ -1,4 +1,5 @@
 require "src/animations/EmptyAnimation"
+require "src/base/Log"
 
 FramesAnimation = inheritsFrom(EmptyAnimation)
 FramesAnimation.mAnimation = nil;
@@ -26,7 +27,7 @@ function FramesAnimation:init(textureName, frames, node, texture, anchor)
 
 	for i = 1, frames do
 		local fullName = textureName..tostring(i)..".png";
-		print("PlayerObject:createAnimation ", fullName);
+		info_log("PlayerObject:createAnimation ", fullName);
 		self.mAnimation:addSpriteFrameWithFileName(fullName);
 	end
 	self.mAnimation:setDelayPerUnit(1 / 10);

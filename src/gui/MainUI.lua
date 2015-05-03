@@ -7,6 +7,7 @@ require "src/gui/LevelTimer"
 require "src/gui/LevelScore"
 require "src/gui/GettingBonusEffect"
 require "src/gui/BonusDlg"
+require "src/base/Log"
 
 MainUI = inheritsFrom(CCBBaseDialog)
 
@@ -41,7 +42,7 @@ end
 
 --------------------------------
 function MainUI:destroy()
-	print("MainUI:destroy");
+	info_log("MainUI:destroy");
 	self.mSettingsDlg:destroy();
 	self.mYouLooseDlg:destroy();
 	self.mYouWinDlg:destroy();
@@ -52,7 +53,7 @@ end
 
 --------------------------------
 function MainUI:onSettingsButtonPressed(val, val2)
-	print("onSettingsButtonPressed ", val, val2);
+	info_log("onSettingsButtonPressed ", val, val2);
 
 	self.mSettingsDlg:doModal();
 end
@@ -85,7 +86,7 @@ end
 --------------------------------
 function MainUI:createGettingBonus(position, bonus)
     local gettingBonus = GettingBonusEffect:create();
-    print("MainUI:createGettingBonus gettingBonus ", gettingBonus);
+    info_log("MainUI:createGettingBonus gettingBonus ", gettingBonus);
     gettingBonus:init(self.mGame, self.mUILayer, bonus);
     gettingBonus:getNode():setPosition(cc.p(position.x, position.y));
     gettingBonus:show();
@@ -146,7 +147,7 @@ function MainUI:tick(dt)
     local i=1;
     while i <= #self.mEffects do
         if self.mEffects[i]:finished() then
-            print("MainUI: remove effect i ", i);
+            info_log("MainUI: remove effect i ", i);
             table.remove(self.mEffects, i)
         else
             i = i + 1
@@ -206,7 +207,7 @@ function MainUI:init(game, uiLayer, ccbFile)
     -------------------------
 
     local function onTouchHandler(action, var)
-        print("MainUI:onTouchHandler ", action, "self.mListener ", self.mListener);
+        info_log("MainUI:onTouchHandler ", action, "self.mListener ", self.mListener);
         return self:onTouchHandler(action, var);
     end
 
@@ -215,6 +216,6 @@ function MainUI:init(game, uiLayer, ccbFile)
         layer:registerScriptTouchHandler(onTouchHandler, true, 2, false);
         layer:setTouchEnabled(true);
     else
-        print("ERROR: MainUI:setTouchListener not found layer !!!");
+        info_log("ERROR: MainUI:setTouchListener not found layer !!!");
     end
 end

@@ -1,5 +1,6 @@
 require "src/game_objects/BaseObject"
 require "src/base/Callback"
+require "src/base/Log"
 
 Trigger = inheritsFrom(BaseObject)
 Trigger.mEnterCallback = nil;
@@ -26,7 +27,7 @@ end
 
 ---------------------------------
 function Trigger:onEnter(player)
-	print("Trigger:onEnter ", self.mEnterCallback);
+	info_log("Trigger:onEnter ", self.mEnterCallback);
 	if self.mEnterCallback then
 		self.mEnterCallback(player, Vector.new(self.mNode:getPosition()));
 	end
@@ -75,14 +76,14 @@ function Trigger:tick(dt)
 			local players = self:getCollisionObjects()
 			for i, player in ipairs(players) do
 				local pointX, pointY = player.mNode:getPosition();
-				--print("Trigger:tick obj x ", pointX, " y ", pointY);
-				--print("Trigger:tick x ", self.mNode:getBoundingBox().x, " y ", self.mNode:getBoundingBox().y );
+				--info_log("Trigger:tick obj x ", pointX, " y ", pointY);
+				--info_log("Trigger:tick x ", self.mNode:getBoundingBox().x, " y ", self.mNode:getBoundingBox().y );
                 local contained = self:contained(Vector.new(pointX, pointY));
-				--print("contained ", contained);
+				--info_log("contained ", contained);
 				if contained then
-                    print("self:onEnter begin ");
+                    info_log("self:onEnter begin ");
 					self:onEnter(player)
-                    print("self:onEnter end ");
+                    info_log("self:onEnter end ");
 				end
 			end
 		end

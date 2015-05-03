@@ -1,4 +1,5 @@
 require "src/gui/CCBBaseDlg"
+require "src/base/Log"
 
 YouLooseDlg = inheritsFrom(CCBBaseDialog)
 
@@ -30,7 +31,7 @@ end
 --------------------------------
 function YouLooseDlg:initReplayButton(nodeBase)
 	local function onReplayButtonPressed(val, val2)
-    	print("onReplayButtonPressed ");
+    	info_log("onReplayButtonPressed ");
     	self.mGame.mSceneMan:replayScene();
     end
 
@@ -40,7 +41,7 @@ end
 --------------------------------
 function YouLooseDlg:initChooseLevelButton(nodeBase)
 	local function onChooseLevelPressed(val, val2)
-    	print("onChooseLevelPressed ");
+    	info_log("onChooseLevelPressed ");
     	self.mGame.mSceneMan:runPrevScene({location = self.mGame.mSceneMan:getCurrentScene():getLevel():getLocation()});
     end
 
@@ -50,7 +51,7 @@ end
 --------------------------------
 function YouLooseDlg:initGuiElements()
 	local nodeBase = self.mNode:getChildByTag(YouLooseDlg.BASE_NODE_TAG);
-	print("YouLooseDlg:initGuiElements nodeBase ", nodeBase );
+	info_log("YouLooseDlg:initGuiElements nodeBase ", nodeBase );
 	
 	if not nodeBase then
 		return;
@@ -69,7 +70,7 @@ function YouLooseDlg:initGuiElements()
 	self:initChooseLevelButton(nodeBase);
 
     local label = tolua.cast(nodeBase:getChildByTag(YouLooseDlg.LABEL_TAG), "cc.Label");
-    print("YouLooseDlg:initGuiElements label ", label);
+    info_log("YouLooseDlg:initGuiElements label ", label);
 
     if label then
         setDefaultFont(label, self.mGame:getScale());

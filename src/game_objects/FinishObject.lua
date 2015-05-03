@@ -1,6 +1,7 @@
 require "src/game_objects/BaseObject"
 require "src/base/Callback"
 require "src/animations/SequenceAnimation"
+require "src/base/Log"
 
 FinishObject = inheritsFrom(BaseObject)
 
@@ -36,7 +37,7 @@ end
 
 --------------------------------
 function FinishObject:init(field, node)
-	print("FinishObject:init ");
+	info_log("FinishObject:init ");
 	FinishObject:superClass().init(self, field, node);
 
     local texture = tolua.cast(node, "cc.Sprite"):getTexture();

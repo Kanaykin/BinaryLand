@@ -8,6 +8,7 @@ require "src/game_objects/FinishObject"
 require "src/game_objects/BonusObject"
 require "src/game_objects/BonusRoomDoor"
 require "src/tutorial/TutorialTrigger"
+require "src/base/Log"
 
 FactoryObject = {}
 
@@ -35,13 +36,13 @@ FactoryObject.TUTORIAL_TRIGGER_3 = 202;
 
 ------------------------------
 function FactoryObject:createObject(field, node)
-	print("FactoryObject:createObject ", field, ", ", node);
+	info_log("FactoryObject:createObject ", field, ", ", node);
 	local  tag = node:getTag();
 	local func = FactoryObject.CreateFunctions[tag];
 	if func then
 		return func(self, field, node);
 	else
-		print("Not found create function for node with tag ", tag);
+		info_log("Not found create function for node with tag ", tag);
 	end
 
 	return nil;
@@ -49,14 +50,14 @@ end
 
 ------------------------------
 function FactoryObject:createBrick(field, node)
-	print("FactoryObject:createBrick ", field, ", ", node);
+	info_log("FactoryObject:createBrick ", field, ", ", node);
 	field:addBrick(node);
     return nil;--node;
 end
 
 ------------------------------
 function FactoryObject:createHunter(field, node)
-	print("FactoryObject:createHunter ", field, ", ", node);
+	info_log("FactoryObject:createHunter ", field, ", ", node);
 	local mob = HunterObject:create();
 	mob:init(field, node);
 	field:addMob(mob);
@@ -65,7 +66,7 @@ end
 
 ------------------------------
 function FactoryObject:createDog(field, node)
-	print("FactoryObject:createDog ", field, ", ", node);
+	info_log("FactoryObject:createDog ", field, ", ", node);
 	local mob = DogObject:create();
 	mob:init(field, node);
 	field:addMob(mob);
@@ -74,7 +75,7 @@ end
 
 ------------------------------
 function FactoryObject:createMob(field, node)
-	print("FactoryObject:createMob ", field, ", ", node);
+	info_log("FactoryObject:createMob ", field, ", ", node);
 	local mob = MobObject:create();
 	mob:init(field, node);
 	field:addMob(mob);
@@ -83,7 +84,7 @@ end
 
 ------------------------------
 function FactoryObject:createFinishObject(field, node)
-	print("FactoryObject:createFinishObject ", field, ", ", node);
+	info_log("FactoryObject:createFinishObject ", field, ", ", node);
 	local obj = FinishObject:create();
 	obj:init(field, node);
 	field:addObject(obj);
@@ -92,7 +93,7 @@ end
 
 ------------------------------
 function FactoryObject:createWeb(field, node)
-	print("FactoryObject:createWeb ", field, ", ", node);
+	info_log("FactoryObject:createWeb ", field, ", ", node);
 	local web = SnareTrigger:create();
 	web:init(field, node, Callback.new(field, Field.onPlayerEnterWeb), Callback.new(field, Field.onPlayerLeaveWeb));
 	field:addMob(web);
@@ -101,7 +102,7 @@ end
 
 ------------------------------
 function FactoryObject:createFinish(field, node)
-	print("FactoryObject:createFinish ", field, ", ", node);
+	info_log("FactoryObject:createFinish ", field, ", ", node);
 	local finish = FinishTrigger:create();
 	finish:init(field, node, nil, nil);
 	field:addFinish(finish);
@@ -110,7 +111,7 @@ end
 
 ------------------------------
 function FactoryObject:createPlayer(field, node)
-	print("FactoryObject:createPlayer ", field, ", ", node);
+	info_log("FactoryObject:createPlayer ", field, ", ", node);
 	local player = PlayerObject:create(); --PlayerObject:create();
 	player:init(field, node, node:getTag() == FactoryObject.PLAYER2_TAG);
 	field:addPlayer(player);
@@ -119,7 +120,7 @@ end
 
 ------------------------------
 function FactoryObject:createTrigger(field, node)
-	print("FactoryObject:createTrigger ", field, ", ", node);
+	info_log("FactoryObject:createTrigger ", field, ", ", node);
 	local trigger = TutorialTrigger:create(); --PlayerObject:create();
 	trigger:init(field, node);
 	field:addObject(trigger);
@@ -128,7 +129,7 @@ end
 
 ------------------------------
 function FactoryObject:createBonusObject(field, node)
-    print("FactoryObject:createBonusObject ", field, ", ", node);
+    info_log("FactoryObject:createBonusObject ", field, ", ", node);
     local bonus = BonusObject:create();
     bonus:init(field, node, nil, BonusObject.COINS_TYPE);
     field:addObject(bonus);
@@ -137,7 +138,7 @@ end
 
 ------------------------------
 function FactoryObject:createBonusTimerObject(field, node)
-    print("FactoryObject:createBonusTimerObject ", field, ", ", node);
+    info_log("FactoryObject:createBonusTimerObject ", field, ", ", node);
     local bonus = BonusObject:create();
     bonus:init(field, node, nil, BonusObject.TIME_TYPE);
     field:addObject(bonus);
@@ -146,7 +147,7 @@ end
 
 ------------------------------
 function FactoryObject:createBonusRoomDoor(field, node)
-    print("FactoryObject:createBonusRoomDoor ", field, ", ", node);
+    info_log("FactoryObject:createBonusRoomDoor ", field, ", ", node);
     local bonusRoom = BonusRoomDoor:create();
 
     bonusRoom:init(field, node, Callback.new(field, Field.onEnterBonusRoomDoor));
@@ -156,7 +157,7 @@ end
 
 ------------------------------
 function FactoryObject:createFoxPlayer(field, node)
-	print("FactoryObject:createFoxPlayer ", field, ", ", node);
+	info_log("FactoryObject:createFoxPlayer ", field, ", ", node);
 	local player = FoxObject:create(); --PlayerObject:create();
 	player:init(field, node, node:getTag() == FactoryObject.FOX2_TAG);
 	field:addPlayer(player);

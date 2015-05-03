@@ -1,5 +1,6 @@
 require "src/scenes/BaseScene"
 require "src/math/Rect"
+require "src/base/Log"
 
 ScrollView = inheritsFrom(nil)
 ScrollView.mScroll = nil;
@@ -17,7 +18,7 @@ end
 function ScrollView:findChildByPoint(point)
 	for i, childinfo in ipairs(self.mClickableChildren) do
 		local child = childinfo[1];
-		print("i ", i, "child ", table.getn(self.mClickableChildren));
+		info_log("i ", i, "child ", table.getn(self.mClickableChildren));
 		local xPos, yPos = child:getPosition();
 		local size = child:getContentSize();
 		local bbox = Rect.new(child:getBoundingBox());
@@ -59,14 +60,14 @@ function ScrollView:setClickable(clickable)
 	if clickable then
 		--------------------
 		local function onTouchHandler(action, var1, var2)
-			--print("onTouchHandler ", action, "var1 ", var, "var2 ", var2);
-			--print("onTouchHandler ", action, "x = ", var1, " y = ", var2);
+			--info_log("onTouchHandler ", action, "var1 ", var, "var2 ", var2);
+			--info_log("onTouchHandler ", action, "x = ", var1, " y = ", var2);
     		scrollView:onTouchHandler(action, cc.p(var1, var2));
     		return true;
     	end
         --------------------
         local function onKeypadHandler(action, var1, var2)
-			print("onKeypadHandler ", action, "var1 ", var, "var2 ", var2);
+			info_log("onKeypadHandler ", action, "var1 ", var, "var2 ", var2);
         end
 
     	scrollviewlayer:registerScriptTouchHandler(onTouchHandler, false, 1, false);
@@ -74,7 +75,7 @@ function ScrollView:setClickable(clickable)
 	else
 		scrollviewlayer:unregisterScriptTouchHandler();
 	end
-	print("ScrollView:setClickable (", clickable);
+	info_log("ScrollView:setClickable (", clickable);
 	scrollviewlayer:setTouchEnabled(clickable);
 end
 
@@ -93,7 +94,7 @@ function ScrollView:initLayers(layers)
 	local height = 0;
 	for i, layer in ipairs(layers) do
 		local layerSize = layer:getContentSize();
-        print("ScrollView:initLayers layerSize.height ", layerSize.height)
+        info_log("ScrollView:initLayers layerSize.height ", layerSize.height)
 		height = height + layerSize.height;
 	end
 
@@ -108,7 +109,7 @@ function ScrollView:initLayers(layers)
 		scrollviewlayer:addChild(layer);
 
 		local layerSize = layer:getContentSize();
-		print("ScrollView:initLayers height ", layerSize.height);
+		info_log("ScrollView:initLayers height ", layerSize.height);
 		local posX, posY = layer:getPosition();
 		layer:setPosition(posX, posY + layersOffset);
 		layersOffset = layersOffset + layerSize.height;
@@ -130,7 +131,7 @@ function ScrollView:init(sizeScale, images)
 	-- add images to view scroll
 	for i, imageName in ipairs(images) do
 		local sp1 = CCSprite:create(imageName);
-		print("sp1 ", sp1, " name ", imageName);
+		info_log("sp1 ", sp1, " name ", imageName);
 		if not sp1 then 
 			break;
 		end

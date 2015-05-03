@@ -1,4 +1,5 @@
 require "src/animations/Animation"
+require "src/base/Log"
 
 SequenceAnimation = inheritsFrom(IAnimation)
 
@@ -22,7 +23,7 @@ end
 
 --------------------------------
 function SequenceAnimation:tick(dt)
-    --print("SequenceAnimation:tick self.mCurrentAnimation ", self.mCurrentAnimation);
+    --debug_log("SequenceAnimation:tick self.mCurrentAnimation ", self.mCurrentAnimation);
 	if self.mCurrentAnimation and self.mAnimations[self.mCurrentAnimation] then
 		self.mAnimations[self.mCurrentAnimation]:tick(dt)
 		self:playNext();
@@ -56,7 +57,7 @@ end
 
 --------------------------------
 function SequenceAnimation:play()
-	print("SequenceAnimation:play");
+	info_log("SequenceAnimation:play");
     self.mCurrentAnimation = nil;
 	self:playNext();
 end

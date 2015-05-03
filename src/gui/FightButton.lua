@@ -1,6 +1,7 @@
 require "src/base/Inheritance"
 require "src/math/Vector"
 require "src/gui/TouchWidget"
+require "src/base/Log"
 
 FightButton = inheritsFrom(TouchWidget)
 
@@ -32,7 +33,7 @@ end
 function FightButton:onDown()
 	local cache = CCSpriteFrameCache:getInstance();
 	local frame = cache:getSpriteFrame("fire_button_pressed.png");
-	print("frame ", frame);
+	info_log("frame ", frame);
 	self.mButtonNode:setDisplayFrame(frame);
 	self.mPressed = true;
 end
@@ -41,32 +42,32 @@ end
 function FightButton:onUp()
 	local cache = CCSpriteFrameCache:getInstance();
 	local frame = cache:getSpriteFrame("fire_button.png");
-	print("frame ", frame);
+	info_log("frame ", frame);
 	self.mButtonNode:setDisplayFrame(frame);
 	self.mPressed = false;
 end
 
 ----------------------------------------
 function FightButton:onTouchBegan(point)
-	print("TouchWidget:onTouchBegan ");
+	info_log("TouchWidget:onTouchBegan ");
 	self:onDown();
 end
 
 ----------------------------------------
 function FightButton:onTouchMoved(point)
-	print("TouchWidget:onTouchMoved ");
+	info_log("TouchWidget:onTouchMoved ");
 end
 
 ----------------------------------------
 function FightButton:onTouchEnded(point)
-	print("TouchWidget:onTouchEnded ");
+	info_log("TouchWidget:onTouchEnded ");
 	self:onUp();
 end
 
 --------------------------------
 function FightButton:init(guiLayer)
 	local node  = guiLayer:getChildByTag(FightButton.BUTTON_TAG);
-	print(" FightButton:init ", node);
+	info_log(" FightButton:init ", node);
 
 	node:setVisible(false);
 

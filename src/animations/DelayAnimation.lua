@@ -1,4 +1,5 @@
 require "src/animations/Animation"
+require "src/base/Log"
 
 DelayAnimation = inheritsFrom(IAnimation)
 
@@ -11,7 +12,7 @@ DelayAnimationSoftImpl.mTextureName = nil
 
 --------------------------------
 function DelayAnimationSoftImpl:init(animation, delay, texture, textureSize, textureName)
-    print("DelayAnimationSoftImpl:init ");
+    info_log("DelayAnimationSoftImpl:init ");
 	local action = animation:getAction();
 	local delayAction = cc.DelayTime:create(delay);
 	local seq = cc.Sequence:create(delayAction, action);
@@ -45,11 +46,11 @@ end
 
 ----------------------------
 function DelayAnimationSoftImpl:play()
-	print("DelayAnimation:play ")
+	info_log("DelayAnimation:play ")
 	if self.mTexture then
         if self.mTextureName then
             local sprite = GuiHelper.getSpriteFrame(self.mTextureName, self.mTextureSize);
-            print("DelayAnimationSoftImpl:play sprite ", sprite);
+            info_log("DelayAnimationSoftImpl:play sprite ", sprite);
             tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setSpriteFrame(sprite);
         else
             tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setTexture(self.mTexture);
@@ -84,14 +85,14 @@ end
 
 ----------------------------
 function DelayAnimationHardImpl:play()
-	print("DelayAnimationHardImpl:play")
+	info_log("DelayAnimationHardImpl:play")
 	self.mCurrentDelay = self.mDelay;
 	self.mPlaying = false;
 end
 
 --------------------------------
 function DelayAnimationHardImpl:tick(dt)
-	--print("DelayAnimationHardImpl:tick ", self.mCurrentDelay)
+	--debug_log("DelayAnimationHardImpl:tick ", self.mCurrentDelay)
 	if self.mCurrentDelay then
 		
 		self.mCurrentDelay = self.mCurrentDelay - dt;
@@ -129,7 +130,7 @@ end
 
 ----------------------------
 function DelayAnimation:play()
-	--print("DelayAnimation:play")
+	--debug_log("DelayAnimation:play")
 	--self.mAnimation:play();
 	self.mImpl:play();
 end

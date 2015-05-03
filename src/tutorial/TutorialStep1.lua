@@ -1,4 +1,5 @@
 require "src/tutorial/TutorialStepBase"
+require "src/base/Log"
 
 TutorialStep1 =  inheritsFrom(TutorialStepBase)
 TutorialStep1.mPlayer = nil;
@@ -16,7 +17,7 @@ TutorialStep1.LABEL_TAG = 2;
 
 ---------------------------------
 function TutorialStep1:destroy()
-	print("TutorialStep1:destroy()");
+	info_log("TutorialStep1:destroy()");
 
 	TutorialStep1:superClass().destroy(self);
 end
@@ -28,7 +29,7 @@ end
 
 --------------------------------
 function TutorialStep1:onBeginAnimationFinished()
-	print("TutorialStep1:onBeginAnimationFinished");
+	info_log("TutorialStep1:onBeginAnimationFinished");
 	self.mCurrentFingerTime = TutorialStep1.FREE_TIME;
 end
 
@@ -50,7 +51,7 @@ function TutorialStep1:init(gameScene, field, tutorialManager)
 	self.mPlayer = self.mField:getPlayerObjects()[self.mPlayerIndex];
 
 	self.mTrigger = self.mField:getObjetcByTag(self.mTriggerTag);
-	print("TutorialStep1:init self.mTrigger ", self.mTrigger);
+	info_log("TutorialStep1:init self.mTrigger ", self.mTrigger);
 
 	self:initFinger(gameScene, field);
 
@@ -64,7 +65,7 @@ function TutorialStep1:init(gameScene, field, tutorialManager)
     self:foxBabyAnimation();
 
     local label = tolua.cast(self.mNode:getChildByTag(TutorialStep1.LABEL_TAG), "cc.Label");
-    print("TutorialStep1:init label ", label);
+    info_log("TutorialStep1:init label ", label);
 
     if label then
         setDefaultFont(label, field.mGame:getScale());
@@ -79,10 +80,10 @@ function TutorialStep1:tick(dt)
 	if self.mCurrentFingerTime ~= nil then
 		-- check finished
 		if self.mTrigger:getContainedObj() ~= nil then
-			print("TutorialStep1:tick FINISH Step");
+			info_log("TutorialStep1:tick FINISH Step");
 			self.mIsFinished = true;
 		end
-        --print("TutorialStep1:tick ContainedObj ", self.mTrigger:getContainedObj())
+        --info_log("TutorialStep1:tick ContainedObj ", self.mTrigger:getContainedObj())
 
 		self.mCurrentFingerTime = self.mCurrentFingerTime + dt;
 

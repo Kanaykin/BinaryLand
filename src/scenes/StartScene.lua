@@ -1,4 +1,5 @@
 require "src/scenes/BaseScene"
+require "src/base/Log"
 
 local LOADSCEENIMAGE = "StartScene.png"
 --[[
@@ -9,7 +10,7 @@ StartScene = inheritsFrom(BaseScene)
 --------------------------------
 function StartScene:init(sceneMan, params)
 	self:superClass().init(self, sceneMan, {background = LOADSCEENIMAGE});
-	print("StartScene:init");
+	info_log("StartScene:init");
 
 	-- create menu elements
 	self:createMenuElements();
@@ -30,7 +31,7 @@ function StartScene:createMenuElements()
     local startScene = self;
 
     local function onPlayGamePressed(val, val2)
-    	print("onPlayGame ", val, val2);
+    	info_log("onPlayGame ", val, val2);
     	startScene.mSceneManager:runNextScene();
     end
 

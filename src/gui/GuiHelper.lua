@@ -1,3 +1,5 @@
+require "src/base/Log"
+
 local DEFAULT_FONT = "res/fonts/Minecrafter.ttf";
 
 GuiHelper = {
@@ -8,7 +10,7 @@ getSpriteFrame = function(name, size)
     local frame = cache:getSpriteFrame(name);
 
     if not frame then
-        print("getSpriteFrame not found frame ", name);
+        info_log("getSpriteFrame not found frame ", name);
         local texture = cc.Director:getInstance():getTextureCache():addImage(name);
         frame = cc.SpriteFrame:createWithTexture(texture, size);
     end
@@ -17,9 +19,9 @@ end,
 
 -----------------------------
 updateScale9SpriteByScale = function(widget, scale)
-    print("updateScale9SpriteByScale (", widget, ", ", scale, ")");
+    info_log("updateScale9SpriteByScale (", widget, ", ", scale, ")");
     local widget9Sprite = tolua.cast(widget, "ccui.Scale9Sprite");
-    print("updateScale9SpriteByScale widget9Sprite ", widget9Sprite);
+    info_log("updateScale9SpriteByScale widget9Sprite ", widget9Sprite);
     widget9Sprite:setInsetRight(widget9Sprite:getInsetRight() * scale);
     widget9Sprite:setInsetLeft(widget9Sprite:getInsetLeft() * scale);
     widget9Sprite:setInsetTop(widget9Sprite:getInsetTop() * scale);
@@ -30,7 +32,7 @@ end
 
 -----------------------------
 function setDefaultFont(label, scale)
-    print("setDefaultFont scale ", scale);
+    info_log("setDefaultFont scale ", scale);
     local config = label:getTTFConfig();
     config.fontFilePath = DEFAULT_FONT;
     config.fontSize = label:getSystemFontSize();
@@ -67,7 +69,7 @@ function setMenuCallback(nodeBase, menuTag, menuItemTag, callback)
 		local settingsItem = settingsButton:getChildByTag(menuItemTag);
 		
 		settingsItem = tolua.cast(settingsItem, "cc.MenuItem");
-		print("SettingsDlg:init ", settingsItem);
+		info_log("SettingsDlg:init ", settingsItem);
 		if settingsItem then
     		settingsItem:registerScriptTapHandler(callback);
     	end

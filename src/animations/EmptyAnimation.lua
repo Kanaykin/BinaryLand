@@ -1,4 +1,5 @@
 require "src/animations/Animation"
+require "src/base/Log"
 
 EmptyAnimation = inheritsFrom(IAnimation)
 EmptyAnimation.mTexture = nil;
@@ -15,7 +16,7 @@ function EmptyAnimation:init(texture, node, anchor)
     if texture then
         self.mTextureSize = texture:getContentSize();
     end
-	print("EmptyAnimation:init ", self.mTextureSize.width, ", ", self.mTextureSize.height);
+	info_log("EmptyAnimation:init ", self.mTextureSize.width, ", ", self.mTextureSize.height);
 end
 
 --------------------------------
@@ -44,8 +45,8 @@ function EmptyAnimation:play()
 		self.mNode:setAnchorPoint(self.mAnchor);
 	end
 	if self.mTexture then
-		print("EmptyAnimation:play self.mNode ", self.mNode);
-		print("EmptyAnimation:play self.mTextureSize ", self.mTextureSize.width);
+		info_log("EmptyAnimation:play self.mNode ", self.mNode);
+		info_log("EmptyAnimation:play self.mTextureSize ", self.mTextureSize.width);
 		tolua.cast(self.mNode, "cc.Sprite"):setTexture(self.mTexture);
 		tolua.cast(self.mNode, "cc.Sprite"):setTextureRect(cc.rect(0, 0, self.mTextureSize.width, self.mTextureSize.height));
 	end

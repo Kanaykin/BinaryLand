@@ -1,4 +1,5 @@
 require "src/base/Inheritance"
+require "src/base/Log"
 
 BaseObject = inheritsFrom(nil)
 BaseObject.mNode = nil;
@@ -7,7 +8,7 @@ BaseObject.mId = nil;
 
 --------------------------------
 function BaseObject:setId(id)
-    print("BaseObject:setId ", id);
+    info_log("BaseObject:setId ", id);
     self.mId = id;
 end
 

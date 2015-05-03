@@ -1,5 +1,6 @@
 require "src/gui/CCBBaseDlg"
 require "src/gui/GuiHelper"
+require "src/base/Log"
 
 SettingsDlg = inheritsFrom(CCBBaseDialog)
 
@@ -28,9 +29,9 @@ end
 
 --------------------------------
 function SettingsDlg:hidePanel()
-	print("SettingsDlg:hidePanel");
+	info_log("SettingsDlg:hidePanel");
 	function callback()
-		print("SettingsDlg:callback");
+		info_log("SettingsDlg:callback");
 		self.mGame.mDialogManager:deactivateModal(self);
 	end
 
@@ -56,7 +57,7 @@ function SettingsDlg:initSoundButton(nodeBase)
     self:updateSoundButton();
 
     local function onSoundButtonPressed(val, val2)
-        print("onSoundButtonPressed ");
+        info_log("onSoundButtonPressed ");
         self.mGame:setSoundEnabled(not self.mGame:getSoundEnabled());
         self:updateSoundButton();
     end
@@ -79,7 +80,7 @@ function SettingsDlg:initMusicButton(nodeBase)
     self:updateMusicButton();
 
     local function onMusicButtonPressed(val, val2)
-        print("onMusicButtonPressed ");
+        info_log("onMusicButtonPressed ");
         self.mGame:setMusicEnabled(not self.mGame:getMusicEnabled());
         self:updateMusicButton();
     end
@@ -90,7 +91,7 @@ end
 --------------------------------
 function SettingsDlg:initReplayButton(nodeBase)
 	local function onReplayButtonPressed(val, val2)
-    	print("onReplayButtonPressed ");
+    	info_log("onReplayButtonPressed ");
     	self.mGame.mSceneMan:replayScene();
     end
 
@@ -100,7 +101,7 @@ end
 --------------------------------
 function SettingsDlg:initChooseLevelButton(nodeBase)
 	local function onChooseLevelPressed(val, val2)
-    	print("onChooseLevelPressed ");
+    	info_log("onChooseLevelPressed ");
     	self.mGame.mSceneMan:runPrevScene({location = self.mGame.mSceneMan:getCurrentScene():getLevel():getLocation()});
     end
 
@@ -110,7 +111,7 @@ end
 --------------------------------
 function SettingsDlg:initHideButton(nodeBase)
 	local function onPanelHidePressed(val, val2)
-    	print("onPanelHidePressed ");
+    	info_log("onPanelHidePressed ");
     	self:hidePanel();
     end
 
@@ -120,7 +121,7 @@ end
 --------------------------------
 function SettingsDlg:initGuiElements()
 	local nodeBase = self.mNode:getChildByTag(SettingsDlg.BASE_NODE_TAG);
-	print("SettingsDlg:initGuiElements nodeBase ", nodeBase );
+	info_log("SettingsDlg:initGuiElements nodeBase ", nodeBase );
 	
 	if not nodeBase then
 		return;
@@ -147,5 +148,5 @@ function SettingsDlg:init(game, uiLayer)
 	self.mAnimator = self.mReader:getActionManager();
 	--local arrayAnimator = self.mReader:getAnimationManagersForNodes();
 
-	print("SettingsDlg:init ", self.mAnimator);
+	info_log("SettingsDlg:init ", self.mAnimator);
 end

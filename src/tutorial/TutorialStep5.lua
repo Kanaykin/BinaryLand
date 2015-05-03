@@ -1,4 +1,5 @@
 require "src/tutorial/TutorialStep1"
+require "src/base/Log"
 
 TutorialStep5 =  inheritsFrom(TutorialStep1)
 TutorialStep5.mCCBFileName = "Step5";
@@ -27,9 +28,9 @@ function TutorialStep5:tick(dt)
 
 	if self.mCurrentFingerTime ~= nil then
 		-- check finished
-		--print("self.mField:getState() ", self.mField:getState());
+		--info_log("self.mField:getState() ", self.mField:getState());
 		if --[[self.mTrigger:getContainedObj() ~= nil]] self.mField:getState() == Field.WIN then
-			print("TutorialStep1:tick FINISH Step");
+			info_log("TutorialStep1:tick FINISH Step");
 			self.mIsFinished = true;
 		end
 

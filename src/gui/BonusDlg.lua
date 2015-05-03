@@ -1,4 +1,5 @@
 require "src/gui/CCBBaseDlg"
+require "src/base/Log"
 
 BonusDlg = inheritsFrom(CCBBaseDialog)
 BonusDlg.mCallBack = nil;
@@ -29,7 +30,7 @@ end
 
 --------------------------------
 function BonusDlg:doModal()
-    print("BonusDlg:doModal");
+    info_log("BonusDlg:doModal");
     self:superClass().doModal(self);
     self.mAnimator:runAnimationsForSequenceNamed(self.mAnimationShow);
 end
@@ -40,7 +41,7 @@ function BonusDlg:initGuiElements()
 
 
     function callback()
-        print("BonusDlg:callback");
+        info_log("BonusDlg:callback");
         self:mCallBack();
     end
 
@@ -48,7 +49,7 @@ function BonusDlg:initGuiElements()
     self.mAnimator:setCallFuncForLuaCallbackNamed(callFunc, "0:Finish");
 
     local nodeBase = self.mNode:getChildByTag(BonusDlg.BASE_NODE_TAG);
-    print("BonusDlg:initGuiElements nodeBase ", nodeBase );
+    info_log("BonusDlg:initGuiElements nodeBase ", nodeBase );
 
     if not nodeBase then
         return;

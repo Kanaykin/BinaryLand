@@ -6,6 +6,7 @@ require "src/gui/MainUI"
 require "src/game_objects/PlayerController"
 require "src/tutorial/TutorialManager"
 require "src/scenes/SoundConfigs"
+require "src/base/Log"
 
 LevelScene = inheritsFrom(BaseScene)
 LevelScene.mField = nil;
@@ -27,17 +28,17 @@ end
 
 ---------------------------------
 function LevelScene:onStateLose()
-	print("LevelScene: LOSE !!!");
+	info_log("LevelScene: LOSE !!!");
 	self.mMainUI:onStateLose();
 	SimpleAudioEngine:getInstance():playMusic(gSounds.GAME_OVER_MUSIC, false)
 end
 
 ---------------------------------
 function LevelScene:bonusStart(self_fake, bonusData)
-    print("LevelScene:bonusStart bonusData ", bonusData);
+    info_log("LevelScene:bonusStart bonusData ", bonusData);
     self:destroyLevelComponent();
     local data = bonusData and bonusData or self.mLevel:getData().bonusLevel;
-    print("LevelScene:bonusStart ccbFile ", data.ccbFile);
+    info_log("LevelScene:bonusStart ccbFile ", data.ccbFile);
     data.isBonus = true;
 	self:initScene(data);
     self:initGui();
@@ -72,7 +73,7 @@ end
 ---------------------------------
 function LevelScene:onEnterBonusRoomDoor(isFemale)
     local score = self.mField:getScore();
-    print("LevelScene:onEnterBonusRoomDoor score ", score);
+    info_log("LevelScene:onEnterBonusRoomDoor score ", score);
     if self.mStoredLevel == nil then
         self.mLevel:getData().bonusRoom.isFemale = isFemale;
         self.mLevel:getData().bonusRoom.score = score;
@@ -92,7 +93,7 @@ end
 
 ---------------------------------
 function LevelScene:winOpenLevel()
-    print("LevelScene: WIN !!!");
+    info_log("LevelScene: WIN !!!");
     local locationId = self.mLevel:getLocation():getId();
 
     -- TODO: open location
@@ -127,7 +128,7 @@ end
 
 ---------------------------------
 function LevelScene:destroy()
-	print("LevelScene:destroy ");
+	info_log("LevelScene:destroy ");
 
     self:destroyLevelComponent();
 
@@ -138,7 +139,7 @@ end
 
 --------------------------------
 function LevelScene:postInitScene(levelData)
-    print("LevelScene:postInitScene ", levelData);
+    info_log("LevelScene:postInitScene ", levelData);
     if levelData.tutorial then
         self.mTutorial = TutorialManager:create();
         self.mTutorial:init(self.mSceneGame, self.mField, self.mMainUI);
@@ -146,7 +147,7 @@ function LevelScene:postInitScene(levelData)
 
     -- set joystick to players
     local players = self.mField:getPlayerObjects();
-    print("LevelScene:postInitScene players ", players);
+    info_log("LevelScene:postInitScene players ", players);
     if players then
         for i, player in ipairs(players) do
             player:setJoystick(self.mMainUI:getJoystick());
@@ -173,7 +174,7 @@ end
 
 --------------------------------
 function LevelScene:init(sceneMan, params)
-	print("LevelScene:init( ", sceneMan, ", ", params, ")");
+	info_log("LevelScene:init( ", sceneMan, ", ", params, ")");
 	LevelScene:superClass().init(self, sceneMan, params);
 	self.mLevel = params;
 

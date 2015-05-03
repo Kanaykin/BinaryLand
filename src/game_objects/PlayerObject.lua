@@ -2,6 +2,7 @@ require "src/game_objects/MovableObject"
 require "src/game_objects/FightTrigger"
 require "src/animations/EmptyAnimation"
 require "src/animations/FramesAnimation"
+require "src/base/Log"
 
 PlayerObject = inheritsFrom(MovableObject)
 PlayerObject.mJoystick = nil;
@@ -78,12 +79,12 @@ end
 
 ---------------------------------
 function PlayerObject:setCustomProperties(properties)
-    print("PlayerObject:setCustomProperties properties.state ", properties.state);
+    info_log("PlayerObject:setCustomProperties properties.state ", properties.state);
 
     PlayerObject:superClass().setCustomProperties(self, properties);
 
     if properties.isFemale ~= nil then
-        print("PlayerObject:setCustomProperties ", properties.isFemale)
+        info_log("PlayerObject:setCustomProperties ", properties.isFemale)
         self.mIsFemale = properties.isFemale;
         self.mReverse = self.mIsFemale and Vector.new(-1, 1) or Vector.new(1, 1);
         self.mNameTexture = self.mIsFemale and PlayerObject.FEMALE_PREFIX or PlayerObject.FEMALE_PREFIX;
@@ -117,7 +118,7 @@ end
 
 ---------------------------------
 function PlayerObject:leaveTrap(pos)
-	print("PlayerObject:leaveTrap");
+	info_log("PlayerObject:leaveTrap");
 	self:playAnimation(nil);
 	self.mInTrap = false;
 end
@@ -132,7 +133,7 @@ function PlayerObject:enterTrap(pos, stateInTrap)
     end
 
 	if pos then
-		print("PlayerObject:enterTrap x= ", pos.x, " y= ", pos.y);
+		info_log("PlayerObject:enterTrap x= ", pos.x, " y= ", pos.y);
 		local posTo = Vector.new(self.mField:positionToGrid(pos));
 		self:moveTo(posTo);
 	else
@@ -140,12 +141,12 @@ function PlayerObject:enterTrap(pos, stateInTrap)
 	end
 	self.mInTrap = true;
 
-    print("PlayerObject:enterTrap ???");
+    info_log("PlayerObject:enterTrap ???");
 end
 
 --------------------------------
 function PlayerObject:onMoveFinished( )
-	print("PlayerObject:onMoveFinished ", self.mStateInTrap)
+	info_log("PlayerObject:onMoveFinished ", self.mStateInTrap)
 	PlayerObject:superClass().onMoveFinished(self);
 	self:playAnimation(self.mStateInTrap);
 	self.mDelta = nil;
@@ -184,10 +185,10 @@ end
 
 --------------------------------
 function PlayerObject:playAnimation(button)
-	--print("PlayerObject:playAnimation ", self.mLastButtonPressed);
+	--debug_log("PlayerObject:playAnimation ", self.mLastButtonPressed);
 	if self.mLastButtonPressed ~= button and self.mNode then
 		self.mLastButtonPressed = button;
-		print("PlayerObject:playAnimation2 ", self.mLastButtonPressed, " button ", button);
+		info_log("PlayerObject:playAnimation2 ", self.mLastButtonPressed, " button ", button);
 		self:getAnimationNode():stopAllActions();
 		button = (button == nil) and -1 or button;
 		self.mAnimations[button]:play();
@@ -229,20 +230,20 @@ end
 --------------------------------
 function PlayerObject:collisionDetect(delta, newDir)
 	local currentPos = Vector.new(self.mNode:getPosition());
-	--print("currentPos ", currentPos.x, " ", currentPos.y);
+	--debug_log("currentPos ", currentPos.x, " ", currentPos.y);
 	local anchor = self.mNode:getAnchorPoint();
 	delta = delta * (self.mField:getCellSize() * 0.5);
 	local destPos = currentPos + delta --[[Vector.new(anchor.x, anchor.y))]];
-	--print("destPos ", destPos.x, " ", destPos.y);
+	--debug_log("destPos ", destPos.x, " ", destPos.y);
 
 	local destGrid = Vector.new(self.mField:positionToGrid(destPos));
-	--print("destGrid ", destGrid.x, " ", destGrid.y);
+	--debug_log("destGrid ", destGrid.x, " ", destGrid.y);
 
 	if self.mField:isFreePointForPlayer(destGrid) then
 		local centerCell = self.mField:gridPosToReal(destGrid) + Vector.new(self.mField:getCellSize() / 2, self.mField:getCellSize() / 2);
 		local centerSelf = self.mField:gridPosToReal(Vector.new(self.mField:positionToGrid(currentPos))) + Vector.new(self.mField:getCellSize() / 2, self.mField:getCellSize() / 2);
-		--print("centerCell ", centerCell.x, " ", centerCell.y);
-		--print("centerSelf ", centerSelf.x, " ", centerSelf.y);
+		--debug_log("centerCell ", centerCell.x, " ", centerCell.y);
+		--debug_log("centerSelf ", centerSelf.x, " ", centerSelf.y);
 		local dir = centerCell - currentPos;
 		if (centerCell - centerSelf):len() <= 1 then
 			return true;
@@ -250,7 +251,7 @@ function PlayerObject:collisionDetect(delta, newDir)
 		dir:normalize();
 		newDir.x = dir.x;
 		newDir.y = dir.y;
-		--print("newDir ", newDir.x, " ", newDir.y);
+		--debug_log("newDir ", newDir.x, " ", newDir.y);
 		return true;
 	end
 	return false;
@@ -305,21 +306,21 @@ end
 
 ---------------------------------
 function PlayerObject:onEnterBonusRoomDoor()
-    print("PlayerObject:onEnterBonusRoomDoor");
-    print("PlayerObject:onEnterBonusRoomDoor mGridPosition ", self.mGridPosition.x, "y ", self.mGridPosition.y);
-    print("PlayerObject:onEnterBonusRoomDoor mDelta ", self.mDelta);
+    info_log("PlayerObject:onEnterBonusRoomDoor");
+    info_log("PlayerObject:onEnterBonusRoomDoor mGridPosition ", self.mGridPosition.x, "y ", self.mGridPosition.y);
+    info_log("PlayerObject:onEnterBonusRoomDoor mDelta ", self.mDelta);
     if self.mDestGridPos then
-        print("PlayerObject:onEnterBonusRoomDoor mDestGridPos ", self.mDestGridPos.x, "y ", self.mDestGridPos.y);
+        info_log("PlayerObject:onEnterBonusRoomDoor mDestGridPos ", self.mDestGridPos.x, "y ", self.mDestGridPos.y);
     end
     if self.mLastDir then
-        print("PlayerObject:onEnterBonusRoomDoor self.mLastDir ", self.mLastDir);
+        info_log("PlayerObject:onEnterBonusRoomDoor self.mLastDir ", self.mLastDir);
 
         local curPosition = Vector.new(self.mNode:getPosition());
 
         local newDir = DIRECTIONS[self.mLastDir]:clone() * self.mReverse;
-        print("PlayerObject:onEnterBonusRoomDoor curPosition ", curPosition.x, " y ", curPosition.y);
+        info_log("PlayerObject:onEnterBonusRoomDoor curPosition ", curPosition.x, " y ", curPosition.y);
         curPosition = curPosition - newDir * self.mField:getCellSize() * 0.5;
-        print("PlayerObject:onEnterBonusRoomDoor curPosition ", curPosition.x, " y ", curPosition.y);
+        info_log("PlayerObject:onEnterBonusRoomDoor curPosition ", curPosition.x, " y ", curPosition.y);
         --self.mNode:setPosition(cc.p(curPosition.x, curPosition.y));
         self.mBonusRoomDoorPosition = curPosition;
     end
@@ -332,7 +333,7 @@ function PlayerObject:move(dt)
 	end
 	
 	local button = self.mJoystick:getButtonPressed();
-	--print("button pressed ", );
+	--debug_log("button pressed ", );
 	if button and button ~= PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP then
 
 		self:playAnimation(button);
@@ -354,7 +355,7 @@ function PlayerObject:move(dt)
 			if not self.mField:collideObject(self, curPosition) then
 				self.mNode:setPosition(cc.p(curPosition.x, curPosition.y));
 				self.mGridPosition = Vector.new(self.mField:getGridPosition(self.mNode));
-				print("PlayerObject:move x ", self.mGridPosition.x, ", y", self.mGridPosition.y);
+				info_log("PlayerObject:move x ", self.mGridPosition.x, ", y", self.mGridPosition.y);
 				self:updateOrder();
 			end
 		end
@@ -376,7 +377,7 @@ end
 --------------------------------
 function PlayerObject:animationTick(dt)
 	local animationButton = (self.mLastButtonPressed == nil) and -1 or self.mLastButtonPressed;
---    print("PlayerObject:animationTick ", animationButton);
+--    info_log("PlayerObject:animationTick ", animationButton);
 	self.mAnimations[animationButton]:tick(dt);
 end
 

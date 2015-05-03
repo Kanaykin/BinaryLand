@@ -1,4 +1,5 @@
 require "src/math/Vector"
+require "src/base/Log"
 
 WavePathFinder = {
 
@@ -39,7 +40,7 @@ WavePathFinder = {
 			for iDir, dir in ipairs(WavePathFinder.DIRECTIONS) do
 				local near = point + dir;
 				if WavePathFinder.isFree(near, array, sizeArray) then
-					print("near x ", near.x, " y ", near.y);
+					info_log("near x ", near.x, " y ", near.y);
 					table.insert(srcNewPoints, near);
 					array[COORD(near.x, near.y, sizeArray.x)] = index;
 					if near.x == pointTo.x and near.y == pointTo.y then
@@ -55,9 +56,9 @@ WavePathFinder = {
 	findPath = function(path, array, sizeArray)
 		WavePathFinder.printPath(path);
 		local point = path[#path];
-		print("point.x ", point.x, "point.y ", point.y);
+		info_log("point.x ", point.x, "point.y ", point.y);
 		local index = array[COORD(point.x, point.y, sizeArray.x)];
-		print("index ", index);
+		info_log("index ", index);
 		if index == WavePathFinder.FIRST_INDEX then
 			return;
 		end
@@ -81,7 +82,7 @@ WavePathFinder = {
 	-----------------------------------
 	printPath = function(path)
 		for i, val in ipairs(path) do 
-			print(" i = ", i, "val.x ", val.x , "val.y ", val.y);
+			info_log(" i = ", i, "val.x ", val.x , "val.y ", val.y);
 		end
 	end,
 
@@ -97,7 +98,7 @@ WavePathFinder = {
 
 	-----------------------------------
 	buildPath = function (pointFrom, pointTo, array, sizeArray)
-		print("buildPath ( pF.x ", pointFrom.x, " pF.y ", pointFrom.x, "pF.x ", pointTo.x, " pF.y ", pointTo.x);
+		info_log("buildPath ( pF.x ", pointFrom.x, " pF.y ", pointFrom.x, "pF.x ", pointTo.x, " pF.y ", pointTo.x);
 		local srcPoints = {pointFrom};
 		array[COORD(pointFrom.x, pointFrom.y, sizeArray.x)] = WavePathFinder.FIRST_INDEX;
 		WavePathFinder.fillArray(srcPoints, pointTo, array, sizeArray, WavePathFinder.FIRST_INDEX + 1);

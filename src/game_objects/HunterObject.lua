@@ -1,14 +1,15 @@
 require "src/game_objects/MobObject"
 require "src/animations/PlistAnimation"
+require "src/base/Log"
 
 HunterObject = inheritsFrom(MobObject)
 
 --------------------------------
 function HunterObject:initAnimation()
-	print("HunterObject:initAnimation");
+	info_log("HunterObject:initAnimation");
     self.mAnimations = {};
 
-	print("Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
+	info_log("Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
 	local animation = PlistAnimation:create();
 	animation:init("HunterWalkSide.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.3);
 

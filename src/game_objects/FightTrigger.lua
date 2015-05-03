@@ -1,4 +1,5 @@
 require "src/game_objects/Trigger"
+require "src/base/Log"
 
 FightTrigger = inheritsFrom(Trigger)
 FightTrigger.mActivated = false;
@@ -38,7 +39,7 @@ end
 
 --------------------------------
 function FightTrigger:getCollisionObjects()
-	print("FightTrigger:getCollisionObjects ", #self.mField:getEnemyObjects());
+	info_log("FightTrigger:getCollisionObjects ", #self.mField:getEnemyObjects());
 	return self.mField:getEnemyObjects();
 end
 
@@ -55,7 +56,7 @@ end
 --------------------------------
 function FightTrigger:tick(dt)
 	if self.mActivated then
-		--print("FightTrigger:tick");
+		--debug_log("FightTrigger:tick");
 		FightTrigger:superClass().tick(self, dt);
 	end
 end

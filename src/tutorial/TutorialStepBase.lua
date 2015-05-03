@@ -1,5 +1,6 @@
 require "src/base/Inheritance"
 require "src/tutorial/Finger"
+require "src/base/Log"
 
 TutorialStepBase =  inheritsFrom(nil)
 TutorialStepBase.mFinger = nil
@@ -27,9 +28,9 @@ end
 
 --------------------------------
 function TutorialStepBase:foxBabyAnimation()
-    print("TutorialStep1:foxBabyAnimation self.mNode ", self.mNode);
+    info_log("TutorialStep1:foxBabyAnimation self.mNode ", self.mNode);
     local foxBaby = self.mNode:getChildByTag(TutorialStep1.FOX_BABY_TAG);
-    print("TutorialStep1:foxBabyAnimation ", foxBaby);
+    info_log("TutorialStep1:foxBabyAnimation ", foxBaby);
 
     if foxBaby then
         local animation = PlistAnimation:create();
@@ -43,7 +44,7 @@ end
 
 --------------------------------
 function TutorialStepBase:onBeginAnimationFinished()
-	print("TutorialStepBase:onBeginAnimationFinished");
+	info_log("TutorialStepBase:onBeginAnimationFinished");
 end
 
 --------------------------------
@@ -75,10 +76,10 @@ function TutorialStepBase:initFromCCB(ccbfile, gameScene)
 	gameScene:addChild(node);
 
 	local layer = tolua.cast(node, "cc.Layer");
-	print("TutorialStepBase:init layer ", layer);
+	info_log("TutorialStepBase:init layer ", layer);
 
 	local function onTouchHandler(action, var)
-		print("onTouchHandler ");
+		info_log("onTouchHandler ");
 		self:onTouchHandler();
 	end
 
@@ -89,7 +90,7 @@ end
 --------------------------------
 function TutorialStepBase:getPlayerPos()
 	local playerGridPosition = Vector.new(self.mField:getGridPosition(self.mPlayer.mNode));
-	--[[print("playerGridPosition ", playerGridPosition.x);
+	--[[info_log("playerGridPosition ", playerGridPosition.x);
 	local dest = self.mField:gridPosToReal(playerGridPosition);
 	dest.x= dest.x + self.mField.mCellSize / 2;
 	dest.y= dest.y + self.mField.mCellSize / 2;
@@ -124,7 +125,7 @@ function TutorialStepBase:init(gameScene, field, tutorialManager, ccbfile)
 	self.mField = field;
 
 	self.mTutorialManager = tutorialManager;
-	print("TutorialStepBase:init ", self.mTutorialManager );
+	info_log("TutorialStepBase:init ", self.mTutorialManager );
 
 	self:initFromCCB(ccbfile, gameScene);
 end

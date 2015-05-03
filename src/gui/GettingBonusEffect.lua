@@ -1,4 +1,5 @@
 require "src/gui/CCBBaseDlg"
+require "src/base/Log"
 
 GettingBonusEffect = inheritsFrom(CCBBaseDialog)
 
@@ -13,7 +14,7 @@ end
 
 --------------------------------
 function GettingBonusEffect:init(game, uiLayer, bonus)
-    print("GettingBonusEffect:init ", self:superClass());
+    info_log("GettingBonusEffect:init ", self:superClass());
     self:superClass().init(self, game, uiLayer, "GettingBonusEffect");
 
     self.mLabel = tolua.cast(self.mNode:getChildByTag(GettingBonusEffect.LABEL_TAG), "cc.Label");
@@ -27,7 +28,7 @@ function GettingBonusEffect:init(game, uiLayer, bonus)
     animator:retain();
 
     function callback()
-        print("GettingBonusEffect callback !!! ");
+        info_log("GettingBonusEffect callback !!! ");
         self.mFinished = true;
     end
 

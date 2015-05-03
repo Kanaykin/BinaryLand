@@ -1,4 +1,5 @@
 require "src/animations/Animation"
+require "src/base/Log"
 
 RandomAnimation = inheritsFrom(IAnimation)
 
@@ -25,7 +26,7 @@ end
 
 --------------------------------
 function RandomAnimation:playNext()
-	--print("RandomAnimation:playNext ", not self.mCurrentAnimation or self.mCurrentAnimation:isDone());
+	--debug_log("RandomAnimation:playNext ", not self.mCurrentAnimation or self.mCurrentAnimation:isDone());
 	if not self.mCurrentAnimation or self.mCurrentAnimation:isDone() then
 		local animNum = math.fmod(math.random (1, 32767), #self.mAnimations) + 1;
 		self.mCurrentAnimation = self.mAnimations[animNum];
@@ -35,6 +36,6 @@ end
 
 --------------------------------
 function RandomAnimation:play()
-	print("RandomAnimation:play");
+	info_log("RandomAnimation:play");
 	self:playNext();
 end

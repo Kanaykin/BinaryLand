@@ -1,4 +1,5 @@
 require "src/game_objects/Trigger"
+require "src/base/Log"
 
 SnareTrigger = inheritsFrom(Trigger)
 SnareTrigger.mTimeDestroy = nil;
@@ -10,7 +11,7 @@ function SnareTrigger:init(field, node, enterCallback, leaveCallback)
 	local parent = self.mNode:getParent();
 	parent:removeChild(self.mNode, false);
 	local posGridX, posGridY = field:getGridPosition(self.mNode);
-	print("SnareTrigger:init ", posGridY);
+	info_log("SnareTrigger:init ", posGridY);
 	parent:addChild(self.mNode, -posGridY * 2 + 1);
 end
 

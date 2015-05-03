@@ -1,4 +1,5 @@
 require "src/animations/Animation"
+require "src/base/Log"
 
 RepeatAnimation = inheritsFrom(IAnimation)
 
@@ -9,7 +10,7 @@ RepeatAnimationSoftImpl.mAnimation = nil
 
 --------------------------------
 function RepeatAnimationSoftImpl:init(animation, times)
-    print("RepeatAnimationSoftImpl:init ( ", times);
+    info_log("RepeatAnimationSoftImpl:init ( ", times);
 
 	local action = animation:getAction();
 	local repeatAction = times ~= nil and CCRepeat:create(action, times) or CCRepeatForever:create(action);
@@ -78,7 +79,7 @@ end
 --------------------------------
 function RepeatAnimationHardImpl:tick(dt)
 	if self.mPlaying and self:isDone() and not self.mStopAfterDone then
-		print("RepeatAnimationHardImpl:tick replay ");
+		info_log("RepeatAnimationHardImpl:tick replay ");
 		self:play();
 	end
 end

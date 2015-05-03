@@ -1,4 +1,5 @@
 require "src/tutorial/TutorialStepBase"
+require "src/base/Log"
 
 TutorialStep3 =  inheritsFrom(TutorialStepBase)
 TutorialStep3.mCCBFileName = "Step3";
@@ -39,7 +40,7 @@ end
 
 --------------------------------
 function TutorialStep3:onBeginAnimationFinished()
-	print("TutorialStep3:onBeginAnimationFinished");
+	info_log("TutorialStep3:onBeginAnimationFinished");
 	self.mCurrentFingerTime = TutorialStep3.FREE_TIME;
 end
 
@@ -54,7 +55,7 @@ function TutorialStep3:tick(dt)
 	if self.mCurrentFingerTime ~= nil then
 
 		if not self.mSecondPlayer:isInTrap() then
-			print("TutorialStep3:tick FINISH Step");
+			info_log("TutorialStep3:tick FINISH Step");
 			self.mIsFinished = true;
 		end
 

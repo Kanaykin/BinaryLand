@@ -2,6 +2,7 @@ require "src/base/Inheritance"
 require "src/math/Vector"
 require "src/game_objects/FieldNode"
 require "src/game_objects/FactoryObject"
+require "src/base/Log"
 
 Field = inheritsFrom(nil)
 Field.mArray = nil;
@@ -46,14 +47,14 @@ end
 
 --------------------------------
 function PRINT_FIELD(array, size)
-	print("PRINT_FIELD !");
+	info_log("PRINT_FIELD !");
 	for j = 0, size.y do
 		local raw = "";
 		for i = 0, size.x do
-			--print("COORD ", COORD(i, j, size.x))
+			--debug_log("COORD ", COORD(i, j, size.x))
 			raw = raw .. tostring(array[COORD(i, j, size.x)]) .. " ";
 		end
-		print(raw);
+		info_log(raw);
 	end
 end
 
@@ -81,7 +82,7 @@ end
 --------------------------------
 function Field:getObjetcByTag(tag)
 	for _, obj in ipairs(self.mObjects) do
-		print("Field:getObjetcByTag tag ", obj:getTag())
+		info_log("Field:getObjetcByTag tag ", obj:getTag())
 		if obj:getTag() == tag then
 			return obj;
 		end
@@ -164,7 +165,7 @@ function Field:checkFinishGame()
 	end
 	
 	if allObjectInTrigger then
-		print("Field:checkFinishGame WIN");
+		info_log("Field:checkFinishGame WIN");
 		self:onStateWin()
 		return;
 	end
@@ -172,14 +173,14 @@ function Field:checkFinishGame()
 	-- check game over
 	local allObjectInTrap = true;
 	for _, object in ipairs(self.mPlayerObjects) do
-		--print("isInTrap ", object:isInTrap());
+		--debug_log("isInTrap ", object:isInTrap());
 		if not object:isInTrap() then
 			allObjectInTrap = false;
 		end
 	end
 
 	if allObjectInTrap or (self.mTime and self.mTime <= 0) then
-		print("Field:checkFinishGame LOSE");
+		info_log("Field:checkFinishGame LOSE");
 		self:onStateLose();
 		return;
 	end
@@ -188,7 +189,7 @@ end
 ---------------------------------
 function Field:onStateLose()
 	self.mState = Field.LOSE;
-	print("LOSE !!!");
+	info_log("LOSE !!!");
 	if self.mStateListener then
         if self.mIsBonusLevel then
             self.mStateListener:onStateWin();
@@ -200,17 +201,17 @@ end
 
 ---------------------------------
 function Field:restore(data)
-    print("Field:restore ");
+    info_log("Field:restore ");
     if not data.field then
-        print("Invalid field data");
+        info_log("Invalid field data");
         return;
     end
     self.mTime = data.field.time;
     self.mScore = data.field.score;
-    print("Field:restore objects ", data.field.objects);
+    info_log("Field:restore objects ", data.field.objects);
     for id, objectData in pairs(data.field.objects) do
         local object = self:getObjectById(id);
-        print("Field:restore id ", id, " object ", object);
+        info_log("Field:restore id ", id, " object ", object);
         if object then
             object:restore(objectData);
         end
@@ -234,26 +235,26 @@ function Field:store(data)
     data.field.objects = {}
     for _, object in ipairs(self.mObjects) do
         data.field.objects[object:getId()] = {};
-        print("Field:store obj ", object:getId());
+        info_log("Field:store obj ", object:getId());
         object:store(data.field.objects[object:getId()]);
     end
 end
 
 ---------------------------------
 function Field:onEnterBonusRoomDoor(player)
-    print("Field:onEnterBonusRoomDoor ", player);
+    info_log("Field:onEnterBonusRoomDoor ", player);
     player:onEnterBonusRoomDoor();
     if self.mStateListener then
         self.mStateListener:onEnterBonusRoomDoor(player:isFemale());
     end
-    print("Field:onEnterBonusRoomDoor end");
+    info_log("Field:onEnterBonusRoomDoor end");
 end
 
 ---------------------------------
 function Field:onStateWin()
 
 	self.mState = Field.WIN;
-	print("WIN !!!");
+	info_log("WIN !!!");
 	if self.mStateListener then
         --check bonus level
         if self.mBonusLevel then
@@ -271,13 +272,13 @@ end
 ---------------------------------
 function Field:onStatePause()
 	self.mState = Field.PAUSE;
-	print("PAUSE !!!");
+	info_log("PAUSE !!!");
 end
 
 ---------------------------------
 function Field:onStateInGame()
 	self.mState = Field.IN_GAME;
-	print("IN GAME !!!");
+	info_log("IN GAME !!!");
 end
 
 ---------------------------------
@@ -285,7 +286,7 @@ function Field:updateState()
 	if self.mState ~= Field.PAUSE and self.mState ~= Field.IN_GAME then
 		return;
 	end
-	--print("self.mGame.mDialogManager:hasModalDlg() ", self.mGame.mDialogManager:hasModalDlg());
+	--debug_log("self.mGame.mDialogManager:hasModalDlg() ", self.mGame.mDialogManager:hasModalDlg());
 	if self.mState == Field.IN_GAME and self.mGame.mDialogManager:hasModalDlg() then
 		self:onStatePause();
 	elseif self.mState == Field.PAUSE and not self.mGame.mDialogManager:hasModalDlg() then
@@ -297,7 +298,7 @@ end
 function Field:tick(dt)
 	self:updateState();
 
-    --print("Field:tick self.mId ", self.mId);
+    --debug_log("Field:tick self.mId ", self.mId);
     for i, obj in ipairs(self.mNeedDestroyObjects) do
         self:removeObject(obj);
         self:removeEnemy(obj);
@@ -358,28 +359,28 @@ end
 
 --------------------------------
 function Field:removeObject(object)
-	print("Field:removeObject(", object, ")");
+	info_log("Field:removeObject(", object, ")");
 	local index = self:findArrayIndex(self.mObjects, object);
 	if index then
 		table.remove(self.mObjects, index);
 	end
-	print("Field:removeObject ", index);
+	info_log("Field:removeObject ", index);
 end
 
 --------------------------------
 function Field:removeEnemy(enemy)
-	print("Field:removeEnemy(", enemy, ")");
+	info_log("Field:removeEnemy(", enemy, ")");
 	local index = self:findArrayIndex(self.mEnemyObjects, enemy);
 	if index then
 		table.remove(self.mEnemyObjects, index);
 	end
-	print("Field:removeEnemy ", index);
+	info_log("Field:removeEnemy ", index);
 end
 
 --------------------------------
 function Field:createBonus(rect, position, orderPos, bonusVal)
     local texture = cc.Director:getInstance():getTextureCache():addImage("Coin.png");
-    print("Field:createBonus texture ", texture, " rect ", rect, "bonus ", bonus);
+    info_log("Field:createBonus texture ", texture, " rect ", rect, "bonus ", bonus);
     local sprite = cc.Sprite:createWithTexture(texture, rect);
     self:getFieldNode():addChild(sprite);
 
@@ -403,7 +404,7 @@ end
 
 --------------------------------
 function Field:onEnterBonusTrigger(player)
-    print("Field:onEnterBonusTrigger ");
+    info_log("Field:onEnterBonusTrigger ");
 --    self.mScore = self.mScore + 100;
     SimpleAudioEngine:getInstance():playEffect(gSounds.BONUS_SOUND);
 end
@@ -420,7 +421,7 @@ end
 
 --------------------------------
 function Field:onEnemyEnterTrigger(enemy)
-	print("Field:onEnemyEnterTrigger ", enemy);
+	info_log("Field:onEnemyEnterTrigger ", enemy);
 	SimpleAudioEngine:getInstance():playEffect(gSounds.MOB_DEATH_SOUND)
 
     enemy:onEnterFightTrigger();
@@ -444,11 +445,11 @@ function Field:collideObject(player, destPos)
 			
 			boxl.x = destPos.x-- + boxl.origin.x;
 			boxl.y = destPos.y-- + boxl.origin.y;
-			print("Field:collideObject1 x ", boxl.x, " y ", boxl.y);
-			print("Field:collideObject1 size x ", boxl.width, " y ", boxl.height);
+			info_log("Field:collideObject1 x ", boxl.x, " y ", boxl.y);
+			info_log("Field:collideObject1 size x ", boxl.width, " y ", boxl.height);
 			local boxr = object:getBoundingBox();
-			print("Field:collideObject2 x ", boxr.x, " y ", boxr.y);
-			print("Field:collideObject2 size x ", boxr.width, " y ", boxr.height);
+			info_log("Field:collideObject2 x ", boxr.x, " y ", boxr.y);
+			info_log("Field:collideObject2 size x ", boxr.width, " y ", boxr.height);
 
 			local centerL = Vector.new(boxl.x - boxl.width / 2, boxl.y - boxl.height / 2);
 			local centerR = Vector.new(boxr.x - boxr.width / 2, boxr.y - boxr.height / 2);
@@ -487,20 +488,20 @@ end
 
 --------------------------------
 function Field:onPlayerLeaveWeb(player)
-	print("onPlayerLeaveWeb ");
+	info_log("onPlayerLeaveWeb ");
 	player:leaveTrap(nil);
 end
 
 --------------------------------
 function Field:onPlayerEnterWeb(player, pos)
-	print("onPlayerEnterWeb ");
+	info_log("onPlayerEnterWeb ");
 	-- if player is primary then game over
 	player:enterTrap(pos);
 end
 
 --------------------------------
 function Field:onPlayerEnterMob(player, pos)
-	print("onPlayerEnterMob ");
+	info_log("onPlayerEnterMob ");
 	-- if player is primary then game over
 	player:enterTrap(nil);
 end
@@ -512,7 +513,7 @@ end
 
 --------------------------------
 function Field:createSnareTrigger(pos)
-	print("Field:createSnareTrigger x= ", pos.x, " y= ", pos.y);
+	info_log("Field:createSnareTrigger x= ", pos.x, " y= ", pos.y);
 	local node = CCNode:create();
 	node:setContentSize(cc.size(self:getCellSize(), self:getCellSize()));
 	self:getFieldNode():addChild(node);
@@ -529,7 +530,7 @@ end
 
 --------------------------------
 function Field:addArrayBorder()
-	print("Field:addArrayBorder x ", self.mSize.x, " y ", self.mSize.y);
+	info_log("Field:addArrayBorder x ", self.mSize.x, " y ", self.mSize.y);
 
 	for j = 0, self.mSize.y do
 		self.mArray[COORD(0, j, self.mSize.x)] = 1;
@@ -626,17 +627,17 @@ end
 --------------------------------
 function Field:getCustomProperties(gridPosX, gridPosY, tag)
     if self.mCustomProperties then
-        print("Field:getCustomProperties ", BaseObject:convertToId(gridPosX, gridPosY, tag));
+        info_log("Field:getCustomProperties ", BaseObject:convertToId(gridPosX, gridPosY, tag));
         return self.mCustomProperties[BaseObject:convertToId(gridPosX, gridPosY, tag)];
     end
 end
 
 --------------------------------
 function Field:loadCustomProperties(fieldData)
-    print("Field:loadCustomProperties( ", fieldData.customProperties);
+    info_log("Field:loadCustomProperties( ", fieldData.customProperties);
     if fieldData.customProperties ~= nil then
         local customProperties = require(fieldData.customProperties);
-        print("Field:loadCustomProperties customProperties ", customProperties);
+        info_log("Field:loadCustomProperties customProperties ", customProperties);
         self.mCustomProperties = customProperties;
     end
 end
@@ -649,11 +650,11 @@ function Field:init(fieldNode, layer, fieldData, game)
     self.mId = fieldData.id;
     self.mBonusLevel = fieldData.bonusLevel;
     self.mIsBonusLevel = fieldData.isBonus;
-    print("Field:init self.mBonusLevel ", self.mBonusLevel);
+    info_log("Field:init self.mBonusLevel ", self.mBonusLevel);
 
 	local objectType = _G[fieldData.playerType];
 	local mobType = _G[fieldData.mobType];
-	print(" Game ", game);
+	info_log(" Game ", game);
 	self.mCellSize = fieldData.cellSize * game:getScale();
 	self.mGame = game;
 
@@ -669,7 +670,7 @@ function Field:init(fieldNode, layer, fieldData, game)
 
 	local children = self.mFieldNode:getChildren();
 	local count = children:count();
-	print("count ", count);
+	info_log("count ", count);
 	if count == 0 then
 		return;
 	end
@@ -679,12 +680,12 @@ function Field:init(fieldNode, layer, fieldData, game)
 	local maxValue = Vector.new(MIN_NUMBER, MIN_NUMBER);
 
 	local contentSize = self.mFieldNode:getContentSize();
-	print("newMaxValue x ", contentSize.width / self.mCellSize, " y ", contentSize.height / self.mCellSize);
+	info_log("newMaxValue x ", contentSize.width / self.mCellSize, " y ", contentSize.height / self.mCellSize);
 
 	maxValue.x = math.floor(contentSize.width / self.mCellSize + 1);--(maxValue.x - minValue.x) / self.mCellSize;
 	maxValue.y = math.floor(contentSize.height / self.mCellSize + 1);--(maxValue.y - minValue.y) / self.mCellSize;
 
-	print("maxValue x ", maxValue.x, " y ", maxValue.y);
+	info_log("maxValue x ", maxValue.x, " y ", maxValue.y);
 	self.mArray = {};
     self.mPlayerFreeArray = {};
 	self.mSize = maxValue;
@@ -702,11 +703,11 @@ function Field:init(fieldNode, layer, fieldData, game)
 		local object = FactoryObject:createObject(self, brick);
         if object then
             local pos = object:getPosition();
-            print("create object x ", pos.x, " y ", pos.y);
+            info_log("create object x ", pos.x, " y ", pos.y);
             local gridPosX, gridPosY = self:positionToGrid(pos);
-            print("create object grid x ", gridPosX, " y ", gridPosY);
+            info_log("create object grid x ", gridPosX, " y ", gridPosY);
             local tag = brick:getTag();
-            print("create tag ", tag);
+            info_log("create tag ", tag);
             local properties = self:getCustomProperties(gridPosX, gridPosY, tag);
             if properties then
                 object:setCustomProperties(properties);

@@ -1,6 +1,7 @@
 require "src/base/Inheritance"
 require "src/math/Vector"
 require "src/gui/TouchWidget"
+require "src/base/Log"
 
 Joystick = inheritsFrom(TouchWidget)
 
@@ -30,7 +31,7 @@ end
 
 --------------------------------
 function Joystick:findButtonPressed(res)
-	print("Joystick:findButtonPressed");
+	info_log("Joystick:findButtonPressed");
 	if math.abs(res.x) > math.abs(res.y) then
 		if res.x > 0 then
 			self.mButtonPressed = Joystick.BUTTONS.RIGHT;
@@ -49,7 +50,7 @@ end
 
 ----------------------------------------
 function Joystick:updatePos(position)
-	print("Joystick:updatePos ");
+	info_log("Joystick:updatePos ");
 	local res = (position - self.mCenter):normalize() * self.mRadius;
 	-- compute position of button
 	if (position - self.mCenter):len() > self.mRadius then
@@ -63,13 +64,13 @@ end
 
 ----------------------------------------
 function Joystick:onTouchBegan(point)
-	print("Joystick:onTouchBegan ", point);
+	info_log("Joystick:onTouchBegan ", point);
 	self:updatePos(point);
 end
 
 ----------------------------------------
 function Joystick:onTouchMoved(point)
-	print("Joystick:onTouchMoved ");
+	info_log("Joystick:onTouchMoved ");
 	self:updatePos(point);
 end
 
@@ -81,7 +82,7 @@ end
 
 ----------------------------------------
 function Joystick:onTouchEnded(point)
-	print("Joystick:onTouchEnded ");
+	info_log("Joystick:onTouchEnded ");
 	self.mDestPosition = self.mCenter;
 	self.mButtonPressed = Joystick.BUTTONS.NONE;
 	if self.mButton then
@@ -91,7 +92,7 @@ end
 
 --------------------------------
 function Joystick:checkBlockedButton(button)
-	print("Joystick:checkBlockedButton button ", button, "blocked ", self.mBlockedButton[button]);
+	info_log("Joystick:checkBlockedButton button ", button, "blocked ", self.mBlockedButton[button]);
 	if self.mBlockedButton[button] then
 		return nil
 	end
@@ -112,7 +113,7 @@ end
 function Joystick:init(guiLayer)
 	
 	local node  = guiLayer:getChildByTag(Joystick.JOYSTICK_TAG);
-	print(" Joystick:init ", node);
+	info_log(" Joystick:init ", node);
 
 	node:setVisible(false);
 
@@ -134,13 +135,13 @@ function Joystick:init(guiLayer)
 	    -- init joystick size
 	    local back = node:getChildByTag(Joystick.BACKGROUND_TAG);
 	    local backSize = back:getContentSize();
-	    print("backSize width ", backSize.width, " height ", backSize.height);
+	    info_log("backSize width ", backSize.width, " height ", backSize.height);
 	    local backPosX, backPosY = back:getPosition();
 	    local anchor = back:getAnchorPoint();
 	    
 	    self.mRadius = backSize.width / 2;
 	    self.mCenter = Vector.new(backPosX - backSize.width * anchor.x + self.mRadius, backPosY - backSize.height * anchor.y + self.mRadius);
-	    print("mCenter x ", self.mCenter.x, " y ", self.mCenter.y);
+	    info_log("mCenter x ", self.mCenter.x, " y ", self.mCenter.y);
 
 	    -- get button of joystick
 	    self.mButton = node:getChildByTag(Joystick.BUTTON_TAG);

@@ -1,4 +1,5 @@
 require "src/scenes/BaseScene"
+require "src/base/Log"
 
 FieldNode = inheritsFrom(BaseScene)
 FieldNode.mNodes = nil;
@@ -31,7 +32,7 @@ end
 
 --------------------------------
 function FieldNode:setScrollPos(pos)
-	--print("FieldNode:setScrollPos ");
+	--debug_log("FieldNode:setScrollPos ");
 	if self.mScrollView.setContentOffset then
 		self.mScrollView:setContentOffset(cc.p(0, -pos.y));
 	end
@@ -88,7 +89,7 @@ function FieldNode:init(nodes, layer, field)
 		local anchor = nodes[1]:getAnchorPoint();
 		local size = nodes[1]:getContentSize();
 		posX, posY = posX - anchor.x * size.width, posY - anchor.y * size.height;
-		print(" !!!!! ", size.width, size.height);
+		info_log(" !!!!! ", size.width, size.height);
 		newLayer:setPosition(posX, posY);
 		--newLayer:setAnchorPoint(nodes[1]:getAnchorPoint());
 	end
@@ -104,7 +105,7 @@ function FieldNode:init(nodes, layer, field)
         local  tag = child:getTag();
         if tag == FactoryObject.BRICK_TAG then
             local index = -posGridY * 2;
-            --print("brick !!!! index ", index);
+            --debug_log("brick !!!! index ", index);
             if bricks_array[index] == nil then
                 bricks_array[index] = {}
             end

@@ -4,6 +4,7 @@ require "src/animations/PlistAnimation"
 require "src/animations/RandomAnimation"
 require "src/animations/DelayAnimation"
 require "src/scenes/SoundConfigs"
+require "src/base/Log"
 
 FoxObject = inheritsFrom(PlayerObject)
 
@@ -36,7 +37,7 @@ function FoxObject:init(field, node, needReverse)
     self.mNewEffect:init(node, field.mGame);
     self.mNewEffect:setVisible(false);
 
-	print("FoxObject:init node_obj ", self.mAnimationNode);
+	info_log("FoxObject:init node_obj ", self.mAnimationNode);
 	
 	FoxObject:superClass().init(self, field, node, needReverse);
 
@@ -56,7 +57,7 @@ end
 
 ---------------------------------
 function FoxObject:setCustomProperties(properties)
-    print("FoxObject:setCustomProperties properties.state ", properties.state);
+    info_log("FoxObject:setCustomProperties properties.state ", properties.state);
 
     FoxObject:superClass().setCustomProperties(self, properties);
 
@@ -96,7 +97,7 @@ end
 
 --------------------------------
 function FoxObject:setFightActivated(activated)
-	print("FoxObject:setFightActivated ", activated);
+	info_log("FoxObject:setFightActivated ", activated);
 	FoxObject:superClass().setFightActivated(self, activated);
 	self.mEffectNode:setVisible(activated);
 
@@ -104,7 +105,7 @@ function FoxObject:setFightActivated(activated)
 
 	if flip then
 		local anchor = self.mEffectNode:getPositionX();
-		print("FoxObject:setFightActivated getPositionX ", anchor);
+		info_log("FoxObject:setFightActivated getPositionX ", anchor);
 		self.mEffectNode:setPositionX(-anchor);
 	end
 
@@ -147,7 +148,7 @@ function FoxObject:updateFlipNode(node)
         local sprite = tolua.cast(node, "cc.Sprite");
         if flip ~= sprite:isFlippedX() then
             sprite:setFlippedX(flip);
-            print("FoxObject:updateFlipNode");
+            info_log("FoxObject:updateFlipNode");
             self:updateAnchorFightAnimation();
         end
 	end
@@ -245,7 +246,7 @@ end
 function FoxObject:createSideIdleAnimation()
     --local texture = tolua.cast(self.mAnimationNode, "cc.Sprite"):getTexture();
     local textureName = self:getPrefixTexture() .. ".png";
-    print("FoxObject:initAnimation textureName ", textureName);
+    info_log("FoxObject:initAnimation textureName ", textureName);
     local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
     if texture then
         local contentSize = texture:getContentSize() -- {width = texture:getPixelsWide(), height = texture:getPixelsHigh()}
@@ -288,7 +289,7 @@ end
 --------------------------------
 function FoxObject:getAnchorFightAnimation()
     local sprite = tolua.cast(self.mAnimationNode, "cc.Sprite");
-    print("FoxObject isFlippedX() ", sprite:isFlippedX());
+    info_log("FoxObject isFlippedX() ", sprite:isFlippedX());
     local mult = sprite:isFlippedX() and 1 or -1;
 
     if self.mIsFemale then
@@ -313,23 +314,23 @@ function FoxObject:createFightAnimation()
     local textureName = self:getPrefixTexture() .. "FightStatic.png"
     local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
     local contentSize = texture:getContentSize();
-    print("FoxObject:createFightAnimation width ", contentSize.width, " height ", contentSize.height);
+    info_log("FoxObject:createFightAnimation width ", contentSize.width, " height ", contentSize.height);
 
     local anchor = self.mAnimationNode:getAnchorPoint();
-    print("FoxObject:createFightAnimation anchor x ", anchor.x, "anchor.y ", anchor.y);
+    info_log("FoxObject:createFightAnimation anchor x ", anchor.x, "anchor.y ", anchor.y);
     local originSize = self.mAnimationNode:getContentSize();
-    print("FoxObject:createFightAnimation originSize width ", originSize.width, " height ", originSize.height);
+    info_log("FoxObject:createFightAnimation originSize width ", originSize.width, " height ", originSize.height);
 
     local newAnchorX = (originSize.width * anchor.x) / contentSize.width;
-    print("FoxObject newAnchorX ", newAnchorX);
+    info_log("FoxObject newAnchorX ", newAnchorX);
 
     local newAnchorY = (originSize.height * anchor.y) / contentSize.height;
-    print("FoxObject newAnchorY ", newAnchorY);
+    info_log("FoxObject newAnchorY ", newAnchorY);
 
     self.mFightPlistAnimations = {};
 
     for i = PlayerObject.PLAYER_STATE.PS_FIGHT_LEFT, PlayerObject.PLAYER_STATE.PS_FIGHT_DOWN do
-        print("FIGHT anchor x ", self.mAnimationNode:getAnchorPoint().x, ", y ", self.mAnimationNode:getAnchorPoint().y)
+        info_log("FIGHT anchor x ", self.mAnimationNode:getAnchorPoint().x, ", y ", self.mAnimationNode:getAnchorPoint().y)
         self.mAnimations[i] = self:createFightRepeatAnimation(self.mAnimationNode, self:getPrefixTexture() .. "Fight.plist", true, 0.06, self:getAnchorFightAnimation(), texture);
     end
 end

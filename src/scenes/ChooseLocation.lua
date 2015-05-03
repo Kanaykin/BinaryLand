@@ -3,6 +3,7 @@ require "src/gui/ScrollView"
 require "src/base/AlignmentHelper"
 require "src/scenes/GameConfigs"
 require "src/scenes/SoundConfigs"
+require "src/base/Log"
 
 local LOADSCEENIMAGE = "choseLevel.png"
 
@@ -19,7 +20,7 @@ function ChooseLocation:createLocationImages()
         local menuToolsItem = CCMenuItemImage:create(location:getImage(), location:getImage());
 
         local function onLocationPressed()
-            print("onLocationPressed");
+            info_log("onLocationPressed");
             location:onLocationPressed();
         end
 
@@ -96,7 +97,7 @@ function ChooseLocation:initGui()
     local choseLevel = self;
 
     local function onReturnPressed()
-    	print("onReturnPressed");
+    	info_log("onReturnPressed");
     	choseLevel.mSceneManager:runPrevScene();
     end
 
@@ -109,7 +110,7 @@ end
 
 --------------------------------
 function ChooseLocation:init(sceneMan, params)
-	print("ChooseLocation:init ");
+	info_log("ChooseLocation:init ");
 	self:superClass().init(self, sceneMan, params);
 
 	-- init scene

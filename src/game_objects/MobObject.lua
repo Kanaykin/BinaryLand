@@ -2,6 +2,7 @@ require "src/game_objects/MovableObject"
 require "src/algorithms/WavePathFinder"
 require "src/game_objects/SnareTrigger"
 require "src/game_objects/PlayerObject"
+require "src/base/Log"
 
 MobObject = inheritsFrom(MovableObject)
 
@@ -44,10 +45,10 @@ end
 
 --------------------------------
 function MobObject:initAnimation()
-	print("MobObject:initAnimation");
+	info_log("MobObject:initAnimation");
 
 	local animation = CCAnimation:create();
-	print("animation ", animation);
+	info_log("animation ", animation);
 	animation:addSpriteFrameWithFileName("spider_frame1.png"); 
 	animation:addSpriteFrameWithFileName("spider_frame2.png"); 
 
@@ -61,7 +62,7 @@ end
 
 --------------------------------
 function MobObject:onPlayerEnter(player, pos)
-	print("MobObject.onPlayerEnter ", player.mNode:getTag());
+	info_log("MobObject.onPlayerEnter ", player.mNode:getTag());
     if self.mState ~= MobObject.DEAD then
         self.mField:createSnareTrigger(Vector.new(player.mNode:getPosition()));
     end
@@ -74,20 +75,20 @@ end
 
 --------------------------------
 function MobObject:onPlayerLeave(player)
-	print("MobObject.onPlayerLeave");
+	info_log("MobObject.onPlayerLeave");
 	--player:leaveTrap(nil);
 end
 
 ---------------------------------
 function MobObject:onStateWin()
-	print("MobObject:onStateWin ", self.mTrigger);
+	info_log("MobObject:onStateWin ", self.mTrigger);
 	MobObject:superClass().onStateWin(self);
 	self.mTrigger:setEnterCallback(nil);
 end
 
 --------------------------------
 function MobObject:init(field, node)
-	print("MobObject:init(", node, ")");
+	info_log("MobObject:init(", node, ")");
 	MobObject:superClass().init(self, field, node);
 
 	self.mState = MobObject.IDLE;
@@ -154,7 +155,7 @@ function MobObject:tick(dt)
 
 	if self.mDelta then
 		local val = self.mDelta:normalized();
-		--print("MobObject:tick mDestGridPos ", val.x, ":", val.y);
+		--info_log("MobObject:tick mDestGridPos ", val.x, ":", val.y);
 		tolua.cast(self.mNode, "cc.Sprite"):setFlippedX(val.x < 0);
 	end
 

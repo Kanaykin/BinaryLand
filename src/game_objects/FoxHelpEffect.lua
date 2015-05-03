@@ -1,4 +1,5 @@
 require "src/base/Inheritance"
+require "src/base/Log"
 
 FoxHelpEffect = inheritsFrom(nil)
 FoxHelpEffect.mAnchorBaseNode = nil;
@@ -27,7 +28,7 @@ function FoxHelpEffect:init(node, game)
     self.mBubbleSprite = tolua.cast(self.mBaseNode:getChildByTag(FoxHelpEffect.BUBBLE_NODE_TAG), "cc.Sprite");
     self.mGame = game;
     self.mLabel = tolua.cast(self.mBaseNode:getChildByTag(FoxHelpEffect.LABEL_TAG), "cc.Label");
-    print("FoxHelpEffect:init self.mLabel ", self.mLabel );
+    info_log("FoxHelpEffect:init self.mLabel ", self.mLabel );
     setDefaultFont(self.mLabel, self.mGame:getScale());
 end
 

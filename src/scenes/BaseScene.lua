@@ -1,4 +1,5 @@
 require "src/base/Inheritance"
+require "src/base/Log"
 
 BaseScene = inheritsFrom(nil)
 BaseScene.mSceneGame = nil -- cocos csene
@@ -34,7 +35,7 @@ end
 
 ---------------------------------
 function BaseScene:destroy()
-	print("BaseScene:destroy ");
+	info_log("BaseScene:destroy ");
 	self.mSceneGame:release();
 end
 
@@ -44,7 +45,7 @@ function BaseScene:init(sceneMan, params)
 	if type(params) == "table" then
 		backgroundImageName = params.background;
 	end
-	print("BaseScene:init ", backgroundImageName, self.mSceneManager);
+	info_log("BaseScene:init ", backgroundImageName, self.mSceneManager);
 	self.mSceneManager = sceneMan;
 	self.mSceneGame = CCScene:create();
 	self.mSceneGame:retain();

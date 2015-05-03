@@ -1,4 +1,5 @@
 require "src/base/Inheritance"
+require "src/base/Log"
 
 DialogManager = inheritsFrom(nil)
 DialogManager.mModalDlg = nil;
@@ -10,13 +11,13 @@ end
 
 --------------------------------------
 function DialogManager:activateModal(dlg)
-	print("DialogManager:activateModal")
+	info_log("DialogManager:activateModal")
 	self.mModalDlg = dlg;
 end
 
 --------------------------------------
 function DialogManager:deactivateModal(dlg)
-	print("DialogManager:deactivateModal");
+	info_log("DialogManager:deactivateModal");
 	self.mModalDlg = nil;
 end
 
