@@ -21,6 +21,7 @@ function ChooseLocation:createLocationImages()
 
         local function onLocationPressed()
             info_log("onLocationPressed");
+            menuToolsItem:unregisterScriptTapHandler();
             location:onLocationPressed();
         end
 

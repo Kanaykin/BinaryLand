@@ -26,6 +26,7 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.lua;
 
+import android.content.DialogInterface;
 import android.util.Log;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
@@ -33,6 +34,8 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.os.Build.VERSION_CODES;
+import android.view.KeyEvent;
+import android.app.AlertDialog;
 
 import org.myextend.MyExtendHelper;
 import com.google.android.gms.common.ConnectionResult;
@@ -71,6 +74,7 @@ GoogleApiClient.OnConnectionFailedListener
     }
     
     private native void nativeSetPaths(String documents_path);
+    private native boolean nativeBackPressed();
     
     protected void initDirectories() {
 		String strCacheDirectory = getExternalCacheDir().getAbsolutePath();
@@ -133,6 +137,40 @@ GoogleApiClient.OnConnectionFailedListener
                 });
         }
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        Log.e("INFO", "onKeyDown");
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            onBackPressed();
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        Log.e("INFO", "onBackPressed");
+        if (!nativeBackPressed()) {
+            AlertDialog ad = new AlertDialog.Builder(this)
+                    .setTitle("Exit?")
+                    .setMessage("Do you really want to exit?")
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    }).create();
+            ad.show();
+        }
+        //super.onBackPressed();
+    }
     
     @Override
     public void onWindowFocusChanged(boolean hasFocus)
@@ -151,18 +189,19 @@ GoogleApiClient.OnConnectionFailedListener
     
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		Log.e("SQC", "onCreate");
+        super.onCreate(savedInstanceState);
+
+        Log.e("INFO", "onCreate");
 
 		initDirectories();
-		
-		initUIImmersive();
-		//mPlusClient =  new GoogleApiClient.Builder(this)
-	    //	.addApi(Plus.API)
-	    //	.addScope(Plus.SCOPE_PLUS_LOGIN)
-	    //	.build();
-        /*int result = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+
+        initUIImmersive();
+
+		/*mPlusClient =  new GoogleApiClient.Builder(this)
+	    	.addApi(Plus.API)
+	    	.addScope(Plus.SCOPE_PLUS_LOGIN)
+	    	.build();
+        int result = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if((result != ConnectionResult.SERVICE_MISSING &&
         		result != ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED &&
         		result != ConnectionResult.SERVICE_DISABLED)) {
@@ -174,12 +213,12 @@ GoogleApiClient.OnConnectionFailedListener
         	//builder.addScope(Plus.SCOPE_PLUS_LOGIN);
         	//builder.addScope(Plus.SCOPE_PLUS_PROFILE);
         	mPlusClient = builder.build();
-        }*/
+        }
 		
 		//mPlusClient = new GoogleApiClient.Builder(this)
         //.addApi(Plus.API)
         //.addScope(Plus.SCOPE_PLUS_LOGIN)
-        //.build();
+        //.build();*/
 
 		MyExtendHelper.init(this);
 	}
@@ -198,7 +237,8 @@ GoogleApiClient.OnConnectionFailedListener
     public void onConnectionFailed(ConnectionResult result){
     	
     }
-    
+
+    @Override
 	protected void onStart() {
         super.onStart();
         //if(!mPlusClient.isConnected())

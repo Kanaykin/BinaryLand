@@ -32,6 +32,7 @@ function StartScene:createMenuElements()
 
     local function onPlayGamePressed(val, val2)
     	info_log("onPlayGame ", val, val2);
+        menuToolsItem:unregisterScriptTapHandler();
     	startScene.mSceneManager:runNextScene();
     end
 

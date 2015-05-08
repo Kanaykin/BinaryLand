@@ -34,6 +34,17 @@ function LevelScene:onStateLose()
 end
 
 ---------------------------------
+function LevelScene:onBackPressed()
+	info_log("LevelScene:onBackPressed !!! ", self.mField:getState());
+    if self.mField:getState() == Field.IN_GAME then
+        self.mMainUI:onSettingsButtonPressed(1, 1);
+        return 1;
+    else
+        return 0;
+    end
+end
+
+---------------------------------
 function LevelScene:bonusStart(self_fake, bonusData)
     info_log("LevelScene:bonusStart bonusData ", bonusData);
     self:destroyLevelComponent();

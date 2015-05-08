@@ -29,6 +29,14 @@ function SceneManager:getCurrentScene()
 end
 
 ---------------------------------
+function SceneManager:onBackPressed()
+    if self:getCurrentScene() ~= nil then
+        return self:getCurrentScene():onBackPressed();
+    end
+    return 0;
+end
+
+---------------------------------
 function SceneManager:runPrevScene(params)
 	self:destroyCurrentScene();
 	

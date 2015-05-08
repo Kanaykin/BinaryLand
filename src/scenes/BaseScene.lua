@@ -16,6 +16,11 @@ local LAYER_ORDER = {
 };
 
 ---------------------------------
+function BaseScene:onBackPressed()
+    return 0;
+end
+
+---------------------------------
 function BaseScene:createBackgroundLayer()
 	self.mBackgroundLayer = CCLayer:create();
 	self.mSceneGame:addChild(self.mBackgroundLayer, LAYER_ORDER.BACKGROUND);

@@ -43,6 +43,14 @@ function Game:tick(dt)
 end
 
 ---------------------------------
+function Game:onBackPressed()
+    if not self.mSceneMan then
+        return 0;
+    end
+    return self.mSceneMan:onBackPressed();
+end
+
+---------------------------------
 function Game:createLocation()
 	for i, location in ipairs(gLocations) do
 		local locat = Location:create();

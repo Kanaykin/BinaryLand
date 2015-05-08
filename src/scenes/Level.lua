@@ -71,13 +71,15 @@ end
 
 -----------------------------------
 function Level:initButton(node)
-	local function onLevelIconPressed()
-		self:onLevelIconPressed();
-	end
-
 	local menu = node:getChildByTag(Level.MENU_TAG);
 	if menu then
 		local menuItem = menu:getChildByTag(Level.MENU_ITEM_TAG);
+
+        local function onLevelIconPressed()
+            tolua.cast(menuItem, "cc.MenuItem"):unregisterScriptTapHandler();
+            self:onLevelIconPressed();
+        end
+
         info_log("Level:initButton menuItem ", menuItem);
 		tolua.cast(menuItem, "cc.MenuItem"):registerScriptTapHandler(onLevelIconPressed);
 	end
