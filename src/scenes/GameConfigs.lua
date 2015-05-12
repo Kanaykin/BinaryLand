@@ -165,6 +165,40 @@ gLocations = {
 	{
 		id = "mars",
 		image = "mars.png",
-		position = Coord(0.78, 0.5, 0, -120)
+		position = Coord(0.78, 0.5, 0, -120),
+        opened = true,
+        levels = {
+            {
+                opened = true,
+                ccbFile = {"Level4_1p1", "Level2_1p2"},
+                tileMap = "Level4_1_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                id = "4_1"
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            }
+        }
 	},
 }

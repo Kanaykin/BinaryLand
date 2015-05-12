@@ -6,9 +6,12 @@
  <tileset firstgid="17" name="snow_tile" tilewidth="64" tileheight="64">
   <image source="snow_tile.png" width="256" height="512"/>
  </tileset>
+ <tileset firstgid="49" name="vulcan_tile" tilewidth="64" tileheight="64">
+  <image source="vulcan_tile.png" width="256" height="256"/>
+ </tileset>
  <layer name="Tile Layer 1" width="20" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjZWBgYB0CmBmI2cjEnEjmiIxQLAfEihRgdPMUgFgQB5YBYgksWBwqL0+CeSCzpIFYCAsWI9E8fGaRY54wHrOkgFiUSuYhm0WKebJALIkFi6KpIyU+iMFDyTwAB94Wgw==
+   eJxjZWBgYB0CmBmI2cjEnEjmGA4BbATEZhRiYzTzTCnE6O4bNW/4mWc8As0DACygNeY=
   </data>
  </layer>
 </map>
