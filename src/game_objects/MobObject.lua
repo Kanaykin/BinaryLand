@@ -9,6 +9,7 @@ MobObject = inheritsFrom(MovableObject)
 MobObject.IDLE = 1;
 MobObject.MOVING = 2;
 MobObject.DEAD = 3;
+MobObject.LAST_STATE = 4;
 
 MobObject.mState = MobObject.IDLE;
 MobObject.mPath = nil;
@@ -61,11 +62,16 @@ function MobObject:initAnimation()
 end
 
 --------------------------------
-function MobObject:onPlayerEnter(player, pos)
-	info_log("MobObject.onPlayerEnter ", player.mNode:getTag());
+function MobObject:onPlayerEnterImpl(player, pos)
+	info_log("MobObject.onPlayerEnterImpl ", player.mNode:getTag());
     if self.mState ~= MobObject.DEAD then
         self.mField:createSnareTrigger(Vector.new(player.mNode:getPosition()));
     end
+end
+
+--------------------------------
+function MobObject:onPlayerEnter(player, pos)
+    self:onPlayerEnterImpl(player, pos);
 end
 
 --------------------------------
@@ -75,15 +81,28 @@ end
 
 --------------------------------
 function MobObject:onPlayerLeave(player)
-	info_log("MobObject.onPlayerLeave");
-	--player:leaveTrap(nil);
+    self:onPlayerLeaveImpl(player);
+end
+
+--------------------------------
+function MobObject:onPlayerLeaveImpl(player)
+    info_log("MobObject.onPlayerLeaveImpl");
+    --player:leaveTrap(nil);
 end
 
 ---------------------------------
 function MobObject:onStateWin()
 	info_log("MobObject:onStateWin ", self.mTrigger);
 	MobObject:superClass().onStateWin(self);
-	self.mTrigger:setEnterCallback(nil);
+    if self.mTrigger then
+        self.mTrigger:setEnterCallback(nil);
+    end
+end
+
+--------------------------------
+function MobObject:createTrigger()
+    self.mTrigger = SnareTrigger:create();
+    self.mTrigger:init(self.mField, self.mNode, Callback.new(self, MobObject.onPlayerEnter), Callback.new(self, MobObject.onPlayerLeave));
 end
 
 --------------------------------
@@ -92,13 +111,12 @@ function MobObject:init(field, node)
 	MobObject:superClass().init(self, field, node);
 
 	self.mState = MobObject.IDLE;
-	self.mTrigger = SnareTrigger:create();
 	self.mVelocity = self.mVelocity * field.mGame:getScale();
 
 	-- set size of cell
 	self.mNode:setContentSize(cc.size(self.mField:getCellSize(), self.mField:getCellSize()));
 
-	self.mTrigger:init(self.mField, self.mNode, Callback.new(self, MobObject.onPlayerEnter), Callback.new(self, MobObject.onPlayerLeave));
+    self:createTrigger();
 
 	-- create animation
 	self:initAnimation();
@@ -114,6 +132,7 @@ end
 function MobObject:moveToNextPoint( )
 	if #self.mPath == 0 then
 		self.mState = MobObject.IDLE;
+        info_log("MobObject:moveToNextPoint empty path ", " id ", self:getId());
 		return;
 	end
 	self:moveTo(self.mPath[1]);
@@ -127,9 +146,29 @@ end
 
 ---------------------------------
 function MobObject:onEnterFightTrigger()
+    info_log ("MobObject:onEnterFightTrigger");
+    self:onEnterFightTriggerImpl();
+end
+
+---------------------------------
+function MobObject:onEnterFightTriggerImpl()
     self.mTimeDestroy = 0.5;
     self.mState = MobObject.DEAD;
 --    self.mNode:stopAllActions();
+end
+
+--------------------------------
+function MobObject:startMoving(destPoint)
+    -- clone field
+    local cloneArray = self.mField:cloneArray();
+    info_log ("MobObject:startMoving destPoint ", destPoint.x, "y ", destPoint.y, " id ", self:getId());
+    self.mState = MobObject.MOVING;
+    self.mPath = WavePathFinder.buildPath(self.mGridPosition, destPoint, cloneArray, self.mField.mSize);
+    if #self.mPath > 0 then
+        table.remove(self.mPath, 1);
+    end
+    info_log ("MobObject:startMoving end");
+    self:moveToNextPoint();
 end
 
 --------------------------------
@@ -142,6 +181,7 @@ function MobObject:tick(dt)
                 self.mField:removeObject(self);
                 self.mField:removeEnemy(self)
                 self:destroy();
+                return;
             end
         end
 --        return;
@@ -162,13 +202,7 @@ function MobObject:tick(dt)
 	if self.mState == MobObject.IDLE then
 		-- find free point on field and move to this point
 		local destPoint = self:getDestPoint();
-		-- clone field
-		local cloneArray = self.mField:cloneArray();
-		print ("MobObject:tick destPoint ", destPoint.x, "y ", destPoint.y);
-		self.mState = MobObject.MOVING;
-		self.mPath = WavePathFinder.buildPath(self.mGridPosition, destPoint, cloneArray, self.mField.mSize);
-		table.remove(self.mPath, 1);
-		self:moveToNextPoint();
+        self:startMoving(destPoint);
 	end
 
     local anim = self:getAnimationByDirection();

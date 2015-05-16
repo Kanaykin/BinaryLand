@@ -81,7 +81,8 @@ WavePathFinder = {
 
 	-----------------------------------
 	printPath = function(path)
-		for i, val in ipairs(path) do 
+        info_log("printPath ");
+		for i, val in ipairs(path) do
 			info_log(" i = ", i, "val.x ", val.x , "val.y ", val.y);
 		end
 	end,
@@ -98,7 +99,7 @@ WavePathFinder = {
 
 	-----------------------------------
 	buildPath = function (pointFrom, pointTo, array, sizeArray)
-		info_log("buildPath ( pF.x ", pointFrom.x, " pF.y ", pointFrom.x, "pF.x ", pointTo.x, " pF.y ", pointTo.x);
+		info_log("buildPath ( pF.x ", pointFrom.x, " pF.y ", pointFrom.y, "pF.x ", pointTo.x, " pF.y ", pointTo.y);
 		local srcPoints = {pointFrom};
 		array[COORD(pointFrom.x, pointFrom.y, sizeArray.x)] = WavePathFinder.FIRST_INDEX;
 		WavePathFinder.fillArray(srcPoints, pointTo, array, sizeArray, WavePathFinder.FIRST_INDEX + 1);
@@ -107,6 +108,7 @@ WavePathFinder = {
 		WavePathFinder.findPath(path, array, sizeArray);
 
 		local pathReversed = WavePathFinder.reversePath(path);
+        info_log("buildPath final path");
 		WavePathFinder.printPath(pathReversed);
 		return pathReversed;
 	end

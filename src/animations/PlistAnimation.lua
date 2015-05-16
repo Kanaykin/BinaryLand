@@ -84,7 +84,7 @@ function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
 
    	for i, val in ipairs(arrayFrames) do
    		local frame = cache:getSpriteFrame(val);
-   		info_log("PlistAnimation frame ", frame);
+   		--info_log("PlistAnimation frame ", frame);
    		self.mAnimation:addSpriteFrame(frame);
    	end
 
