@@ -5,12 +5,16 @@ require "src/base/Log"
 
 DogObject = inheritsFrom(MobObject)
 
-DogObject.FOUND_PLAYER = MobObject.LAST_STATE + 1;
-DogObject.RUN_AWAY = DogObject.FOUND_PLAYER + 1;
+DogObject.FOUND_PLAYER  = MobObject.LAST_STATE + 1;
+DogObject.RUN_AWAY      = MobObject.LAST_STATE + 2;
+DogObject.HUNTER_DEAD   = MobObject.LAST_STATE + 3;
 DogObject.BARK_ANIMATION = 4;
 
 DogObject.SAFE_DISTANCE = 2;
 DogObject.oldVelocity = nil;
+
+DogObject.mFoundPlayer = nil;
+DogObject.mHunterDead = false;
 
 --------------------------------
 function DogObject:createBarkAnimation()
@@ -64,10 +68,11 @@ end
 --------------------------------
 function DogObject:onPlayerEnterImpl(player, pos)
     info_log("DogObject.onPlayerEnterImpl ", player.mNode:getTag());
-    if self.mState ~= MobObject.DEAD and self.mState ~= DogObject.RUN_AWAY then
+    if not player:isInTrap() and self.mState ~= MobObject.DEAD and self.mState ~= DogObject.RUN_AWAY then
         self.mState = DogObject.FOUND_PLAYER;
         self.mDelta = nil;
         self.mMoveTime = 0;
+        self.mFoundPlayer = player;
     end
 end
 
@@ -76,6 +81,7 @@ function DogObject:onPlayerLeaveImpl(player)
     info_log("DogObject.onPlayerLeaveImpl");
     if self.mState == DogObject.FOUND_PLAYER then
         self.mState = MobObject.IDLE;
+        self.mFoundPlayer = nil;
     end
 end
 
@@ -88,7 +94,8 @@ function DogObject:getSafePlayerPoints()
     debug_log("self.mGridPosition x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
     for i, point in ipairs(freePoints) do
         if (math.abs(point.x - self.mGridPosition.x) > DogObject.SAFE_DISTANCE) and
-            (math.abs(point.y - self.mGridPosition.y) > DogObject.SAFE_DISTANCE) then
+            (math.abs(point.y - self.mGridPosition.y) > DogObject.SAFE_DISTANCE) and
+            self:inThisHalf(point) then
 
             debug_log("i ", i, "x ", point.x, "y ", point.y);
             table.insert(safePoints, Vector.new(point.x, point.y));
@@ -99,18 +106,31 @@ function DogObject:getSafePlayerPoints()
 end
 
 ---------------------------------
+function DogObject:getFoundPlayerPos()
+    if self.mState == DogObject.FOUND_PLAYER then
+        return self.mGridPosition;
+    end
+    return nil;
+end
+
+---------------------------------
+function DogObject:runAway(point)
+    if point and not self.oldVelocity then
+        self.oldVelocity = self.mVelocity;
+        self.mVelocity = self.mVelocity * 4;
+        --self.mGridPosition = Vector.new(self.mField:getGridPosition(self.mNode));
+        self.mPath = {};
+        self:startMoving(point);
+        self.mState = DogObject.RUN_AWAY;
+    end
+end
+
+---------------------------------
 function DogObject:onEnterFightTriggerImpl()
     if self.mState ~= DogObject.RUN_AWAY then
         -- move to safe for player point
         local point = self:getSafePlayerPoints();
-        if point and not self.oldVelocity then
-            self.oldVelocity = self.mVelocity;
-            self.mVelocity = self.mVelocity * 4;
-            --self.mGridPosition = Vector.new(self.mField:getGridPosition(self.mNode));
-            self.mPath = {};
-            self:startMoving(point);
-            self.mState = DogObject.RUN_AWAY;
-        end
+        self:runAway(point);
     end
 end
 
@@ -131,11 +151,80 @@ function DogObject:onMoveFinished( )
         self.mVelocity = self.oldVelocity;
         self.oldVelocity = nil;
     end
+    if self.mHunterDead and #self.mPath == 0 then
+        self.mTimeDestroy = 0.0;
+        self.mState = MobObject.DEAD;
+    end
     DogObject:superClass().onMoveFinished(self);
+end
+
+---------------------------------
+function DogObject:inThisHalf(point)
+    local allRight = self.mGridPosition.x <= 7 and point.x <= 7;
+    local allLeft = self.mGridPosition.x > 7 and point.x > 7;
+    return allRight or allLeft;
+end
+
+---------------------------------
+function DogObject:getAwayPoint()
+    info_log("DogObject:getAwayPoint id ", self:getId());
+    local freePoints = self.mField:getFreePoints();
+    local awayPoints = {};
+
+    debug_log("self.mGridPosition x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
+    for i, point in ipairs(freePoints) do
+        if point.y == 1 and self:inThisHalf(point) then
+            debug_log("i ", i, "x ", point.x, "y ", point.y);
+            table.insert(awayPoints, Vector.new(point.x, point.y));
+        end
+    end
+
+    return awayPoints[math.random(#awayPoints)];
+end
+
+--------------------------------
+function DogObject:getBonus()
+    return nil;
+end
+
+--------------------------------
+function DogObject:updateRunAwayPath()
+    local newPath = {};
+    for i, point in ipairs(self.mPath) do
+        debug_log("DogObject:updateRunAwayPath i ", i, " point x ", point.x, " y ", point.y);
+        table.insert(newPath, Vector.new(point.x, point.y));
+        if point.y == 1 then
+            table.insert(newPath, Vector.new(point.x, point.y - 1));
+            break;
+        end
+    end
+    self.mPath = newPath;
+end
+
+--------------------------------
+function DogObject:onHunterDead()
+    info_log ("DogObject:onHunterDead ");
+    local awayPoint = self:getAwayPoint();
+    if self.oldVelocity then
+        self.mVelocity = self.oldVelocity;
+        self.oldVelocity = nil;
+    end
+    self:runAway(awayPoint);
+    self:updateRunAwayPath();
+    self.mHunterDead = true;
+end
+
+--------------------------------
+function DogObject:checkFoundPlayer()
+    if self.mFoundPlayer and self.mFoundPlayer:isInTrap() then
+        self.mState = MobObject.IDLE;
+        self.mFoundPlayer = nil;
+    end
 end
 
 --------------------------------
 function DogObject:tick(dt)
     --debug_log("DogObject:tick x ", self.mGridPosition.x, " y ", self.mGridPosition.y, " id ", self:getId());
+    self:checkFoundPlayer();
 	DogObject:superClass().tick(self, dt);
 end

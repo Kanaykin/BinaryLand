@@ -25,6 +25,7 @@ gLocations = {
 				tutorial = false,
 				time = 120,
 				backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                customProperties = "src/levels/Level1_2",
                 id = "1_2",
                 bonusRoom = {
                     --opened = true,
@@ -97,6 +98,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 120,
+                customProperties = "src/levels/Level2_1",
                 backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
                 id = "2_1"
             },
@@ -136,6 +138,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 120,
+                customProperties = "src/levels/Level3_1",
                 backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
                 id = "3_1"
             },
@@ -176,6 +179,7 @@ gLocations = {
                 tutorial = false,
                 time = 120,
                 backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                customProperties = "src/levels/Level4_1",
                 id = "4_1"
             },
             {

@@ -64,7 +64,7 @@ end
 --------------------------------
 function MobObject:onPlayerEnterImpl(player, pos)
 	info_log("MobObject.onPlayerEnterImpl ", player.mNode:getTag());
-    if self.mState ~= MobObject.DEAD then
+    if self.mState ~= MobObject.DEAD and not player:isInTrap() then
         self.mField:createSnareTrigger(Vector.new(player.mNode:getPosition()));
     end
 end
@@ -141,7 +141,9 @@ end
 
 --------------------------------
 function MobObject:onMoveFinished( )
-	self:moveToNextPoint();
+    if self.mState ~= MobObject.DEAD then
+        self:moveToNextPoint();
+    end
 end
 
 ---------------------------------

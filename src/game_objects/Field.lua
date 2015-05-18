@@ -360,6 +360,13 @@ end
 --------------------------------
 function Field:removeObject(object)
 	info_log("Field:removeObject(", object, ")");
+
+    local id = object:getId();
+    if id then
+        self.mObjectsById[id] = nil;
+        info_log("Field:removeObject id ", id);
+    end
+
 	local index = self:findArrayIndex(self.mObjects, object);
 	if index then
 		table.remove(self.mObjects, index);
@@ -411,7 +418,7 @@ end
 
 --------------------------------
 function Field:addBonus(enemy)
-    if enemy.getBonus then
+    if enemy.getBonus and enemy.getBonus() then
         local rect = enemy:getBoundingBox();
         local pos = enemy:getPosition();
         local orderPos = enemy:getPrevOrderPos();
