@@ -133,6 +133,7 @@ function MobObject:moveToNextPoint( )
 	if #self.mPath == 0 then
 		self.mState = MobObject.IDLE;
         info_log("MobObject:moveToNextPoint empty path ", " id ", self:getId());
+        self:resetMovingParams();
 		return;
 	end
 	self:moveTo(self.mPath[1]);
@@ -197,7 +198,7 @@ function MobObject:tick(dt)
 
 	if self.mDelta then
 		local val = self.mDelta:normalized();
-		--info_log("MobObject:tick mDestGridPos ", val.x, ":", val.y);
+		--info_log("MobObject:tick mDestGridPos ", val.x, ":", val.y,  "id ", self:getId());
 		tolua.cast(self.mNode, "cc.Sprite"):setFlippedX(val.x < 0);
 	end
 

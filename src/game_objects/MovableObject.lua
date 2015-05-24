@@ -32,9 +32,15 @@ function MovableObject:restore(data)
 end
 
 --------------------------------
+function MovableObject:resetMovingParams()
+    self.mDelta = nil;
+    self.mMoveTime = 0;
+end
+
+--------------------------------
 function MovableObject:stopMoving()
 	if self.mDelta then
-		self.mDelta = nil;
+        self:resetMovingParams();
 		self:onMoveFinished();
 	end
 end
@@ -90,12 +96,12 @@ function MovableObject:tick(dt)
 	MovableObject:superClass().tick(self, dt);
 	if self.mDelta then
 		local val = self.mDelta:normalized() * self.mVelocity * self.mMoveTime;
-		--debug_log("[MovableObject:moveTo] tick val ", val);
+		--debug_log("[MovableObject:moveTo] tick val ", val, "id ", self:getId());
 		local cur = self.mSrcPos + self.mDelta - val;
-		--debug_log("[MovableObject:moveTo] tick cur.x ", cur.x, " y ", cur.y);
+		--debug_log("[MovableObject:moveTo] tick cur.x ", cur.x, " y ", cur.y, "id ", self:getId());
 		self.mNode:setPosition(cc.p(cur.x, cur.y));
 		self.mMoveTime = self.mMoveTime - dt;
-		--debug_log("[MovableObject:moveTo] tick mMoveTime ", self.mMoveTime);
+		--debug_log("[MovableObject:moveTo] tick mMoveTime ", self.mMoveTime, "id ", self:getId());
 		self.mGridPosition = Vector.new(self.mField:getGridPosition(self.mNode));
 		self:updateOrder();
 		if self.mMoveTime <= 0 then

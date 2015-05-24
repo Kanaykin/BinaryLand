@@ -70,8 +70,7 @@ function DogObject:onPlayerEnterImpl(player, pos)
     info_log("DogObject.onPlayerEnterImpl ", player.mNode:getTag());
     if not player:isInTrap() and self.mState ~= MobObject.DEAD and self.mState ~= DogObject.RUN_AWAY then
         self.mState = DogObject.FOUND_PLAYER;
-        self.mDelta = nil;
-        self.mMoveTime = 0;
+        self:resetMovingParams();
         self.mFoundPlayer = player;
     end
 end
@@ -102,7 +101,7 @@ function DogObject:getSafePlayerPoints()
         end
     end
 
-    return safePoints[math.random(#safePoints)];
+return safePoints[math.random(#safePoints)];
 end
 
 ---------------------------------
@@ -116,6 +115,7 @@ end
 ---------------------------------
 function DogObject:runAway(point)
     if point and not self.oldVelocity then
+        self:resetMovingParams();
         self.oldVelocity = self.mVelocity;
         self.mVelocity = self.mVelocity * 4;
         --self.mGridPosition = Vector.new(self.mField:getGridPosition(self.mNode));
