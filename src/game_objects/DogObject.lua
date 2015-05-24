@@ -190,6 +190,9 @@ end
 --------------------------------
 function DogObject:updateRunAwayPath()
     local newPath = {};
+    if #self.mPath == 0 and self.mGridPosition.y == 1 then
+        table.insert(self.mPath, Vector.new(self.mGridPosition.x, self.mGridPosition.y));
+    end
     for i, point in ipairs(self.mPath) do
         debug_log("DogObject:updateRunAwayPath i ", i, " point x ", point.x, " y ", point.y);
         table.insert(newPath, Vector.new(point.x, point.y));

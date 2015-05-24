@@ -1,7 +1,7 @@
-require "src/game_objects/Trigger"
+require "src/game_objects/MultiTrigger"
 require "src/base/Log"
 
-FightTrigger = inheritsFrom(Trigger)
+FightTrigger = inheritsFrom(MultiTrigger)
 FightTrigger.mActivated = false;
 FightTrigger.mNodeSecond = nil;
 
