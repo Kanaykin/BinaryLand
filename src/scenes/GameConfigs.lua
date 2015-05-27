@@ -205,4 +205,45 @@ gLocations = {
             }
         }
 	},
+    {
+        id = "jungle",
+        image = "mars.png",
+        position = Coord(0.9, 0.5, 0, -120),
+        opened = true,
+        levels = {
+            {
+                opened = true,
+                ccbFile = {"Level5_1p1", "Level2_1p2"},
+                tileMap = "Level5_1_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                customProperties = "src/levels/Level4_1",
+                id = "5_1"
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            }
+        }
+    },
+
 }

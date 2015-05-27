@@ -58,6 +58,16 @@ function MultiTrigger:contained(point)
 end
 
 --------------------------------
+function MultiTrigger:isContainedObject(player_in)
+    for i, player in ipairs(self.mContainedObjects) do
+        if player == player_in then
+            return true;
+        end
+    end
+    return false;
+end
+
+--------------------------------
 function MultiTrigger:updateContainedObjects(dt)
     local containedObjects = {}
     for i, player in ipairs(self.mContainedObjects) do
@@ -68,28 +78,32 @@ function MultiTrigger:updateContainedObjects(dt)
         end
         if not contained then
             if self.mLeaveCallback then
+                info_log("MultiTrigger:updateContainedObjects leave ", player:getId());
                 self.mLeaveCallback(player);
             end
         else
             table.insert(containedObjects, player);
         end
     end
-    self.mContainedObjects = {}
+    self.mContainedObjects = containedObjects
 end
 
 --------------------------------
 function MultiTrigger:findCollisionObjects(dt)
     local players = self:getCollisionObjects()
     for i, player in ipairs(players) do
-        local pointX, pointY = player.mNode:getPosition();
-        --info_log("Trigger:tick obj x ", pointX, " y ", pointY);
-        --info_log("Trigger:tick x ", self.mNode:getBoundingBox().x, " y ", self.mNode:getBoundingBox().y );
-        local contained = self:contained(Vector.new(pointX, pointY));
-        --info_log("contained ", contained);
-        if contained then
-            info_log("self:onEnter begin ");
-            self:onEnter(player)
-            info_log("self:onEnter end ");
+        info_log("MultiTrigger:findCollisionObjects ", player:getId(), " contained ", self:isContainedObject(player));
+        if not self:isContainedObject(player) then
+            local pointX, pointY = player.mNode:getPosition();
+            --info_log("Trigger:tick obj x ", pointX, " y ", pointY);
+            --info_log("Trigger:tick x ", self.mNode:getBoundingBox().x, " y ", self.mNode:getBoundingBox().y );
+            local contained = self:contained(Vector.new(pointX, pointY));
+            --info_log("contained ", contained);
+            if contained then
+                info_log("self:onEnter begin ");
+                self:onEnter(player)
+                info_log("self:onEnter end ");
+            end
         end
     end
 
@@ -97,6 +111,7 @@ end
 
 --------------------------------
 function MultiTrigger:tick(dt)
+    info_log("MultiTrigger:tick");
 	MultiTrigger:superClass().tick(self, dt);
 
 	-- check bbox contain player or not
