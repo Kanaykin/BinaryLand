@@ -153,7 +153,7 @@ GoogleApiClient.OnConnectionFailedListener
     public void onBackPressed()
     {
         Log.e("INFO", "onBackPressed");
-        if (!nativeBackPressed()) {
+        if (true || !nativeBackPressed()) {
             AlertDialog ad = new AlertDialog.Builder(this)
                     .setTitle("Exit?")
                     .setMessage("Do you really want to exit?")
