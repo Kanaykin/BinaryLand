@@ -54,7 +54,7 @@ function LevelScene:bonusStart(self_fake, bonusData)
 	self:initScene(data);
     self:initGui();
     self:postInitScene(data);
-    if bonusData.score then
+    if bonusData and bonusData.score then
         self.mField:setScore(bonusData.score);
     end
 end

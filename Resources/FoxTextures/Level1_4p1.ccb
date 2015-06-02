@@ -2280,7 +2280,7 @@
 								<key>value</key>
 								<array>
 									<real>16</real>
-									<real>64</real>
+									<real>96</real>
 									<integer>5</integer>
 								</array>
 							</dict>
@@ -2292,7 +2292,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>-0.30000001192092896</real>
+									<real>0.0</real>
 								</array>
 							</dict>
 							<dict>

@@ -51,7 +51,7 @@ end
 
 --------------------------------
 function Trigger:contained(point)
-    return Rect.new(self.mNode:getBoundingBox()):containsPoint(cc.p(point.x, point.y));
+    return Rect.new(self:getBoundingBox()):containsPoint(cc.p(point.x, point.y));
 end
 
 --------------------------------

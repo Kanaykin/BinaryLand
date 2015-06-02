@@ -20,7 +20,7 @@ function BonusObject:initAnimation()
     if self.mType == BonusObject.COINS_TYPE then
         animation:init("CoinsBonus.plist", self.mNode, self.mNode:getAnchorPoint());
     elseif self.mType == BonusObject.TIME_TYPE then
-        animation:init("TimeBonus.plist", self.mNode, self.mNode:getAnchorPoint());
+        animation:init("TimeBonus.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.2);
     end
 
     self.mAnimation = RepeatAnimation:create();
@@ -28,6 +28,14 @@ function BonusObject:initAnimation()
     self.mAnimation:play();
 end
 
+---------------------------------
+function BonusObject:getBoundingBox()
+    local rect = self.mNode:getBoundingBox();
+    if self.mType == BonusObject.TIME_TYPE then
+        rect.height = rect.height * 0.5;
+    end
+    return rect;
+end
 
 --------------------------------
 function BonusObject:setScore(score)
