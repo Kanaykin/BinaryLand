@@ -96,6 +96,12 @@ function HunterObject:updateDog()
         elseif not playerPos and self.mState == HunterObject.FOUND_PLAYER then
             self.mVelocity = self.oldVelocity;
             self.oldVelocity = nil;
+
+            if self.mGridPosition ~= self.mDestGridPos then
+                self.mState = MobObject.MOVING;
+            else
+                self.mState = MobObject.IDLE;
+            end
         end
     end
 end
