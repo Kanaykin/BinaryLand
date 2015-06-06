@@ -170,7 +170,7 @@ end
 
 ----------------------------------------
 function PlayerController:onTouchEnded(point)
-	info_log("PlayerController:onTouchEnded ");
+	--info_log("PlayerController:onTouchEnded ");
 	--self.mObjectCaptured = nil
 	--self.mJoystick:setButtonPressed(nil);
 	self.mPrevObjectPosition = {}

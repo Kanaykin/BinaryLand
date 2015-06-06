@@ -152,7 +152,7 @@ function FactoryObject:createBonusRoomDoor(field, node)
 
     bonusRoom:init(field, node, Callback.new(field, Field.onEnterBonusRoomDoor));
     field:addBonusRoomDoor(bonusRoom);
-    return bonus;
+    return bonusRoom;
 end
 
 ------------------------------

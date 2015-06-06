@@ -9,9 +9,10 @@ DelayAnimationSoftImpl = inheritsFrom(IAnimation)
 DelayAnimationSoftImpl.mAnimation = nil
 DelayAnimationSoftImpl.mTexture = nil
 DelayAnimationSoftImpl.mTextureName = nil
+DelayAnimationSoftImpl.mAnchor = nil
 
 --------------------------------
-function DelayAnimationSoftImpl:init(animation, delay, texture, textureSize, textureName)
+function DelayAnimationSoftImpl:init(animation, delay, texture, textureSize, textureName, anchor)
     info_log("DelayAnimationSoftImpl:init ");
 	local action = animation:getAction();
 	local delayAction = cc.DelayTime:create(delay);
@@ -20,6 +21,7 @@ function DelayAnimationSoftImpl:init(animation, delay, texture, textureSize, tex
 	animation:setAction(seq);
 
 	self.mAnimation = animation;
+    self.mAnchor = anchor;
 
 	-- remembe texture
 	if texture and textureSize then
@@ -57,6 +59,9 @@ function DelayAnimationSoftImpl:play()
             tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setTextureRect(cc.rect(0, 0, self.mTextureSize.width, self.mTextureSize.height));
         end
 	end
+    if self.mAnchor then
+        self.mNode:setAnchorPoint(self.mAnchor);
+    end
 	self.mAnimation:play();
 end
 
@@ -108,10 +113,10 @@ end
 
 --////////////////////////////////////////
 --------------------------------
-function DelayAnimation:init(animation, delay, texture, textureSize, textureName)
+function DelayAnimation:init(animation, delay, texture, textureSize, textureName, anchor)
 	if animation:getAction() then
 		self.mImpl = DelayAnimationSoftImpl:create();
-		self.mImpl:init(animation, delay, texture, textureSize, textureName);
+		self.mImpl:init(animation, delay, texture, textureSize, textureName, anchor);
 	else 
 		self.mImpl = DelayAnimationHardImpl:create();
 		self.mImpl:init(animation, delay);

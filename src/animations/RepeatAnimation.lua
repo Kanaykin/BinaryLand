@@ -102,6 +102,11 @@ function RepeatAnimation:init(animation, soft, time)
 end
 
 ---------------------------------
+function RepeatAnimation:getAction()
+    return nil;
+end
+
+---------------------------------
 function RepeatAnimation:isDone()
 	return self.mImpl:isDone();
 end

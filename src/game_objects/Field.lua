@@ -33,6 +33,7 @@ Field.mState = nil;
 Field.mStateListener = nil;
 Field.mId = nil;
 Field.mCustomProperties = nil;
+Field.mEnemyEnterTriggerListener = nil;
 
 -- states
 Field.PAUSE = 1;
@@ -427,11 +428,24 @@ function Field:addBonus(enemy)
 end
 
 --------------------------------
+function Field:addEnemyEnterTriggerListener(listener)
+    if self.mEnemyEnterTriggerListener then
+        local newListener = ListenerGlue.new(self.mEnemyEnterTriggerListener, listener);
+        self.mEnemyEnterTriggerListener = newListener;
+    else
+        self.mEnemyEnterTriggerListener = listener;
+    end
+end
+
+--------------------------------
 function Field:onEnemyEnterTrigger(enemy)
 	info_log("Field:onEnemyEnterTrigger ", enemy);
 	SimpleAudioEngine:getInstance():playEffect(gSounds.MOB_DEATH_SOUND)
 
     enemy:onEnterFightTrigger();
+    if self.mEnemyEnterTriggerListener then
+        self.mEnemyEnterTriggerListener:onEnemyEnterTrigger(enemy);
+    end
 end
 
 --------------------------------
