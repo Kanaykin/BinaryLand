@@ -22,11 +22,28 @@ end
 function BonusRoomDoor:onEnemyEnterTrigger(enemy)
     info_log("BonusRoomDoor:onEnemyEnterTrigger id ", enemy:getId());
     if self.mBonusAnimation and self:isHunter(enemy) then
+
+        local texture = tolua.cast(self.mNode, "cc.Sprite"):getTexture();
+        texture:retain();
+
+        local anim1 = EmptyAnimation:create();
+        anim1:init(texture, self.mNode, self.mNode:getAnchorPoint());
+
+        local delayAnim = DelayAnimation:create();
+        delayAnim:init(anim1, 1);
+        --------------------
         local repeat_idle = RepeatAnimation:create();
         local animation = PlistAnimation:create();
         local anchor = self.mNode:getAnchorPoint();
         animation:init(self.mBonusAnimation, self.mNode, anchor, nil, 0.2);
         repeat_idle:init(animation, false, 4);
+
+        --------------------
+        local sequence = SequenceAnimation:create();
+        sequence:init();
+
+        sequence:addAnimation(delayAnim);
+        sequence:addAnimation(repeat_idle);
 
         --local texture = tolua.cast(self.mNode, "cc.Sprite"):getTexture();
         --local delayAnim = DelayAnimation:create();
@@ -38,7 +55,7 @@ function BonusRoomDoor:onEnemyEnterTrigger(enemy)
         --self.mAnimation:addAnimation(delayAnim);
         --self.mAnimation:play();
 
-        self.mAnimation = repeat_idle;
+        self.mAnimation = sequence;
         self.mAnimation:play();
     end
 
