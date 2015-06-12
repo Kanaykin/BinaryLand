@@ -35,6 +35,11 @@ Field.mId = nil;
 Field.mCustomProperties = nil;
 Field.mEnemyEnterTriggerListener = nil;
 
+-- smooth camera moving
+Field.mScrollPosNew = nil;
+Field.mScrollPosAccelerate = 100;
+Field.mScrollCurVelocity = nil;
+
 -- states
 Field.PAUSE = 1;
 Field.IN_GAME = 2;
@@ -139,15 +144,20 @@ function Field:updateScrollPos()
 	local min = math.huge;
 	local max = -math.huge;
 	for i, val in ipairs(self.mPlayerObjects) do
-		local x, y = val.mNode:getPosition();
-		min = math.min(min, y);
-		max = math.max(max, y);
+        if not val:isInTrap() then
+            local x, y = val.mNode:getPosition();
+            min = math.min(min, y);
+            max = math.max(max, y);
+        end
 	end
-	local visibleSize = CCDirector:getInstance():getVisibleSize();
-	local pos = max - visibleSize.height / 2;
-	pos = math.max(pos, 0);
-	--print ("Field:updateScrollPos ", pos); 
-	self.mFieldNode:setScrollPos(Vector.new(0, pos));
+    if min ~= math.huge and max ~= -math.huge then
+        local visibleSize = CCDirector:getInstance():getVisibleSize();
+        local pos = (max - min) / 2 + min - visibleSize.height / 2;-- max - visibleSize.height / 2;
+        pos = math.max(pos, 0);
+        --print ("Field:updateScrollPos ", pos); 
+        --self.mFieldNode:setScrollPos(Vector.new(0, pos));
+        self:smoothCameraMove(Vector.new(0, pos));
+    end
 end
 
 ---------------------------------
@@ -296,6 +306,39 @@ function Field:updateState()
 end
 
 ---------------------------------
+function Field:smoothCameraMove(cameraPosNew)
+    self.mScrollPosNew = cameraPosNew;
+    self.mScrollCurVelocity = 0;
+end
+
+---------------------------------
+function Field:updateCameraMove(dt)
+
+    local scrollPos = self.mFieldNode:getScrollPos();
+    scrollPos = Vector.new(scrollPos.x, -scrollPos.y);
+    if self.mScrollPosNew ~= nil and (scrollPos - self.mScrollPosNew):len() > 0 then
+
+        local dir = (self.mScrollPosNew - scrollPos):normalize().y;
+        self.mScrollCurVelocity = self.mScrollPosAccelerate;-- * dt;
+
+        local delta = self.mScrollCurVelocity * dt * dir;
+        local newpos = scrollPos + delta;
+        debug_log("scrollPos ", scrollPos.y);
+        debug_log("new pos ", newpos.y);
+        debug_log("dir ", dir);
+        debug_log("self.mScrollPosNew ", self.mScrollPosNew.y);
+
+        self.mFieldNode:setScrollPos(newpos);
+        if (self.mScrollPosNew - newpos).y * dir < 0 then
+            self.mFieldNode:setScrollPos(self.mScrollPosNew);
+            self.mScrollPosNew = nil;
+        end
+
+        self.mScrollCurVelocity = 0;
+    end
+end
+
+---------------------------------
 function Field:tick(dt)
 	self:updateState();
 
@@ -306,6 +349,8 @@ function Field:tick(dt)
         obj:destroy();
     end
     self.mNeedDestroyObjects = {}
+
+    self:updateCameraMove(dt);
 
 	if self.mState == Field.IN_GAME then
         if self.mTime then
