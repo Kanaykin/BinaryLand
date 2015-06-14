@@ -139,7 +139,7 @@ function Field:fieldToScreen(pos)
 end
 
 ---------------------------------
-function Field:setScrollPos(scrollPosY)
+function Field:setScrollPos(scrollPosY, playerDir)
     local scrollPos = self.mFieldNode:getScrollPos();
     scrollPos = Vector.new(scrollPos.x, -scrollPos.y);
     debug_log("Field:setScrollPos ", scrollPosY);
@@ -147,12 +147,20 @@ function Field:setScrollPos(scrollPosY)
 
     local len = math.abs(scrollPosY - scrollPos.y);
     debug_log("len ", len);
-    local dir = (scrollPosY - scrollPos.y) / len;
 
-    if self.mMaxScroll < len then
-        self.mFieldNode:setScrollPos(Vector.new(0, scrollPos.y + self.mMaxScroll * dir));
-    else
-        self.mFieldNode:setScrollPos(Vector.new(0, scrollPosY));
+    if len > 0 then
+        local dir = (scrollPosY - scrollPos.y) / len;
+
+        debug_log(" Field:setScrollPos dir ", dir);
+        debug_log(" Field:setScrollPos playerDir ", playerDir);
+
+        if dir * playerDir < 0 then
+            if self.mMaxScroll < len then
+                self.mFieldNode:setScrollPos(Vector.new(0, scrollPos.y + self.mMaxScroll * dir));
+            else
+                self.mFieldNode:setScrollPos(Vector.new(0, scrollPosY));
+            end
+        end
     end
 end
 
@@ -176,7 +184,7 @@ function Field:updateScrollPos()
         end
         if self.mPlayerPosY[i] and yMax < math.abs(self.mPlayerPosY[i] - y) then
             yMax = math.abs(self.mPlayerPosY[i] - y);
-            dir = self.mPlayerPosY[i] - y;
+            dir = (self.mPlayerPosY[i] - y) / yMax;
         end
         self.mPlayerPosY[i] = y;
 	end
@@ -185,16 +193,15 @@ function Field:updateScrollPos()
         return;
     end
 
-    info_log("Field:updateScrollPos dir ", dir);
-
     if min ~= math.huge and max ~= -math.huge then
         local visibleSize = CCDirector:getInstance():getVisibleSize();
         local pos = (max - min) / 2 + min - visibleSize.height / 2;-- max - visibleSize.height / 2;
         pos = math.max(pos, 0);
-        --print ("Field:updateScrollPos ", pos); 
+
+        --print ("Field:updateScrollPos ", pos);
         --self.mFieldNode:setScrollPos(Vector.new(0, pos));
         --self:smoothCameraMove(Vector.new(0, pos));
-        self:setScrollPos(pos);
+        self:setScrollPos(pos, dir);
     end
 end
 
