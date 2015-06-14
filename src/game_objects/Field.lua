@@ -36,9 +36,8 @@ Field.mCustomProperties = nil;
 Field.mEnemyEnterTriggerListener = nil;
 
 -- smooth camera moving
-Field.mScrollPosNew = nil;
-Field.mScrollPosAccelerate = 100;
-Field.mScrollCurVelocity = nil;
+Field.mMaxScroll = 5;
+Field.mPlayerPosY = nil;
 
 -- states
 Field.PAUSE = 1;
@@ -140,23 +139,62 @@ function Field:fieldToScreen(pos)
 end
 
 ---------------------------------
+function Field:setScrollPos(scrollPosY)
+    local scrollPos = self.mFieldNode:getScrollPos();
+    scrollPos = Vector.new(scrollPos.x, -scrollPos.y);
+    debug_log("Field:setScrollPos ", scrollPosY);
+    debug_log("scrollPos ", scrollPos.y);
+
+    local len = math.abs(scrollPosY - scrollPos.y);
+    debug_log("len ", len);
+    local dir = (scrollPosY - scrollPos.y) / len;
+
+    if self.mMaxScroll < len then
+        self.mFieldNode:setScrollPos(Vector.new(0, scrollPos.y + self.mMaxScroll * dir));
+    else
+        self.mFieldNode:setScrollPos(Vector.new(0, scrollPosY));
+    end
+end
+
+---------------------------------
 function Field:updateScrollPos()
 	local min = math.huge;
 	local max = -math.huge;
+    local equal = true;
+
+    local dir = 0;
+    local yMax = -math.huge;
+
 	for i, val in ipairs(self.mPlayerObjects) do
+        local x, y = val.mNode:getPosition();
         if not val:isInTrap() then
-            local x, y = val.mNode:getPosition();
             min = math.min(min, y);
             max = math.max(max, y);
         end
+        if self.mPlayerPosY[i] ~= y then
+            equal = false;
+        end
+        if self.mPlayerPosY[i] and yMax < math.abs(self.mPlayerPosY[i] - y) then
+            yMax = math.abs(self.mPlayerPosY[i] - y);
+            dir = self.mPlayerPosY[i] - y;
+        end
+        self.mPlayerPosY[i] = y;
 	end
+
+    if equal then
+        return;
+    end
+
+    info_log("Field:updateScrollPos dir ", dir);
+
     if min ~= math.huge and max ~= -math.huge then
         local visibleSize = CCDirector:getInstance():getVisibleSize();
         local pos = (max - min) / 2 + min - visibleSize.height / 2;-- max - visibleSize.height / 2;
         pos = math.max(pos, 0);
         --print ("Field:updateScrollPos ", pos); 
         --self.mFieldNode:setScrollPos(Vector.new(0, pos));
-        self:smoothCameraMove(Vector.new(0, pos));
+        --self:smoothCameraMove(Vector.new(0, pos));
+        self:setScrollPos(pos);
     end
 end
 
@@ -306,39 +344,6 @@ function Field:updateState()
 end
 
 ---------------------------------
-function Field:smoothCameraMove(cameraPosNew)
-    self.mScrollPosNew = cameraPosNew;
-    self.mScrollCurVelocity = 0;
-end
-
----------------------------------
-function Field:updateCameraMove(dt)
-
-    local scrollPos = self.mFieldNode:getScrollPos();
-    scrollPos = Vector.new(scrollPos.x, -scrollPos.y);
-    if self.mScrollPosNew ~= nil and (scrollPos - self.mScrollPosNew):len() > 0 then
-
-        local dir = (self.mScrollPosNew - scrollPos):normalize().y;
-        self.mScrollCurVelocity = self.mScrollPosAccelerate;-- * dt;
-
-        local delta = self.mScrollCurVelocity * dt * dir;
-        local newpos = scrollPos + delta;
-        debug_log("scrollPos ", scrollPos.y);
-        debug_log("new pos ", newpos.y);
-        debug_log("dir ", dir);
-        debug_log("self.mScrollPosNew ", self.mScrollPosNew.y);
-
-        self.mFieldNode:setScrollPos(newpos);
-        if (self.mScrollPosNew - newpos).y * dir < 0 then
-            self.mFieldNode:setScrollPos(self.mScrollPosNew);
-            self.mScrollPosNew = nil;
-        end
-
-        self.mScrollCurVelocity = 0;
-    end
-end
-
----------------------------------
 function Field:tick(dt)
 	self:updateState();
 
@@ -350,7 +355,7 @@ function Field:tick(dt)
     end
     self.mNeedDestroyObjects = {}
 
-    self:updateCameraMove(dt);
+    --self:updateCameraMove(dt);
 
 	if self.mState == Field.IN_GAME then
         if self.mTime then
@@ -730,6 +735,7 @@ function Field:init(fieldNode, layer, fieldData, game)
 	self.mEnemyObjects = {};
 	self.mFinishTrigger = {};
     self.mObjectsById = {};
+    self.mPlayerPosY = {};
 	self.mLeftBottom = Vector.new(0, 0);
 	self.mFieldNode = FieldNode:create();
 	self.mFieldNode:init(fieldNode, layer, self);
