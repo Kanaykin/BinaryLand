@@ -1,11 +1,17 @@
-package.path = package.path .. os.getenv("BINARY_LAND_PATH")
-cc = {
-	p = function (x_in, y_in)
-		return {x = x_in, y = y_in}
-	end
-}
 require "lunit"
+require "BaseTests"
 require "src/game_objects/DogObject"
+
+local mob = DogObject:create();
+local node = NodeMock:create();
+node.mParent = NodeMock:create();
+
+local field = FieldMock:create();
+local game = GameMock:create();
+
+field.mGame = game;
+
+mob:init(field, node);
 
 module( "my_testcase", lunit.testcase )
 
