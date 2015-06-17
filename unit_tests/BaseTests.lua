@@ -15,6 +15,13 @@ function release_print(...)
 end
 
 ------------------------------------
+tolua = {
+	cast = function(obj)
+		return obj;
+	end
+}
+
+------------------------------------
 NodeMock = inheritsFrom(nil)
 
 function NodeMock:retain()
@@ -35,6 +42,25 @@ function NodeMock:removeChild()
 end
 
 function NodeMock:addChild()
+end
+
+function NodeMock:getTexture()
+	return self.mTexture;
+end
+
+function NodeMock:getAnchorPoint()
+	return cc.p(0, 0);
+end
+
+function NodeMock:getContentSize()
+	return cc.size(1, 1);
+end
+
+------------------------------------
+TextureMock = inheritsFrom(nil)
+
+function TextureMock:getName()
+	return "temp";
 end
 
 ------------------------------------

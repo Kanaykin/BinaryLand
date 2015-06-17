@@ -5,6 +5,7 @@ require "src/game_objects/DogObject"
 local mob = DogObject:create();
 local node = NodeMock:create();
 node.mParent = NodeMock:create();
+node.mTexture = TextureMock:create();
 
 local field = FieldMock:create();
 local game = GameMock:create();
