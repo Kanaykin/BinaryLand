@@ -25,6 +25,7 @@ FoxObject.mFrontIdleAnimation = nil;
 FoxObject.mBackIdleAnimation = nil;
 FoxObject.mSideIdleAnimation = nil;
 FoxObject.mDebugBox = nil;
+FoxObject.mNeedDebugBox = true;
 FoxObject.mSize = nil;
 
 --------------------------------
@@ -49,9 +50,11 @@ function FoxObject:init(field, node, needReverse)
 
 	self.mVelocity = self.mVelocity * field.mGame:getScale();
 
-    --local nodeBox = cc.DrawNode:create();
-    --self.mAnimationNode:addChild(nodeBox);
-    --self.mDebugBox = nodeBox;
+    if self.mNeedDebugBox then
+        local nodeBox = cc.DrawNode:create();
+        self.mAnimationNode:addChild(nodeBox);
+        self.mDebugBox = nodeBox;
+    end
     self.mSize = self.mAnimationNode:getBoundingBox();
 end
 
@@ -73,13 +76,23 @@ end
 function FoxObject:updateDebugBox()
     if self.mDebugBox then
         local box = self:getBoundingBox();
+        local size = self.mAnimationNode:getBoundingBox();
+        local anchor = self.mAnimationNode:getAnchorPoint();
         box.x = 0;
         box.y = 0;
         self.mDebugBox:clear();
-        self.mDebugBox:drawLine(cc.p(box.x, box.y), cc.p(box.x + box.width, box.y), {r = 0, g = 0, b = 0, a = 100});
+        local center = cc.p(box.x + anchor.x * size.width , box.y + anchor.y * size.height);
+        self.mDebugBox:drawCircle(center, box.width / 2.0 * 0.7,
+            360, 360, false, {r = 0, g = 0, b = 0, a = 100});
+
+        if self.mFightTrigger:isActivated() then
+            self.mFightTrigger:drawDebug(self.mDebugBox, center);
+        end
+
+        --[[self.mDebugBox:drawLine(cc.p(box.x, box.y), cc.p(box.x + box.width, box.y), {r = 0, g = 0, b = 0, a = 100});
         self.mDebugBox:drawLine(cc.p(box.x, box.y), cc.p(box.x, box.y + box.height), {r = 0, g = 0, b = 0, a = 100});
         self.mDebugBox:drawLine(cc.p(box.x + box.width, box.y), cc.p(box.x + box.width, box.y  + box.height), {r = 0, g = 0, b = 0, a = 100});
-        self.mDebugBox:drawLine(cc.p(box.x, box.y + box.height), cc.p(box.x + box.width, box.y  + box.height), {r = 0, g = 0, b = 0, a = 100});
+        self.mDebugBox:drawLine(cc.p(box.x, box.y + box.height), cc.p(box.x + box.width, box.y  + box.height), {r = 0, g = 0, b = 0, a = 100});]]
     end
 end
 

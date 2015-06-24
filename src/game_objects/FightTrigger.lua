@@ -8,7 +8,7 @@ FightTrigger.mNodeSecond = nil;
 --------------------------------
 function FightTrigger:init(field)
 	local node = CCNode:create();
-    node:setContentSize(cc.size(field:getCellSize(), field:getCellSize() * 3));
+    node:setContentSize(cc.size(field:getCellSize() * 1.5, field:getCellSize() * 3));
 	field:getFieldNode():addChild(node);
 
 	-- #FIXME: anchor point for fox scene
@@ -17,11 +17,32 @@ function FightTrigger:init(field)
 	FightTrigger:superClass().init(self, field, node, Callback.new(field, Field.onEnemyEnterTrigger), Callback.new(field, Field.onEnemyLeaveTrigger));
 
     local nodeSecond = CCNode:create();
-    nodeSecond:setContentSize(cc.size(field:getCellSize() * 3, field:getCellSize()));
+    nodeSecond:setContentSize(cc.size(field:getCellSize() * 3, field:getCellSize() * 1.5));
     field:getFieldNode():addChild(nodeSecond);
 
     nodeSecond:setAnchorPoint(cc.p(0.5, 0.5));
     self.mNodeSecond = nodeSecond;
+end
+
+--------------------------------
+function FightTrigger:drawDebugBox(debugNode, center, box)
+    local x,y = self.mNode:getPosition();
+    box.x = box.x - x + center.x;
+    box.y = box.y - y + center.y;
+
+    debugNode:drawLine(cc.p(box.x, box.y), cc.p(box.x + box.width, box.y), {r = 0, g = 0, b = 0, a = 100});
+    debugNode:drawLine(cc.p(box.x, box.y), cc.p(box.x, box.y + box.height), {r = 0, g = 0, b = 0, a = 100});
+    debugNode:drawLine(cc.p(box.x + box.width, box.y), cc.p(box.x + box.width, box.y  + box.height), {r = 0, g = 0, b = 0, a = 100});
+    debugNode:drawLine(cc.p(box.x, box.y + box.height), cc.p(box.x + box.width, box.y  + box.height), {r = 0, g = 0, b = 0, a = 100});
+
+end
+
+--------------------------------
+function FightTrigger:drawDebug(debugNode, center)
+    local box = self.mNodeSecond:getBoundingBox();
+    self:drawDebugBox(debugNode, center, box);
+    local box = self.mNode:getBoundingBox();
+    self:drawDebugBox(debugNode, center, box);
 end
 
 --------------------------------
@@ -32,6 +53,7 @@ end
 
 --------------------------------
 function FightTrigger:setDateTransform(selfPos, newDir)
+    debug_log("FightTrigger:setDateTransform selfPos.x ", selfPos.x, " selfPos.y ", selfPos.y);
     local res = selfPos;
     self.mNode:setPosition(cc.p(res.x, res.y));
     self.mNodeSecond:setPosition(cc.p(res.x, res.y));
