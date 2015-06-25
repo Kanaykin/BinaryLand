@@ -7,6 +7,9 @@ cc = {
 	end,
 	size = function (width_in, height_in)
 		return {width = width_in, height = height_in}
+	end,
+	rect = function (x_in, y_in, width_in, height_in)
+		return {x = x_in, y = y_in, width = width_in, height = height_in}
 	end
 }
 
@@ -23,6 +26,8 @@ tolua = {
 
 ------------------------------------
 NodeMock = inheritsFrom(nil)
+NodeMock.mParent = nil;
+NodeMock.mPosition = cc.p(0, 0);
 
 function NodeMock:retain()
 end
@@ -52,9 +57,31 @@ function NodeMock:getAnchorPoint()
 	return cc.p(0, 0);
 end
 
+function NodeMock:setAnchorPoint(point)
+end
+
 function NodeMock:getContentSize()
 	return cc.size(1, 1);
 end
+
+function NodeMock:setPosition(pos)
+	self.mPosition = pos;
+end
+
+function NodeMock:getPosition()
+	return self.mPosition.x, self.mPosition.y;
+end
+
+function NodeMock:getBoundingBox()
+	cc.rect(0,0,0,0);
+end
+
+CCNode = {
+	create = function ()
+		local node = NodeMock:create()
+		return node;
+	end
+}
 
 ------------------------------------
 TextureMock = inheritsFrom(nil)
@@ -64,7 +91,12 @@ function TextureMock:getName()
 end
 
 ------------------------------------
-FieldMock = inheritsFrom(nil)
+--[[FieldMock = inheritsFrom(nil)
+FieldMock.mFieldNode = nil;
+
+function FieldMock:getFieldNode()
+	return self.mFieldNode;
+end
 
 function FieldMock:getGridPosition(node)
 	return 0, 0;
@@ -72,7 +104,7 @@ end
 
 function FieldMock:getCellSize()
 	return 1;
-end
+end]]
 
 ------------------------------------
 GameMock = inheritsFrom(nil)

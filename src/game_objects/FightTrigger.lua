@@ -1,5 +1,6 @@
 require "src/game_objects/MultiTrigger"
 require "src/base/Log"
+require "src/math/Rect"
 
 FightTrigger = inheritsFrom(MultiTrigger)
 FightTrigger.mActivated = false;
