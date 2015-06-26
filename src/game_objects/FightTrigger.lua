@@ -48,8 +48,16 @@ end
 
 --------------------------------
 function FightTrigger:contained(point)
+    local box1 = self.mNode:getBoundingBox();
+    --debug_log("FightTrigger:contained box1 ", box1);
+    --debug_log("FightTrigger:contained box1.x ", box1.x, " box1.y ", box1.y, " box1.width ", box1.width, " box1.height ", box1.height);
+
+    local box2 = self.mNodeSecond:getBoundingBox();
+    --debug_log("FightTrigger:contained box2 ", box2);
+    --debug_log("FightTrigger:contained box2.x ", box2.x, " box2.y ", box2.y, " box2.width ", box2.width, " box2.height ", box2.height);
+
     return Rect.new(self.mNode:getBoundingBox()):containsPoint(cc.p(point.x, point.y))
-    or Rect.new(self.mNodeSecond:getBoundingBox()):containsPoint(cc.p(point.x, point.y));
+        or Rect.new(self.mNodeSecond:getBoundingBox()):containsPoint(cc.p(point.x, point.y));
 end
 
 --------------------------------

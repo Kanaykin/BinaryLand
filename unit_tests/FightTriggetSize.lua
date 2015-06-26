@@ -18,13 +18,18 @@ require "src/game_objects/Field"
 	print("posGrid.x ", posGrid.x, " posGrid.y ", posGrid.y);
 	trigger:setDateTransform(posGrid, Vector.new(0, 0));
 
-	local posGridCont = field:gridPosToReal(Vector.new(3, 3));
+	local posGridCont = Vector.new(posGrid.x + field.mCellSize * 0.7, posGrid.y + field.mCellSize * 0.7);
 	print("posGridCont.x ", posGridCont.x, " posGridCont.y ", posGridCont.y);
-	trigger:contained(posGridCont);
+
+	local diametr = Vector.distance(posGrid, posGridCont);
+	print("diametr ", diametr);
+
+	local contained = trigger:contained(posGridCont);
+	print("contained ", contained);
 
 
-module( "my_testcase", lunit.testcase )
+module( "FightTrigger size", lunit.testcase )
 
 function test_success()
-	assert_true( true, "This test never fails.")
+	assert_true( contained, "This test never fails.")
 end

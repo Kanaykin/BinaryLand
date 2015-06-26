@@ -28,6 +28,8 @@ tolua = {
 NodeMock = inheritsFrom(nil)
 NodeMock.mParent = nil;
 NodeMock.mPosition = cc.p(0, 0);
+NodeMock.mAnchorPoint = cc.p(0, 0)
+NodeMock.mContentSize = cc.size(0, 0)
 
 function NodeMock:retain()
 end
@@ -36,7 +38,8 @@ function NodeMock:getTag()
 	return "1";
 end
 
-function NodeMock:setContentSize()
+function NodeMock:setContentSize(size)
+	self.mContentSize = size;
 end
 
 function NodeMock:getParent()
@@ -54,14 +57,15 @@ function NodeMock:getTexture()
 end
 
 function NodeMock:getAnchorPoint()
-	return cc.p(0, 0);
+	return self.mAnchorPoint;
 end
 
 function NodeMock:setAnchorPoint(point)
+	self.mAnchorPoint = point;
 end
 
 function NodeMock:getContentSize()
-	return cc.size(1, 1);
+	return self.mContentSize;
 end
 
 function NodeMock:setPosition(pos)
@@ -73,7 +77,9 @@ function NodeMock:getPosition()
 end
 
 function NodeMock:getBoundingBox()
-	cc.rect(0,0,0,0);
+	local deltaX = self.mContentSize.width * self.mAnchorPoint.x;
+	local deltaY = self.mContentSize.height * self.mAnchorPoint.y;
+	return cc.rect(self.mPosition.x - deltaX, self.mPosition.y - deltaY, self.mContentSize.width, self.mContentSize.height);
 end
 
 CCNode = {
