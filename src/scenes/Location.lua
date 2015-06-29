@@ -30,7 +30,7 @@ end
 
 ---------------------------------
 function Location:isOpened()
-	return self.mOpened;
+	return self.mOpened or self.mGame:isLocationOpened(self:getId());
 end
 
 ---------------------------------

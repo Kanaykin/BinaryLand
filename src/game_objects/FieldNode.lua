@@ -28,6 +28,7 @@ function FieldNode:getScrollPos()
 		local point = self.mScrollView:getContentOffset();
 		return Vector.new(point.x, point.y);
 	end
+    return Vector.new(0, 0);
 end
 
 --------------------------------

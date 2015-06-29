@@ -18,7 +18,7 @@ LevelScene.mMainUI = nil;
 LevelScene.mTutorial = nil;
 LevelScene.mStoredLevel = nil;
 
-local LOADSCEENIMAGE = "choseLevel.png"
+local LOADSCEENIMAGE = "GlobalMap.png"
 
 
 ---------------------------------
@@ -106,8 +106,12 @@ end
 function LevelScene:winOpenLevel()
     info_log("LevelScene: WIN !!!");
     local locationId = self.mLevel:getLocation():getId();
+    info_log("LevelScene:winOpenLevel: locationId ", locationId);
 
     -- TODO: open location
+    if #self.mSceneManager.mGame:getLocations() >= (locationId + 1) then
+        self.mSceneManager.mGame:openLocation(locationId + 1);
+    end
 
     self.mSceneManager.mGame:openLevel(locationId, self.mLevel:getIndex() + 1);
     self.mSceneManager.mGame:setLevelStar(locationId, self.mLevel:getIndex(), 2);

@@ -68,12 +68,22 @@ end
 
 ---------------------------------
 function Game:isLevelOpened(locationId, level)
-    return CCUserDefault:getInstance():getBoolForKey(locationId .. tostring(level));
+    return CCUserDefault:getInstance():getBoolForKey(tostring(locationId) .. tostring(level));
 end
 
 ---------------------------------
 function Game:openLevel(locationId, level)
-	CCUserDefault:getInstance():setBoolForKey(locationId .. tostring(level), true);
+	CCUserDefault:getInstance():setBoolForKey(tostring(locationId) .. tostring(level), true);
+end
+
+---------------------------------
+function Game:openLocation(locationId)
+    CCUserDefault:getInstance():setBoolForKey(tostring(locationId), true);
+end
+
+---------------------------------
+function Game:isLocationOpened(locationId)
+    return CCUserDefault:getInstance():getBoolForKey(tostring(locationId));
 end
 
 ---------------------------------

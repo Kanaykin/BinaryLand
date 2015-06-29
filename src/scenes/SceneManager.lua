@@ -75,7 +75,7 @@ function SceneManager:runNextScene(params)
 	end
 
 	if index == SCENE_TYPE_ID.CHOOSE_LOCATION then
-		local locationId = "mercury";
+		local locationId = 1;
 		local isLevelOpened = self.mGame:isLevelOpened(locationId, 1);
 		info_log("First start is level opened ", isLevelOpened);
 		if not isLevelOpened then

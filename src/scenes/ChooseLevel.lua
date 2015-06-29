@@ -9,7 +9,7 @@ ChooseLevel.BACK_MENU_TAG = 10;
 ChooseLevel.BACK_MENU_ITEM_TAG = 11;
 ChooseLevel.BASE_NODE_TAG = 1;
 
-local LOADSCEENIMAGE = "Games_Duck_Hunt_Nintendo_Dendy_Nes_025749_32.jpg"
+local LOADSCEENIMAGE = "GlobalMap.png"
 
 --------------------------------
 function ChooseLevel:getCurLocation()

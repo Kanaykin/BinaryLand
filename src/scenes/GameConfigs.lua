@@ -2,7 +2,7 @@ require "src/base/AlignmentHelper"
 
 gLocations = {
 	{
-		id = "mercury",
+		id = 1,
 		image = "mercury.png",
 		position = Coord(0.15, 0.5, 0, -87),
 		opened = true,
@@ -86,10 +86,10 @@ gLocations = {
 		}
 	},
 	{
-		id = "venus",
+		id = 2,
 		image = "venus.png",
 		position = Coord(0.32, 0.5, 0, -215),
-        opened = true,
+        opened = false,
         levels = {
             {
                 opened = true,
@@ -126,10 +126,10 @@ gLocations = {
         }
 	},
 	{
-		id = "earth",
+		id = 3,
 		image = "earth.png",
 		position = Coord(0.52, 0.5, 0, -235),
-        opened = true,
+        opened = false,
         levels = {
             {
                 opened = true,
@@ -166,10 +166,10 @@ gLocations = {
         }
 	},
 	{
-		id = "mars",
+		id = 4,
 		image = "mars.png",
 		position = Coord(0.78, 0.5, 0, -120),
-        opened = true,
+        opened = false,
         levels = {
             {
                 opened = true,
@@ -206,10 +206,10 @@ gLocations = {
         }
 	},
     {
-        id = "jungle",
+        id = 5,
         image = "mars.png",
         position = Coord(0.9, 0.5, 0, -120),
-        opened = true,
+        opened = false,
         levels = {
             {
                 opened = true,
