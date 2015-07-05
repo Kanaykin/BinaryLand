@@ -13,13 +13,13 @@ Location.mLevels = nil;
 
 ---------------------------------
 function Location:onLocationPressed()
-	info_log("onLocationPressed opened ", self.mOpened);
+    info_log("onLocationPressed opened ", self:isOpened());
     info_log("onLocationPressed self.mLevels ", #self.mLevels);
 
     local locationId = self:getId();
     info_log("Location:onLocationPressed locationId ", locationId)
 
-    if not self.mOpened then
+    if not self:isOpened() then
 		local dlg = BaseDialog:create();
 		dlg:show(self.mGame.mSceneMan:getCurrentScene());
 	else

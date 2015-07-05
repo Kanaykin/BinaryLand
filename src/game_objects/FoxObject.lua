@@ -25,7 +25,7 @@ FoxObject.mFrontIdleAnimation = nil;
 FoxObject.mBackIdleAnimation = nil;
 FoxObject.mSideIdleAnimation = nil;
 FoxObject.mDebugBox = nil;
-FoxObject.mNeedDebugBox = true;
+FoxObject.mNeedDebugBox = false;
 FoxObject.mSize = nil;
 
 --------------------------------
