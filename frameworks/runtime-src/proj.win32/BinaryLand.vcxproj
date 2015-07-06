@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -175,12 +175,21 @@ xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\ui" "$(P
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\Logger.h" />
+    <ClInclude Include="..\Classes\lua_module_extend.h" />
+    <ClInclude Include="..\Classes\lua_module_register.h" />
+    <ClInclude Include="..\Classes\Statistic.h" />
+    <ClInclude Include="GoogleAnalitics.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\Logger.cpp" />
+    <ClCompile Include="..\Classes\lua_module_extend.cpp" />
+    <ClCompile Include="GoogleAnalitics.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Statistic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />

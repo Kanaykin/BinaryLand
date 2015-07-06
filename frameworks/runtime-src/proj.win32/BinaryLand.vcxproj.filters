@@ -19,12 +19,39 @@
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="..\Classes\Logger.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua_module_extend.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua_module_register.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Statistic.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="GoogleAnalitics.h">
+      <Filter>win32</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Logger.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua_module_extend.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="GoogleAnalitics.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="Statistic.cpp">
       <Filter>win32</Filter>
     </ClCompile>
   </ItemGroup>
