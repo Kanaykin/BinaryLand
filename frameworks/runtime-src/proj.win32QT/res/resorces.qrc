@@ -1,0 +1,14 @@
+ <!DOCTYPE RCC><RCC version="1.0">
+     <qresource>
+         <file>images/cross.png</file>
+         <file>images/bush.png</file>
+         <file>images/Hunter.png</file>
+         <file>images/cage.png</file>
+         <file>images/FoxGirl.png</file>
+         <file>images/Fox.png</file>
+         <file>images/Coin.png</file>
+         <file>images/Dog.png</file>
+         <file>images/save_baby.png</file>
+         <file>images/delete.png</file>
+     </qresource>
+     </RCC>
