@@ -57,7 +57,7 @@ public:
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         widthEdit = new QSpinBox(groupBox);
         widthEdit->setObjectName(QStringLiteral("widthEdit"));
-        widthEdit->setMaximum(13);
+        widthEdit->setMaximum(15);
 
         gridLayout_3->addWidget(widthEdit, 0, 0, 1, 1);
 

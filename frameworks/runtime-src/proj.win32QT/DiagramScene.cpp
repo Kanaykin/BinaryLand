@@ -8,7 +8,7 @@
 
 const int DiagramScene::CELL_SIZE = 50;
 static QString  BEGIN_FILE = "local map = {";
-static QString END_FILE = "} return map";
+static QString END_FILE = "} return {m=map";
 
 #define CELL_POS(X, Y, W) ((X) + (W * Y))
 
@@ -102,7 +102,12 @@ void DiagramScene::loadFromStr(const QString& str)
 
 	QStringList list1 = endStr.split(',');
 	QString widthStr = list1.at(0);
+	widthStr.remove(0, 2); // remove 'w='
+	std::string temp = widthStr.toStdString();
 	QString heightStr = list1.at(1);
+	heightStr.remove(0, 2); // remove 'h='
+	heightStr.remove(heightStr.length() - 1, 1); // remove '}'
+	temp = heightStr.toStdString();
 	reset(QSize(widthStr.toInt(), heightStr.toInt()));
 
 	QStringList listItems = midStr.split(',');
@@ -129,8 +134,9 @@ QString DiagramScene::convertSceneToStr() const
 		}
 	}
 	result += END_FILE;
-	result += QString(",") + QString::number(mSize.width());
-	result += QString(",") + QString::number(mSize.height());
+	result += QString(",w=") + QString::number(mSize.width());
+	result += QString(",h=") + QString::number(mSize.height());
+	result += "}";
 	return result;
 }
 

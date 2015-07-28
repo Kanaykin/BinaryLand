@@ -35,7 +35,7 @@
         <item row="0" column="0">
          <widget class="QSpinBox" name="widthEdit">
           <property name="maximum">
-           <number>13</number>
+           <number>15</number>
           </property>
          </widget>
         </item>
