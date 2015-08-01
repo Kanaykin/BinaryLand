@@ -111,6 +111,7 @@ function ScrollView:initLayers(layers)
 		local layerSize = layer:getContentSize();
 		info_log("ScrollView:initLayers height ", layerSize.height);
 		local posX, posY = layer:getPosition();
+		info_log("ScrollView:initLayers posX ", posX);
 		layer:setPosition(posX, posY + layersOffset);
 		layersOffset = layersOffset + layerSize.height;
 	end

@@ -743,13 +743,14 @@ function Field:init(fieldNode, layer, fieldData, game)
 	self.mFinishTrigger = {};
     self.mObjectsById = {};
     self.mPlayerPosY = {};
+    self.mNeedDestroyObjects = {};
 	self.mLeftBottom = Vector.new(0, 0);
 	self.mFieldNode = FieldNode:create();
 	self.mFieldNode:init(fieldNode, layer, self);
 
 	local children = self.mFieldNode:getChildren();
 	local count = children:count();
-	info_log("count ", count);
+	info_log("Field:init count ", count);
 	if count == 0 then
 		return;
 	end
@@ -803,6 +804,4 @@ function Field:init(fieldNode, layer, fieldData, game)
 	if fieldData.time then
 		self.mTime = fieldData.time;
 	end
-
-    self.mNeedDestroyObjects = {};
 end
