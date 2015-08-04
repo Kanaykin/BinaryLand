@@ -11,6 +11,9 @@
 #include "diagramscene.h"
 #include "GettingSizeDialog.h"
 #include "ButtonPanel.h"
+#include "cocos2d.h"
+#include "QtApplication.h"
+#include <QtCore/QTimer>
 
 static const int MAX_SIZE(500);
 
@@ -32,21 +35,8 @@ mDiagramScene(0),
 mParentView(0)
 {
 	QMenuBar *menuBar = new QMenuBar;
-	QMenu *menuWindow = menuBar->addMenu(tr("&Window"));
-	QAction *addNew = new QAction(menuWindow);
-	addNew->setText(tr("New"));
-	menuWindow->addAction(addNew);
-	connect(addNew, SIGNAL(triggered()), this, SLOT(onAddNew()));
-	
-	QAction *saveAction = new QAction(menuWindow);
-	saveAction->setText(tr("Save"));
-	menuWindow->addAction(saveAction);
-	connect(saveAction, SIGNAL(triggered()), this, SLOT(onSave()));
-
-	QAction *openAction = new QAction(menuWindow);
-	openAction->setText(tr("Open"));
-	menuWindow->addAction(openAction);
-	connect(openAction, SIGNAL(triggered()), this, SLOT(onOpen()));
+	createFileMenu(menuBar);
+	createSceneMenu(menuBar);
 
 	setMenuBar(menuBar);
 
@@ -95,6 +85,41 @@ mParentView(0)
 	updateSize(0, 0);
 }
 
+void MainWindow::createFileMenu(QMenuBar *menuBar)
+{
+	QMenu *menuWindow = menuBar->addMenu(tr("&File"));
+	QAction *addNew = new QAction(menuWindow);
+	addNew->setText(tr("New"));
+	menuWindow->addAction(addNew);
+	connect(addNew, SIGNAL(triggered()), this, SLOT(onAddNew()));
+
+	QAction *saveAction = new QAction(menuWindow);
+	saveAction->setText(tr("Save"));
+	menuWindow->addAction(saveAction);
+	connect(saveAction, SIGNAL(triggered()), this, SLOT(onSave()));
+
+	QAction *openAction = new QAction(menuWindow);
+	openAction->setText(tr("Open"));
+	menuWindow->addAction(openAction);
+	connect(openAction, SIGNAL(triggered()), this, SLOT(onOpen()));
+}
+
+void MainWindow::createSceneMenu(QMenuBar *menuBar)
+{
+	QMenu *menuWindow = menuBar->addMenu(tr("&Scene"));
+	QAction *actApply = new QAction(menuWindow);
+	actApply->setText(tr("Apply"));
+	menuWindow->addAction(actApply);
+
+	connect(actApply, SIGNAL(triggered()), this, SLOT(onApplyScene()));
+
+	QAction *actReset = new QAction(menuWindow);
+	actReset->setText(tr("Reset"));
+	menuWindow->addAction(actReset);
+
+	connect(actReset, SIGNAL(triggered()), this, SLOT(onResetScene()));
+}
+
 void MainWindow::onButtonCheck(int button)
 {
 	mDiagramScene->setTypeItem((DiagramItem::eTypeItem)button);
@@ -113,6 +138,7 @@ void MainWindow::onOpen()
 	QFile file(fileName);
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 		return;
+	mCurrentFile = file.fileName();
 
 	QString result;
 	QTextStream instream(&file);
@@ -127,12 +153,98 @@ void MainWindow::onOpen()
 	updateSize(size.width(), size.height());
 }
 
+void MainWindow::onTimer()
+{
+	runCocos();
+	//cocos2d::Application::getInstance()->run();
+}
+
+void MainWindow::runCocos()
+{
+	if (mApp) {
+		mApp.reset();
+
+		cocos2d::Director* dir = cocos2d::Director::getInstance();
+		if (dir)
+			dir->release();
+	}
+	mApp = std::make_shared<QTAplication>(this);
+	int ret = cocos2d::Application::getInstance()->run();
+}
+
+bool MainWindow::saveRunningScript(const QString& dataStr)
+{
+	QString filePath = QDir::currentPath() + "\\src\\levels\\editor_scene.lua";
+	QFile file(filePath);
+	std::string dir = filePath.toStdString();
+	if (!file.exists()) {
+		return false;
+	}
+	file.open(QIODevice::WriteOnly);
+
+	QString data = dataStr;
+	QTextStream outstream(&file);
+	outstream << data;
+	file.close();
+
+	return true;
+}
+
+void MainWindow::onResetScene()
+{
+	if (!saveRunningScript(QString(" ") )){
+		QMessageBox msgBox;
+		msgBox.setText("Can't write editor_scene.lua");
+		msgBox.exec();
+		return;
+	}
+
+	restartGame();
+}
+
+void MainWindow::restartGame()
+{
+	cocos2d::Director* director = cocos2d::Director::getInstance();
+	if (director) {
+		cocos2d::GLView* glview = director->getOpenGLView();
+		if (glview) {
+			//glview->end();
+			cocos2d::Director::getInstance()->end();
+			QTimer::singleShot(200, this, SLOT(onTimer()));
+		}
+	}
+}
+
+void MainWindow::onApplyScene()
+{
+	// check file exists
+	QFileInfo infoFile(mCurrentFile);
+	QFile file(QDir::currentPath() + "\\src\\levels\\" + infoFile.fileName());
+	if (!file.exists()) {
+		QMessageBox msgBox;
+		msgBox.setText("Please save file to src/levels/");
+		msgBox.exec();
+		return;
+	}
+
+	QFileInfo info(file);
+	if (!saveRunningScript(QString("return require ") + "\"src/levels/" +info.baseName() + "\"")){
+		QMessageBox msgBox;
+		msgBox.setText("Can't write editor_scene.lua");
+		msgBox.exec();
+		return;
+	}
+
+	restartGame();
+}
+
 void MainWindow::onSave()
 {
 	QString filename = QFileDialog::getSaveFileName(this, tr("Save File"),
 		"",
 		tr("Scene File (*.lua )"));
 	QFile f(filename);
+	mCurrentFile = f.fileName();
 	f.open(QIODevice::WriteOnly);
 	// store data in f
 	QString data = mDiagramScene->convertSceneToStr();

@@ -3,7 +3,6 @@
 #include "cocos2d.h"
 #include <QtWidgets/QApplication>
 #include "MainWindow.h"
-#include "QtApplication.h"
 
 USING_NS_CC;
 
@@ -17,9 +16,7 @@ int main(int argc, char *argv[])
 	MainWindow mainWindow;
 
 	mainWindow.show();
-
-	QTAplication appCocos(&mainWindow);
-	int ret = Application::getInstance()->run();
+	mainWindow.runCocos();
 
 	return app.exec();
 }

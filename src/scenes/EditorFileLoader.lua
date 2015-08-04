@@ -143,10 +143,13 @@ EditorFileLoader.CreateFunctions = {
 
 --------------------------------
 function EditorFileLoader:loadEditorFile(levelData, G_EditorScene, levelScene)
-    info_log("LevelScene:loadEditorFile G_EditorScene: ", G_EditorScene.m);
-    info_log("LevelScene:loadEditorFile G_EditorSceneW: ", G_EditorScene.w);
-    info_log("LevelScene:loadEditorFile G_EditorSceneH: ", G_EditorScene.h);
-    if G_EditorScene then
+
+    if type(G_EditorScene) == "table" then
+		info_log("G_EditorScene ", G_EditorScene);
+	    info_log("LevelScene:loadEditorFile G_EditorScene: ", G_EditorScene.m);
+		info_log("LevelScene:loadEditorFile G_EditorSceneW: ", G_EditorScene.w);
+		info_log("LevelScene:loadEditorFile G_EditorSceneH: ", G_EditorScene.h);
+
         --self.mField = Field:create();
 
         local visibleSize = CCDirector:getInstance():getVisibleSize();
@@ -192,9 +195,6 @@ function EditorFileLoader:loadEditorFile(levelData, G_EditorScene, levelScene)
             fieldNode:setAnchorPoint(cc.p(0.5, 0.0));
             table.insert(nodes, fieldNode);
 
---local layerSize = node:getContentSize();
---local fieldSize = fieldNode:getContentSize();
---node:setContentSize(cc.size(layerSize.width, fieldSize.height));
         end
 
         levelScene.mScrollView = ScrollView:create();

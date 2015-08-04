@@ -223,6 +223,7 @@ function LevelScene:initScene(levelData)
 
     -- try open file from editor
     if  EditorFileLoader:loadEditorFile(levelData, G_EditorScene, self) then
+		levelData.tutorial = false;
         return;
     end
 
