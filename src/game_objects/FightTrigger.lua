@@ -76,6 +76,9 @@ end
 
 --------------------------------
 function FightTrigger:setActivated(activated)
+    if self.mActivated and not activated then
+        self:leaveAll();
+    end
 	self.mActivated = activated;
 end
 

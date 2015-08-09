@@ -76,6 +76,7 @@ WavePathFinder = {
 		end
 		if inserted then
 			WavePathFinder.findPath(path, array, sizeArray);
+            --PRINT_FIELD(array, sizeArray);
 		end
 	end,
 
@@ -103,7 +104,8 @@ WavePathFinder = {
 		local srcPoints = {pointFrom};
 		array[COORD(pointFrom.x, pointFrom.y, sizeArray.x)] = WavePathFinder.FIRST_INDEX;
 		WavePathFinder.fillArray(srcPoints, pointTo, array, sizeArray, WavePathFinder.FIRST_INDEX + 1);
-		--PRINT_FIELD(array, sizeArray);
+		PRINT_FIELD(array, sizeArray);
+        info_log("!!!111 ", array[COORD(pointTo.x, pointTo.y, sizeArray.x)]);
 		local path = {pointTo};
 		WavePathFinder.findPath(path, array, sizeArray);
 

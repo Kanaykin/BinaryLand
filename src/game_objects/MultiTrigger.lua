@@ -36,15 +36,20 @@ function MultiTrigger:onEnter(player)
 end
 
 ---------------------------------
-function MultiTrigger:destroy()
-	MultiTrigger:superClass().destroy(self);
-
-	if self.mLeaveCallback and self.mContainedObjects then
+function MultiTrigger:leaveAll()
+    if self.mLeaveCallback and self.mContainedObjects then
         for i, player in ipairs(self.mContainedObjects) do
             self.mLeaveCallback(player);
         end
-	end
+    end
     self.mContainedObjects = {};
+end
+
+---------------------------------
+function MultiTrigger:destroy()
+	MultiTrigger:superClass().destroy(self);
+
+    self:leaveAll();
 end
 
 --------------------------------
@@ -69,12 +74,16 @@ end
 
 --------------------------------
 function MultiTrigger:updateContainedObjects(dt)
+    print("MultiTrigger:updateContainedObjects ");
     local containedObjects = {}
     for i, player in ipairs(self.mContainedObjects) do
+        print("MultiTrigger:updateContainedObjects i ", i);
         local contained = false;
         if player.mNode then
             local pointX, pointY = player.mNode:getPosition();
+            print("MultiTrigger:updateContainedObjects pointX ", pointX, " pointX ", pointY);
             contained = self:contained(Vector.new(pointX, pointY));
+            print(" contained ", contained, " self.mLeaveCallback ", self.mLeaveCallback);
         end
         if not contained then
             if self.mLeaveCallback then
@@ -98,7 +107,7 @@ function MultiTrigger:findCollisionObjects(dt)
             --info_log("Trigger:tick obj x ", pointX, " y ", pointY);
             --info_log("Trigger:tick x ", self.mNode:getBoundingBox().x, " y ", self.mNode:getBoundingBox().y );
             local contained = self:contained(Vector.new(pointX, pointY));
-            --info_log("contained ", contained);
+            info_log("contained ", contained);
             if contained then
                 info_log("self:onEnter begin ");
                 self:onEnter(player)

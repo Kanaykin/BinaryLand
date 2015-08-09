@@ -47,7 +47,7 @@ Field.LOSE = 4;
 
 --------------------------------
 function COORD(x, y, width)
-	return x + 1 + y * width;
+	return x + 1 + y * (width + 1);
 end
 
 --------------------------------
@@ -56,7 +56,7 @@ function PRINT_FIELD(array, size)
 	for j = 0, size.y do
 		local raw = "";
 		for i = 0, size.x do
-			--debug_log("COORD ", COORD(i, j, size.x))
+			--debug_log("COORD ", COORD(i, j, size.x), " i ", i, " j ", j)
 			raw = raw .. tostring(array[COORD(i, j, size.x)]) .. " ";
 		end
 		info_log(raw);
@@ -113,6 +113,11 @@ end
 --------------------------------
 function Field:printField()
 	PRINT_FIELD(self.mArray, self.mSize);
+end
+
+--------------------------------
+function Field:getSize()
+    return self.mSize;
 end
 
 --------------------------------
@@ -382,13 +387,21 @@ end
 
 --------------------------------
 function Field:fillFreePoint()
-	for j = 0, self.mSize.y do
-		for i = 0, self.mSize.x do
-			if self.mArray[COORD(i, j, self.mSize.x)] == 0 then 
-				table.insert(self.mFreePoints, Vector.new(i, j));
-			end
-		end
-	end
+    local cloneArray = self:cloneArray();
+    local players = self:getPlayerObjects();
+
+    if #players ~= 0 then
+        WavePathFinder.fillArray({players[1].mGridPosition}, Vector.new(-1, -1), cloneArray, self.mSize,
+            WavePathFinder.FIRST_INDEX + 1);
+
+        for j = 0, self.mSize.y do
+            for i = 0, self.mSize.x do
+                if cloneArray[COORD(i, j, self.mSize.x)] > 1 then
+                    table.insert(self.mFreePoints, Vector.new(i, j));
+                end
+            end
+        end
+    end
 end
 
 --------------------------------

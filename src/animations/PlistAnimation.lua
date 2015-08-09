@@ -29,8 +29,8 @@ function PlistAnimation:play()
 	PlistAnimation:superClass().play(self);
 
 	self.mNode:stopAction(self.mAction);
-	debug_log("PlistAnimation:play mNode ", self.mNode);
-	debug_log("PlistAnimation:play mAction ", self.mAction);
+	--debug_log("PlistAnimation:play mNode ", self.mNode);
+	--debug_log("PlistAnimation:play mAction ", self.mAction);
 	self.mNode:runAction(self.mAction);
 end
 

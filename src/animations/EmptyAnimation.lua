@@ -45,8 +45,8 @@ function EmptyAnimation:play()
 		self.mNode:setAnchorPoint(self.mAnchor);
 	end
 	if self.mTexture then
-		info_log("EmptyAnimation:play self.mNode ", self.mNode);
-		info_log("EmptyAnimation:play self.mTextureSize ", self.mTextureSize.width);
+		--info_log("EmptyAnimation:play self.mNode ", self.mNode);
+		--info_log("EmptyAnimation:play self.mTextureSize ", self.mTextureSize.width);
 		tolua.cast(self.mNode, "cc.Sprite"):setTexture(self.mTexture);
 		tolua.cast(self.mNode, "cc.Sprite"):setTextureRect(cc.rect(0, 0, self.mTextureSize.width, self.mTextureSize.height));
 	end

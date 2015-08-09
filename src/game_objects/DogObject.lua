@@ -10,7 +10,7 @@ DogObject.RUN_AWAY      = MobObject.LAST_STATE + 2;
 DogObject.HUNTER_DEAD   = MobObject.LAST_STATE + 3;
 DogObject.BARK_ANIMATION = 4;
 
-DogObject.SAFE_DISTANCE = 2;
+DogObject.SAFE_DISTANCE = 4;
 DogObject.oldVelocity = nil;
 
 DogObject.mFoundPlayer = nil;
@@ -68,6 +68,7 @@ end
 --------------------------------
 function DogObject:onPlayerEnterImpl(player, pos)
     info_log("DogObject.onPlayerEnterImpl ", player.mNode:getTag());
+    info_log("DogObject.onPlayerEnterImpl self.mState ", self.mState);
     if not player:isInTrap() and self.mState ~= MobObject.DEAD and self.mState ~= DogObject.RUN_AWAY then
         self.mState = DogObject.FOUND_PLAYER;
         self:resetMovingParams();
@@ -92,16 +93,16 @@ function DogObject:getSafePlayerPoints()
 
     debug_log("self.mGridPosition x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
     for i, point in ipairs(freePoints) do
-        if (math.abs(point.x - self.mGridPosition.x) > DogObject.SAFE_DISTANCE) and
-            (math.abs(point.y - self.mGridPosition.y) > DogObject.SAFE_DISTANCE) and
-            self:inThisHalf(point) then
+        if ((point.x - self.mGridPosition.x)*(point.x - self.mGridPosition.x) +
+            (point.y - self.mGridPosition.y)*(point.y - self.mGridPosition.y)) > DogObject.SAFE_DISTANCE * DogObject.SAFE_DISTANCE
+            and self:inThisHalf(point) then
 
             debug_log("i ", i, "x ", point.x, "y ", point.y);
             table.insert(safePoints, Vector.new(point.x, point.y));
         end
     end
 
-return safePoints[math.random(#safePoints)];
+    return safePoints[math.random(#safePoints)];
 end
 
 ---------------------------------
@@ -127,9 +128,11 @@ end
 
 ---------------------------------
 function DogObject:onEnterFightTriggerImpl()
+    info_log ("DogObject:onEnterFightTriggerImpl self.mState ", self.mState);
     if self.mState ~= DogObject.RUN_AWAY then
         -- move to safe for player point
         local point = self:getSafePlayerPoints();
+        info_log ("DogObject:onEnterFightTriggerImpl point.x ", point.x, " point.y ", point.y);
         self:runAway(point);
     end
 end
@@ -160,8 +163,11 @@ end
 
 ---------------------------------
 function DogObject:inThisHalf(point)
-    local allRight = self.mGridPosition.x <= 7 and point.x <= 7;
-    local allLeft = self.mGridPosition.x > 7 and point.x > 7;
+    local halfField = math.ceil(self.mField:getSize().x / 2);
+
+    debug_log("DogObject:inThisHalf point x ", point.x, "point y ", point.y, " halfField ", halfField);
+    local allRight = self.mGridPosition.x <= halfField and point.x <= halfField;
+    local allLeft = self.mGridPosition.x > halfField and point.x > halfField;
     return allRight or allLeft;
 end
 
@@ -189,6 +195,7 @@ end
 
 --------------------------------
 function DogObject:updateRunAwayPath()
+    debug_log("DogObject:updateRunAwayPath ", #self.mPath);
     local newPath = {};
     if #self.mPath == 0 and self.mGridPosition.y == 1 then
         table.insert(self.mPath, Vector.new(self.mGridPosition.x, self.mGridPosition.y));

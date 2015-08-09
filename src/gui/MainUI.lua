@@ -207,7 +207,7 @@ function MainUI:init(game, uiLayer, ccbFile)
     -------------------------
 
     local function onTouchHandler(action, var)
-        info_log("MainUI:onTouchHandler ", action, "self.mListener ", self.mListener);
+        --info_log("MainUI:onTouchHandler ", action, "self.mListener ", self.mListener);
         return self:onTouchHandler(action, var);
     end
 

@@ -92,7 +92,7 @@ end
 
 --------------------------------
 function Joystick:checkBlockedButton(button)
-	info_log("Joystick:checkBlockedButton button ", button, "blocked ", self.mBlockedButton[button]);
+	--info_log("Joystick:checkBlockedButton button ", button, "blocked ", self.mBlockedButton[button]);
 	if self.mBlockedButton[button] then
 		return nil
 	end

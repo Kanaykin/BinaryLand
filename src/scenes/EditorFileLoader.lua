@@ -10,6 +10,8 @@ EditorFileLoader.FOX_ID = 6;
 EditorFileLoader.COIN_ID = 7;
 EditorFileLoader.FOXY_ID = 8;
 
+EditorFileLoader.MAX_WIDTH = 15;
+
 --------------------------------
 function EditorFileLoader:createLoveCage(pos, cellSize, fieldNode)
     info_log("EditorFileLoader:createLoveCage ");
@@ -142,6 +144,41 @@ EditorFileLoader.CreateFunctions = {
 };
 
 --------------------------------
+function EditorFileLoader:createObjects(G_EditorScene, node, cellSize)
+
+    for i, val in ipairs(G_EditorScene.m) do
+        if EditorFileLoader.CreateFunctions[val] ~= nil then
+            local child = EditorFileLoader.CreateFunctions[val](EditorFileLoader, cc.p(((i - 1) % G_EditorScene.w) * cellSize + cellSize / 2.0,
+                math.floor(G_EditorScene.h - i / G_EditorScene.w) * cellSize), cellSize, node);
+
+            node:addChild(child);
+        end
+    end
+
+    for i=1, G_EditorScene.w do
+        local child = self:createBush(cc.p((i - 1) * cellSize + cellSize / 2.0,
+            G_EditorScene.h * cellSize), cellSize, node);
+
+        node:addChild(child);
+    end
+
+    if (EditorFileLoader.MAX_WIDTH - 2) > G_EditorScene.w then
+        for i=1, G_EditorScene.h + 1 do
+            local child = self:createBush(cc.p(- cellSize / 2.0,
+                (i - 1) * cellSize), cellSize, node);
+
+            node:addChild(child);
+
+            local child2 = self:createBush(cc.p(G_EditorScene.w * cellSize + cellSize / 2.0,
+                (i - 1) * cellSize), cellSize, node);
+
+            node:addChild(child2);
+        end
+    end
+
+end
+
+--------------------------------
 function EditorFileLoader:loadEditorFile(levelData, G_EditorScene, levelScene)
 
     if type(G_EditorScene) == "table" then
@@ -203,21 +240,7 @@ function EditorFileLoader:loadEditorFile(levelData, G_EditorScene, levelScene)
 
         levelScene:loadTileMap("Level1_2_map.tmx");
 
-		for i, val in ipairs(G_EditorScene.m) do
-			if EditorFileLoader.CreateFunctions[val] ~= nil then
-                local child = EditorFileLoader.CreateFunctions[val](EditorFileLoader, cc.p(((i - 1) % G_EditorScene.w) * cellSize + cellSize / 2.0,
-                    math.floor(G_EditorScene.h - i / G_EditorScene.w) * cellSize), cellSize, nodes[1]);
-
-				nodes[1]:addChild(child);
-			end
-
-        end
-        for i=1, G_EditorScene.w do
-            local child = self:createBush(cc.p(((i - 1) % G_EditorScene.w) * cellSize + cellSize / 2.0,
-                G_EditorScene.h * cellSize), cellSize, nodes[1]);
-
-            nodes[1]:addChild(child);
-        end
+        self:createObjects(G_EditorScene, nodes[1], cellSize);
 
         levelScene.mSceneGame:addChild(levelScene.mScrollView.mScroll);
         levelScene.mField = Field:create();

@@ -118,3 +118,12 @@ GameMock = inheritsFrom(nil)
 function GameMock:getScale()
 	return 1;
 end
+
+ObjectMock = inheritsFrom(nil)
+ObjectMock.mId = 1;
+ObjectMock.mNode = nil;
+
+function ObjectMock:getId()
+	return self.mId;
+end
+

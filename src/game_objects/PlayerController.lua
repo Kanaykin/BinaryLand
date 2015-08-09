@@ -51,7 +51,7 @@ end
 
 ----------------------------------------
 function PlayerController:onTouchBegan(point)
-	info_log("PlayerController:onTouchBegan (", point.x, " ,", point.y, ")");
+	--info_log("PlayerController:onTouchBegan (", point.x, " ,", point.y, ")");
 
 	self:resetData();
 	self.mObjectCaptured = nil;
@@ -60,7 +60,7 @@ function PlayerController:onTouchBegan(point)
 		--debug_log("PlayerController:onTouchBegan  x ", box.origin.x, " y ", box.origin.y);
 		--debug_log("PlayerController:onTouchBegan  size ", box.size.width, " y ", box.size.height);
 		local pos = object:getScreenPos();
-		info_log("PlayerController:onTouchBegan  x ", pos.x, " y ", pos.y);
+		--info_log("PlayerController:onTouchBegan  x ", pos.x, " y ", pos.y);
 		if self:touchObject(object, point) then
 			info_log("self:touchObject ");
 			self.mObjectCaptured = object;
