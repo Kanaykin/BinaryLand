@@ -15,6 +15,7 @@ DogObject.oldVelocity = nil;
 
 DogObject.mFoundPlayer = nil;
 DogObject.mHunterDead = false;
+DogObject.mRunAnimations = nil;
 
 --------------------------------
 function DogObject:createBarkAnimation()
@@ -28,23 +29,41 @@ function DogObject:createBarkAnimation()
 end
 
 --------------------------------
-function DogObject:initAnimation()
-	info_log("HunterObject:initAnimation");
+function DogObject:swapAnimation(list1, list2, type)
+    local tmp = list1[type];
+    list1[type] = list2[type];
+    list2[type] = tmp;
+end
 
-	info_log("Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
-	local animation = PlistAnimation:create();
-	animation:init("DogWalk.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.16);
+--------------------------------
+function DogObject:swapAnimations()
+    self:swapAnimation(self.mAnimations, self.mRunAnimations, MobObject.DIRECTIONS.SIDE);
+    self:swapAnimation(self.mAnimations, self.mRunAnimations, MobObject.DIRECTIONS.FRONT);
+    self:swapAnimation(self.mAnimations, self.mRunAnimations, MobObject.DIRECTIONS.BACK);
+end
 
-	local sideAnimation = RepeatAnimation:create();
-	sideAnimation:init(animation);
-	sideAnimation:play();
+--------------------------------
+function DogObject:createSideAnimation()
 
-    self.mAnimations = {}
-    self.mAnimation = MobObject.DIRECTIONS.SIDE;
+    local animation = PlistAnimation:create();
+    animation:init("DogWalk.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.16);
+
+    local sideAnimation = RepeatAnimation:create();
+    sideAnimation:init(animation);
+
     self.mAnimations[MobObject.DIRECTIONS.SIDE] = sideAnimation;
 
-    ------------------------
-    -- Front animation
+    local animationRun = PlistAnimation:create();
+    animationRun:init("DogRun.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.16);
+
+    local sideRunAnimation = RepeatAnimation:create();
+    sideRunAnimation:init(animationRun);
+
+    self.mRunAnimations[MobObject.DIRECTIONS.SIDE] = sideRunAnimation;
+end
+
+--------------------------------
+function DogObject:createFrontAnimation()
     local animationFront = PlistAnimation:create();
     animationFront:init("DogWalkFront.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.16);
 
@@ -52,14 +71,51 @@ function DogObject:initAnimation()
     frontAnimation:init(animationFront);
     self.mAnimations[MobObject.DIRECTIONS.FRONT] = frontAnimation;
 
-    ------------------------
-    -- Back animation
+    local animationRunFront = PlistAnimation:create();
+    animationRunFront:init("DogRunFront.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.16);
+
+    local frontRunAnimation = RepeatAnimation:create();
+    frontRunAnimation:init(animationRunFront);
+    self.mRunAnimations[MobObject.DIRECTIONS.FRONT] = frontRunAnimation;
+end
+
+--------------------------------
+function DogObject:createBackAnimation()
     local animationBack = PlistAnimation:create();
     animationBack:init("DogWalkBack.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.16);
 
     local backAnimation = RepeatAnimation:create();
     backAnimation:init(animationBack);
     self.mAnimations[MobObject.DIRECTIONS.BACK] = backAnimation;
+
+    local animationRunBack = PlistAnimation:create();
+    animationRunBack:init("DogRunBack.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.16);
+
+    local backRunAnimation = RepeatAnimation:create();
+    backRunAnimation:init(animationRunBack);
+    self.mRunAnimations[MobObject.DIRECTIONS.BACK] = backRunAnimation;
+
+end
+
+--------------------------------
+function DogObject:initAnimation()
+	info_log("HunterObject:initAnimation");
+
+	info_log("Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
+    self.mAnimations = {}
+    self.mRunAnimations = {};
+
+    self:createSideAnimation();
+    self.mAnimation = MobObject.DIRECTIONS.SIDE;
+    self.mAnimations[MobObject.DIRECTIONS.SIDE]:play();
+
+    ------------------------
+    -- Front animation
+    self:createFrontAnimation();
+
+    ------------------------
+    -- Back animation
+    self:createBackAnimation();
 
     ------------------------
     self:createBarkAnimation();
@@ -70,7 +126,7 @@ function DogObject:onPlayerEnterImpl(player, pos)
     info_log("DogObject.onPlayerEnterImpl ", player.mNode:getTag());
     info_log("DogObject.onPlayerEnterImpl self.mState ", self.mState);
     if not player:isInTrap() and self.mState ~= MobObject.DEAD and self.mState ~= DogObject.RUN_AWAY then
-        self.mState = DogObject.FOUND_PLAYER;
+        self:setState(DogObject.FOUND_PLAYER);
         self:resetMovingParams();
         self.mFoundPlayer = player;
     end
@@ -80,7 +136,7 @@ end
 function DogObject:onPlayerLeaveImpl(player)
     info_log("DogObject.onPlayerLeaveImpl");
     if self.mState == DogObject.FOUND_PLAYER then
-        self.mState = MobObject.IDLE;
+        self:setState(MobObject.IDLE);
         self.mFoundPlayer = nil;
     end
 end
@@ -106,6 +162,17 @@ function DogObject:getSafePlayerPoints()
 end
 
 ---------------------------------
+function DogObject:setState(state)
+    if self.mState ~= DogObject.RUN_AWAY and state == DogObject.RUN_AWAY then
+        self:swapAnimations();
+    end
+    if state ~= DogObject.RUN_AWAY and self.mState == DogObject.RUN_AWAY then
+        self:swapAnimations();
+    end
+    self.mState = state;
+end
+
+---------------------------------
 function DogObject:getFoundPlayerPos()
     if self.mState == DogObject.FOUND_PLAYER then
         return self.mGridPosition;
@@ -122,7 +189,7 @@ function DogObject:runAway(point)
         --self.mGridPosition = Vector.new(self.mField:getGridPosition(self.mNode));
         self.mPath = {};
         self:startMoving(point);
-        self.mState = DogObject.RUN_AWAY;
+        self:setState(DogObject.RUN_AWAY);
     end
 end
 
@@ -153,10 +220,11 @@ function DogObject:onMoveFinished( )
         debug_log("self.mGridPosition x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
         self.mVelocity = self.oldVelocity;
         self.oldVelocity = nil;
+        self:setState(MobObject.IDLE);
     end
     if self.mHunterDead and #self.mPath == 0 then
         self.mTimeDestroy = 0.0;
-        self.mState = MobObject.DEAD;
+        self:setState(MobObject.DEAD);
     end
     DogObject:superClass().onMoveFinished(self);
 end
@@ -227,7 +295,7 @@ end
 --------------------------------
 function DogObject:checkFoundPlayer()
     if self.mFoundPlayer and self.mFoundPlayer:isInTrap() then
-        self.mState = MobObject.IDLE;
+        self:setState(MobObject.IDLE);
         self.mFoundPlayer = nil;
     end
 end
