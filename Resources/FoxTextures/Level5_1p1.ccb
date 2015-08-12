@@ -217,7 +217,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>rocks.png</string>
 								</array>
 							</dict>
 						</array>
@@ -289,7 +289,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -317,7 +317,7 @@
 								<key>value</key>
 								<array>
 									<real>208</real>
-									<real>256</real>
+									<real>96</real>
 									<integer>5</integer>
 								</array>
 							</dict>
@@ -361,7 +361,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -433,7 +433,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -585,7 +585,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -657,7 +657,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>idol.png</string>
+									<string>rocks.png</string>
 								</array>
 							</dict>
 						</array>
@@ -684,8 +684,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>112</real>
-									<real>128</real>
+									<real>80</real>
+									<real>96</real>
 									<integer>5</integer>
 								</array>
 							</dict>
@@ -729,7 +729,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -801,7 +801,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>idol.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -873,7 +873,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -945,7 +945,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1017,7 +1017,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1089,7 +1089,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1161,7 +1161,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1233,7 +1233,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1305,7 +1305,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1377,7 +1377,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>idol.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1449,7 +1449,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>idol.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1476,7 +1476,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>464</real>
+									<real>400</real>
 									<real>96</real>
 									<integer>5</integer>
 								</array>
@@ -1521,7 +1521,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>idol.png</string>
+									<string>rocks.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1593,7 +1593,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1620,7 +1620,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>400</real>
+									<real>464</real>
 									<real>32</real>
 									<integer>5</integer>
 								</array>
@@ -1665,7 +1665,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1737,7 +1737,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>idol.png</string>
+									<string>rocks.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1809,7 +1809,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>idol.png</string>
+									<string>rocks.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1881,7 +1881,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1908,7 +1908,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>336</real>
+									<real>272</real>
 									<real>96</real>
 									<integer>5</integer>
 								</array>
@@ -1953,7 +1953,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>idol.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -2025,7 +2025,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -2052,7 +2052,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>272</real>
+									<real>336</real>
 									<real>32</real>
 									<integer>5</integer>
 								</array>
@@ -2097,7 +2097,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>rocks.png</string>
 								</array>
 							</dict>
 						</array>
@@ -2169,7 +2169,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -2241,7 +2241,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>rocks.png</string>
 								</array>
 							</dict>
 						</array>
@@ -2268,7 +2268,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>400</real>
+									<real>464</real>
 									<real>160</real>
 									<integer>5</integer>
 								</array>
@@ -2313,7 +2313,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>idol.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -2385,7 +2385,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -2457,7 +2457,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -2529,7 +2529,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -2601,7 +2601,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -2628,8 +2628,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>176</real>
-									<real>64</real>
+									<real>144</real>
+									<real>160</real>
 									<integer>5</integer>
 								</array>
 							</dict>
@@ -2673,7 +2673,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -2745,7 +2745,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -2772,8 +2772,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>48</real>
-									<real>64</real>
+									<real>16</real>
+									<real>160</real>
 									<integer>5</integer>
 								</array>
 							</dict>
@@ -2817,7 +2817,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -2889,7 +2889,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>idol.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3121,7 +3121,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3193,7 +3193,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3265,7 +3265,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3337,7 +3337,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3409,7 +3409,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3481,7 +3481,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3508,7 +3508,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>80</real>
+									<real>16</real>
 									<real>256</real>
 									<integer>5</integer>
 								</array>
@@ -3553,7 +3553,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>idol.png</string>
+									<string>rocks.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3581,7 +3581,7 @@
 								<key>value</key>
 								<array>
 									<real>176</real>
-									<real>0.0</real>
+									<real>288</real>
 									<integer>5</integer>
 								</array>
 							</dict>
@@ -3625,7 +3625,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3697,7 +3697,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3769,7 +3769,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>rocks.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3841,7 +3841,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3913,7 +3913,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>idol.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3940,7 +3940,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>464</real>
+									<real>400</real>
 									<real>224</real>
 									<integer>5</integer>
 								</array>
@@ -3985,7 +3985,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>idol.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -4057,12 +4057,10 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -4086,7 +4084,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>272</real>
+									<real>336</real>
 									<real>160</real>
 									<integer>5</integer>
 								</array>
@@ -4131,7 +4129,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>rocks.png</string>
 								</array>
 							</dict>
 						</array>
@@ -4203,7 +4201,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>rocks.png</string>
 								</array>
 							</dict>
 						</array>
@@ -4275,7 +4273,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>rocks.png</string>
 								</array>
 							</dict>
 						</array>
@@ -4989,7 +4987,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>palm.png</string>
+									<string>vulcan.png</string>
 								</array>
 							</dict>
 						</array>
@@ -5016,7 +5014,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>336</real>
+									<real>272</real>
 									<real>224</real>
 									<integer>5</integer>
 								</array>
@@ -5061,7 +5059,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>idol.png</string>
+									<string>vulcan-tree.png</string>
 								</array>
 							</dict>
 						</array>
@@ -5293,7 +5291,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>spicule.png</string>
+									<string>rocks.png</string>
 								</array>
 							</dict>
 						</array>
@@ -5697,6 +5695,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -5774,366 +5774,6 @@
 								<array>
 									<string></string>
 									<string>cage.png</string>
-								</array>
-							</dict>
-						</array>
-					</dict>
-					<dict>
-						<key>baseClass</key>
-						<string>CCSprite</string>
-						<key>children</key>
-						<array/>
-						<key>customClass</key>
-						<string></string>
-						<key>displayName</key>
-						<string>CCSprite</string>
-						<key>memberVarAssignmentName</key>
-						<string></string>
-						<key>memberVarAssignmentType</key>
-						<integer>0</integer>
-						<key>properties</key>
-						<array>
-							<dict>
-								<key>name</key>
-								<string>position</string>
-								<key>type</key>
-								<string>Position</string>
-								<key>value</key>
-								<array>
-									<real>176</real>
-									<real>128</real>
-									<integer>5</integer>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>anchorPoint</string>
-								<key>type</key>
-								<string>Point</string>
-								<key>value</key>
-								<array>
-									<real>0.5</real>
-									<real>0.0</real>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>scale</string>
-								<key>type</key>
-								<string>ScaleLock</string>
-								<key>value</key>
-								<array>
-									<real>1</real>
-									<real>1</real>
-									<false/>
-									<integer>0</integer>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>ignoreAnchorPointForPosition</string>
-								<key>type</key>
-								<string>Check</string>
-								<key>value</key>
-								<false/>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>displayFrame</string>
-								<key>type</key>
-								<string>SpriteFrame</string>
-								<key>value</key>
-								<array>
-									<string></string>
-									<string>idol.png</string>
-								</array>
-							</dict>
-						</array>
-					</dict>
-					<dict>
-						<key>baseClass</key>
-						<string>CCSprite</string>
-						<key>children</key>
-						<array/>
-						<key>customClass</key>
-						<string></string>
-						<key>displayName</key>
-						<string>CCSprite</string>
-						<key>memberVarAssignmentName</key>
-						<string></string>
-						<key>memberVarAssignmentType</key>
-						<integer>0</integer>
-						<key>properties</key>
-						<array>
-							<dict>
-								<key>name</key>
-								<string>position</string>
-								<key>type</key>
-								<string>Position</string>
-								<key>value</key>
-								<array>
-									<real>80</real>
-									<real>224</real>
-									<integer>5</integer>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>anchorPoint</string>
-								<key>type</key>
-								<string>Point</string>
-								<key>value</key>
-								<array>
-									<real>0.5</real>
-									<real>0.0</real>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>scale</string>
-								<key>type</key>
-								<string>ScaleLock</string>
-								<key>value</key>
-								<array>
-									<real>1</real>
-									<real>1</real>
-									<false/>
-									<integer>0</integer>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>ignoreAnchorPointForPosition</string>
-								<key>type</key>
-								<string>Check</string>
-								<key>value</key>
-								<false/>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>displayFrame</string>
-								<key>type</key>
-								<string>SpriteFrame</string>
-								<key>value</key>
-								<array>
-									<string></string>
-									<string>idol.png</string>
-								</array>
-							</dict>
-						</array>
-					</dict>
-					<dict>
-						<key>baseClass</key>
-						<string>CCSprite</string>
-						<key>children</key>
-						<array/>
-						<key>customClass</key>
-						<string></string>
-						<key>displayName</key>
-						<string>CCSprite</string>
-						<key>memberVarAssignmentName</key>
-						<string></string>
-						<key>memberVarAssignmentType</key>
-						<integer>0</integer>
-						<key>properties</key>
-						<array>
-							<dict>
-								<key>name</key>
-								<string>position</string>
-								<key>type</key>
-								<string>Position</string>
-								<key>value</key>
-								<array>
-									<real>144</real>
-									<real>256</real>
-									<integer>5</integer>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>anchorPoint</string>
-								<key>type</key>
-								<string>Point</string>
-								<key>value</key>
-								<array>
-									<real>0.5</real>
-									<real>0.0</real>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>scale</string>
-								<key>type</key>
-								<string>ScaleLock</string>
-								<key>value</key>
-								<array>
-									<real>1</real>
-									<real>1</real>
-									<false/>
-									<integer>0</integer>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>ignoreAnchorPointForPosition</string>
-								<key>type</key>
-								<string>Check</string>
-								<key>value</key>
-								<false/>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>displayFrame</string>
-								<key>type</key>
-								<string>SpriteFrame</string>
-								<key>value</key>
-								<array>
-									<string></string>
-									<string>spicule.png</string>
-								</array>
-							</dict>
-						</array>
-					</dict>
-					<dict>
-						<key>baseClass</key>
-						<string>CCSprite</string>
-						<key>children</key>
-						<array/>
-						<key>customClass</key>
-						<string></string>
-						<key>displayName</key>
-						<string>CCSprite</string>
-						<key>memberVarAssignmentName</key>
-						<string></string>
-						<key>memberVarAssignmentType</key>
-						<integer>0</integer>
-						<key>properties</key>
-						<array>
-							<dict>
-								<key>name</key>
-								<string>position</string>
-								<key>type</key>
-								<string>Position</string>
-								<key>value</key>
-								<array>
-									<real>144</real>
-									<real>224</real>
-									<integer>5</integer>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>anchorPoint</string>
-								<key>type</key>
-								<string>Point</string>
-								<key>value</key>
-								<array>
-									<real>0.5</real>
-									<real>0.0</real>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>scale</string>
-								<key>type</key>
-								<string>ScaleLock</string>
-								<key>value</key>
-								<array>
-									<real>1</real>
-									<real>1</real>
-									<false/>
-									<integer>0</integer>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>ignoreAnchorPointForPosition</string>
-								<key>type</key>
-								<string>Check</string>
-								<key>value</key>
-								<false/>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>displayFrame</string>
-								<key>type</key>
-								<string>SpriteFrame</string>
-								<key>value</key>
-								<array>
-									<string></string>
-									<string>palm.png</string>
-								</array>
-							</dict>
-						</array>
-					</dict>
-					<dict>
-						<key>baseClass</key>
-						<string>CCSprite</string>
-						<key>children</key>
-						<array/>
-						<key>customClass</key>
-						<string></string>
-						<key>displayName</key>
-						<string>CCSprite</string>
-						<key>memberVarAssignmentName</key>
-						<string></string>
-						<key>memberVarAssignmentType</key>
-						<integer>0</integer>
-						<key>properties</key>
-						<array>
-							<dict>
-								<key>name</key>
-								<string>position</string>
-								<key>type</key>
-								<string>Position</string>
-								<key>value</key>
-								<array>
-									<real>208</real>
-									<real>224</real>
-									<integer>5</integer>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>anchorPoint</string>
-								<key>type</key>
-								<string>Point</string>
-								<key>value</key>
-								<array>
-									<real>0.5</real>
-									<real>0.0</real>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>scale</string>
-								<key>type</key>
-								<string>ScaleLock</string>
-								<key>value</key>
-								<array>
-									<real>1</real>
-									<real>1</real>
-									<false/>
-									<integer>0</integer>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>ignoreAnchorPointForPosition</string>
-								<key>type</key>
-								<string>Check</string>
-								<key>value</key>
-								<false/>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>displayFrame</string>
-								<key>type</key>
-								<string>SpriteFrame</string>
-								<key>value</key>
-								<array>
-									<string></string>
-									<string>spicule.png</string>
 								</array>
 							</dict>
 						</array>

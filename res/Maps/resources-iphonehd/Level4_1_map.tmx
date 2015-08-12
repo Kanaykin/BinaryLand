@@ -3,15 +3,15 @@
  <tileset firstgid="1" name="sand_tile" tilewidth="64" tileheight="64">
   <image source="sand_tile.png" width="256" height="256"/>
  </tileset>
- <tileset firstgid="17" name="snow_tile" tilewidth="64" tileheight="64">
-  <image source="snow_tile.png" width="256" height="512"/>
- </tileset>
- <tileset firstgid="49" name="vulcan_tile" tilewidth="64" tileheight="64">
+ <tileset firstgid="17" name="vulcan_tile" tilewidth="64" tileheight="64">
   <image source="vulcan_tile.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="33" name="jungle_tile" tilewidth="64" tileheight="64">
+  <image source="jungle_tile.png" width="256" height="512"/>
  </tileset>
  <layer name="Tile Layer 1" width="20" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjZWBgYB0CmBmI2cjEnEjmGA4BbATEZhRiYzTzTCnE6O4bNW/4mWc8As0DACygNeY=
+   eJztzDEOgCAQBMD7CigICoL8/3FueQkJWUNjQTHtGBExy69Y2Cdt6ovgJh3r62Q4B8LHL4EfuMgvExf7sRf7VfIq0IjvgZugL/29ud8tkg==
   </data>
  </layer>
 </map>

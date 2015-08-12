@@ -40,6 +40,7 @@ function DogObject:swapAnimations()
     self:swapAnimation(self.mAnimations, self.mRunAnimations, MobObject.DIRECTIONS.SIDE);
     self:swapAnimation(self.mAnimations, self.mRunAnimations, MobObject.DIRECTIONS.FRONT);
     self:swapAnimation(self.mAnimations, self.mRunAnimations, MobObject.DIRECTIONS.BACK);
+    self.mAnimation = nil
 end
 
 --------------------------------
@@ -166,6 +167,7 @@ function DogObject:setState(state)
     if self.mState ~= DogObject.RUN_AWAY and state == DogObject.RUN_AWAY then
         self:swapAnimations();
     end
+    debug_log("DogObject:setState state ", state, " self.mState ", self.mState);
     if state ~= DogObject.RUN_AWAY and self.mState == DogObject.RUN_AWAY then
         self:swapAnimations();
     end
@@ -219,6 +221,7 @@ function DogObject:onMoveFinished( )
     if self.oldVelocity and #self.mPath == 0 then
         debug_log("self.mGridPosition x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
         self.mVelocity = self.oldVelocity;
+        debug_log("DogObject:onMoveFinished self.mVelocity " );
         self.oldVelocity = nil;
         self:setState(MobObject.IDLE);
     end
