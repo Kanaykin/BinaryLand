@@ -52,7 +52,7 @@ function DelayAnimationSoftImpl:play()
 	if self.mTexture then
         if self.mTextureName then
             local sprite = GuiHelper.getSpriteFrame(self.mTextureName, self.mTextureSize);
-            info_log("DelayAnimationSoftImpl:play sprite ", sprite);
+            --info_log("DelayAnimationSoftImpl:play sprite ", sprite);
             tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setSpriteFrame(sprite);
         else
             tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setTexture(self.mTexture);

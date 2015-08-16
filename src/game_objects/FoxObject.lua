@@ -5,6 +5,7 @@ require "src/animations/RandomAnimation"
 require "src/animations/DelayAnimation"
 require "src/scenes/SoundConfigs"
 require "src/base/Log"
+require "src/game_objects/FoxTrace.lua"
 
 FoxObject = inheritsFrom(PlayerObject)
 
@@ -27,6 +28,7 @@ FoxObject.mSideIdleAnimation = nil;
 FoxObject.mDebugBox = nil;
 FoxObject.mNeedDebugBox = false;
 FoxObject.mSize = nil;
+FoxObject.mTrace = nil;
 
 --------------------------------
 function FoxObject:init(field, node, needReverse)
@@ -56,6 +58,15 @@ function FoxObject:init(field, node, needReverse)
         self.mDebugBox = nodeBox;
     end
     self.mSize = self.mAnimationNode:getBoundingBox();
+
+    -- create trace
+    self.mTrace = FoxTrace:create();
+    self.mTrace:init(field:getSize());
+end
+
+---------------------------------
+function FoxObject:getTrace()
+    return self.mTrace;
 end
 
 ---------------------------------
@@ -189,6 +200,8 @@ function FoxObject:tick(dt)
         self.mNewEffect:setVisible(false);
     end
     self:updateDebugBox();
+
+    self.mTrace:updatePosition(self.mGridPosition);
 end
 
 --------------------------------

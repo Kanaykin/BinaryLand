@@ -308,4 +308,9 @@ function DogObject:tick(dt)
     --debug_log("DogObject:tick x ", self.mGridPosition.x, " y ", self.mGridPosition.y, " id ", self:getId());
     self:checkFoundPlayer();
 	DogObject:superClass().tick(self, dt);
+
+    local players = self.mField:getPlayerObjects();
+    for i, player in pairs(players) do
+        player:getTrace():findTrace(self.mGridPosition);
+    end
 end
