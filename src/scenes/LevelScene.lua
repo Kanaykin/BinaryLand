@@ -227,6 +227,7 @@ function LevelScene:initScene(levelData)
         return;
     end
 
+    debug_log("levelData.ccbFile ", levelData);
 	if type(levelData.ccbFile) == "string" then
 		local ccpproxy = CCBProxy:create();
 		local reader = ccpproxy:createCCBReader();

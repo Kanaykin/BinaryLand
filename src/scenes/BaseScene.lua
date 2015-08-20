@@ -50,7 +50,7 @@ function BaseScene:init(sceneMan, params)
 	if type(params) == "table" then
 		backgroundImageName = params.background;
 	end
-	info_log("BaseScene:init ", backgroundImageName, self.mSceneManager);
+	info_log("BaseScene:init ", backgroundImageName, sceneMan);
 	self.mSceneManager = sceneMan;
 	self.mSceneGame = CCScene:create();
 	self.mSceneGame:retain();

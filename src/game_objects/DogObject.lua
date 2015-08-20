@@ -2,6 +2,7 @@ require "src/game_objects/MobObject"
 require "src/animations/PlistAnimation"
 require "src/animations/RepeatAnimation"
 require "src/base/Log"
+require "src/game_objects/DogStates.lua"
 
 DogObject = inheritsFrom(MobObject)
 
@@ -16,6 +17,14 @@ DogObject.oldVelocity = nil;
 DogObject.mFoundPlayer = nil;
 DogObject.mHunterDead = false;
 DogObject.mRunAnimations = nil;
+
+--------------------------------
+function DogObject:init(field, node)
+    info_log("DogObject:init(", node, ")");
+    DogObject:superClass().init(self, field, node);
+    self.mStateMachine = StateMachine:create();
+    self.mStateMachine:init(self);
+end
 
 --------------------------------
 function DogObject:createBarkAnimation()

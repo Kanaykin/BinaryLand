@@ -1,12 +1,23 @@
 require "src/game_objects/MobObject"
 require "src/animations/PlistAnimation"
 require "src/base/Log"
+require "src/game_objects/HunterStates"
 
 HunterObject = inheritsFrom(MobObject)
 HunterObject.mDogId = nil;
 HunterObject.mDog = nil;
 HunterObject.oldVelocity = nil;
 HunterObject.FOUND_PLAYER = MobObject.LAST_STATE + 1;
+HunterObject.mFoundPlayerPos = nil;
+
+
+--------------------------------
+function HunterObject:init(field, node)
+    info_log("HunterObject:init(", node, ")");
+    HunterObject:superClass().init(self, field, node);
+    self.mStateMachine = HunterStateMachine:create();
+    self.mStateMachine:init(self);
+end
 
 --------------------------------
 function HunterObject:initAnimation()
@@ -83,25 +94,16 @@ function HunterObject:updateDog()
         info_log("HunterObject:updateDog self.mDog ", self.mDog);
     end
 
-    if self.mDog and self.mState ~= MobObject.DEAD then
+    if self.mDog then
         local playerPos = self.mDog:getFoundPlayerPos();
-        if playerPos and self.mState ~= HunterObject.FOUND_PLAYER then
-
-            info_log("HunterObject:updateDog player found !!! ");
-            self.oldVelocity = self.mVelocity;
-            self.mVelocity = self.mVelocity * 4;
-            self.mPath = {};
-            self:startMoving(playerPos);
-            self.mState = HunterObject.FOUND_PLAYER;
-        elseif not playerPos and self.mState == HunterObject.FOUND_PLAYER then
-            self.mVelocity = self.oldVelocity;
-            self.oldVelocity = nil;
-
-            if self.mGridPosition ~= self.mDestGridPos then
-                self.mState = MobObject.MOVING;
-            else
-                self.mState = MobObject.IDLE;
-            end
+        if playerPos and not self.mFoundPlayerPos then
+            debug_log("self.mStateMachine:onDogPlayerFound");
+            self.mStateMachine:onDogPlayerFound(playerPos);
+            self.mFoundPlayerPos = playerPos;
+        elseif not playerPos and self.mFoundPlayerPos then
+            debug_log("self.mStateMachine:onDogPlayerRunAway");
+            self.mStateMachine:onDogPlayerRunAway();
+            self.mFoundPlayerPos = nil;
         end
     end
 end

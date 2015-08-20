@@ -184,5 +184,7 @@ function Level:init(levelData, location, index, countStar)
 	if(levelData.opened ~= nil ) then
 		self.mOpened = levelData.opened; 
 	end
+    debug_log("Level:init id ", levelData.id);
+    debug_log("Level:init ccbFile ", levelData.ccbFile);
     self:setCountStar(countStar);
 end

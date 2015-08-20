@@ -14,6 +14,7 @@ MobObject.LAST_STATE = 4;
 MobObject.mState = MobObject.IDLE;
 MobObject.mPath = nil;
 MobObject.mTrigger = nil;
+MobObject.mStateMachine = nil;
 
 MobObject.DIRECTIONS = {
     SIDE = 1,
@@ -64,9 +65,8 @@ end
 --------------------------------
 function MobObject:onPlayerEnterImpl(player, pos)
 	info_log("MobObject.onPlayerEnterImpl ", player.mNode:getTag());
-    if self.mState ~= MobObject.DEAD and not player:isInTrap() then
-        self.mField:createSnareTrigger(Vector.new(player.mNode:getPosition()));
-    end
+
+    self.mStateMachine:onPlayerEnter(player, self.mField);
 end
 
 --------------------------------
@@ -129,22 +129,20 @@ function MobObject:getDestPoint()
 end
 
 --------------------------------
-function MobObject:moveToNextPoint( )
+function MobObject:moveToNextPoint()
 	if #self.mPath == 0 then
-		self.mState = MobObject.IDLE;
         info_log("MobObject:moveToNextPoint empty path ", " id ", self:getId());
         self:resetMovingParams();
-		return;
+		return false;
 	end
 	self:moveTo(self.mPath[1]);
 	table.remove(self.mPath, 1);
+    return true;
 end
 
 --------------------------------
-function MobObject:onMoveFinished( )
-    if self.mState ~= MobObject.DEAD then
-        self:moveToNextPoint();
-    end
+function MobObject:onMoveFinished()
+    self.mStateMachine:onMoveFinished();
 end
 
 ---------------------------------
@@ -155,8 +153,9 @@ end
 
 ---------------------------------
 function MobObject:onEnterFightTriggerImpl()
-    self.mTimeDestroy = 0.5;
-    self.mState = MobObject.DEAD;
+    --self.mTimeDestroy = 0.5;
+    --self.mState = MobObject.DEAD;
+    self.mStateMachine:onEnterFightTrigger();
 --    self.mNode:stopAllActions();
 end
 
@@ -165,7 +164,6 @@ function MobObject:startMoving(destPoint)
     -- clone field
     local cloneArray = self.mField:cloneArray();
     info_log ("MobObject:startMoving destPoint ", destPoint.x, "y ", destPoint.y, " id ", self:getId());
-    self.mState = MobObject.MOVING;
     self.mPath = WavePathFinder.buildPath(self.mGridPosition, destPoint, cloneArray, self.mField.mSize);
     if #self.mPath > 0 then
         table.remove(self.mPath, 1);
@@ -176,20 +174,6 @@ end
 
 --------------------------------
 function MobObject:tick(dt)
-    if self.mState == MobObject.DEAD then
-        if self.mTimeDestroy then
-            self.mTimeDestroy = self.mTimeDestroy - dt;
-            if self.mTimeDestroy <= 0 then
-                self.mField:addBonus(self);
-                self.mField:removeObject(self);
-                self.mField:removeEnemy(self)
-                self:destroy();
-                return;
-            end
-        end
---        return;
-    end
-
 	MobObject:superClass().tick(self, dt);
 
 	if self.mTrigger then
@@ -202,17 +186,13 @@ function MobObject:tick(dt)
 		tolua.cast(self.mNode, "cc.Sprite"):setFlippedX(val.x < 0);
 	end
 
-	if self.mState == MobObject.IDLE then
-		-- find free point on field and move to this point
-		local destPoint = self:getDestPoint();
-        self:startMoving(destPoint);
-	end
-
     local anim = self:getAnimationByDirection();
     if anim ~= self.mAnimation then
         self.mAnimation = anim;
         self.mNode:stopAllActions();
         self.mAnimations[self.mAnimation]:play();
     end
+
+    self.mStateMachine:tick(dt);
 
 end

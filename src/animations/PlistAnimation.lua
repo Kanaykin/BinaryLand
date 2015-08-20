@@ -62,7 +62,7 @@ function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
 
     local array = cc.FileUtils:getInstance():getValueMapFromFile(plistName);
     local frames = array["frames"];
-    info_log("PlistAnimation:init ", array["frames"]);
+    --info_log("PlistAnimation:init ", array["frames"]);
 
 	local cache = CCSpriteFrameCache:getInstance();
    	cache:addSpriteFrames(plistName);
@@ -71,8 +71,8 @@ function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
 
    	local arrayFrames = {};
     for key, val in pairs(frames) do
-        info_log("PlistAnimation:init key ", key);
-        info_log("PlistAnimation:init val ", val);
+        --info_log("PlistAnimation:init key ", key);
+        --info_log("PlistAnimation:init val ", val);
 
         local nameStr = key;
    		table.insert(arrayFrames, nameStr);
