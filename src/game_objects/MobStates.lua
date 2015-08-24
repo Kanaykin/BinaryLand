@@ -3,7 +3,8 @@ require "src/base/Inheritance"
 MobStates = {
     MS_MOVE = 1,
     MS_IDLE = 2,
-    MS_LAST = 3,
+    HS_DEAD = 3,
+    MS_LAST = 4,
 }
 
 
@@ -88,6 +89,35 @@ function IdleState:tick(dt)
     self.mStateMachine:setState(MobStates.MS_MOVE);
 end
 
+--[[///////////////////////////]]
+DeadState = inheritsFrom(BaseState)
+DeadState.mTimeWait = nil
+
+------------------------------------
+function DeadState:tick(dt)
+    info_log("DeadState:tick ");
+    DeadState:superClass().tick(self, dt);
+    if self.mTimeWait == nil then
+        self.mTimeWait = 0.5;
+    end
+    self.mTimeWait = self.mTimeWait - dt;
+    if self.mTimeWait < 0 then
+        --self.mStateMachine:setState(MobStates.MS_IDLE);
+
+        self.mObject.mField:addBonus(self.mObject);
+        self.mObject.mField:removeObject(self.mObject);
+        self.mObject.mField:removeEnemy(self.mObject)
+        self.mObject:destroy();
+
+    end
+end
+
+------------------------------------
+function DeadState:enter(params)
+    debug_log("DeadState:enter");
+    self.mObject:resetMovingParams();
+end
+
 
 --[[///////////////////////////]]
 StateMachine = inheritsFrom(nil)
@@ -101,7 +131,8 @@ StateMachine.mParams = nil
 function StateMachine:init(object)
     self.mFactoryStates = {
         [MobStates.MS_IDLE] = IdleState,
-        [MobStates.MS_MOVE] = MoveState
+        [MobStates.MS_MOVE] = MoveState,
+        [MobStates.HS_DEAD] = DeadState
     }
 
     self.mOject = object;

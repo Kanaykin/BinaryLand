@@ -1,39 +1,10 @@
 require "src/game_objects/MobStates.lua"
 
 HunterStates = {
-    HS_DEAD = MobStates.MS_LAST + 1,
-    HS_CATCH_PLAYER = MobStates.MS_LAST + 2,
-    HS_FOUND_PLAYER = MobStates.MS_LAST + 3
+    HS_CATCH_PLAYER = MobStates.MS_LAST + 1,
+    HS_FOUND_PLAYER = MobStates.MS_LAST + 2
 }
 
---[[///////////////////////////]]
-DeadState = inheritsFrom(BaseState)
-DeadState.mTimeWait = nil
-
-------------------------------------
-function DeadState:tick(dt)
-    info_log("DeadState:tick ");
-    DeadState:superClass().tick(self, dt);
-    if self.mTimeWait == nil then
-        self.mTimeWait = 0.5;
-    end
-    self.mTimeWait = self.mTimeWait - dt;
-    if self.mTimeWait < 0 then
-        --self.mStateMachine:setState(MobStates.MS_IDLE);
-
-        self.mObject.mField:addBonus(self.mObject);
-        self.mObject.mField:removeObject(self.mObject);
-        self.mObject.mField:removeEnemy(self.mObject)
-        self.mObject:destroy();
-
-    end
-end
-
-------------------------------------
-function DeadState:enter(params)
-    debug_log("DeadState:enter");
-    self.mObject:resetMovingParams();
-end
 
 --[[///////////////////////////]]
 CatchState = inheritsFrom(BaseState)
@@ -65,7 +36,7 @@ end
 
 ------------------------------------
 function CatchState:onEnterFightTrigger()
-    self.mStateMachine:setState(HunterStates.HS_DEAD);
+    self.mStateMachine:setState(MobStates.HS_DEAD);
 end
 
 --[[///////////////////////////]]
@@ -84,7 +55,7 @@ end
 
 ------------------------------------
 function HunterMoveState:onEnterFightTrigger()
-    self.mStateMachine:setState(HunterStates.HS_DEAD);
+    self.mStateMachine:setState(MobStates.HS_DEAD);
 end
 
 --[[///////////////////////////]]
@@ -125,7 +96,7 @@ end
 
 ------------------------------------
 function FoundPlayerState:onEnterFightTrigger()
-    self.mStateMachine:setState(HunterStates.HS_DEAD);
+    self.mStateMachine:setState(MobStates.HS_DEAD);
 end
 
 ------------------------------------
@@ -141,7 +112,6 @@ function HunterStateMachine:init(object)
     info_log("HunterStateMachine:init ");
     HunterStateMachine:superClass().init(self, object);
 
-    self.mFactoryStates[HunterStates.HS_DEAD] = DeadState;
     self.mFactoryStates[MobStates.MS_MOVE] = HunterMoveState;
     self.mFactoryStates[HunterStates.HS_CATCH_PLAYER] = CatchState;
     self.mFactoryStates[HunterStates.HS_FOUND_PLAYER] = FoundPlayerState;

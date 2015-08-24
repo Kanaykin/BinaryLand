@@ -6,23 +6,20 @@ require "src/game_objects/DogStates.lua"
 
 DogObject = inheritsFrom(MobObject)
 
-DogObject.FOUND_PLAYER  = MobObject.LAST_STATE + 1;
-DogObject.RUN_AWAY      = MobObject.LAST_STATE + 2;
-DogObject.HUNTER_DEAD   = MobObject.LAST_STATE + 3;
 DogObject.BARK_ANIMATION = 4;
 
 DogObject.SAFE_DISTANCE = 4;
 DogObject.oldVelocity = nil;
 
-DogObject.mFoundPlayer = nil;
 DogObject.mHunterDead = false;
 DogObject.mRunAnimations = nil;
+DogObject.mFoundPlayerPos = nil;
 
 --------------------------------
 function DogObject:init(field, node)
     info_log("DogObject:init(", node, ")");
     DogObject:superClass().init(self, field, node);
-    self.mStateMachine = StateMachine:create();
+    self.mStateMachine = DogStateMachine:create();
     self.mStateMachine:init(self);
 end
 
@@ -135,20 +132,15 @@ end
 function DogObject:onPlayerEnterImpl(player, pos)
     info_log("DogObject.onPlayerEnterImpl ", player.mNode:getTag());
     info_log("DogObject.onPlayerEnterImpl self.mState ", self.mState);
-    if not player:isInTrap() and self.mState ~= MobObject.DEAD and self.mState ~= DogObject.RUN_AWAY then
-        self:setState(DogObject.FOUND_PLAYER);
-        self:resetMovingParams();
-        self.mFoundPlayer = player;
-    end
+
+    self.mStateMachine:onPlayerEnter(player, pos);
 end
 
 --------------------------------
 function DogObject:onPlayerLeaveImpl(player)
     info_log("DogObject.onPlayerLeaveImpl");
-    if self.mState == DogObject.FOUND_PLAYER then
-        self:setState(MobObject.IDLE);
-        self.mFoundPlayer = nil;
-    end
+    
+    self.mStateMachine:onPlayerLeave(player, pos);
 end
 
 ---------------------------------
@@ -173,71 +165,47 @@ end
 
 ---------------------------------
 function DogObject:setState(state)
-    if self.mState ~= DogObject.RUN_AWAY and state == DogObject.RUN_AWAY then
-        self:swapAnimations();
-    end
-    debug_log("DogObject:setState state ", state, " self.mState ", self.mState);
-    if state ~= DogObject.RUN_AWAY and self.mState == DogObject.RUN_AWAY then
-        self:swapAnimations();
-    end
-    self.mState = state;
+end
+
+---------------------------------
+function DogObject:setFoundPlayerPos(pos)
+    self.mFoundPlayerPos = pos;
 end
 
 ---------------------------------
 function DogObject:getFoundPlayerPos()
-    if self.mState == DogObject.FOUND_PLAYER then
-        return self.mGridPosition;
-    end
-    return nil;
+    return self.mFoundPlayerPos;
 end
 
 ---------------------------------
 function DogObject:runAway(point)
     if point and not self.oldVelocity then
-        self:resetMovingParams();
         self.oldVelocity = self.mVelocity;
         self.mVelocity = self.mVelocity * 4;
-        --self.mGridPosition = Vector.new(self.mField:getGridPosition(self.mNode));
-        self.mPath = {};
-        self:startMoving(point);
-        self:setState(DogObject.RUN_AWAY);
     end
+    self:resetMovingParams();
+    --self.mGridPosition = Vector.new(self.mField:getGridPosition(self.mNode));
+    self.mPath = {};
+    self:startMoving(point);
+    --self:setState(DogObject.RUN_AWAY);
+
 end
 
 ---------------------------------
 function DogObject:onEnterFightTriggerImpl()
     info_log ("DogObject:onEnterFightTriggerImpl self.mState ", self.mState);
-    if self.mState ~= DogObject.RUN_AWAY then
-        -- move to safe for player point
-        local point = self:getSafePlayerPoints();
-        info_log ("DogObject:onEnterFightTriggerImpl point.x ", point.x, " point.y ", point.y);
-        self:runAway(point);
-    end
+    DogObject:superClass().onEnterFightTriggerImpl(self);
 end
 
 --------------------------------
 function DogObject:getAnimationByDirection()
-    if self.mState == DogObject.FOUND_PLAYER then
-        return DogObject.BARK_ANIMATION;
-    else
-        return DogObject:superClass().getAnimationByDirection(self);
-    end
+    local stateAnim = self.mStateMachine:getAnimationByDirection();
+    return stateAnim and stateAnim or DogObject:superClass().getAnimationByDirection(self);
 end
 
 --------------------------------
 function DogObject:onMoveFinished( )
     info_log ("DogObject:onMoveFinished #self.mPath ", #self.mPath);
-    if self.oldVelocity and #self.mPath == 0 then
-        debug_log("self.mGridPosition x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
-        self.mVelocity = self.oldVelocity;
-        debug_log("DogObject:onMoveFinished self.mVelocity " );
-        self.oldVelocity = nil;
-        self:setState(MobObject.IDLE);
-    end
-    if self.mHunterDead and #self.mPath == 0 then
-        self.mTimeDestroy = 0.0;
-        self:setState(MobObject.DEAD);
-    end
     DogObject:superClass().onMoveFinished(self);
 end
 
@@ -294,28 +262,11 @@ end
 --------------------------------
 function DogObject:onHunterDead()
     info_log ("DogObject:onHunterDead ");
-    local awayPoint = self:getAwayPoint();
-    if self.oldVelocity then
-        self.mVelocity = self.oldVelocity;
-        self.oldVelocity = nil;
-    end
-    self:runAway(awayPoint);
-    self:updateRunAwayPath();
-    self.mHunterDead = true;
-end
-
---------------------------------
-function DogObject:checkFoundPlayer()
-    if self.mFoundPlayer and self.mFoundPlayer:isInTrap() then
-        self:setState(MobObject.IDLE);
-        self.mFoundPlayer = nil;
-    end
+    self.mStateMachine:onHunterDead();
 end
 
 --------------------------------
 function DogObject:tick(dt)
-    --debug_log("DogObject:tick x ", self.mGridPosition.x, " y ", self.mGridPosition.y, " id ", self:getId());
-    self:checkFoundPlayer();
 	DogObject:superClass().tick(self, dt);
 
     local players = self.mField:getPlayerObjects();
