@@ -32,12 +32,34 @@ function FoxTrace:updatePosition(gridPosition)
 end
 
 --------------------------------
+function FoxTrace:short_path(path, gridPosition)
+    local short_path = {};
+    for i, val in ipairs(path) do
+        table.insert(short_path, val);
+        if gridPosition == val then
+            break;
+        end
+    end
+    short_path = WavePathFinder.reversePath(short_path);
+    WavePathFinder.printPath(short_path);
+    return short_path;
+end
+
+
+--------------------------------
 function FoxTrace:findTrace(gridPosition)
     local found_ind = self.mFieldArray[COORD(gridPosition.x, gridPosition.y, self.mFieldSize.x)];
     if found_ind > 0 then
         local delta = self.mIndex - found_ind - 1;
         debug_log("FoxTrace:findTrace delta ", delta);
         debug_log("FoxTrace:findTrace gridPosition.x ", gridPosition.x, " gridPosition.y ", gridPosition.y);
+        if FoxTrace.LENGTH_TRACE > delta then
+            local path = {self.mLastGridPos};
+            WavePathFinder.findPath(path, self.mFieldArray, self.mFieldSize);
+            debug_log("path found ", #path);
+            return self:short_path(path, gridPosition);
+        end
     end
+    return nil;
 end
 

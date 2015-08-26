@@ -13,7 +13,10 @@ DogObject.oldVelocity = nil;
 
 DogObject.mHunterDead = false;
 DogObject.mRunAnimations = nil;
+DogObject.mPlayerFollowAnimations = nil;
+
 DogObject.mFoundPlayerPos = nil;
+DogObject.mPlayerTrace = nil;
 
 --------------------------------
 function DogObject:init(field, node)
@@ -50,58 +53,43 @@ function DogObject:swapAnimations()
 end
 
 --------------------------------
-function DogObject:createSideAnimation()
+function DogObject:swapFollowAnimations()
+    self:swapAnimation(self.mAnimations, self.mPlayerFollowAnimations, MobObject.DIRECTIONS.SIDE);
+    self:swapAnimation(self.mAnimations, self.mPlayerFollowAnimations, MobObject.DIRECTIONS.FRONT);
+    self:swapAnimation(self.mAnimations, self.mPlayerFollowAnimations, MobObject.DIRECTIONS.BACK);
+    self.mAnimation = nil
+end
 
+--------------------------------
+function DogObject:createSideAnimationImpl(name, container, direct)
     local animation = PlistAnimation:create();
-    animation:init("DogWalk.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.16);
+    animation:init(name, self.mNode, self.mNode:getAnchorPoint(), nil, 0.16);
 
     local sideAnimation = RepeatAnimation:create();
     sideAnimation:init(animation);
 
-    self.mAnimations[MobObject.DIRECTIONS.SIDE] = sideAnimation;
+    container[direct] = sideAnimation;
+end
 
-    local animationRun = PlistAnimation:create();
-    animationRun:init("DogRun.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.16);
-
-    local sideRunAnimation = RepeatAnimation:create();
-    sideRunAnimation:init(animationRun);
-
-    self.mRunAnimations[MobObject.DIRECTIONS.SIDE] = sideRunAnimation;
+--------------------------------
+function DogObject:createSideAnimation()
+    self:createSideAnimationImpl("DogWalk.plist", self.mAnimations, MobObject.DIRECTIONS.SIDE);
+    self:createSideAnimationImpl("DogRun.plist", self.mRunAnimations, MobObject.DIRECTIONS.SIDE);
+    self:createSideAnimationImpl("DogPlayerFollow.plist", self.mPlayerFollowAnimations, MobObject.DIRECTIONS.SIDE);
 end
 
 --------------------------------
 function DogObject:createFrontAnimation()
-    local animationFront = PlistAnimation:create();
-    animationFront:init("DogWalkFront.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.16);
-
-    local frontAnimation = RepeatAnimation:create();
-    frontAnimation:init(animationFront);
-    self.mAnimations[MobObject.DIRECTIONS.FRONT] = frontAnimation;
-
-    local animationRunFront = PlistAnimation:create();
-    animationRunFront:init("DogRunFront.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.16);
-
-    local frontRunAnimation = RepeatAnimation:create();
-    frontRunAnimation:init(animationRunFront);
-    self.mRunAnimations[MobObject.DIRECTIONS.FRONT] = frontRunAnimation;
+    self:createSideAnimationImpl("DogWalkFront.plist", self.mAnimations, MobObject.DIRECTIONS.FRONT);
+    self:createSideAnimationImpl("DogRunFront.plist", self.mRunAnimations, MobObject.DIRECTIONS.FRONT);
+    self:createSideAnimationImpl("DogWalkFront.plist", self.mPlayerFollowAnimations, MobObject.DIRECTIONS.FRONT);
 end
 
 --------------------------------
 function DogObject:createBackAnimation()
-    local animationBack = PlistAnimation:create();
-    animationBack:init("DogWalkBack.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.16);
-
-    local backAnimation = RepeatAnimation:create();
-    backAnimation:init(animationBack);
-    self.mAnimations[MobObject.DIRECTIONS.BACK] = backAnimation;
-
-    local animationRunBack = PlistAnimation:create();
-    animationRunBack:init("DogRunBack.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.16);
-
-    local backRunAnimation = RepeatAnimation:create();
-    backRunAnimation:init(animationRunBack);
-    self.mRunAnimations[MobObject.DIRECTIONS.BACK] = backRunAnimation;
-
+    self:createSideAnimationImpl("DogWalkBack.plist", self.mAnimations, MobObject.DIRECTIONS.BACK);
+    self:createSideAnimationImpl("DogRunBack.plist", self.mRunAnimations, MobObject.DIRECTIONS.BACK);
+    self:createSideAnimationImpl("DogWalkBack.plist", self.mPlayerFollowAnimations, MobObject.DIRECTIONS.BACK);
 end
 
 --------------------------------
@@ -111,6 +99,7 @@ function DogObject:initAnimation()
 	info_log("Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
     self.mAnimations = {}
     self.mRunAnimations = {};
+    self.mPlayerFollowAnimations = {};
 
     self:createSideAnimation();
     self.mAnimation = MobObject.DIRECTIONS.SIDE;
@@ -266,11 +255,22 @@ function DogObject:onHunterDead()
 end
 
 --------------------------------
+function DogObject:resetPlayerTrace()
+    self.mPlayerTrace = nil;
+end
+
+--------------------------------
 function DogObject:tick(dt)
 	DogObject:superClass().tick(self, dt);
 
-    local players = self.mField:getPlayerObjects();
-    for i, player in pairs(players) do
-        player:getTrace():findTrace(self.mGridPosition);
+    if not self.mPlayerTrace then
+        local players = self.mField:getPlayerObjects();
+        for i, player in pairs(players) do
+            local trace = player:getTrace():findTrace(self.mGridPosition);
+            if trace then
+                self.mPlayerTrace = trace;
+                self.mStateMachine:onPlayerTraceFound(trace);
+            end
+        end
     end
 end

@@ -160,6 +160,15 @@ function MobObject:onEnterFightTriggerImpl()
 end
 
 --------------------------------
+function MobObject:moveByPath(path)
+    self.mPath = path;
+    if #self.mPath > 0 then
+        table.remove(self.mPath, 1);
+    end
+    self:moveToNextPoint();
+end
+
+--------------------------------
 function MobObject:startMoving(destPoint)
     -- clone field
     local cloneArray = self.mField:cloneArray();

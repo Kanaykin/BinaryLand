@@ -9,6 +9,15 @@ DogStates = {
 
 
 --[[///////////////////////////]]
+DogIdleState = inheritsFrom(IdleState)
+
+------------------------------------
+function DogIdleState:onPlayerTraceFound(path)
+	debug_log("DogIdleState:onPlayerTraceFound path ", path)
+	self.mStateMachine:setState(DogStates.DS_TOOK_TRACE, {path = path});
+end
+
+--[[///////////////////////////]]
 RunAwayState = inheritsFrom(MoveState)
 
 ------------------------------------
@@ -81,6 +90,38 @@ function DogMoveState:onHunterDead()
 	self.mStateMachine:setState(DogStates.DS_HUNTER_DEAD);
 end
 
+------------------------------------
+function DogMoveState:onPlayerTraceFound(path)
+	debug_log("DogMoveState:onPlayerTraceFound path ", path)
+	self.mStateMachine:setState(DogStates.DS_TOOK_TRACE, {path = path});
+end
+
+--[[///////////////////////////]]
+TookTrace = inheritsFrom(DogMoveState)
+
+------------------------------------
+function TookTrace:enter(params)
+	debug_log("TookTrace:enter params.path ", params.path)
+	WavePathFinder.printPath(params.path);
+	self.mObject:resetMovingParams();
+	self.mObject:swapFollowAnimations();
+	self.mObject:moveByPath(params.path);
+end
+
+------------------------------------
+function TookTrace:leave()
+    local res = TookTrace:superClass().leave(self);
+    self.mObject:resetPlayerTrace();
+    self.mObject:swapFollowAnimations();
+    return res;
+end
+
+------------------------------------
+function TookTrace:tick(dt)
+	TookTrace:superClass().tick(self, dt);
+	--debug_log("TookTrace:tick gridPosition.x ", self.mObject.mGridPosition.x, " gridPosition.y ", self.mObject.mGridPosition.y);
+end
+
 --[[///////////////////////////]]
 DogPlayerFoundState = inheritsFrom(BaseState)
 DogPlayerFoundState.mFoundPlayer = nil
@@ -140,6 +181,8 @@ function DogStateMachine:init(object)
     self.mFactoryStates[MobStates.MS_MOVE] = DogMoveState;
     self.mFactoryStates[DogStates.DS_RUN_AWAY] = RunAwayState;
     self.mFactoryStates[DogStates.DS_HUNTER_DEAD] = HunterDeadState;
+    self.mFactoryStates[DogStates.DS_TOOK_TRACE] = TookTrace;
+    self.mFactoryStates[MobStates.MS_IDLE] = DogIdleState;
 end
 
 ------------------------------------
@@ -155,6 +198,14 @@ function DogStateMachine:getAnimationByDirection()
         return self.mActive:getAnimationByDirection();
     else
     	return nil;
+    end
+end
+
+------------------------------------
+function DogStateMachine:onPlayerTraceFound(path)
+	debug_log("DogStateMachine:onPlayerTraceFound ")
+	if self.mActive.onPlayerTraceFound then
+        self.mActive:onPlayerTraceFound(path);
     end
 end
 

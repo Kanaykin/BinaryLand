@@ -144,14 +144,13 @@ end
 
 ------------------------------------
 function StateMachine:tick(dt)
-    self.mActive:tick(dt);
-
     if self.mCurrent ~= self.mActive then
         if self.mActive:leave() then
             self.mActive = self.mCurrent;
             self.mActive:enter(self.mParams);
         end
     end
+    self.mActive:tick(dt);
 end
 
 ------------------------------------
