@@ -6,6 +6,7 @@ Trigger = inheritsFrom(BaseObject)
 Trigger.mEnterCallback = nil;
 Trigger.mLeaveCallback = nil;
 Trigger.mContainedObj = nil;
+Trigger.mSize = nil;
 
 --------------------------------
 function Trigger:getContainedObj()
@@ -23,6 +24,17 @@ function Trigger:init(field, node, enterCallback, leaveCallback)
 
 	self.mEnterCallback = enterCallback;
 	self.mLeaveCallback = leaveCallback;
+
+	self.mSize = node:getBoundingBox();
+end
+
+---------------------------------
+function Trigger:getBoundingBox()
+    --debug_log("Trigger:getBoundingBox");
+    local pos = self:getPosition();
+    local anchor = self.mNode:getAnchorPoint();
+
+    return cc.rect(pos.x - self.mSize.width * anchor.x, pos.y - self.mSize.height * anchor.y, self.mSize.width, self.mSize.height);
 end
 
 ---------------------------------
@@ -51,7 +63,11 @@ end
 
 --------------------------------
 function Trigger:contained(point)
-    return Rect.new(self:getBoundingBox()):containsPoint(cc.p(point.x, point.y));
+    --debug_log("Trigger:contained point.x ", point.x, " point.y ", point.y);
+    local rect = Rect.new(self:getBoundingBox());
+    --debug_log("Trigger:contained box x ", rect.x, " y ", rect.y);
+    --debug_log("Trigger:contained box w ", rect.width, " h ", rect.height);
+    return rect:containsPoint(cc.p(point.x, point.y));
 end
 
 --------------------------------

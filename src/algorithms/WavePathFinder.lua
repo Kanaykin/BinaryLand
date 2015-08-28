@@ -40,7 +40,7 @@ WavePathFinder = {
 			for iDir, dir in ipairs(WavePathFinder.DIRECTIONS) do
 				local near = point + dir;
 				if WavePathFinder.isFree(near, array, sizeArray) then
-					info_log("near x ", near.x, " y ", near.y);
+					--info_log("near x ", near.x, " y ", near.y);
 					table.insert(srcNewPoints, near);
 					array[COORD(near.x, near.y, sizeArray.x)] = index;
 					if near.x == pointTo.x and near.y == pointTo.y then
@@ -54,11 +54,11 @@ WavePathFinder = {
 
 	-----------------------------------
 	findPath = function(path, array, sizeArray)
-		WavePathFinder.printPath(path);
+		--WavePathFinder.printPath(path);
 		local point = path[#path];
-		info_log("point.x ", point.x, "point.y ", point.y);
+		--info_log("point.x ", point.x, "point.y ", point.y);
 		local index = array[COORD(point.x, point.y, sizeArray.x)];
-		info_log("index ", index);
+		--info_log("index ", index);
 		if index == WavePathFinder.FIRST_INDEX then
 			return;
 		end

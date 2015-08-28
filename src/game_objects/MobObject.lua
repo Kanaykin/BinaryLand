@@ -26,6 +26,7 @@ MobObject.mAnimation = nil;
 
 MobObject.mAnimations = nil;
 MobObject.mTimeDestroy = nil;
+MobObject.mSize = nil;
 
 --------------------------------
 function MobObject:getAnimationByDirection()
@@ -126,6 +127,12 @@ end
 function MobObject:getDestPoint()
 	local freePoints = self.mField:getFreePoints();
 	return freePoints[math.random(#freePoints)];
+end
+
+--------------------------------
+function MobObject:resetMovingParams()
+    MobObject:superClass().resetMovingParams(self);
+    self.mPath = {}
 end
 
 --------------------------------

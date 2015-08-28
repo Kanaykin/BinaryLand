@@ -116,7 +116,7 @@ end
 function FoxObject:getBoundingBox()
 	local pos = FoxObject:superClass().getBoundingBox(self);
 	local size = self.mSize;
-	return cc.rect(pos.x, pos.y, size.width, size.width);
+	return cc.rect(pos.x, pos.y, size.width, size.height);
 end
 
 --------------------------------

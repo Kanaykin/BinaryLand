@@ -1,10 +1,13 @@
 require "src/game_objects/MobStates.lua"
-
+    --MS_MOVE = 1,
+    --MS_IDLE = 2,
+    --HS_DEAD = 3,
+    --MS_LAST = 4,
 DogStates = {
     DS_RUN_AWAY = MobStates.MS_LAST,
-    DS_HUNTER_DEAD = MobStates.MS_LAST + 1,
-    DS_PLAYER_FOUND = MobStates.MS_LAST + 2,
-    DS_TOOK_TRACE = MobStates.MS_LAST + 3
+    DS_HUNTER_DEAD = MobStates.MS_LAST + 1, --5
+    DS_PLAYER_FOUND = MobStates.MS_LAST + 2, --6
+    DS_TOOK_TRACE = MobStates.MS_LAST + 3 --7
 }
 
 
@@ -12,10 +15,10 @@ DogStates = {
 DogIdleState = inheritsFrom(IdleState)
 
 ------------------------------------
-function DogIdleState:onPlayerTraceFound(path)
+--[[function DogIdleState:onPlayerTraceFound(path)
 	debug_log("DogIdleState:onPlayerTraceFound path ", path)
 	self.mStateMachine:setState(DogStates.DS_TOOK_TRACE, {path = path});
-end
+end]]
 
 --[[///////////////////////////]]
 RunAwayState = inheritsFrom(MoveState)
@@ -91,21 +94,36 @@ function DogMoveState:onHunterDead()
 end
 
 ------------------------------------
-function DogMoveState:onPlayerTraceFound(path)
+function DogMoveState:tick(dt)
+	DogMoveState:superClass().tick(self, dt);
+	--debug_log("TookTrace:tick gridPosition.x ", self.mObject.mGridPosition.x, " gridPosition.y ", self.mObject.mGridPosition.y);
+	local trace = self.mObject:getPlayerTrace();
+	if trace and #trace > 1 then
+		self.mStateMachine:setState(DogStates.DS_TOOK_TRACE, {path = trace});
+	end
+end
+
+------------------------------------
+--[[function DogMoveState:onPlayerTraceFound(path)
 	debug_log("DogMoveState:onPlayerTraceFound path ", path)
 	self.mStateMachine:setState(DogStates.DS_TOOK_TRACE, {path = path});
-end
+end]]
 
 --[[///////////////////////////]]
 TookTrace = inheritsFrom(DogMoveState)
 
 ------------------------------------
-function TookTrace:enter(params)
-	debug_log("TookTrace:enter params.path ", params.path)
-	WavePathFinder.printPath(params.path);
+function TookTrace:move(path)
+	WavePathFinder.printPath(path);
 	self.mObject:resetMovingParams();
 	self.mObject:swapFollowAnimations();
-	self.mObject:moveByPath(params.path);
+	self.mObject:moveByPath(path);
+end
+
+------------------------------------
+function TookTrace:enter(params)
+	debug_log("TookTrace:enter params.path ", params.path)
+	self:move(params.path);
 end
 
 ------------------------------------
@@ -118,8 +136,27 @@ end
 
 ------------------------------------
 function TookTrace:tick(dt)
-	TookTrace:superClass().tick(self, dt);
+	DogMoveState:superClass().tick(self, dt);
 	--debug_log("TookTrace:tick gridPosition.x ", self.mObject.mGridPosition.x, " gridPosition.y ", self.mObject.mGridPosition.y);
+end
+
+------------------------------------
+function TookTrace:canChange(state)
+	debug_log("TookTrace:canChange state ", state)
+    local trace = self.mObject:getPlayerTrace();
+	if (state == MobStates.MS_IDLE or state == MobStates.MS_MOVE) and trace and #trace > 1 then
+		WavePathFinder.printPath(trace);
+		--self.mObject:resetMovingParams();
+		self.mObject:moveByPath(trace);
+		return false
+	end
+	return true
+end
+
+------------------------------------
+function TookTrace:onMoveFinished()
+	debug_log("TookTrace:onMoveFinished gridPosition.x ", self.mObject.mGridPosition.x, " gridPosition.y ", self.mObject.mGridPosition.y);
+	TookTrace:superClass().onMoveFinished(self);
 end
 
 --[[///////////////////////////]]
@@ -202,12 +239,12 @@ function DogStateMachine:getAnimationByDirection()
 end
 
 ------------------------------------
-function DogStateMachine:onPlayerTraceFound(path)
+--[[function DogStateMachine:onPlayerTraceFound(path)
 	debug_log("DogStateMachine:onPlayerTraceFound ")
 	if self.mActive.onPlayerTraceFound then
         self.mActive:onPlayerTraceFound(path);
     end
-end
+end]]
 
 ------------------------------------
 function DogStateMachine:onHunterDead()

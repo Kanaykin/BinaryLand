@@ -256,21 +256,31 @@ end
 
 --------------------------------
 function DogObject:resetPlayerTrace()
+    debug_log("DogObject:resetPlayerTrace ");
     self.mPlayerTrace = nil;
+end
+
+--------------------------------
+function DogObject:getPlayerTrace()
+    return self.mPlayerTrace;
 end
 
 --------------------------------
 function DogObject:tick(dt)
 	DogObject:superClass().tick(self, dt);
 
-    if not self.mPlayerTrace then
+    --debug_log("DogObject:tick self.mPlayerTrace ", self.mPlayerTrace)
+    --debug_log("DogObject:tick gridPosition.x ", self.mGridPosition.x, " gridPosition.y ", self.mGridPosition.y);
+    --if not self.mPlayerTrace then
         local players = self.mField:getPlayerObjects();
         for i, player in pairs(players) do
-            local trace = player:getTrace():findTrace(self.mGridPosition);
-            if trace then
-                self.mPlayerTrace = trace;
-                self.mStateMachine:onPlayerTraceFound(trace);
+            if not player:isInTrap() then
+                local trace = player:getTrace():findTrace(self.mGridPosition);
+                if trace then
+                    self.mPlayerTrace = trace;
+                    --self.mStateMachine:onPlayerTraceFound(trace);
+                end
             end
         end
-    end
+    --end
 end
