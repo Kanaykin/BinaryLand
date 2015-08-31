@@ -17,6 +17,7 @@ DogObject.mPlayerFollowAnimations = nil;
 
 DogObject.mFoundPlayerPos = nil;
 DogObject.mPlayerTrace = nil;
+DogObject.mGridPosGetTrace = nil;
 
 --------------------------------
 function DogObject:init(field, node)
@@ -216,7 +217,7 @@ function DogObject:getAwayPoint()
 
     debug_log("self.mGridPosition x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
     for i, point in ipairs(freePoints) do
-        if point.y == 1 and self:inThisHalf(point) then
+        if point.y == 1 and self:inThisHalf(point) and point ~= self.mGridPosition then
             debug_log("i ", i, "x ", point.x, "y ", point.y);
             table.insert(awayPoints, Vector.new(point.x, point.y));
         end
@@ -271,16 +272,21 @@ function DogObject:tick(dt)
 
     --debug_log("DogObject:tick self.mPlayerTrace ", self.mPlayerTrace)
     --debug_log("DogObject:tick gridPosition.x ", self.mGridPosition.x, " gridPosition.y ", self.mGridPosition.y);
-    --if not self.mPlayerTrace then
+    if self.mGridPosGetTrace ~= self.mGridPosition then
+        self.mGridPosGetTrace = self.mGridPosition;
         local players = self.mField:getPlayerObjects();
         for i, player in pairs(players) do
             if not player:isInTrap() then
                 local trace = player:getTrace():findTrace(self.mGridPosition);
-                if trace then
-                    self.mPlayerTrace = trace;
+                -- debug_log("DogObject:tick id ", self:getId(), " trace ", trace)
+                --if trace then
+                self.mPlayerTrace = trace;
                     --self.mStateMachine:onPlayerTraceFound(trace);
+                --end
+                if trace then
+                    break;
                 end
             end
         end
-    --end
+    end
 end

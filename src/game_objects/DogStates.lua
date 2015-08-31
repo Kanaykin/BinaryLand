@@ -98,6 +98,7 @@ function DogMoveState:tick(dt)
 	DogMoveState:superClass().tick(self, dt);
 	--debug_log("TookTrace:tick gridPosition.x ", self.mObject.mGridPosition.x, " gridPosition.y ", self.mObject.mGridPosition.y);
 	local trace = self.mObject:getPlayerTrace();
+	--debug_log("DogMoveState:tick id ", self.mObject:getId(),  " trace ", trace)
 	if trace and #trace > 1 then
 		self.mStateMachine:setState(DogStates.DS_TOOK_TRACE, {path = trace});
 	end

@@ -64,6 +64,7 @@ end
 function MoveState:enter(params)
     info_log("MoveState:enter");
     local destPoint = self.mObject:getDestPoint();
+    info_log("MoveState:enter dest x ", destPoint.x, " y ", destPoint.y);
     self.mObject:startMoving(destPoint);
 end
 
@@ -182,7 +183,7 @@ end
 
 ------------------------------------
 function StateMachine:setState(state, params)
-    debug_log("StateMachine:setState ", state);
+    debug_log("StateMachine:setState ", state, " id ", self.mOject:getId());
     if self.mCurrent:canChange(state) then
         self.mCurrent = self:createState(self.mOject, state);
         self.mParams = params;

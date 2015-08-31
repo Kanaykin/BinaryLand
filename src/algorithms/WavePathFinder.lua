@@ -53,6 +53,45 @@ WavePathFinder = {
 	end,
 
 	-----------------------------------
+	findPathExt = function(path, array, sizeArray, finishPoint)
+		--WavePathFinder.printPath(path);
+		local point = path[#path];
+		if point == finishPoint then
+			return;
+		end
+		info_log("point.x ", point.x, "point.y ", point.y);
+		local index = array[COORD(point.x, point.y, sizeArray.x)];
+		info_log("index ", index);
+		if index == WavePathFinder.FIRST_INDEX then
+			return;
+		end
+
+		--local inserted = false;
+		local found_index = index;
+		local found_point = nil;
+		--and array[COORD(near.x, near.y, sizeArray.x)] > index
+
+		for iDir, dir in ipairs(WavePathFinder.DIRECTIONS) do
+			local near = point + dir;
+			if WavePathFinder.isValidPoint(near, sizeArray) and array[COORD(near.x, near.y, sizeArray.x)] ~= 1
+				and array[COORD(near.x, near.y, sizeArray.x)] ~= 0  then
+				--table.insert(path, near);
+				--inserted = true;
+				if found_index < array[COORD(near.x, near.y, sizeArray.x)] then
+					found_index = array[COORD(near.x, near.y, sizeArray.x)];
+					found_point = near;
+				end
+				--break;
+			end
+		end
+		if found_point then
+			table.insert(path, found_point);
+			WavePathFinder.findPathExt(path, array, sizeArray, finishPoint);
+            --PRINT_FIELD(array, sizeArray);
+		end
+	end,
+
+	-----------------------------------
 	findPath = function(path, array, sizeArray)
 		--WavePathFinder.printPath(path);
 		local point = path[#path];

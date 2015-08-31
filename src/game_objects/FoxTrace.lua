@@ -40,7 +40,7 @@ function FoxTrace:short_path(path, gridPosition)
             break;
         end
     end
-    short_path = WavePathFinder.reversePath(short_path);
+    --short_path = WavePathFinder.reversePath(short_path);
     WavePathFinder.printPath(short_path);
     return short_path;
 end
@@ -54,10 +54,11 @@ function FoxTrace:findTrace(gridPosition)
         debug_log("FoxTrace:findTrace delta ", delta);
         debug_log("FoxTrace:findTrace gridPosition.x ", gridPosition.x, " gridPosition.y ", gridPosition.y);
         if FoxTrace.LENGTH_TRACE > delta then
-            local path = {self.mLastGridPos};
-            WavePathFinder.findPath(path, self.mFieldArray, self.mFieldSize);
+            local path = {gridPosition};
+            WavePathFinder.findPathExt(path, self.mFieldArray, self.mFieldSize, self.mLastGridPos);
             debug_log("path found ", #path);
-            return self:short_path(path, gridPosition);
+            PRINT_FIELD(self.mFieldArray, self.mFieldSize);
+            return self:short_path(path, self.mLastGridPos);
         end
     end
     return nil;

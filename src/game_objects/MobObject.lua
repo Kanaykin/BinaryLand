@@ -125,8 +125,16 @@ end
 
 --------------------------------
 function MobObject:getDestPoint()
+    local points = {}
 	local freePoints = self.mField:getFreePoints();
-	return freePoints[math.random(#freePoints)];
+
+    for i, point in ipairs(freePoints) do
+        if point ~= self.mGridPosition then
+            table.insert(points, Vector.new(point.x, point.y));
+        end
+    end
+
+	return points[math.random(#points)];
 end
 
 --------------------------------
