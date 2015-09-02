@@ -231,15 +231,6 @@ function DogStateMachine:onPlayerEnter(player, pos)
 end
 
 ------------------------------------
-function DogStateMachine:getAnimationByDirection()
-	if self.mActive.getAnimationByDirection then
-        return self.mActive:getAnimationByDirection();
-    else
-    	return nil;
-    end
-end
-
-------------------------------------
 --[[function DogStateMachine:onPlayerTraceFound(path)
 	debug_log("DogStateMachine:onPlayerTraceFound ")
 	if self.mActive.onPlayerTraceFound then

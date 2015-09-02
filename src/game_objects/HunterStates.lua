@@ -105,6 +105,59 @@ function FoundPlayerState:onDogPlayerRunAway()
 end
 
 --[[///////////////////////////]]
+HunterIdleState = inheritsFrom(IdleState)
+HunterIdleState.mNeedCautionAnim = false;
+
+------------------------------------
+function HunterIdleState:enter(params)
+    HunterIdleState:superClass().enter(self, params);
+    local dirMoving = self.mObject:getCurrentAnimationDir();
+    if dirMoving ~= MobObject.DIRECTIONS.BACK and params.prevState == MobStates.MS_MOVE then
+        local rand = math.random(100) % 2;
+        debug_log("HunterIdleState:enter rand ", rand);
+        if rand == 0 then
+            self.mNeedCautionAnim = true;
+        end
+    end
+end
+
+------------------------------------
+function HunterIdleState:tick(dt)
+    if not self.mNeedCautionAnim then
+        self.mStateMachine:setState(MobStates.MS_MOVE);
+    end
+    -- check finish animation
+    if self.mObject:getCurrentAnimationDir() == HunterObject.DIRECTIONS.CAUTION 
+        and self.mObject:getAnimation(HunterObject.DIRECTIONS.CAUTION):isDone() then
+        self.mStateMachine:setState(MobStates.MS_MOVE);
+    end
+end
+
+------------------------------------
+function HunterIdleState:getAnimationByDirection()
+    if self.mNeedCautionAnim then
+        return HunterObject.DIRECTIONS.CAUTION;
+    end
+    return nil;
+end
+
+------------------------------------
+function HunterIdleState:onPlayerEnter(player, field)
+    debug_log("HunterIdleState:onPlayerEnter ");
+    self.mStateMachine:setState(HunterStates.HS_CATCH_PLAYER, {player = player, field = field});
+end
+
+------------------------------------
+function HunterIdleState:onDogPlayerFound(playerPos)
+    self.mStateMachine:setState(HunterStates.HS_FOUND_PLAYER, {playerPos = playerPos});
+end
+
+------------------------------------
+function HunterIdleState:onEnterFightTrigger()
+    self.mStateMachine:setState(MobStates.HS_DEAD);
+end
+
+--[[///////////////////////////]]
 HunterStateMachine = inheritsFrom(StateMachine)
 
 ------------------------------------
@@ -113,6 +166,7 @@ function HunterStateMachine:init(object)
     HunterStateMachine:superClass().init(self, object);
 
     self.mFactoryStates[MobStates.MS_MOVE] = HunterMoveState;
+    self.mFactoryStates[MobStates.MS_IDLE] = HunterIdleState;
     self.mFactoryStates[HunterStates.HS_CATCH_PLAYER] = CatchState;
     self.mFactoryStates[HunterStates.HS_FOUND_PLAYER] = FoundPlayerState;
 

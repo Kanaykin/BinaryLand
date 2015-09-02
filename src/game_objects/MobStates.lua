@@ -147,6 +147,10 @@ end
 function StateMachine:tick(dt)
     if self.mCurrent ~= self.mActive then
         if self.mActive:leave() then
+            if not self.mParams then
+                self.mParams = {}
+            end
+            self.mParams.prevState = self.mActive.mId;
             self.mActive = self.mCurrent;
             self.mActive:enter(self.mParams);
         end
@@ -179,6 +183,15 @@ end
 ------------------------------------
 function StateMachine:onEnterFightTrigger()
     self.mActive:onEnterFightTrigger();
+end
+
+------------------------------------
+function StateMachine:getAnimationByDirection()
+    if self.mActive.getAnimationByDirection then
+        return self.mActive:getAnimationByDirection();
+    else
+        return nil;
+    end
 end
 
 ------------------------------------

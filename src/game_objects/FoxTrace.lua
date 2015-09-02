@@ -4,7 +4,7 @@ FoxTrace = inheritsFrom(nil)
 FoxTrace.mFieldSize = nil
 FoxTrace.mFieldArray = nil
 FoxTrace.mLastGridPos = nil
-FoxTrace.mIndex = 1
+FoxTrace.mIndex = 2
 FoxTrace.LENGTH_TRACE = 10
 
 --------------------------------

@@ -10,6 +10,9 @@ HunterObject.oldVelocity = nil;
 HunterObject.FOUND_PLAYER = MobObject.LAST_STATE + 1;
 HunterObject.mFoundPlayerPos = nil;
 
+HunterObject.DIRECTIONS = {
+    CAUTION = MobObject.DIRECTIONS.BACK + 1
+}
 
 --------------------------------
 function HunterObject:init(field, node)
@@ -52,6 +55,12 @@ function HunterObject:initAnimation()
     local backAnimation = RepeatAnimation:create();
     backAnimation:init(animationBack);
     self.mAnimations[MobObject.DIRECTIONS.BACK] = backAnimation;
+
+    ------------------------
+    -- caution animation
+    local animationCaution = PlistAnimation:create();
+    animationCaution:init("HunterCaution.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.3);
+    self.mAnimations[HunterObject.DIRECTIONS.CAUTION] = animationCaution;
 end
 
 ---------------------------------

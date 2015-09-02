@@ -188,12 +188,6 @@ function DogObject:onEnterFightTriggerImpl()
 end
 
 --------------------------------
-function DogObject:getAnimationByDirection()
-    local stateAnim = self.mStateMachine:getAnimationByDirection();
-    return stateAnim and stateAnim or DogObject:superClass().getAnimationByDirection(self);
-end
-
---------------------------------
 function DogObject:onMoveFinished( )
     info_log ("DogObject:onMoveFinished #self.mPath ", #self.mPath);
     DogObject:superClass().onMoveFinished(self);

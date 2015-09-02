@@ -28,8 +28,24 @@ MobObject.mAnimations = nil;
 MobObject.mTimeDestroy = nil;
 MobObject.mSize = nil;
 
+
+--------------------------------
+function MobObject:getCurrentAnimationDir()
+    return self.mAnimation;
+end
+
+--------------------------------
+function MobObject:getAnimation(dir)
+    return self.mAnimations[dir];
+end
+
 --------------------------------
 function MobObject:getAnimationByDirection()
+    local stateAnim = self.mStateMachine:getAnimationByDirection();
+    if stateAnim then
+        return stateAnim;
+    end
+
     if self.mDelta then
         local val = self.mDelta:normalized();
         if val.y >= 0.9 then
