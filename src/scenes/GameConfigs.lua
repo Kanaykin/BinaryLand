@@ -19,7 +19,8 @@ gLocations = {
 			},
 			{
 				--opened = true,
-				ccbFile = {"Level1_2p1", "Level1_2p2"},
+				--ccbFile = {"Level1_2p1", "Level1_2p2"},
+                ccbFile = "Level1_2p1_new",
 				tileMap = "Level1_2_map.tmx",
 				cellSize = 32,
 				tutorial = false,
