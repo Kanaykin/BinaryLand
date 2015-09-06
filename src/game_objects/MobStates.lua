@@ -196,7 +196,7 @@ end
 
 ------------------------------------
 function StateMachine:setState(state, params)
-    debug_log("StateMachine:setState ", state, " id ", self.mOject:getId());
+    debug_log("StateMachine:setState ", state, " current ", self.mCurrent.mId, " id ", self.mOject:getId());
     if self.mCurrent:canChange(state) then
         self.mCurrent = self:createState(self.mOject, state);
         self.mParams = params;

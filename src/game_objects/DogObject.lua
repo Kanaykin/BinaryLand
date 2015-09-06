@@ -21,8 +21,8 @@ DogObject.mGridPosGetTrace = nil;
 
 --------------------------------
 function DogObject:init(field, node)
-    info_log("DogObject:init(", node, ")");
     DogObject:superClass().init(self, field, node);
+    info_log("DogObject:init(", node, " id ", self:getId(), ")");
     self.mStateMachine = DogStateMachine:create();
     self.mStateMachine:init(self);
 end

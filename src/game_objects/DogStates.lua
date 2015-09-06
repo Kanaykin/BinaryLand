@@ -68,6 +68,11 @@ function HunterDeadState:enter(params)
 end
 
 ------------------------------------
+function HunterDeadState:canChange(state)
+	return state == MobStates.HS_DEAD;
+end
+
+------------------------------------
 function HunterDeadState:onMoveFinished()
     if not self.mObject:moveToNextPoint() then
         self.mStateMachine:setState(MobStates.HS_DEAD);

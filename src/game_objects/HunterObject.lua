@@ -16,8 +16,8 @@ HunterObject.DIRECTIONS = {
 
 --------------------------------
 function HunterObject:init(field, node)
-    info_log("HunterObject:init(", node, ")");
     HunterObject:superClass().init(self, field, node);
+    info_log("HunterObject:init(", node, " id ", self:getId(), ")");
     self.mStateMachine = HunterStateMachine:create();
     self.mStateMachine:init(self);
 end
