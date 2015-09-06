@@ -79,14 +79,30 @@ gLocations = {
                 tutorial = false,
                 time = 120,
                 backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
-                customProperties = "src/levels/Level5_1",
+                customProperties = "src/levels/Level1_5",
                 id = "1_5"
             },
             {
-
+                --opened = true,
+                ccbFile = "Level1_6p1",
+                tileMap = "Level1_2_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                customProperties = "src/levels/Level1_6",
+                id = "1_6"
             },
             {
-
+                --opened = true,
+                ccbFile = "Level1_7p1",
+                tileMap = "Level1_2_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                customProperties = "src/levels/Level1_7",
+                id = "1_7"
             },
             {
 
