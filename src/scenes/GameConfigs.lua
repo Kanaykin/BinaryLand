@@ -105,7 +105,15 @@ gLocations = {
                 id = "1_7"
             },
             {
-
+                --opened = true,
+                ccbFile = {"Level1_8p1", "Level1_8p2"},
+                tileMap = "Level1_2_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                customProperties = "src/levels/Level1_8",
+                id = "1_8"
             }
 
 		}
