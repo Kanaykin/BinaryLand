@@ -1,10 +1,50 @@
 require "src/game_objects/MobStates.lua"
 
 HunterStates = {
-    HS_CATCH_PLAYER = MobStates.MS_LAST + 1,
-    HS_FOUND_PLAYER = MobStates.MS_LAST + 2
+    HS_CATCH_PLAYER = MobStates.MS_LAST + 1, --5
+    HS_FOUND_PLAYER = MobStates.MS_LAST + 2, --6
+    HS_SHOT_GUN = MobStates.MS_LAST + 3 --7
 }
 
+--[[///////////////////////////]]
+ShotGunState = inheritsFrom(BaseState)
+ShotGunState.mDir = nil;
+
+------------------------------------
+function ShotGunState:getAnimationByDirection()
+    return self.mDir;
+end
+
+------------------------------------
+function ShotGunState:enter(params)
+    debug_log("ShotGunState:enter");
+
+    local curPos = self.mObject:getGridPosition();
+    local foxPos = params.foxPos;
+
+    if foxPos.y < curPos.y then
+        self.mDir = HunterObject.DIRECTIONS.SHOT_FRONT;
+    elseif foxPos.y >= curPos.y then
+        self.mDir = HunterObject.DIRECTIONS.SHOT_BACK;
+    else
+        self.mDir = HunterObject.DIRECTIONS.SHOT_SIDE;
+    end
+
+    self.mObject:resetMovingParams();
+
+    self.mObject:createBullet();
+end
+
+------------------------------------
+function ShotGunState:tick(dt)
+    ShotGunState:superClass().tick(self, dt);
+
+    if self.mObject:getCurrentAnimationDir() == self.mDir 
+        and self.mObject:getAnimation(self.mDir):isDone() then
+        self.mStateMachine:setState(MobStates.MS_IDLE);
+        self.mObject:resetFoxGoalPos();
+    end
+end
 
 --[[///////////////////////////]]
 CatchState = inheritsFrom(BaseState)
@@ -56,6 +96,15 @@ end
 ------------------------------------
 function HunterMoveState:onEnterFightTrigger()
     self.mStateMachine:setState(MobStates.HS_DEAD);
+end
+
+------------------------------------
+function HunterMoveState:tick(dt)
+    HunterMoveState:superClass().tick(self, dt);
+    local foxPos = self.mObject:getFoxGoalPos();
+    if foxPos then
+        self.mStateMachine:setState(HunterStates.HS_SHOT_GUN, {foxPos = foxPos});
+    end
 end
 
 --[[///////////////////////////]]
@@ -169,6 +218,7 @@ function HunterStateMachine:init(object)
     self.mFactoryStates[MobStates.MS_IDLE] = HunterIdleState;
     self.mFactoryStates[HunterStates.HS_CATCH_PLAYER] = CatchState;
     self.mFactoryStates[HunterStates.HS_FOUND_PLAYER] = FoundPlayerState;
+    self.mFactoryStates[HunterStates.HS_SHOT_GUN] = ShotGunState;
 
 end
 

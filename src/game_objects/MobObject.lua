@@ -41,9 +41,11 @@ end
 
 --------------------------------
 function MobObject:getAnimationByDirection()
-    local stateAnim = self.mStateMachine:getAnimationByDirection();
-    if stateAnim then
-        return stateAnim;
+    if self.mStateMachine then
+        local stateAnim = self.mStateMachine:getAnimationByDirection();
+        if stateAnim then
+            return stateAnim;
+        end
     end
 
     if self.mDelta then
@@ -83,7 +85,9 @@ end
 function MobObject:onPlayerEnterImpl(player, pos)
 	info_log("MobObject.onPlayerEnterImpl ", player.mNode:getTag());
 
-    self.mStateMachine:onPlayerEnter(player, self.mField);
+    if self.mStateMachine then
+        self.mStateMachine:onPlayerEnter(player, self.mField);
+    end
 end
 
 --------------------------------
@@ -173,7 +177,9 @@ end
 
 --------------------------------
 function MobObject:onMoveFinished()
-    self.mStateMachine:onMoveFinished();
+    if self.mStateMachine then
+        self.mStateMachine:onMoveFinished();
+    end
 end
 
 ---------------------------------
@@ -227,12 +233,14 @@ function MobObject:tick(dt)
 	end
 
     local anim = self:getAnimationByDirection();
-    if anim ~= self.mAnimation then
+    if anim ~= self.mAnimation and self.mAnimations ~= nil then
         self.mAnimation = anim;
         self.mNode:stopAllActions();
         self.mAnimations[self.mAnimation]:play();
     end
 
-    self.mStateMachine:tick(dt);
+    if self.mStateMachine then
+        self.mStateMachine:tick(dt);
+    end
 
 end

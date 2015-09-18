@@ -18,6 +18,10 @@ function MovableObject:init(field, node)
 end
 
 ---------------------------------
+function MovableObject:getGridPosition()
+	return self.mGridPosition;
+end
+---------------------------------
 function MovableObject:store(data)
     MovableObject:superClass().store(self, data);
     data.nodePosition = Vector.new(self.mNode:getPosition());

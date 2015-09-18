@@ -102,8 +102,14 @@ function SceneManager:runNextLevelScene()
 	local level = self:getCurrentScene():getLevel();
 	local locationId = level:getLocation():getId();
 
-	-- TODO: open location
+    local countLevels = #level:getLocation():getLevels();
+
+    -- TODO: open location
 	local index = level:getIndex() + 1;
+    if countLevels < index then
+        index = 1;
+        locationId = locationId + 1;
+    end
 
 	local locations = self.mGame:getLocations();
 	self:runLevelScene(locations[locationId]:getLevels()[index]);
