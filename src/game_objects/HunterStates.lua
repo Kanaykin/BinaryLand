@@ -9,10 +9,17 @@ HunterStates = {
 --[[///////////////////////////]]
 ShotGunState = inheritsFrom(BaseState)
 ShotGunState.mDir = nil;
+ShotGunState.mFlip = nil;
 
 ------------------------------------
 function ShotGunState:getAnimationByDirection()
     return self.mDir;
+end
+
+------------------------------------
+function ShotGunState:getFlipByDirection(dir)
+    debug_log("ShotGunState:getFlipByDirection ");
+    return self.mFlip;
 end
 
 ------------------------------------
@@ -24,10 +31,12 @@ function ShotGunState:enter(params)
 
     if foxPos.y < curPos.y then
         self.mDir = HunterObject.DIRECTIONS.SHOT_FRONT;
-    elseif foxPos.y >= curPos.y then
+    elseif foxPos.y > curPos.y then
         self.mDir = HunterObject.DIRECTIONS.SHOT_BACK;
     else
         self.mDir = HunterObject.DIRECTIONS.SHOT_SIDE;
+
+        self.mFlip = (foxPos.x - curPos.x) < 0;
     end
 
     self.mObject:resetMovingParams();
@@ -38,6 +47,7 @@ end
 ------------------------------------
 function ShotGunState:tick(dt)
     ShotGunState:superClass().tick(self, dt);
+    debug_log("ShotGunState:tick ");
 
     if self.mObject:getCurrentAnimationDir() == self.mDir 
         and self.mObject:getAnimation(self.mDir):isDone() then

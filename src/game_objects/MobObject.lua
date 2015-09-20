@@ -219,6 +219,24 @@ function MobObject:startMoving(destPoint)
 end
 
 --------------------------------
+function MobObject:getFlipByDirection()
+
+    if self.mStateMachine then
+        local flip = self.mStateMachine:getFlipByDirection(self.mDelta);
+        if flip then
+            return flip;
+        end
+    end
+
+    if not self.mDelta then
+        return nil;
+    end
+
+    local val = self.mDelta:normalized();
+    return val.x < 0;
+end
+
+--------------------------------
 function MobObject:tick(dt)
 	MobObject:superClass().tick(self, dt);
 
@@ -226,11 +244,10 @@ function MobObject:tick(dt)
 		self.mTrigger:tick(dt);
 	end
 
-	if self.mDelta then
-		local val = self.mDelta:normalized();
-		--info_log("MobObject:tick mDestGridPos ", val.x, ":", val.y,  "id ", self:getId());
-		tolua.cast(self.mNode, "cc.Sprite"):setFlippedX(val.x < 0);
-	end
+    local flip = self:getFlipByDirection();
+    if flip then
+        tolua.cast(self.mNode, "cc.Sprite"):setFlippedX(flip);
+    end
 
     local anim = self:getAnimationByDirection();
     if anim ~= self.mAnimation and self.mAnimations ~= nil then

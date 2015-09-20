@@ -12,6 +12,12 @@ HunterObject.FOUND_PLAYER = MobObject.LAST_STATE + 1;
 HunterObject.mFoundPlayerPos = nil;
 HunterObject.mGridPosGetTrace = nil;
 HunterObject.mFoxGoalPos = nil;
+HunterObject.mFoxGridGoalPos = nil;
+
+--shot constants
+HunterObject.SHOT_PIXELS_DELTA = 10
+HunterObject.SHOT_MIN_GRID_DELTA = 1
+HunterObject.SHOT_MAX_GRID_DELTA = 4
 
 HunterObject.DIRECTIONS = {
     CAUTION = MobObject.DIRECTIONS.BACK + 1,
@@ -26,6 +32,7 @@ function HunterObject:init(field, node)
     info_log("HunterObject:init(", node, " id ", self:getId(), ")");
     self.mStateMachine = HunterStateMachine:create();
     self.mStateMachine:init(self);
+    self.mFoxGridGoalPos = nil;
 end
 
 --------------------------------
@@ -156,16 +163,27 @@ function HunterObject:createBullet()
 end
 
 --------------------------------
+function HunterObject:checkShotLine(playerPosGrid, selfPosGrid, delta)
+    debug_log("HunterObject:checkShotLine ", playerPosGrid, ", ", selfPosGrid);
+    return playerPosGrid == selfPosGrid and delta > HunterObject.SHOT_MIN_GRID_DELTA and delta < HunterObject.SHOT_MAX_GRID_DELTA;
+end
+
+--------------------------------
 function HunterObject:tryShotGun()
-    if self.mGridPosGetTrace ~= self.mGridPosition then
+    
+    if self.mGridPosGetTrace ~= self.mGridPosition or self.mFoxGridGoalPos == self.mGridPosGetTrace then
         self.mGridPosGetTrace = self.mGridPosition;
         debug_log("self.mField:isFreePoint check trace x ", self.mGridPosGetTrace.x, " y ", self.mGridPosGetTrace.y);
         self.mFoxGoalPos = nil;
+        self.mFoxGridGoalPos = nil;
+
         local players = self.mField:getPlayerObjects();
         for i, player in pairs(players) do
-            -- check on the one line
             local pos = player:getGridPosition();
-            if pos.x == self.mGridPosition.x and not player:isInTrap() then
+
+            -- check on the one line
+            if not player:isInTrap() then
+            if self:checkShotLine(pos.x, self.mGridPosition.x, math.abs(pos.y - self.mGridPosition.y)) then
                 -- check barrier
                 local all_point_free = true;
                 for j = pos.y, self.mGridPosition.y, self.mGridPosition.y > pos.y and 1 or -1 do
@@ -178,11 +196,16 @@ function HunterObject:tryShotGun()
                     debug_log("self.mField:isFreePoint FREE X !!!");
                     debug_log("self.mField:isFreePoint player postion x ", pos.x, " y ", pos.y);
                     debug_log("self.mField:isFreePoint hunter postion x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
-                    self.mFoxGoalPos = pos;
+                    
+                    self.mFoxGridGoalPos = self.mGridPosGetTrace;
+
+                    if math.abs(player:getPosition().x - self:getPosition().x) < HunterObject.SHOT_PIXELS_DELTA then
+                        self.mFoxGoalPos = pos;
+                    end
                     break;
                 end
 
-            elseif pos.y == self.mGridPosition.y and not player:isInTrap() then
+            elseif self:checkShotLine(pos.y, self.mGridPosition.y, math.abs(pos.x - self.mGridPosition.x)) then
                 -- check barrier
                 local all_point_free = true;
                 for j = pos.x, self.mGridPosition.x, self.mGridPosition.x > pos.x and 1 or -1 do
@@ -195,10 +218,15 @@ function HunterObject:tryShotGun()
                     debug_log("self.mField:isFreePoint FREE Y !!!");
                     debug_log("self.mField:isFreePoint player postion x ", pos.x, " y ", pos.y);
                     debug_log("self.mField:isFreePoint hunter postion x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
-                    self.mFoxGoalPos = pos;
+                    self.mFoxGridGoalPos = self.mGridPosGetTrace;
+
+                    if math.abs(player:getPosition().y - self:getPosition().y) < HunterObject.SHOT_PIXELS_DELTA then
+                        self.mFoxGoalPos = pos;
+                    end
                     break;
                 end
                 
+            end
             end
         end
     end

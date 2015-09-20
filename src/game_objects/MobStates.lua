@@ -185,6 +185,16 @@ function StateMachine:onEnterFightTrigger()
     self.mActive:onEnterFightTrigger();
 end
 
+
+------------------------------------
+function StateMachine:getFlipByDirection(dir)
+    if self.mActive.getFlipByDirection then
+        return self.mActive:getFlipByDirection(dir);
+    else
+        return nil;
+    end
+end
+
 ------------------------------------
 function StateMachine:getAnimationByDirection()
     if self.mActive.getAnimationByDirection then

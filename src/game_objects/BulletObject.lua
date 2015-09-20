@@ -4,7 +4,7 @@ BulletObject = inheritsFrom(MobObject)
 
 --------------------------------
 function BulletObject:init(field, position)
-	local node = CCSprite:create("Coin.png");
+	local node = CCSprite:create("Bullet.png");
 	node:setContentSize(cc.size(field:getCellSize(), field:getCellSize()));
 	
 	node:setPosition(position.x, position.y);
