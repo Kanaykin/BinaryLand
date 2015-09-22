@@ -245,7 +245,7 @@ function MobObject:tick(dt)
 	end
 
     local flip = self:getFlipByDirection();
-    if flip then
+    if flip ~= nil then
         tolua.cast(self.mNode, "cc.Sprite"):setFlippedX(flip);
     end
 

@@ -18,6 +18,11 @@ function PlistAnimation:setAction(action)
 end
 
 --------------------------------
+function PlistAnimation:getCurrentFrameIndex()
+  return self.mAction:getCurrentFrameIndex();
+end
+
+--------------------------------
 function PlistAnimation:destroy()
 	PlistAnimation:superClass().destroy(self);
 	self.mAction:release();

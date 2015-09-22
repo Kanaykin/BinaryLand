@@ -155,11 +155,11 @@ function HunterObject:resetFoxGoalPos()
 end
 
 --------------------------------
-function HunterObject:createBullet()
+function HunterObject:createBullet(goalPos)
     local bullet = BulletObject:create();
-    bullet:init(self.mField, self:getPosition());
+    bullet:init(self.mField, self:getPosition(), goalPos);
     self.mField:addObject(bullet);
-    bullet:moveTo(self.mFoxGoalPos);
+    bullet:moveTo(goalPos);
 end
 
 --------------------------------

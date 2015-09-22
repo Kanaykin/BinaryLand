@@ -10,6 +10,8 @@ HunterStates = {
 ShotGunState = inheritsFrom(BaseState)
 ShotGunState.mDir = nil;
 ShotGunState.mFlip = nil;
+ShotGunState.mShoted = nil;
+ShotGunState.mFoxPos = nil;
 
 ------------------------------------
 function ShotGunState:getAnimationByDirection()
@@ -28,6 +30,7 @@ function ShotGunState:enter(params)
 
     local curPos = self.mObject:getGridPosition();
     local foxPos = params.foxPos;
+    self.mFoxPos = foxPos;
 
     if foxPos.y < curPos.y then
         self.mDir = HunterObject.DIRECTIONS.SHOT_FRONT;
@@ -40,8 +43,6 @@ function ShotGunState:enter(params)
     end
 
     self.mObject:resetMovingParams();
-
-    self.mObject:createBullet();
 end
 
 ------------------------------------
@@ -49,10 +50,17 @@ function ShotGunState:tick(dt)
     ShotGunState:superClass().tick(self, dt);
     debug_log("ShotGunState:tick ");
 
-    if self.mObject:getCurrentAnimationDir() == self.mDir 
-        and self.mObject:getAnimation(self.mDir):isDone() then
-        self.mStateMachine:setState(MobStates.MS_IDLE);
-        self.mObject:resetFoxGoalPos();
+    if self.mObject:getCurrentAnimationDir() == self.mDir then
+        local frame = self.mObject:getAnimation(self.mDir):getCurrentFrameIndex();
+        if frame == 7 and not self.mShoted then
+            self.mObject:createBullet(self.mFoxPos);
+            self.mShoted = true;
+        end
+
+        if self.mObject:getAnimation(self.mDir):isDone() then
+            self.mStateMachine:setState(MobStates.MS_IDLE);
+            self.mObject:resetFoxGoalPos();
+        end
     end
 end
 
