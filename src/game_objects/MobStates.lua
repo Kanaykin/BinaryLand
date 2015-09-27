@@ -30,7 +30,7 @@ function BaseState:onPlayerEnter(player, field)
 end
 
 ------------------------------------
-function BaseState:leave()
+function BaseState:leave(state)
     return true
 end
 
@@ -146,7 +146,7 @@ end
 ------------------------------------
 function StateMachine:tick(dt)
     if self.mCurrent ~= self.mActive then
-        if self.mActive:leave() then
+        if self.mActive:leave(self.mCurrent.mId) then
             if not self.mParams then
                 self.mParams = {}
             end

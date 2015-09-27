@@ -28,6 +28,25 @@ MobObject.mAnimations = nil;
 MobObject.mTimeDestroy = nil;
 MobObject.mSize = nil;
 
+---------------------------------
+function MobObject:destroy()
+    info_log("MobObject:destroy ");
+
+    MobObject:superClass().destroy(self);
+
+    self:destroyAnimation();
+end
+
+---------------------------------
+function MobObject:destroyAnimation()
+    if self.mAnimations then
+        for i, animation in pairs(self.mAnimations) do
+            if animation then
+                animation:destroy();
+            end
+        end
+    end
+end
 
 --------------------------------
 function MobObject:getCurrentAnimationDir()

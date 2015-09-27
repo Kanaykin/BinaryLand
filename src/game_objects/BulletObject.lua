@@ -55,4 +55,5 @@ function BulletObject:onPlayerEnterImpl(player, pos)
 	BulletObject:superClass().onPlayerEnterImpl(self, player, pos);
 
 	self.mField:createSnareTrigger(Vector.new(player.mNode:getPosition()));
+	self.mField:delayDelete(self);
 end

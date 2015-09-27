@@ -46,6 +46,28 @@ function ShotGunState:enter(params)
 end
 
 ------------------------------------
+function ShotGunState:onEnterFightTrigger()
+    self.mStateMachine:setState(MobStates.HS_DEAD);
+end
+
+------------------------------------
+function ShotGunState:onDogPlayerFound(playerPos)
+    self.mStateMachine:setState(HunterStates.HS_FOUND_PLAYER, {playerPos = playerPos});
+end
+
+------------------------------------
+function ShotGunState:leave(state)
+    debug_log("ShotGunState:leave");
+    if state == MobStates.HS_DEAD then
+        return true;
+    end
+    if self.mObject:getCurrentAnimationDir() == self.mDir then
+        return self.mObject:getAnimation(self.mDir):isDone();
+    end
+    return true;
+end
+
+------------------------------------
 function ShotGunState:tick(dt)
     ShotGunState:superClass().tick(self, dt);
     debug_log("ShotGunState:tick ");
@@ -139,7 +161,7 @@ function FoundPlayerState:enter(params)
 end
 
 ------------------------------------
-function FoundPlayerState:leave()
+function FoundPlayerState:leave(state)
     debug_log("FoundPlayerState:leave");
 
     self.mObject.mVelocity = self.mObject.oldVelocity;

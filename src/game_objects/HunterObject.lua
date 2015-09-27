@@ -186,21 +186,28 @@ function HunterObject:tryShotGun()
             if self:checkShotLine(pos.x, self.mGridPosition.x, math.abs(pos.y - self.mGridPosition.y)) then
                 -- check barrier
                 local all_point_free = true;
-                for j = pos.y, self.mGridPosition.y, self.mGridPosition.y > pos.y and 1 or -1 do
+                local delta = self.mGridPosition.y > pos.y and 1 or -1;
+                for j = pos.y, self.mGridPosition.y, delta do
                     if not self.mField:isFreePoint( Vector.new(pos.x, j) ) then
                         all_point_free = false;
                     end
                 end
 
                 if all_point_free then
-                    debug_log("self.mField:isFreePoint FREE X !!!");
-                    debug_log("self.mField:isFreePoint player postion x ", pos.x, " y ", pos.y);
-                    debug_log("self.mField:isFreePoint hunter postion x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
+                    --debug_log("self.mField:isFreePoint FREE X !!!");
+                    --debug_log("self.mField:isFreePoint player postion x ", pos.x, " y ", pos.y);
+                    --debug_log("self.mField:isFreePoint hunter postion x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
                     
                     self.mFoxGridGoalPos = self.mGridPosGetTrace;
 
                     if math.abs(player:getPosition().x - self:getPosition().x) < HunterObject.SHOT_PIXELS_DELTA then
                         self.mFoxGoalPos = pos;
+                        local newPos = Vector.new(self.mFoxGoalPos.x, self.mFoxGoalPos.y - delta);
+                        while self.mField:isFreePoint( newPos ) do
+                            self.mFoxGoalPos = newPos;
+                            newPos = Vector.new(self.mFoxGoalPos.x, self.mFoxGoalPos.y - delta);
+                        end
+
                     end
                     break;
                 end
@@ -208,20 +215,27 @@ function HunterObject:tryShotGun()
             elseif self:checkShotLine(pos.y, self.mGridPosition.y, math.abs(pos.x - self.mGridPosition.x)) then
                 -- check barrier
                 local all_point_free = true;
-                for j = pos.x, self.mGridPosition.x, self.mGridPosition.x > pos.x and 1 or -1 do
+                local delta = self.mGridPosition.x > pos.x and 1 or -1;
+                for j = pos.x, self.mGridPosition.x, delta do
                     if not self.mField:isFreePoint( Vector.new(j, pos.y) ) then
                         all_point_free = false;
                     end
                 end
 
                 if all_point_free then
-                    debug_log("self.mField:isFreePoint FREE Y !!!");
-                    debug_log("self.mField:isFreePoint player postion x ", pos.x, " y ", pos.y);
-                    debug_log("self.mField:isFreePoint hunter postion x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
+                    --debug_log("self.mField:isFreePoint FREE Y !!!");
+                    --debug_log("self.mField:isFreePoint player postion x ", pos.x, " y ", pos.y);
+                    --debug_log("self.mField:isFreePoint hunter postion x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
                     self.mFoxGridGoalPos = self.mGridPosGetTrace;
 
                     if math.abs(player:getPosition().y - self:getPosition().y) < HunterObject.SHOT_PIXELS_DELTA then
                         self.mFoxGoalPos = pos;
+                        local newPos = Vector.new(self.mFoxGoalPos.x - delta, self.mFoxGoalPos.y );
+                        while self.mField:isFreePoint( newPos ) do
+                            self.mFoxGoalPos = newPos;
+                            debug_log("self.mField:isFreePoint self.mFoxGoalPos.x ", self.mFoxGoalPos.x);
+                            newPos = Vector.new(self.mFoxGoalPos.x - delta, self.mFoxGoalPos.y );
+                        end
                     end
                     break;
                 end

@@ -33,7 +33,7 @@ function RunAwayState:enter(params)
 end
 
 ------------------------------------
-function RunAwayState:leave()
+function RunAwayState:leave(state)
     debug_log("RunAwayState:leave");
     self.mObject:swapAnimations();
     return true;
@@ -133,7 +133,7 @@ function TookTrace:enter(params)
 end
 
 ------------------------------------
-function TookTrace:leave()
+function TookTrace:leave(state)
     local res = TookTrace:superClass().leave(self);
     self.mObject:resetPlayerTrace();
     self.mObject:swapFollowAnimations();
@@ -178,7 +178,7 @@ function DogPlayerFoundState:enter(params)
 end
 
 ------------------------------------
-function DogPlayerFoundState:leave()
+function DogPlayerFoundState:leave(state)
     debug_log("DogPlayerFoundState:leave");
     self.mObject:setFoundPlayerPos(nil);
     return true;

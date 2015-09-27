@@ -69,8 +69,8 @@ function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
     local frames = array["frames"];
     --info_log("PlistAnimation:init ", array["frames"]);
 
-	local cache = CCSpriteFrameCache:getInstance();
-   	cache:addSpriteFrames(plistName);
+    local cache = CCSpriteFrameCache:getInstance();
+    cache:addSpriteFrames(plistName);
 
    	self.mAnimation = CCAnimation:create();
 
@@ -79,7 +79,7 @@ function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
         --info_log("PlistAnimation:init key ", key);
         --info_log("PlistAnimation:init val ", val);
 
-        local nameStr = key;
+      local nameStr = key;
    		table.insert(arrayFrames, nameStr);
    	end
 
@@ -93,11 +93,10 @@ function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
    		self.mAnimation:addSpriteFrame(frame);
    	end
 
-   	self.mAnimation:setDelayPerUnit(delayPerUnit);
-	self.mAnimation:setRestoreOriginalFrame(true);
+    self.mAnimation:setDelayPerUnit(delayPerUnit);
+    self.mAnimation:setRestoreOriginalFrame(true);
 
-	local action = CCAnimate:create(self.mAnimation);
-	self.mAction = action;--CCActionInterval:create(action, 1);
-
-	self.mAction:retain();
+    local action = CCAnimate:create(self.mAnimation);
+    self.mAction = action;--CCActionInterval:create(action, 1);
+    self.mAction:retain();
 end

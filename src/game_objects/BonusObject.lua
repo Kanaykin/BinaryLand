@@ -56,6 +56,15 @@ function BonusObject:init(field, node, score, type)
 end
 
 ---------------------------------
+function BonusObject:destroy()
+    info_log("BonusObject:destroy ");
+
+    BonusObject:superClass().destroy(self);
+
+    self.mAnimation:destroy();
+end
+
+---------------------------------
 function BonusObject:onEnter(player)
     BonusObject:superClass().onEnter(self, player);
     info_log("BonusObject:onEnter score ", self.mScore);
