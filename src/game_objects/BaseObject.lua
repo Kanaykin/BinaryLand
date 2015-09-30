@@ -109,3 +109,8 @@ end
 function BaseObject:tick(dt)
 
 end
+
+--------------------------------
+function BaseObject:setVisible(visible)
+	self.mNode:setVisible(visible);
+end

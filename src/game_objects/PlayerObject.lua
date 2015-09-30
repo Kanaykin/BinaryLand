@@ -40,6 +40,7 @@ PlayerObject.PLAYER_STATE = {
 	PS_FIGHT_UP = 8,
 	PS_FIGHT_DOWN = 9,
 	PS_WIN_STATE = 10,
+	PS_LAST = 11,
 	NONE = nil	
 };
 
@@ -127,6 +128,7 @@ end
 function PlayerObject:enterTrap(pos, stateInTrap)
 	
 	self.mStateInTrap = stateInTrap and stateInTrap or PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP;
+	self.mInTrap = true;
 
     if self.mLastButtonPressed ~= self.mStateInTrap then
         self:playAnimation(nil);
@@ -139,7 +141,6 @@ function PlayerObject:enterTrap(pos, stateInTrap)
 	else
 		self:playAnimation(self.mStateInTrap);
 	end
-	self.mInTrap = true;
 
     info_log("PlayerObject:enterTrap ???");
 end

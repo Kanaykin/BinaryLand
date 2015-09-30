@@ -587,7 +587,7 @@ end
 function Field:onPlayerEnterWeb(player, pos)
 	info_log("onPlayerEnterWeb ");
 	-- if player is primary then game over
-	player:enterTrap(pos);
+	player:enterCage(pos);
 end
 
 --------------------------------

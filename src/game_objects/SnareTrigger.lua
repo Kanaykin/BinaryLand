@@ -12,7 +12,7 @@ function SnareTrigger:init(field, node, enterCallback, leaveCallback)
 	parent:removeChild(self.mNode, false);
 	local posGridX, posGridY = field:getGridPosition(self.mNode);
 	info_log("SnareTrigger:init ", posGridY);
-	parent:addChild(self.mNode, -posGridY * 2 + 1);
+	parent:addChild(self.mNode, -posGridY * 2);
 end
 
 ---------------------------------

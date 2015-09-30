@@ -7,7 +7,7 @@ FoxHelpEffect.mBubbleSprite = nil;
 FoxHelpEffect.mLabel = nil;
 FoxHelpEffect.mBaseNode = nil;
 FoxHelpEffect.mGame = nil;
-FoxHelpEffect.mDependAnimation = nil;
+FoxHelpEffect.mDependAnimations = nil;
 
 FoxHelpEffect.BUBBLE_NODE_TAG = 10;
 FoxHelpEffect.BASE_NODE_TAG = 11;
@@ -30,6 +30,8 @@ function FoxHelpEffect:init(node, game)
     self.mLabel = tolua.cast(self.mBaseNode:getChildByTag(FoxHelpEffect.LABEL_TAG), "cc.Label");
     info_log("FoxHelpEffect:init self.mLabel ", self.mLabel );
     setDefaultFont(self.mLabel, self.mGame:getScale());
+
+    self.mDependAnimations = {};
 end
 
 --------------------------------
@@ -40,13 +42,18 @@ function FoxHelpEffect:setVisible(visible)
 end
 
 --------------------------------
-function FoxHelpEffect:setDependAnimation(animation)
-    self.mDependAnimation = animation;
+function FoxHelpEffect:addDependAnimation(animation)
+    table.insert(self.mDependAnimations, animation);
 end
 
 --------------------------------
-function FoxHelpEffect:getDependAnimation()
-    return self.mDependAnimation;
+function FoxHelpEffect:isDependAnimation(animation)
+    for i, anim in ipairs(self.mDependAnimations) do
+        if anim == animation then
+            return true;
+        end
+    end
+    return false;
 end
 
 --------------------------------

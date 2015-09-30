@@ -13,7 +13,7 @@ DelayAnimationSoftImpl.mAnchor = nil
 
 --------------------------------
 function DelayAnimationSoftImpl:init(animation, delay, texture, textureSize, textureName, anchor)
-    info_log("DelayAnimationSoftImpl:init ");
+    info_log("DelayAnimationSoftImpl:init (", texture, ", ", textureSize, ", ", textureName);
 	local action = animation:getAction();
 	local delayAction = cc.DelayTime:create(delay);
 	local seq = cc.Sequence:create(delayAction, action);
@@ -48,7 +48,7 @@ end
 
 ----------------------------
 function DelayAnimationSoftImpl:play()
-	info_log("DelayAnimation:play ")
+	info_log("DelayAnimation:play ", self.mTextureName)
 	if self.mTexture then
         if self.mTextureName then
             local sprite = GuiHelper.getSpriteFrame(self.mTextureName, self.mTextureSize);

@@ -25,10 +25,18 @@ FoxObject.EFFECT_NODE_TAG = 6;
 FoxObject.mFrontIdleAnimation = nil;
 FoxObject.mBackIdleAnimation = nil;
 FoxObject.mSideIdleAnimation = nil;
+FoxObject.mCageAnimations = nil;
+FoxObject.mIsInCage = nil;
+
 FoxObject.mDebugBox = nil;
 FoxObject.mNeedDebugBox = false;
 FoxObject.mSize = nil;
 FoxObject.mTrace = nil;
+
+FoxObject.FOX_STATE = {
+    PS_IN_CAGE_LEFT = PlayerObject.PLAYER_STATE.PS_LAST + 1,
+    PS_IN_CAGE_RIGHT = PlayerObject.PLAYER_STATE.PS_LAST + 2
+};
 
 --------------------------------
 function FoxObject:init(field, node, needReverse)
@@ -77,6 +85,8 @@ function FoxObject:setCustomProperties(properties)
 
     if properties.state then
         self:playAnimation(properties.state);
+        info_log("FoxObject:setCustomProperties self.mLastButtonPressed ", self.mLastButtonPressed);
+        info_log("FoxObject:setCustomProperties self.mAnimations[self.mLastButtonPressed] ", self.mAnimations[self.mLastButtonPressed]);
         self.mAnimations[self.mLastButtonPressed]:setCurrentAnimation(2);
         self.mInTrap = true;
         self.mField:createSnareTrigger(Vector.new(self.mNode:getPosition()));
@@ -194,7 +204,7 @@ function FoxObject:tick(dt)
     local currAnim = self:getCurrentAnimation();
     local curr = currAnim:currentAnimation();
 
-    if self.mNewEffect:getDependAnimation() == curr then
+    if self.mNewEffect:isDependAnimation(curr) then
         self.mNewEffect:setVisible(true);
     else
         self.mNewEffect:setVisible(false);
@@ -248,13 +258,20 @@ end
 
 --------------------------------
 function FoxObject:playAnimation(button)
-	if button == PlayerObject.PLAYER_STATE.PS_TOP then
+    if button == PlayerObject.PLAYER_STATE.PS_TOP then
 		self.mAnimations[-1] = self.mBackIdleAnimation;
 	elseif button == PlayerObject.PLAYER_STATE.PS_LEFT or 
 		button == PlayerObject.PLAYER_STATE.PS_RIGHT then
 		self.mAnimations[-1] = self.mSideIdleAnimation;
     elseif button == PlayerObject.PLAYER_STATE.PS_BOTTOM then
         self.mAnimations[-1] = self.mFrontIdleAnimation;
+    elseif button == PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP then
+        debug_log("FoxObject:playAnimation self:isInTrap() ", self.mIsInCage)
+        if self.mIsInCage then
+            self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT];
+        else
+            self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP];
+        end
 	end
 	FoxObject:superClass().playAnimation(self, button);
 end
@@ -309,7 +326,7 @@ function FoxObject:createFrontIdleAnimation()
     local contentSize = texture:getContentSize() -- {width = texture:getPixelsWide(), height = texture:getPixelsHigh()}
     self:createIdleAnimation(self.mFrontIdleAnimation, self:getPrefixTexture().."FrontIdle1.plist", texture, contentSize, textureName);
 
-self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE] = self.mFrontIdleAnimation;
+    self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE] = self.mFrontIdleAnimation;
 end
 
 --------------------------------
@@ -370,6 +387,79 @@ function FoxObject:getInTrapAnchor(anchorOrigin)
     end
 end
 
+---------------------------------
+function FoxObject:leaveTrap(pos)
+    FoxObject:superClass().leaveTrap(self, pos);
+    self.mIsInCage = false;
+end
+
+--------------------------------
+function FoxObject:enterCage(pos)
+    self.mIsInCage = true;
+
+    self:enterTrap(pos);
+
+    --self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT];
+end
+
+--------------------------------
+function FoxObject:onMoveFinished( )
+    FoxObject:superClass().onMoveFinished(self);
+    if self.mInTrap then
+        local gridPosition = self.mGridPosition;--Vector.new(self.mField:positionToGrid(pos));
+        local cageId = BaseObject:convertToId(gridPosition.x, gridPosition.y, "104");
+        debug_log("FoxObject:onMoveFinished cageTag ", cageId);
+        local cage = self.mField:getObjectById(cageId);
+        debug_log("FoxObject:onMoveFinished cage ", cage);
+        --cage:setVisible(false);
+    end
+end
+
+--------------------------------
+function FoxObject:getAnchorInCageAnimation()
+    if self.mIsFemale then
+        return { x = 0.52, y = 0.26};
+    else
+        return { x = 0.5, y = 0.27};
+    end
+end
+
+--------------------------------
+function FoxObject:createInCageAnimation()
+    local sequence = SequenceAnimation:create();
+    sequence:init();
+
+    local animation = PlistAnimation:create();
+
+    local anchor = self:getAnchorInCageAnimation();
+    animation:init(self:getPrefixTexture().."InCageLeft.plist", self.mAnimationNode, anchor, nil, 0.2);
+
+    sequence:addAnimation(animation);
+
+    -------------------------------
+    local idle = PlistAnimation:create();
+    idle:init(self:getPrefixTexture().."InCageLeftEnd.plist", self.mAnimationNode, anchor, nil, 0.2);
+    local delayAnim = DelayAnimation:create();
+
+    local textureName = self:getPrefixTexture() .. "InCageLeftText.png";
+    local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
+    local contentSize = texture:getContentSize() -- {width = texture:getPixelsWide(), height = texture:getPixelsHigh()}
+    debug_log("FoxObject:createInCageAnimation texture ", texture)
+
+    delayAnim:init(idle, math.random(3, 5), texture, contentSize, textureName);
+
+    local endAnimRep = RepeatAnimation:create();
+    endAnimRep:init(delayAnim, true);
+
+    sequence:addAnimation(endAnimRep);
+
+    self.mNewEffect:addDependAnimation(endAnimRep);
+
+
+    self.mCageAnimations = {}
+    self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT] = sequence;
+end
+
 --------------------------------
 function FoxObject:createInTrapAnimation()
     local sequence = SequenceAnimation:create();
@@ -393,9 +483,26 @@ function FoxObject:createInTrapAnimation()
     empty:init(textureEmpty, self.mAnimationNode, anchor)
 
     sequence:addAnimation(empty);
-    self.mNewEffect:setDependAnimation(empty);
+    self.mNewEffect:addDependAnimation(empty);
 
-    self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = sequence;
+    --self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = sequence;
+    self.mCageAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = sequence;
+end
+
+---------------------------------
+function FoxObject:destroyAnimation()
+    self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = nil;
+    for i, animation in pairs(self.mCageAnimations) do
+        if animation then
+            animation:destroy();
+        end
+    end
+
+    FoxObject:superClass().destroyAnimation(self);
+
+    self.mBackIdleAnimation:destroy();
+    self.mSideIdleAnimation:destroy();
+    self.mFrontIdleAnimation:destroy();
 end
 
 --------------------------------
@@ -419,6 +526,7 @@ function FoxObject:initAnimation()
 
     self:createFightAnimation();
 
+    self:createInCageAnimation();
     self:createInTrapAnimation();
 
 	--self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE] = EmptyAnimation:create();
