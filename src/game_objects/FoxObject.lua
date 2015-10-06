@@ -172,6 +172,7 @@ end
 
 --------------------------------
 function FoxObject:updateFlipNode(node)
+    --debug_log("FoxObject:updateFlipNode ", self:getId(), " self.mLastDir ", self.mLastDir)
 	local flip = false;
 	if node and self.mLastDir == Joystick.BUTTONS.RIGHT or self.mLastDir ==  Joystick.BUTTONS.LEFT then
 		flip = self.mLastDir == Joystick.BUTTONS.RIGHT;
@@ -182,7 +183,7 @@ function FoxObject:updateFlipNode(node)
         local sprite = tolua.cast(node, "cc.Sprite");
         if flip ~= sprite:isFlippedX() then
             sprite:setFlippedX(flip);
-            info_log("FoxObject:updateFlipNode");
+            info_log("FoxObject:updateFlipNode flip ", flip, " id ", self:getId());
             self:updateAnchorFightAnimation();
         end
 	end
@@ -266,9 +267,25 @@ function FoxObject:playAnimation(button)
     elseif button == PlayerObject.PLAYER_STATE.PS_BOTTOM then
         self.mAnimations[-1] = self.mFrontIdleAnimation;
     elseif button == PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP then
-        debug_log("FoxObject:playAnimation self:isInTrap() ", self.mIsInCage)
+        debug_log("FoxObject:playAnimation self:isInTrap() ", self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT])
         if self.mIsInCage then
-            self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT];
+            local sprite = tolua.cast(self.mAnimationNode, "cc.Sprite");
+            debug_log("FoxObject:playAnimation sprite:isFlippedX() ", sprite:isFlippedX())
+            if (self.mIsFemale and self.mLastDir == Joystick.BUTTONS.LEFT) or 
+                (not self.mIsFemale and self.mLastDir == Joystick.BUTTONS.RIGHT) then
+                debug_log("FoxObject:playAnimation right ")
+                self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_RIGHT];
+                
+                self.mLastDir = self.mIsFemale and Joystick.BUTTONS.RIGHT or Joystick.BUTTONS.LEFT;
+                self:updateFlipNode(self.mAnimationNode);
+                --if self.mIsFemale then
+                    self.mNewEffect:updateFlip(self.mIsFemale and self.mLastDir ~= Joystick.BUTTONS.LEFT or self.mLastDir ~= Joystick.BUTTONS.RIGHT);
+                --end
+            else
+                self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT];
+            end
+            
+            --sprite:setFlippedX(not self.mIsFemale)
         else
             self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP];
         end
@@ -411,37 +428,41 @@ function FoxObject:onMoveFinished( )
         debug_log("FoxObject:onMoveFinished cageTag ", cageId);
         local cage = self.mField:getObjectById(cageId);
         debug_log("FoxObject:onMoveFinished cage ", cage);
-        --cage:setVisible(false);
+        cage:setVisible(false);
     end
 end
 
 --------------------------------
-function FoxObject:getAnchorInCageAnimation()
+function FoxObject:getAnchorInCageAnimation(id_anim)
     if self.mIsFemale then
-        return { x = 0.52, y = 0.26};
+        return id_anim == FoxObject.FOX_STATE.PS_IN_CAGE_LEFT and { x = 0.52, y = 0.26} or { x = 0.495, y = 0.26};
     else
         return { x = 0.5, y = 0.27};
     end
 end
 
 --------------------------------
-function FoxObject:createInCageAnimation()
+function FoxObject:createInCageSideAnimation(texture_prefix, id_anim)
     local sequence = SequenceAnimation:create();
     sequence:init();
 
-    local animation = PlistAnimation:create();
+    do
+        local animation = PlistAnimation:create();
+        local textureName = self:getPrefixTexture() .. "InCage"..texture_prefix.."First.png";
+        local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
+        local contentSize = texture:getContentSize() -- {width = texture:getPixelsWide(), height = texture:getPixelsHigh()}
+        local anchor = self:getAnchorInCageAnimation(id_anim);
+        animation:init(self:getPrefixTexture().."InCage" .. texture_prefix .. ".plist", self.mAnimationNode, anchor, texture, 0.2);
 
-    local anchor = self:getAnchorInCageAnimation();
-    animation:init(self:getPrefixTexture().."InCageLeft.plist", self.mAnimationNode, anchor, nil, 0.2);
-
-    sequence:addAnimation(animation);
+        sequence:addAnimation(animation);
+    end
 
     -------------------------------
     local idle = PlistAnimation:create();
-    idle:init(self:getPrefixTexture().."InCageLeftEnd.plist", self.mAnimationNode, anchor, nil, 0.2);
+    idle:init(self:getPrefixTexture().."InCage" .. texture_prefix .. "End.plist", self.mAnimationNode, anchor, nil, 0.2);
     local delayAnim = DelayAnimation:create();
 
-    local textureName = self:getPrefixTexture() .. "InCageLeftText.png";
+    local textureName = self:getPrefixTexture() .. "InCage"..texture_prefix.."Text.png";
     local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
     local contentSize = texture:getContentSize() -- {width = texture:getPixelsWide(), height = texture:getPixelsHigh()}
     debug_log("FoxObject:createInCageAnimation texture ", texture)
@@ -455,9 +476,14 @@ function FoxObject:createInCageAnimation()
 
     self.mNewEffect:addDependAnimation(endAnimRep);
 
+    self.mCageAnimations[id_anim] = sequence;
+end
 
+--------------------------------
+function FoxObject:createInCageAnimation()
     self.mCageAnimations = {}
-    self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT] = sequence;
+    self:createInCageSideAnimation("Left", FoxObject.FOX_STATE.PS_IN_CAGE_LEFT);
+    self:createInCageSideAnimation("Right", FoxObject.FOX_STATE.PS_IN_CAGE_RIGHT);
 end
 
 --------------------------------
