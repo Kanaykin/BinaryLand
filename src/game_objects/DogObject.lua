@@ -83,14 +83,14 @@ end
 function DogObject:createFrontAnimation()
     self:createSideAnimationImpl("DogWalkFront.plist", self.mAnimations, MobObject.DIRECTIONS.FRONT);
     self:createSideAnimationImpl("DogRunFront.plist", self.mRunAnimations, MobObject.DIRECTIONS.FRONT);
-    self:createSideAnimationImpl("DogWalkFront.plist", self.mPlayerFollowAnimations, MobObject.DIRECTIONS.FRONT);
+    self:createSideAnimationImpl("DogPlayerFollowFront.plist", self.mPlayerFollowAnimations, MobObject.DIRECTIONS.FRONT);
 end
 
 --------------------------------
 function DogObject:createBackAnimation()
     self:createSideAnimationImpl("DogWalkBack.plist", self.mAnimations, MobObject.DIRECTIONS.BACK);
     self:createSideAnimationImpl("DogRunBack.plist", self.mRunAnimations, MobObject.DIRECTIONS.BACK);
-    self:createSideAnimationImpl("DogWalkBack.plist", self.mPlayerFollowAnimations, MobObject.DIRECTIONS.BACK);
+    self:createSideAnimationImpl("DogPlayerFollowBack.plist", self.mPlayerFollowAnimations, MobObject.DIRECTIONS.BACK);
 end
 
 --------------------------------

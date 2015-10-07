@@ -271,8 +271,8 @@ function FoxObject:playAnimation(button)
         if self.mIsInCage then
             local sprite = tolua.cast(self.mAnimationNode, "cc.Sprite");
             debug_log("FoxObject:playAnimation sprite:isFlippedX() ", sprite:isFlippedX())
-            if (self.mIsFemale and self.mLastDir == Joystick.BUTTONS.LEFT) or 
-                (not self.mIsFemale and self.mLastDir == Joystick.BUTTONS.RIGHT) then
+            debug_log("FoxObject:playAnimation self.mLastDir ", self.mLastDir)
+            if sprite:isFlippedX() then
                 debug_log("FoxObject:playAnimation right ")
                 self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_RIGHT];
                 
@@ -448,9 +448,9 @@ function FoxObject:createInCageSideAnimation(texture_prefix, id_anim)
 
     do
         local animation = PlistAnimation:create();
-        local textureName = self:getPrefixTexture() .. "InCage"..texture_prefix.."First.png";
-        local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
-        local contentSize = texture:getContentSize() -- {width = texture:getPixelsWide(), height = texture:getPixelsHigh()}
+        --local textureName = self:getPrefixTexture() .. "InCage"..texture_prefix.."First.png";
+        --local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
+        --local contentSize = texture:getContentSize() -- {width = texture:getPixelsWide(), height = texture:getPixelsHigh()}
         local anchor = self:getAnchorInCageAnimation(id_anim);
         animation:init(self:getPrefixTexture().."InCage" .. texture_prefix .. ".plist", self.mAnimationNode, anchor, texture, 0.2);
 

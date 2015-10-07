@@ -91,6 +91,9 @@ function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
    		local frame = cache:getSpriteFrame(val);
    		--info_log("PlistAnimation frame ", frame);
    		self.mAnimation:addSpriteFrame(frame);
+      if not texture and i == 1 then
+        self:setFrame(frame);
+      end
    	end
 
     self.mAnimation:setDelayPerUnit(delayPerUnit);

@@ -5,6 +5,7 @@ EmptyAnimation = inheritsFrom(IAnimation)
 EmptyAnimation.mTexture = nil;
 EmptyAnimation.mAnchor = nil;
 EmptyAnimation.mNode = nil;
+EmptyAnimation.mFrame = nil;
 EmptyAnimation.mTextureSize = nil;
 
 --------------------------------
@@ -17,6 +18,11 @@ function EmptyAnimation:init(texture, node, anchor)
         self.mTextureSize = texture:getContentSize();
     end
 	info_log("EmptyAnimation:init ", self.mTextureSize.width, ", ", self.mTextureSize.height);
+end
+
+--------------------------------
+function EmptyAnimation:setFrame(frame)
+	self.mFrame = frame
 end
 
 --------------------------------
@@ -44,7 +50,11 @@ function EmptyAnimation:play()
 	if self.mAnchor then
 		self.mNode:setAnchorPoint(self.mAnchor);
 	end
-	if self.mTexture then
+	if self.mFrame then
+		--info_log("EmptyAnimation:play self.mFrame ", self.mFrame);
+		tolua.cast(self.mNode, "cc.Sprite"):setSpriteFrame(self.mFrame);
+		--tolua.cast(self.mNode, "cc.Sprite"):setTextureRect(cc.rect(0, 0, self.mTextureSize.width, self.mTextureSize.height));
+	elseif self.mTexture then
 		--info_log("EmptyAnimation:play self.mNode ", self.mNode);
 		--info_log("EmptyAnimation:play self.mTextureSize ", self.mTextureSize.width);
 		tolua.cast(self.mNode, "cc.Sprite"):setTexture(self.mTexture);
