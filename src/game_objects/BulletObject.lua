@@ -51,9 +51,11 @@ end
 
 --------------------------------
 function BulletObject:onPlayerEnterImpl(player, pos)
-	info_log("MobObject.onPlayerEnterImpl ", player.mNode:getTag());
+	info_log("BulletObject.onPlayerEnterImpl ", player.mNode:getTag());
 	BulletObject:superClass().onPlayerEnterImpl(self, player, pos);
 
-	self.mField:createSnareTrigger(Vector.new(player.mNode:getPosition()));
-	self.mField:delayDelete(self);
+	if not player:isInTrap() then
+		self.mField:createSnareTrigger(Vector.new(player.mNode:getPosition()));
+		self.mField:delayDelete(self);
+	end
 end

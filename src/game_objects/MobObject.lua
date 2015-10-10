@@ -242,7 +242,7 @@ function MobObject:getFlipByDirection()
 
     if self.mStateMachine then
         local flip = self.mStateMachine:getFlipByDirection(self.mDelta);
-        if flip then
+        if flip ~= nil then
             return flip;
         end
     end

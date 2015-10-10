@@ -9,7 +9,7 @@ FightTrigger.mNodeSecond = nil;
 --------------------------------
 function FightTrigger:init(field)
 	local node = CCNode:create();
-    node:setContentSize(cc.size(field:getCellSize() * 1.5, field:getCellSize() * 3));
+    node:setContentSize(cc.size(field:getCellSize() * 1.5, field:getCellSize() * 3.2));
 	field:getFieldNode():addChild(node);
 
 	-- #FIXME: anchor point for fox scene
@@ -18,7 +18,7 @@ function FightTrigger:init(field)
 	FightTrigger:superClass().init(self, field, node, Callback.new(field, Field.onEnemyEnterTrigger), Callback.new(field, Field.onEnemyLeaveTrigger));
 
     local nodeSecond = CCNode:create();
-    nodeSecond:setContentSize(cc.size(field:getCellSize() * 3, field:getCellSize() * 1.5));
+    nodeSecond:setContentSize(cc.size(field:getCellSize() * 3.2, field:getCellSize() * 1.5));
     field:getFieldNode():addChild(nodeSecond);
 
     nodeSecond:setAnchorPoint(cc.p(0.5, 0.5));

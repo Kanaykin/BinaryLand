@@ -20,7 +20,7 @@ end
 
 ------------------------------------
 function ShotGunState:getFlipByDirection(dir)
-    debug_log("ShotGunState:getFlipByDirection ");
+    debug_log("ShotGunState:getFlipByDirection self.mFlip ", self.mFlip);
     return self.mFlip;
 end
 
@@ -40,6 +40,8 @@ function ShotGunState:enter(params)
         self.mDir = HunterObject.DIRECTIONS.SHOT_SIDE;
 
         self.mFlip = (foxPos.x - curPos.x) < 0;
+        debug_log("ShotGunState:enter foxPos.x ", foxPos.x, " curPos.x ",  curPos.x);
+        debug_log("ShotGunState:enter self.mFlip ", self.mFlip);
     end
 
     self.mObject:resetMovingParams();
