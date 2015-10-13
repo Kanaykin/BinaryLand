@@ -5,6 +5,7 @@ require "src/scenes/GameConfigs"
 require "src/scenes/SoundConfigs"
 require "src/base/Log"
 require "src/gui/GuiHelper"
+require "src/gui/TouchWidget"
 
 local LOADSCEENIMAGE = "GlobalMapBack.png"
 local GLOBALMAP = "GlobalMap.png"
@@ -14,53 +15,95 @@ start scene - loading screen
 ]]
 ChooseLocation = inheritsFrom(BaseScene)
 ChooseLocation.mScrollView = nil;
+ChooseLocation.mBabyInTrapAnimations = nil
+
 ChooseLocation.LABEL_BEGIN = 1;
 ChooseLocation.LABEL_ENG = 5;
 
 ChooseLocation.LOCATION_BEGIN = 10;
-ChooseLocation.LOCATION_FOX_FREE_DELTA = 5;
+ChooseLocation.LOCATION_FOX_ANIMATION_DELTA = 3;
+ChooseLocation.LOCATION_FOX_BACK_DELTA = 4;
 ChooseLocation.LOCATION_SPRITE_BEGIN = 100;
 
 ChooseLocation.BACK_MENU = 7;
 ChooseLocation.BACK_MENU_ITEM = 8;
 
 --------------------------------
+function ChooseLocation:createIdleAnimation(animation, nameAnimation, node, texture, textureSize, textureName,
+                                        times, delayPerUnit)
+    local repeat_idle = RepeatAnimation:create();
+
+    local idle = PlistAnimation:create();
+    idle:init(nameAnimation, node, node:getAnchorPoint(), nil, delayPerUnit);
+    repeat_idle:init(idle, false, times);
+    animation:addAnimation(repeat_idle);
+end
+
+--------------------------------
+function ChooseLocation:createBabyAnimation(node)
+    local randomAnim = RandomAnimation:create();
+    randomAnim:init();
+    self:createIdleAnimation(randomAnim, "BabyIdle1.plist", node, texture, contentSize, textureName, 3);
+    self:createIdleAnimation(randomAnim, "BabyIdle2.plist", node, texture, contentSize, textureName, 1, 0.15);
+    return randomAnim;
+end
+
+--------------------------------
+function ChooseLocation:createBabyFreeAnimation(node)
+    local repeat_idle = RepeatAnimation:create();
+
+    local idle = PlistAnimation:create();
+    idle:init("BabyFreeIdle.plist", node, node:getAnchorPoint(), nil, 0.15);
+
+    local delayAnim = DelayAnimation:create();
+    delayAnim:init(idle, math.random(1, 2000) / 1000, texture, contentSize, textureName);
+
+    repeat_idle:init(delayAnim, true);
+
+    return repeat_idle;
+end
+
+--------------------------------
 function ChooseLocation:createLocationImages(node)
     info_log("ChooseLocation:createLocationImages node ", node);
 
+    self.mBabyInTrapAnimations = {}
     local locations = self.mSceneManager.mGame:getLocations();
     local locationNum = 1;
 
+    tmp_touch = {}
 	for i, location in ipairs(locations) do
+        local sprite = node:getChildByTag(ChooseLocation.LOCATION_SPRITE_BEGIN * locationNum);
+        info_log("ChooseLocation:createLocationImages location ID ", location:getId(), " isOpened ", location:isOpened());
+
         local function onLocationPressed()
             info_log("onLocationPressed");
-            --menuToolsItem:unregisterScriptTapHandler();
             location:onLocationPressed();
         end
 
-        local sprite = node:getChildByTag(ChooseLocation.LOCATION_SPRITE_BEGIN * locationNum);
-        info_log("ChooseLocation:createLocationImages location ID ", location:getId(), " isOpened ", location:isOpened());
         -- TODO: check all opened
-        if #locations >= (i + 1) then
-            info_log("ChooseLocation:createLocationImages next opened ", locations[i + 1]:isOpened());
-            if locations[i + 1]:isOpened() then
-                local foxInTrap = sprite:getChildByTag(ChooseLocation.LOCATION_BEGIN * locationNum);
-                foxInTrap:setVisible(false);
-
-                local foxFree = sprite:getChildByTag(ChooseLocation.LOCATION_BEGIN * locationNum + ChooseLocation.LOCATION_FOX_FREE_DELTA);
-                foxFree:setVisible(true);
-
-                setMenuCallback(sprite, ChooseLocation.LOCATION_BEGIN * locationNum + ChooseLocation.LOCATION_FOX_FREE_DELTA,
-                    ChooseLocation.LOCATION_BEGIN * locationNum + ChooseLocation.LOCATION_FOX_FREE_DELTA + 1, onLocationPressed);
+        if  location:isOpened() then
+            --local foxInTrap = sprite:getChildByTag(ChooseLocation.LOCATION_BEGIN * locationNum);
+            --foxInTrap:setVisible(false);
+            local animNode = sprite:getChildByTag(ChooseLocation.LOCATION_BEGIN * locationNum + ChooseLocation.LOCATION_FOX_ANIMATION_DELTA);
+            if animNode then
+                local anim = nil;
+                if (#locations >= (i + 1) and locations[i + 1]:isOpened()) then 
+                    local back = sprite:getChildByTag(ChooseLocation.LOCATION_BEGIN * locationNum + ChooseLocation.LOCATION_FOX_BACK_DELTA);
+                    if back then
+                        back:setVisible(false);
+                    end
+                    anim = self:createBabyFreeAnimation(animNode);
+                else
+                    anim = self:createBabyAnimation(animNode);
+                end
+                anim:play();
+                self.mBabyInTrapAnimations[i] = anim;
             end
-        end
-
-        setMenuCallback(sprite, ChooseLocation.LOCATION_BEGIN * locationNum , ChooseLocation.LOCATION_BEGIN * locationNum + 1, onLocationPressed);
-
-		-- if location is locked
-		if not location:isOpened() then
+        else -- if location is locked
             sprite:setVisible(false);
-		end
+        end
+        setMenuCallback(sprite, ChooseLocation.LOCATION_BEGIN * locationNum , ChooseLocation.LOCATION_BEGIN * locationNum + 1, onLocationPressed);
 
         locationNum = locationNum + 1;
 	end
@@ -145,6 +188,15 @@ function ChooseLocation:initGui()
     end
 
     setMenuCallback(node, ChooseLocation.BACK_MENU, ChooseLocation.BACK_MENU_ITEM, onReturnPressed);
+end
+
+---------------------------------
+function ChooseLocation:tick(dt)
+    self:superClass().tick(self, dt);
+
+    for key, anim in ipairs(self.mBabyInTrapAnimations) do
+        anim:tick(dt);
+    end
 end
 
 --------------------------------
