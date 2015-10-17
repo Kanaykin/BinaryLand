@@ -18,7 +18,7 @@ end
 
 --------------------------------
 function ChooseLevel:init(sceneMan, params)
-	info_log("ChooseLevel:init ", params.location);
+	info_log("ChooseLevel:init ", params.location:getId());
 	self.mCurLocation = params.location;
 	self:superClass().init(self, sceneMan, {background = LOADSCEENIMAGE});
 
@@ -41,14 +41,16 @@ end
 
 --------------------------------
 function ChooseLevel:initScene()
-    local tileMap = cc.TMXTiledMap:create("ChoiceLevels1.tmx");
+    local nameTileMap = self.mCurLocation:getId() <= 4 and "ChoiceLevels" ..self.mCurLocation:getId().. ".tmx" or "ChoiceLevels1.tmx";
+    local tileMap = cc.TMXTiledMap:create(nameTileMap);
     local visibleSize = CCDirector:getInstance():getVisibleSize();
     tileMap:setAnchorPoint(cc.p(0.5, 0.5));
     tileMap:setPosition(cc.p(visibleSize.width / 2.0, visibleSize.height / 2.0));
 
 	local ccpproxy = CCBProxy:create();
 	local reader = ccpproxy:createCCBReader();
-	local node = ccpproxy:readCCBFromFile("MainScene", reader, false);
+    local nameCCBFile = self.mCurLocation:getId() <= 4 and "MainScene" ..self.mCurLocation:getId() or "MainScene1";
+	local node = ccpproxy:readCCBFromFile(nameCCBFile, reader, false);
 
     if tileMap then
         self.mSceneGame:addChild(tileMap);
