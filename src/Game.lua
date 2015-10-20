@@ -93,6 +93,16 @@ function Game:setLevelStar(locationId, level, star)
 end
 
 ---------------------------------
+function Game:setLevelStarShowed(locationId, level, count)
+    CCUserDefault:getInstance():setIntegerForKey(locationId .. tostring(level).. "_showed_star", count);
+end
+
+---------------------------------
+function Game:getLevelStarShowed(locationId, level)
+    return CCUserDefault:getInstance():getIntegerForKey(locationId .. tostring(level).. "_showed_star");
+end
+
+---------------------------------
 function Game:getLevelStar(locationId, level)
     return CCUserDefault:getInstance():getIntegerForKey(locationId .. tostring(level) .. "_star", 0);
 end

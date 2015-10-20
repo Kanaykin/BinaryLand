@@ -74,20 +74,29 @@ function ChooseLevel:initScene()
 
         return animManagerA:getRootNode():getTag() < animManagerB:getRootNode():getTag();
     end)
-	
+
     local minCount = (#arrayAnimator < #self.mCurLocation.mLevels) and #arrayAnimator or #self.mCurLocation.mLevels;
 
+    local frameIndex = 1;
 	for i = 1, minCount do
-		local nameFrame = "0:frame"..i;
-
-        info_log("nameFrame ", nameFrame);
-
 		local animManager = tolua.cast(arrayAnimator[i + 1], "cc.CCBAnimationManager");
 
+        local showedCountStar = self.mSceneManager.mGame:getLevelStarShowed(self.mCurLocation:getId(), self.mCurLocation.mLevels[i]:getIndex());
+        local countStar = self.mCurLocation.mLevels[i]:getCountStar();
+        local showed = countStar == showedCountStar;
+        debug_log("ChooseLevel: showed !!!! ", showed );
+        self.mSceneManager.mGame:setLevelStarShowed(self.mCurLocation:getId(), 
+            self.mCurLocation.mLevels[i]:getIndex(),
+            countStar);
+
         --info_log("animManager:getRootNode() ", animManager:getRootNode():getTag());
+        local nameFrame = "0:frame"..frameIndex;
+        if not showed then
+            frameIndex = frameIndex + 1;
+        end
 
         local child = node:getChildByTag(i);
-		self.mCurLocation.mLevels[i]:initVisual(animator, animManager, nameFrame, child);
+		self.mCurLocation.mLevels[i]:initVisual(animator, animManager, nameFrame, child, showed);
 	end
 
 	animator:runAnimationsForSequenceNamed("Default Timeline");

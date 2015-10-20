@@ -92,21 +92,20 @@ function Level:getIndex()
 end
 
 -----------------------------------
-function Level:initVisual(primaryAnimator, animManager, nameFrame, node)
-
-	local loc_self = self;
+function Level:initFlashAnimation(primaryAnimator, animManager, nameFrame, node)
+    local loc_self = self;
     local loc_animManager = animManager;
-	function callback()
-		loc_self:runStartAnimation(loc_animManager, node);
-	end
+    function callback()
+        loc_self:runStartAnimation(loc_animManager, node);
+    end
 
-	local callFunc = CCCallFunc:create(callback);
-	primaryAnimator:setCallFuncForLuaCallbackNamed(callFunc, nameFrame);
+    local callFunc = CCCallFunc:create(callback);
+    primaryAnimator:setCallFuncForLuaCallbackNamed(callFunc, nameFrame);
 
     for i = 1, self:getCountStar() do
         function star_callback()
             info_log("star_callback ", i);
-			local star = node:getChildByTag(Level.FIRST_STAR_TAG + (i - 1));
+            local star = node:getChildByTag(Level.FIRST_STAR_TAG + (i - 1));
             star:setVisible(true);
             self.mStarAnimations[i]:play();
         end
@@ -115,34 +114,6 @@ function Level:initVisual(primaryAnimator, animManager, nameFrame, node)
         animManager:setCallFuncForLuaCallbackNamed(starCallFunc, "0:starframe"..tostring(i));
     end
 
-	self:initButton(node);
-
-    local lock = node:getChildByTag(Level.LOCK_TAG);
-    lock:setVisible(not self:isOpened());
-
-    -- show blue star
-    if self:isOpened() then
-        for i = 1, 3 do
-            local star = node:getChildByTag(Level.BLUE_STAR_TAG + (i - 1));
-            star:setVisible(true);
-        end
-    end
-
-    local label = node:getChildByTag(Level.LABEL_TAG);
-    label:setVisible(self:isOpened());
-
-    local textureName = "LevelLabel" .. tostring(self.mIndex).. ".png";
-    local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
-    tolua.cast(label, "cc.Sprite"):setTexture(texture);
-
-    --------
-    if self.mStarAnimations then
-        for i, animation in pairs(self.mStarAnimations) do
-            if animation then
-                animation:destroy();
-            end
-        end
-    end
     self.mStarAnimations = {}
     for i = 1, 3 do
         local star = node:getChildByTag(Level.FIRST_STAR_TAG + (i - 1));
@@ -163,6 +134,63 @@ function Level:initVisual(primaryAnimator, animManager, nameFrame, node)
 
         self.mStarAnimations[i] = sequence;
     end
+
+end
+
+-----------------------------------
+function Level:initFireAnimation(node)
+    self.mStarAnimations = {}
+
+    for i = 1, self:getCountStar() do
+        local star = node:getChildByTag(Level.FIRST_STAR_TAG + (i - 1));
+        local animation = PlistAnimation:create();
+        animation:init("LevelStar.plist", star, star:getAnchorPoint(), nil, 0.1);
+        local repAnimation = RepeatAnimation:create();
+        repAnimation:init(animation);
+        self.mStarAnimations[i] = repAnimation;
+        star:setVisible(true);
+        self.mStarAnimations[i]:play();
+    end
+end
+
+-----------------------------------
+function Level:initVisual(primaryAnimator, animManager, nameFrame, node, showed)
+
+    self:initButton(node);
+
+    local lock = node:getChildByTag(Level.LOCK_TAG);
+    lock:setVisible(not self:isOpened());
+
+    -- show blue star
+    if self:isOpened() then
+        for i = 1, 3 do
+            local star = node:getChildByTag(Level.BLUE_STAR_TAG + (i - 1));
+            star:setVisible(true);
+        end
+    end
+
+    local label = node:getChildByTag(Level.LABEL_TAG);
+    label:setVisible(self:isOpened());
+
+    local textureName = "LevelLabel" .. tostring(self.mIndex).. ".png";
+    local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
+    tolua.cast(label, "cc.Sprite"):setTexture(texture);
+    
+    --------
+    if self.mStarAnimations then
+        for i, animation in pairs(self.mStarAnimations) do
+            if animation then
+                animation:destroy();
+            end
+        end
+    end
+
+    if not showed then
+        self:initFlashAnimation(primaryAnimator, animManager, nameFrame, node);
+    else
+        self:initFireAnimation(node);
+    end
+    
 end
 
 ---------------------------------
