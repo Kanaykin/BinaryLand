@@ -4,79 +4,269 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>trap_forest_boy_0011_Layer-Comp-12 copy.png</key>
+            <key>trap_forest_boy_0010_Layer-Comp-11 copy.png</key>
             <dict>
                 <key>height</key>
-                <integer>117</integer>
+                <integer>115</integer>
                 <key>offsetX</key>
                 <real>0</real>
                 <key>offsetY</key>
-                <real>-16</real>
+                <real>-17</real>
                 <key>originalHeight</key>
                 <integer>175</integer>
                 <key>originalWidth</key>
                 <integer>160</integer>
                 <key>width</key>
-                <integer>116</integer>
+                <integer>112</integer>
                 <key>x</key>
                 <integer>2</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>trap_forest_boy_0010_Layer-Comp-11.png</key>
+            <dict>
+                <key>height</key>
+                <integer>115</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>-17</real>
+                <key>originalHeight</key>
+                <integer>175</integer>
+                <key>originalWidth</key>
+                <integer>160</integer>
+                <key>width</key>
+                <integer>112</integer>
+                <key>x</key>
+                <integer>2</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>trap_forest_boy_0011_Layer-Comp-12 copy.png</key>
+            <dict>
+                <key>height</key>
+                <integer>115</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>-17</real>
+                <key>originalHeight</key>
+                <integer>175</integer>
+                <key>originalWidth</key>
+                <integer>160</integer>
+                <key>width</key>
+                <integer>112</integer>
+                <key>x</key>
+                <integer>116</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
             <key>trap_forest_boy_0011_Layer-Comp-12.png</key>
             <dict>
                 <key>height</key>
-                <integer>117</integer>
+                <integer>115</integer>
                 <key>offsetX</key>
                 <real>0</real>
                 <key>offsetY</key>
-                <real>-16</real>
+                <real>-17</real>
                 <key>originalHeight</key>
                 <integer>175</integer>
                 <key>originalWidth</key>
                 <integer>160</integer>
                 <key>width</key>
-                <integer>116</integer>
+                <integer>112</integer>
                 <key>x</key>
-                <integer>2</integer>
+                <integer>116</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
             <key>trap_forest_boy_0012_Layer-Comp-13 copy.png</key>
             <dict>
                 <key>height</key>
-                <integer>117</integer>
+                <integer>115</integer>
                 <key>offsetX</key>
                 <real>0</real>
                 <key>offsetY</key>
-                <real>-16</real>
+                <real>-17</real>
                 <key>originalHeight</key>
                 <integer>175</integer>
                 <key>originalWidth</key>
                 <integer>160</integer>
                 <key>width</key>
-                <integer>116</integer>
+                <integer>112</integer>
                 <key>x</key>
-                <integer>120</integer>
+                <integer>2</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
             <key>trap_forest_boy_0012_Layer-Comp-13.png</key>
             <dict>
                 <key>height</key>
-                <integer>117</integer>
+                <integer>115</integer>
                 <key>offsetX</key>
                 <real>0</real>
                 <key>offsetY</key>
-                <real>-16</real>
+                <real>-17</real>
                 <key>originalHeight</key>
                 <integer>175</integer>
                 <key>originalWidth</key>
                 <integer>160</integer>
                 <key>width</key>
-                <integer>116</integer>
+                <integer>112</integer>
                 <key>x</key>
-                <integer>120</integer>
+                <integer>2</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>trap_forest_boy_0013_Layer-Comp-14 copy.png</key>
+            <dict>
+                <key>height</key>
+                <integer>115</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>-17</real>
+                <key>originalHeight</key>
+                <integer>175</integer>
+                <key>originalWidth</key>
+                <integer>160</integer>
+                <key>width</key>
+                <integer>112</integer>
+                <key>x</key>
+                <integer>116</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>trap_forest_boy_0013_Layer-Comp-14.png</key>
+            <dict>
+                <key>height</key>
+                <integer>115</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>-17</real>
+                <key>originalHeight</key>
+                <integer>175</integer>
+                <key>originalWidth</key>
+                <integer>160</integer>
+                <key>width</key>
+                <integer>112</integer>
+                <key>x</key>
+                <integer>116</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>trap_forest_boy_0014_Layer-Comp-15 copy.png</key>
+            <dict>
+                <key>height</key>
+                <integer>115</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>-17</real>
+                <key>originalHeight</key>
+                <integer>175</integer>
+                <key>originalWidth</key>
+                <integer>160</integer>
+                <key>width</key>
+                <integer>112</integer>
+                <key>x</key>
+                <integer>2</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>trap_forest_boy_0014_Layer-Comp-15.png</key>
+            <dict>
+                <key>height</key>
+                <integer>115</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>-17</real>
+                <key>originalHeight</key>
+                <integer>175</integer>
+                <key>originalWidth</key>
+                <integer>160</integer>
+                <key>width</key>
+                <integer>112</integer>
+                <key>x</key>
+                <integer>2</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>trap_forest_boy_0015_Layer-Comp-16 copy.png</key>
+            <dict>
+                <key>height</key>
+                <integer>115</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>-17</real>
+                <key>originalHeight</key>
+                <integer>175</integer>
+                <key>originalWidth</key>
+                <integer>160</integer>
+                <key>width</key>
+                <integer>112</integer>
+                <key>x</key>
+                <integer>116</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>trap_forest_boy_0015_Layer-Comp-16.png</key>
+            <dict>
+                <key>height</key>
+                <integer>115</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>-17</real>
+                <key>originalHeight</key>
+                <integer>175</integer>
+                <key>originalWidth</key>
+                <integer>160</integer>
+                <key>width</key>
+                <integer>112</integer>
+                <key>x</key>
+                <integer>116</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>trap_forest_boy_0016_Layer-Comp-17 copy.png</key>
+            <dict>
+                <key>height</key>
+                <integer>115</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>-17</real>
+                <key>originalHeight</key>
+                <integer>175</integer>
+                <key>originalWidth</key>
+                <integer>160</integer>
+                <key>width</key>
+                <integer>112</integer>
+                <key>x</key>
+                <integer>2</integer>
+                <key>y</key>
+                <integer>2</integer>
+            </dict>
+            <key>trap_forest_boy_0016_Layer-Comp-17.png</key>
+            <dict>
+                <key>height</key>
+                <integer>115</integer>
+                <key>offsetX</key>
+                <real>0</real>
+                <key>offsetY</key>
+                <real>-17</real>
+                <key>originalHeight</key>
+                <integer>175</integer>
+                <key>originalWidth</key>
+                <integer>160</integer>
+                <key>width</key>
+                <integer>112</integer>
+                <key>x</key>
+                <integer>2</integer>
                 <key>y</key>
                 <integer>2</integer>
             </dict>
@@ -88,18 +278,18 @@
             <key>realTextureFileName</key>
             <string>FoxInCageLeftEnd.png</string>
             <key>size</key>
-            <string>{238,121}</string>
+            <string>{230,119}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:95689648012175bbed71beee678bc2c2:d50f3f4e2f14231a4421d9fc4a1da24e:afc416ac672033f636d03e50f07e77a2$</string>
+            <string>$TexturePacker:SmartUpdate:489fe063d3e7ab42711a79a1cdd80b05:15fcfe387de72f2aff923aba0a7ec372:afc416ac672033f636d03e50f07e77a2$</string>
             <key>textureFileName</key>
             <string>FoxInCageLeftEnd.png</string>
         </dict>
         <key>texture</key>
         <dict>
             <key>height</key>
-            <integer>121</integer>
+            <integer>119</integer>
             <key>width</key>
-            <integer>238</integer>
+            <integer>230</integer>
         </dict>
     </dict>
 </plist>

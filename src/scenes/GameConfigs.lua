@@ -123,7 +123,7 @@ gLocations = {
 		id = 2,
 		image = "venus.png",
 		position = Coord(0.32, 0.5, 0, -215),
-        opened = false,
+        opened = true,
         levels = {
             {
                 opened = true,
@@ -163,7 +163,7 @@ gLocations = {
 		id = 3,
 		image = "earth.png",
 		position = Coord(0.52, 0.5, 0, -235),
-        opened = false,
+        opened = true,
         levels = {
             {
                 opened = true,
@@ -203,7 +203,7 @@ gLocations = {
 		id = 4,
 		image = "mars.png",
 		position = Coord(0.78, 0.5, 0, -120),
-        opened = false,
+        opened = true,
         levels = {
             {
                 opened = true,
@@ -243,7 +243,7 @@ gLocations = {
         id = 5,
         image = "mars.png",
         position = Coord(0.9, 0.5, 0, -120),
-        opened = false,
+        opened = true,
         levels = {
             {
                 opened = true,
