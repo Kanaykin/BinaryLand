@@ -71,7 +71,8 @@ function ChooseLocation:createLocationImages(node)
     local locations = self.mSceneManager.mGame:getLocations();
     local locationNum = 1;
 
-    tmp_touch = {}
+    local lastVisited = self.mSceneManager.mGame:getLastVisitLocation();
+    local scrollVisitedOffset = nil;
 	for i, location in ipairs(locations) do
         local sprite = node:getChildByTag(ChooseLocation.LOCATION_SPRITE_BEGIN * locationNum);
         info_log("ChooseLocation:createLocationImages location ID ", location:getId(), " isOpened ", location:isOpened());
@@ -79,6 +80,12 @@ function ChooseLocation:createLocationImages(node)
         local function onLocationPressed()
             info_log("onLocationPressed");
             location:onLocationPressed();
+            self.mSceneManager.mGame:setLastVisitLocation(location:getId());
+        end
+
+        if lastVisited == location:getId() then
+            local positionNode = Vector.new(sprite:getPosition());
+            scrollVisitedOffset = positionNode.x - sprite:getContentSize().width / 2;
         end
 
         -- TODO: check all opened
@@ -100,10 +107,24 @@ function ChooseLocation:createLocationImages(node)
                 anim:play();
                 self.mBabyInTrapAnimations[i] = anim;
             end
+            if not lastVisited then
+                local positionNode = Vector.new(sprite:getPosition());
+                scrollVisitedOffset = positionNode.x - sprite:getContentSize().width / 2;
+            end
         else -- if location is locked
             sprite:setVisible(false);
         end
         setMenuCallback(sprite, ChooseLocation.LOCATION_BEGIN * locationNum , ChooseLocation.LOCATION_BEGIN * locationNum + 1, onLocationPressed);
+
+        info_log("ChooseLocation:createLocationImages scrollVisitedOffset ", scrollVisitedOffset);
+        if scrollVisitedOffset then
+            local visibleSize = CCDirector:getInstance():getVisibleSize();
+            --scrollVisitedOffset = math.min(scrollVisitedOffset, visibleSize.width);
+            --scrollVisitedOffset = scrollVisitedOffset - visibleSize.width / 2;
+            scrollVisitedOffset = math.max(scrollVisitedOffset, 0);
+            info_log("ChooseLocation:createLocationImages scrollVisitedOffset result ", scrollVisitedOffset);
+            self.mScrollView:setContentOffset({ x = -scrollVisitedOffset, y = 0});
+        end
 
         locationNum = locationNum + 1;
 	end

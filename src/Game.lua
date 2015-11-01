@@ -13,7 +13,8 @@ Game.mSceneMan = nil
 Game.mDialogManager = nil
 Game.mGameTime = 0
 Game.mScale = 1
-Game.mLocations = {}
+Game.mLocations = nil
+Game.mLastVisitLocation = nil
 
 local SUPPORTED_RESOLUTION = {
 	{ size = cc.size(480, 320), scale = 1, searchPath = "resources-iphone"},
@@ -65,6 +66,15 @@ function Game:getScale()
 	return self.mScale;
 end
 
+---------------------------------
+function Game:setLastVisitLocation(locationId)
+	self.mLastVisitLocation = locationId;
+end
+
+---------------------------------
+function Game:getLastVisitLocation()
+	return self.mLastVisitLocation;
+end
 
 ---------------------------------
 function Game:isLevelOpened(locationId, level)
@@ -179,6 +189,8 @@ end
 
 ---------------------------------
 function Game:init()
+
+	self.mLocations = {}
 
 	CCUserDefault:getInstance();
 	local xmlFilePath = CCUserDefault:getXMLFilePath();

@@ -54,6 +54,11 @@ function ScrollView:setTouchEnabled(enable)
 end
 
 ------------------------------
+function ScrollView:setContentOffset(offset)
+	self.mScroll:setContentOffset(offset);
+end
+
+------------------------------
 function ScrollView:setClickable(clickable)
 	local scrollviewlayer = self.mScroll:getContainer();
 	local scrollView = self;
