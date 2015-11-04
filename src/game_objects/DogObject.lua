@@ -97,7 +97,7 @@ end
 function DogObject:initAnimation()
 	info_log("HunterObject:initAnimation");
 
-	info_log("Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
+	info_log("DogObject Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
     self.mAnimations = {}
     self.mRunAnimations = {};
     self.mPlayerFollowAnimations = {};

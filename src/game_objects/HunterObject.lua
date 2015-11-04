@@ -58,7 +58,7 @@ function HunterObject:initAnimation()
 	info_log("HunterObject:initAnimation");
     self.mAnimations = {};
 
-	info_log("Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
+	info_log("HunterObject Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
 
 	local sideAnimation = self:createRepeateAnimation("HunterWalkSide.plist", MobObject.DIRECTIONS.SIDE);
 	sideAnimation:play();

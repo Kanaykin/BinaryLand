@@ -7,6 +7,7 @@ require "src/game_objects/FinishTrigger"
 require "src/game_objects/FinishObject"
 require "src/game_objects/BonusObject"
 require "src/game_objects/BonusRoomDoor"
+require "src/game_objects/BushObject"
 require "src/tutorial/TutorialTrigger"
 require "src/base/Log"
 
@@ -51,8 +52,10 @@ end
 ------------------------------
 function FactoryObject:createBrick(field, node)
 	info_log("FactoryObject:createBrick ", field, ", ", node);
-	field:addBrick(node);
-    return nil;--node;
+	local bush = BushObject:create();
+	bush:init(field, node);
+	field:addBrick(bush);
+    return bush;--node;
 end
 
 ------------------------------

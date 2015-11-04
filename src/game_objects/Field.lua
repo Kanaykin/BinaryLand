@@ -636,7 +636,8 @@ end
 
 --------------------------------
 function Field:addBrick(brick)
-	local x, y = self:getGridPosition(brick);
+	self:addObject(brick);
+	local x, y = self:getGridPosition(brick:getNode());
 	self.mArray[COORD(x, y, self.mSize.x)] = 1;
 end
 
