@@ -174,12 +174,14 @@ function Field:updateScrollPos()
 	local min = math.huge;
 	local max = -math.huge;
     local equal = true;
+    local forceUpdate = false;
 
     local dir = 0;
     local yMax = -math.huge;
 
 	for i, val in ipairs(self.mPlayerObjects) do
         local x, y = val.mNode:getPosition();
+        debug_log("Field:updateScrollPos x ", x, " y ", y)
         if not val:isInTrap() then
             min = math.min(min, y);
             max = math.max(max, y);
@@ -187,8 +189,16 @@ function Field:updateScrollPos()
         if self.mPlayerPosY[i] ~= y then
             equal = false;
         end
+
+        if not self.mPlayerPosY[i] then
+        	forceUpdate = true;
+        end
+
         if self.mPlayerPosY[i] and yMax < math.abs(self.mPlayerPosY[i] - y) then
             yMax = math.abs(self.mPlayerPosY[i] - y);
+            debug_log ("Field:updateScrollPos yMax ", yMax);
+            debug_log ("Field:updateScrollPos self.mPlayerPosY[i] ", self.mPlayerPosY[i]);
+            debug_log ("Field:updateScrollPos y ", y);
             dir = (self.mPlayerPosY[i] - y) / yMax;
         end
         self.mPlayerPosY[i] = y;
@@ -198,15 +208,19 @@ function Field:updateScrollPos()
         return;
     end
 
+	debug_log ("Field:updateScrollPos forceUpdate ", forceUpdate);
     if min ~= math.huge and max ~= -math.huge then
         local visibleSize = CCDirector:getInstance():getVisibleSize();
         local pos = (max - min) / 2 + min - visibleSize.height / 2;-- max - visibleSize.height / 2;
         pos = math.max(pos, 0);
 
-        --print ("Field:updateScrollPos ", pos);
-        --self.mFieldNode:setScrollPos(Vector.new(0, pos));
-        --self:smoothCameraMove(Vector.new(0, pos));
-        self:setScrollPos(pos, dir);
+        print ("Field:updateScrollPos ", pos);
+        if forceUpdate then
+        	self.mFieldNode:setScrollPos(Vector.new(0, pos));
+        else
+        	--self:smoothCameraMove(Vector.new(0, pos));
+        	self:setScrollPos(pos, dir);
+        end
     end
 end
 

@@ -33,7 +33,7 @@ end
 
 --------------------------------
 function FieldNode:setScrollPos(pos)
-	--debug_log("FieldNode:setScrollPos ");
+	debug_log("FieldNode:setScrollPos ", pos.y);
 	if self.mScrollView.setContentOffset then
 		self.mScrollView:setContentOffset(cc.p(0, -pos.y));
 	end
@@ -82,6 +82,7 @@ function FieldNode:init(nodes, layer, field)
 	self.mSize = cc.size(width, height);
 	local newLayer = CCLayer:create();
 	newLayer:setContentSize(self.mSize);
+	info_log(" !!!!! size layer ", self.mSize.width, self.mSize.height);
 	self.mLayer = newLayer;
 
 	layer:addChild(newLayer);
@@ -94,6 +95,8 @@ function FieldNode:init(nodes, layer, field)
 		newLayer:setPosition(posX, posY);
 		--newLayer:setAnchorPoint(nodes[1]:getAnchorPoint());
 	end
+
+	--self:setScrollPos(Vector.new(0, 800));
 
     local bricks_array = {};
 	-- move to new layers

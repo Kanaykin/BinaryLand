@@ -1,5 +1,6 @@
 local CustomProperties = {
-    ["9_7_106"] = {dog_id = "1_4_107"}
+    ["5_1_106"] = {dog_id = "4_3_107"},
+    ["11_1_106"] = {dog_id = "12_3_107"}
 }
 
 return CustomProperties;
