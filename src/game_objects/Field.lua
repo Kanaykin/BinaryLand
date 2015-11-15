@@ -181,7 +181,7 @@ function Field:updateScrollPos()
 
 	for i, val in ipairs(self.mPlayerObjects) do
         local x, y = val.mNode:getPosition();
-        debug_log("Field:updateScrollPos x ", x, " y ", y)
+        --debug_log("Field:updateScrollPos x ", x, " y ", y)
         if not val:isInTrap() then
             min = math.min(min, y);
             max = math.max(max, y);
@@ -196,9 +196,9 @@ function Field:updateScrollPos()
 
         if self.mPlayerPosY[i] and yMax < math.abs(self.mPlayerPosY[i] - y) then
             yMax = math.abs(self.mPlayerPosY[i] - y);
-            debug_log ("Field:updateScrollPos yMax ", yMax);
-            debug_log ("Field:updateScrollPos self.mPlayerPosY[i] ", self.mPlayerPosY[i]);
-            debug_log ("Field:updateScrollPos y ", y);
+            --debug_log ("Field:updateScrollPos yMax ", yMax);
+            --debug_log ("Field:updateScrollPos self.mPlayerPosY[i] ", self.mPlayerPosY[i]);
+            --debug_log ("Field:updateScrollPos y ", y);
             dir = (self.mPlayerPosY[i] - y) / yMax;
         end
         self.mPlayerPosY[i] = y;
@@ -208,13 +208,13 @@ function Field:updateScrollPos()
         return;
     end
 
-	debug_log ("Field:updateScrollPos forceUpdate ", forceUpdate);
+	--debug_log ("Field:updateScrollPos forceUpdate ", forceUpdate);
     if min ~= math.huge and max ~= -math.huge then
         local visibleSize = CCDirector:getInstance():getVisibleSize();
         local pos = (max - min) / 2 + min - visibleSize.height / 2;-- max - visibleSize.height / 2;
         pos = math.max(pos, 0);
 
-        print ("Field:updateScrollPos ", pos);
+        --print ("Field:updateScrollPos ", pos);
         if forceUpdate then
         	self.mFieldNode:setScrollPos(Vector.new(0, pos));
         else
