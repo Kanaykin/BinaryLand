@@ -179,6 +179,22 @@ function EditorFileLoader:createObjects(G_EditorScene, node, cellSize)
 end
 
 --------------------------------
+function setProperty(inTable, outTable, nameProperty)
+    debug_log("setProperty ", nameProperty, " prop ", inTable[nameProperty])
+    if inTable[nameProperty] then
+        outTable[nameProperty] = inTable[nameProperty]
+    end
+end
+
+--------------------------------
+function EditorFileLoader:updateLevelData(levelData, editorScene)
+    debug_log("EditorFileLoader:updateLevelData ", editorScene.levelParams);
+    setProperty( editorScene.levelParams, levelData, "time");
+    setProperty( editorScene.levelParams, levelData, "backgroundMusic");
+    setProperty( editorScene.levelParams, levelData, "tileMap");
+end
+
+--------------------------------
 function EditorFileLoader:loadEditorFile(levelData, G_EditorScene, levelScene)
 
     if type(G_EditorScene) == "table" then
@@ -238,9 +254,15 @@ function EditorFileLoader:loadEditorFile(levelData, G_EditorScene, levelScene)
         levelScene.mScrollView:initLayers(layers);
         levelScene.mScrollView:setTouchEnabled(false);
 
-        levelScene:loadTileMap("Level1_2_map.tmx");
+        if G_EditorScene.levelParams and G_EditorScene.levelParams.tileMap then
+            levelScene:loadTileMap(G_EditorScene.levelParams.tileMap);
+        else
+            levelScene:loadTileMap("Level1_2_map.tmx");
+        end
 
         self:createObjects(G_EditorScene, nodes[1], cellSize);
+
+        self:updateLevelData(levelData, G_EditorScene);
 
         levelScene.mSceneGame:addChild(levelScene.mScrollView.mScroll);
         levelScene.mField = Field:create();
