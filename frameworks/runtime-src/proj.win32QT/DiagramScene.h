@@ -22,6 +22,9 @@ public:
 	static const int CELL_SIZE;
 signals:
 	void itemMoved(DiagramItem *movedItem, const QPointF &movedFromPosition);
+	void sigCreateScene(DiagramScene* scene);
+	void sigCreateItem(DiagramItem *movedItem);
+	void sigDeleteItem(DiagramItem *movedItem);
 
 protected:
 	void mousePressEvent(QGraphicsSceneMouseEvent *event);

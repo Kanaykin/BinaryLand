@@ -17,11 +17,16 @@ public:
 		FOXY_ITEM,
 		DELETE_ITEM
 	};
+	struct ItemData {
+		std::string mIconName;
+		std::string	mName;
+	};
 	explicit DiagramItem(eTypeItem itemType);
 	~DiagramItem();
 
 	eTypeItem getItemType() const { return mItemType; }
 	static std::string getIconByType(eTypeItem itemType);
+	static std::string getNameByType(eTypeItem itemType);
 
 private:
 	eTypeItem mItemType;

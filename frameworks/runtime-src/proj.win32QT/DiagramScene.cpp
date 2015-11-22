@@ -61,6 +61,7 @@ void DiagramScene::createItem(DiagramItem::eTypeItem	typeItem, const QPoint& cel
 	item->setPos(DiagramScene::convertCellToScenePosition(cellPoint) + delta);
 	mItems[CELL_POS(cellPoint.x(), cellPoint.y(), mSize.width())] = item;
 
+	emit sigCreateItem(item);
 }
 
 void DiagramScene::deleteItem(const QPoint& cellPoint)
@@ -68,6 +69,7 @@ void DiagramScene::deleteItem(const QPoint& cellPoint)
 	if (mItems[CELL_POS(cellPoint.x(), cellPoint.y(), mSize.width())]) {
 		DiagramItem* item = mItems[CELL_POS(cellPoint.x(), cellPoint.y(), mSize.width())];
 		removeItem(item);
+		emit sigDeleteItem(item);
 		delete item;
 		mItems[CELL_POS(cellPoint.x(), cellPoint.y(), mSize.width())] = 0;
 	}
@@ -146,6 +148,8 @@ void DiagramScene::reset(const QSize& size)
 	mItems.clear();
 	mSize = size;
 	mItems.resize(size.width() * size.height(), 0);
+
+	emit sigCreateScene(this);
 }
 
 QPointF DiagramScene::convertCellToScenePosition(const QPoint& cellPos)

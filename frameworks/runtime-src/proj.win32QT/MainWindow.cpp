@@ -11,6 +11,7 @@
 #include "diagramscene.h"
 #include "GettingSizeDialog.h"
 #include "ButtonPanel.h"
+#include "ExplorerPanel.h"
 #include "cocos2d.h"
 #include "QtApplication.h"
 #include <QtCore/QTimer>
@@ -60,13 +61,19 @@ mParentView(0)
 	QGraphicsView *view = new QGraphicsView(mDiagramScene);
 
 	QHBoxLayout *container = new QHBoxLayout;
+
+	ExplorerPanel *widgetExplorer = new ExplorerPanel();
+	container->addWidget(widgetExplorer);
+	QObject::connect(mDiagramScene, SIGNAL(sigCreateScene(DiagramScene*)), widgetExplorer, SLOT(onCreateScene(DiagramScene*)));
+	QObject::connect(mDiagramScene, SIGNAL(sigCreateItem(DiagramItem*)), widgetExplorer, SLOT(onCreateItem(DiagramItem*)));
+	QObject::connect(mDiagramScene, SIGNAL(sigDeleteItem(DiagramItem*)), widgetExplorer, SLOT(onDeleteItem(DiagramItem*)));
+
 	QHBoxLayout *container2 = new QHBoxLayout;
 	container->addWidget(mParentView);
 	container2->addWidget(view);
 	mParentView->setLayout(container2);
 
 	QWidget *widgetButtons = new ButtonPanel(this);
-
 	container->addWidget(widgetButtons);
 
 	//setCentralWidget(view);

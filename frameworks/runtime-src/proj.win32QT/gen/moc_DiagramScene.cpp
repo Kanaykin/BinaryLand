@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_DiagramScene_t {
-    QByteArrayData data[6];
-    char stringdata0[65];
+    QByteArrayData data[11];
+    char stringdata0[128];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,11 +34,18 @@ QT_MOC_LITERAL(1, 13, 9), // "itemMoved"
 QT_MOC_LITERAL(2, 23, 0), // ""
 QT_MOC_LITERAL(3, 24, 12), // "DiagramItem*"
 QT_MOC_LITERAL(4, 37, 9), // "movedItem"
-QT_MOC_LITERAL(5, 47, 17) // "movedFromPosition"
+QT_MOC_LITERAL(5, 47, 17), // "movedFromPosition"
+QT_MOC_LITERAL(6, 65, 14), // "sigCreateScene"
+QT_MOC_LITERAL(7, 80, 13), // "DiagramScene*"
+QT_MOC_LITERAL(8, 94, 5), // "scene"
+QT_MOC_LITERAL(9, 100, 13), // "sigCreateItem"
+QT_MOC_LITERAL(10, 114, 13) // "sigDeleteItem"
 
     },
     "DiagramScene\0itemMoved\0\0DiagramItem*\0"
-    "movedItem\0movedFromPosition"
+    "movedItem\0movedFromPosition\0sigCreateScene\0"
+    "DiagramScene*\0scene\0sigCreateItem\0"
+    "sigDeleteItem"
 };
 #undef QT_MOC_LITERAL
 
@@ -48,18 +55,24 @@ static const uint qt_meta_data_DiagramScene[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
+       4,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,   19,    2, 0x06 /* Public */,
+       1,    2,   34,    2, 0x06 /* Public */,
+       6,    1,   39,    2, 0x06 /* Public */,
+       9,    1,   42,    2, 0x06 /* Public */,
+      10,    1,   45,    2, 0x06 /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, QMetaType::QPointF,    4,    5,
+    QMetaType::Void, 0x80000000 | 7,    8,
+    QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void, 0x80000000 | 3,    4,
 
        0        // eod
 };
@@ -71,7 +84,21 @@ void DiagramScene::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->itemMoved((*reinterpret_cast< DiagramItem*(*)>(_a[1])),(*reinterpret_cast< const QPointF(*)>(_a[2]))); break;
+        case 1: _t->sigCreateScene((*reinterpret_cast< DiagramScene*(*)>(_a[1]))); break;
+        case 2: _t->sigCreateItem((*reinterpret_cast< DiagramItem*(*)>(_a[1]))); break;
+        case 3: _t->sigDeleteItem((*reinterpret_cast< DiagramItem*(*)>(_a[1]))); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+        case 1:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< DiagramScene* >(); break;
+            }
+            break;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
@@ -80,6 +107,24 @@ void DiagramScene::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
             typedef void (DiagramScene::*_t)(DiagramItem * , const QPointF & );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&DiagramScene::itemMoved)) {
                 *result = 0;
+            }
+        }
+        {
+            typedef void (DiagramScene::*_t)(DiagramScene * );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&DiagramScene::sigCreateScene)) {
+                *result = 1;
+            }
+        }
+        {
+            typedef void (DiagramScene::*_t)(DiagramItem * );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&DiagramScene::sigCreateItem)) {
+                *result = 2;
+            }
+        }
+        {
+            typedef void (DiagramScene::*_t)(DiagramItem * );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&DiagramScene::sigDeleteItem)) {
+                *result = 3;
             }
         }
     }
@@ -110,13 +155,13 @@ int DiagramScene::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
-            *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        if (_id < 4)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 4;
     }
     return _id;
 }
@@ -126,5 +171,26 @@ void DiagramScene::itemMoved(DiagramItem * _t1, const QPointF & _t2)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+
+// SIGNAL 1
+void DiagramScene::sigCreateScene(DiagramScene * _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+
+// SIGNAL 2
+void DiagramScene::sigCreateItem(DiagramItem * _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
+}
+
+// SIGNAL 3
+void DiagramScene::sigDeleteItem(DiagramItem * _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 3, _a);
 }
 QT_END_MOC_NAMESPACE
