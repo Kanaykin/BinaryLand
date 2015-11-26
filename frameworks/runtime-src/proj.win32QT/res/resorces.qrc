@@ -10,5 +10,6 @@
          <file>images/Dog.png</file>
          <file>images/save_baby.png</file>
          <file>images/delete.png</file>
+         <file>images/arrow.png</file>
      </qresource>
      </RCC>

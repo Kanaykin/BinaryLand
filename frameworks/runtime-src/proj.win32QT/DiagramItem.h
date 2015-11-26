@@ -15,7 +15,8 @@ public:
 		FOX_ITEM,
 		COIN_ITEM,
 		FOXY_ITEM,
-		DELETE_ITEM
+		DELETE_ITEM,
+		ARROW_ITEM
 	};
 	struct ItemData {
 		std::string mIconName;

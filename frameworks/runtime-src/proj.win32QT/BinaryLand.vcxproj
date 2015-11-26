@@ -197,6 +197,14 @@ xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\ui" "$(P
     <ClInclude Include="main.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="QtApplication.h" />
+    <ClInclude Include="QtPropertyBrowser\qtbuttonpropertybrowser.h" />
+    <ClInclude Include="QtPropertyBrowser\qteditorfactory.h" />
+    <ClInclude Include="QtPropertyBrowser\qtgroupboxpropertybrowser.h" />
+    <ClInclude Include="QtPropertyBrowser\qtpropertybrowser.h" />
+    <ClInclude Include="QtPropertyBrowser\qtpropertybrowserutils_p.h" />
+    <ClInclude Include="QtPropertyBrowser\qtpropertymanager.h" />
+    <ClInclude Include="QtPropertyBrowser\qttreepropertybrowser.h" />
+    <ClInclude Include="QtPropertyBrowser\qtvariantproperty.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +220,14 @@ xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\ui" "$(P
     <ClCompile Include="gen\moc_GlWindow.cpp" />
     <ClCompile Include="DiagramScene.cpp" />
     <ClCompile Include="gen\moc_MainWindow.cpp" />
+    <ClCompile Include="gen\moc_qtbuttonpropertybrowser.cpp" />
+    <ClCompile Include="gen\moc_qteditorfactory.cpp" />
+    <ClCompile Include="gen\moc_qtgroupboxpropertybrowser.cpp" />
+    <ClCompile Include="gen\moc_qtpropertybrowser.cpp" />
+    <ClCompile Include="gen\moc_qtpropertybrowserutils_p.cpp" />
+    <ClCompile Include="gen\moc_qtpropertymanager.cpp" />
+    <ClCompile Include="gen\moc_qttreepropertybrowser.cpp" />
+    <ClCompile Include="gen\moc_qtvariantproperty.cpp" />
     <ClCompile Include="gen\rc_resorces.cpp" />
     <ClCompile Include="GettingSizeDialog.cpp" />
     <ClCompile Include="GlWindow.cpp" />
@@ -219,6 +235,14 @@ xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\ui" "$(P
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="QtApplication.cpp" />
+    <ClCompile Include="QtPropertyBrowser\qtbuttonpropertybrowser.cpp" />
+    <ClCompile Include="QtPropertyBrowser\qteditorfactory.cpp" />
+    <ClCompile Include="QtPropertyBrowser\qtgroupboxpropertybrowser.cpp" />
+    <ClCompile Include="QtPropertyBrowser\qtpropertybrowser.cpp" />
+    <ClCompile Include="QtPropertyBrowser\qtpropertybrowserutils.cpp" />
+    <ClCompile Include="QtPropertyBrowser\qtpropertymanager.cpp" />
+    <ClCompile Include="QtPropertyBrowser\qttreepropertybrowser.cpp" />
+    <ClCompile Include="QtPropertyBrowser\qtvariantproperty.cpp" />
     <ClCompile Include="Statistic.cpp" />
   </ItemGroup>
   <ItemGroup>

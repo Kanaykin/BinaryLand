@@ -20,6 +20,7 @@ mSignalMapper(0)
 	initButton(group, DiagramItem::COIN_ITEM, "coinButton");
 	initButton(group, DiagramItem::FOXY_ITEM, "foxyButton");
 	initButton(group, DiagramItem::DELETE_ITEM, "deleteButton");
+	initButton(group, DiagramItem::ARROW_ITEM, "arrowButton");
 	connect(mSignalMapper, SIGNAL(mapped(int)), mainWnd, SLOT(onButtonCheck(int)));
 	
 	group->setExclusive(true);

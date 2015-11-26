@@ -13,6 +13,7 @@ ItemsDataMap_t fillItemsData() {
 	result[DiagramItem::COIN_ITEM] = { ":images/Coin.png", "Coin" };
 	result[DiagramItem::FOXY_ITEM] = { ":images/save_baby.png", "Baby" };
 	result[DiagramItem::DELETE_ITEM] = { ":images/delete.png", "" };
+	result[DiagramItem::ARROW_ITEM] = { ":images/arrow.png", "" };
 
 	return result;
 };

@@ -13,9 +13,11 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QTreeWidget>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -24,9 +26,9 @@ class Ui_ExplorerPanel
 {
 public:
     QGridLayout *gridLayout_2;
-    QGridLayout *gridLayout;
-    QWidget *widget;
+    QVBoxLayout *verticalLayout;
     QTreeWidget *ProjectExplorerTree;
+    QFrame *PropertyTree;
 
     void setupUi(QWidget *ExplorerPanel)
     {
@@ -37,13 +39,8 @@ public:
         ExplorerPanel->setMaximumSize(QSize(242, 16777215));
         gridLayout_2 = new QGridLayout(ExplorerPanel);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        widget = new QWidget(ExplorerPanel);
-        widget->setObjectName(QStringLiteral("widget"));
-
-        gridLayout->addWidget(widget, 1, 0, 1, 1);
-
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         ProjectExplorerTree = new QTreeWidget(ExplorerPanel);
         QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem();
         __qtreewidgetitem->setText(0, QStringLiteral("1"));
@@ -54,10 +51,19 @@ public:
         ProjectExplorerTree->header()->setVisible(false);
         ProjectExplorerTree->header()->setStretchLastSection(true);
 
-        gridLayout->addWidget(ProjectExplorerTree, 0, 0, 1, 1);
+        verticalLayout->addWidget(ProjectExplorerTree);
+
+        PropertyTree = new QFrame(ExplorerPanel);
+        PropertyTree->setObjectName(QStringLiteral("PropertyTree"));
+        PropertyTree->setMinimumSize(QSize(50, 200));
+        PropertyTree->setFrameShape(QFrame::StyledPanel);
+        PropertyTree->setFrameShadow(QFrame::Raised);
+        ProjectExplorerTree->raise();
+
+        verticalLayout->addWidget(PropertyTree);
 
 
-        gridLayout_2->addLayout(gridLayout, 0, 0, 1, 1);
+        gridLayout_2->addLayout(verticalLayout, 0, 0, 1, 1);
 
 
         retranslateUi(ExplorerPanel);

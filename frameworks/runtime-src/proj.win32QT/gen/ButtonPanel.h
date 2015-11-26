@@ -37,12 +37,13 @@ public:
     QPushButton *coinButton;
     QPushButton *foxyButton;
     QPushButton *deleteButton;
+    QPushButton *arrowButton;
 
     void setupUi(QWidget *ButtonsForm)
     {
         if (ButtonsForm->objectName().isEmpty())
             ButtonsForm->setObjectName(QStringLiteral("ButtonsForm"));
-        ButtonsForm->resize(234, 490);
+        ButtonsForm->resize(234, 524);
         gridLayout = new QGridLayout(ButtonsForm);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         frame = new QFrame(ButtonsForm);
@@ -124,6 +125,14 @@ public:
 
         formLayout->setWidget(4, QFormLayout::LabelRole, deleteButton);
 
+        arrowButton = new QPushButton(frame);
+        arrowButton->setObjectName(QStringLiteral("arrowButton"));
+        arrowButton->setMinimumSize(QSize(90, 90));
+        arrowButton->setIconSize(QSize(80, 80));
+        arrowButton->setCheckable(true);
+
+        formLayout->setWidget(4, QFormLayout::FieldRole, arrowButton);
+
 
         gridLayout->addWidget(frame, 0, 0, 1, 1);
 
@@ -145,6 +154,7 @@ public:
         coinButton->setText(QString());
         foxyButton->setText(QString());
         deleteButton->setText(QString());
+        arrowButton->setText(QString());
     } // retranslateUi
 
 };

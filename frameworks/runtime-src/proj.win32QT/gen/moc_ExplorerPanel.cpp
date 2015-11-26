@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_ExplorerPanel_t {
-    QByteArrayData data[9];
-    char stringdata0[98];
+    QByteArrayData data[13];
+    char stringdata0[141];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,12 +37,17 @@ QT_MOC_LITERAL(4, 43, 5), // "scene"
 QT_MOC_LITERAL(5, 49, 12), // "onCreateItem"
 QT_MOC_LITERAL(6, 62, 12), // "DiagramItem*"
 QT_MOC_LITERAL(7, 75, 9), // "movedItem"
-QT_MOC_LITERAL(8, 85, 12) // "onDeleteItem"
+QT_MOC_LITERAL(8, 85, 12), // "onDeleteItem"
+QT_MOC_LITERAL(9, 98, 13), // "onItemPressed"
+QT_MOC_LITERAL(10, 112, 16), // "QTreeWidgetItem*"
+QT_MOC_LITERAL(11, 129, 4), // "item"
+QT_MOC_LITERAL(12, 134, 6) // "column"
 
     },
     "ExplorerPanel\0onCreateScene\0\0DiagramScene*\0"
     "scene\0onCreateItem\0DiagramItem*\0"
-    "movedItem\0onDeleteItem"
+    "movedItem\0onDeleteItem\0onItemPressed\0"
+    "QTreeWidgetItem*\0item\0column"
 };
 #undef QT_MOC_LITERAL
 
@@ -52,7 +57,7 @@ static const uint qt_meta_data_ExplorerPanel[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -60,14 +65,16 @@ static const uint qt_meta_data_ExplorerPanel[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   29,    2, 0x08 /* Private */,
-       5,    1,   32,    2, 0x08 /* Private */,
-       8,    1,   35,    2, 0x08 /* Private */,
+       1,    1,   34,    2, 0x08 /* Private */,
+       5,    1,   37,    2, 0x08 /* Private */,
+       8,    1,   40,    2, 0x08 /* Private */,
+       9,    2,   43,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void, 0x80000000 | 6,    7,
     QMetaType::Void, 0x80000000 | 6,    7,
+    QMetaType::Void, 0x80000000 | 10, QMetaType::Int,   11,   12,
 
        0        // eod
 };
@@ -81,6 +88,7 @@ void ExplorerPanel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 0: _t->onCreateScene((*reinterpret_cast< DiagramScene*(*)>(_a[1]))); break;
         case 1: _t->onCreateItem((*reinterpret_cast< DiagramItem*(*)>(_a[1]))); break;
         case 2: _t->onDeleteItem((*reinterpret_cast< DiagramItem*(*)>(_a[1]))); break;
+        case 3: _t->onItemPressed((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         default: ;
         }
     }
@@ -111,13 +119,13 @@ int ExplorerPanel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }
