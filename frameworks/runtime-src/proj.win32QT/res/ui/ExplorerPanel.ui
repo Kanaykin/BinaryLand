@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>242</width>
+    <width>300</width>
     <height>524</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>242</width>
+    <width>300</width>
     <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>242</width>
+    <width>300</width>
     <height>16777215</height>
    </size>
   </property>
@@ -66,7 +66,6 @@
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <zorder>ProjectExplorerTree</zorder>
       </widget>
      </item>
     </layout>

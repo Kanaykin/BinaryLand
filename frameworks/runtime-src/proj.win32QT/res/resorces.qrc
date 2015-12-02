@@ -11,5 +11,6 @@
          <file>images/save_baby.png</file>
          <file>images/delete.png</file>
          <file>images/arrow.png</file>
+         <file>images/border.png</file>
      </qresource>
      </RCC>

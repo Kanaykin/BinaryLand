@@ -34,9 +34,9 @@ public:
     {
         if (ExplorerPanel->objectName().isEmpty())
             ExplorerPanel->setObjectName(QStringLiteral("ExplorerPanel"));
-        ExplorerPanel->resize(242, 524);
-        ExplorerPanel->setMinimumSize(QSize(242, 0));
-        ExplorerPanel->setMaximumSize(QSize(242, 16777215));
+        ExplorerPanel->resize(300, 524);
+        ExplorerPanel->setMinimumSize(QSize(300, 0));
+        ExplorerPanel->setMaximumSize(QSize(300, 16777215));
         gridLayout_2 = new QGridLayout(ExplorerPanel);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         verticalLayout = new QVBoxLayout();
@@ -58,7 +58,6 @@ public:
         PropertyTree->setMinimumSize(QSize(50, 200));
         PropertyTree->setFrameShape(QFrame::StyledPanel);
         PropertyTree->setFrameShadow(QFrame::Raised);
-        ProjectExplorerTree->raise();
 
         verticalLayout->addWidget(PropertyTree);
 

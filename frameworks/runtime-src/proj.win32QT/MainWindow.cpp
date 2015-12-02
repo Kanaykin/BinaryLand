@@ -67,6 +67,8 @@ mParentView(0)
 	QObject::connect(mDiagramScene, SIGNAL(sigCreateScene(DiagramScene*)), widgetExplorer, SLOT(onCreateScene(DiagramScene*)));
 	QObject::connect(mDiagramScene, SIGNAL(sigCreateItem(DiagramItem*)), widgetExplorer, SLOT(onCreateItem(DiagramItem*)));
 	QObject::connect(mDiagramScene, SIGNAL(sigDeleteItem(DiagramItem*)), widgetExplorer, SLOT(onDeleteItem(DiagramItem*)));
+	QObject::connect(mDiagramScene, SIGNAL(sigSelectItem(DiagramItem*)), widgetExplorer, SLOT(onSelectItem(DiagramItem*)));
+	QObject::connect(widgetExplorer, SIGNAL(sigSelectItem(DiagramItem*)), mDiagramScene, SLOT(onSelectItem(DiagramItem*)));
 
 	QHBoxLayout *container2 = new QHBoxLayout;
 	container->addWidget(mParentView);

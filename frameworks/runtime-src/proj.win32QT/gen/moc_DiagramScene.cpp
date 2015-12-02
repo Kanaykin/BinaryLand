@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_DiagramScene_t {
-    QByteArrayData data[11];
-    char stringdata0[128];
+    QByteArrayData data[13];
+    char stringdata0[155];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,13 +39,15 @@ QT_MOC_LITERAL(6, 65, 14), // "sigCreateScene"
 QT_MOC_LITERAL(7, 80, 13), // "DiagramScene*"
 QT_MOC_LITERAL(8, 94, 5), // "scene"
 QT_MOC_LITERAL(9, 100, 13), // "sigCreateItem"
-QT_MOC_LITERAL(10, 114, 13) // "sigDeleteItem"
+QT_MOC_LITERAL(10, 114, 13), // "sigDeleteItem"
+QT_MOC_LITERAL(11, 128, 13), // "sigSelectItem"
+QT_MOC_LITERAL(12, 142, 12) // "onSelectItem"
 
     },
     "DiagramScene\0itemMoved\0\0DiagramItem*\0"
     "movedItem\0movedFromPosition\0sigCreateScene\0"
     "DiagramScene*\0scene\0sigCreateItem\0"
-    "sigDeleteItem"
+    "sigDeleteItem\0sigSelectItem\0onSelectItem"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,23 +57,31 @@ static const uint qt_meta_data_DiagramScene[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       4,       // signalCount
+       5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,   34,    2, 0x06 /* Public */,
-       6,    1,   39,    2, 0x06 /* Public */,
-       9,    1,   42,    2, 0x06 /* Public */,
-      10,    1,   45,    2, 0x06 /* Public */,
+       1,    2,   44,    2, 0x06 /* Public */,
+       6,    1,   49,    2, 0x06 /* Public */,
+       9,    1,   52,    2, 0x06 /* Public */,
+      10,    1,   55,    2, 0x06 /* Public */,
+      11,    1,   58,    2, 0x06 /* Public */,
+
+ // slots: name, argc, parameters, tag, flags
+      12,    1,   61,    2, 0x09 /* Protected */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, QMetaType::QPointF,    4,    5,
     QMetaType::Void, 0x80000000 | 7,    8,
     QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void, 0x80000000 | 3,    4,
+
+ // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
 
        0        // eod
@@ -87,6 +97,8 @@ void DiagramScene::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 1: _t->sigCreateScene((*reinterpret_cast< DiagramScene*(*)>(_a[1]))); break;
         case 2: _t->sigCreateItem((*reinterpret_cast< DiagramItem*(*)>(_a[1]))); break;
         case 3: _t->sigDeleteItem((*reinterpret_cast< DiagramItem*(*)>(_a[1]))); break;
+        case 4: _t->sigSelectItem((*reinterpret_cast< DiagramItem*(*)>(_a[1]))); break;
+        case 5: _t->onSelectItem((*reinterpret_cast< DiagramItem*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -127,6 +139,12 @@ void DiagramScene::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
                 *result = 3;
             }
         }
+        {
+            typedef void (DiagramScene::*_t)(DiagramItem * );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&DiagramScene::sigSelectItem)) {
+                *result = 4;
+            }
+        }
     }
 }
 
@@ -155,13 +173,13 @@ int DiagramScene::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 6;
     }
     return _id;
 }
@@ -192,5 +210,12 @@ void DiagramScene::sigDeleteItem(DiagramItem * _t1)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 3, _a);
+}
+
+// SIGNAL 4
+void DiagramScene::sigSelectItem(DiagramItem * _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 4, _a);
 }
 QT_END_MOC_NAMESPACE

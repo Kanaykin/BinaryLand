@@ -3,6 +3,7 @@
 
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QTreeWidget>
+#include <functional>
 
 class DiagramScene;
 class DiagramItem;
@@ -16,6 +17,7 @@ class QtRectPropertyManager;
 class QtSizePolicyPropertyManager;
 class QtEnumPropertyManager;
 class QtGroupPropertyManager;
+class QtProperty;
 
 class ExplorerPanel : public QWidget
 {
@@ -31,13 +33,27 @@ private slots:
 	void onCreateItem(DiagramItem *movedItem);
 	void onDeleteItem(DiagramItem *movedItem);
 	void onItemPressed(QTreeWidgetItem* item, int column);
+	void onSelectItem(DiagramItem *movedItem);
+	void onIntValueChanged(QtProperty* prop, int val);
+	void onBoolValueChanged(QtProperty* prop, bool val);
+signals:
+	void sigSelectItem(DiagramItem* item);
 
 protected:
 	void showProjectPropertyTree();
+	void resetSelectedItems();
+	void showItemProperty(DiagramItem* item);
+
 private:
+	typedef std::function<void(const QVariant&)> PropertySetFunc_t;
+	typedef std::map<QtProperty*, PropertySetFunc_t> PropertySetMap_t;
+	PropertySetFunc_t getSetterByProperty(QtProperty* prop)const;
+
 	QTreeWidgetItem* addTreeRoot(const QString& name);
 	QTreeWidgetItem* addTreeChild(QTreeWidgetItem* parent, const QString& name);
 	QTreeWidgetItem* removeTreeItemByDiagramItem(DiagramItem *movedItem);
+	QTreeWidgetItem* getTreeItemByDiagramItem(DiagramItem *movedItem);
+	DiagramItem*	getDiagramItemByTreeItem(QTreeWidgetItem* item);
 
 	QTreeWidget* mProjectTree;
 	QTreeWidgetItem* mProjectRoot;
@@ -57,6 +73,7 @@ private:
 	/////////////////////////////////
 
 	ItemsMap_t mItems;
+	PropertySetMap_t	mPropertySetters;
 };
 
 #endif

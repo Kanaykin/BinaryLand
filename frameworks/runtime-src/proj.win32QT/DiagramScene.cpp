@@ -7,14 +7,22 @@
 #include "DiagramItem.h"
 
 const int DiagramScene::CELL_SIZE = 50;
-static QString  BEGIN_FILE = "local map = {";
-static QString END_FILE = "} return {m=map";
+static QString  BEGIN_MAP = "local map = {";
+static QString END_MAP = "}\n";
+
+static QString  BEGIN_LEVEL_PROPERTIES = "local level = {\n";
+static QString END_LEVEL_PROPERTIES = "}\n";
+
+static QString  BEGIN_CUSTOM_PROPERTIES = "local CustomProperties = {\n";
+static QString END_CUSTOM_PROPERTIES = "}\n";
 
 #define CELL_POS(X, Y, W) ((X) + (W * Y))
 
 DiagramScene::DiagramScene(QObject *parent)
 	: QGraphicsScene(parent),
-	mTypeItem(DiagramItem::BUSH_ITEM)
+	mTypeItem(DiagramItem::BUSH_ITEM),
+	mSelector(0),
+	mTime(120)
 {
 }
 
@@ -30,14 +38,24 @@ bool DiagramScene::checkUniqueItemExists(const QPoint& cellPoint)
 	return false;
 }
 
-void DiagramScene::createItem(DiagramItem::eTypeItem	typeItem, const QPoint& cellPoint)
+DiagramItem* DiagramScene::createItemImpl(const QPoint& cellPoint, const QString& iconName, DiagramItem::eTypeItem typeItem)
 {
-	QPixmap pixmap(DiagramItem::getIconByType(typeItem).c_str());
+	QPixmap pixmap(iconName);
 	QPixmap pixmapScaled = pixmap.scaled(QSize(DiagramScene::CELL_SIZE, DiagramScene::CELL_SIZE), Qt::KeepAspectRatio);
 	QSize pixmapSize = pixmapScaled.size();
 
 	QPointF delta((DiagramScene::CELL_SIZE - pixmapSize.width()) / 2.0f, (DiagramScene::CELL_SIZE - pixmapSize.height()) / 2.0f);
 
+	DiagramItem *item = new DiagramItem(typeItem, cellPoint);
+	item->setPixmap(pixmapScaled);
+	addItem(item);
+
+	item->setPos(DiagramScene::convertCellToScenePosition(cellPoint) + delta);
+	return item;
+}
+
+void DiagramScene::createItem(DiagramItem::eTypeItem typeItem, const QPoint& cellPoint)
+{
 	if (mItems[CELL_POS(cellPoint.x(), cellPoint.y(), mSize.width())])
 	{
 		QMessageBox msgBox;
@@ -53,15 +71,39 @@ void DiagramScene::createItem(DiagramItem::eTypeItem	typeItem, const QPoint& cel
 		msgBox.exec();
 		return;
 	}
-
-	DiagramItem *item = new DiagramItem(typeItem);
-	item->setPixmap(pixmapScaled);
-	addItem(item);
-
-	item->setPos(DiagramScene::convertCellToScenePosition(cellPoint) + delta);
+	DiagramItem *item = createItemImpl(cellPoint, DiagramItem::getIconByType(typeItem).c_str(), typeItem);
+	
 	mItems[CELL_POS(cellPoint.x(), cellPoint.y(), mSize.width())] = item;
 
 	emit sigCreateItem(item);
+}
+
+void DiagramScene::selectItem(const QPoint& cellPoint)
+{
+	if (mItems[CELL_POS(cellPoint.x(), cellPoint.y(), mSize.width())]) {
+		DiagramItem* item = mItems[CELL_POS(cellPoint.x(), cellPoint.y(), mSize.width())];
+		
+		if (mSelector)
+			delete mSelector;
+		mSelector = createItemImpl(cellPoint, ":images/border.png", DiagramItem::ARROW_ITEM);
+		emit sigSelectItem(item);
+	}
+}
+
+void DiagramScene::selectItem(DiagramItem *movedItem)
+{
+	QPointF pos = movedItem->scenePos();
+	if (mSelector)
+		delete mSelector;
+	mSelector = createItemImpl(QPoint(pos.x() / DiagramScene::CELL_SIZE, pos.y() / DiagramScene::CELL_SIZE), ":images/border.png", DiagramItem::ARROW_ITEM);
+}
+
+void DiagramScene::setTypeItem(DiagramItem::eTypeItem typeItem)
+{
+	mTypeItem = typeItem;
+	if (mSelector)
+		delete mSelector;
+	mSelector = 0;
 }
 
 void DiagramScene::deleteItem(const QPoint& cellPoint)
@@ -80,6 +122,9 @@ void DiagramScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	if (mTypeItem == DiagramItem::DELETE_ITEM){
 		deleteItem(DiagramScene::convertToCellPosition(event->scenePos()));
 	}
+	else if (mTypeItem == DiagramItem::ARROW_ITEM) {
+		selectItem(DiagramScene::convertToCellPosition(event->scenePos()));
+	}
 	else
 		createItem(mTypeItem, DiagramScene::convertToCellPosition(event->scenePos()));
 
@@ -89,17 +134,17 @@ void DiagramScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void DiagramScene::loadFromStr(const QString& str)
 {
 	QString result(str);
-	if (!str.startsWith(BEGIN_FILE))
+	if (!str.startsWith(BEGIN_MAP))
 		return;
-	result.remove(0, BEGIN_FILE.length());
+	result.remove(0, BEGIN_MAP.length());
 
-	const int ind = result.indexOf(END_FILE);
+	const int ind = result.indexOf(END_MAP);
 	QString midStr = result.mid(0, ind);
 	std::string str2 = midStr.toStdString();
 
 	QString endStr = result.mid(ind);
 	str2 = endStr.toStdString();
-	endStr.remove(0, END_FILE.length() + 1);
+	endStr.remove(0, END_MAP.length() + 1);
 	str2 = endStr.toStdString();
 
 	QStringList list1 = endStr.split(',');
@@ -121,9 +166,69 @@ void DiagramScene::loadFromStr(const QString& str)
 	}
 }
 
+//--------------------------------------------------
+QString convertMapPropToStr(const DiagramItem::VariantMap_t& properties)
+{
+	QString  result;
+	bool firstItem = true;
+	for (DiagramItem::VariantMap_t::const_iterator ciProp = properties.begin(); ciProp != properties.end(); ++ciProp) {
+		if (!firstItem)
+			result += QString(",\n");
+		firstItem = false;
+
+		result += QString::fromStdString((*ciProp).first) + QString("=");
+		QVariant val = (*ciProp).second;
+		if (val.type() == QVariant::Bool) {
+			const bool bVal = val.toBool();
+			result += bVal ? QString("true") : QString("false");
+		}
+		else if (val.type() == QVariant::Int){
+			result += QString::number(val.toInt());
+		}
+		//result += "\n";
+	}
+	return result;
+}
+
+//--------------------------------------------------
+QString DiagramScene::convertObjectsPropToStr() const
+{
+	QString  result = BEGIN_CUSTOM_PROPERTIES;
+	bool firstItem = true;
+	for (DiagramItemVec_t::const_iterator citer = mItems.begin(); citer != mItems.end(); ++citer){
+		DiagramItem* curr = (*citer);
+		if (curr) {
+			const DiagramItem::VariantMap_t& properties = curr->getProperties();
+			if (!properties.empty()){
+				if (!firstItem)
+					result += QString(",\n");
+				firstItem = false;
+				QPoint point = curr->getPoint();
+				result += QString("[\"")  + QString::number(point.x()) + QString("_") + QString::number(point.y()) +
+					QString("_") + QString::number(DiagramItem::getIdByType(curr->getItemType())) + QString("\"] = {\n");
+				
+				result += convertMapPropToStr(properties);
+				result += QString("}");
+			}
+		}
+	}
+	result += END_CUSTOM_PROPERTIES;
+	return result;
+}
+
+//--------------------------------------------------
+QString DiagramScene::convertScenePropToStr() const
+{
+	QString  result = BEGIN_LEVEL_PROPERTIES;
+	result += QString("time = ") + QString::number(getTime()) + QString("\n");
+	result += END_LEVEL_PROPERTIES;
+	return result;
+}
+
+//--------------------------------------------------
 QString DiagramScene::convertSceneToStr() const
 {
-	QString  result = BEGIN_FILE;
+	QString  result = BEGIN_MAP;
 	for (int j = 0; j < mSize.height(); j++){
 		for (int i = 0; i < mSize.width(); i++) {
 			if (!(i == 0 && j == 0))
@@ -135,9 +240,14 @@ QString DiagramScene::convertSceneToStr() const
 				result += QString::number(mItems[CELL_POS(i, j, mSize.width())]->getItemType());
 		}
 	}
-	result += END_FILE;
+	result += END_MAP;
+	result += convertScenePropToStr();
+	result += convertObjectsPropToStr();
+	result += QString("return{ m = map");
 	result += QString(",w=") + QString::number(mSize.width());
 	result += QString(",h=") + QString::number(mSize.height());
+	result += QString(",level=level");
+	result += QString(",CustomProperties=CustomProperties");
 	result += "}";
 	return result;
 }
@@ -158,6 +268,11 @@ QPointF DiagramScene::convertCellToScenePosition(const QPoint& cellPos)
 	return scenePos;
 }
 
+void DiagramScene::onSelectItem(DiagramItem *movedItem)
+{
+	selectItem(movedItem);
+}
+
 QPoint DiagramScene::convertToCellPosition(const QPointF& mousePos)
 {
 	QPoint cellPos(int(mousePos.x()) / DiagramScene::CELL_SIZE, int(mousePos.y()) / DiagramScene::CELL_SIZE);
@@ -173,4 +288,9 @@ void DiagramScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 		movingItem = 0;
 	}
 	QGraphicsScene::mouseReleaseEvent(event);*/
+}
+
+void DiagramScene::setTime(const QVariant& time)
+{
+	mTime = time.toInt();
 }
