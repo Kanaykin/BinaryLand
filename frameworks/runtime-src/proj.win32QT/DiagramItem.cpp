@@ -28,7 +28,10 @@ mPoint(cellPoint)
 		mProperties.insert(std::make_pair("Count", QVariant(10)));
 	}
 	else if (itemType == DiagramItem::HUNTER_ITEM) {
-		mProperties.insert(std::make_pair("Attackable", QVariant(false)));
+		mProperties.insert(std::make_pair("CanAttack", QVariant(false)));
+	}
+	else if (itemType == DiagramItem::DOG_ITEM) {
+		mProperties.insert(std::make_pair("CanSearch", QVariant(false)));
 	}
 }
 

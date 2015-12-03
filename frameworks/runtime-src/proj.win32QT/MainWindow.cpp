@@ -157,7 +157,9 @@ void MainWindow::onOpen()
 	}
 	file.close();
 
-	mDiagramScene->loadFromStr(result);
+	//mDiagramScene->loadFromStr(result);
+	QFileInfo infoFile(mCurrentFile);
+	mDiagramScene->loadFromFile(infoFile.fileName());
 	const QSize size = mDiagramScene->getSize();
 	updateSize(size.width(), size.height());
 }

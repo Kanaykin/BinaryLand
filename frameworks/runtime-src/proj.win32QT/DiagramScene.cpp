@@ -5,6 +5,7 @@
 #include "diagramscene.h"
 //#include "diagramitem.h"
 #include "DiagramItem.h"
+#include "SceneLoader.h"
 
 const int DiagramScene::CELL_SIZE = 50;
 static QString  BEGIN_MAP = "local map = {";
@@ -131,8 +132,53 @@ void DiagramScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	QGraphicsScene::mousePressEvent(event);
 }
 
+void DiagramScene::loadFromFile(const QString& file)
+{
+	SceneLoader loader;
+	if (loader.loadScene(file.toStdString())) {
+		SceneLoader::PropertyContainer mapProps = loader.getRootContainer();
+		std::map<int, int> map;
+		if (mapProps.getIntContainer("m", map)){
+			const int w = mapProps.getIntProperty("w");
+			const int h = mapProps.getIntProperty("h");
+			reset(QSize(w, h));
+			for (std::map<int, int>::const_iterator citer = map.begin(); citer != map.end(); ++citer){
+				const int type = (*citer).second;
+				const int i = (*citer).first - 1;
+				if (type != 0)
+					createItem((DiagramItem::eTypeItem)type, QPoint(i % mSize.width(), i / mSize.width()));
+			}
+		}
+		// level properties
+		SceneLoader::PropertyContainer levelProps = mapProps.getContainer("level");
+		int time = levelProps.getIntProperty("time");
+		if (time)
+			mTime = time;
+		// CustomProperties
+		//SceneLoader::PropertyContainer customProps = mapProps.getContainer("CustomProperties");
+		std::map<std::string, SceneLoader::PropertyContainer> mapProp;
+		if (mapProps.getContainerContainer("CustomProperties", mapProp)){
+			for (std::map<std::string, SceneLoader::PropertyContainer>::iterator citer = mapProp.begin(); citer != mapProp.end(); ++citer){
+				QStringList list1 = QString::fromStdString((*citer).first).split('_');
+				int x = (list1.at(0)).toInt();
+				int y = (list1.at(1)).toInt();
+				DiagramItem* item = mItems[CELL_POS(x, y, mSize.width())];
+				if (item) {
+					std::map<std::string, QVariant> objProp;
+					if ((*citer).second.getVariantContainer(/*(*citer).first,*/ objProp)){
+						for (std::map<std::string, QVariant>::const_iterator prop = objProp.begin(); prop != objProp.end(); ++prop){
+							item->setProperty((*prop).first, (*prop).second);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 void DiagramScene::loadFromStr(const QString& str)
 {
+
 	QString result(str);
 	if (!str.startsWith(BEGIN_MAP))
 		return;
@@ -254,6 +300,10 @@ QString DiagramScene::convertSceneToStr() const
 
 void DiagramScene::reset(const QSize& size)
 {
+	if (mSelector)
+		delete mSelector;
+	mSelector = 0;
+
 	clear();
 	mItems.clear();
 	mSize = size;

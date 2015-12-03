@@ -206,6 +206,7 @@ xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\ui" "$(P
     <ClInclude Include="QtPropertyBrowser\qttreepropertybrowser.h" />
     <ClInclude Include="QtPropertyBrowser\qtvariantproperty.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SceneLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
@@ -243,6 +244,7 @@ xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\ui" "$(P
     <ClCompile Include="QtPropertyBrowser\qtpropertymanager.cpp" />
     <ClCompile Include="QtPropertyBrowser\qttreepropertybrowser.cpp" />
     <ClCompile Include="QtPropertyBrowser\qtvariantproperty.cpp" />
+    <ClCompile Include="SceneLoader.cpp" />
     <ClCompile Include="Statistic.cpp" />
   </ItemGroup>
   <ItemGroup>

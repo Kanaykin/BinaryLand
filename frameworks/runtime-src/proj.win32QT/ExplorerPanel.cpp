@@ -165,6 +165,8 @@ void ExplorerPanel::onCreateScene(DiagramScene* scene)
 		delete mProjectRoot;
 	mProjectRoot = addTreeRoot("Project");
 	mScene = scene;
+	mPropertyBrowser->clear();
+	mPropertySetters.clear();
 }
 
 //-----------------------------------------------

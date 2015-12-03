@@ -22,6 +22,7 @@ public:
 	QString convertObjectsPropToStr() const;
 
 	void loadFromStr(const QString& str);
+	void loadFromFile(const QString& file);
 	QSize getSize() const { return mSize;  }
 	void setTime(const QVariant& time);
 	int getTime() const { return mTime; }
