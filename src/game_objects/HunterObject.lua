@@ -13,6 +13,7 @@ HunterObject.mFoundPlayerPos = nil;
 HunterObject.mGridPosGetTrace = nil;
 HunterObject.mFoxGoalPos = nil;
 HunterObject.mFoxGridGoalPos = nil;
+HunterObject.mCanAttack = false;
 
 --shot constants
 HunterObject.SHOT_PIXELS_DELTA = 10
@@ -99,6 +100,9 @@ function HunterObject:setCustomProperties(properties)
     if properties.dog_id then
         info_log("HunterObject:setCustomProperties dog_id ", properties.dog_id);
         self.mDogId = properties.dog_id;
+    end
+    if properties.CanAttack then
+        self.mCanAttack = properties.CanAttack;
     end
 end
 
@@ -251,5 +255,7 @@ function HunterObject:tick(dt)
     self:updateDog();
     HunterObject:superClass().tick(self, dt);
 
-    self:tryShotGun();
+    if self.mCanAttack then
+        self:tryShotGun();
+    end
 end

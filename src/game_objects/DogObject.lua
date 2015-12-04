@@ -18,6 +18,7 @@ DogObject.mPlayerFollowAnimations = nil;
 DogObject.mFoundPlayerPos = nil;
 DogObject.mPlayerTrace = nil;
 DogObject.mGridPosGetTrace = nil;
+DogObject.mCanSearch = false;
 
 --------------------------------
 function DogObject:init(field, node)
@@ -260,6 +261,18 @@ function DogObject:getPlayerTrace()
     return self.mPlayerTrace;
 end
 
+---------------------------------
+function DogObject:setCustomProperties(properties)
+    info_log("DogObject:setCustomProperties ");
+
+    DogObject:superClass().setCustomProperties(self, properties);
+
+    if properties.CanSearch then
+        info_log("BonusObject:setCustomProperties CanSearch ", properties.CanSearch);
+        self.mCanSearch = properties.CanSearch;
+    end
+end
+
 --------------------------------
 function DogObject:tick(dt)
 	DogObject:superClass().tick(self, dt);
@@ -270,7 +283,7 @@ function DogObject:tick(dt)
         self.mGridPosGetTrace = self.mGridPosition;
         local players = self.mField:getPlayerObjects();
         for i, player in pairs(players) do
-            if not player:isInTrap() then
+            if not player:isInTrap() and self.mCanSearch then
                 local trace = player:getTrace():findTrace(self.mGridPosition);
                 -- debug_log("DogObject:tick id ", self:getId(), " trace ", trace)
                 --if trace then

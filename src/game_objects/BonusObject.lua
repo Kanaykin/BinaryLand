@@ -42,6 +42,18 @@ function BonusObject:setScore(score)
     self.mScore = score;
 end
 
+---------------------------------
+function BonusObject:setCustomProperties(properties)
+    info_log("BonusObject:setCustomProperties ");
+
+    BonusObject:superClass().setCustomProperties(self, properties);
+
+    if properties.Count then
+        info_log("BonusObject:setCustomProperties Count ", properties.Count);
+        self.mScore = properties.Count;
+    end
+end
+
 --------------------------------
 function BonusObject:init(field, node, score, type)
     info_log("BonusObject:init ")

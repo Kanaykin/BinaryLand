@@ -266,6 +266,11 @@ function EditorFileLoader:loadEditorFile(levelData, G_EditorScene, levelScene)
 
         levelScene.mSceneGame:addChild(levelScene.mScrollView.mScroll);
         levelScene.mField = Field:create();
+        if G_EditorScene.CustomProperties then
+            info_log("LevelScene:loadEditorFile CustomProperties ", G_EditorScene.CustomProperties);
+            levelData.determinedCustomProperties = G_EditorScene.CustomProperties;
+            --levelScene.mField:setCustomProperties(G_EditorScene.CustomProperties);
+        end
         levelScene.mField:init(nodes, levelScene.mScrollView.mScroll, levelData, levelScene.mSceneManager.mGame);
         levelScene.mField:setStateListener(levelScene);
         return true;

@@ -739,9 +739,16 @@ function Field:getCustomProperties(gridPosX, gridPosY, tag)
 end
 
 --------------------------------
+function Field:setCustomProperties(customProperties)
+    self.mCustomProperties = customProperties;
+end
+
+--------------------------------
 function Field:loadCustomProperties(fieldData)
-    info_log("Field:loadCustomProperties( ", fieldData.customProperties);
-    if fieldData.customProperties ~= nil then
+    info_log("Field:loadCustomProperties( ", fieldData.determinedCustomProperties);
+    if fieldData.determinedCustomProperties then
+        self.mCustomProperties = fieldData.determinedCustomProperties;
+    elseif fieldData.customProperties ~= nil then
         local customProperties = require(fieldData.customProperties);
         info_log("Field:loadCustomProperties customProperties ", customProperties);
         self.mCustomProperties = customProperties;
