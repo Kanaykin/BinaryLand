@@ -180,8 +180,8 @@ end
 
 --------------------------------
 function setProperty(inTable, outTable, nameProperty)
-    debug_log("setProperty ", nameProperty, " prop ", inTable[nameProperty])
-    if inTable[nameProperty] then
+    --debug_log("setProperty ", nameProperty, " prop ", inTable[nameProperty])
+    if inTable and inTable[nameProperty] then
         outTable[nameProperty] = inTable[nameProperty]
     end
 end

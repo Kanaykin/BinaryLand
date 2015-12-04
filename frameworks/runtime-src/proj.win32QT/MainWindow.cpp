@@ -159,7 +159,7 @@ void MainWindow::onOpen()
 
 	//mDiagramScene->loadFromStr(result);
 	QFileInfo infoFile(mCurrentFile);
-	mDiagramScene->loadFromFile(infoFile.fileName());
+	mDiagramScene->loadFromFile(QString("src/levels/") +infoFile.fileName());
 	const QSize size = mDiagramScene->getSize();
 	updateSize(size.width(), size.height());
 }

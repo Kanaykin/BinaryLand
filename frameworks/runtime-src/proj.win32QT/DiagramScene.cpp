@@ -161,7 +161,7 @@ void DiagramScene::loadFromFile(const QString& file)
 			for (std::map<std::string, SceneLoader::PropertyContainer>::iterator citer = mapProp.begin(); citer != mapProp.end(); ++citer){
 				QStringList list1 = QString::fromStdString((*citer).first).split('_');
 				int x = (list1.at(0)).toInt() - 1;
-				int y = (list1.at(1)).toInt() - 1;
+				int y = mSize.height() - (list1.at(1)).toInt();
 				if (x < 0 || y < 0)
 					continue;
 				DiagramItem* item = mItems[CELL_POS(x, y, mSize.width())];
@@ -252,7 +252,7 @@ QString DiagramScene::convertObjectsPropToStr() const
 					result += QString(",\n");
 				firstItem = false;
 				QPoint point = curr->getPoint();
-				result += QString("[\"")  + QString::number(point.x() + 1) + QString("_") + QString::number(point.y() + 1) +
+				result += QString("[\"") + QString::number(point.x() + 1) + QString("_") + QString::number(mSize.height() - point.y()) +
 					QString("_") + QString::number(DiagramItem::getIdByType(curr->getItemType())) + QString("\"] = {\n");
 				
 				result += convertMapPropToStr(properties);
