@@ -150,7 +150,7 @@ void DiagramScene::loadFromFile(const QString& file)
 			}
 		}
 		// level properties
-		SceneLoader::PropertyContainer levelProps = mapProps.getContainer("level");
+		SceneLoader::PropertyContainer levelProps = mapProps.getContainer("levelParams");
 		int time = levelProps.getIntProperty("time");
 		if (time)
 			mTime = time;
@@ -160,8 +160,10 @@ void DiagramScene::loadFromFile(const QString& file)
 		if (mapProps.getContainerContainer("CustomProperties", mapProp)){
 			for (std::map<std::string, SceneLoader::PropertyContainer>::iterator citer = mapProp.begin(); citer != mapProp.end(); ++citer){
 				QStringList list1 = QString::fromStdString((*citer).first).split('_');
-				int x = (list1.at(0)).toInt();
-				int y = (list1.at(1)).toInt();
+				int x = (list1.at(0)).toInt() - 1;
+				int y = (list1.at(1)).toInt() - 1;
+				if (x < 0 || y < 0)
+					continue;
 				DiagramItem* item = mItems[CELL_POS(x, y, mSize.width())];
 				if (item) {
 					std::map<std::string, QVariant> objProp;
@@ -250,7 +252,7 @@ QString DiagramScene::convertObjectsPropToStr() const
 					result += QString(",\n");
 				firstItem = false;
 				QPoint point = curr->getPoint();
-				result += QString("[\"")  + QString::number(point.x()) + QString("_") + QString::number(point.y()) +
+				result += QString("[\"")  + QString::number(point.x() + 1) + QString("_") + QString::number(point.y() + 1) +
 					QString("_") + QString::number(DiagramItem::getIdByType(curr->getItemType())) + QString("\"] = {\n");
 				
 				result += convertMapPropToStr(properties);
@@ -292,7 +294,7 @@ QString DiagramScene::convertSceneToStr() const
 	result += QString("return{ m = map");
 	result += QString(",w=") + QString::number(mSize.width());
 	result += QString(",h=") + QString::number(mSize.height());
-	result += QString(",level=level");
+	result += QString(",levelParams=level");
 	result += QString(",CustomProperties=CustomProperties");
 	result += "}";
 	return result;
