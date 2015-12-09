@@ -147,6 +147,7 @@ public:
         timeButton->setObjectName(QStringLiteral("timeButton"));
         timeButton->setMinimumSize(QSize(90, 90));
         timeButton->setMaximumSize(QSize(90, 90));
+        timeButton->setIconSize(QSize(80, 80));
 
         gridLayout_3->addWidget(timeButton, 0, 2, 1, 1);
 
