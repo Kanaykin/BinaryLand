@@ -51,7 +51,7 @@ function EditorFileLoader:createTimeBonus(pos, cellSize)
 
     --pos.y = pos.y + cellSize / 2.0;
 
-    node:setAnchorPoint(cc.p(0.5, -0.3));
+    node:setAnchorPoint(cc.p(0.5, 0));
     node:setPosition(pos);
     node:setTag(FactoryObject.BONUS_TIME_TAG);
     return node;
