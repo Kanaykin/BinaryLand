@@ -52,6 +52,12 @@ function BonusObject:setCustomProperties(properties)
         info_log("BonusObject:setCustomProperties Count ", properties.Count);
         self.mScore = properties.Count;
     end
+
+	if properties.Type then
+        info_log("BonusObject:setCustomProperties Type ", properties.Type);
+        self.mType = properties.Type;
+		self:initAnimation();
+    end
 end
 
 --------------------------------

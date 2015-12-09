@@ -43,6 +43,7 @@ protected:
 	void showProjectPropertyTree();
 	void resetSelectedItems();
 	void showItemProperty(DiagramItem* item);
+	static bool isVisibleProperty(const std::string& name);
 
 private:
 	typedef std::function<void(const QVariant&)> PropertySetFunc_t;

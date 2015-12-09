@@ -14,6 +14,7 @@ ItemsDataMap_t fillItemsData() {
 	result[DiagramItem::FOXY_ITEM] = { ":images/save_baby.png", "Baby", 103 };
 	result[DiagramItem::DELETE_ITEM] = { ":images/delete.png", "", 0 };
 	result[DiagramItem::ARROW_ITEM] = { ":images/arrow.png", "", 0 };
+	result[DiagramItem::TIME_BONUS_ITEM] = { ":images/Time.png", "Time", 110 };
 
 	return result;
 };
@@ -33,8 +34,19 @@ mPoint(cellPoint)
 	else if (itemType == DiagramItem::DOG_ITEM) {
 		mProperties.insert(std::make_pair("CanSearch", QVariant(false)));
 	}
+	else if (itemType == DiagramItem::TIME_BONUS_ITEM) {
+		mProperties.insert(std::make_pair("Count", QVariant(10)));
+	}
 }
 
+//-----------------------------------------------------------
+void DiagramItem::removeProperty(const std::string& name)
+{
+	VariantMap_t::iterator iter = mProperties.find(name);
+	if (iter != mProperties.end()) {
+		mProperties.erase(iter);
+	}
+}
 
 //-----------------------------------------------------------
 DiagramItem::~DiagramItem()

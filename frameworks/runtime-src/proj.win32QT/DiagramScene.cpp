@@ -233,9 +233,19 @@ QString convertMapPropToStr(const DiagramItem::VariantMap_t& properties)
 		else if (val.type() == QVariant::Int){
 			result += QString::number(val.toInt());
 		}
+		else if (val.type() == QVariant::String){
+			result += QString("'") + val.toString() + QString("'");
+		}
 		//result += "\n";
 	}
 	return result;
+}
+
+//--------------------------------------------------
+QString DiagramScene::convertToId(const QPoint& point, DiagramItem::eTypeItem type) const
+{
+	return QString::number(point.x() + 1) + QString("_") + QString::number(mSize.height() - point.y()) +
+		QString("_") + QString::number(DiagramItem::getIdByType(type));
 }
 
 //--------------------------------------------------
@@ -252,8 +262,7 @@ QString DiagramScene::convertObjectsPropToStr() const
 					result += QString(",\n");
 				firstItem = false;
 				QPoint point = curr->getPoint();
-				result += QString("[\"") + QString::number(point.x() + 1) + QString("_") + QString::number(mSize.height() - point.y()) +
-					QString("_") + QString::number(DiagramItem::getIdByType(curr->getItemType())) + QString("\"] = {\n");
+				result += QString("[\"") + convertToId(point, curr->getItemType()) + QString("\"] = {\n");
 				
 				result += convertMapPropToStr(properties);
 				result += QString("}");
@@ -271,6 +280,43 @@ QString DiagramScene::convertScenePropToStr() const
 	result += QString("time = ") + QString::number(getTime()) + QString("\n");
 	result += END_LEVEL_PROPERTIES;
 	return result;
+}
+
+//--------------------------------------------------
+DiagramItem* getNearestDog(const QPoint& point, const DiagramScene::DiagramItemVec_t& items)
+{
+	DiagramItem* result(0);
+	float distance = std::numeric_limits<float>::max();
+	for (DiagramScene::DiagramItemVec_t::const_iterator citer = items.begin(); citer != items.end(); ++citer) {
+		DiagramItem* item = (*citer);
+		if (item && item->getItemType() == DiagramItem::DOG_ITEM) {
+			QPoint dist = point - item->getPoint();
+			const float len = dist.x() * dist.x() + dist.y() * dist.y();
+			if (len < distance){
+				distance = len;
+				result = item;
+			}
+		}
+	}
+	return result;
+}
+
+//--------------------------------------------------
+void DiagramScene::autoSetDogToHunter()
+{
+	DiagramScene::DiagramItemVec_t items_copy(mItems);
+	const int count = mSize.width() * mSize.height();
+	for (int i = 0; i != (count); i++){
+		if (mItems[i] != 0 && mItems[i]->getItemType() == DiagramItem::HUNTER_ITEM){
+			mItems[i]->removeProperty("dog_id");
+
+			DiagramItem* res = getNearestDog(mItems[i]->getPoint(), items_copy);
+			if (res){
+				items_copy.erase(std::find(items_copy.begin(), items_copy.end(), res));
+				mItems[i]->setProperty("dog_id", QVariant(convertToId(res->getPoint(), res->getItemType())));
+			}
+		}
+	}
 }
 
 //--------------------------------------------------

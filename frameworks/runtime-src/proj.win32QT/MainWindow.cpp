@@ -257,7 +257,8 @@ void MainWindow::onSave()
 	QFile f(filename);
 	mCurrentFile = f.fileName();
 	f.open(QIODevice::WriteOnly);
-	// store data in f
+	// store data in file
+	mDiagramScene->autoSetDogToHunter();
 	QString data = mDiagramScene->convertSceneToStr();
 	QTextStream outstream(&f);
 	outstream << data;

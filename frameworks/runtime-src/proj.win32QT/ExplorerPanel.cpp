@@ -116,12 +116,21 @@ void ExplorerPanel::showProjectPropertyTree()
 	mPropertySetters.insert(std::make_pair(item0, func));
 }
 
+//----------------------------------------------
+bool ExplorerPanel::isVisibleProperty(const std::string& name)
+{
+	return name != "dog_id";
+}
+
 //-----------------------------------------------
 void ExplorerPanel::showItemProperty(DiagramItem* item)
 {
 	mPropertySetters.clear();
 	const DiagramItem::VariantMap_t& properties = item->getProperties();
 	for (DiagramItem::VariantMap_t::const_iterator citer = properties.begin(); citer != properties.end(); ++citer){
+		if (!isVisibleProperty((*citer).first))
+			continue;
+
 		if ((*citer).second.type() == QVariant::Bool){
 			QtProperty *item0 = mBoolManager->addProperty(QString::fromStdString((*citer).first));
 			mBoolManager->setValue(item0, (*citer).second.toBool());
@@ -134,6 +143,15 @@ void ExplorerPanel::showItemProperty(DiagramItem* item)
 		else if ((*citer).second.type() == QVariant::Int){
 			QtProperty *item0 = mIntManager->addProperty(QString::fromStdString((*citer).first));
 			mIntManager->setValue(item0, (*citer).second.toInt());
+
+			mPropertyBrowser->addProperty(item0);
+
+			PropertySetFunc_t func = std::bind(&DiagramItem::setProperty, item, (*citer).first, std::placeholders::_1);
+			mPropertySetters.insert(std::make_pair(item0, func));
+		}
+		else if ((*citer).second.type() == QVariant::String){
+			QtProperty *item0 = mStringManager->addProperty(QString::fromStdString((*citer).first));
+			mStringManager->setValue(item0, (*citer).second.toString());
 
 			mPropertyBrowser->addProperty(item0);
 

@@ -13,6 +13,8 @@ class DiagramScene : public QGraphicsScene
 	Q_OBJECT
 
 public:
+	typedef std::vector<DiagramItem*> DiagramItemVec_t;
+
 	explicit DiagramScene(QObject *parent = 0);
 	void reset(const QSize& size);
 	void setTypeItem(DiagramItem::eTypeItem typeItem);
@@ -20,6 +22,7 @@ public:
 	QString convertSceneToStr() const;
 	QString convertScenePropToStr() const;
 	QString convertObjectsPropToStr() const;
+	void autoSetDogToHunter();
 
 	void loadFromStr(const QString& str);
 	void loadFromFile(const QString& file);
@@ -44,13 +47,13 @@ protected:
 	void selectItem(const QPoint& cellPoint);
 	void selectItem(DiagramItem *movedItem);
 	bool checkUniqueItemExists(const QPoint& cellPoint);
+	QString convertToId(const QPoint& point, DiagramItem::eTypeItem type) const;
 
 	DiagramItem* createItemImpl(const QPoint& cellPoint, const QString& iconName, DiagramItem::eTypeItem typeItem);
 
 	static QPoint convertToCellPosition(const QPointF& mousePos);
 	static QPointF convertCellToScenePosition(const QPoint& cellPos);
 private:
-	typedef std::vector<DiagramItem*> DiagramItemVec_t;
 
 	DiagramItemVec_t			mItems;
 	QSize						mSize;

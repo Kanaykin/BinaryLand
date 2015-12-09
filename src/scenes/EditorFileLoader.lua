@@ -9,6 +9,7 @@ EditorFileLoader.FOX_GIRL_ID = 5;
 EditorFileLoader.FOX_ID = 6;
 EditorFileLoader.COIN_ID = 7;
 EditorFileLoader.FOXY_ID = 8;
+EditorFileLoader.TIME_BONUS_ID = 11;
 
 EditorFileLoader.MAX_WIDTH = 15;
 
@@ -39,6 +40,20 @@ function EditorFileLoader:createLoveCage(pos, cellSize, fieldNode)
     trigger2:setTag(FactoryObject.FINISH_TAG);
     fieldNode:addChild(trigger2);
 
+    return node;
+end
+
+--------------------------------
+function EditorFileLoader:createTimeBonus(pos, cellSize)
+	info_log("EditorFileLoader:createTimeBonus ");
+
+    local node = CCSprite:create("Time.png");
+
+    --pos.y = pos.y + cellSize / 2.0;
+
+    node:setAnchorPoint(cc.p(0.5, -0.3));
+    node:setPosition(pos);
+    node:setTag(FactoryObject.BONUS_TIME_TAG);
     return node;
 end
 
@@ -140,7 +155,8 @@ EditorFileLoader.CreateFunctions = {
     [EditorFileLoader.DOG_ID] = EditorFileLoader.createDog,
     [EditorFileLoader.CAGE_ID] = EditorFileLoader.createCage,
     [EditorFileLoader.COIN_ID] = EditorFileLoader.createCoin,
-    [EditorFileLoader.FOXY_ID] = EditorFileLoader.createLoveCage
+    [EditorFileLoader.FOXY_ID] = EditorFileLoader.createLoveCage,
+	[EditorFileLoader.TIME_BONUS_ID] = EditorFileLoader.createTimeBonus
 };
 
 --------------------------------

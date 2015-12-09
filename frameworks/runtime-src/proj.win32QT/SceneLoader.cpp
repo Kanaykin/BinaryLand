@@ -144,6 +144,10 @@ bool SceneLoader::PropertyContainer::getVariantContainer(std::map<std::string, Q
 			const bool val = lua_toboolean(mState, -1);
 			result[key] = QVariant(val);
 		}
+		else if (lua_isstring(mState, -1)){
+			const std::string val = lua_tostring(mState, -1);
+			result[key] = QVariant(QString::fromStdString(val));
+		}
 		lua_pop(mState, 1);
 	}
 

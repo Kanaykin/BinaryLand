@@ -17,7 +17,8 @@ public:
 		COIN_ITEM,
 		FOXY_ITEM,
 		DELETE_ITEM,
-		ARROW_ITEM
+		ARROW_ITEM,
+		TIME_BONUS_ITEM
 	};
 	struct ItemData {
 		std::string mIconName;
@@ -34,6 +35,7 @@ public:
 
 	const VariantMap_t& getProperties() const { return mProperties; }
 	void setProperty(const std::string& name, const QVariant& variant);
+	void removeProperty(const std::string& name);
 	QPoint getPoint() const { return mPoint; }
 private:
 	eTypeItem		mItemType;
