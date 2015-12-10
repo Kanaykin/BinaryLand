@@ -14,7 +14,7 @@ ItemsDataMap_t fillItemsData() {
 	result[DiagramItem::FOXY_ITEM] = { ":images/save_baby.png", "Baby", 103 };
 	result[DiagramItem::DELETE_ITEM] = { ":images/delete.png", "", 0 };
 	result[DiagramItem::ARROW_ITEM] = { ":images/arrow.png", "", 0 };
-	result[DiagramItem::TIME_BONUS_ITEM] = { ":images/Time.png", "Time", 110 };
+	result[DiagramItem::TIME_BONUS_ITEM] = { ":images/Time.png", "Time", 111 };
 
 	return result;
 };
