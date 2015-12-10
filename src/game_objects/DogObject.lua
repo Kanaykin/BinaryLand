@@ -150,6 +150,12 @@ function DogObject:getSafePlayerPoints()
             table.insert(safePoints, Vector.new(point.x, point.y));
         end
     end
+    -- not found in safe distance
+    if #safePoints == 0 then
+        for i, point in ipairs(freePoints) do
+            table.insert(safePoints, Vector.new(point.x, point.y));
+        end
+    end
 
     return safePoints[math.random(#safePoints)];
 end
