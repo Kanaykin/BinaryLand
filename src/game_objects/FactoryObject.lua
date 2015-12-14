@@ -29,6 +29,7 @@ FactoryObject.FOX2_TAG = 109;
 FactoryObject.BONUS_TAG = 110;
 FactoryObject.BONUS_TIME_TAG = 111;
 FactoryObject.BONUS_ROOM_DOOR_TAG = 112;
+FactoryObject.BONUS_CHEST_TAG = 113;
 
 -- tutorial
 FactoryObject.TUTORIAL_TRIGGER_1 = 200;
@@ -149,6 +150,15 @@ function FactoryObject:createBonusTimerObject(field, node)
 end
 
 ------------------------------
+function FactoryObject:createBonusChestObject(field, node)
+	info_log("FactoryObject:createBonusChestObject ", field, ", ", node);
+    local bonus = BonusObject:create();
+    bonus:init(field, node, nil, BonusObject.CHEST_COINS_TYPE);
+    field:addObject(bonus);
+    return bonus;
+end
+
+------------------------------
 function FactoryObject:createBonusRoomDoor(field, node)
     info_log("FactoryObject:createBonusRoomDoor ", field, ", ", node);
     local bonusRoom = BonusRoomDoor:create();
@@ -182,6 +192,7 @@ FactoryObject.CreateFunctions = {
 	[FactoryObject.LOVE_CAGE_TAG] = FactoryObject.createFinishObject,
 	[FactoryObject.BONUS_TAG] = FactoryObject.createBonusObject,
 	[FactoryObject.BONUS_TIME_TAG] = FactoryObject.createBonusTimerObject,
+	[FactoryObject.BONUS_CHEST_TAG] = FactoryObject.createBonusChestObject,
 	[FactoryObject.TUTORIAL_TRIGGER_1] = FactoryObject.createTrigger,
 	[FactoryObject.TUTORIAL_TRIGGER_2] = FactoryObject.createTrigger,
 	[FactoryObject.TUTORIAL_TRIGGER_3] = FactoryObject.createTrigger,

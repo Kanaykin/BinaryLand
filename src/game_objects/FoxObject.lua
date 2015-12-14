@@ -428,7 +428,9 @@ function FoxObject:onMoveFinished( )
         debug_log("FoxObject:onMoveFinished cageTag ", cageId);
         local cage = self.mField:getObjectById(cageId);
         debug_log("FoxObject:onMoveFinished cage ", cage);
-        cage:setVisible(false);
+        if cage then
+            cage:setVisible(false);
+        end
     end
 end
 
