@@ -14,8 +14,12 @@ BonusObject.mType = nil;
 
 BonusObject.COINS_TYPE = 1;
 BonusObject.TIME_TYPE = 2;
-BonusObject.CHEST_COINS_TYPE = 3;
-BonusObject.CHEST_TIME_TYPE = 4;
+BonusObject.CHEST_TYPE = 3;
+
+BonusObject.CHEST_COINS_TYPE = 11;
+BonusObject.CHEST_TIME_TYPE = 12;
+
+BonusObject.mChestType = BonusObject.CHEST_COINS_TYPE;
 
 --------------------------------
 function BonusObject:initAnimation()
@@ -28,7 +32,8 @@ function BonusObject:initAnimation()
         animation:init("CoinsBonus.plist", self.mNode, self.mNode:getAnchorPoint());
     elseif self.mType == BonusObject.TIME_TYPE then
         animation:init("TimeBonus.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.1);
-    elseif self.mType == BonusObject.CHEST_COINS_TYPE then
+    elseif self.mType == BonusObject.CHEST_TYPE then
+        debug_log("BonusObject:initAnimation id ", self:getId());
         animation:init("ChestBonus.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.2);
         --self:createChestOpenAnimation();
     end
@@ -94,6 +99,11 @@ function BonusObject:setCustomProperties(properties)
         self.mType = properties.Type;
 		self:initAnimation();
     end
+
+    if properties.chestBonusType then
+        info_log("BonusObject:setCustomProperties chestBonusType ", properties.chestBonusType);
+        self.mChestType = properties.chestBonusType;
+    end
 end
 
 --------------------------------
@@ -149,9 +159,12 @@ end
 --------------------------------
 function BonusObject:createBonusSprite()
     --self.mBonusShowed = true;
-    local texture = cc.Director:getInstance():getTextureCache():addImage("Coin.png");
+    debug_log("BonusObject:createBonusSprite ", self.mChestType)
+    local texture = cc.Director:getInstance():getTextureCache():addImage(
+        self.mChestType == BonusObject.CHEST_COINS_TYPE and "Coin.png" or "TimeEmpty.png");
     local sprite = cc.Sprite:createWithTexture(texture);
-    sprite:setAnchorPoint({ x = -0.25, y = -0.5});
+    sprite:setAnchorPoint(self.mChestType == BonusObject.CHEST_COINS_TYPE and { x = -0.25, y = -0.5}
+        or { x = -0.5, y = -0.3});
     --sprite:setOpacity(100);
     sprite:setVisible(false);
     self.mNode:addChild(sprite);
@@ -214,12 +227,13 @@ function BonusObject:onEnter(player)
     info_log("BonusObject:onEnter score ", self.mScore);
 
     self.mListOpenAnimation = List.new();
-    if self.mType == BonusObject.COINS_TYPE then
+    if self.mType == BonusObject.COINS_TYPE or self.mChestType == BonusObject.CHEST_COINS_TYPE then
         self.mField:addScore(self.mScore);
-    elseif self.mType == BonusObject.TIME_TYPE then
+    elseif self.mType == BonusObject.TIME_TYPE or self.mChestType == BonusObject.CHEST_TIME_TYPE  then
         self.mField:addTime(self.mScore);
-    elseif self.mType == BonusObject.CHEST_COINS_TYPE then
-        self.mField:addScore(self.mScore);
+    end
+
+    if self.mType == BonusObject.CHEST_TYPE then
         self:createOpenAnimation();
     end
 
