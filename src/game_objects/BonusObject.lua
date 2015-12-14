@@ -224,12 +224,12 @@ end
 ---------------------------------
 function BonusObject:onEnter(player)
     BonusObject:superClass().onEnter(self, player);
-    info_log("BonusObject:onEnter score ", self.mScore);
+    info_log("BonusObject:onEnter type ", self.mType);
 
     self.mListOpenAnimation = List.new();
-    if self.mType == BonusObject.COINS_TYPE or self.mChestType == BonusObject.CHEST_COINS_TYPE then
+    if self.mType == BonusObject.COINS_TYPE or ( self.mType == BonusObject.CHEST_TYPE and self.mChestType == BonusObject.CHEST_COINS_TYPE) then
         self.mField:addScore(self.mScore);
-    elseif self.mType == BonusObject.TIME_TYPE or self.mChestType == BonusObject.CHEST_TIME_TYPE  then
+    elseif self.mType == BonusObject.TIME_TYPE or ( self.mType == BonusObject.CHEST_TYPE and self.mChestType == BonusObject.CHEST_TIME_TYPE)  then
         self.mField:addTime(self.mScore);
     end
 
