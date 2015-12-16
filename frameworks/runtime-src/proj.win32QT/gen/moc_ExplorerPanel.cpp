@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_ExplorerPanel_t {
-    QByteArrayData data[20];
-    char stringdata0[226];
+    QByteArrayData data[21];
+    char stringdata0[245];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -48,7 +48,8 @@ QT_MOC_LITERAL(15, 168, 17), // "onIntValueChanged"
 QT_MOC_LITERAL(16, 186, 11), // "QtProperty*"
 QT_MOC_LITERAL(17, 198, 4), // "prop"
 QT_MOC_LITERAL(18, 203, 3), // "val"
-QT_MOC_LITERAL(19, 207, 18) // "onBoolValueChanged"
+QT_MOC_LITERAL(19, 207, 18), // "onEnumValueChanged"
+QT_MOC_LITERAL(20, 226, 18) // "onBoolValueChanged"
 
     },
     "ExplorerPanel\0sigSelectItem\0\0DiagramItem*\0"
@@ -56,7 +57,8 @@ QT_MOC_LITERAL(19, 207, 18) // "onBoolValueChanged"
     "onCreateItem\0movedItem\0onDeleteItem\0"
     "onItemPressed\0QTreeWidgetItem*\0column\0"
     "onSelectItem\0onIntValueChanged\0"
-    "QtProperty*\0prop\0val\0onBoolValueChanged"
+    "QtProperty*\0prop\0val\0onEnumValueChanged\0"
+    "onBoolValueChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -66,7 +68,7 @@ static const uint qt_meta_data_ExplorerPanel[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -74,16 +76,17 @@ static const uint qt_meta_data_ExplorerPanel[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   54,    2, 0x06 /* Public */,
+       1,    1,   59,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    1,   57,    2, 0x08 /* Private */,
-       8,    1,   60,    2, 0x08 /* Private */,
-      10,    1,   63,    2, 0x08 /* Private */,
-      11,    2,   66,    2, 0x08 /* Private */,
-      14,    1,   71,    2, 0x08 /* Private */,
-      15,    2,   74,    2, 0x08 /* Private */,
-      19,    2,   79,    2, 0x08 /* Private */,
+       5,    1,   62,    2, 0x08 /* Private */,
+       8,    1,   65,    2, 0x08 /* Private */,
+      10,    1,   68,    2, 0x08 /* Private */,
+      11,    2,   71,    2, 0x08 /* Private */,
+      14,    1,   76,    2, 0x08 /* Private */,
+      15,    2,   79,    2, 0x08 /* Private */,
+      19,    2,   84,    2, 0x08 /* Private */,
+      20,    2,   89,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -94,6 +97,7 @@ static const uint qt_meta_data_ExplorerPanel[] = {
     QMetaType::Void, 0x80000000 | 3,    9,
     QMetaType::Void, 0x80000000 | 12, QMetaType::Int,    4,   13,
     QMetaType::Void, 0x80000000 | 3,    9,
+    QMetaType::Void, 0x80000000 | 16, QMetaType::Int,   17,   18,
     QMetaType::Void, 0x80000000 | 16, QMetaType::Int,   17,   18,
     QMetaType::Void, 0x80000000 | 16, QMetaType::Bool,   17,   18,
 
@@ -113,7 +117,8 @@ void ExplorerPanel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 4: _t->onItemPressed((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 5: _t->onSelectItem((*reinterpret_cast< DiagramItem*(*)>(_a[1]))); break;
         case 6: _t->onIntValueChanged((*reinterpret_cast< QtProperty*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 7: _t->onBoolValueChanged((*reinterpret_cast< QtProperty*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 7: _t->onEnumValueChanged((*reinterpret_cast< QtProperty*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 8: _t->onBoolValueChanged((*reinterpret_cast< QtProperty*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -153,13 +158,13 @@ int ExplorerPanel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }

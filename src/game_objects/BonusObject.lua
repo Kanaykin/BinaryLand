@@ -16,8 +16,8 @@ BonusObject.COINS_TYPE = 1;
 BonusObject.TIME_TYPE = 2;
 BonusObject.CHEST_TYPE = 3;
 
-BonusObject.CHEST_COINS_TYPE = 11;
-BonusObject.CHEST_TIME_TYPE = 12;
+BonusObject.CHEST_COINS_TYPE = 0;
+BonusObject.CHEST_TIME_TYPE = 1;
 
 BonusObject.mChestType = BonusObject.CHEST_COINS_TYPE;
 
@@ -100,9 +100,9 @@ function BonusObject:setCustomProperties(properties)
 		self:initAnimation();
     end
 
-    if properties.chestBonusType then
-        info_log("BonusObject:setCustomProperties chestBonusType ", properties.chestBonusType);
-        self.mChestType = properties.chestBonusType;
+    if properties.ChestType then
+        info_log("BonusObject:setCustomProperties chestBonusType ", properties.ChestType);
+        self.mChestType = properties.ChestType;
     end
 end
 

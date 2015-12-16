@@ -15,6 +15,7 @@ ItemsDataMap_t fillItemsData() {
 	result[DiagramItem::DELETE_ITEM] = { ":images/delete.png", "", 0 };
 	result[DiagramItem::ARROW_ITEM] = { ":images/arrow.png", "", 0 };
 	result[DiagramItem::TIME_BONUS_ITEM] = { ":images/Time.png", "Time", 111 };
+	result[DiagramItem::CHEST_BONUS_ITEN] = { ":images/Chest.png", "Chest", 113 };
 
 	return result;
 };
@@ -25,18 +26,27 @@ DiagramItem::DiagramItem(eTypeItem itemType, const QPoint& cellPoint) :
 mItemType(itemType),
 mPoint(cellPoint)
 {
-	if (itemType == DiagramItem::COIN_ITEM){
-		mProperties.insert(std::make_pair("Count", QVariant(10)));
-	}
-	else if (itemType == DiagramItem::HUNTER_ITEM) {
-		mProperties.insert(std::make_pair("CanAttack", QVariant(false)));
-	}
-	else if (itemType == DiagramItem::DOG_ITEM) {
-		mProperties.insert(std::make_pair("CanSearch", QVariant(false)));
-	}
-	else if (itemType == DiagramItem::TIME_BONUS_ITEM) {
-		mProperties.insert(std::make_pair("Count", QVariant(10)));
-	}
+	switch (itemType){
+	case DiagramItem::COIN_ITEM: {
+			mProperties.insert(std::make_pair("Count", QVariant(10)));
+	}break;
+	case DiagramItem::HUNTER_ITEM: {
+			mProperties.insert(std::make_pair("CanAttack", QVariant(false)));
+	}break;
+	case DiagramItem::DOG_ITEM: {
+			mProperties.insert(std::make_pair("CanSearch", QVariant(false)));
+	}break;
+	case DiagramItem::TIME_BONUS_ITEM: {
+			mProperties.insert(std::make_pair("Count", QVariant(10)));
+	}break;
+	case DiagramItem::CHEST_BONUS_ITEN: {
+			mProperties.insert(std::make_pair("Count", QVariant(10)));
+			mProperty.reset(new CustomProperty);
+			mProperty->mIntVal = 0;
+			mProperties.insert(std::make_pair("ChestType", QVariant(QVariant::UserType, mProperty.get())));
+	}break;
+	default: break;
+	};
 }
 
 //-----------------------------------------------------------
@@ -66,7 +76,14 @@ std::string DiagramItem::getNameByType(eTypeItem itemType)
 //-----------------------------------------------------------
 void DiagramItem::setProperty(const std::string& name, const QVariant& variant)
 {
-	mProperties[name] = variant;
+	if (name == "ChestType" && variant.type() != QVariant::UserType) {
+		mProperty.reset(new CustomProperty);
+		mProperty->mIntVal = variant.toInt();
+		mProperties[name] = QVariant(QVariant::UserType, mProperty.get());
+	}
+	else {
+		mProperties[name] = variant;
+	}
 }
 
 //-----------------------------------------------------------

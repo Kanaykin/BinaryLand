@@ -38,6 +38,7 @@ public:
     QPushButton *foxGirlButton;
     QPushButton *arrowButton;
     QPushButton *timeButton;
+    QPushButton *chestButton;
 
     void setupUi(QWidget *ButtonsForm)
     {
@@ -148,8 +149,18 @@ public:
         timeButton->setMinimumSize(QSize(90, 90));
         timeButton->setMaximumSize(QSize(90, 90));
         timeButton->setIconSize(QSize(80, 80));
+        timeButton->setCheckable(true);
 
         gridLayout_3->addWidget(timeButton, 0, 2, 1, 1);
+
+        chestButton = new QPushButton(frame);
+        chestButton->setObjectName(QStringLiteral("chestButton"));
+        chestButton->setMinimumSize(QSize(90, 90));
+        chestButton->setMaximumSize(QSize(90, 90));
+        chestButton->setIconSize(QSize(80, 80));
+        chestButton->setCheckable(true);
+
+        gridLayout_3->addWidget(chestButton, 2, 2, 1, 1);
 
 
         gridLayout->addWidget(frame, 0, 1, 1, 1);
@@ -174,6 +185,7 @@ public:
         foxGirlButton->setText(QString());
         arrowButton->setText(QString());
         timeButton->setText(QString());
+        chestButton->setText(QString());
     } // retranslateUi
 
 };

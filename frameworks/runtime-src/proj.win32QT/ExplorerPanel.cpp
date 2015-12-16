@@ -63,6 +63,7 @@ mGroupManager(0)
 
 	QObject::connect(mIntManager, SIGNAL(valueChanged(QtProperty*, int)), this, SLOT(onIntValueChanged(QtProperty*, int)));
 	QObject::connect(mBoolManager, SIGNAL(valueChanged(QtProperty*, bool)), this, SLOT(onBoolValueChanged(QtProperty*, bool)));
+	QObject::connect(mEnumManager, SIGNAL(valueChanged(QtProperty*, int)), this, SLOT(onEnumValueChanged(QtProperty*, int)));
 }
 
 //-----------------------------------------------
@@ -96,6 +97,15 @@ void ExplorerPanel::onIntValueChanged(QtProperty* prop, int val)
 	ExplorerPanel::PropertySetFunc_t func = getSetterByProperty(prop);
 	if (func)
 		func(QVariant(val));
+}
+
+//-----------------------------------------------
+void ExplorerPanel::onEnumValueChanged(QtProperty* prop, int val)
+{
+
+	ExplorerPanel::PropertySetFunc_t func = getSetterByProperty(prop);
+	if (func)
+		func(QVariant(QVariant(val)));
 }
 
 //-----------------------------------------------
@@ -158,6 +168,19 @@ void ExplorerPanel::showItemProperty(DiagramItem* item)
 			PropertySetFunc_t func = std::bind(&DiagramItem::setProperty, item, (*citer).first, std::placeholders::_1);
 			mPropertySetters.insert(std::make_pair(item0, func));
 		}
+		else if ((*citer).second.type() == QVariant::UserType){
+			QtProperty *item0 = mEnumManager->addProperty(QString::fromStdString((*citer).first));
+			const DiagramItem::CustomProperty* prop = reinterpret_cast<const DiagramItem::CustomProperty*>((*citer).second.data());
+			QStringList list;
+			list.push_back("Coin");
+			list.push_back("Time");
+			mEnumManager->setEnumNames(item0, list);
+			mPropertyBrowser->addProperty(item0);
+			mEnumManager->setValue(item0, prop->mIntVal);
+
+			PropertySetFunc_t func = std::bind(&DiagramItem::setProperty, item, (*citer).first, std::placeholders::_1);
+			mPropertySetters.insert(std::make_pair(item0, func));
+		}
 	}
 }
 
@@ -185,6 +208,7 @@ void ExplorerPanel::onCreateScene(DiagramScene* scene)
 	mScene = scene;
 	mPropertyBrowser->clear();
 	mPropertySetters.clear();
+	mItems.clear();
 }
 
 //-----------------------------------------------

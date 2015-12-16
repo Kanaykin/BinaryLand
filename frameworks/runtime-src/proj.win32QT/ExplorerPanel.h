@@ -35,6 +35,7 @@ private slots:
 	void onItemPressed(QTreeWidgetItem* item, int column);
 	void onSelectItem(DiagramItem *movedItem);
 	void onIntValueChanged(QtProperty* prop, int val);
+	void onEnumValueChanged(QtProperty* prop, int val);
 	void onBoolValueChanged(QtProperty* prop, bool val);
 signals:
 	void sigSelectItem(DiagramItem* item);

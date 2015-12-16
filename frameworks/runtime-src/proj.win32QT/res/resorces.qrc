@@ -13,5 +13,6 @@
          <file>images/arrow.png</file>
          <file>images/border.png</file>
          <file>images/Time.png</file>
+         <file>images/Chest.png</file>
      </qresource>
      </RCC>

@@ -23,7 +23,8 @@ DiagramScene::DiagramScene(QObject *parent)
 	: QGraphicsScene(parent),
 	mTypeItem(DiagramItem::BUSH_ITEM),
 	mSelector(0),
-	mTime(120)
+	mTime(120),
+	mSize(0,0)
 {
 }
 
@@ -226,15 +227,22 @@ QString convertMapPropToStr(const DiagramItem::VariantMap_t& properties)
 
 		result += QString::fromStdString((*ciProp).first) + QString("=");
 		QVariant val = (*ciProp).second;
-		if (val.type() == QVariant::Bool) {
-			const bool bVal = val.toBool();
-			result += bVal ? QString("true") : QString("false");
-		}
-		else if (val.type() == QVariant::Int){
-			result += QString::number(val.toInt());
-		}
-		else if (val.type() == QVariant::String){
-			result += QString("'") + val.toString() + QString("'");
+		switch (val.type()) {
+			case QVariant::Bool: {
+				const bool bVal = val.toBool();
+				result += bVal ? QString("true") : QString("false");
+			}break;
+			case QVariant::Int :{
+				result += QString::number(val.toInt());
+			}break;
+			case QVariant::String :{
+				result += QString("'") + val.toString() + QString("'");
+			}break;
+			case QVariant::UserType:{
+				const DiagramItem::CustomProperty* prop = reinterpret_cast<const DiagramItem::CustomProperty*>(val.data());
+				result += QString::number(prop->mIntVal);
+			}break;
+			default: break;
 		}
 		//result += "\n";
 	}

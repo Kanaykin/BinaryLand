@@ -1,6 +1,7 @@
 #ifndef DIAGRAMITEM_H
 #define DIAGRAMITEM_H
 
+#include <memory>
 #include <QtWidgets/QGraphicsPixmapItem >
 
 class DiagramItem : public QGraphicsPixmapItem
@@ -18,13 +19,19 @@ public:
 		FOXY_ITEM,
 		DELETE_ITEM,
 		ARROW_ITEM,
-		TIME_BONUS_ITEM
+		TIME_BONUS_ITEM,
+		CHEST_BONUS_ITEN
 	};
 	struct ItemData {
 		std::string mIconName;
 		std::string	mName;
 		int mId;
 	};
+	struct CustomProperty
+	{
+		int mIntVal;
+	};
+	typedef std::shared_ptr<CustomProperty> CustomPropertyPtr;
 	explicit DiagramItem(eTypeItem itemType, const QPoint& cellPoint);
 	~DiagramItem();
 
@@ -38,9 +45,10 @@ public:
 	void removeProperty(const std::string& name);
 	QPoint getPoint() const { return mPoint; }
 private:
-	eTypeItem		mItemType;
-	VariantMap_t	mProperties;
-	QPoint			mPoint;
+	eTypeItem			mItemType;
+	VariantMap_t		mProperties;
+	QPoint				mPoint;
+	CustomPropertyPtr	mProperty;
 };
 
 #endif
