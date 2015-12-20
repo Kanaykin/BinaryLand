@@ -6,328 +6,225 @@
         <dict>
             <key>Time_bonus_0000_Layer-Comp-1.png</key>
             <dict>
-                <key>height</key>
-                <integer>118</integer>
-                <key>offsetX</key>
-                <real>-2</real>
-                <key>offsetY</key>
-                <real>-2</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>42</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>600</integer>
+                <key>frame</key>
+                <string>{{248,2},{42,76}}</string>
+                <key>offset</key>
+                <string>{-2,-23}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{8,48},{42,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
             <key>Time_bonus_0001_Layer-Comp-2.png</key>
             <dict>
-                <key>height</key>
-                <integer>116</integer>
-                <key>offsetX</key>
-                <real>2</real>
-                <key>offsetY</key>
-                <real>-3</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>50</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>2</integer>
+                <key>frame</key>
+                <string>{{2,2},{50,76}}</string>
+                <key>offset</key>
+                <string>{2,-23}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{8,48},{50,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
             <key>Time_bonus_0002_Layer-Comp-3.png</key>
             <dict>
-                <key>height</key>
-                <integer>118</integer>
-                <key>offsetX</key>
-                <real>-1</real>
-                <key>offsetY</key>
-                <real>-2</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>40</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>840</integer>
+                <key>frame</key>
+                <string>{{336,2},{40,76}}</string>
+                <key>offset</key>
+                <string>{-1,-23}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{10,48},{40,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
             <key>Time_bonus_0003_Layer-Comp-4.png</key>
             <dict>
-                <key>height</key>
-                <integer>120</integer>
-                <key>offsetX</key>
-                <real>4</real>
-                <key>offsetY</key>
-                <real>-1</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>46</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>240</integer>
+                <key>frame</key>
+                <string>{{104,2},{46,76}}</string>
+                <key>offset</key>
+                <string>{4,-23}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{12,48},{46,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
             <key>Time_bonus_0004_Layer-Comp-5.png</key>
             <dict>
-                <key>height</key>
-                <integer>118</integer>
-                <key>offsetX</key>
-                <real>2</real>
-                <key>offsetY</key>
-                <real>-2</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>46</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>362</integer>
+                <key>frame</key>
+                <string>{{152,2},{46,76}}</string>
+                <key>offset</key>
+                <string>{2,-23}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{10,48},{46,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
             <key>Time_bonus_0005_Layer-Comp-6.png</key>
             <dict>
-                <key>height</key>
-                <integer>116</integer>
-                <key>offsetX</key>
-                <real>4</real>
-                <key>offsetY</key>
-                <real>-3</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>46</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>482</integer>
+                <key>frame</key>
+                <string>{{200,2},{46,76}}</string>
+                <key>offset</key>
+                <string>{4,-23}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{12,48},{46,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
             <key>Time_bonus_0006_Layer-Comp-7.png</key>
             <dict>
-                <key>height</key>
-                <integer>118</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>-2</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>38</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>1566</integer>
+                <key>frame</key>
+                <string>{{2,80},{38,76}}</string>
+                <key>offset</key>
+                <string>{0,-23}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{12,48},{38,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
             <key>Time_bonus_0007_Layer-Comp-8.png</key>
             <dict>
-                <key>height</key>
-                <integer>120</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>-1</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>38</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>1200</integer>
+                <key>frame</key>
+                <string>{{80,80},{38,76}}</string>
+                <key>offset</key>
+                <string>{0,-23}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{12,48},{38,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
             <key>Time_bonus_0008_Layer-Comp-9.png</key>
             <dict>
-                <key>height</key>
-                <integer>118</integer>
-                <key>offsetX</key>
-                <real>-1</real>
-                <key>offsetY</key>
-                <real>-2</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>40</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>960</integer>
+                <key>frame</key>
+                <string>{{378,2},{40,76}}</string>
+                <key>offset</key>
+                <string>{-1,-23}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{10,48},{40,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
             <key>Time_bonus_0009_Layer-Comp-10.png</key>
             <dict>
-                <key>height</key>
-                <integer>116</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>-3</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>38</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>1686</integer>
+                <key>frame</key>
+                <string>{{158,80},{38,76}}</string>
+                <key>offset</key>
+                <string>{0,-23}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{12,48},{38,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
             <key>Time_bonus_0010_Layer-Comp-11.png</key>
             <dict>
-                <key>height</key>
-                <integer>118</integer>
-                <key>offsetX</key>
-                <real>1</real>
-                <key>offsetY</key>
-                <real>-2</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>40</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>1080</integer>
+                <key>frame</key>
+                <string>{{420,2},{40,76}}</string>
+                <key>offset</key>
+                <string>{1,-23}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{12,48},{40,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
             <key>Time_bonus_0011_Layer-Comp-12.png</key>
             <dict>
-                <key>height</key>
-                <integer>116</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>-3</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>38</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>1804</integer>
+                <key>frame</key>
+                <string>{{236,80},{38,76}}</string>
+                <key>offset</key>
+                <string>{0,-23}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{12,48},{38,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
             <key>Time_bonus_0012_Layer-Comp-13.png</key>
             <dict>
-                <key>height</key>
-                <integer>118</integer>
-                <key>offsetX</key>
-                <real>-5</real>
-                <key>offsetY</key>
-                <real>-2</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>48</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>120</integer>
+                <key>frame</key>
+                <string>{{54,2},{48,76}}</string>
+                <key>offset</key>
+                <string>{-5,-23}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{2,48},{48,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
             <key>Time_bonus_0013_Layer-Comp-14.png</key>
             <dict>
-                <key>height</key>
-                <integer>118</integer>
-                <key>offsetX</key>
-                <real>-2</real>
-                <key>offsetY</key>
-                <real>-2</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>42</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>720</integer>
+                <key>frame</key>
+                <string>{{292,2},{42,76}}</string>
+                <key>offset</key>
+                <string>{-2,-23}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{8,48},{42,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
             <key>Time_bonus_0014_Layer-Comp-15.png</key>
             <dict>
-                <key>height</key>
-                <integer>120</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>-1</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>38</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>1322</integer>
+                <key>frame</key>
+                <string>{{314,80},{38,76}}</string>
+                <key>offset</key>
+                <string>{0,-23}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{12,48},{38,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
             <key>Time_bonus_0015_Layer-Comp-16.png</key>
             <dict>
-                <key>height</key>
-                <integer>120</integer>
-                <key>offsetX</key>
-                <real>0</real>
-                <key>offsetY</key>
-                <real>-1</real>
-                <key>originalHeight</key>
-                <integer>126</integer>
-                <key>originalWidth</key>
-                <integer>62</integer>
-                <key>width</key>
-                <integer>38</integer>
-                <key>x</key>
-                <integer>2</integer>
-                <key>y</key>
-                <integer>1444</integer>
+                <key>frame</key>
+                <string>{{392,80},{38,76}}</string>
+                <key>offset</key>
+                <string>{0,-23}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{12,48},{38,76}}</string>
+                <key>sourceSize</key>
+                <string>{62,126}</string>
             </dict>
         </dict>
         <key>metadata</key>
         <dict>
             <key>format</key>
-            <integer>0</integer>
+            <integer>2</integer>
             <key>realTextureFileName</key>
             <string>TimeBonus.png</string>
             <key>size</key>
-            <string>{54,1922}</string>
+            <string>{470,120}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:2d01de9019aebb62be380f811bb02c09:01fcb67764377ee7b2a07a3f1354c7b9:fec7fe6451e3696f33c7b986383b1b9c$</string>
+            <string>$TexturePacker:SmartUpdate:74540ac3c246380337836830012614ea:8cc53a00207adc9e6cfd3b6080ade9fe:fec7fe6451e3696f33c7b986383b1b9c$</string>
             <key>textureFileName</key>
             <string>TimeBonus.png</string>
-        </dict>
-        <key>texture</key>
-        <dict>
-            <key>height</key>
-            <integer>1922</integer>
-            <key>width</key>
-            <integer>54</integer>
         </dict>
     </dict>
 </plist>

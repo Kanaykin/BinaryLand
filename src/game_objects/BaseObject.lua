@@ -17,6 +17,11 @@ function BaseObject:getId()
     return self.mId;
 end
 
+--------------------------------
+function BaseObject:getField()
+    return self.mField;
+end
+
 ---------------------------------
 function BaseObject:isMob()
     return false;

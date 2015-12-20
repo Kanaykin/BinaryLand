@@ -11,10 +11,16 @@ BonusObject.mListOpenAnimation = nil;
 
 BonusObject.mScore = 10;
 BonusObject.mType = nil;
+BonusObject.mTimeLabel = nil;
 
 BonusObject.COINS_TYPE = 1;
 BonusObject.TIME_TYPE = 2;
 BonusObject.CHEST_TYPE = 3;
+
+BonusObject.MAIN_TIME_NODE_TAG = 1;
+BonusObject.ANIM_TIME_NODE_TAG = 2;
+BonusObject.ANIM_LABEL_NODE_TAG = 3;
+BonusObject.BASE_NODE_TAG = 5;
 
 BonusObject.CHEST_COINS_TYPE = 0;
 BonusObject.CHEST_TIME_TYPE = 1;
@@ -22,16 +28,61 @@ BonusObject.CHEST_TIME_TYPE = 1;
 BonusObject.mChestType = BonusObject.CHEST_COINS_TYPE;
 
 --------------------------------
+function BonusObject:initTimeBonus(animation)
+    --animation:init("TimeBonus.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.1);
+    local ccpproxy = CCBProxy:create();
+    local reader = ccpproxy:createCCBReader();
+    local node = ccpproxy:readCCBFromFile("TimeBonus", reader, false);
+    self.mNode:addChild(node);
+    --self.mNode:setAnchorPoint(cc.p(0, 0));
+    node = node:getChildByTag(BonusObject.BASE_NODE_TAG);
+    --self.mNode:ignoreAnchorPointForPosition(true);
+
+    local mainNode = node:getChildByTag(BonusObject.MAIN_TIME_NODE_TAG);
+    debug_log("BonusObject:initAnimation mainNode ", mainNode);
+    if mainNode then
+        animation:init("TimeBonus.plist", mainNode, mainNode:getAnchorPoint(), nil, 0.1);
+        --self.mSize = mainNode:getBoundingBox();
+
+        local tmpBox = self:getBoundingBox();
+        debug_log("BonusObject:initAnimation tmpBox ", tmpBox.x, " ", tmpBox.y, " ", tmpBox.width, " ", tmpBox.height);
+    end
+    local animNode = node:getChildByTag(BonusObject.ANIM_TIME_NODE_TAG);
+    if animNode then
+        local animator = reader:getActionManager();
+
+        function callback()
+            debug_log("BonusObject:initAnimation finish ");
+            animator:runAnimationsForSequenceNamed("LoopAnimation");
+        end
+
+        local callFunc = CCCallFunc:create(callback);
+        animator:setCallFuncForLuaCallbackNamed(callFunc, "0:finish");
+        animator:runAnimationsForSequenceNamed("LoopAnimation");
+
+        local label = tolua.cast(animNode:getChildByTag(BonusObject.ANIM_LABEL_NODE_TAG), "cc.Label");
+        debug_log("BonusObject:initAnimation label ", label);
+
+        if label then
+            setDefaultFont(label, self:getField():getGame():getScale());
+            self.mTimeLabel = label;
+            self.mTimeLabel:setString(tostring(self.mScore));
+        end
+    end
+
+end
+
+--------------------------------
 function BonusObject:initAnimation()
     info_log("BonusObject:initAnimation");
 
-    info_log("Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
+    --info_log("Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
     local animation = PlistAnimation:create();
 
     if self.mType == BonusObject.COINS_TYPE then
         animation:init("CoinsBonus.plist", self.mNode, self.mNode:getAnchorPoint());
     elseif self.mType == BonusObject.TIME_TYPE then
-        animation:init("TimeBonus.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.1);
+        self:initTimeBonus(animation);
     elseif self.mType == BonusObject.CHEST_TYPE then
         debug_log("BonusObject:initAnimation id ", self:getId());
         animation:init("ChestBonus.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.2);
@@ -81,6 +132,9 @@ end
 --------------------------------
 function BonusObject:setScore(score)
     self.mScore = score;
+    if self.mTimeLabel then
+        self.mTimeLabel:setString(tostring(score));
+    end
 end
 
 ---------------------------------
@@ -91,7 +145,7 @@ function BonusObject:setCustomProperties(properties)
 
     if properties.Count then
         info_log("BonusObject:setCustomProperties Count ", properties.Count);
-        self.mScore = properties.Count;
+        self:setScore(properties.Count);
     end
 
 	if properties.Type then
