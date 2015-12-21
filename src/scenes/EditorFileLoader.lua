@@ -49,13 +49,19 @@ function EditorFileLoader:createTimeBonus(pos, cellSize)
 	info_log("EditorFileLoader:createTimeBonus ");
 
     local node = CCSprite:create("Time.png");
+    node:setAnchorPoint(cc.p(0, 0));
+    node:setTag(BonusObject.FAKE_NODE_TAG);
+
+    local mainNode = CCNode:create();
+    mainNode:addChild(node);
+    mainNode:setContentSize(node:getContentSize());
 
     --pos.y = pos.y + cellSize / 2.0;
 
-    node:setAnchorPoint(cc.p(0.5, 0));
-    node:setPosition(pos);
-    node:setTag(FactoryObject.BONUS_TIME_TAG);
-    return node;
+    mainNode:setAnchorPoint(cc.p(0.5, 0));
+    mainNode:setPosition(pos);
+    mainNode:setTag(FactoryObject.BONUS_TIME_TAG);
+    return mainNode;
 end
 
 --------------------------------

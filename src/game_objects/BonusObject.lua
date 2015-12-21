@@ -21,6 +21,7 @@ BonusObject.MAIN_TIME_NODE_TAG = 1;
 BonusObject.ANIM_TIME_NODE_TAG = 2;
 BonusObject.ANIM_LABEL_NODE_TAG = 3;
 BonusObject.BASE_NODE_TAG = 5;
+BonusObject.FAKE_NODE_TAG = 99;
 
 BonusObject.CHEST_COINS_TYPE = 0;
 BonusObject.CHEST_TIME_TYPE = 1;
@@ -35,6 +36,12 @@ function BonusObject:initTimeBonus(animation)
     local node = ccpproxy:readCCBFromFile("TimeBonus", reader, false);
     self.mNode:addChild(node);
     --self.mNode:setAnchorPoint(cc.p(0, 0));
+    local fakeNode = self.mNode:getChildByTag(BonusObject.FAKE_NODE_TAG);
+    debug_log("BonusObject:initTimeBonus fakeNode ", fakeNode);
+    if fakeNode then
+        fakeNode:setVisible(false);
+    end
+
     node = node:getChildByTag(BonusObject.BASE_NODE_TAG);
     --self.mNode:ignoreAnchorPointForPosition(true);
 
