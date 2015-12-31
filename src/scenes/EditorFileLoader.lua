@@ -11,6 +11,7 @@ EditorFileLoader.COIN_ID = 7;
 EditorFileLoader.FOXY_ID = 8;
 EditorFileLoader.TIME_BONUS_ID = 11;
 EditorFileLoader.CHEST_BONUS_ID = 12;
+EditorFileLoader.HIDDEN_TRAP_ID = 13;
 
 EditorFileLoader.MAX_WIDTH = 15;
 
@@ -108,6 +109,19 @@ function EditorFileLoader:createCage(pos, cellSize)
 end
 
 --------------------------------
+function EditorFileLoader:createHiddenTrap(pos, cellSize)
+    info_log("EditorFileLoader:createHiddenTrap ");
+
+    local node = CCSprite:create("HiddenTrapForest.png");
+
+    pos.y = pos.y --+ cellSize / 2.0;
+
+    node:setAnchorPoint(cc.p(0.5, 0.0));
+    node:setPosition(pos);
+    node:setTag(FactoryObject.HIDDEN_TRAP_TAG);
+    return node;
+end
+--------------------------------
 function EditorFileLoader:createDog(pos, cellSize)
     info_log("EditorFileLoader:createDog ");
 
@@ -178,7 +192,8 @@ EditorFileLoader.CreateFunctions = {
     [EditorFileLoader.COIN_ID] = EditorFileLoader.createCoin,
     [EditorFileLoader.FOXY_ID] = EditorFileLoader.createLoveCage,
 	[EditorFileLoader.TIME_BONUS_ID] = EditorFileLoader.createTimeBonus,
-	[EditorFileLoader.CHEST_BONUS_ID] = EditorFileLoader.createChestBonus
+	[EditorFileLoader.CHEST_BONUS_ID] = EditorFileLoader.createChestBonus,
+	[EditorFileLoader.HIDDEN_TRAP_ID] = EditorFileLoader.createHiddenTrap
 };
 
 --------------------------------

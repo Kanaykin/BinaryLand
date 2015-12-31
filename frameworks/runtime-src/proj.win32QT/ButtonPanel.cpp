@@ -23,6 +23,7 @@ mSignalMapper(0)
 	initButton(group, DiagramItem::ARROW_ITEM, "arrowButton");
 	initButton(group, DiagramItem::TIME_BONUS_ITEM, "timeButton");
 	initButton(group, DiagramItem::CHEST_BONUS_ITEN, "chestButton");
+	initButton(group, DiagramItem::HIDDEN_TRAP_ITEN, "hiddenTrapButton");
 	
 	connect(mSignalMapper, SIGNAL(mapped(int)), mainWnd, SLOT(onButtonCheck(int)));
 	

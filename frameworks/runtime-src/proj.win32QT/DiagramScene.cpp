@@ -136,6 +136,8 @@ void DiagramScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void DiagramScene::loadFromFile(const QString& file)
 {
 	SceneLoader loader;
+	DiagramItem::eTypeItem oldType(mTypeItem);
+	mTypeItem = DiagramItem::BUSH_ITEM;
 	if (loader.loadScene(file.toStdString())) {
 		SceneLoader::PropertyContainer mapProps = loader.getRootContainer();
 		std::map<int, int> map;
@@ -177,6 +179,7 @@ void DiagramScene::loadFromFile(const QString& file)
 			}
 		}
 	}
+	mTypeItem = oldType;
 }
 
 void DiagramScene::loadFromStr(const QString& str)

@@ -16,6 +16,7 @@ ItemsDataMap_t fillItemsData() {
 	result[DiagramItem::ARROW_ITEM] = { ":images/arrow.png", "", 0 };
 	result[DiagramItem::TIME_BONUS_ITEM] = { ":images/Time.png", "Time", 111 };
 	result[DiagramItem::CHEST_BONUS_ITEN] = { ":images/Chest.png", "Chest", 113 };
+	result[DiagramItem::HIDDEN_TRAP_ITEN] = { ":images/trap.png", "HiddenTrap", 114 };
 
 	return result;
 };

@@ -39,6 +39,7 @@ public:
     QPushButton *arrowButton;
     QPushButton *timeButton;
     QPushButton *chestButton;
+    QPushButton *hiddenTrapButton;
 
     void setupUi(QWidget *ButtonsForm)
     {
@@ -162,6 +163,15 @@ public:
 
         gridLayout_3->addWidget(chestButton, 2, 2, 1, 1);
 
+        hiddenTrapButton = new QPushButton(frame);
+        hiddenTrapButton->setObjectName(QStringLiteral("hiddenTrapButton"));
+        hiddenTrapButton->setMinimumSize(QSize(90, 90));
+        hiddenTrapButton->setMaximumSize(QSize(90, 90));
+        hiddenTrapButton->setIconSize(QSize(80, 80));
+        hiddenTrapButton->setCheckable(true);
+
+        gridLayout_3->addWidget(hiddenTrapButton, 3, 2, 1, 1);
+
 
         gridLayout->addWidget(frame, 0, 1, 1, 1);
 
@@ -186,6 +196,7 @@ public:
         arrowButton->setText(QString());
         timeButton->setText(QString());
         chestButton->setText(QString());
+        hiddenTrapButton->setText(QString());
     } // retranslateUi
 
 };

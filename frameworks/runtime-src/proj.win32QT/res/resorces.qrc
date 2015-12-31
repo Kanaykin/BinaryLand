@@ -14,5 +14,6 @@
          <file>images/border.png</file>
          <file>images/Time.png</file>
          <file>images/Chest.png</file>
+         <file>images/trap.png</file>
      </qresource>
      </RCC>

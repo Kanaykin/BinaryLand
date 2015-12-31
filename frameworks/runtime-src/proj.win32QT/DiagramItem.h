@@ -20,7 +20,8 @@ public:
 		DELETE_ITEM,
 		ARROW_ITEM,
 		TIME_BONUS_ITEM,
-		CHEST_BONUS_ITEN
+		CHEST_BONUS_ITEN,
+		HIDDEN_TRAP_ITEN
 	};
 	struct ItemData {
 		std::string mIconName;
