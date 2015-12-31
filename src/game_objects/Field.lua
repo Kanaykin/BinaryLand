@@ -598,6 +598,13 @@ function Field:onPlayerLeaveWeb(player)
 end
 
 --------------------------------
+function Field:onPlayerEnterHiddenTrap(player, pos)
+    info_log("onPlayerEnterHiddenTrap ");
+    -- if player is primary then game over
+    player:enterHiddenTrap(pos);
+end
+
+--------------------------------
 function Field:onPlayerEnterWeb(player, pos)
 	info_log("onPlayerEnterWeb ");
 	-- if player is primary then game over

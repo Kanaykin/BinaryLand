@@ -7,6 +7,8 @@ Trigger.mEnterCallback = nil;
 Trigger.mLeaveCallback = nil;
 Trigger.mContainedObj = nil;
 Trigger.mSize = nil;
+Trigger.mDebugBox = nil;
+Trigger.mNeedDebugBox = false;
 
 --------------------------------
 function Trigger:getContainedObj()
@@ -26,6 +28,30 @@ function Trigger:init(field, node, enterCallback, leaveCallback)
 	self.mLeaveCallback = leaveCallback;
 
 	self.mSize = node:getBoundingBox();
+
+	if self.mNeedDebugBox then
+        local nodeBox = cc.DrawNode:create();
+        self.mNode:addChild(nodeBox);
+        self.mDebugBox = nodeBox;
+        self:updateDebugBox();
+    end
+end
+
+--------------------------------
+function Trigger:updateDebugBox()
+    if self.mDebugBox then
+        local box = self:getBoundingBox();
+        local size = self.mNode:getBoundingBox();
+        local anchor = self.mNode:getAnchorPoint();
+        box.x = 0;
+        box.y = 0;
+        self.mDebugBox:clear();
+        
+        self.mDebugBox:drawLine(cc.p(box.x, box.y), cc.p(box.x + box.width, box.y), {r = 0, g = 0, b = 0, a = 100});
+        self.mDebugBox:drawLine(cc.p(box.x, box.y), cc.p(box.x, box.y + box.height), {r = 0, g = 0, b = 0, a = 100});
+        self.mDebugBox:drawLine(cc.p(box.x + box.width, box.y), cc.p(box.x + box.width, box.y  + box.height), {r = 0, g = 0, b = 0, a = 100});
+        self.mDebugBox:drawLine(cc.p(box.x, box.y + box.height), cc.p(box.x + box.width, box.y  + box.height), {r = 0, g = 0, b = 0, a = 100});
+    end
 end
 
 ---------------------------------
@@ -38,10 +64,15 @@ function Trigger:getBoundingBox()
 end
 
 ---------------------------------
+function Trigger:getTrapPosition()
+	return self.mNode:getPosition();
+end
+
+---------------------------------
 function Trigger:onEnter(player)
 	info_log("Trigger:onEnter ", self.mEnterCallback);
 	if self.mEnterCallback then
-		self.mEnterCallback(player, Vector.new(self.mNode:getPosition()));
+		self.mEnterCallback(player, Vector.new(self:getTrapPosition()));
 	end
 	self.mContainedObj = player;
 end

@@ -5,6 +5,7 @@ require "src/animations/RandomAnimation"
 require "src/animations/DelayAnimation"
 require "src/scenes/SoundConfigs"
 require "src/base/Log"
+require "src/base/Interpolator"
 require "src/game_objects/FoxTrace.lua"
 
 FoxObject = inheritsFrom(PlayerObject)
@@ -26,17 +27,25 @@ FoxObject.mFrontIdleAnimation = nil;
 FoxObject.mBackIdleAnimation = nil;
 FoxObject.mSideIdleAnimation = nil;
 FoxObject.mCageAnimations = nil;
-FoxObject.mIsInCage = nil;
+FoxObject.mTypeCage = nil;
 
 FoxObject.mDebugBox = nil;
 FoxObject.mNeedDebugBox = false;
 FoxObject.mSize = nil;
 FoxObject.mTrace = nil;
 
+FoxObject.mAnchorInterpolation = nil;
+
 FoxObject.FOX_STATE = {
     PS_IN_CAGE_LEFT = PlayerObject.PLAYER_STATE.PS_LAST + 1,
-    PS_IN_CAGE_RIGHT = PlayerObject.PLAYER_STATE.PS_LAST + 2
+    PS_IN_CAGE_RIGHT = PlayerObject.PLAYER_STATE.PS_LAST + 2,
+    PS_IN_HIDDEN_CAGE = PlayerObject.PLAYER_STATE.PS_LAST + 3
 };
+
+FoxObject.CAGE_TYPE = {
+    CT_CAGE = 1,
+    CT_HIDDEN = 2
+}
 
 --------------------------------
 function FoxObject:init(field, node, needReverse)
@@ -48,7 +57,7 @@ function FoxObject:init(field, node, needReverse)
     self.mNewEffect:init(node, field.mGame);
     self.mNewEffect:setVisible(false);
 
-	info_log("FoxObject:init node_obj ", self.mAnimationNode);
+	info_log("FoxObject:init node_obj ", self.mAnimationNode:getAnchorPoint().y);
 	
 	FoxObject:superClass().init(self, field, node, needReverse);
 
@@ -190,6 +199,23 @@ function FoxObject:updateFlipNode(node)
 	return flip; 
 end
 
+
+--------------------------------
+function FoxObject:updateAnchorPoint(dt)
+    if self.mAnchorInterpolation then
+        local anchor = self:getAnchorInHiddenCageAnimation();
+
+        self.mAnchorInterpolation:tick(dt);
+        local cur = self.mAnchorInterpolation:getCurrent();
+        debug_log("FoxObject:updateAnchorPoint x ", cur.x, " y ", cur.y);
+        self.mAnimationNode:setAnchorPoint(cc.p(cur.x, cur.y));
+
+        if cur.x == anchor.x and cur.y == anchor.y then
+            self.mAnchorInterpolation = nil
+        end
+    end
+end
+
 --------------------------------
 function FoxObject:tick(dt)
 	FoxObject:superClass().tick(self, dt);
@@ -213,6 +239,8 @@ function FoxObject:tick(dt)
     self:updateDebugBox();
 
     self.mTrace:updatePosition(self.mGridPosition);
+
+    self:updateAnchorPoint(dt);
 end
 
 --------------------------------
@@ -268,7 +296,7 @@ function FoxObject:playAnimation(button)
         self.mAnimations[-1] = self.mFrontIdleAnimation;
     elseif button == PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP then
         debug_log("FoxObject:playAnimation self:isInTrap() ", self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT])
-        if self.mIsInCage then
+        if self.mTypeCage == FoxObject.CAGE_TYPE.CT_CAGE then
             local sprite = tolua.cast(self.mAnimationNode, "cc.Sprite");
             debug_log("FoxObject:playAnimation sprite:isFlippedX() ", sprite:isFlippedX())
             debug_log("FoxObject:playAnimation self.mLastDir ", self.mLastDir)
@@ -284,8 +312,12 @@ function FoxObject:playAnimation(button)
             else
                 self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT];
             end
+            --self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_HIDDEN_CAGE];
+            --self.mAnimationNode:setVisible(false);
             
             --sprite:setFlippedX(not self.mIsFemale)
+        elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_HIDDEN then
+            self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_HIDDEN_CAGE];
         else
             self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP];
         end
@@ -407,12 +439,26 @@ end
 ---------------------------------
 function FoxObject:leaveTrap(pos)
     FoxObject:superClass().leaveTrap(self, pos);
-    self.mIsInCage = false;
+    self.mTypeCage = nil;
+end
+
+--------------------------------
+function FoxObject:enterHiddenTrap(pos)
+    self:enterCage(pos);
+
+    self.mTypeCage = FoxObject.CAGE_TYPE.CT_HIDDEN;
+
+    local anchor = self:getAnchorInHiddenCageAnimation();
+    local curAnchor = self.mAnimationNode:getAnchorPoint();
+    --self.mAnimationNode:setAnchorPoint(anchor);
+
+    self.mAnchorInterpolation = LinearInterpolator:create();
+    self.mAnchorInterpolation:init(Vector.new(curAnchor.x, curAnchor.y), Vector.new(anchor.x, anchor.y), 0.2);
 end
 
 --------------------------------
 function FoxObject:enterCage(pos)
-    self.mIsInCage = true;
+    self.mTypeCage = FoxObject.CAGE_TYPE.CT_CAGE;
 
     self:enterTrap(pos);
 
@@ -441,6 +487,34 @@ function FoxObject:getAnchorInCageAnimation(id_anim)
     else
         return { x = 0.5, y = 0.27};
     end
+end
+
+--------------------------------
+function FoxObject:getAnchorInHiddenCageAnimation()
+    if self.mIsFemale then
+        return { x = 0.48, y = 0.15};
+    else
+        return { x = 0.48, y = 0.15};
+    end
+end
+
+--------------------------------
+function FoxObject:createInHiddenCageAnimation()
+    local animation = PlistAnimation:create();
+    local anchor = self:getAnchorInHiddenCageAnimation(); --self.mAnimationNode:getAnchorPoint();
+    animation:init(self:getPrefixTexture().."InHiddenTrap.plist", self.mAnimationNode, anchor, nil, 0.2);
+
+    local sequence = SequenceAnimation:create();
+    sequence:init();
+    sequence:addAnimation(animation);
+
+    local emptyAnim = EmptyAnimation:create();
+    emptyAnim:init(nil, self.mAnimationNode, anchor);
+    emptyAnim:setFrame(animation:getLastFrame());
+
+    sequence:addAnimation(emptyAnim);
+
+    self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_HIDDEN_CAGE] = sequence;
 end
 
 --------------------------------
@@ -486,6 +560,7 @@ function FoxObject:createInCageAnimation()
     self.mCageAnimations = {}
     self:createInCageSideAnimation("Left", FoxObject.FOX_STATE.PS_IN_CAGE_LEFT);
     self:createInCageSideAnimation("Right", FoxObject.FOX_STATE.PS_IN_CAGE_RIGHT);
+    self:createInHiddenCageAnimation();
 end
 
 --------------------------------

@@ -8,6 +8,7 @@ require "src/game_objects/FinishObject"
 require "src/game_objects/BonusObject"
 require "src/game_objects/BonusRoomDoor"
 require "src/game_objects/BushObject"
+require "src/game_objects/HiddenTrap"
 require "src/tutorial/TutorialTrigger"
 require "src/base/Log"
 
@@ -30,6 +31,7 @@ FactoryObject.BONUS_TAG = 110;
 FactoryObject.BONUS_TIME_TAG = 111;
 FactoryObject.BONUS_ROOM_DOOR_TAG = 112;
 FactoryObject.BONUS_CHEST_TAG = 113;
+FactoryObject.HIDDEN_TRAP_TAG = 114;
 
 -- tutorial
 FactoryObject.TUTORIAL_TRIGGER_1 = 200;
@@ -100,6 +102,15 @@ function FactoryObject:createWeb(field, node)
 	info_log("FactoryObject:createWeb ", field, ", ", node);
 	local web = SnareTrigger:create();
 	web:init(field, node, Callback.new(field, Field.onPlayerEnterWeb), Callback.new(field, Field.onPlayerLeaveWeb));
+	field:addMob(web);
+	return web;
+end
+
+------------------------------
+function FactoryObject:createHiddenTrap(field, node)
+	info_log("FactoryObject:createHiddenTrap ", field, ", ", node);
+	local web = HiddenTrap:create();
+	web:init(field, node, Callback.new(field, Field.onPlayerEnterHiddenTrap), Callback.new(field, Field.onPlayerLeaveWeb));
 	field:addMob(web);
 	return web;
 end
@@ -184,6 +195,7 @@ FactoryObject.CreateFunctions = {
 	[FactoryObject.HUNTER_TAG] = FactoryObject.createHunter,
 	[FactoryObject.DOG_TAG] = FactoryObject.createDog,
 	[FactoryObject.WEB_TAG] = FactoryObject.createWeb,
+	[FactoryObject.HIDDEN_TRAP_TAG] = FactoryObject.createHiddenTrap,
 	[FactoryObject.FINISH_TAG] = FactoryObject.createFinish,
 	[FactoryObject.PLAYER_TAG] = FactoryObject.createPlayer,
 	[FactoryObject.PLAYER2_TAG] = FactoryObject.createPlayer,

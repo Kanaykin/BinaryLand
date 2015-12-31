@@ -41,6 +41,7 @@ end
 
 --------------------------------
 function SequenceAnimation:playNext()
+	--debug_log("SequenceAnimation:playNext ");
 	local needPlay = false;
 	if not self.mCurrentAnimation then
 		self.mCurrentAnimation = 1;

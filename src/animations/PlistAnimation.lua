@@ -4,10 +4,16 @@ require "src/base/Log"
 PlistAnimation = inheritsFrom(EmptyAnimation)
 PlistAnimation.mAnimation = nil;
 PlistAnimation.mAction = nil;
+PlistAnimation.mLastFrame = nil;
 
 --------------------------------
 function PlistAnimation:getAction()
 	return self.mAction;
+end
+
+--------------------------------
+function PlistAnimation:getLastFrame()
+  return self.mLastFrame;
 end
 
 --------------------------------
@@ -86,8 +92,9 @@ function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
    	table.sort( arrayFrames, function(x, y)
    		return y > x;
    	end );
-
-   	for i, val in ipairs(arrayFrames) do
+    
+    self.mLastFrame = cache:getSpriteFrame(arrayFrames[#arrayFrames]);
+    for i, val in ipairs(arrayFrames) do
    		local frame = cache:getSpriteFrame(val);
    		--info_log("PlistAnimation frame ", frame);
    		self.mAnimation:addSpriteFrame(frame);

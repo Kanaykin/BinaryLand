@@ -22,6 +22,7 @@ end
 
 --------------------------------
 function EmptyAnimation:setFrame(frame)
+	debug_log("EmptyAnimation:setFrame ", frame);
 	self.mFrame = frame
 end
 
@@ -47,11 +48,13 @@ end
 
 ----------------------------
 function EmptyAnimation:play()
+	debug_log("EmptyAnimation:play ", self.mFrame);
 	if self.mAnchor then
 		self.mNode:setAnchorPoint(self.mAnchor);
 	end
 	if self.mFrame then
-		--info_log("EmptyAnimation:play self.mFrame ", self.mFrame);
+		info_log("EmptyAnimation:play self.mFrame ", self.mFrame);
+		tolua.cast(self.mNode, "cc.Sprite"):setTexture(nil);
 		tolua.cast(self.mNode, "cc.Sprite"):setSpriteFrame(self.mFrame);
 		--tolua.cast(self.mNode, "cc.Sprite"):setTextureRect(cc.rect(0, 0, self.mTextureSize.width, self.mTextureSize.height));
 	elseif self.mTexture then
