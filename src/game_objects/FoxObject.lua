@@ -3,6 +3,7 @@ require "src/game_objects/FoxHelpEffect"
 require "src/animations/PlistAnimation"
 require "src/animations/RandomAnimation"
 require "src/animations/DelayAnimation"
+require "src/animations/AnimationDoneCallback"
 require "src/scenes/SoundConfigs"
 require "src/base/Log"
 require "src/base/Interpolator"
@@ -35,6 +36,7 @@ FoxObject.mSize = nil;
 FoxObject.mTrace = nil;
 
 FoxObject.mAnchorInterpolation = nil;
+FoxObject.mCallbackOnDone = nil;
 
 FoxObject.FOX_STATE = {
     PS_IN_CAGE_LEFT = PlayerObject.PLAYER_STATE.PS_LAST + 1,
@@ -241,6 +243,7 @@ function FoxObject:tick(dt)
     self.mTrace:updatePosition(self.mGridPosition);
 
     self:updateAnchorPoint(dt);
+    self.mCallbackOnDone:tick(dt);
 end
 
 --------------------------------
@@ -318,6 +321,7 @@ function FoxObject:playAnimation(button)
             --sprite:setFlippedX(not self.mIsFemale)
         elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_HIDDEN then
             self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_HIDDEN_CAGE];
+            --self.mCallbackOnDone:start();
         else
             self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP];
         end
@@ -376,6 +380,12 @@ function FoxObject:createFrontIdleAnimation()
     self:createIdleAnimation(self.mFrontIdleAnimation, self:getPrefixTexture().."FrontIdle1.plist", texture, contentSize, textureName);
 
     self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE] = self.mFrontIdleAnimation;
+end
+
+--------------------------------
+function FoxObject:isFlipped()
+    local sprite = tolua.cast(self.mAnimationNode, "cc.Sprite");
+    return sprite:isFlippedX();
 end
 
 --------------------------------
@@ -499,10 +509,33 @@ function FoxObject:getAnchorInHiddenCageAnimation()
 end
 
 --------------------------------
+function FoxObject:onHiddenAnimDone()
+    debug_log("FoxObject:onHiddenAnimDone ")
+    local pos = self.mField:gridPosToReal(Vector.new(self.mGridPosition.x, self.mGridPosition.y + 1));
+    pos.x = pos.x + self.mField.mCellSize / 2;
+    --pos.y = pos.y + self.mField.mCellSize / 2;
+    
+    local other = nil
+    local players = self.mField:getPlayerObjects();
+    for i, player in pairs(players) do
+        if player ~= self then
+            other = player;
+        end
+    end
+
+    self.mField:createSpirit(pos, other);
+end
+
+--------------------------------
 function FoxObject:createInHiddenCageAnimation()
     local animation = PlistAnimation:create();
     local anchor = self:getAnchorInHiddenCageAnimation(); --self.mAnimationNode:getAnchorPoint();
     animation:init(self:getPrefixTexture().."InHiddenTrap.plist", self.mAnimationNode, anchor, nil, 0.2);
+
+
+    self.mCallbackOnDone = AnimationDoneCallback:create();
+    self.mCallbackOnDone:init(animation, Callback.new(self, FoxObject.onHiddenAnimDone));
+
 
     local sequence = SequenceAnimation:create();
     sequence:init();

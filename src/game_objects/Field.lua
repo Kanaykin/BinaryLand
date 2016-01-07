@@ -595,6 +595,10 @@ end
 function Field:onPlayerLeaveWeb(player)
 	info_log("onPlayerLeaveWeb ");
 	player:leaveTrap(nil);
+    -- get Spirit and remove it
+    local spirit = self:getObjetcByTag(FactoryObject.SPIRIT_TAG);
+    debug_log("Field:onPlayerLeaveWeb spirit ", spirit);
+    spirit:onPlayerLeaveWeb(player);
 end
 
 --------------------------------
@@ -621,6 +625,23 @@ end
 --------------------------------
 function Field:getFieldNode()
 	return self.mFieldNode;
+end
+
+--------------------------------
+function Field:createSpirit(pos, player)
+    local node = CCSprite:create("Spirit.png");
+
+    --pos.y = pos.y + cellSize / 2.0;
+
+    node:setAnchorPoint(cc.p(0.5, 0));
+    node:setPosition(pos);
+    node:setTag(FactoryObject.SPIRIT_TAG);
+
+    self:getFieldNode():addChild(node);
+
+    local spirit = SpiritObject:create();
+    spirit:init(self, node, player);
+    self:addObject(spirit);
 end
 
 --------------------------------

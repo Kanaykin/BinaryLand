@@ -7,7 +7,7 @@ HunterStates = {
 }
 
 --[[///////////////////////////]]
-ShotGunState = inheritsFrom(BaseState)
+ShotGunState = inheritsFrom(BaseMobState)
 ShotGunState.mDir = nil;
 ShotGunState.mFlip = nil;
 ShotGunState.mShoted = nil;
@@ -89,7 +89,7 @@ function ShotGunState:tick(dt)
 end
 
 --[[///////////////////////////]]
-CatchState = inheritsFrom(BaseState)
+CatchState = inheritsFrom(BaseMobState)
 CatchState.mTimeWait = nil
 
 ------------------------------------
@@ -150,7 +150,7 @@ function HunterMoveState:tick(dt)
 end
 
 --[[///////////////////////////]]
-FoundPlayerState = inheritsFrom(BaseState)
+FoundPlayerState = inheritsFrom(BaseMobState)
 
 ------------------------------------
 function FoundPlayerState:enter(params)
@@ -249,7 +249,7 @@ function HunterIdleState:onEnterFightTrigger()
 end
 
 --[[///////////////////////////]]
-HunterStateMachine = inheritsFrom(StateMachine)
+HunterStateMachine = inheritsFrom(MobStateMachine)
 
 ------------------------------------
 function HunterStateMachine:init(object)

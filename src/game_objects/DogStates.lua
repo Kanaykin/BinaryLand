@@ -166,7 +166,7 @@ function TookTrace:onMoveFinished()
 end
 
 --[[///////////////////////////]]
-DogPlayerFoundState = inheritsFrom(BaseState)
+DogPlayerFoundState = inheritsFrom(BaseMobState)
 DogPlayerFoundState.mFoundPlayer = nil
 
 ------------------------------------
@@ -213,7 +213,7 @@ function DogPlayerFoundState:onEnterFightTrigger()
 end
 
 --[[///////////////////////////]]
-DogStateMachine = inheritsFrom(StateMachine)
+DogStateMachine = inheritsFrom(MobStateMachine)
 
 ------------------------------------
 function DogStateMachine:init(object)

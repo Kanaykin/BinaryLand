@@ -5,6 +5,7 @@ PlistAnimation = inheritsFrom(EmptyAnimation)
 PlistAnimation.mAnimation = nil;
 PlistAnimation.mAction = nil;
 PlistAnimation.mLastFrame = nil;
+PlistAnimation.mPlayed = nil;
 
 --------------------------------
 function PlistAnimation:getAction()
@@ -36,6 +37,7 @@ end
 
 ----------------------------
 function PlistAnimation:play()
+  self.mPlayed = true
 --	debug_log("PlistAnimation:play");
 	PlistAnimation:superClass().play(self);
 
@@ -48,8 +50,8 @@ end
 ---------------------------------
 function PlistAnimation:isDone()
 	--debug_log("PlistAnimation:isDone ", CCDirector:getInstance():getActionManager():numberOfRunningActionsInTarget(self.mAction:getTarget()));
-	return self.mAction and self.mAction:isDone() or 
-		CCDirector:getInstance():getActionManager():getNumberOfRunningActionsInTarget(self.mAction:getTarget()) == 0;
+	return self.mPlayed and (self.mAction and self.mAction:isDone() or 
+		CCDirector:getInstance():getActionManager():getNumberOfRunningActionsInTarget(self.mAction:getTarget()) == 0);
 end
 
 --------------------------------

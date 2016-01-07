@@ -9,6 +9,7 @@ require "src/game_objects/BonusObject"
 require "src/game_objects/BonusRoomDoor"
 require "src/game_objects/BushObject"
 require "src/game_objects/HiddenTrap"
+require "src/game_objects/Spirit"
 require "src/tutorial/TutorialTrigger"
 require "src/base/Log"
 
@@ -32,6 +33,7 @@ FactoryObject.BONUS_TIME_TAG = 111;
 FactoryObject.BONUS_ROOM_DOOR_TAG = 112;
 FactoryObject.BONUS_CHEST_TAG = 113;
 FactoryObject.HIDDEN_TRAP_TAG = 114;
+FactoryObject.SPIRIT_TAG = 115;
 
 -- tutorial
 FactoryObject.TUTORIAL_TRIGGER_1 = 200;
@@ -178,6 +180,7 @@ function FactoryObject:createBonusRoomDoor(field, node)
     field:addBonusRoomDoor(bonusRoom);
     return bonusRoom;
 end
+
 
 ------------------------------
 function FactoryObject:createFoxPlayer(field, node)

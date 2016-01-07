@@ -48,7 +48,7 @@ end
 
 ----------------------------
 function DelayAnimationSoftImpl:play()
-	info_log("DelayAnimation:play ", self.mTextureName)
+	info_log("DelayAnimationSoftImpl:play ", self.mTextureName)
 	if self.mTexture then
         if self.mTextureName then
             local sprite = GuiHelper.getSpriteFrame(self.mTextureName, self.mTextureSize);
@@ -90,7 +90,7 @@ end
 
 ----------------------------
 function DelayAnimationHardImpl:play()
-	info_log("DelayAnimationHardImpl:play")
+	info_log("DelayAnimationHardImpl:play ", self.mTextureName)
 	self.mCurrentDelay = self.mDelay;
 	self.mPlaying = false;
 end

@@ -21,6 +21,11 @@ function SequenceAnimation:addAnimation(animation)
 	self.mAnimations[#self.mAnimations + 1] = animation
 end
 
+---------------------------------
+function SequenceAnimation:isDone()
+	return #self.mAnimations == self.mCurrentAnimation and self.mAnimations[self.mCurrentAnimation]:isDone(); 
+end
+
 --------------------------------
 function SequenceAnimation:tick(dt)
     --debug_log("SequenceAnimation:tick self.mCurrentAnimation ", self.mCurrentAnimation);
