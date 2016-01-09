@@ -17,6 +17,8 @@ ItemsDataMap_t fillItemsData() {
 	result[DiagramItem::TIME_BONUS_ITEM] = { ":images/Time.png", "Time", 111 };
 	result[DiagramItem::CHEST_BONUS_ITEN] = { ":images/Chest.png", "Chest", 113 };
 	result[DiagramItem::HIDDEN_TRAP_ITEN] = { ":images/trap.png", "HiddenTrap", 114 };
+	result[DiagramItem::BONUS_TREE_ITEN] = { ":images/BonusBush.png", "BonusTree", 112 };
+	result[DiagramItem::BONUS_DOOR_ITEN] = { ":images/BonusDoor.png", "BonusDoor", 112 };
 
 	return result;
 };
@@ -39,6 +41,11 @@ mPoint(cellPoint)
 	}break;
 	case DiagramItem::TIME_BONUS_ITEM: {
 			mProperties.insert(std::make_pair("Count", QVariant(10)));
+	}break;
+	case DiagramItem::FOX_ITEM: 
+	case DiagramItem::FOXGIRL_ITEM:
+	{
+		mProperties.insert(std::make_pair("InTrap", QVariant(false)));
 	}break;
 	case DiagramItem::CHEST_BONUS_ITEN: {
 			mProperties.insert(std::make_pair("Count", QVariant(10)));

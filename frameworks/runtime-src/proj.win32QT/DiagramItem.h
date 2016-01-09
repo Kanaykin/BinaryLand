@@ -21,7 +21,9 @@ public:
 		ARROW_ITEM,
 		TIME_BONUS_ITEM,
 		CHEST_BONUS_ITEN,
-		HIDDEN_TRAP_ITEN
+		HIDDEN_TRAP_ITEN,
+		BONUS_TREE_ITEN,
+		BONUS_DOOR_ITEN
 	};
 	struct ItemData {
 		std::string mIconName;

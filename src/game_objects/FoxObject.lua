@@ -94,8 +94,8 @@ function FoxObject:setCustomProperties(properties)
 
     FoxObject:superClass().setCustomProperties(self, properties);
 
-    if properties.state then
-        self:playAnimation(properties.state);
+    if properties.InTrap then
+        self:playAnimation(PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP);
         info_log("FoxObject:setCustomProperties self.mLastButtonPressed ", self.mLastButtonPressed);
         info_log("FoxObject:setCustomProperties self.mAnimations[self.mLastButtonPressed] ", self.mAnimations[self.mLastButtonPressed]);
         self.mAnimations[self.mLastButtonPressed]:setCurrentAnimation(2);

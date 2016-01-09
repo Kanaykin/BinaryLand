@@ -15,5 +15,7 @@
          <file>images/Time.png</file>
          <file>images/Chest.png</file>
          <file>images/trap.png</file>
+         <file>images/BonusBush.png</file>
+         <file>images/BonusDoor.png</file>
      </qresource>
      </RCC>

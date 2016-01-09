@@ -1,5 +1,5 @@
 local CustomProperties = {
-    ["7_1_109"] = {state = PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP},
+    ["7_1_109"] = {InTrap = true},
     ["15_4_113"] = {ChestType = BonusObject.CHEST_TIME_TYPE}
 }
 

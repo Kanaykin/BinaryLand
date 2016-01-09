@@ -40,6 +40,8 @@ public:
     QPushButton *timeButton;
     QPushButton *chestButton;
     QPushButton *hiddenTrapButton;
+    QPushButton *bonusTreeButton;
+    QPushButton *bonusDoorButton;
 
     void setupUi(QWidget *ButtonsForm)
     {
@@ -172,6 +174,24 @@ public:
 
         gridLayout_3->addWidget(hiddenTrapButton, 3, 2, 1, 1);
 
+        bonusTreeButton = new QPushButton(frame);
+        bonusTreeButton->setObjectName(QStringLiteral("bonusTreeButton"));
+        bonusTreeButton->setMinimumSize(QSize(90, 90));
+        bonusTreeButton->setMaximumSize(QSize(90, 90));
+        bonusTreeButton->setIconSize(QSize(80, 80));
+        bonusTreeButton->setCheckable(true);
+
+        gridLayout_3->addWidget(bonusTreeButton, 4, 2, 1, 1);
+
+        bonusDoorButton = new QPushButton(frame);
+        bonusDoorButton->setObjectName(QStringLiteral("bonusDoorButton"));
+        bonusDoorButton->setMinimumSize(QSize(90, 90));
+        bonusDoorButton->setMaximumSize(QSize(90, 90));
+        bonusDoorButton->setIconSize(QSize(80, 80));
+        bonusDoorButton->setCheckable(true);
+
+        gridLayout_3->addWidget(bonusDoorButton, 5, 2, 1, 1);
+
 
         gridLayout->addWidget(frame, 0, 1, 1, 1);
 
@@ -197,6 +217,8 @@ public:
         timeButton->setText(QString());
         chestButton->setText(QString());
         hiddenTrapButton->setText(QString());
+        bonusTreeButton->setText(QString());
+        bonusDoorButton->setText(QString());
     } // retranslateUi
 
 };
