@@ -13,11 +13,11 @@ function BushObject:init(field, node)
 		local textureEmpty = cc.Director:getInstance():getTextureCache():getFileNameForTexture(tolua.cast(self.mNode, "cc.Sprite"):getTexture());
 		local _, file = string.match(textureEmpty, '(.+)/(.+)%..+');
 		local animationName = file .. "Animation.plist"
-		debug_log("!!!! animationName ", animationName);
+		debug_log("BushObject:init animationName ", animationName);
 
 		local array = cc.FileUtils:getInstance():getValueMapFromFile(animationName);
 		if array["frames"] then
-			debug_log("!!!! array ", array["frames"]);
+			debug_log("BushObject:init array ", array["frames"]);
 			local animation = PlistAnimation:create();
 			animation:init(animationName, self.mNode, self.mNode:getAnchorPoint(), nil, 0.2);
 

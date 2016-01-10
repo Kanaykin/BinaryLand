@@ -598,7 +598,9 @@ function Field:onPlayerLeaveWeb(player)
     -- get Spirit and remove it
     local spirit = self:getObjetcByTag(FactoryObject.SPIRIT_TAG);
     debug_log("Field:onPlayerLeaveWeb spirit ", spirit);
-    spirit:onPlayerLeaveWeb(player);
+    if spirit then
+        spirit:onPlayerLeaveWeb(player);
+    end
 end
 
 --------------------------------

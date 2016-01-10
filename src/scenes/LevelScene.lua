@@ -88,14 +88,16 @@ end
 function LevelScene:onEnterBonusRoomDoor(isFemale)
     local score = self.mField:getScore();
     info_log("LevelScene:onEnterBonusRoomDoor score ", score);
-    if self.mStoredLevel == nil then
-        self.mLevel:getData().bonusRoom.isFemale = isFemale;
-        self.mLevel:getData().bonusRoom.score = score;
-        self:storeScene();
-        self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.bonusRoomStart), "ShortShow");
-    else
-        self.mStoredLevel.field.score = score;
-        self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.restoreScene), "ShortShow");
+    if self.mLevel:getData().bonusRoom then
+        if self.mStoredLevel == nil then
+            self.mLevel:getData().bonusRoom.isFemale = isFemale;
+            self.mLevel:getData().bonusRoom.score = score;
+            self:storeScene();
+            self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.bonusRoomStart), "ShortShow");
+        else
+            self.mStoredLevel.field.score = score;
+            self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.restoreScene), "ShortShow");
+        end
     end
 end
 

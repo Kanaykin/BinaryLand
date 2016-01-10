@@ -11,17 +11,25 @@ function BonusRoomDoor:init(field, node, enterCallback, leaveCallback)
     BonusRoomDoor:superClass().init(self, field, node, enterCallback, leaveCallback);
     info_log("BonusRoomDoor:init id ", self:getId());
     field:addEnemyEnterTriggerListener(self);
+
+    self:createAnimation();
+
+    self.mSize.height = self.mSize.height * 0.6;
+    self:updateDebugBox();
 end
 
 --------------------------------
-function BonusRoomDoor:isHunter(enemy)
-    return enemy:getTag() == 106;
-end
+function BonusRoomDoor:createAnimation()
+    local textureName = tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName();
+        
+    local textureEmpty = cc.Director:getInstance():getTextureCache():getFileNameForTexture(tolua.cast(self.mNode, "cc.Sprite"):getTexture());
+    local _, file = string.match(textureEmpty, '(.+)/(.+)%..+');
+    local animationName = file .. "Entrance.plist"
+    debug_log("BonusRoomDoor !!!! animationName ", animationName);
 
---------------------------------
-function BonusRoomDoor:onEnemyEnterTrigger(enemy)
-    info_log("BonusRoomDoor:onEnemyEnterTrigger id ", enemy:getId());
-    if self.mBonusAnimation and self:isHunter(enemy) then
+    local array = cc.FileUtils:getInstance():getValueMapFromFile(animationName);
+    if array["frames"] then
+        debug_log("BonusRoomDoor:init array ", array["frames"]);
 
         local texture = tolua.cast(self.mNode, "cc.Sprite"):getTexture();
         texture:retain();
@@ -35,7 +43,7 @@ function BonusRoomDoor:onEnemyEnterTrigger(enemy)
         local repeat_idle = RepeatAnimation:create();
         local animation = PlistAnimation:create();
         local anchor = self.mNode:getAnchorPoint();
-        animation:init(self.mBonusAnimation, self.mNode, anchor, nil, 0.2);
+        animation:init(animationName, self.mNode, anchor, nil, 0.2);
         repeat_idle:init(animation, false, 4);
 
         --------------------
@@ -45,17 +53,30 @@ function BonusRoomDoor:onEnemyEnterTrigger(enemy)
         sequence:addAnimation(delayAnim);
         sequence:addAnimation(repeat_idle);
 
-        --local texture = tolua.cast(self.mNode, "cc.Sprite"):getTexture();
-        --local delayAnim = DelayAnimation:create();
-        --anchor.y = anchor.y;
-        --delayAnim:init(repeat_idle, 2, texture, nil, nil, anchor);
-
-        --self.mAnimation = RandomAnimation:create();
-        --self.mAnimation:init();
-        --self.mAnimation:addAnimation(delayAnim);
-        --self.mAnimation:play();
-
         self.mAnimation = sequence;
+    end
+end
+
+---------------------------------
+function BonusRoomDoor:destroy()
+    info_log("BonusRoomDoor:destroy ");
+
+    BonusRoomDoor:superClass().destroy(self);
+
+    if self.mAnimation then
+        self.mAnimation:destroy();
+    end
+end
+
+--------------------------------
+function BonusRoomDoor:isHunter(enemy)
+    return enemy:getTag() == 106;
+end
+
+--------------------------------
+function BonusRoomDoor:onEnemyEnterTrigger(enemy)
+    info_log("BonusRoomDoor:onEnemyEnterTrigger id ", enemy:getId());
+    if self.mAnimation and self:isHunter(enemy) then
         self.mAnimation:play();
     end
 
