@@ -12,6 +12,8 @@ EditorFileLoader.FOXY_ID = 8;
 EditorFileLoader.TIME_BONUS_ID = 11;
 EditorFileLoader.CHEST_BONUS_ID = 12;
 EditorFileLoader.HIDDEN_TRAP_ID = 13;
+EditorFileLoader.BONUS_TREE_ID = 14;
+EditorFileLoader.BONUS_DOOR_ID = 15;
 
 EditorFileLoader.MAX_WIDTH = 15;
 
@@ -182,6 +184,29 @@ function EditorFileLoader:createFoxGirl(pos, cellSize)
     return node;
 end
 
+--------------------------------
+function EditorFileLoader:createBonusTree(pos, cellSize)
+	local tree = CCSprite:create("bush2.png");
+    
+    info_log("EditorFileLoader:createBonusTree tree ", tree);
+    tree:setAnchorPoint(cc.p(0.5, 0.0));
+    tree:setPosition(pos);
+	tree:setTag(FactoryObject.BONUS_ROOM_DOOR_TAG);
+    return tree;
+end
+
+--------------------------------
+function EditorFileLoader:createBonusDoor(pos, cellSize)
+	local tree = CCSprite:create("BonusDoorExit.png");
+    
+    info_log("EditorFileLoader:createBonusTree tree ", tree);
+    tree:setAnchorPoint(cc.p(0.5, 0.0));
+    tree:setPosition(pos);
+	tree:setTag(FactoryObject.BONUS_ROOM_DOOR_TAG);
+    return tree;
+end
+
+--------------------------------
 EditorFileLoader.CreateFunctions = {
 	[EditorFileLoader.BUSH_ID] = EditorFileLoader.createBush,
 	[EditorFileLoader.FOX_ID] = EditorFileLoader.createFox,
@@ -193,7 +218,9 @@ EditorFileLoader.CreateFunctions = {
     [EditorFileLoader.FOXY_ID] = EditorFileLoader.createLoveCage,
 	[EditorFileLoader.TIME_BONUS_ID] = EditorFileLoader.createTimeBonus,
 	[EditorFileLoader.CHEST_BONUS_ID] = EditorFileLoader.createChestBonus,
-	[EditorFileLoader.HIDDEN_TRAP_ID] = EditorFileLoader.createHiddenTrap
+	[EditorFileLoader.HIDDEN_TRAP_ID] = EditorFileLoader.createHiddenTrap,
+	[EditorFileLoader.BONUS_TREE_ID] = EditorFileLoader.createBonusTree,
+	[EditorFileLoader.BONUS_DOOR_ID] = EditorFileLoader.createBonusDoor
 };
 
 --------------------------------

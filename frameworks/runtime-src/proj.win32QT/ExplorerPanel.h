@@ -37,6 +37,7 @@ private slots:
 	void onIntValueChanged(QtProperty* prop, int val);
 	void onEnumValueChanged(QtProperty* prop, int val);
 	void onBoolValueChanged(QtProperty* prop, bool val);
+	void onStringValueChanged(QtProperty* prop, QString val);
 signals:
 	void sigSelectItem(DiagramItem* item);
 

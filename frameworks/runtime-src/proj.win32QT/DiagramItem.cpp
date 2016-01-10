@@ -53,6 +53,11 @@ mPoint(cellPoint)
 			mProperty->mIntVal = 0;
 			mProperties.insert(std::make_pair("ChestType", QVariant(QVariant::UserType, mProperty.get())));
 	}break;
+	case DiagramItem::BONUS_TREE_ITEN:
+	case DiagramItem::BONUS_DOOR_ITEN:
+	{
+		mProperties.insert(std::make_pair("BonusFile", QVariant("")));
+	}break;
 	default: break;
 	};
 }

@@ -64,6 +64,7 @@ mGroupManager(0)
 	QObject::connect(mIntManager, SIGNAL(valueChanged(QtProperty*, int)), this, SLOT(onIntValueChanged(QtProperty*, int)));
 	QObject::connect(mBoolManager, SIGNAL(valueChanged(QtProperty*, bool)), this, SLOT(onBoolValueChanged(QtProperty*, bool)));
 	QObject::connect(mEnumManager, SIGNAL(valueChanged(QtProperty*, int)), this, SLOT(onEnumValueChanged(QtProperty*, int)));
+	QObject::connect(mStringManager, SIGNAL(valueChanged(QtProperty*, QString)), this, SLOT(onStringValueChanged(QtProperty*, QString)));
 }
 
 //-----------------------------------------------
@@ -81,6 +82,14 @@ ExplorerPanel::PropertySetFunc_t ExplorerPanel::getSetterByProperty(QtProperty* 
 	if (citer != mPropertySetters.end())
 		return citer->second;
 	return ExplorerPanel::PropertySetFunc_t();
+}
+
+//-----------------------------------------------
+void ExplorerPanel::onStringValueChanged(QtProperty* prop, QString val)
+{
+	ExplorerPanel::PropertySetFunc_t func = getSetterByProperty(prop);
+	if (func)
+		func(QVariant(val));
 }
 
 //-----------------------------------------------
