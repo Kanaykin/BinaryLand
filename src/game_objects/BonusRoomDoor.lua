@@ -4,7 +4,7 @@ require "src/base/Log"
 BonusRoomDoor = inheritsFrom(Trigger)
 BonusRoomDoor.mVisited = nil;
 BonusRoomDoor.mAnimation = nil;
-BonusRoomDoor.mBonusAnimation = nil;
+BonusRoomDoor.mBonusFile = nil;
 
 --------------------------------
 function BonusRoomDoor:init(field, node, enterCallback, leaveCallback)
@@ -16,6 +16,11 @@ function BonusRoomDoor:init(field, node, enterCallback, leaveCallback)
 
     self.mSize.height = self.mSize.height * 0.6;
     self:updateDebugBox();
+end
+
+--------------------------------
+function BonusRoomDoor:getBonusFile()
+    return self.mBonusFile;
 end
 
 --------------------------------
@@ -87,7 +92,7 @@ function BonusRoomDoor:setCustomProperties(properties)
     info_log("BonusRoomDoor:setCustomProperties animated ", properties.bonusAnimation);
 
     BonusRoomDoor:superClass().setCustomProperties(self, properties);
-    self.mBonusAnimation = properties.bonusAnimation;
+    self.mBonusFile = properties.BonusFile;
 end
 
 --------------------------------
@@ -112,6 +117,7 @@ function BonusRoomDoor:store(data)
     info_log("BonusRoomDoor:store self.mVisited ", self.mVisited);
     BonusRoomDoor:superClass().store(self, data);
     data.visited = self.mVisited;
+    return true
 end
 
 ---------------------------------

@@ -72,7 +72,7 @@ end
 function Trigger:onEnter(player)
 	info_log("Trigger:onEnter ", self.mEnterCallback);
 	if self.mEnterCallback then
-		self.mEnterCallback(player, Vector.new(self:getTrapPosition()));
+		self.mEnterCallback(player, Vector.new(self:getTrapPosition()), self);
 	end
 	self.mContainedObj = player;
 end

@@ -4,14 +4,22 @@ Callback = {}
 Callback.__index = Callback
 
 -----------------------------------
-function Callback.new(obj, func)
-	return setmetatable({ mObj = obj or 0, mFunc = func or 0 }, Callback)
+function Callback.new(obj, func, ...)
+	return setmetatable({ mObj = obj or 0, mFunc = func or 0, mArgs = arg }, Callback)
 end
 
 -----------------------------------
 function Callback.__call(a, ...)
-    info_log("Callback.__call a.mObj ", a.mObj)
-	return a.mFunc(a.mObj, ...);
+    info_log("Callback.__call a.mObj ", a.mObj, " a.mArgs ", a.mArgs)
+    local params = {}
+    for i,v in ipairs(arg) do
+        table.insert(params, v)
+    end
+    for i,v in ipairs(a.mArgs) do
+        table.insert(params, v)
+    end
+    params.n = #params
+	return a.mFunc(a.mObj, unpack(params))--, unpack(a.mArgs))--, ...)--, unpack(a.mArgs));
 end
 
 setmetatable(Callback, { __call = function(_, ...) return Callback.new(...) end })

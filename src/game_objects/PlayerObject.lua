@@ -65,6 +65,7 @@ function PlayerObject:store(data)
     if self.mBonusRoomDoorPosition then
         data.nodePosition = self.mBonusRoomDoorPosition;
     end
+    return true
 end
 
 ---------------------------------

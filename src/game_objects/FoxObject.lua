@@ -523,7 +523,9 @@ function FoxObject:onHiddenAnimDone()
         end
     end
 
-    self.mField:createSpirit(pos, other);
+    if other and not other:isInTrap() then
+        self.mField:createSpirit(pos, other);
+    end
 end
 
 --------------------------------

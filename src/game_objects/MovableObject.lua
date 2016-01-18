@@ -25,6 +25,7 @@ end
 function MovableObject:store(data)
     MovableObject:superClass().store(self, data);
     data.nodePosition = Vector.new(self.mNode:getPosition());
+    return true
 end
 
 ---------------------------------

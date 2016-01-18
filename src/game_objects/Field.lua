@@ -230,6 +230,12 @@ function Field:checkFinishGame()
 		return;
 	end
 
+    -- check bonus room without finish trigger
+    -- exit from door
+    if self.mIsBonusLevel and #self.mFinishTrigger == 0 then
+        return
+    end
+
 	-- check win game
 	local allObjectInTrigger = true;
 	for _, trigger in ipairs(self.mFinishTrigger) do
@@ -309,18 +315,20 @@ function Field:store(data)
     -- store objects
     data.field.objects = {}
     for _, object in ipairs(self.mObjects) do
-        data.field.objects[object:getId()] = {};
+        local storedData = {}
         info_log("Field:store obj ", object:getId());
-        object:store(data.field.objects[object:getId()]);
+        if object:store(storedData) then
+            data.field.objects[object:getId()] = storedData;
+        end
     end
 end
 
 ---------------------------------
-function Field:onEnterBonusRoomDoor(player)
-    info_log("Field:onEnterBonusRoomDoor ", player);
+function Field:onEnterBonusRoomDoor(player, pos, trigger)
+    info_log("Field:onEnterBonusRoomDoor ", player, " pos ", pos, " trigger ", trigger);
     player:onEnterBonusRoomDoor();
     if self.mStateListener then
-        self.mStateListener:onEnterBonusRoomDoor(player:isFemale());
+        self.mStateListener:onEnterBonusRoomDoor(player:isFemale(), trigger:getBonusFile());
     end
     info_log("Field:onEnterBonusRoomDoor end");
 end

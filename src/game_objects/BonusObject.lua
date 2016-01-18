@@ -12,6 +12,7 @@ BonusObject.mListOpenAnimation = nil;
 BonusObject.mScore = 10;
 BonusObject.mType = nil;
 BonusObject.mTimeLabel = nil;
+BonusObject.mOpened = nil;
 
 BonusObject.COINS_TYPE = 1;
 BonusObject.TIME_TYPE = 2;
@@ -283,6 +284,12 @@ function BonusObject:createOpenAnimation()
 end
 
 ---------------------------------
+function BonusObject:store(data)
+    BonusObject:superClass().store(self, data);
+    return not self.mOpened
+end
+
+---------------------------------
 function BonusObject:onEnter(player)
     BonusObject:superClass().onEnter(self, player);
     info_log("BonusObject:onEnter type ", self.mType);
@@ -297,6 +304,7 @@ function BonusObject:onEnter(player)
     if self.mType == BonusObject.CHEST_TYPE then
         self:createOpenAnimation();
     end
+    self.mOpened = true
 
 end
 

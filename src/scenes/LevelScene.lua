@@ -85,19 +85,38 @@ function LevelScene:bonusRoomStart()
 end
 
 ---------------------------------
-function LevelScene:onEnterBonusRoomDoor(isFemale)
+function LevelScene:bonusRoomStartFromFile(self_fake, isFemale, bonusFile, score)
+    debug_log("LevelScene:bonusRoomStartFromFile (", isFemale, ", ", bonusFile);
+    local old_G_EditorScene = G_EditorScene
+    G_EditorScene = bonusFile
+    self:bonusStart(self, self.mLevel:getData())--self.mLevel:getData().bonusRoom);
+    G_EditorScene = old_G_EditorScene
+    self.mField:setScore(score);
+end
+
+---------------------------------
+function LevelScene:loadBonusRoomFromFile(isFemale, bonusFile)
+    local score = self.mField:getScore();
+    if self.mStoredLevel == nil then
+        self:storeScene();
+        self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.bonusRoomStartFromFile, isFemale, bonusFile, score), "ShortShow");
+    end
+end
+
+---------------------------------
+function LevelScene:onEnterBonusRoomDoor(isFemale, bonusFile)
     local score = self.mField:getScore();
     info_log("LevelScene:onEnterBonusRoomDoor score ", score);
-    if self.mLevel:getData().bonusRoom then
-        if self.mStoredLevel == nil then
-            self.mLevel:getData().bonusRoom.isFemale = isFemale;
-            self.mLevel:getData().bonusRoom.score = score;
-            self:storeScene();
-            self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.bonusRoomStart), "ShortShow");
-        else
-            self.mStoredLevel.field.score = score;
-            self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.restoreScene), "ShortShow");
-        end
+    if self.mStoredLevel ~= nil then
+        self.mStoredLevel.field.score = score;
+        self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.restoreScene), "ShortShow");
+    elseif bonusFile and bonusFile ~= "" then
+        self:loadBonusRoomFromFile(isFemale, bonusFile)
+    elseif self.mLevel:getData().bonusRoom then
+        self.mLevel:getData().bonusRoom.isFemale = isFemale;
+        self.mLevel:getData().bonusRoom.score = score;
+        self:storeScene();
+        self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.bonusRoomStart), "ShortShow");
     end
 end
 

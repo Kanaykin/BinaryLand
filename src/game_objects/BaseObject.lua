@@ -29,6 +29,7 @@ end
 
 ---------------------------------
 function BaseObject:store(data)
+    return true
 end
 
 --------------------------------
