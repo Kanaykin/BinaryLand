@@ -126,13 +126,24 @@ void ExplorerPanel::showProjectPropertyTree()
 	QtProperty *item2 = mBoolManager->addProperty("enabled");
 	item0->addSubProperty(item2);*/
 	mPropertySetters.clear();
-	QtProperty *item0 = mIntManager->addProperty("Time");
-	mIntManager->setValue(item0, mScene->getTime());
+	{
+		QtProperty *item0 = mIntManager->addProperty("Time");
+		mIntManager->setValue(item0, mScene->getTime());
 
-	mPropertyBrowser->addProperty(item0);
+		mPropertyBrowser->addProperty(item0);
 
-	PropertySetFunc_t func = std::bind(&DiagramScene::setTime, mScene, std::placeholders::_1);
-	mPropertySetters.insert(std::make_pair(item0, func));
+		PropertySetFunc_t func = std::bind(&DiagramScene::setTime, mScene, std::placeholders::_1);
+		mPropertySetters.insert(std::make_pair(item0, func));
+	}
+	{
+		QtProperty *item0 = mStringManager->addProperty("BonusFile");
+		mStringManager->setValue(item0, mScene->getBonusFile());
+
+		mPropertyBrowser->addProperty(item0);
+
+		PropertySetFunc_t func = std::bind(&DiagramScene::setBonusFile, mScene, std::placeholders::_1);
+		mPropertySetters.insert(std::make_pair(item0, func));
+	}
 }
 
 //----------------------------------------------

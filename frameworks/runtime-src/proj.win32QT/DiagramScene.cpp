@@ -318,8 +318,19 @@ QString DiagramScene::convertObjectsPropToStr() const
 QString DiagramScene::convertScenePropToStr() const
 {
 	QString  result = BEGIN_LEVEL_PROPERTIES;
-	result += QString("time = ") + QString::number(getTime()) + QString("\n");
+	result += QString("time = ") + QString::number(getTime()) + QString(",\n");
+
+	QString fileName = getBonusFile();
+	if (fileName.isEmpty()) {
+		result += QString("BonusLevel = ''") + QString("\n");
+	}
+	else {
+		const QFileInfo info(fileName);
+		std::string path = std::string("src/levels/") + info.baseName().toStdString();
+		result += QString("BonusLevel = ") + QString("require \"") + QString::fromStdString(path) + QString("\"") + QString("\n");
+	}
 	result += END_LEVEL_PROPERTIES;
+
 	return result;
 }
 

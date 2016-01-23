@@ -29,6 +29,9 @@ public:
 	QSize getSize() const { return mSize;  }
 	void setTime(const QVariant& time);
 	int getTime() const { return mTime; }
+	QString	getBonusFile() const	{ return mBonusFile; }
+	void	setBonusFile(const QVariant& bonusFile) 	{ mBonusFile = bonusFile.toString(); }
+
 	static const int CELL_SIZE;
 signals:
 	void itemMoved(DiagramItem *movedItem, const QPointF &movedFromPosition);
@@ -59,6 +62,7 @@ private:
 	QSize						mSize;
 	DiagramItem::eTypeItem		mTypeItem;
 	DiagramItem*				mSelector;
+	QString						mBonusFile;
 
 	//-------------------------------------------
 	// Scene properties
