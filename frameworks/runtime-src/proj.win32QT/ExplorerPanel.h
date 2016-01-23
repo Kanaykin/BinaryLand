@@ -4,6 +4,7 @@
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QTreeWidget>
 #include <functional>
+#include "DiagramItem.h"
 
 class DiagramScene;
 class DiagramItem;
@@ -46,6 +47,7 @@ protected:
 	void resetSelectedItems();
 	void showItemProperty(DiagramItem* item);
 	static bool isVisibleProperty(const std::string& name);
+	QtProperty* showCustomItemProperty(const DiagramItem::CustomProperty* prop, const QString& itemName);
 
 private:
 	typedef std::function<void(const QVariant&)> PropertySetFunc_t;

@@ -6,6 +6,7 @@
 //#include "diagramitem.h"
 #include "DiagramItem.h"
 #include "SceneLoader.h"
+#include <assert.h> 
 
 const int DiagramScene::CELL_SIZE = 50;
 static QString  BEGIN_MAP = "local map = {";
@@ -219,6 +220,35 @@ void DiagramScene::loadFromStr(const QString& str)
 }
 
 //--------------------------------------------------
+QString convertCustomPropToStr(const DiagramItem::CustomProperty* prop)
+{
+	switch (prop->getType())
+	{
+		case DiagramItem::CustomProperty::TP_TYPE_BONUS :
+		{
+			return QString::number(prop->getVal().toInt());
+		} break;
+		case DiagramItem::CustomProperty::TP_TYPE_FILE:
+		{
+			const QString fileName = prop->getVal().toString();
+			if (fileName.isEmpty()) {
+				return QString("\"\"");
+			}
+			else {
+				const QFileInfo info(fileName);
+				std::string path = std::string("src/levels/") + info.baseName().toStdString();
+				return QString("require \"") + QString::fromStdString(path) + QString("\"");
+			}
+		} break;  
+		default:
+		{ 
+			assert(false); 
+		} break;
+	}
+	return QString();
+}
+
+//--------------------------------------------------
 QString convertMapPropToStr(const DiagramItem::VariantMap_t& properties)
 {
 	QString  result;
@@ -243,7 +273,7 @@ QString convertMapPropToStr(const DiagramItem::VariantMap_t& properties)
 			}break;
 			case QVariant::UserType:{
 				const DiagramItem::CustomProperty* prop = reinterpret_cast<const DiagramItem::CustomProperty*>(val.data());
-				result += QString::number(prop->mIntVal);
+				result += convertCustomPropToStr(prop);
 			}break;
 			default: break;
 		}

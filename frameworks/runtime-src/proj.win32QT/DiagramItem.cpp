@@ -24,6 +24,10 @@ ItemsDataMap_t fillItemsData() {
 };
 static const ItemsDataMap_t  itemsData = fillItemsData();
 
+DiagramItem::CustomProperty::CustomProperty():
+mType(TP_TYPE_BONUS)
+{}
+
 //-----------------------------------------------------------
 DiagramItem::DiagramItem(eTypeItem itemType, const QPoint& cellPoint) :
 mItemType(itemType),
@@ -49,13 +53,21 @@ mPoint(cellPoint)
 	}break;
 	case DiagramItem::CHEST_BONUS_ITEN: {
 			mProperties.insert(std::make_pair("Count", QVariant(10)));
-			mProperty.reset(new CustomProperty);
-			mProperty->mIntVal = 0;
-			mProperties.insert(std::make_pair("ChestType", QVariant(QVariant::UserType, mProperty.get())));
+			QVariant tmp;
+			CustomProperty val;
+			val.setVal(0);
+			tmp.setValue(val);
+			//mProperties.insert(std::make_pair("ChestType", QVariant(QVariant::UserType, mProperty.get())));
+			mProperties.insert(std::make_pair("ChestType", tmp));
 	}break;
 	case DiagramItem::BONUS_TREE_ITEN:
 	case DiagramItem::BONUS_DOOR_ITEN:
 	{
+		QVariant property;
+		CustomProperty val;
+		val.setVal("");
+		val.setType(CustomProperty::TP_TYPE_FILE);
+		property.setValue(val);
 		mProperties.insert(std::make_pair("BonusFile", QVariant("")));
 	}break;
 	default: break;
@@ -90,9 +102,21 @@ std::string DiagramItem::getNameByType(eTypeItem itemType)
 void DiagramItem::setProperty(const std::string& name, const QVariant& variant)
 {
 	if (name == "ChestType" && variant.type() != QVariant::UserType) {
-		mProperty.reset(new CustomProperty);
-		mProperty->mIntVal = variant.toInt();
-		mProperties[name] = QVariant(QVariant::UserType, mProperty.get());
+		QVariant tmp;
+		CustomProperty val;
+		val.setVal(variant.toInt());
+		tmp.setValue(val);
+
+		mProperties[name] = tmp;
+	}
+	else if (name == "BonusFile" && variant.type() != QVariant::UserType) {
+		QVariant tmp;
+		CustomProperty val;
+		val.setType(CustomProperty::TP_TYPE_FILE);
+		val.setVal(variant.toString());
+		tmp.setValue(val);
+
+		mProperties[name] = tmp;
 	}
 	else {
 		mProperties[name] = variant;

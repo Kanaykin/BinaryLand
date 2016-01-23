@@ -150,47 +150,60 @@ void ExplorerPanel::showItemProperty(DiagramItem* item)
 		if (!isVisibleProperty((*citer).first))
 			continue;
 
+		QtProperty *item0 = 0;
 		if ((*citer).second.type() == QVariant::Bool){
-			QtProperty *item0 = mBoolManager->addProperty(QString::fromStdString((*citer).first));
+			item0 = mBoolManager->addProperty(QString::fromStdString((*citer).first));
 			mBoolManager->setValue(item0, (*citer).second.toBool());
-
-			mPropertyBrowser->addProperty(item0);
-
-			PropertySetFunc_t func = std::bind(&DiagramItem::setProperty, item, (*citer).first, std::placeholders::_1);
-			mPropertySetters.insert(std::make_pair(item0, func));
 		}
 		else if ((*citer).second.type() == QVariant::Int){
-			QtProperty *item0 = mIntManager->addProperty(QString::fromStdString((*citer).first));
+			item0 = mIntManager->addProperty(QString::fromStdString((*citer).first));
 			mIntManager->setValue(item0, (*citer).second.toInt());
-
-			mPropertyBrowser->addProperty(item0);
-
-			PropertySetFunc_t func = std::bind(&DiagramItem::setProperty, item, (*citer).first, std::placeholders::_1);
-			mPropertySetters.insert(std::make_pair(item0, func));
 		}
 		else if ((*citer).second.type() == QVariant::String){
-			QtProperty *item0 = mStringManager->addProperty(QString::fromStdString((*citer).first));
+			item0 = mStringManager->addProperty(QString::fromStdString((*citer).first));
 			mStringManager->setValue(item0, (*citer).second.toString());
-
-			mPropertyBrowser->addProperty(item0);
-
-			PropertySetFunc_t func = std::bind(&DiagramItem::setProperty, item, (*citer).first, std::placeholders::_1);
-			mPropertySetters.insert(std::make_pair(item0, func));
 		}
 		else if ((*citer).second.type() == QVariant::UserType){
-			QtProperty *item0 = mEnumManager->addProperty(QString::fromStdString((*citer).first));
-			const DiagramItem::CustomProperty* prop = reinterpret_cast<const DiagramItem::CustomProperty*>((*citer).second.data());
-			QStringList list;
-			list.push_back("Coin");
-			list.push_back("Time");
-			mEnumManager->setEnumNames(item0, list);
+
+			DiagramItem::CustomProperty s2 = (*citer).second.value<DiagramItem::CustomProperty>();
+
+			item0 = showCustomItemProperty(&s2, QString::fromStdString((*citer).first));
+		}
+		if (item0) {
 			mPropertyBrowser->addProperty(item0);
-			mEnumManager->setValue(item0, prop->mIntVal);
 
 			PropertySetFunc_t func = std::bind(&DiagramItem::setProperty, item, (*citer).first, std::placeholders::_1);
 			mPropertySetters.insert(std::make_pair(item0, func));
 		}
 	}
+}
+
+//-----------------------------------------------
+QtProperty* ExplorerPanel::showCustomItemProperty(const DiagramItem::CustomProperty* prop, const QString& itemName)
+{
+	switch (prop->getType())
+	{
+		case DiagramItem::CustomProperty::TP_TYPE_BONUS:
+		{
+			QtProperty *item0 = mEnumManager->addProperty(itemName);
+
+			QStringList list;
+			list.push_back("Coin");
+			list.push_back("Time");
+			mEnumManager->setEnumNames(item0, list);
+			mEnumManager->setValue(item0, prop->getVal().toInt());
+			return item0;
+		}break;
+		case DiagramItem::CustomProperty::TP_TYPE_FILE:
+		{
+			QtProperty *item0 = mStringManager->addProperty(itemName);
+			mStringManager->setValue(item0, prop->getVal().toString());
+			return item0;
+		}break;
+		default:
+			break;
+	}
+	return 0;
 }
 
 //-----------------------------------------------

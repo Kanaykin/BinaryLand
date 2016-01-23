@@ -1,5 +1,9 @@
 #include "SceneLoader.h"
 #include "CCLuaEngine.h"
+#include <QtCore/QTextStream>
+#include <QtCore/QFile>
+#include <QtCore/QFileInfo>
+#include <QtCore/QTextStream>
 
 USING_NS_CC;
 
@@ -189,8 +193,56 @@ bool SceneLoader::PropertyContainer::getIntContainer(const std::string& key, std
 }
 
 //----------------------------------------------
-bool SceneLoader::loadScene(const std::string& fileName)
+std::string SceneLoader::prepareFile(const std::string& fileName)
 {
+	const QString requireStr("require ");
+	QFile file(QString::fromStdString( fileName));
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+		return std::string();
+
+	QString result;
+	QTextStream instream(&file);
+	while (!instream.atEnd()) {
+		QString line = instream.readLine();
+		result += line;
+	}
+	file.close();
+
+	bool found = false;
+	do {
+		const int ind = result.indexOf(requireStr);
+		found = false;
+		if (ind != -1) {
+			found = true;
+			result.remove(ind, requireStr.length());
+			const int ind1 = result.indexOf("\"", ind);
+			const int ind2 = result.indexOf("\"", ind1 + 1);
+			QString filePath = result.mid(ind1, ind2 - ind1);
+			const QFileInfo info(filePath);
+			result.remove(ind1 + 1, filePath.length() - 1);
+			QString newFileName = info.baseName();
+			std::string ghj = newFileName.toStdString();
+			result.insert(ind1 + 1, newFileName);
+		}
+	} while (found);
+
+	//const QFileInfo tmpinfo(QString::fromStdString(fileName));
+
+	QString tmpname = QString::fromStdString(fileName);// +QString("~.lua");
+	tmpname.replace(".lua", "");
+	tmpname += QString("~.lua");
+	QFile file_temp(tmpname);
+	file_temp.open(QIODevice::WriteOnly | QIODevice::Text);
+	QTextStream  out(&file_temp);
+	out << result;
+
+	return tmpname.toStdString();
+}
+
+//----------------------------------------------
+bool SceneLoader::loadScene(const std::string& fileNameIn)
+{
+	std::string fileName = prepareFile(fileNameIn);
 	LuaEngine* engine = LuaEngine::getInstance();
 	lua_State* L = engine->getLuaStack()->getLuaState();
 
@@ -206,5 +258,10 @@ bool SceneLoader::loadScene(const std::string& fileName)
 	mState = L;
 
 	lua_pop(L, 1);
+
+	QString tmpFile = QString::fromStdString(fileName);
+	QFile file_temp(tmpFile);
+	file_temp.remove();
+
 	return true;
 }

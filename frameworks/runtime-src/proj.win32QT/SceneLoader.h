@@ -36,6 +36,8 @@ public:
 
 	bool loadScene(const std::string& fileName);
 
+protected:
+	std::string prepareFile(const std::string& fileName);
 private:
 	lua_State* mState;
 };

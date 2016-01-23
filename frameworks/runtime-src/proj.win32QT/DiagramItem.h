@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <QtWidgets/QGraphicsPixmapItem >
+#include <QtCore/QMetaType>
 
 class DiagramItem : public QGraphicsPixmapItem
 {
@@ -30,10 +31,23 @@ public:
 		std::string	mName;
 		int mId;
 	};
-	struct CustomProperty
+	class CustomProperty
 	{
-		int mIntVal;
+	public:
+		enum TypeProperty {
+			TP_TYPE_BONUS,
+			TP_TYPE_FILE
+		};
+		CustomProperty();
+		TypeProperty getType() const { return mType; }
+		void setType(TypeProperty type) { mType = type; }
+		QVariant getVal() const { return mVal; }
+		void setVal(const QVariant& val){ mVal = val; }
+	private:
+		QVariant		mVal;
+		TypeProperty	mType;
 	};
+
 	typedef std::shared_ptr<CustomProperty> CustomPropertyPtr;
 	explicit DiagramItem(eTypeItem itemType, const QPoint& cellPoint);
 	~DiagramItem();
@@ -51,7 +65,8 @@ private:
 	eTypeItem			mItemType;
 	VariantMap_t		mProperties;
 	QPoint				mPoint;
-	CustomPropertyPtr	mProperty;
 };
+
+Q_DECLARE_METATYPE(DiagramItem::CustomProperty)
 
 #endif
