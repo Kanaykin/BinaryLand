@@ -16,6 +16,7 @@ Field.mTime = nil;
 Field.mScore = nil;
 Field.mMainUi = nil;
 Field.mBonusLevel = nil;
+Field.mBonusLevelFile = nil;
 Field.mIsBonusLevel = nil;
 Field.mObjectsById = nil;
 
@@ -70,6 +71,7 @@ end
 
 ---------------------------------
 function Field:destroy()
+    debug_log("Field:destroy")
 	for i, obj in ipairs(self.mObjects) do
 		obj:destroy();
 	end
@@ -337,10 +339,10 @@ end
 function Field:onStateWin()
 
 	self.mState = Field.WIN;
-	info_log("WIN !!!");
+	info_log("WIN !!! ", self.mBonusLevelFile);
 	if self.mStateListener then
         --check bonus level
-        if self.mBonusLevel then
+        if self.mBonusLevel or self.mBonusLevelFile then
             self.mStateListener:onStateBonusStart();
         else
             self.mStateListener:onStateWin();
@@ -401,6 +403,8 @@ function Field:tick(dt)
 		for i, obj in ipairs(self.mObjects) do
 			obj:tick(dt);
 		end
+
+        --debug_log("Field:tick count objects ", #self.mObjects);
 
 		self:updateScrollPos();
 		self:checkFinishGame();
@@ -800,6 +804,7 @@ function Field:init(fieldNode, layer, fieldData, game)
     self.mScore = 0;
     self.mId = fieldData.id;
     self.mBonusLevel = fieldData.bonusLevel;
+    self.mBonusLevelFile = fieldData.BonusLevelFile;
     self.mIsBonusLevel = fieldData.isBonus;
     info_log("Field:init self.mBonusLevel ", self.mBonusLevel);
 

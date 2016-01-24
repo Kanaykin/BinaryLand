@@ -7,6 +7,7 @@ require "src/game_objects/PlayerController"
 require "src/tutorial/TutorialManager"
 require "src/scenes/SoundConfigs"
 require "src/base/Log"
+require "src/base/table"
 require "src/scenes/EditorFileLoader"
 
 local G_EditorScene = require "src/levels/editor_scene"
@@ -48,13 +49,26 @@ function LevelScene:onBackPressed()
 end
 
 ---------------------------------
+function LevelScene:bonusFileStart(self_fake)
+    debug_log("LevelScene:bonusFileStart ")
+    local old_G_EditorScene = G_EditorScene
+    G_EditorScene = self.mLevel:getData().BonusLevelFile
+    self:bonusStart(self, self.mLevel:getData());
+    G_EditorScene = old_G_EditorScene
+end
+
+---------------------------------
 function LevelScene:bonusStart(self_fake, bonusData)
-    info_log("LevelScene:bonusStart bonusData ", bonusData);
+
+    info_log("LevelScene:bonusStart bonusData ");
     self:destroyLevelComponent();
     local data = bonusData and bonusData or self.mLevel:getData().bonusLevel;
+
+--    data = data and data or self.mLevel:getData().BonusLevelFile;
     info_log("LevelScene:bonusStart ccbFile ", data.ccbFile);
     data.isBonus = true;
-	self:initScene(data);
+
+    self:initScene(data);
     self:initGui();
     self:postInitScene(data);
     if bonusData and bonusData.score then
@@ -89,7 +103,11 @@ function LevelScene:bonusRoomStartFromFile(self_fake, isFemale, bonusFile, score
     debug_log("LevelScene:bonusRoomStartFromFile (", isFemale, ", ", bonusFile);
     local old_G_EditorScene = G_EditorScene
     G_EditorScene = bonusFile
-    self:bonusStart(self, self.mLevel:getData())--self.mLevel:getData().bonusRoom);
+    local copyData = table.copy(self.mLevel:getData())
+
+    copyData.isFemale = isFemale;
+
+    self:bonusStart(self, copyData)
     G_EditorScene = old_G_EditorScene
     self.mField:setScore(score);
 end
@@ -122,8 +140,14 @@ end
 
 ---------------------------------
 function LevelScene:onStateBonusStart()
+    debug_log("LevelScene:onStateBonusStart ", self.mLevel:getData().BonusLevelFile);
     self:winOpenLevel();
-    self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.bonusStart));
+
+    if self.mLevel:getData().BonusLevelFile then
+        self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.bonusFileStart));
+    else
+        self.mMainUI:onStateBonusStart(Callback.new(self, LevelScene.bonusStart));
+    end
 end
 
 ---------------------------------
@@ -178,7 +202,7 @@ end
 
 --------------------------------
 function LevelScene:postInitScene(levelData)
-    info_log("LevelScene:postInitScene ", levelData);
+    info_log("LevelScene:postInitScene ", levelData.isFemale);
     if levelData.tutorial then
         self.mTutorial = TutorialManager:create();
         self.mTutorial:init(self.mSceneGame, self.mField, self.mMainUI);

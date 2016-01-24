@@ -260,7 +260,7 @@ end
 
 --------------------------------
 function setProperty(inTable, outTable, nameProperty)
-    --debug_log("setProperty ", nameProperty, " prop ", inTable[nameProperty])
+    debug_log("setProperty ", nameProperty, " prop ", inTable[nameProperty])
     if inTable and inTable[nameProperty] then
         outTable[nameProperty] = inTable[nameProperty]
     end
@@ -272,6 +272,7 @@ function EditorFileLoader:updateLevelData(levelData, editorScene)
     setProperty( editorScene.levelParams, levelData, "time");
     setProperty( editorScene.levelParams, levelData, "backgroundMusic");
     setProperty( editorScene.levelParams, levelData, "tileMap");
+    setProperty( editorScene.levelParams, levelData, "BonusLevelFile");
 end
 
 --------------------------------

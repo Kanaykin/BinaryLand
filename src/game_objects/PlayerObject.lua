@@ -65,6 +65,7 @@ function PlayerObject:store(data)
     if self.mBonusRoomDoorPosition then
         data.nodePosition = self.mBonusRoomDoorPosition;
     end
+    --data.inTrap = self.mInTrap;
     return true
 end
 
@@ -77,6 +78,7 @@ end
 function PlayerObject:restore(data)
     PlayerObject:superClass().restore(self, data);
     --self.mLastButtonPressed = data.lastButtonPressed;
+    self.mInTrap = data.inTrap;
 end
 
 ---------------------------------
