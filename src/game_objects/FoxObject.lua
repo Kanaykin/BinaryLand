@@ -89,6 +89,17 @@ function FoxObject:getTrace()
 end
 
 ---------------------------------
+function FoxObject:restore(data)
+    debug_log("FoxObject:restore mInTrap ", self.mInTrap, " data.inTrap ", data.inTrap)
+    FoxObject:superClass().restore(self, data);
+    --self.mLastButtonPressed = data.lastButtonPressed;
+    if self.mInTrap and not data.inTrap then
+        self.mInTrap = data.inTrap;
+        self:playAnimation(-1);
+    end
+end
+
+---------------------------------
 function FoxObject:setCustomProperties(properties)
     info_log("FoxObject:setCustomProperties properties.state ", properties.state);
 
