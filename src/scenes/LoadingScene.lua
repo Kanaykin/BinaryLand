@@ -14,6 +14,7 @@ LoadingScene.mProgress = nil;
 LoadingScene.mTimeLabel = nil;
 LoadingScene.PROGRESS_TAG = 31;
 LoadingScene.LABEL_TAG = 32;
+LoadingScene.PERCENT_IMAGE_TAG = 33;
 LoadingScene.PROGRESS_PARENT_TAG = 30;
 
 ---------------------------------
@@ -37,6 +38,10 @@ function LoadingScene:loadScene()
     self.mTimeLabel = node:getChildByTag(LoadingScene.LABEL_TAG);
     self.mTimeLabel:setPositionX(parentSize.width / 2);
     setDefaultFont(self.mTimeLabel, self.mSceneManager.mGame:getScale());
+    
+    local percent_image = node:getChildByTag(LoadingScene.PERCENT_IMAGE_TAG);
+    local labelSize = self.mTimeLabel:getContentSize();
+    percent_image:setPositionX(parentSize.width / 2 + labelSize.width);
 end
 
 --------------------------------
