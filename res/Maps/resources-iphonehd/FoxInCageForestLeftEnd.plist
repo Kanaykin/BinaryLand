@@ -276,13 +276,13 @@
             <key>format</key>
             <integer>0</integer>
             <key>realTextureFileName</key>
-            <string>FoxInCageLeftEnd.png</string>
+            <string>FoxInCageForestLeftEnd.png</string>
             <key>size</key>
             <string>{230,119}</string>
             <key>smartupdate</key>
             <string>$TexturePacker:SmartUpdate:489fe063d3e7ab42711a79a1cdd80b05:15fcfe387de72f2aff923aba0a7ec372:afc416ac672033f636d03e50f07e77a2$</string>
             <key>textureFileName</key>
-            <string>FoxInCageLeftEnd.png</string>
+            <string>FoxInCageForestLeftEnd.png</string>
         </dict>
         <key>texture</key>
         <dict>

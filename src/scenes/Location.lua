@@ -53,6 +53,12 @@ function Location:getId()
 	return self.mData.id;
 end
 
+
+---------------------------------
+function Location:getDescription()
+	return self.mData.description;
+end
+
 ---------------------------------
 function Location:initLevels(locationData)
     info_log("Location:initLevels !");

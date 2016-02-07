@@ -564,7 +564,17 @@ function FoxObject:createInHiddenCageAnimation()
 end
 
 --------------------------------
+function FoxObject:getNameLocation()
+    local level = self.mField:getGame().mSceneMan:getCurrentScene():getLevel();
+    local location = level:getLocation();
+    return location:getDescription();
+end
+
+--------------------------------
 function FoxObject:createInCageSideAnimation(texture_prefix, id_anim)
+    local location = self:getNameLocation();
+    debug_log("FoxObject:createInCageSideAnimation ", location);
+    texture_prefix = location..texture_prefix;
     local sequence = SequenceAnimation:create();
     sequence:init();
 

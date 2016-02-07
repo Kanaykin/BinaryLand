@@ -4,18 +4,18 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>trap_forest_boy_r_0010_Layer-Comp-11 copy.png</key>
+            <key>trap_forest_girl_0010_Layer-Comp-11 copy.png</key>
             <dict>
                 <key>height</key>
                 <integer>117</integer>
                 <key>offsetX</key>
-                <real>0</real>
+                <real>3</real>
                 <key>offsetY</key>
-                <real>-16</real>
+                <real>-17</real>
                 <key>originalHeight</key>
-                <integer>175</integer>
+                <integer>173</integer>
                 <key>originalWidth</key>
-                <integer>160</integer>
+                <integer>166</integer>
                 <key>width</key>
                 <integer>116</integer>
                 <key>x</key>
@@ -23,18 +23,18 @@
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>trap_forest_boy_r_0010_Layer-Comp-11.png</key>
+            <key>trap_forest_girl_0010_Layer-Comp-11.png</key>
             <dict>
                 <key>height</key>
                 <integer>117</integer>
                 <key>offsetX</key>
-                <real>0</real>
+                <real>3</real>
                 <key>offsetY</key>
-                <real>-16</real>
+                <real>-17</real>
                 <key>originalHeight</key>
-                <integer>175</integer>
+                <integer>173</integer>
                 <key>originalWidth</key>
-                <integer>160</integer>
+                <integer>166</integer>
                 <key>width</key>
                 <integer>116</integer>
                 <key>x</key>
@@ -42,18 +42,18 @@
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>trap_forest_boy_r_0011_Layer-Comp-12 copy.png</key>
+            <key>trap_forest_girl_0011_Layer-Comp-12 copy.png</key>
             <dict>
                 <key>height</key>
                 <integer>117</integer>
                 <key>offsetX</key>
-                <real>0</real>
+                <real>3</real>
                 <key>offsetY</key>
-                <real>-16</real>
+                <real>-17</real>
                 <key>originalHeight</key>
-                <integer>175</integer>
+                <integer>173</integer>
                 <key>originalWidth</key>
-                <integer>160</integer>
+                <integer>166</integer>
                 <key>width</key>
                 <integer>116</integer>
                 <key>x</key>
@@ -61,18 +61,18 @@
                 <key>y</key>
                 <integer>2</integer>
             </dict>
-            <key>trap_forest_boy_r_0011_Layer-Comp-12.png</key>
+            <key>trap_forest_girl_0011_Layer-Comp-12.png</key>
             <dict>
                 <key>height</key>
                 <integer>117</integer>
                 <key>offsetX</key>
-                <real>0</real>
+                <real>3</real>
                 <key>offsetY</key>
-                <real>-16</real>
+                <real>-17</real>
                 <key>originalHeight</key>
-                <integer>175</integer>
+                <integer>173</integer>
                 <key>originalWidth</key>
-                <integer>160</integer>
+                <integer>166</integer>
                 <key>width</key>
                 <integer>116</integer>
                 <key>x</key>
@@ -86,13 +86,13 @@
             <key>format</key>
             <integer>0</integer>
             <key>realTextureFileName</key>
-            <string>FoxInCageRightEnd.png</string>
+            <string>FoxGirlInCageForestLeftEnd.png</string>
             <key>size</key>
             <string>{238,121}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:2bd30d30b85fa8cb5b2073e93d573a83:081990c8a8d716635486a1e99fec4dc5:e70bf18c195ef0aeb0ccefdaaba54451$</string>
+            <string>$TexturePacker:SmartUpdate:6e62a6d090fbfe835a197f135bf1b5ad:b3c2eed8e224becc7d4d77c748a899a7:41c39deadf698e781144e69dbefd6a7e$</string>
             <key>textureFileName</key>
-            <string>FoxInCageRightEnd.png</string>
+            <string>FoxGirlInCageForestLeftEnd.png</string>
         </dict>
         <key>texture</key>
         <dict>

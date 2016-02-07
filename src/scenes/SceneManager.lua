@@ -74,6 +74,7 @@ function SceneManager:runNextScene(params)
 		index = self.mCurrentSceneId + 1;
 	end
 
+	info_log("SceneManager:runNextScene index ", index);
 	if index == SCENE_TYPE_ID.CHOOSE_LOCATION then
 		local locationId = 1;
 		local isLevelOpened = self.mGame:isLevelOpened(locationId, 1);

@@ -390,13 +390,13 @@
             <key>format</key>
             <integer>0</integer>
             <key>realTextureFileName</key>
-            <string>FoxInCageRight.png</string>
+            <string>FoxInCageForestRight.png</string>
             <key>size</key>
             <string>{242,967}</string>
             <key>smartupdate</key>
             <string>$TexturePacker:SmartUpdate:fa114644584df76b98c15ffed04ddffb:076f7adcace775245e24b483ef7047c8:2b9f29c14f61c79d516215e53b20ac9a$</string>
             <key>textureFileName</key>
-            <string>FoxInCageRight.png</string>
+            <string>FoxInCageForestRight.png</string>
         </dict>
         <key>texture</key>
         <dict>

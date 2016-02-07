@@ -825,8 +825,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -3905,7 +3903,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageSand.png</string>
 								</array>
 							</dict>
 						</array>
