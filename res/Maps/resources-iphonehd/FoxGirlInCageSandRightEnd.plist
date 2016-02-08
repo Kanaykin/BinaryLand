@@ -4,31 +4,31 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>trap_girl_right_0010_Layer-Comp-11.png</key>
+            <key>trap_girl_right_sand_0010_Layer-Comp-11.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{112,116}}</string>
+                <string>{{2,2},{108,107}}</string>
                 <key>offset</key>
-                <string>{-1,-19}</string>
+                <string>{-1,-25}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
-                <string>{{26,48},{112,116}}</string>
+                <string>{{28,58},{108,107}}</string>
                 <key>sourceSize</key>
-                <string>{166,174}</string>
+                <string>{166,173}</string>
             </dict>
-            <key>trap_girl_right_0011_Layer-Comp-12.png</key>
+            <key>trap_girl_right_sand_0011_Layer-Comp-12.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{116,2},{112,116}}</string>
+                <string>{{111,2},{108,107}}</string>
                 <key>offset</key>
-                <string>{-1,-19}</string>
+                <string>{-1,-25}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
-                <string>{{26,48},{112,116}}</string>
+                <string>{{28,58},{108,107}}</string>
                 <key>sourceSize</key>
-                <string>{166,174}</string>
+                <string>{166,173}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -36,13 +36,13 @@
             <key>format</key>
             <integer>2</integer>
             <key>realTextureFileName</key>
-            <string>FoxGirlInCageForestRightEnd.png</string>
+            <string>FoxGirlInCageSandRightEnd.png</string>
             <key>size</key>
-            <string>{230,120}</string>
+            <string>{220,112}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:e4a2d257896686a6c0603393cdca67b1:e85ba34d488fdfd3ea891fc006426b06:59b917f0b564acc0b099b1b4b43d9b74$</string>
+            <string>$TexturePacker:SmartUpdate:51dcd6639d39e9b7d125c4b8dcecd3e0:e33ab8f4a85ef6bfedcf657e9f79dbdd:de560c431c30388c1ab463f2db6cbe43$</string>
             <key>textureFileName</key>
-            <string>FoxGirlInCageForestRightEnd.png</string>
+            <string>FoxGirlInCageSandRightEnd.png</string>
         </dict>
     </dict>
 </plist>

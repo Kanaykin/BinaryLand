@@ -4,159 +4,159 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>trap_boy_right_0001_Layer-Comp-2.png</key>
+            <key>trap_boy_right_sand_0000_Layer-Comp-1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{116,460},{112,120}}</string>
+                <string>{{624,2},{108,122}}</string>
                 <key>offset</key>
-                <string>{0,-16}</string>
+                <string>{0,-17}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{24,44},{112,120}}</string>
+                <string>{{26,44},{108,122}}</string>
                 <key>sourceSize</key>
                 <string>{160,176}</string>
             </dict>
-            <key>trap_boy_right_0002_Layer-Comp-3.png</key>
+            <key>trap_boy_right_sand_0001_Layer-Comp-2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{116,574},{112,120}}</string>
+                <string>{{494,112},{108,122}}</string>
                 <key>offset</key>
-                <string>{0,-16}</string>
+                <string>{0,-17}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{24,44},{112,120}}</string>
+                <string>{{26,44},{108,122}}</string>
                 <key>sourceSize</key>
                 <string>{160,176}</string>
             </dict>
-            <key>trap_boy_right_0003_Layer-Comp-4.png</key>
+            <key>trap_boy_right_sand_0002_Layer-Comp-3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{116,688},{112,120}}</string>
+                <string>{{322,140},{108,122}}</string>
                 <key>offset</key>
-                <string>{0,-16}</string>
+                <string>{0,-17}</string>
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{24,44},{112,120}}</string>
+                <string>{{26,44},{108,122}}</string>
                 <key>sourceSize</key>
                 <string>{160,176}</string>
             </dict>
-            <key>trap_boy_right_0004_Layer-Comp-5.png</key>
+            <key>trap_boy_right_sand_0003_Layer-Comp-4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,602},{112,128}}</string>
+                <string>{{494,2},{108,128}}</string>
                 <key>offset</key>
                 <string>{0,-19}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
-                <string>{{24,43},{112,128}}</string>
+                <string>{{26,43},{108,128}}</string>
                 <key>sourceSize</key>
                 <string>{160,176}</string>
             </dict>
-            <key>trap_boy_right_0005_Layer-Comp-6.png</key>
+            <key>trap_boy_right_sand_0004_Layer-Comp-5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,732},{112,124}}</string>
+                <string>{{604,126},{108,116}}</string>
                 <key>offset</key>
-                <string>{0,-21}</string>
+                <string>{0,-25}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
-                <string>{{24,47},{112,124}}</string>
+                <string>{{26,55},{108,116}}</string>
                 <key>sourceSize</key>
                 <string>{160,176}</string>
             </dict>
-            <key>trap_boy_right_0006_Layer-Comp-7.png</key>
+            <key>trap_boy_right_sand_0005_Layer-Comp-6.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,456},{112,144}}</string>
+                <string>{{2,122},{108,144}}</string>
                 <key>offset</key>
                 <string>{0,-13}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
-                <string>{{24,29},{112,144}}</string>
+                <string>{{26,29},{108,144}}</string>
                 <key>sourceSize</key>
                 <string>{160,176}</string>
             </dict>
-            <key>trap_boy_right_0007_Layer-Comp-8.png</key>
+            <key>trap_boy_right_sand_0006_Layer-Comp-7.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{124,294},{112,164}}</string>
+                <string>{{168,2},{108,164}}</string>
                 <key>offset</key>
                 <string>{0,-3}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
-                <string>{{24,9},{112,164}}</string>
+                <string>{{26,9},{108,164}}</string>
                 <key>sourceSize</key>
                 <string>{160,176}</string>
             </dict>
-            <key>trap_boy_right_0008_Layer-Comp-9.png</key>
+            <key>trap_boy_right_sand_0007_Layer-Comp-8.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,294},{120,160}}</string>
+                <string>{{2,2},{118,164}}</string>
                 <key>offset</key>
-                <string>{3,4}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{23,4},{120,160}}</string>
-                <key>sourceSize</key>
-                <string>{160,176}</string>
-            </dict>
-            <key>trap_boy_right_0009_Layer-Comp-10.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{2,142},{142,150}}</string>
-                <key>offset</key>
-                <string>{4,-1}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{13,14},{142,150}}</string>
-                <key>sourceSize</key>
-                <string>{160,176}</string>
-            </dict>
-            <key>trap_boy_right_0010_Layer-Comp-11.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{2,2},{160,138}}</string>
-                <key>offset</key>
-                <string>{0,-10}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,29},{160,138}}</string>
-                <key>sourceSize</key>
-                <string>{160,176}</string>
-            </dict>
-            <key>trap_boy_right_0011_Layer-Comp-12.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{2,858},{112,116}}</string>
-                <key>offset</key>
-                <string>{0,-18}</string>
+                <string>{4,4}</string>
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{24,48},{112,116}}</string>
+                <string>{{25,2},{118,164}}</string>
                 <key>sourceSize</key>
                 <string>{160,176}</string>
             </dict>
-            <key>trap_boy_right_0012_Layer-Comp-13.png</key>
+            <key>trap_boy_right_sand_0008_Layer-Comp-9.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{120,802},{112,116}}</string>
+                <string>{{168,112},{142,152}}</string>
                 <key>offset</key>
-                <string>{0,-18}</string>
+                <string>{6,-2}</string>
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{24,48},{112,116}}</string>
+                <string>{{15,14},{142,152}}</string>
+                <key>sourceSize</key>
+                <string>{160,176}</string>
+            </dict>
+            <key>trap_boy_right_sand_0009_Layer-Comp-10.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{334,2},{158,136}}</string>
+                <key>offset</key>
+                <string>{1,-10}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{2,30},{158,136}}</string>
+                <key>sourceSize</key>
+                <string>{160,176}</string>
+            </dict>
+            <key>trap_boy_right_sand_0010_Layer-Comp-11.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{722,126},{108,106}}</string>
+                <key>offset</key>
+                <string>{0,-25}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{26,60},{108,106}}</string>
+                <key>sourceSize</key>
+                <string>{160,176}</string>
+            </dict>
+            <key>trap_boy_right_sand_0011_Layer-Comp-12.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{734,2},{108,106}}</string>
+                <key>offset</key>
+                <string>{0,-25}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{26,60},{108,106}}</string>
                 <key>sourceSize</key>
                 <string>{160,176}</string>
             </dict>
@@ -166,13 +166,13 @@
             <key>format</key>
             <integer>2</integer>
             <key>realTextureFileName</key>
-            <string>FoxInCageForestRight.png</string>
+            <string>FoxInCageSandRight.png</string>
             <key>size</key>
-            <string>{238,972}</string>
+            <string>{842,256}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:5ecd9c62c3dd56945e68cbac5ab9e090:e1f924f66364f7cdfc7ee26ef585d9a5:a7a7202632e414bff0f1c80a64ce01f0$</string>
+            <string>$TexturePacker:SmartUpdate:8f6857696708eea58cd69dfe9d8f19e6:a45e27bc7602d3a781bf439cd9a2d57e:9bbdc605cc66d175827489d438cdb403$</string>
             <key>textureFileName</key>
-            <string>FoxInCageForestRight.png</string>
+            <string>FoxInCageSandRight.png</string>
         </dict>
     </dict>
 </plist>
