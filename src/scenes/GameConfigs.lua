@@ -217,7 +217,7 @@ gLocations = {
 	},
 	{
 		id = 3,
-		description = "earth.png",
+		description = "Snow",
 		position = Coord(0.52, 0.5, 0, -235),
         opened = true,
         levels = {
