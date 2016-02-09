@@ -257,7 +257,7 @@ gLocations = {
 	},
 	{
 		id = 4,
-		description = "mars.png",
+		description = "Forest",
 		position = Coord(0.78, 0.5, 0, -120),
         opened = true,
         levels = {
@@ -297,7 +297,7 @@ gLocations = {
 	},
     {
         id = 5,
-        description = "mars.png",
+        description = "Vulcano",
         position = Coord(0.9, 0.5, 0, -120),
         opened = true,
         levels = {

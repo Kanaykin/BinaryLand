@@ -513,7 +513,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageVulcano.png</string>
 								</array>
 							</dict>
 						</array>
@@ -4595,7 +4595,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageVulcano.png</string>
 								</array>
 							</dict>
 						</array>
@@ -4675,7 +4675,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageVulcano.png</string>
 								</array>
 							</dict>
 						</array>
@@ -4755,7 +4755,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageVulcano.png</string>
 								</array>
 							</dict>
 						</array>
@@ -4835,7 +4835,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageVulcano.png</string>
 								</array>
 							</dict>
 						</array>
@@ -4915,10 +4915,12 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageVulcano.png</string>
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -5371,7 +5373,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageVulcano.png</string>
 								</array>
 							</dict>
 						</array>
@@ -5451,7 +5453,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageVulcano.png</string>
 								</array>
 							</dict>
 						</array>
@@ -5531,7 +5533,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageVulcano.png</string>
 								</array>
 							</dict>
 						</array>
@@ -5611,7 +5613,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageVulcano.png</string>
 								</array>
 							</dict>
 						</array>
@@ -5691,12 +5693,10 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageVulcano.png</string>
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -5773,7 +5773,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageVulcano.png</string>
 								</array>
 							</dict>
 						</array>

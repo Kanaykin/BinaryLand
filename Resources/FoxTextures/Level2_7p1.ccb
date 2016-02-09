@@ -3599,7 +3599,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageSand.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3679,7 +3679,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageSand.png</string>
 								</array>
 							</dict>
 						</array>
@@ -4279,7 +4279,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageSand.png</string>
 								</array>
 							</dict>
 						</array>
@@ -5079,7 +5079,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageSand.png</string>
 								</array>
 							</dict>
 						</array>
@@ -5743,7 +5743,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageSand.png</string>
 								</array>
 							</dict>
 						</array>
@@ -6911,7 +6911,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>cage.png</string>
+									<string>cageSand.png</string>
 								</array>
 							</dict>
 						</array>
@@ -7451,8 +7451,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
