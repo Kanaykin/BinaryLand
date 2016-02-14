@@ -30,10 +30,13 @@ function FirstAppear:enter(params)
 	self.mObject:playAnimation(SpiritObject.ANIMATION_STATE.AS_FIRST_APPEAR);
 
 	self.mAnimation = self.mObject:getAnimation(SpiritObject.ANIMATION_STATE.AS_FIRST_APPEAR);
+	self.mObject:setPlayerPosition();
+	self.mObject:setPlayerFlip();
 end
 
 ------------------------------------
 function FirstAppear:tick(dt)
+	--self.mObject:setPlayerPosition();
 	if self.mAnimation:isDone() then
 		debug_log("FirstAppear:tick isDone ");
 		self.mStateMachine:setState(SpiritStates.MS_FOLLOW_PLAYER);
@@ -53,11 +56,12 @@ end
 function FollowPlayer:enter(params)
 	info_log("FollowPlayer:enter ");
 	self.mObject:playAnimation(SpiritObject.ANIMATION_STATE.AS_FOLLOW_PLAYER);
+	self.mObject:setSourcePosition();
 end
 
 ------------------------------------
 function FollowPlayer:tick(dt)
-	self.mObject:setPlayerPosition();
+self.mObject:setSourcePosition();
 end
 
 --[[///////////////////////////]]

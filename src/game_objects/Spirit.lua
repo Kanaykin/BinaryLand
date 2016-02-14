@@ -12,18 +12,23 @@ SpiritObject.ANIMATION_STATE = {
 }
 SpiritObject.mCurrentAnimation = nil--SpiritObject.ANIMATION_STATE.AS_FIRST_APPEAR
 SpiritObject.mStateMachine = nil
+SpiritObject.mSourcePosition = nil
 
 --------------------------------
 function SpiritObject:init(field, node, player)
 	info_log("SpiritObject:init(", node, ")");
 	SpiritObject:superClass().init(self, field, node);
 
+	self.mPlayer = player;
 	self:initAnimation();
 	--self.mAnimations[self.mCurrentAnimation]:play();
-	self.mPlayer = player;
+
+    self.mSourcePosition = Vector.new(self.mNode:getPosition());
+    debug_log("SpiritObject:init self.mSourcePosition ", self.mSourcePosition.x, ", ", self.mSourcePosition.y);
 
 	self.mStateMachine = SpiritStateMachine:create();
     self.mStateMachine:init(self);
+
 end
 
 ---------------------------------
@@ -55,24 +60,30 @@ end
 
 --------------------------------
 function SpiritObject:createAppearAnimation()
+	local prefix =  not self.mPlayer:isFemale() and "Girl" or "";
+
 	local anchor = self.mNode:getAnchorPoint();
 	local animation = PlistAnimation:create();
-    animation:init("SpiritAppear.plist", self.mNode, anchor, nil, 0.1);
+    animation:init("Spirit"..prefix.."Appear.plist", self.mNode, anchor, nil, 0.1);
     return animation;
 end
 
 --------------------------------
 function SpiritObject:createLoopAnimation(loop)
+	local prefix =  not self.mPlayer:isFemale() and "Girl" or "";
+
 	local anchor = self.mNode:getAnchorPoint();
     local repeat_loop = RepeatAnimation:create();
     local animation_loop = PlistAnimation:create();
-    animation_loop:init("SpiritLoop.plist", self.mNode, anchor, nil, 0.2);
+    animation_loop:init("Spirit"..prefix.."Loop.plist", self.mNode, anchor, nil, 0.2);
     repeat_loop:init(animation_loop, false, loop);
     return repeat_loop;
 end
 
 --------------------------------
 function SpiritObject:createFirstAppearAnimation()
+	local prefix =  not self.mPlayer:isFemale() and "Girl" or "";
+
 	local sequence = SequenceAnimation:create();
     sequence:init();
 
@@ -85,7 +96,7 @@ function SpiritObject:createFirstAppearAnimation()
     sequence:addAnimation(repeat_loop);
 
 	local animationHide = PlistAnimation:create();
-    animationHide:init("SpiritHide.plist", self.mNode, anchor, nil, 0.1);
+    animationHide:init("Spirit"..prefix.."Hide.plist", self.mNode, anchor, nil, 0.1);
     sequence:addAnimation(animationHide);
 
     local emptyAnim = EmptyAnimation:create();
@@ -99,11 +110,12 @@ end
 
 --------------------------------
 function SpiritObject:createDisappearAnimation()
+	local prefix =  not self.mPlayer:isFemale() and "Girl" or "";
 	local sequence = SequenceAnimation:create();
     sequence:init();
 
 	local animationHide = PlistAnimation:create();
-    animationHide:init("SpiritHide.plist", self.mNode, anchor, nil, 0.1);
+    animationHide:init("Spirit"..prefix.."Hide.plist", self.mNode, anchor, nil, 0.1);
     sequence:addAnimation(animationHide);
 
     local emptyAnim = EmptyAnimation:create();
@@ -165,18 +177,28 @@ function SpiritObject:disappear()
 end
 
 --------------------------------
-function SpiritObject:setPlayerPosition()
-	local pos = self.mPlayer:getPosition();
-
-    pos.y = pos.y + self.mField.mCellSize / 1.2;
-	self.mNode:setPosition(pos.x, pos.y);
-
+function SpiritObject:setPlayerFlip()
 	local flip = self.mPlayer:isFlipped();
 
 	local sprite = tolua.cast(self.mNode, "cc.Sprite");
     if flip ~= sprite:isFlippedX() then
         sprite:setFlippedX(flip);
     end
+end
+
+--------------------------------
+function SpiritObject:setSourcePosition()
+	--debug_log("SpiritObject:setSourcePosition self.mSourcePosition ", self.mSourcePosition.x, ", ", self.mSourcePosition.y);
+	self.mNode:setPosition(self.mSourcePosition.x, self.mSourcePosition.y);
+end
+
+--------------------------------
+function SpiritObject:setPlayerPosition()
+	local pos = self.mPlayer:getPosition();
+	--debug_log("SpiritObject:setPlayerPosition pos ", pos.x, ", ", pos.y);
+
+    pos.y = pos.y + self.mField.mCellSize / 1.2;
+	self.mNode:setPosition(pos.x, pos.y);
 end
 
 --------------------------------
