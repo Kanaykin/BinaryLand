@@ -1,5 +1,6 @@
 require "src/game_objects/MovableObject"
 require "src/game_objects/SpiritStates"
+require "src/game_objects/FoxHelpEffect"
 
 SpiritObject = inheritsFrom(MovableObject)
 SpiritObject.mAnimations = nil
@@ -13,6 +14,10 @@ SpiritObject.ANIMATION_STATE = {
 SpiritObject.mCurrentAnimation = nil--SpiritObject.ANIMATION_STATE.AS_FIRST_APPEAR
 SpiritObject.mStateMachine = nil
 SpiritObject.mSourcePosition = nil
+SpiritObject.mHelpEffect = nil
+SpiritObject.mDebugBox = nil;
+SpiritObject.mNeedDebugBox = false;
+SpiritObject.mAnimationHideHelp = nil;
 
 --------------------------------
 function SpiritObject:init(field, node, player)
@@ -20,15 +25,25 @@ function SpiritObject:init(field, node, player)
 	SpiritObject:superClass().init(self, field, node);
 
 	self.mPlayer = player;
+
+	self.mHelpEffect = FoxHelpEffect:create();
+    self.mHelpEffect:init(node, field.mGame);
+    self.mHelpEffect:setVisible(false);
+
 	self:initAnimation();
 	--self.mAnimations[self.mCurrentAnimation]:play();
 
     self.mSourcePosition = Vector.new(self.mNode:getPosition());
     debug_log("SpiritObject:init self.mSourcePosition ", self.mSourcePosition.x, ", ", self.mSourcePosition.y);
 
-	self.mStateMachine = SpiritStateMachine:create();
+    self.mStateMachine = SpiritStateMachine:create();
     self.mStateMachine:init(self);
 
+    if self.mNeedDebugBox then
+        local nodeBox = cc.DrawNode:create();
+        node:addChild(nodeBox);
+        self.mDebugBox = nodeBox;
+    end
 end
 
 ---------------------------------
@@ -39,6 +54,21 @@ function SpiritObject:destroy()
 
 	for i, animation in ipairs(self.mAnimations) do
 		animation:destroy();
+	end
+end
+
+--------------------------------
+function SpiritObject:updateDebugBox()
+    if self.mDebugBox then
+        local box = self:getBoundingBox();
+        local size = self.mNode:getBoundingBox();
+        local anchor = self.mNode:getAnchorPoint();
+        box.x = 0;
+        box.y = 0;
+        self.mDebugBox:clear();
+        local center = cc.p(box.x + anchor.x * size.width , box.y + anchor.y * size.height);
+        self.mDebugBox:drawCircle(center, box.width / 2.0 * 0.7,
+            360, 360, false, {r = 0, g = 0, b = 0, a = 100});
 	end
 end
 
@@ -94,10 +124,12 @@ function SpiritObject:createFirstAppearAnimation()
 
     local repeat_loop = self:createLoopAnimation(2);
     sequence:addAnimation(repeat_loop);
+    self.mHelpEffect:addDependAnimation(repeat_loop);
 
 	local animationHide = PlistAnimation:create();
     animationHide:init("Spirit"..prefix.."Hide.plist", self.mNode, anchor, nil, 0.1);
     sequence:addAnimation(animationHide);
+    self.mAnimationHideHelp = animationHide;
 
     local emptyAnim = EmptyAnimation:create();
     emptyAnim:init(nil, self.mNode, anchor);
@@ -178,12 +210,14 @@ end
 
 --------------------------------
 function SpiritObject:setPlayerFlip()
-	local flip = self.mPlayer:isFlipped();
+	local flip = not self.mPlayer:isFlipped();
 
 	local sprite = tolua.cast(self.mNode, "cc.Sprite");
     if flip ~= sprite:isFlippedX() then
         sprite:setFlippedX(flip);
     end
+    self.mHelpEffect:setAnchor({x = flip and -1.3 or -0.3, y = -3.5});
+    self.mHelpEffect:updateFlip(flip);
 end
 
 --------------------------------
@@ -211,7 +245,23 @@ function SpiritObject:initAnimation()
 end
 
 --------------------------------
+function SpiritObject:getCurrentAnimation()
+    return self.mAnimations[self.mCurrentAnimation];
+end
+
+--------------------------------
 function SpiritObject:tick(dt)
 	self.mStateMachine:tick(dt);
 	self.mAnimations[self.mCurrentAnimation]:tick(dt);
+	self:updateDebugBox();
+
+	local currAnim = self:getCurrentAnimation();
+    local curr = currAnim:currentAnimation();
+
+    if self.mHelpEffect:isDependAnimation(curr) then
+        self.mHelpEffect:setVisible(true);
+    end
+    if self.mAnimationHideHelp == curr then
+    	self.mHelpEffect:setVisible(false);
+    end
 end
