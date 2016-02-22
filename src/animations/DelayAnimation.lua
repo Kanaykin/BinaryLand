@@ -55,8 +55,8 @@ function DelayAnimationSoftImpl:play()
             --info_log("DelayAnimationSoftImpl:play sprite ", sprite);
             tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setSpriteFrame(sprite);
         else
-            tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setTexture(self.mTexture);
-            tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setTextureRect(cc.rect(0, 0, self.mTextureSize.width, self.mTextureSize.height));
+            --tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setTexture(self.mTexture);
+            --tolua.cast(self.mAnimation:getNode(), "cc.Sprite"):setTextureRect(cc.rect(0, 0, self.mTextureSize.width, self.mTextureSize.height));
         end
 	end
     if self.mAnchor then

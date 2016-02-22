@@ -19,6 +19,7 @@ Field.mBonusLevel = nil;
 Field.mBonusLevelFile = nil;
 Field.mIsBonusLevel = nil;
 Field.mObjectsById = nil;
+Field.mBrickObjects = nil;
 
 Field.mPlayerObjects = nil;
 
@@ -399,6 +400,10 @@ function Field:tick(dt)
         end
     end
 
+    for i, obj in ipairs(self.mBrickObjects) do
+        obj:tick(dt);
+    end
+
     if self.mState ~= Field.PAUSE then
 		for i, obj in ipairs(self.mObjects) do
 			obj:tick(dt);
@@ -692,7 +697,7 @@ end
 
 --------------------------------
 function Field:addBrick(brick)
-	self:addObject(brick);
+    table.insert(self.mBrickObjects, brick);
 	local x, y = self:getGridPosition(brick:getNode());
 	self.mArray[COORD(x, y, self.mSize.x)] = 1;
 end
@@ -815,6 +820,7 @@ function Field:init(fieldNode, layer, fieldData, game)
 	self.mGame = game;
 
 	self.mObjects = {}
+    self.mBrickObjects = {}
 	self.mFreePoints = {};
 	self.mPlayerObjects = {};
 	self.mEnemyObjects = {};

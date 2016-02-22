@@ -7,6 +7,7 @@ RepeatAnimation.mImpl = nil
 
 RepeatAnimationSoftImpl = inheritsFrom(IAnimation)
 RepeatAnimationSoftImpl.mAnimation = nil
+RepeatAnimationSoftImpl.mAction = nil;
 
 --------------------------------
 function RepeatAnimationSoftImpl:init(animation, times)
@@ -17,6 +18,7 @@ function RepeatAnimationSoftImpl:init(animation, times)
 	animation:setAction(repeatAction);
 
 	self.mAnimation = animation;
+	self.mAction = repeatAction;
 end
 
 ----------------------------
@@ -36,6 +38,18 @@ end
 
 --------------------------------
 function RepeatAnimationSoftImpl:tick(dt)
+end
+
+---------------------------------
+function RepeatAnimationSoftImpl:getAction()
+    return self.mAction;
+end
+
+--------------------------------
+function RepeatAnimationSoftImpl:setAction(action)
+	self.mAction:release();
+	self.mAction = action;
+	self.mAction:retain();
 end
 
 ---------------------------------
@@ -77,11 +91,20 @@ function RepeatAnimationHardImpl:stop()
 end
 
 --------------------------------
+function RepeatAnimationHardImpl:setAction()
+end
+
+--------------------------------
 function RepeatAnimationHardImpl:tick(dt)
 	if self.mPlaying and self:isDone() and not self.mStopAfterDone then
 		info_log("RepeatAnimationHardImpl:tick replay ");
 		self:play();
 	end
+end
+
+---------------------------------
+function RepeatAnimationHardImpl:getAction()
+    return nil;
 end
 
 ---------------------------------
@@ -91,8 +114,8 @@ end
 
 --///////////////////////////////
 --------------------------------
-function RepeatAnimation:init(animation, soft, time)
-	if soft then
+function RepeatAnimation:init(animation, hard, time)
+	if hard then
 		self.mImpl = RepeatAnimationHardImpl:create();
 		self.mImpl:init(animation);
 	else
@@ -103,7 +126,12 @@ end
 
 ---------------------------------
 function RepeatAnimation:getAction()
-    return nil;
+    return --self.mImpl:getAction();
+end
+
+--------------------------------
+function RepeatAnimation:setAction(action)
+	self.mImpl:setAction(action);
 end
 
 ---------------------------------
