@@ -131,6 +131,19 @@ function MobObject:onPlayerLeaveImpl(player)
 end
 
 ---------------------------------
+function MobObject:onStateInGame()
+    MobObject:superClass().onStateInGame(self);
+    self.mAnimations[self.mAnimation]:play();
+end
+
+---------------------------------
+function MobObject:onStatePause()
+    info_log("MobObject:onStatePause");
+    MobObject:superClass().onStatePause(self);
+    self.mAnimations[self.mAnimation]:stop();
+end
+
+---------------------------------
 function MobObject:onStateWin()
 	info_log("MobObject:onStateWin ", self.mTrigger);
 	MobObject:superClass().onStateWin(self);

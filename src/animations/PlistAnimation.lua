@@ -61,6 +61,7 @@ end
 
 ----------------------------
 function PlistAnimation:stop()
+  debug_log("PlistAnimation:stop ");
 	self.mNode:stopAction(self.mAction);
 end
 

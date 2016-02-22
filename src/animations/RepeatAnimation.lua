@@ -26,6 +26,12 @@ function RepeatAnimationSoftImpl:play()
 	self.mAnimation:play();
 end
 
+----------------------------
+function RepeatAnimationSoftImpl:stop()
+	debug_log("RepeatAnimationSoftImpl:stop ");
+	self.mAnimation:stop()
+end
+
 ---------------------------------
 function RepeatAnimationSoftImpl:setStopAfterDone(stopAfterDone)
 	
@@ -146,6 +152,7 @@ end
 
 ----------------------------
 function RepeatAnimation:stop()
+	debug_log("RepeatAnimation:stop ");
 	self.mImpl:stop();
 end
 

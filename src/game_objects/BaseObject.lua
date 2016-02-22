@@ -36,6 +36,14 @@ end
 function BaseObject:restore(data)
 end
 
+---------------------------------
+function BaseObject:onStatePause()
+end
+
+---------------------------------
+function BaseObject:onStateInGame()
+end
+
 --------------------------------
 function BaseObject:destroyNode()
 	if self.mNode then

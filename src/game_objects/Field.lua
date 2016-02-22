@@ -359,12 +359,18 @@ end
 function Field:onStatePause()
 	self.mState = Field.PAUSE;
 	info_log("PAUSE !!!");
+    for i, obj in ipairs(self.mObjects) do
+        obj:onStatePause();
+    end
 end
 
 ---------------------------------
 function Field:onStateInGame()
 	self.mState = Field.IN_GAME;
 	info_log("IN GAME !!!");
+    for i, obj in ipairs(self.mObjects) do
+        obj:onStateInGame();
+    end
 end
 
 ---------------------------------
