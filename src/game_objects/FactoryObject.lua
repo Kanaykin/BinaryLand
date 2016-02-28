@@ -136,6 +136,15 @@ function FactoryObject:createPlayer(field, node)
 end
 
 ------------------------------
+function FactoryObject:createMoveInTrigger(field, node)
+	info_log("FactoryObject:createMoveInTrigger ", field, ", ", node);
+	local trigger = TutorialTrigger:create(); --PlayerObject:create();
+	trigger:init(field, node, true);
+	field:addObject(trigger);
+	return trigger;
+end
+
+------------------------------
 function FactoryObject:createTrigger(field, node)
 	info_log("FactoryObject:createTrigger ", field, ", ", node);
 	local trigger = TutorialTrigger:create(); --PlayerObject:create();
@@ -208,7 +217,7 @@ FactoryObject.CreateFunctions = {
 	[FactoryObject.BONUS_TAG] = FactoryObject.createBonusObject,
 	[FactoryObject.BONUS_TIME_TAG] = FactoryObject.createBonusTimerObject,
 	[FactoryObject.BONUS_CHEST_TAG] = FactoryObject.createBonusChestObject,
-	[FactoryObject.TUTORIAL_TRIGGER_1] = FactoryObject.createTrigger,
+	[FactoryObject.TUTORIAL_TRIGGER_1] = FactoryObject.createMoveInTrigger,
 	[FactoryObject.TUTORIAL_TRIGGER_2] = FactoryObject.createTrigger,
 	[FactoryObject.TUTORIAL_TRIGGER_3] = FactoryObject.createTrigger,
 	[FactoryObject.BONUS_ROOM_DOOR_TAG] = FactoryObject.createBonusRoomDoor
