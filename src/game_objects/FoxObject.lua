@@ -596,6 +596,7 @@ function FoxObject:createInCageSideAnimation(texture_prefix, id_anim)
     local delayAnim = DelayAnimation:create();
 
     local textureName = self:getPrefixTexture() .. "InCage"..texture_prefix_origin.."Text.png";
+    debug_log("FoxObject:createInCageAnimation texture ", textureName)
     local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
     local contentSize = texture:getContentSize() -- {width = texture:getPixelsWide(), height = texture:getPixelsHigh()}
     debug_log("FoxObject:createInCageAnimation texture ", texture)
