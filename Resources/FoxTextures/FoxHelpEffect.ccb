@@ -130,7 +130,7 @@
 								<key>value</key>
 								<array>
 									<real>0.0</real>
-									<real>0.0</real>
+									<real>2</real>
 									<integer>5</integer>
 								</array>
 							</dict>
@@ -189,7 +189,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>14</real>
+									<real>22</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -319,8 +319,6 @@
 						<false/>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

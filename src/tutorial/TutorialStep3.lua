@@ -27,6 +27,7 @@ function TutorialStep3:init(gameScene, field, tutorialManager)
 
     self:foxBabyAnimation();
     local label = tolua.cast(self.mNode:getChildByTag(TutorialStep1.LABEL_TAG), "cc.Label");
+    debug_log("TutorialStep3:init label ", label);
     if label then
         setDefaultFont(label, field.mGame:getScale());
     end

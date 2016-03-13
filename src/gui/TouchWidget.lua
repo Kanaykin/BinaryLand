@@ -63,7 +63,7 @@ function TouchWidget:onTouchHandler(action, var)
 
 	local arrayPoints = self:convertToPoints(var);
 
-	info_log("TouchWidget.mTouchId ", self.mTouchId, " var ", var);
+	--info_log("TouchWidget.mTouchId ", self.mTouchId, " var ", var);
 
 	if self.mTouchId ~= nil and not arrayPoints[self.mTouchId] then
 		return;
@@ -94,6 +94,7 @@ function TouchWidget:onTouchHandler(action, var)
 	elseif oldTouchId and self.mTouchId then
 		self:onTouchMoved(arrayPoints[self.mTouchId]);
 	elseif oldTouchId and not self.mTouchId then
+		--info_log("TouchWidget.mTouchId double touch ");
 		self:onTouchEnded(arrayPoints[self.mTouchId]);
 		if self.mDeltaTime > 0 and self.mDeltaTime < TouchWidget.DOUBLE_TOUCH_DELTA then
 			self:onDoubleTouch();

@@ -18,6 +18,7 @@ ChooseLocation.mScrollView = nil;
 ChooseLocation.mBabyInTrapAnimations = nil
 
 ChooseLocation.LABEL_BEGIN = 1;
+ChooseLocation.LABEL_TAG = 2;
 ChooseLocation.LABEL_ENG = 5;
 
 ChooseLocation.LOCATION_BEGIN = 10;
@@ -27,6 +28,10 @@ ChooseLocation.LOCATION_SPRITE_BEGIN = 100;
 
 ChooseLocation.BACK_MENU = 7;
 ChooseLocation.BACK_MENU_ITEM = 8;
+ChooseLocation.TUTORIAL_FRAME = 20;
+
+local MovieText = "Пришло время помочь взрослым лисам вернуть своё потомство!"
+
 
 --------------------------------
 function ChooseLocation:createIdleAnimation(animation, nameAnimation, node, texture, textureSize, textureName,
@@ -193,7 +198,7 @@ function ChooseLocation:updateLabels(node)
 end
 
 --------------------------------
-function ChooseLocation:initGui()
+function ChooseLocation:initGui(params)
     self:createGuiLayer();
 
     local ccpproxy = CCBProxy:create();
@@ -209,6 +214,21 @@ function ChooseLocation:initGui()
     end
 
     setMenuCallback(node, ChooseLocation.BACK_MENU, ChooseLocation.BACK_MENU_ITEM, onReturnPressed);
+
+    local layer = node:getChildByTag(ChooseLocation.TUTORIAL_FRAME);
+    if layer then 
+        if params and params.fromTutorial then
+            local label = tolua.cast(layer:getChildByTag(ChooseLocation.LABEL_TAG), "cc.Label");
+            info_log("ChooseLocation:loadScene label ", params );
+
+            if label then
+                setDefaultFont(label, game:getScale());
+                label:setString(MovieText);
+            end
+        else
+            layer:setVisible(false);
+        end
+    end
 end
 
 ---------------------------------
@@ -229,7 +249,7 @@ function ChooseLocation:init(sceneMan, params)
 	self:initScene();
 
 	-- init gui
-	self:initGui();
+	self:initGui(params);
 
 	SimpleAudioEngine:getInstance():playMusic(gSounds.CHOOSE_LOCATION_MUSIC, true)
 

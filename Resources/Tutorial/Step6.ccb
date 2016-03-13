@@ -313,7 +313,7 @@
 						<key>value</key>
 						<array>
 							<real>56.458332061767578</real>
-							<real>10.3125</real>
+							<real>10.699999809265137</real>
 							<integer>4</integer>
 						</array>
 					</dict>
@@ -363,7 +363,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Minecrafter.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -372,7 +372,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>18</real>
+							<real>28</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -425,6 +425,8 @@
 						<string>Congratulations! You have managed.</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -810,8 +812,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>

@@ -394,7 +394,7 @@
 						<key>value</key>
 						<array>
 							<real>35.672515869140625</real>
-							<real>50</real>
+							<real>57</real>
 							<integer>4</integer>
 						</array>
 					</dict>
@@ -453,7 +453,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>26</real>
+							<real>30</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -506,6 +506,8 @@
 						<string>12:15</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

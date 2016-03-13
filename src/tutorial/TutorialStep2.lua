@@ -17,7 +17,7 @@ function TutorialStep2:init(gameScene, field, tutorialManager)
 	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.BOTTOM);
 
     local label = tolua.cast(self.mNode:getChildByTag(TutorialStep2.LABEL_TAG2), "cc.Label");
-
+	debug_log("TutorialStep2:init label ", label);
     if label then
         setDefaultFont(label, field.mGame:getScale());
     end

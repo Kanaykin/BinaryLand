@@ -396,7 +396,7 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>59</real>
+							<real>60</real>
 							<real>7.5</real>
 							<integer>1</integer>
 						</array>
@@ -536,7 +536,7 @@
 						<key>value</key>
 						<array>
 							<real>56.200000762939453</real>
-							<real>10.300000190734863</real>
+							<real>10.699999809265137</real>
 							<integer>4</integer>
 						</array>
 					</dict>
@@ -586,7 +586,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Minecrafter.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -595,7 +595,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>18</real>
+							<real>28</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -715,7 +715,7 @@
 						<key>value</key>
 						<array>
 							<real>57</real>
-							<real>10.300000190734863</real>
+							<real>10.699999809265137</real>
 							<integer>4</integer>
 						</array>
 					</dict>
@@ -765,7 +765,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Minecrafter.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -774,7 +774,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>18</real>
+							<real>26</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -827,6 +827,8 @@
 						<string>But Foxy has fallen into trap. Help her.</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -1575,8 +1577,6 @@
 выбраться.</string>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>

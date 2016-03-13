@@ -2153,8 +2153,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -2179,7 +2177,7 @@
 						<key>value</key>
 						<array>
 							<real>84</real>
-							<real>102</real>
+							<real>104</real>
 							<integer>5</integer>
 						</array>
 					</dict>
@@ -2238,7 +2236,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>16</real>
+							<real>25</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -2303,7 +2301,7 @@
 						<key>value</key>
 						<array>
 							<real>288</real>
-							<real>27</real>
+							<real>29</real>
 							<integer>5</integer>
 						</array>
 					</dict>
@@ -2362,7 +2360,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>16</real>
+							<real>25</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -2427,7 +2425,7 @@
 						<key>value</key>
 						<array>
 							<real>544</real>
-							<real>73</real>
+							<real>75</real>
 							<integer>5</integer>
 						</array>
 					</dict>
@@ -2486,7 +2484,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>16</real>
+							<real>25</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -2551,7 +2549,7 @@
 						<key>value</key>
 						<array>
 							<real>739</real>
-							<real>257</real>
+							<real>259</real>
 							<integer>5</integer>
 						</array>
 					</dict>
@@ -2610,7 +2608,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>16</real>
+							<real>25</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -2675,7 +2673,7 @@
 						<key>value</key>
 						<array>
 							<real>957</real>
-							<real>39</real>
+							<real>41</real>
 							<integer>5</integer>
 						</array>
 					</dict>
@@ -2734,7 +2732,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>16</real>
+							<real>25</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -2775,6 +2773,8 @@
 						<string>Vulcano</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
