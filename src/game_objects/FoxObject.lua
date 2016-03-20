@@ -269,6 +269,8 @@ end
 
 --------------------------------
 function FoxObject:createFightRepeatAnimation(node, nameAnimation, soft, delayPerUnit, anchor, texture)
+    debug_log("FoxObject:createFightRepeatAnimation texture ", texture)
+    debug_log("FoxObject:createFightRepeatAnimation anchor ", anchor)
     local animation = PlistAnimation:create();
     animation:init(nameAnimation, node, anchor and anchor or node:getAnchorPoint(), texture, delayPerUnit);
 
@@ -406,9 +408,9 @@ function FoxObject:getAnchorFightAnimation()
     local mult = sprite:isFlippedX() and 1 or -1;
 
     if self.mIsFemale then
-        return { x = 0.5 + 0.195 / 2 * mult, y = 0.35 + 0.04 / 2}, sprite:isFlippedX();
+        return { x = 0.5 - 0.35 / 2 * mult, y = 0.35 + 0.28 / 2}, sprite:isFlippedX();--{ x = 0.5 + 0.195 / 2 * mult, y = 0.35 + 0.04 / 2}, sprite:isFlippedX();
     else
-        return { x = 0.5 + 0.34 / 2 * mult, y = 0.35 + 0.065 / 2}, sprite:isFlippedX();
+        return { x = 0.5 - 0.30 / 2 * mult, y = 0.35 + 0.28 / 2}, sprite:isFlippedX();
     end
 end
 
@@ -446,6 +448,8 @@ function FoxObject:createFightAnimation()
         info_log("FIGHT anchor x ", self.mAnimationNode:getAnchorPoint().x, ", y ", self.mAnimationNode:getAnchorPoint().y)
         self.mAnimations[i] = self:createFightRepeatAnimation(self.mAnimationNode, self:getPrefixTexture() .. "Fight.plist", true, 0.06, self:getAnchorFightAnimation(), texture);
     end
+    self.mAnimations[PlayerObject.PLAYER_STATE.PS_FIGHT_DOWN] = 
+        self:createFightRepeatAnimation(self.mAnimationNode, self:getPrefixTexture() .. "Fight.plist", true, 0.06, self:getAnchorFightAnimation(), texture);
 end
 
 --------------------------------
