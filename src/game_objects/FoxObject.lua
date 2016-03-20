@@ -444,12 +444,15 @@ function FoxObject:createFightAnimation()
 
     self.mFightPlistAnimations = {};
 
-    for i = PlayerObject.PLAYER_STATE.PS_FIGHT_LEFT, PlayerObject.PLAYER_STATE.PS_FIGHT_DOWN do
+    for i = PlayerObject.PLAYER_STATE.PS_FIGHT_LEFT, PlayerObject.PLAYER_STATE.PS_FIGHT_RIGHT do
         info_log("FIGHT anchor x ", self.mAnimationNode:getAnchorPoint().x, ", y ", self.mAnimationNode:getAnchorPoint().y)
         self.mAnimations[i] = self:createFightRepeatAnimation(self.mAnimationNode, self:getPrefixTexture() .. "Fight.plist", true, 0.06, self:getAnchorFightAnimation(), texture);
     end
     self.mAnimations[PlayerObject.PLAYER_STATE.PS_FIGHT_DOWN] = 
-        self:createFightRepeatAnimation(self.mAnimationNode, self:getPrefixTexture() .. "Fight.plist", true, 0.06, self:getAnchorFightAnimation(), texture);
+        self:createFightRepeatAnimation(self.mAnimationNode, self:getPrefixTexture() .. "FightFront.plist", true, 0.06, self:getAnchorFightAnimation(), texture);
+
+    self.mAnimations[PlayerObject.PLAYER_STATE.PS_FIGHT_UP] = 
+        self:createFightRepeatAnimation(self.mAnimationNode, self:getPrefixTexture() .. "FightBack.plist", true, 0.06, self:getAnchorFightAnimation(), texture);
 end
 
 --------------------------------
