@@ -24,7 +24,10 @@ HunterObject.DIRECTIONS = {
     CAUTION = MobObject.DIRECTIONS.BACK + 1,
     SHOT_SIDE = MobObject.DIRECTIONS.BACK + 2,
     SHOT_BACK = MobObject.DIRECTIONS.BACK + 3,
-    SHOT_FRONT = MobObject.DIRECTIONS.BACK + 4
+    SHOT_FRONT = MobObject.DIRECTIONS.BACK + 4,
+    DEAD_SIDE = MobObject.DIRECTIONS.BACK + 5,
+    DEAD_BACK = MobObject.DIRECTIONS.BACK + 6,
+    DEAD_FRONT = MobObject.DIRECTIONS.BACK + 7
 }
 
 --------------------------------
@@ -89,6 +92,18 @@ function HunterObject:initAnimation()
     ------------------------
     -- Shot animation
     self:createPlistAnimation("HunterShotBack.plist", HunterObject.DIRECTIONS.SHOT_BACK, 0.15);
+
+    ------------------------
+    -- Dead animation
+    self:createPlistAnimation("HunterDieSide.plist", HunterObject.DIRECTIONS.DEAD_SIDE, 0.06);
+
+    ------------------------
+    -- Dead animation
+    self:createPlistAnimation("HunterShotFront.plist", HunterObject.DIRECTIONS.DEAD_FRONT, 0.06);
+
+    ------------------------
+    -- Dead animation
+    self:createPlistAnimation("HunterShotBack.plist", HunterObject.DIRECTIONS.DEAD_BACK, 0.06);
 end
 
 ---------------------------------

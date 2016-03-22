@@ -249,6 +249,24 @@ function HunterIdleState:onEnterFightTrigger()
 end
 
 --[[///////////////////////////]]
+HunterDieState = inheritsFrom(DeadState)
+
+------------------------------------
+function HunterDieState:enter(params)
+    debug_log("HunterDieState:enter");
+    HunterDieState:superClass().enter(self, params);
+end
+
+------------------------------------
+function HunterDieState:getAnimationByDirection()
+    return HunterObject.DIRECTIONS.DEAD_SIDE;
+end
+
+------------------------------------
+function HunterDieState:tick(dt)
+end
+
+--[[///////////////////////////]]
 HunterStateMachine = inheritsFrom(MobStateMachine)
 
 ------------------------------------
@@ -258,6 +276,7 @@ function HunterStateMachine:init(object)
 
     self.mFactoryStates[MobStates.MS_MOVE] = HunterMoveState;
     self.mFactoryStates[MobStates.MS_IDLE] = HunterIdleState;
+    self.mFactoryStates[MobStates.HS_DEAD] = HunterDieState;
     self.mFactoryStates[HunterStates.HS_CATCH_PLAYER] = CatchState;
     self.mFactoryStates[HunterStates.HS_FOUND_PLAYER] = FoundPlayerState;
     self.mFactoryStates[HunterStates.HS_SHOT_GUN] = ShotGunState;
