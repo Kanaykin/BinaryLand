@@ -69,6 +69,14 @@ DeadState = inheritsFrom(BaseMobState)
 DeadState.mTimeWait = nil
 
 ------------------------------------
+function DeadState:removeObject()
+    self.mObject.mField:addBonus(self.mObject);
+    self.mObject.mField:removeObject(self.mObject);
+    self.mObject.mField:removeEnemy(self.mObject)
+    self.mObject:destroy();
+end
+
+------------------------------------
 function DeadState:tick(dt)
     info_log("DeadState:tick ");
     DeadState:superClass().tick(self, dt);
@@ -79,10 +87,7 @@ function DeadState:tick(dt)
     if self.mTimeWait < 0 then
         --self.mStateMachine:setState(MobStates.MS_IDLE);
 
-        self.mObject.mField:addBonus(self.mObject);
-        self.mObject.mField:removeObject(self.mObject);
-        self.mObject.mField:removeEnemy(self.mObject)
-        self.mObject:destroy();
+        self:removeObject();
 
     end
 end

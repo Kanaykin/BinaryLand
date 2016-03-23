@@ -99,11 +99,11 @@ function HunterObject:initAnimation()
 
     ------------------------
     -- Dead animation
-    self:createPlistAnimation("HunterShotFront.plist", HunterObject.DIRECTIONS.DEAD_FRONT, 0.06);
+    self:createPlistAnimation("HunterDieFront.plist", HunterObject.DIRECTIONS.DEAD_FRONT, 0.06);
 
     ------------------------
     -- Dead animation
-    self:createPlistAnimation("HunterShotBack.plist", HunterObject.DIRECTIONS.DEAD_BACK, 0.06);
+    self:createPlistAnimation("HunterDieBack.plist", HunterObject.DIRECTIONS.DEAD_BACK, 0.06);
 end
 
 ---------------------------------

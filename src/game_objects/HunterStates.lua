@@ -250,20 +250,33 @@ end
 
 --[[///////////////////////////]]
 HunterDieState = inheritsFrom(DeadState)
+HunterDieState.mDir = nil
 
 ------------------------------------
 function HunterDieState:enter(params)
     debug_log("HunterDieState:enter");
     HunterDieState:superClass().enter(self, params);
+
+    local dirMoving = self.mObject:getCurrentAnimationDir();
+    if dirMoving == MobObject.DIRECTIONS.FRONT then
+        self.mDir = HunterObject.DIRECTIONS.DEAD_FRONT;
+    elseif dirMoving == MobObject.DIRECTIONS.BACK then
+        self.mDir = HunterObject.DIRECTIONS.DEAD_BACK;
+    else
+        self.mDir = HunterObject.DIRECTIONS.DEAD_SIDE;
+    end 
 end
 
 ------------------------------------
 function HunterDieState:getAnimationByDirection()
-    return HunterObject.DIRECTIONS.DEAD_SIDE;
+    return self.mDir;
 end
 
 ------------------------------------
 function HunterDieState:tick(dt)
+    if self.mObject:getAnimation(self.mDir):isDone() then
+        self:removeObject();
+    end
 end
 
 --[[///////////////////////////]]
