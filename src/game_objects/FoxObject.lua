@@ -41,12 +41,14 @@ FoxObject.mCallbackOnDone = nil;
 FoxObject.FOX_STATE = {
     PS_IN_CAGE_LEFT = PlayerObject.PLAYER_STATE.PS_LAST + 1,
     PS_IN_CAGE_RIGHT = PlayerObject.PLAYER_STATE.PS_LAST + 2,
-    PS_IN_HIDDEN_CAGE = PlayerObject.PLAYER_STATE.PS_LAST + 3
+    PS_IN_HIDDEN_CAGE = PlayerObject.PLAYER_STATE.PS_LAST + 3,
+    PS_IN_SIDE_NET = PlayerObject.PLAYER_STATE.PS_LAST + 4,
 };
 
 FoxObject.CAGE_TYPE = {
     CT_CAGE = 1,
-    CT_HIDDEN = 2
+    CT_HIDDEN = 2,
+    CT_NET = 3
 }
 
 --------------------------------
@@ -119,6 +121,7 @@ end
 function FoxObject:updateDebugBox()
     if self.mDebugBox then
         local box = self:getBoundingBox();
+        debug_log("box.y ", box.y)
         local size = self.mAnimationNode:getBoundingBox();
         local anchor = self.mAnimationNode:getAnchorPoint();
         box.x = 0;
@@ -335,6 +338,8 @@ function FoxObject:playAnimation(button)
         elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_HIDDEN then
             self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_HIDDEN_CAGE];
             --self.mCallbackOnDone:start();
+        elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_NET then
+            self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_SIDE_NET];
         else
             self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP];
         end
@@ -494,6 +499,15 @@ function FoxObject:enterCage(pos)
 end
 
 --------------------------------
+function FoxObject:enterNet(pos)
+    self.mTypeCage = FoxObject.CAGE_TYPE.CT_NET;
+
+    self:enterTrap(pos);
+
+    --self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT];
+end
+
+--------------------------------
 function FoxObject:onMoveFinished( )
     FoxObject:superClass().onMoveFinished(self);
     if self.mInTrap then
@@ -622,10 +636,18 @@ end
 
 --------------------------------
 function FoxObject:createInCageAnimation()
-    self.mCageAnimations = {}
     self:createInCageSideAnimation("Left", FoxObject.FOX_STATE.PS_IN_CAGE_LEFT);
     self:createInCageSideAnimation("Right", FoxObject.FOX_STATE.PS_IN_CAGE_RIGHT);
     self:createInHiddenCageAnimation();
+end
+
+--------------------------------
+function FoxObject:createInNetAnimation()
+    local anchor = self.mAnimationNode:getAnchorPoint();
+    local animation = PlistAnimation:create();
+    animation:init(self:getPrefixTexture().."InNetSide.plist", self.mAnimationNode, anchor, nil, 0.1);
+
+    self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_SIDE_NET] = animation;
 end
 
 --------------------------------
@@ -694,8 +716,10 @@ function FoxObject:initAnimation()
 
     self:createFightAnimation();
 
+    self.mCageAnimations = {}
     self:createInCageAnimation();
     self:createInTrapAnimation();
+    self:createInNetAnimation();
 
 	--self.mAnimations[PlayerObject.PLAYER_STATE.PS_WIN_STATE] = EmptyAnimation:create();
 	--local frontTexture = tolua.cast(self.mAnimationNode, "cc.Sprite"):getTexture();

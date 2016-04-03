@@ -13,12 +13,12 @@ HunterObject.mFoundPlayerPos = nil;
 HunterObject.mGridPosGetTrace = nil;
 HunterObject.mFoxGoalPos = nil;
 HunterObject.mFoxGridGoalPos = nil;
-HunterObject.mCanAttack = true;
+HunterObject.mCanAttack = false;
 
 --shot constants
 HunterObject.SHOT_PIXELS_DELTA = 10
 HunterObject.SHOT_MIN_GRID_DELTA = 1
-HunterObject.SHOT_MAX_GRID_DELTA = 14
+HunterObject.SHOT_MAX_GRID_DELTA = 4
 
 HunterObject.DIRECTIONS = {
     CAUTION = MobObject.DIRECTIONS.BACK + 1,

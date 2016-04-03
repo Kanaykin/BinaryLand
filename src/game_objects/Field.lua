@@ -648,6 +648,17 @@ function Field:onPlayerEnterMob(player, pos)
 end
 
 --------------------------------
+function Field:onPlayerEnterNet(player, pos)
+    info_log("Field:onPlayerEnterNet ");
+    player:enterNet();
+end
+
+--------------------------------
+function Field:onPlayerLeaveNet(player)
+    self:onPlayerLeaveWeb(player);
+end
+
+--------------------------------
 function Field:getFieldNode()
 	return self.mFieldNode;
 end
@@ -670,7 +681,7 @@ function Field:createSpirit(pos, player)
 end
 
 --------------------------------
-function Field:createSnareTrigger(pos)
+function Field:createSnareTrigger(pos, fromBullet)
 	info_log("Field:createSnareTrigger x= ", pos.x, " y= ", pos.y);
 	local node = CCNode:create();
 	node:setContentSize(cc.size(self:getCellSize(), self:getCellSize()));
@@ -681,7 +692,13 @@ function Field:createSnareTrigger(pos)
 	node:setPosition(cc.p(pos.x, pos.y));
 
 	local web = SnareTrigger:create();
-	web:init(self, node, Callback.new(self, Field.onPlayerEnterMob), Callback.new(self, Field.onPlayerLeaveWeb));
+    local enterCallback = Callback.new(self, Field.onPlayerEnterMob);
+    local leaveCallback = Callback.new(self, Field.onPlayerLeaveWeb)
+    if fromBullet then
+        enterCallback = Callback.new(self, Field.onPlayerEnterNet);
+        leaveCallback = Callback.new(self, Field.onPlayerLeaveNet)
+    end
+	web:init(self, node, enterCallback, leaveCallback);
 	table.insert(self.mObjects, web);
 	table.insert(self.mEnemyObjects, web);
 end
