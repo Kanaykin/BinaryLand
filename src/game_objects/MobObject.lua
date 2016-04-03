@@ -171,7 +171,7 @@ function MobObject:init(field, node)
 
     self:createTrigger();
 
-	-- create animation
+    -- create animation
 	self:initAnimation();
 end
 
@@ -275,6 +275,10 @@ function MobObject:tick(dt)
 	if self.mTrigger then
 		self.mTrigger:tick(dt);
 	end
+
+    if self.mAnimation and self.mAnimations[self.mAnimation] then
+        self.mAnimations[self.mAnimation]:tick(dt);
+    end
 
     local flip = self:getFlipByDirection();
     if flip ~= nil then
