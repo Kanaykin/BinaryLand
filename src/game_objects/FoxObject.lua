@@ -121,7 +121,7 @@ end
 function FoxObject:updateDebugBox()
     if self.mDebugBox then
         local box = self:getBoundingBox();
-        debug_log("box.y ", box.y)
+        --debug_log("box.y ", box.y)
         local size = self.mAnimationNode:getBoundingBox();
         local anchor = self.mAnimationNode:getAnchorPoint();
         box.x = 0;
@@ -525,9 +525,18 @@ end
 --------------------------------
 function FoxObject:getAnchorInCageAnimation(id_anim)
     if self.mIsFemale then
-        return id_anim == FoxObject.FOX_STATE.PS_IN_CAGE_LEFT and { x = 0.52, y = 0.26} or { x = 0.495, y = 0.26};
+        return id_anim == FoxObject.FOX_STATE.PS_IN_CAGE_LEFT and { x = 0.52, y = 0.37} or { x = 0.495, y = 0.37};
     else
-        return { x = 0.5, y = 0.27};
+        return { x = 0.5, y = 0.38};
+    end
+end
+
+--------------------------------
+function FoxObject:getAnchorInNetAnimation()
+    if self.mIsFemale then
+        return { x = 0.48, y = 0.55};
+    else
+        return { x = 0.62, y = 0.45};
     end
 end
 
@@ -643,7 +652,7 @@ end
 
 --------------------------------
 function FoxObject:createInNetAnimation()
-    local anchor = self.mAnimationNode:getAnchorPoint();
+    local anchor = self:getAnchorInNetAnimation()--self.mAnimationNode:getAnchorPoint();
     local animation = PlistAnimation:create();
     animation:init(self:getPrefixTexture().."InNetSide.plist", self.mAnimationNode, anchor, nil, 0.1);
 
