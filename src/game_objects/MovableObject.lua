@@ -10,11 +10,40 @@ MovableObject.mDestGridPos = nil;
 MovableObject.mSrcPos = nil;
 MovableObject.mPrevOrderPos = nil;
 
+MovableObject.mDebugBox = nil;
+MovableObject.mNeedDebugBox = false;
+
 --------------------------------
 function MovableObject:init(field, node)
 	MovableObject:superClass().init(self, field, node);
 
 	self.mGridPosition = Vector.new(field:getGridPosition(node));
+
+	self:createDebugBox();
+end
+
+---------------------------------
+function MovableObject:createDebugBox()
+	if self.mNeedDebugBox then
+        local nodeBox = cc.DrawNode:create();
+        self.mNode:addChild(nodeBox);
+        self.mDebugBox = nodeBox;
+    end
+end
+
+--------------------------------
+function MovableObject:updateDebugBox()
+    if self.mDebugBox then
+        local box = self:getBoundingBox();
+        local size = self.mNode:getBoundingBox();
+        local anchor = self.mNode:getAnchorPoint();
+        box.x = 0;
+        box.y = 0;
+        self.mDebugBox:clear();
+        local center = cc.p(box.x + box.height / 2.0, box.y + box.width / 2.0);
+        self.mDebugBox:drawCircle(center, box.width / 2.0 * 0.7,
+            360, 360, false, {r = 0, g = 0, b = 0, a = 100});
+	end
 end
 
 ---------------------------------
@@ -122,4 +151,6 @@ function MovableObject:tick(dt)
 			--self:updateOrder();
 		end
 	end
+
+	self:updateDebugBox();
 end

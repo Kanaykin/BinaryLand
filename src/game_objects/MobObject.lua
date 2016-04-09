@@ -269,6 +269,14 @@ function MobObject:getFlipByDirection()
 end
 
 --------------------------------
+function MobObject:updateFlip()
+    local flip = self:getFlipByDirection();
+    if flip ~= nil then
+        tolua.cast(self.mNode, "cc.Sprite"):setFlippedX(flip);
+    end
+end
+
+--------------------------------
 function MobObject:tick(dt)
 	MobObject:superClass().tick(self, dt);
 
@@ -280,10 +288,7 @@ function MobObject:tick(dt)
         self.mAnimations[self.mAnimation]:tick(dt);
     end
 
-    local flip = self:getFlipByDirection();
-    if flip ~= nil then
-        tolua.cast(self.mNode, "cc.Sprite"):setFlippedX(flip);
-    end
+    self:updateFlip();
 
     local anim = self:getAnimationByDirection();
     if anim ~= self.mAnimation and self.mAnimations ~= nil then

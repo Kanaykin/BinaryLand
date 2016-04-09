@@ -30,8 +30,6 @@ FoxObject.mSideIdleAnimation = nil;
 FoxObject.mCageAnimations = nil;
 FoxObject.mTypeCage = nil;
 
-FoxObject.mDebugBox = nil;
-FoxObject.mNeedDebugBox = false;
 FoxObject.mSize = nil;
 FoxObject.mTrace = nil;
 
@@ -63,7 +61,7 @@ function FoxObject:init(field, node, needReverse)
 
 	info_log("FoxObject:init node_obj ", self.mAnimationNode:getAnchorPoint().y);
 	
-	FoxObject:superClass().init(self, field, node, needReverse);
+	FoxObject:superClass().init(self, field, node, notneedReverse);
 
     self.mLastDir = 2;
         if not self.mIsFemale then
@@ -73,11 +71,7 @@ function FoxObject:init(field, node, needReverse)
 
 	self.mVelocity = self.mVelocity * field.mGame:getScale();
 
-    if self.mNeedDebugBox then
-        local nodeBox = cc.DrawNode:create();
-        self.mAnimationNode:addChild(nodeBox);
-        self.mDebugBox = nodeBox;
-    end
+    --self:createDebugBox(node)--self.mAnimationNode);
     self.mSize = self.mAnimationNode:getBoundingBox();
 
     -- create trace
@@ -119,15 +113,15 @@ end
 
 --------------------------------
 function FoxObject:updateDebugBox()
+    FoxObject:superClass().updateDebugBox(self);
     if self.mDebugBox then
         local box = self:getBoundingBox();
-        --debug_log("box.y ", box.y)
-        local size = self.mAnimationNode:getBoundingBox();
-        local anchor = self.mAnimationNode:getAnchorPoint();
+        local size = self.mNode:getBoundingBox();
+        local anchor = self.mNode:getAnchorPoint();
         box.x = 0;
         box.y = 0;
-        self.mDebugBox:clear();
         local center = cc.p(box.x + anchor.x * size.width , box.y + anchor.y * size.height);
+        self.mDebugBox:clear();
         self.mDebugBox:drawCircle(center, box.width / 2.0 * 0.7,
             360, 360, false, {r = 0, g = 0, b = 0, a = 100});
 
@@ -252,7 +246,6 @@ function FoxObject:tick(dt)
     else
         self.mNewEffect:setVisible(false);
     end
-    self:updateDebugBox();
 
     self.mTrace:updatePosition(self.mGridPosition);
 
@@ -652,11 +645,35 @@ end
 
 --------------------------------
 function FoxObject:createInNetAnimation()
+    local sequence = SequenceAnimation:create();
+    sequence:init();
+
     local anchor = self:getAnchorInNetAnimation()--self.mAnimationNode:getAnchorPoint();
     local animation = PlistAnimation:create();
-    animation:init(self:getPrefixTexture().."InNetSide.plist", self.mAnimationNode, anchor, nil, 0.1);
+    animation:init(self:getPrefixTexture().."InNetSide.plist", self.mAnimationNode, anchor, nil, 0.05);
+    sequence:addAnimation(animation);
 
-    self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_SIDE_NET] = animation;
+    -------------------------------
+    local idle = PlistAnimation:create();
+    idle:init(self:getPrefixTexture().."InNet" .. "Side" .. "End.plist", self.mAnimationNode, anchor, nil, 0.2);
+    local delayAnim = DelayAnimation:create();
+
+    -- local textureName = self:getPrefixTexture() .. "InCage"..texture_prefix_origin.."Text.png";
+    -- debug_log("FoxObject:createInCageAnimation texture ", textureName)
+    -- local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
+    -- local contentSize = texture:getContentSize() -- {width = texture:getPixelsWide(), height = texture:getPixelsHigh()}
+    -- debug_log("FoxObject:createInCageAnimation texture ", texture)
+
+    delayAnim:init(idle, math.random(3, 5), texture, contentSize, textureName);
+
+    local endAnimRep = RepeatAnimation:create();
+    endAnimRep:init(delayAnim, true);
+
+    self.mNewEffect:addDependAnimation(endAnimRep);
+
+    sequence:addAnimation(endAnimRep);
+
+    self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_SIDE_NET] = sequence;
 end
 
 --------------------------------

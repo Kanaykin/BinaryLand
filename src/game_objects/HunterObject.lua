@@ -13,12 +13,12 @@ HunterObject.mFoundPlayerPos = nil;
 HunterObject.mGridPosGetTrace = nil;
 HunterObject.mFoxGoalPos = nil;
 HunterObject.mFoxGridGoalPos = nil;
-HunterObject.mCanAttack = false;
+HunterObject.mCanAttack = true;
 
 --shot constants
 HunterObject.SHOT_PIXELS_DELTA = 10
 HunterObject.SHOT_MIN_GRID_DELTA = 1
-HunterObject.SHOT_MAX_GRID_DELTA = 4
+HunterObject.SHOT_MAX_GRID_DELTA = 14
 
 HunterObject.DIRECTIONS = {
     CAUTION = MobObject.DIRECTIONS.BACK + 1,
@@ -176,7 +176,11 @@ end
 --------------------------------
 function HunterObject:createBullet(goalPos)
     local bullet = BulletObject:create();
-    bullet:init(self.mField, self:getPosition(), goalPos);
+    debug_log("HunterObject:createBullet goalPos ", goalPos.x, ", ", goalPos.y)
+    local selfPos = self:getPosition();
+    local dir = (goalPos - self.mGridPosition):normalized();-- * self.mField:getCellSize();
+    debug_log("HunterObject:createBullet selfPos ", dir.x, ", ", dir.y)
+    bullet:init(self.mField, selfPos, goalPos, dir);
     self.mField:addObject(bullet);
     bullet:moveTo(goalPos);
 end

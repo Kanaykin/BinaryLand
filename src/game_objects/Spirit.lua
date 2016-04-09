@@ -15,8 +15,6 @@ SpiritObject.mCurrentAnimation = nil--SpiritObject.ANIMATION_STATE.AS_FIRST_APPE
 SpiritObject.mStateMachine = nil
 SpiritObject.mSourcePosition = nil
 SpiritObject.mHelpEffect = nil
-SpiritObject.mDebugBox = nil;
-SpiritObject.mNeedDebugBox = false;
 SpiritObject.mAnimationHideHelp = nil;
 
 --------------------------------
@@ -39,11 +37,7 @@ function SpiritObject:init(field, node, player)
     self.mStateMachine = SpiritStateMachine:create();
     self.mStateMachine:init(self);
 
-    if self.mNeedDebugBox then
-        local nodeBox = cc.DrawNode:create();
-        node:addChild(nodeBox);
-        self.mDebugBox = nodeBox;
-    end
+    --self:createDebugBox(node);
 end
 
 ---------------------------------
@@ -54,21 +48,6 @@ function SpiritObject:destroy()
 
 	for i, animation in ipairs(self.mAnimations) do
 		animation:destroy();
-	end
-end
-
---------------------------------
-function SpiritObject:updateDebugBox()
-    if self.mDebugBox then
-        local box = self:getBoundingBox();
-        local size = self.mNode:getBoundingBox();
-        local anchor = self.mNode:getAnchorPoint();
-        box.x = 0;
-        box.y = 0;
-        self.mDebugBox:clear();
-        local center = cc.p(box.x + anchor.x * size.width , box.y + anchor.y * size.height);
-        self.mDebugBox:drawCircle(center, box.width / 2.0 * 0.7,
-            360, 360, false, {r = 0, g = 0, b = 0, a = 100});
 	end
 end
 
@@ -251,9 +230,10 @@ end
 
 --------------------------------
 function SpiritObject:tick(dt)
+    SpiritObject:superClass().tick(self, dt);
+
 	self.mStateMachine:tick(dt);
 	self.mAnimations[self.mCurrentAnimation]:tick(dt);
-	self:updateDebugBox();
 
 	local currAnim = self:getCurrentAnimation();
     local curr = currAnim:currentAnimation();
