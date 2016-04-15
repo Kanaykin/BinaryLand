@@ -80,7 +80,7 @@
 								<key>type</key>
 								<string>Integer</string>
 								<key>value</key>
-								<integer>109</integer>
+								<integer>108</integer>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -91,6 +91,8 @@
 								<string>Fox.ccb</string>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -114,8 +116,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>336</real>
-									<real>240</real>
+									<real>272</real>
+									<real>48</real>
 									<integer>5</integer>
 								</array>
 							</dict>
@@ -138,7 +140,7 @@
 								<key>type</key>
 								<string>Integer</string>
 								<key>value</key>
-								<integer>108</integer>
+								<integer>109</integer>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -4167,8 +4169,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>

@@ -40,9 +40,13 @@ function MovableObject:updateDebugBox()
         box.x = 0;
         box.y = 0;
         self.mDebugBox:clear();
-        local center = cc.p(box.x + box.height / 2.0, box.y + box.width / 2.0);
-        self.mDebugBox:drawCircle(center, box.width / 2.0 * 0.7,
-            360, 360, false, {r = 0, g = 0, b = 0, a = 100});
+        --local center = cc.p(box.x + box.height / 2.0, box.y + box.width / 2.0);
+        --self.mDebugBox:drawCircle(center, box.width / 2.0 * 0.7,
+        --    360, 360, false, {r = 0, g = 0, b = 0, a = 100});
+        self.mDebugBox:drawLine(cc.p(box.x, box.y), cc.p(box.x + box.width, box.y), {r = 0, g = 0, b = 0, a = 100});
+        self.mDebugBox:drawLine(cc.p(box.x, box.y), cc.p(box.x, box.y + box.height), {r = 0, g = 0, b = 0, a = 100});
+        self.mDebugBox:drawLine(cc.p(box.x + box.width, box.y), cc.p(box.x + box.width, box.y  + box.height), {r = 0, g = 0, b = 0, a = 100});
+        self.mDebugBox:drawLine(cc.p(box.x, box.y + box.height), cc.p(box.x + box.width, box.y  + box.height), {r = 0, g = 0, b = 0, a = 100});
 	end
 end
 

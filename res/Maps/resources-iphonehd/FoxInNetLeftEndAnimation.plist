@@ -88,13 +88,13 @@
             <key>format</key>
             <integer>2</integer>
             <key>realTextureFileName</key>
-            <string>FoxInNetSideEnd.png</string>
+            <string>FoxInNetLeftEndAnimation.png</string>
             <key>size</key>
             <string>{124,156}</string>
             <key>smartupdate</key>
             <string>$TexturePacker:SmartUpdate:091d5e5fde7992c2a5219d6d679099b3:403e8067e2190d1df6f021496462dbbd:6bdbdaab47c68e3b57faa8705e688387$</string>
             <key>textureFileName</key>
-            <string>FoxInNetSideEnd.png</string>
+            <string>FoxInNetLeftEndAnimation.png</string>
         </dict>
     </dict>
 </plist>

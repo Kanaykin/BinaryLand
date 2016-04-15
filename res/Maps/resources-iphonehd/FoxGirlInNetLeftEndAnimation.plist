@@ -4,20 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>girl_catch_left_0009_Layer-Comp-10.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{2,2},{120,78}}</string>
-                <key>offset</key>
-                <string>{5,-17}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{44,82},{120,78}}</string>
-                <key>sourceSize</key>
-                <string>{198,208}</string>
-            </dict>
-            <key>girl_catch_left_0010_Layer-Comp-11.png</key>
+            <key>girl_catch_right_0010_Layer-Comp-11 copy.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,82},{120,76}}</string>
@@ -30,7 +17,33 @@
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>girl_catch_left_0011_Layer-Comp-12.png</key>
+            <key>girl_catch_right_0010_Layer-Comp-11.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,82},{120,76}}</string>
+                <key>offset</key>
+                <string>{5,-18}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{44,84},{120,76}}</string>
+                <key>sourceSize</key>
+                <string>{198,208}</string>
+            </dict>
+            <key>girl_catch_right_0011_Layer-Comp-12 copy.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{120,78}}</string>
+                <key>offset</key>
+                <string>{5,-17}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{44,82},{120,78}}</string>
+                <key>sourceSize</key>
+                <string>{198,208}</string>
+            </dict>
+            <key>girl_catch_right_0011_Layer-Comp-12.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,2},{120,78}}</string>
@@ -49,13 +62,13 @@
             <key>format</key>
             <integer>2</integer>
             <key>realTextureFileName</key>
-            <string>FoxGirlInNetSideEnd.png</string>
+            <string>FoxGirlInNetLeftEndAnimation.png</string>
             <key>size</key>
             <string>{124,160}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:c06919b825aba7fd0110cfe6cc298478:460e55bacb42dfffb93b725da8005023:370367fa64d20a7e951098ec87dbb5ad$</string>
+            <string>$TexturePacker:SmartUpdate:3805af3ba1838c47fae094ccd6cc155f:2ac73777ee4adbabe23661dfce785329:9b63c91d8906ecc7dc6bfa47021683f3$</string>
             <key>textureFileName</key>
-            <string>FoxGirlInNetSideEnd.png</string>
+            <string>FoxGirlInNetLeftEndAnimation.png</string>
         </dict>
     </dict>
 </plist>

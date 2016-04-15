@@ -3,13 +3,22 @@ require "src/game_objects/MobObject"
 BulletObject = inheritsFrom(MobObject)
 BulletObject.ANCHOR_BY_DIR = {}
 BulletObject.mAnimationNode = nil;
+BulletObject.mDir = nil;
 
 
 --------------------------------
-function BulletObject:init(field, pos, goalPos, dir)
-	local position = pos + dir * field:getCellSize() * 2;
+function BulletObject:init(field, pos, goalPos)
+	local dir = (goalPos - Vector.new(field:positionToGrid(pos))):normalize()
+	local delta = (dir.y == 1) and 1 or 1;
+	local delta = (dir.x == -1) and 2 or delta;
+
+	debug_log("BulletObject:init delta ", delta)
+	local position = pos + dir * field:getCellSize() * delta;
 	local animationNode = CCSprite:create("Bullet.png");
 	self.mAnimationNode = animationNode;
+
+	debug_log("BulletObject:init pos x ", pos.x, " y ", pos.y)
+	debug_log("BulletObject:init position x ", position.x, " y ", position.y)
 	--self.mAnimationNode:setAnchorPoint(cc.p(-2.5, 0.5));
 	--node:setPosition(position.x, position.y);
 
@@ -21,20 +30,22 @@ function BulletObject:init(field, pos, goalPos, dir)
 
 	debug_log("BulletObject:getAnchorByDir goalPos y ", goalPos.y, " x ", goalPos.x);
 	debug_log("BulletObject:getAnchorByDir  y ", field:getGridPosition(node));
-	local anchor = self:getAnchorByDir((goalPos - Vector.new(field:getGridPosition(node))):normalize());
+	local anchor = self:getAnchorByDir(dir);
 
-	--node:setAnchorPoint(anchor);
 	node:setContentSize(cc.size(field:getCellSize(), field:getCellSize()));
 
 	field:getFieldNode():addChild(node);
+	node:setAnchorPoint(cc.p(0.5, 0.0));
 
 	debug_log("BulletObject:getAnchorByDir dir y ", dir.y, " x ", dir.x);
 	--self.mAnimationNode:setAnchorPoint(cc.p(0.5 + dir.x, 0.5 + dir.y) );
-	self.mAnimationNode:setAnchorPoint(cc.p(anchor.x + dir.x * 2, anchor.y + dir.y * 2) );
+	self.mAnimationNode:setAnchorPoint(cc.p(anchor.x + dir.x * delta, anchor.y + dir.y * delta) );
 
 	BulletObject:superClass().init(self, field, node);
 
 	self.mVelocity = 400;
+	self.mDir = dir;
+	self:moveTo(goalPos + dir * delta);
 end
 
 --------------------------------
@@ -82,13 +93,13 @@ function BulletObject:getAnchorByDir(dir)
 	debug_log("BulletObject:getAnchorByDir dir y ", dir.y, " x ", dir.x);
     if dir then
         if dir.y >= 0.9 then
-            return cc.p(0.5, 0.0);
+            return cc.p(0.15, -0.5);
         elseif dir.y <= -0.9 then
-            return cc.p(0.5, 0.5);
+            return cc.p(0.2, -0.35);
         elseif dir.x >= 0.9 then
-            return cc.p(-0.2, 0.0);
+            return cc.p(-0.7, 0.0);
         elseif dir.x <= -0.9 then
-            return cc.p(1.4, 0.33);
+            return cc.p(0.9, 0.0);
         end
     end
     return cc.p(0.7, 0.2);
@@ -115,6 +126,7 @@ function BulletObject:onPlayerEnterImpl(player, pos)
 	BulletObject:superClass().onPlayerEnterImpl(self, player, pos);
 
 	if not player:isInTrap() then
+		player:setBulletDir(self.mDir);
 		self.mField:createSnareTrigger(Vector.new(player.mNode:getPosition()), true);
 		self.mField:delayDelete(self);
 	end
@@ -128,8 +140,9 @@ function BulletObject:updateFlip()
     end
 
     local flipY = self:getVerticalFlipByDirection();
+    debug_log("BulletObject:updateFlip flipY ", flipY);
     if flipY ~= nil then
-        tolua.cast(self.mAnimationNode, "cc.Sprite"):setFlippedY(flip);
+        tolua.cast(self.mAnimationNode, "cc.Sprite"):setFlippedY(flipY);
     end
 end
 

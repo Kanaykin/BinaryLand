@@ -17,8 +17,8 @@ HunterObject.mCanAttack = true;
 
 --shot constants
 HunterObject.SHOT_PIXELS_DELTA = 10
-HunterObject.SHOT_MIN_GRID_DELTA = 1
-HunterObject.SHOT_MAX_GRID_DELTA = 14
+HunterObject.SHOT_MIN_GRID_DELTA = 3
+HunterObject.SHOT_MAX_GRID_DELTA = 6
 
 HunterObject.DIRECTIONS = {
     CAUTION = MobObject.DIRECTIONS.BACK + 1,
@@ -178,11 +178,12 @@ function HunterObject:createBullet(goalPos)
     local bullet = BulletObject:create();
     debug_log("HunterObject:createBullet goalPos ", goalPos.x, ", ", goalPos.y)
     local selfPos = self:getPosition();
-    local dir = (goalPos - self.mGridPosition):normalized();-- * self.mField:getCellSize();
-    debug_log("HunterObject:createBullet selfPos ", dir.x, ", ", dir.y)
-    bullet:init(self.mField, selfPos, goalPos, dir);
+    --local dir = (goalPos - self.mGridPosition):normalized();-- * self.mField:getCellSize();
+
+    local hubterpos = self.mField:gridPosToReal(self.mGridPosition)
+    debug_log("HunterObject:createBullet selfPos ", hubterpos.x, ", ", hubterpos.y)
+    bullet:init(self.mField, selfPos, goalPos);
     self.mField:addObject(bullet);
-    bullet:moveTo(goalPos);
 end
 
 --------------------------------

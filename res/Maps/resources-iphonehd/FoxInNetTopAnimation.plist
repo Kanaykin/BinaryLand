@@ -4,218 +4,218 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>man_catch_left_0000_Layer-Comp-1.png</key>
+            <key>man_catch_top_0000_Layer-Comp-1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{246,126},{160,124}}</string>
+                <string>{{2,448},{98,158}}</string>
                 <key>offset</key>
-                <string>{-17,7}</string>
+                <string>{16,24}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,35},{160,124}}</string>
+                <string>{{66,1},{98,158}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0001_Layer-Comp-2.png</key>
+            <key>man_catch_top_0001_Layer-Comp-2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{148,2},{170,122}}</string>
+                <string>{{134,162},{112,158}}</string>
                 <key>offset</key>
-                <string>{-14,6}</string>
+                <string>{14,24}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,37},{170,122}}</string>
+                <string>{{57,1},{112,158}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0002_Layer-Comp-3 copy.png</key>
+            <key>man_catch_top_0002_Layer-Comp-3 copy.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{320,2},{156,116}}</string>
+                <string>{{150,2},{104,158}}</string>
                 <key>offset</key>
-                <string>{-20,3}</string>
+                <string>{6,24}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{1,43},{156,116}}</string>
+                <string>{{53,1},{104,158}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0002_Layer-Comp-3.png</key>
+            <key>man_catch_top_0002_Layer-Comp-3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{320,2},{156,116}}</string>
+                <string>{{150,2},{104,158}}</string>
                 <key>offset</key>
-                <string>{-20,3}</string>
+                <string>{6,24}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{1,43},{156,116}}</string>
+                <string>{{53,1},{104,158}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0003_Layer-Comp-4 copy.png</key>
+            <key>man_catch_top_0003_Layer-Comp-4 copy.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{478,2},{144,114}}</string>
+                <string>{{102,470},{118,126}}</string>
                 <key>offset</key>
-                <string>{-16,2}</string>
+                <string>{-3,8}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{11,45},{144,114}}</string>
+                <string>{{37,33},{118,126}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0003_Layer-Comp-4.png</key>
+            <key>man_catch_top_0003_Layer-Comp-4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{478,2},{144,114}}</string>
+                <string>{{102,470},{118,126}}</string>
                 <key>offset</key>
-                <string>{-16,2}</string>
+                <string>{-3,8}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{11,45},{144,114}}</string>
+                <string>{{37,33},{118,126}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0004_Layer-Comp-5 copy.png</key>
+            <key>man_catch_top_0004_Layer-Comp-5 copy.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{558,118},{134,138}}</string>
+                <string>{{2,608},{130,138}}</string>
                 <key>offset</key>
-                <string>{-3,14}</string>
+                <string>{-1,14}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{29,21},{134,138}}</string>
+                <string>{{33,21},{130,138}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0004_Layer-Comp-5.png</key>
+            <key>man_catch_top_0004_Layer-Comp-5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{558,118},{134,138}}</string>
+                <string>{{2,608},{130,138}}</string>
                 <key>offset</key>
-                <string>{-3,14}</string>
+                <string>{-1,14}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{29,21},{134,138}}</string>
+                <string>{{33,21},{130,138}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0005_Layer-Comp-6 copy.png</key>
+            <key>man_catch_top_0005_Layer-Comp-6 copy.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{698,2},{124,146}}</string>
+                <string>{{130,322},{124,146}}</string>
                 <key>offset</key>
                 <string>{-2,16}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{35,15},{124,146}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0005_Layer-Comp-6.png</key>
+            <key>man_catch_top_0005_Layer-Comp-6.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{698,2},{124,146}}</string>
+                <string>{{130,322},{124,146}}</string>
                 <key>offset</key>
                 <string>{-2,16}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{35,15},{124,146}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0006_Layer-Comp-7 copy.png</key>
+            <key>man_catch_top_0006_Layer-Comp-7 copy.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{698,128},{120,148}}</string>
+                <string>{{2,298},{126,148}}</string>
                 <key>offset</key>
-                <string>{-2,22}</string>
+                <string>{0,22}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{37,8},{120,148}}</string>
+                <string>{{36,8},{126,148}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0006_Layer-Comp-7.png</key>
+            <key>man_catch_top_0006_Layer-Comp-7.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{698,128},{120,148}}</string>
+                <string>{{2,298},{126,148}}</string>
                 <key>offset</key>
-                <string>{-2,22}</string>
+                <string>{0,22}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{37,8},{120,148}}</string>
+                <string>{{36,8},{126,148}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0007_Layer-Comp-8 copy.png</key>
+            <key>man_catch_top_0007_Layer-Comp-8 copy.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,2},{146,144}}</string>
                 <key>offset</key>
                 <string>{9,16}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{35,16},{146,144}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0007_Layer-Comp-8.png</key>
+            <key>man_catch_top_0007_Layer-Comp-8.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,2},{146,144}}</string>
                 <key>offset</key>
                 <string>{9,16}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{35,16},{146,144}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0008_Layer-Comp-9 copy.png</key>
+            <key>man_catch_top_0008_Layer-Comp-9 copy.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{408,120},{148,130}}</string>
+                <string>{{2,148},{148,130}}</string>
                 <key>offset</key>
                 <string>{10,9}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{35,30},{148,130}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0008_Layer-Comp-9.png</key>
+            <key>man_catch_top_0008_Layer-Comp-9.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{408,120},{148,130}}</string>
+                <string>{{2,148},{148,130}}</string>
                 <key>offset</key>
                 <string>{10,9}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{35,30},{148,130}}</string>
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0009_Layer-Comp-10 copy.png</key>
+            <key>man_catch_top_0009_Layer-Comp-10 copy.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,150},{120,76}}</string>
+                <string>{{134,598},{120,76}}</string>
                 <key>offset</key>
                 <string>{5,-18}</string>
                 <key>rotated</key>
@@ -225,10 +225,10 @@
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0009_Layer-Comp-10.png</key>
+            <key>man_catch_top_0009_Layer-Comp-10.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,150},{120,76}}</string>
+                <string>{{134,598},{120,76}}</string>
                 <key>offset</key>
                 <string>{5,-18}</string>
                 <key>rotated</key>
@@ -238,10 +238,10 @@
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0010_Layer-Comp-11 copy.png</key>
+            <key>man_catch_top_0010_Layer-Comp-11 copy.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{124,150},{120,74}}</string>
+                <string>{{134,676},{120,74}}</string>
                 <key>offset</key>
                 <string>{5,-19}</string>
                 <key>rotated</key>
@@ -251,10 +251,10 @@
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0010_Layer-Comp-11.png</key>
+            <key>man_catch_top_0010_Layer-Comp-11.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{124,150},{120,74}}</string>
+                <string>{{134,676},{120,74}}</string>
                 <key>offset</key>
                 <string>{5,-19}</string>
                 <key>rotated</key>
@@ -264,10 +264,10 @@
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0011_Layer-Comp-12 copy.png</key>
+            <key>man_catch_top_0011_Layer-Comp-12 copy.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,150},{120,76}}</string>
+                <string>{{134,598},{120,76}}</string>
                 <key>offset</key>
                 <string>{5,-18}</string>
                 <key>rotated</key>
@@ -277,10 +277,10 @@
                 <key>sourceSize</key>
                 <string>{198,208}</string>
             </dict>
-            <key>man_catch_left_0011_Layer-Comp-12.png</key>
+            <key>man_catch_top_0011_Layer-Comp-12.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,150},{120,76}}</string>
+                <string>{{134,598},{120,76}}</string>
                 <key>offset</key>
                 <string>{5,-18}</string>
                 <key>rotated</key>
@@ -296,13 +296,13 @@
             <key>format</key>
             <integer>2</integer>
             <key>realTextureFileName</key>
-            <string>FoxInNetSide.png</string>
+            <string>FoxInNetTopAnimation.png</string>
             <key>size</key>
-            <string>{848,254}</string>
+            <string>{256,752}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:9422ac2c9748b793ed6545195f0f22a9:83bb2908dd1a11dd0413c2e05bf514b7:9fb9ecf4dfbace1db666dd3a63b516a2$</string>
+            <string>$TexturePacker:SmartUpdate:d3f5748c75bc91afa499e77291e2673f:0448be5165d362981ac6031b6f28ac04:90d386b71b2cbb4cccb69dd799735a97$</string>
             <key>textureFileName</key>
-            <string>FoxInNetSide.png</string>
+            <string>FoxInNetTopAnimation.png</string>
         </dict>
     </dict>
 </plist>
