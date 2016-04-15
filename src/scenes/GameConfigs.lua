@@ -69,6 +69,7 @@ gLocations = {
                 tutorial = false,
                 time = 120,
                 backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                customProperties = "src/levels/Level1_4",
                 id = "1_4"
 			},
 			{

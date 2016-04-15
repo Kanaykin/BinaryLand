@@ -13,7 +13,7 @@ HunterObject.mFoundPlayerPos = nil;
 HunterObject.mGridPosGetTrace = nil;
 HunterObject.mFoxGoalPos = nil;
 HunterObject.mFoxGridGoalPos = nil;
-HunterObject.mCanAttack = true;
+HunterObject.mCanAttack = false;
 
 --shot constants
 HunterObject.SHOT_PIXELS_DELTA = 10
