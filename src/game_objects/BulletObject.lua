@@ -74,7 +74,7 @@ function BulletObject:initAnimation()
 	self.mAnimations = {}
 	self:createAnimation("BulletAnimation.plist", MobObject.DIRECTIONS.SIDE, 0.06)
 	self:createAnimation("BulletTopAnimation.plist", MobObject.DIRECTIONS.FRONT, 0.06)
-	self:createAnimation("BulletTopAnimation.plist", MobObject.DIRECTIONS.BACK, 0.06)
+	self:createAnimation("BulletDownAnimation.plist", MobObject.DIRECTIONS.BACK, 0.06)
 end
 
 --------------------------------
@@ -142,7 +142,7 @@ function BulletObject:updateFlip()
     local flipY = self:getVerticalFlipByDirection();
     debug_log("BulletObject:updateFlip flipY ", flipY);
     if flipY ~= nil then
-        tolua.cast(self.mAnimationNode, "cc.Sprite"):setFlippedY(flipY);
+        --tolua.cast(self.mAnimationNode, "cc.Sprite"):setFlippedY(flipY);
     end
 end
 
