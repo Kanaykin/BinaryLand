@@ -19,6 +19,7 @@ ItemsDataMap_t fillItemsData() {
 	result[DiagramItem::HIDDEN_TRAP_ITEN] = { ":images/trap.png", "HiddenTrap", 114 };
 	result[DiagramItem::BONUS_TREE_ITEN] = { ":images/BonusBush.png", "BonusTree", 112 };
 	result[DiagramItem::BONUS_DOOR_ITEN] = { ":images/BonusDoor.png", "BonusDoor", 112 };
+	result[DiagramItem::TORNADO_ITEN] = { ":images/Tornado.png", "Tornado", 116 };
 
 	return result;
 };
@@ -69,6 +70,10 @@ mPoint(cellPoint)
 		val.setType(CustomProperty::TP_TYPE_FILE);
 		property.setValue(val);
 		mProperties.insert(std::make_pair("BonusFile", QVariant("")));
+	}break;
+	case DiagramItem::TORNADO_ITEN:
+	{
+		mProperties.insert(std::make_pair("DestPoint", QVariant("1,1")));
 	}break;
 	default: break;
 	};

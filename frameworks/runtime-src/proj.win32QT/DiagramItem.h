@@ -24,7 +24,8 @@ public:
 		CHEST_BONUS_ITEN,
 		HIDDEN_TRAP_ITEN,
 		BONUS_TREE_ITEN,
-		BONUS_DOOR_ITEN
+		BONUS_DOOR_ITEN,
+		TORNADO_ITEN
 	};
 	struct ItemData {
 		std::string mIconName;

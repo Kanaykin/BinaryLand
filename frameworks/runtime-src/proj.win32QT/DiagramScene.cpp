@@ -7,6 +7,7 @@
 #include "DiagramItem.h"
 #include "SceneLoader.h"
 #include <assert.h> 
+#include <QtWidgets/QGraphicsView>
 
 const int DiagramScene::CELL_SIZE = 50;
 static QString  BEGIN_MAP = "local map = {";
@@ -117,6 +118,15 @@ void DiagramScene::deleteItem(const QPoint& cellPoint)
 		emit sigDeleteItem(item);
 		delete item;
 		mItems[CELL_POS(cellPoint.x(), cellPoint.y(), mSize.width())] = 0;
+	}
+}
+
+void DiagramScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+	QPoint point = DiagramScene::convertToCellPosition(event->scenePos());
+	QList<QGraphicsView *> viewsList = views();
+	if (!viewsList.empty()){
+		(*viewsList.begin())->setToolTip(QString::number(point.x() + 1) + QString(",") + QString::number(mSize.height() - point.y()));
 	}
 }
 

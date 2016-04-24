@@ -59,6 +59,7 @@ mParentView(0)
 	mParentView = new ResizableWidget(this);
 	mParentView->setMinimumSize(MAX_SIZE, MAX_SIZE);
 	QGraphicsView *view = new QGraphicsView(mDiagramScene);
+	view->setToolTip("1");
 
 	QHBoxLayout *container = new QHBoxLayout;
 

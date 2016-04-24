@@ -27,6 +27,19 @@ end
 function TornadoObject:initAnimation()
 end
 
+---------------------------------
+function TornadoObject:setCustomProperties(properties)
+    info_log("TornadoObject:setCustomProperties ");
+
+    TornadoObject:superClass().setCustomProperties(self, properties);
+
+    if properties.DestPoint then
+		local one, two = properties.DestPoint:match("([^,]+),([^,]+)")
+		self.mPoints[2] = Vector.new(one, two);
+        --self.mCanAttack = properties.CanAttack;
+    end
+end
+
 --------------------------------
 function TornadoObject:onMoveFinished()
 	self.mDestIndex = self.mDestIndex == 1 and 2 or 1;

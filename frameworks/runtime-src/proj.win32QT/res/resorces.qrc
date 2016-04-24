@@ -17,5 +17,6 @@
          <file>images/trap.png</file>
          <file>images/BonusBush.png</file>
          <file>images/BonusDoor.png</file>
+         <file>images/Tornado.png</file>
      </qresource>
      </RCC>

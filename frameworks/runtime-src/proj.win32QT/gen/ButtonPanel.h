@@ -42,12 +42,13 @@ public:
     QPushButton *hiddenTrapButton;
     QPushButton *bonusTreeButton;
     QPushButton *bonusDoorButton;
+    QPushButton *tornadoButton;
 
     void setupUi(QWidget *ButtonsForm)
     {
         if (ButtonsForm->objectName().isEmpty())
             ButtonsForm->setObjectName(QStringLiteral("ButtonsForm"));
-        ButtonsForm->resize(330, 524);
+        ButtonsForm->resize(330, 650);
         gridLayout = new QGridLayout(ButtonsForm);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         frame = new QFrame(ButtonsForm);
@@ -192,6 +193,14 @@ public:
 
         gridLayout_3->addWidget(bonusDoorButton, 5, 2, 1, 1);
 
+        tornadoButton = new QPushButton(frame);
+        tornadoButton->setObjectName(QStringLiteral("tornadoButton"));
+        tornadoButton->setMinimumSize(QSize(90, 90));
+        tornadoButton->setIconSize(QSize(80, 80));
+        tornadoButton->setCheckable(true);
+
+        gridLayout_3->addWidget(tornadoButton, 6, 0, 1, 1);
+
 
         gridLayout->addWidget(frame, 0, 1, 1, 1);
 
@@ -219,6 +228,7 @@ public:
         hiddenTrapButton->setText(QString());
         bonusTreeButton->setText(QString());
         bonusDoorButton->setText(QString());
+        tornadoButton->setText(QString());
     } // retranslateUi
 
 };

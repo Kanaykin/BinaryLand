@@ -45,6 +45,7 @@ protected slots:
 protected:
 	void mousePressEvent(QGraphicsSceneMouseEvent *event);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+	void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 	void createItem(DiagramItem::eTypeItem	typeItem, const QPoint& cellPoint);
 	void deleteItem(const QPoint& cellPoint);
 	void selectItem(const QPoint& cellPoint);

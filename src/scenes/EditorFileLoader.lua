@@ -14,6 +14,7 @@ EditorFileLoader.CHEST_BONUS_ID = 12;
 EditorFileLoader.HIDDEN_TRAP_ID = 13;
 EditorFileLoader.BONUS_TREE_ID = 14;
 EditorFileLoader.BONUS_DOOR_ID = 15;
+EditorFileLoader.BONUS_TORNADO_ID = 16;
 
 EditorFileLoader.MAX_WIDTH = 15;
 
@@ -207,6 +208,17 @@ function EditorFileLoader:createBonusDoor(pos, cellSize)
 end
 
 --------------------------------
+function EditorFileLoader:createTornado(pos, cellSize)
+	local tree = CCSprite:create("Tornado.png");
+    
+    info_log("EditorFileLoader:createTornado tree ", tree);
+    tree:setAnchorPoint(cc.p(0.5, 0.0));
+    tree:setPosition(pos);
+	tree:setTag(FactoryObject.TORNADO_TAG);
+    return tree;
+end
+
+--------------------------------
 EditorFileLoader.CreateFunctions = {
 	[EditorFileLoader.BUSH_ID] = EditorFileLoader.createBush,
 	[EditorFileLoader.FOX_ID] = EditorFileLoader.createFox,
@@ -220,7 +232,8 @@ EditorFileLoader.CreateFunctions = {
 	[EditorFileLoader.CHEST_BONUS_ID] = EditorFileLoader.createChestBonus,
 	[EditorFileLoader.HIDDEN_TRAP_ID] = EditorFileLoader.createHiddenTrap,
 	[EditorFileLoader.BONUS_TREE_ID] = EditorFileLoader.createBonusTree,
-	[EditorFileLoader.BONUS_DOOR_ID] = EditorFileLoader.createBonusDoor
+	[EditorFileLoader.BONUS_DOOR_ID] = EditorFileLoader.createBonusDoor,
+	[EditorFileLoader.BONUS_TORNADO_ID] = EditorFileLoader.createTornado
 };
 
 --------------------------------
