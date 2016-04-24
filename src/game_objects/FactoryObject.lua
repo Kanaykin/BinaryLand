@@ -10,6 +10,7 @@ require "src/game_objects/BonusRoomDoor"
 require "src/game_objects/BushObject"
 require "src/game_objects/HiddenTrap"
 require "src/game_objects/Spirit"
+require "src/game_objects/TornadoObject"
 require "src/tutorial/TutorialTrigger"
 require "src/base/Log"
 
@@ -34,6 +35,7 @@ FactoryObject.BONUS_ROOM_DOOR_TAG = 112;
 FactoryObject.BONUS_CHEST_TAG = 113;
 FactoryObject.HIDDEN_TRAP_TAG = 114;
 FactoryObject.SPIRIT_TAG = 115;
+FactoryObject.TORNADO_TAG = 116;
 
 -- tutorial
 FactoryObject.TUTORIAL_TRIGGER_1 = 200;
@@ -85,6 +87,15 @@ end
 function FactoryObject:createMob(field, node)
 	info_log("FactoryObject:createMob ", field, ", ", node);
 	local mob = MobObject:create();
+	mob:init(field, node);
+	field:addMob(mob);
+	return mob;
+end
+
+------------------------------
+function FactoryObject:createTornado(field, node)
+	info_log("FactoryObject:createTornado ", field, ", ", node);
+	local mob = TornadoObject:create();
 	mob:init(field, node);
 	field:addMob(mob);
 	return mob;
@@ -220,5 +231,6 @@ FactoryObject.CreateFunctions = {
 	[FactoryObject.TUTORIAL_TRIGGER_1] = FactoryObject.createMoveInTrigger,
 	[FactoryObject.TUTORIAL_TRIGGER_2] = FactoryObject.createTrigger,
 	[FactoryObject.TUTORIAL_TRIGGER_3] = FactoryObject.createTrigger,
-	[FactoryObject.BONUS_ROOM_DOOR_TAG] = FactoryObject.createBonusRoomDoor
+	[FactoryObject.BONUS_ROOM_DOOR_TAG] = FactoryObject.createBonusRoomDoor,
+	[FactoryObject.TORNADO_TAG] = FactoryObject.createTornado
 }
