@@ -15,11 +15,16 @@ function TornadoObject:init(field, node)
 	self.mPoints = {}
     self.mPoints[1] = Vector.new(self.mGridPosition.x, self.mGridPosition.y);
     self.mPoints[2] = Vector.new(self.mGridPosition.x, self.mGridPosition.y - 3);
+    debug_log("TornadoObject:init ", self.mPoints[1].x, " ", self.mPoints[1].y)
 end
 
 --------------------------------
 function TornadoObject:getDestPoint()
 	debug_log("TornadoObject:getDestPoint ", self.mDestIndex)
+	if self.mPoints[self.mDestIndex].x == self.mGridPosition.x and 
+		self.mPoints[self.mDestIndex].y == self.mGridPosition.y then
+		self.mDestIndex = self.mDestIndex == 1 and 2 or 1;
+	end
 	return self.mPoints[self.mDestIndex];
 end
 
@@ -37,12 +42,15 @@ function TornadoObject:setCustomProperties(properties)
 		local one, two = properties.DestPoint:match("([^,]+),([^,]+)")
 		self.mPoints[2] = Vector.new(one, two);
         --self.mCanAttack = properties.CanAttack;
+        --self:resetMovingParams();
+        --self:startMoving(self:getDestPoint());
     end
 end
 
 --------------------------------
 function TornadoObject:onMoveFinished()
-	self.mDestIndex = self.mDestIndex == 1 and 2 or 1;
+	debug_log("TornadoObject:onMoveFinished ", self.mGridPosition.x, ", ", self.mGridPosition.y);
+	--self.mDestIndex = self.mDestIndex == 1 and 2 or 1;
 	debug_log("TornadoObject:onMoveFinished self.mDestIndex ", self.mDestIndex)
     TornadoObject:superClass().onMoveFinished(self);
 end
