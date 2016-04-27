@@ -212,7 +212,7 @@ function EditorFileLoader:createTornado(pos, cellSize)
 	local tree = CCSprite:create("Tornado.png");
     
     info_log("EditorFileLoader:createTornado tree ", tree);
-    tree:setAnchorPoint(cc.p(0.5, 0.0));
+    --tree:setAnchorPoint(cc.p(0.5, 0.0));
     pos.y = pos.y + cellSize / 2.0;
     tree:setPosition(pos);
 	tree:setTag(FactoryObject.TORNADO_TAG);

@@ -11,7 +11,7 @@ MovableObject.mSrcPos = nil;
 MovableObject.mPrevOrderPos = nil;
 
 MovableObject.mDebugBox = nil;
-MovableObject.mNeedDebugBox = false;
+MovableObject.mNeedDebugBox = true;
 
 --------------------------------
 function MovableObject:init(field, node)

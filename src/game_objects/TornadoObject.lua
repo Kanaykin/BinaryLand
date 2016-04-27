@@ -15,16 +15,20 @@ function TornadoObject:init(field, node)
 	self.mPoints = {}
     self.mPoints[1] = Vector.new(self.mGridPosition.x, self.mGridPosition.y);
     self.mPoints[2] = Vector.new(self.mGridPosition.x, self.mGridPosition.y - 3);
-    debug_log("TornadoObject:init ", self.mPoints[1].x, " ", self.mPoints[1].y)
+    debug_log("TornadoObject:init ", self.mPoints[1].x, " ", self.mPoints[1].y);
+
+	tolua.cast(self.mNode, "cc.Sprite"):setFlippedX(true);
+    tolua.cast(self.mNode, "cc.Sprite"):setFlippedX(false);
 end
 
 --------------------------------
 function TornadoObject:getDestPoint()
-	debug_log("TornadoObject:getDestPoint ", self.mDestIndex)
 	if self.mPoints[self.mDestIndex].x == self.mGridPosition.x and 
 		self.mPoints[self.mDestIndex].y == self.mGridPosition.y then
 		self.mDestIndex = self.mDestIndex == 1 and 2 or 1;
 	end
+	debug_log("TornadoObject:getDestPoint ", self.mDestIndex)
+	tolua.cast(self.mNode, "cc.Sprite"):setFlippedX(false);
 	return self.mPoints[self.mDestIndex];
 end
 
