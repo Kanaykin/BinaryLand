@@ -141,7 +141,7 @@ function PlayerObject:enterTrap(pos, stateInTrap)
 	if pos then
 		info_log("PlayerObject:enterTrap x= ", pos.x, " y= ", pos.y);
 		local posTo = Vector.new(self.mField:positionToGrid(pos));
-		self:moveTo(posTo);
+		self:moveTo(posTo, Callback.new(self, PlayerObject.onMoveToTrapFinished));
 	else
 		self:playAnimation(self.mStateInTrap);
 	end
@@ -150,11 +150,16 @@ function PlayerObject:enterTrap(pos, stateInTrap)
 end
 
 --------------------------------
+function PlayerObject:onMoveToTrapFinished()
+	info_log("PlayerObject:onMoveToTrapFinished ")
+	self:playAnimation(self.mStateInTrap);
+	self.mDelta = nil;
+end
+
+--------------------------------
 function PlayerObject:onMoveFinished( )
 	info_log("PlayerObject:onMoveFinished ", self.mStateInTrap)
 	PlayerObject:superClass().onMoveFinished(self);
-	self:playAnimation(self.mStateInTrap);
-	self.mDelta = nil;
 end
 
 --------------------------------

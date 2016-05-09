@@ -12,6 +12,7 @@ MovableObject.mPrevOrderPos = nil;
 
 MovableObject.mDebugBox = nil;
 MovableObject.mNeedDebugBox = true;
+MovableObject.mMoveFinishCallback = nil;
 
 --------------------------------
 function MovableObject:init(field, node)
@@ -84,9 +85,10 @@ function MovableObject:stopMoving()
 end
 
 --------------------------------
-function MovableObject:moveTo(posDest)
+function MovableObject:moveTo(posDest, moveFinishCallback)
 	-- compute real position
 	info_log("[MovableObject:moveTo] posDest.x ", posDest.x, "posDest.y ", posDest.y);
+	self.mMoveFinishCallback = moveFinishCallback;
 	local dest = self.mField:gridPosToReal(posDest);
 	dest.x= dest.x + self.mField.mCellSize / 2;
 	dest.y= dest.y + self.mField.mCellSize / 2;
@@ -122,6 +124,9 @@ end
 --------------------------------
 function MovableObject:onMoveFinished( )
 	-- body
+	if self.mMoveFinishCallback then
+		self.mMoveFinishCallback()
+	end
 end
 
 --------------------------------

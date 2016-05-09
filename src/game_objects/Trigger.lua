@@ -8,7 +8,7 @@ Trigger.mLeaveCallback = nil;
 Trigger.mContainedObj = nil;
 Trigger.mSize = nil;
 Trigger.mDebugBox = nil;
-Trigger.mNeedDebugBox = false;
+Trigger.mNeedDebugBox = true;
 
 --------------------------------
 function Trigger:getContainedObj()
@@ -69,6 +69,15 @@ function Trigger:getTrapPosition()
 end
 
 ---------------------------------
+function Trigger:onLeave()
+	info_log("Trigger:onLeave ", self.mLeaveCallback);
+	if self.mLeaveCallback then
+		self.mLeaveCallback(self.mContainedObj);
+	end
+	self.mContainedObj = nil;
+end
+
+---------------------------------
 function Trigger:onEnter(player)
 	info_log("Trigger:onEnter ", self.mEnterCallback);
 	if self.mEnterCallback then
@@ -114,10 +123,7 @@ function Trigger:tick(dt)
                 contained = self:contained(Vector.new(pointX, pointY));
 			end
 			if not contained then
-				if self.mLeaveCallback then
-					self.mLeaveCallback(self.mContainedObj);
-				end
-				self.mContainedObj = nil;
+				self:onLeave();
 			end
 		else
 			local players = self:getCollisionObjects()

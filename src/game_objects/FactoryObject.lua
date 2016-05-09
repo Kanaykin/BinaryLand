@@ -11,6 +11,7 @@ require "src/game_objects/BushObject"
 require "src/game_objects/HiddenTrap"
 require "src/game_objects/Spirit"
 require "src/game_objects/TornadoObject"
+require "src/game_objects/IceGround"
 require "src/tutorial/TutorialTrigger"
 require "src/base/Log"
 
@@ -36,6 +37,7 @@ FactoryObject.BONUS_CHEST_TAG = 113;
 FactoryObject.HIDDEN_TRAP_TAG = 114;
 FactoryObject.SPIRIT_TAG = 115;
 FactoryObject.TORNADO_TAG = 116;
+FactoryObject.ICE_GROUND_TAG = 117;
 
 -- tutorial
 FactoryObject.TUTORIAL_TRIGGER_1 = 200;
@@ -116,6 +118,15 @@ function FactoryObject:createWeb(field, node)
 	local web = SnareTrigger:create();
 	web:init(field, node, Callback.new(field, Field.onPlayerEnterWeb), Callback.new(field, Field.onPlayerLeaveWeb));
 	field:addMob(web);
+	return web;
+end
+
+------------------------------
+function FactoryObject:createIceGround(field, node)
+	info_log("FactoryObject:createIceGround ", field, ", ", node);
+	local web = IceGround:create();
+	web:init(field, node);
+	field:addObject(web);
 	return web;
 end
 
@@ -232,5 +243,6 @@ FactoryObject.CreateFunctions = {
 	[FactoryObject.TUTORIAL_TRIGGER_2] = FactoryObject.createTrigger,
 	[FactoryObject.TUTORIAL_TRIGGER_3] = FactoryObject.createTrigger,
 	[FactoryObject.BONUS_ROOM_DOOR_TAG] = FactoryObject.createBonusRoomDoor,
-	[FactoryObject.TORNADO_TAG] = FactoryObject.createTornado
+	[FactoryObject.TORNADO_TAG] = FactoryObject.createTornado,
+	[FactoryObject.ICE_GROUND_TAG] = FactoryObject.createIceGround
 }
