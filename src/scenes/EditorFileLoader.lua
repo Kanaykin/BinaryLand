@@ -14,7 +14,8 @@ EditorFileLoader.CHEST_BONUS_ID = 12;
 EditorFileLoader.HIDDEN_TRAP_ID = 13;
 EditorFileLoader.BONUS_TREE_ID = 14;
 EditorFileLoader.BONUS_DOOR_ID = 15;
-EditorFileLoader.BONUS_TORNADO_ID = 16;
+EditorFileLoader.TORNADO_ID = 16;
+EditorFileLoader.ICE_GROUND_ID = 17;
 
 EditorFileLoader.MAX_WIDTH = 15;
 
@@ -220,6 +221,19 @@ function EditorFileLoader:createTornado(pos, cellSize)
 end
 
 --------------------------------
+function EditorFileLoader:createIceGround(pos, cellSize)
+	local tree = CCSprite:create("IceGround.png");
+    
+    info_log("EditorFileLoader:createIceGround tree ", tree);
+    --tree:setAnchorPoint(cc.p(0.5, 0.0));
+    pos.y = pos.y + cellSize / 2.0;
+    tree:setPosition(pos);
+	tree:setTag(FactoryObject.ICE_GROUND_TAG);
+    return tree;
+end
+
+
+--------------------------------
 EditorFileLoader.CreateFunctions = {
 	[EditorFileLoader.BUSH_ID] = EditorFileLoader.createBush,
 	[EditorFileLoader.FOX_ID] = EditorFileLoader.createFox,
@@ -234,7 +248,8 @@ EditorFileLoader.CreateFunctions = {
 	[EditorFileLoader.HIDDEN_TRAP_ID] = EditorFileLoader.createHiddenTrap,
 	[EditorFileLoader.BONUS_TREE_ID] = EditorFileLoader.createBonusTree,
 	[EditorFileLoader.BONUS_DOOR_ID] = EditorFileLoader.createBonusDoor,
-	[EditorFileLoader.BONUS_TORNADO_ID] = EditorFileLoader.createTornado
+	[EditorFileLoader.TORNADO_ID] = EditorFileLoader.createTornado,
+	[EditorFileLoader.ICE_GROUND_ID] = EditorFileLoader.createIceGround
 };
 
 --------------------------------

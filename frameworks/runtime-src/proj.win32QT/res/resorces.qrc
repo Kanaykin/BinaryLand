@@ -18,5 +18,6 @@
          <file>images/BonusBush.png</file>
          <file>images/BonusDoor.png</file>
          <file>images/Tornado.png</file>
+         <file>images/IceGround.png</file>
      </qresource>
      </RCC>

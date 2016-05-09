@@ -43,6 +43,7 @@ public:
     QPushButton *bonusTreeButton;
     QPushButton *bonusDoorButton;
     QPushButton *tornadoButton;
+    QPushButton *iceGroundButton;
 
     void setupUi(QWidget *ButtonsForm)
     {
@@ -201,6 +202,14 @@ public:
 
         gridLayout_3->addWidget(tornadoButton, 6, 0, 1, 1);
 
+        iceGroundButton = new QPushButton(frame);
+        iceGroundButton->setObjectName(QStringLiteral("iceGroundButton"));
+        iceGroundButton->setMinimumSize(QSize(90, 90));
+        iceGroundButton->setIconSize(QSize(80, 80));
+        iceGroundButton->setCheckable(true);
+
+        gridLayout_3->addWidget(iceGroundButton, 6, 1, 1, 1);
+
 
         gridLayout->addWidget(frame, 0, 1, 1, 1);
 
@@ -229,6 +238,7 @@ public:
         bonusTreeButton->setText(QString());
         bonusDoorButton->setText(QString());
         tornadoButton->setText(QString());
+        iceGroundButton->setText(QString());
     } // retranslateUi
 
 };
