@@ -9,7 +9,7 @@ TornadoCatchState = inheritsFrom(BaseMobState)
 
 ------------------------------------
 function TornadoCatchState:tick(dt)
-    info_log("TornadoCatchState:tick ");
+    --info_log("TornadoCatchState:tick ");
     TornadoCatchState:superClass().tick(self, dt);
     -- if self.mTimeWait == nil then
     --     self.mTimeWait = 0.5;

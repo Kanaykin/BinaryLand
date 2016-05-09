@@ -4,6 +4,7 @@ require "src/game_objects/TornadoStates.lua"
 TornadoObject = inheritsFrom(MobObject)
 TornadoObject.mPoints = nil;
 TornadoObject.mDestIndex = 2;
+TornadoObject.mVelocity = 40;
 
 --------------------------------
 function TornadoObject:init(field, node)
