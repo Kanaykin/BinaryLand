@@ -61,7 +61,7 @@ function PlayerController:onTouchBegan(point)
 		--debug_log("PlayerController:onTouchBegan  size ", box.size.width, " y ", box.size.height);
 		local pos = object:getScreenPos();
 		--info_log("PlayerController:onTouchBegan  x ", pos.x, " y ", pos.y);
-		if self:touchObject(object, point) then
+		if not object:isInTrap() and self:touchObject(object, point) then
 			info_log("self:touchObject ");
 			self.mObjectCaptured = object;
 			self.mDeltaCapturedPos = Vector.new(point.x, point.y) - Vector.new(object.mNode:getPosition());

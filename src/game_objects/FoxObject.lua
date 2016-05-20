@@ -516,6 +516,13 @@ function FoxObject:leaveTrap(pos)
 end
 
 --------------------------------
+function FoxObject:enterIceGround(pos)
+    self:enterTrap(pos);
+    self.mMoveFinishCallback = nil;
+    self.mInTrap = false;
+end
+
+--------------------------------
 function FoxObject:enterHiddenTrap(pos)
     self:enterCage(pos);
 
