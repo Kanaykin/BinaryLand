@@ -77,6 +77,8 @@ function FoxObject:init(field, node, needReverse)
 
     --self:createDebugBox(node)--self.mAnimationNode);
     self.mSize = self.mAnimationNode:getBoundingBox();
+    self.mSize.width = self.mSize.width * 0.7;
+    self.mSize.height = self.mSize.height * 0.7;
 
     -- create trace
     self.mTrace = FoxTrace:create();
@@ -125,8 +127,9 @@ function FoxObject:updateDebugBox()
         box.x = 0;
         box.y = 0;
         local center = cc.p(box.x + anchor.x * size.width , box.y + anchor.y * size.height);
+        --local center = cc.p(box.x - box.width / 2, box.y - box.height / 2);
         self.mDebugBox:clear();
-        self.mDebugBox:drawCircle(center, box.width / 2.0 * 0.7,
+        self.mDebugBox:drawCircle(center, box.width / 2.0,
             360, 360, false, {r = 0, g = 0, b = 0, a = 100});
 
         if self.mFightTrigger:isActivated() then

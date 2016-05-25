@@ -348,7 +348,7 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>1.2100000381469727</real>
+							<real>1.1599999666213989</real>
 							<real>0.0</real>
 						</array>
 					</dict>
@@ -391,7 +391,7 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>62</real>
+							<real>80</real>
 							<real>7.5</real>
 							<integer>1</integer>
 						</array>
@@ -472,7 +472,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>56.458332061767578</real>
+							<real>46.5</real>
 							<real>10.699999809265137</real>
 							<integer>4</integer>
 						</array>
@@ -532,7 +532,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>25</real>
+							<real>27</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -582,11 +582,9 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Excellent! Help them to release babies.</string>
+						<string>Фелиция, я не могу открыть клетку, тут хитрый засов!</string>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>animatedProperties</key>

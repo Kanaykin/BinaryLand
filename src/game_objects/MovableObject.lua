@@ -3,7 +3,6 @@ require "src/base/Log"
 
 MovableObject = inheritsFrom(BaseObject)
 MovableObject.mVelocity = 15;
-MovableObject.mGridPosition = nil;
 MovableObject.mMoveTime = nil;
 MovableObject.mDelta = nil;
 MovableObject.mDestGridPos = nil;
@@ -17,8 +16,6 @@ MovableObject.mMoveFinishCallback = nil;
 --------------------------------
 function MovableObject:init(field, node)
 	MovableObject:superClass().init(self, field, node);
-
-	self.mGridPosition = Vector.new(field:getGridPosition(node));
 
 	self:createDebugBox();
 end
@@ -51,10 +48,7 @@ function MovableObject:updateDebugBox()
 	end
 end
 
----------------------------------
-function MovableObject:getGridPosition()
-	return self.mGridPosition;
-end
+
 ---------------------------------
 function MovableObject:store(data)
     MovableObject:superClass().store(self, data);

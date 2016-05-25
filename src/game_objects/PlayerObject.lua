@@ -211,6 +211,13 @@ function PlayerObject:getReverse()
 end
 
 --------------------------------
+function PlayerObject:resetMovingParams()
+	debug_log("PlayerObject:resetMovingParams ");
+    PlayerObject:superClass().resetMovingParams(self);
+    self:playAnimation(nil);
+end
+
+--------------------------------
 function PlayerObject:init(field, node, needReverse)
 	PlayerObject:superClass().init(self, field, node);
 
@@ -343,7 +350,7 @@ function PlayerObject:move(dt)
 	end
 	
 	local button = self.mJoystick:getButtonPressed();
-	--debug_log("button pressed ", );
+	--debug_log("button pressed ", button);
 	if button and button ~= PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP then
 
 		self:playAnimation(button);

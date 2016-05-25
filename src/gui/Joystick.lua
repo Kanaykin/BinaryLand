@@ -110,6 +110,11 @@ function Joystick:clearBlockedButtons()
 end
 
 --------------------------------
+function Joystick:resetButtonPressed()
+	self.mButtonPressed = Joystick.BUTTONS.NONE;
+end
+
+--------------------------------
 function Joystick:init(guiLayer)
 	
 	local node  = guiLayer:getChildByTag(Joystick.JOYSTICK_TAG);

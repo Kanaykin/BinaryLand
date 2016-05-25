@@ -5,6 +5,7 @@ BaseObject = inheritsFrom(nil)
 BaseObject.mNode = nil;
 BaseObject.mField = nil;
 BaseObject.mId = nil;
+BaseObject.mGridPosition = nil;
 
 --------------------------------
 function BaseObject:setId(id)
@@ -109,9 +110,14 @@ function BaseObject:init(field, node)
 	self.mNode:retain();
 	self.mField = field;
 
-    local gridPosition = Vector.new(field:getGridPosition(node));
+    self.mGridPosition = Vector.new(field:getGridPosition(node));
 
-    self:setId(BaseObject:convertToId(gridPosition.x, gridPosition.y, self:getNode():getTag()));
+    self:setId(BaseObject:convertToId(self.mGridPosition.x, self.mGridPosition.y, self:getNode():getTag()));
+end
+
+---------------------------------
+function BaseObject:getGridPosition()
+	return self.mGridPosition;
 end
 
 ---------------------------------

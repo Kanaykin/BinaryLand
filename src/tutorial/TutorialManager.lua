@@ -5,6 +5,7 @@ require "src/tutorial/TutorialStep3"
 require "src/tutorial/TutorialStep4"
 require "src/tutorial/TutorialStep5"
 require "src/tutorial/TutorialStep6"
+require "src/tutorial/TutorialStep7"
 require "src/base/Log"
 
 TutorialManager =  inheritsFrom(nil)

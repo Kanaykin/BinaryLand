@@ -573,15 +573,34 @@ function Field:collideObject(player, destPos)
 			
 			boxl.x = destPos.x-- + boxl.origin.x;
 			boxl.y = destPos.y-- + boxl.origin.y;
-			info_log("Field:collideObject1 x ", boxl.x, " y ", boxl.y);
-			info_log("Field:collideObject1 size x ", boxl.width, " y ", boxl.height);
+			-- info_log("Field:collideObject1 x ", boxl.x, " y ", boxl.y);
+			-- info_log("Field:collideObject1 size x ", boxl.width, " y ", boxl.height);
 			local boxr = object:getBoundingBox();
-			info_log("Field:collideObject2 x ", boxr.x, " y ", boxr.y);
-			info_log("Field:collideObject2 size x ", boxr.width, " y ", boxr.height);
+			-- info_log("Field:collideObject2 x ", boxr.x, " y ", boxr.y);
+			-- info_log("Field:collideObject2 size x ", boxr.width, " y ", boxr.height);
 
-			local centerL = Vector.new(boxl.x - boxl.width / 2, boxl.y - boxl.height / 2);
-			local centerR = Vector.new(boxr.x - boxr.width / 2, boxr.y - boxr.height / 2);
+			local centerL = Vector.new(boxl.x , boxl.y );
+			local centerR = Vector.new(boxr.x , boxr.y );
 			local diametr = Vector.distance(centerL, centerR);
+
+            -- if not self.mDebugBox1 then
+            --     local nodeBox = cc.DrawNode:create();
+            --     self:getFieldNode():addChild(nodeBox);
+            --     self.mDebugBox1 = nodeBox;
+            -- end
+            -- self.mDebugBox1:clear();
+            -- self.mDebugBox1:drawCircle(cc.p(centerL.x, centerL.y), boxl.width / 2.0,
+            -- 360, 360, false, {r = 1, g = 0, b = 0, a = 1});
+
+            -- if not self.mDebugBox2 then
+            --     local nodeBox = cc.DrawNode:create();
+            --     self:getFieldNode():addChild(nodeBox);
+            --     self.mDebugBox2 = nodeBox;
+            -- end
+            -- self.mDebugBox2:clear();
+            -- self.mDebugBox2:drawCircle(cc.p(centerR.x, centerR.y), boxr.width / 2.0,
+            -- 360, 360, false, {r = 1, g = 0, b = 0, a = 1});
+
 			return diametr <= boxr.width * 0.7;
 		end
 	end
