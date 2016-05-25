@@ -1,10 +1,12 @@
 @echo off
-SET PATH_RES="Debug.win32"
+SET PATH_RES="Release.win32"
 echo %PATH_RES%
 
 REM LIST_DIRS=(../../../src )
 
 xcopy %cd%\..\..\..\src %cd%\%PATH_RES%\src /S/E/I/Y
+
+xcopy %cd%\..\..\..\res\fonts %cd%\%PATH_RES%\res\fonts /S/E/I/Y
 
 REM xcopy %cd%\..\..\..\res\Published-iOS %cd%\%PATH_RES% /S/E/I
 
