@@ -50,7 +50,7 @@ function TutorialStep1:init(gameScene, field, tutorialManager)
 
 	self.mPlayer = self.mField:getPlayerObjects()[self.mPlayerIndex];
 
-	self.mTrigger = self.mField:getObjetcByTag(self.mTriggerTag);
+	self.mTrigger = self.mField:getObjectsByTag(self.mTriggerTag)[1];
 	info_log("TutorialStep1:init self.mTrigger ", self.mTrigger);
 	local dest = self.mTrigger:getPosition();
 	--dest.x = dest.x + field.mCellSize / 2;
@@ -67,26 +67,19 @@ function TutorialStep1:init(gameScene, field, tutorialManager)
 	self.mTutorialManager:getMainUI():getFightButton():setBlocked(true);
 
     self:foxBabyAnimation();
-
-    local label = tolua.cast(self.mNode:getChildByTag(TutorialStep1.LABEL_TAG), "cc.Label");
-    info_log("TutorialStep1:init label ", label);
-
-    if label then
-        setDefaultFont(label, field.mGame:getScale());
-    end
-
 end
 
 --------------------------------
 function TutorialStep1:tick(dt)
+	-- check finished
+	if self.mTrigger:getContainedObj() ~= nil then
+		info_log("TutorialStep1:tick FINISH Step");
+		self.mIsFinished = true;
+	end
+
 	self.mFinger:tick(dt);
 
 	if self.mCurrentFingerTime ~= nil then
-		-- check finished
-		if self.mTrigger:getContainedObj() ~= nil then
-			info_log("TutorialStep1:tick FINISH Step");
-			self.mIsFinished = true;
-		end
   --       --info_log("TutorialStep1:tick ContainedObj ", self.mTrigger:getContainedObj())
 
 		self.mCurrentFingerTime = self.mCurrentFingerTime + dt;

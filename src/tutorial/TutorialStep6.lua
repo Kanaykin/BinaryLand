@@ -25,12 +25,6 @@ function TutorialStep6:init(gameScene, field, tutorialManager)
 
 	self.mTutorialManager:getMainUI():getFightButton():setBlocked(false);
 
-	local label = tolua.cast(self.mNode:getChildByTag(TutorialStep1.LABEL_TAG), "cc.Label");
-	debug_log("TutorialStep2:init label ", label);
-    if label then
-        setDefaultFont(label, field.mGame:getScale());
-    end
-
     self:initFinger(gameScene, field);
 
     self.mCurrentFingerTime = TutorialStep3.FREE_TIME;

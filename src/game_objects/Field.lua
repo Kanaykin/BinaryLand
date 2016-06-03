@@ -88,14 +88,15 @@ function Field:getMainUi()
     return self.mMainUi;
 end
 --------------------------------
-function Field:getObjetcByTag(tag)
+function Field:getObjectsByTag(tag)
+    local result = {};
 	for _, obj in ipairs(self.mObjects) do
-		info_log("Field:getObjetcByTag tag ", obj:getTag())
+		info_log("Field:getObjectsByTag tag ", obj:getTag())
 		if obj:getTag() == tag then
-			return obj;
+			table.insert(result, obj);
 		end
 	end
-	return nil
+	return result
 end
 
 --------------------------------
@@ -638,7 +639,7 @@ function Field:onPlayerLeaveWeb(player)
 	info_log("onPlayerLeaveWeb ");
 	player:leaveTrap(nil);
     -- get Spirit and remove it
-    local spirit = self:getObjetcByTag(FactoryObject.SPIRIT_TAG);
+    local spirit = self:getObjectsByTag(FactoryObject.SPIRIT_TAG)[1];
     debug_log("Field:onPlayerLeaveWeb spirit ", spirit);
     if spirit then
         spirit:onPlayerLeaveWeb(player);

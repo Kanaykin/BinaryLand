@@ -8,6 +8,7 @@ TutorialStepBase.mField = nil;
 TutorialStepBase.mTutorialManager = nil
 TutorialStepBase.mIsFinished = false
 TutorialStepBase.mNode = nil;
+TutorialStepBase.mCurrentTime = nil;
 
 ---------------------------------
 function TutorialStepBase:destroy()
@@ -29,6 +30,12 @@ end
 --------------------------------
 function TutorialStepBase:foxBabyAnimation()
     info_log("TutorialStep1:foxBabyAnimation self.mNode ", self.mNode);
+    if true then
+    	return;
+    end
+    if not self.mNode then
+    	return;
+    end
     local foxBaby = self.mNode:getChildByTag(TutorialStep1.FOX_BABY_TAG);
     info_log("TutorialStep1:foxBabyAnimation ", foxBaby);
 
@@ -65,6 +72,9 @@ end
 
 ---------------------------------
 function TutorialStepBase:initFromCCB(ccbfile, gameScene)
+	if not ccbfile then
+		return;
+	end
 	local ccpproxy = CCBProxy:create();
 	local reader = ccpproxy:createCCBReader();
 	local node = ccpproxy:readCCBFromFile(ccbfile, reader, false);
@@ -82,9 +92,6 @@ function TutorialStepBase:initFromCCB(ccbfile, gameScene)
 		info_log("onTouchHandler ");
 		self:onTouchHandler();
 	end
-
-    self.mTutorialManager:getMainUI():addTouchListener(self);
-
 end
 
 --------------------------------
@@ -107,6 +114,12 @@ end
 
 --------------------------------
 function TutorialStepBase:tick(dt)
+	if self.mCurrentTime then
+	    self.mCurrentTime = self.mCurrentTime - dt;
+		if self.mCurrentTime <= 0 then
+			self.mIsFinished = true;
+		end
+	end
 end
 
 --------------------------------
@@ -121,11 +134,20 @@ function TutorialStepBase:finished()
 end
 
 --------------------------------
-function TutorialStepBase:init(gameScene, field, tutorialManager, ccbfile)
+function TutorialStepBase:init(gameScene, field, tutorialManager, ccbfile, step_duration)
 	self.mField = field;
 
 	self.mTutorialManager = tutorialManager;
 	info_log("TutorialStepBase:init ", self.mTutorialManager );
 
 	self:initFromCCB(ccbfile, gameScene);
+
+	self.mTutorialManager:getMainUI():addTouchListener(self);
+
+	local label = tolua.cast(self.mNode:getChildByTag(TutorialStep1.LABEL_TAG), "cc.Label");
+    if label then
+        setDefaultFont(label, field.mGame:getScale());
+    end
+    self.mCurrentTime = step_duration;
+
 end

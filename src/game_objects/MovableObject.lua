@@ -10,7 +10,7 @@ MovableObject.mSrcPos = nil;
 MovableObject.mPrevOrderPos = nil;
 
 MovableObject.mDebugBox = nil;
-MovableObject.mNeedDebugBox = true;
+MovableObject.mNeedDebugBox = false;
 MovableObject.mMoveFinishCallback = nil;
 
 --------------------------------

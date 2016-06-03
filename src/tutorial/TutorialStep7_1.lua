@@ -1,12 +1,12 @@
 require "src/tutorial/TutorialStepBase"
 
-TutorialStep5 =  inheritsFrom(TutorialStepBase)
-TutorialStep5.mCCBFileName = "Step5";
-TutorialStep5.STEP_DURATION = 3;
+TutorialStep7_1 =  inheritsFrom(TutorialStepBase)
+TutorialStep7_1.mCCBFileName = "Step7_1";
+TutorialStep7_1.STEP_DURATION = 3;
 
 --------------------------------
-function TutorialStep5:init(gameScene, field, tutorialManager)
-	TutorialStep5:superClass().init(self, gameScene, field, tutorialManager, self.mCCBFileName, TutorialStep5.STEP_DURATION);
+function TutorialStep7_1:init(gameScene, field, tutorialManager)
+	TutorialStep7_1:superClass().init(self, gameScene, field, tutorialManager, self.mCCBFileName, TutorialStep7_1.STEP_DURATION);
 
 	self.mTutorialManager:getMainUI():getJoystick():clearBlockedButtons();
 	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.TOP);
@@ -18,11 +18,11 @@ function TutorialStep5:init(gameScene, field, tutorialManager)
 end
 
 --------------------------------
-function TutorialStep5:getNextStep()
-	return "TutorialStep5_1";
+function TutorialStep7_1:getNextStep()
+	return "TutorialStep8";
 end
 
 --------------------------------
-function TutorialStep5:tick(dt)
+function TutorialStep7_1:tick(dt)
 	TutorialStep5:superClass().tick(self, dt);
 end

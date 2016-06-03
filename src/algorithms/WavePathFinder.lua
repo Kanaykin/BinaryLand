@@ -92,6 +92,33 @@ WavePathFinder = {
 	end,
 
 	-----------------------------------
+	normalizePath = function(path)
+		debug_log("normalizePath ", #path);
+		if #path < 2 then
+			return path
+		end
+		local result = {};
+		local lastDir = Vector.new(0, 0);
+		for i = 2, #path do
+			debug_log("normalizePath i ", i);
+			local first = path[i - 1];
+			local second = path[i];
+			local dir = (second - first):normalized();
+			for iDir, dirConst in ipairs(WavePathFinder.DIRECTIONS) do
+				if dir == dirConst then
+					if lastDir ~= dir then
+						lastDir = dir;
+						table.insert(result, first);
+					end
+					break;
+				end
+			end
+		end
+		table.insert(result, path[#path]);
+		return result;
+	end,
+
+	-----------------------------------
 	findPath = function(path, array, sizeArray)
 		--WavePathFinder.printPath(path);
 		local point = path[#path];

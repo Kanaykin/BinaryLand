@@ -289,8 +289,6 @@
 						<real>0.0</real>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -503,7 +501,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>FoxBabyTutor.png</string>
+							<string>FoxGirlTutor.png</string>
 						</array>
 					</dict>
 				</array>

@@ -309,7 +309,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>FoxBabyTutor.png</string>
+							<string>FoxTutor.png</string>
 						</array>
 					</dict>
 				</array>
@@ -391,7 +391,7 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>80</real>
+							<real>81</real>
 							<real>7.5</real>
 							<integer>1</integer>
 						</array>

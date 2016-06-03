@@ -229,9 +229,9 @@
 			<key>name</key>
 			<string>animation</string>
 			<key>offset</key>
-			<real>0.0</real>
+			<real>0.053128242492675781</real>
 			<key>position</key>
-			<real>1.2000000476837158</real>
+			<real>0.1666666716337204</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>

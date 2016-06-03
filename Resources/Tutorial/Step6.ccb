@@ -422,12 +422,9 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Быть может мы сможем открыть клетку вместе. 
-Помоги мне выбраться</string>
+						<string>Тапни два раза, чтобы сломать ловушку</string>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -504,7 +501,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>FoxBabyTutor.png</string>
+							<string>FoxGirlTutor.png</string>
 						</array>
 					</dict>
 				</array>
