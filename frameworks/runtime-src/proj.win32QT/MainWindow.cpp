@@ -14,6 +14,7 @@
 #include "ExplorerPanel.h"
 #include "cocos2d.h"
 #include "QtApplication.h"
+#include "2d/CCFontAtlasCache.h"
 #include <QtCore/QTimer>
 
 static const int MAX_SIZE(500);
@@ -179,6 +180,7 @@ void MainWindow::runCocos()
 		cocos2d::Director* dir = cocos2d::Director::getInstance();
 		if (dir)
 			dir->release();
+		cocos2d::FontAtlasCache::releaseAllFontAtlas();
 	}
 	mApp = std::make_shared<QTAplication>(this);
 	int ret = cocos2d::Application::getInstance()->run();
