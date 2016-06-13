@@ -2,7 +2,7 @@ require "src/tutorial/TutorialStepBase"
 
 TutorialStep7_1 =  inheritsFrom(TutorialStepBase)
 TutorialStep7_1.mCCBFileName = "Step7_1";
-TutorialStep7_1.STEP_DURATION = 3;
+TutorialStep7_1.STEP_DURATION = 4;
 
 --------------------------------
 function TutorialStep7_1:init(gameScene, field, tutorialManager)

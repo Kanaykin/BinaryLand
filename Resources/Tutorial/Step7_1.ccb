@@ -422,7 +422,8 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Встаньте с двух сторон клетки.</string>
+						<string>Чтобы освободить лисёнка из клетки,
+ подведите к ней Фредерика и Фелицию</string>
 					</dict>
 				</array>
 				<key>selected</key>

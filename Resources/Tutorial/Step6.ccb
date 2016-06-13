@@ -422,9 +422,12 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Тапни два раза, чтобы сломать ловушку</string>
+						<string>Быстро нажми два раза на экран в любом месте,
+ чтобы ударить и освободить меня</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>

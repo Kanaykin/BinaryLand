@@ -567,7 +567,7 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>10</real>
+								<real>13</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -583,7 +583,7 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>10</real>
+								<real>13</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -594,6 +594,8 @@
 								<real>8</real>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -827,8 +829,6 @@
 						<true/>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
