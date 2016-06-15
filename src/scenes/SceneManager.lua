@@ -79,12 +79,12 @@ function SceneManager:runNextScene(params)
 		local locationId = 1;
 		local isLevelOpened = self.mGame:isLevelOpened(locationId, 1);
 		info_log("First start is level opened ", isLevelOpened);
-		if not isLevelOpened and false then
+		if not isLevelOpened then
 			self.mGame:openLevel(locationId, 1);
 			-- run tutorial
-			local locations = self.mGame:getLocations();
-			self:runLevelScene(locations[locationId]:getLevels()[1]);
-			return;
+			--local locations = self.mGame:getLocations();
+			--self:runLevelScene(locations[locationId]:getLevels()[1]);
+			--return;
 		end
 	end
 

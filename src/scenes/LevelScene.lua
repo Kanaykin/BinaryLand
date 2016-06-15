@@ -156,12 +156,18 @@ function LevelScene:winOpenLevel()
     local locationId = self.mLevel:getLocation():getId();
     info_log("LevelScene:winOpenLevel: locationId ", locationId);
 
-    -- TODO: open location
-    if #self.mSceneManager.mGame:getLocations() >= (locationId + 1) then
-        self.mSceneManager.mGame:openLocation(locationId + 1);
+    local newLevelIndex = self.mLevel:getIndex() + 1;
+    local newLocationIndex = locationId;
+    if newLevelIndex > #self.mLevel:getLocation():getLevels() then
+        newLocationIndex = newLocationIndex + 1;
+        newLevelIndex = 1;
     end
 
-    self.mSceneManager.mGame:openLevel(locationId, self.mLevel:getIndex() + 1);
+    if #self.mSceneManager.mGame:getLocations() >= newLocationIndex and newLocationIndex ~= locationId then
+        self.mSceneManager.mGame:openLocation(newLocationIndex);
+    end
+
+    self.mSceneManager.mGame:openLevel(newLocationIndex, newLevelIndex);
     self.mSceneManager.mGame:setLevelStar(locationId, self.mLevel:getIndex(), 2);
 
     SimpleAudioEngine:getInstance():playMusic(gSounds.VICTORY_MUSIC, false)
