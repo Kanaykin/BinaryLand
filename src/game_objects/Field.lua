@@ -411,7 +411,7 @@ function Field:tick(dt)
         obj:tick(dt);
     end
 
-    if self.mState ~= Field.PAUSE then
+    if self.mState ~= Field.PAUSE and false then
 		for i, obj in ipairs(self.mObjects) do
 			obj:tick(dt);
 		end
