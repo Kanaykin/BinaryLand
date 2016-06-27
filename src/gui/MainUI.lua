@@ -7,6 +7,7 @@ require "src/gui/LevelTimer"
 require "src/gui/LevelScore"
 require "src/gui/GettingBonusEffect"
 require "src/gui/BonusDlg"
+require "src/gui/GetStarDlg"
 require "src/base/Log"
 
 MainUI = inheritsFrom(CCBBaseDialog)
@@ -16,6 +17,7 @@ MainUI.mFightButton = nil;
 MainUI.mSettingsDlg = nil;
 MainUI.mYouLooseDlg = nil;
 MainUI.mYouWinDlg = nil;
+MainUI.mGetStarDlg = nil;
 MainUI.mBonusDlg = nil;
 MainUI.mTimeLabel = nil;
 MainUI.mTimer = nil;
@@ -47,6 +49,7 @@ function MainUI:destroy()
 	self.mYouLooseDlg:destroy();
 	self.mYouWinDlg:destroy();
     self.mBonusDlg:destroy();
+    self.mGetStarDlg:destroy();
 
 	self:superClass().destroy(self);
 end
@@ -56,6 +59,13 @@ function MainUI:onSettingsButtonPressed(val, val2)
 	info_log("onSettingsButtonPressed ", val, val2);
 
 	self.mSettingsDlg:doModal();
+end
+
+--------------------------------
+function MainUI:onGetStarDlgPressed()
+    info_log("MainUI:onGetStarDlgPressed ");
+    self.mYouWinDlg:hide();
+    self.mGetStarDlg:doModal();
 end
 
 ---------------------------------
@@ -156,6 +166,9 @@ function MainUI:tick(dt)
     if self.mGame.mDialogManager:isModal(self.mYouWinDlg) then
         self.mYouWinDlg:tick(dt);
     end
+    if self.mGame.mDialogManager:isModal(self.mGetStarDlg) then
+        self.mGetStarDlg:tick(dt);
+    end
 end
 
 --------------------------------
@@ -194,7 +207,11 @@ function MainUI:init(game, uiLayer, ccbFile)
 
 	-------------------------
 	self.mYouWinDlg = YouWinDlg:create();
-	self.mYouWinDlg:init(self.mGame, self.mUILayer);
+	self.mYouWinDlg:init(self.mGame, self.mUILayer, self);
+
+    -------------------------
+    self.mGetStarDlg = GetStarDlg:create();
+    self.mGetStarDlg:init(self.mGame, self.mUILayer);
 
 	-------------------------
     self.mTimer = LevelTimer:create();

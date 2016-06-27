@@ -12,14 +12,18 @@ YouWinDlg.CHOOSE_LEVEL_MENU_TAG = 60;
 YouWinDlg.CHOOSE_LEVEL_MENU_ITEM_TAG = 61;
 YouWinDlg.NEXT_LEVEL_MENU_TAG = 80;
 YouWinDlg.NEXT_LEVEL_MENU_ITEM_TAG = 81;
-YouWinDlg.LABEL_TAG = 2;
+YouWinDlg.LABEL_TAGS = {2, 3, 4, 5};
 YouWinDlg.ANIM_SPRITE = 75;
+YouWinDlg.BUTTON_OK = 100;
+
 YouWinDlg.mAnimator = nil;
+YouWinDlg.mMainUI = nil;
 
 --------------------------------
-function YouWinDlg:init(game, uiLayer)
+function YouWinDlg:init(game, uiLayer, mainUI)
 	self:superClass().init(self, game, uiLayer, "VictoryDlg");
 
+    self.mMainUI = mainUI;
 	self:initGuiElements();
 end
 
@@ -66,34 +70,38 @@ function YouWinDlg:tick(dt)
 end
 
 --------------------------------
-function YouWinDlg:initGuiElements()
-	local nodeBase = self.mNode:getChildByTag(YouWinDlg.BASE_NODE_TAG);
-	info_log("YouWinDlg:initGuiElements nodeBase ", nodeBase );
-	
-	if not nodeBase then
-		return;
-	end
+function YouWinDlg:initLabels(nodeBase)
+    for i,val in ipairs(YouWinDlg.LABEL_TAGS ) do
+        local label = tolua.cast(nodeBase:getChildByTag(val), "cc.Label");
+        info_log("YouWinDlg:initGuiElements label ", label);
 
-	local workPlace = nodeBase:getChildByTag(YouWinDlg.WORK_PLACE);	
-	self:setTouchBBox(workPlace:getBoundingBox());
-    GuiHelper.updateScale9SpriteByScale(workPlace, self.mGame:getScale());
+        if label then
+            setDefaultFont(label, self.mGame:getScale());
+        end
+    end
+end
 
-    local labelPlace = nodeBase:getChildByTag(YouWinDlg.LABEL_BACK);
-    GuiHelper.updateScale9SpriteByScale(labelPlace, self.mGame:getScale());
+--------------------------------
+function YouWinDlg:initButtonOk(nodeBase)
+    local button = tolua.cast(nodeBase:getChildByTag(YouWinDlg.BUTTON_OK), "cc.ControlButton");
+    debug_log("YouWinDlg:initButtonOk button ", button);
+    local label = button:getTitleLabelForState(0);
+    debug_log("YouWinDlg:initButtonOk label ", label);
 
-	self.mAnimator = self.mReader:getActionManager();
+    local function onButtonPress()
+        debug_log("YouWinDlg:initButtonOk onButtonPress ");
+        self.mMainUI:onGetStarDlgPressed();
+    end
+    button:registerControlEventHandler(onButtonPress, 1);
 
-	self:initReplayButton(nodeBase);
-	self:initChooseLevelButton(nodeBase);
-	self:initNextLevelButton(nodeBase);
-
-    local label = tolua.cast(nodeBase:getChildByTag(YouLooseDlg.LABEL_TAG), "cc.Label");
-    info_log("YouWinDlg:initGuiElements label ", label);
-
+    label = tolua.cast(label, "cc.Label");
     if label then
         setDefaultFont(label, self.mGame:getScale());
     end
+end
 
+--------------------------------
+function YouWinDlg:initAnimation(nodeBase)
     local animationNode  = nodeBase:getChildByTag(YouWinDlg.ANIM_SPRITE);
 
 --    local animation = PlistAnimation:create();
@@ -121,5 +129,32 @@ function YouWinDlg:initGuiElements()
 
     local starCallFunc = CCCallFunc:create(start_callback);
     self.mAnimator:setCallFuncForLuaCallbackNamed(starCallFunc, "0:animationStart");
+end
 
+--------------------------------
+function YouWinDlg:initGuiElements()
+	local nodeBase = self.mNode:getChildByTag(YouWinDlg.BASE_NODE_TAG);
+	info_log("YouWinDlg:initGuiElements nodeBase ", nodeBase );
+	
+	if not nodeBase then
+		return;
+	end
+
+	local workPlace = nodeBase:getChildByTag(YouWinDlg.WORK_PLACE);	
+	self:setTouchBBox(workPlace:getBoundingBox());
+    GuiHelper.updateScale9SpriteByScale(workPlace, self.mGame:getScale());
+
+    local labelPlace = nodeBase:getChildByTag(YouWinDlg.LABEL_BACK);
+    GuiHelper.updateScale9SpriteByScale(labelPlace, self.mGame:getScale());
+
+	self.mAnimator = self.mReader:getActionManager();
+
+	self:initReplayButton(nodeBase);
+	self:initChooseLevelButton(nodeBase);
+	self:initNextLevelButton(nodeBase);
+    self:initButtonOk(nodeBase);
+
+    self:initLabels(nodeBase);
+
+    self:initAnimation(nodeBase);
 end

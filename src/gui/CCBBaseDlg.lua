@@ -39,6 +39,11 @@ function CCBBaseDialog:show()
 end
 
 --------------------------------
+function CCBBaseDialog:hide()
+	self.mNode:setVisible(false);
+end
+
+--------------------------------
 function CCBBaseDialog:doModal()
 	self:show();
 	local function onTouchHandler(action, var1, var2)
