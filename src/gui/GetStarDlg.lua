@@ -1,6 +1,8 @@
 require "src/gui/CCBBaseDlg"
 
 GetStarDlg = inheritsFrom(CCBBaseDialog)
+GetStarDlg.mAnimation = nil;
+
 GetStarDlg.BASE_NODE_TAG = 49;
 GetStarDlg.WORK_PLACE = 72;
 GetStarDlg.LABEL_BACK = 74;

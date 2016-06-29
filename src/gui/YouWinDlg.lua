@@ -20,11 +20,13 @@ YouWinDlg.TRAP_STAR_TAG = 300;
 YouWinDlg.COINS_STAR_TAG = 400;
 YouWinDlg.TIME_STAR_TAG = 500;
 YouWinDlg.ALL_STAR_TAG = 600;
+YouWinDlg.ALL_STAR_COUNT = 5;
 
 YouWinDlg.mAnimator = nil;
 YouWinDlg.mMainUI = nil;
 YouWinDlg.mStarsCount = nil;
 YouWinDlg.mStarAnimations = nil;
+YouWinDlg.mAnimation = nil;
 
 --------------------------------
 function YouWinDlg:init(game, uiLayer, mainUI)
@@ -107,7 +109,12 @@ function YouWinDlg:initButtonOk(nodeBase)
 
     local function onButtonPress()
         debug_log("YouWinDlg:initButtonOk onButtonPress ");
-        self.mMainUI:onGetStarDlgPressed();
+        local allStars = self.mStarsCount.trapStar + self.mStarsCount.coinsStar + self.mStarsCount.timeStar;
+        if allStars == YouWinDlg.ALL_STAR_COUNT then
+            self.mGame.mSceneMan:runNextLevelScene();
+        else
+            self.mMainUI:onGetStarDlgPressed();
+        end
     end
     button:registerControlEventHandler(onButtonPress, 1);
 
@@ -119,6 +126,13 @@ end
 
 ---------------------------------
 function YouWinDlg:destroy()
+    self:superClass().destroy(self);
+
+    self.mAnimation:destroy();
+
+    for i,val in ipairs(self.mStarAnimations) do
+        val:destroy();
+    end
 end
 
 --------------------------------
