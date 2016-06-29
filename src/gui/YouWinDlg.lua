@@ -16,22 +16,31 @@ YouWinDlg.LABEL_TAGS = {2, 3, 4, 5};
 YouWinDlg.ANIM_SPRITE = 75;
 YouWinDlg.BUTTON_OK = 100;
 
+YouWinDlg.TRAP_STAR_TAG = 300;
+YouWinDlg.COINS_STAR_TAG = 400;
+YouWinDlg.TIME_STAR_TAG = 500;
+YouWinDlg.ALL_STAR_TAG = 600;
+
 YouWinDlg.mAnimator = nil;
 YouWinDlg.mMainUI = nil;
+YouWinDlg.mStarsCount = nil;
+YouWinDlg.mStarAnimations = nil;
 
 --------------------------------
 function YouWinDlg:init(game, uiLayer, mainUI)
 	self:superClass().init(self, game, uiLayer, "VictoryDlg");
 
     self.mMainUI = mainUI;
+    self.mStarAnimations = {};
 	self:initGuiElements();
 end
 
 --------------------------------
-function YouWinDlg:doModal()
+function YouWinDlg:doModal(stars)
 	info_log("YouWinDlg:doModal");
 	self:superClass().doModal(self);
 	self.mAnimator:runAnimationsForSequenceNamed("Default Timeline");
+    self.mStarsCount = stars;
 end
 
 --------------------------------
@@ -67,6 +76,14 @@ end
 ---------------------------------
 function YouWinDlg:tick(dt)
     self.mAnimation:tick(dt);
+
+    if self.mStarAnimations then
+        for i, animation in pairs(self.mStarAnimations) do
+            if animation then
+                animation:tick(dt);
+            end
+        end
+    end
 end
 
 --------------------------------
@@ -100,6 +117,44 @@ function YouWinDlg:initButtonOk(nodeBase)
     end
 end
 
+---------------------------------
+function YouWinDlg:destroy()
+end
+
+--------------------------------
+function YouWinDlg:showStarsImpl(starCount, tag)
+    local nodeBase = self.mNode:getChildByTag(YouWinDlg.BASE_NODE_TAG);
+    for i = 1, starCount do
+        local star = nodeBase:getChildByTag(tag + (i - 1));
+        debug_log("YouWinDlg:showStarsImpl i ", i, " star ", star);
+
+        local animationBegin = PlistAnimation:create();
+        animationBegin:init("LevelStarBegin.plist", star, star:getAnchorPoint(), nil, 0.1);
+
+        local animation = PlistAnimation:create();
+        animation:init("LevelStar.plist", star, star:getAnchorPoint(), nil, 0.1);
+        local repAnimation = RepeatAnimation:create();
+        repAnimation:init(animation);
+
+        local sequence = SequenceAnimation:create();
+        sequence:init();
+
+        sequence:addAnimation(animationBegin);
+        sequence:addAnimation(repAnimation);
+
+        table.insert(self.mStarAnimations, sequence);
+        sequence:play();
+    end
+end
+
+--------------------------------
+function YouWinDlg:showStars()
+    self:showStarsImpl(self.mStarsCount.trapStar, YouWinDlg.TRAP_STAR_TAG);
+    self:showStarsImpl(self.mStarsCount.coinsStar, YouWinDlg.COINS_STAR_TAG);
+    self:showStarsImpl(self.mStarsCount.timeStar, YouWinDlg.TIME_STAR_TAG);
+    self:showStarsImpl(self.mStarsCount.trapStar + self.mStarsCount.coinsStar + self.mStarsCount.timeStar, YouWinDlg.ALL_STAR_TAG);
+end
+
 --------------------------------
 function YouWinDlg:initAnimation(nodeBase)
     local animationNode  = nodeBase:getChildByTag(YouWinDlg.ANIM_SPRITE);
@@ -125,6 +180,7 @@ function YouWinDlg:initAnimation(nodeBase)
     function start_callback()
         info_log("start_callback ");
         self.mAnimation:play();
+        self:showStars();
     end
 
     local starCallFunc = CCCallFunc:create(start_callback);

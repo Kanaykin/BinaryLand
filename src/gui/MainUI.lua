@@ -83,9 +83,10 @@ function MainUI:onStateBonusStart(callback, animationShow)
 end
 
 ---------------------------------
-function MainUI:onStateWin()
+function MainUI:onStateWin(stars)
+    debug_log("MainUI:onStateWin ", stars);
 	self.mJoystick:release();
-	self.mYouWinDlg:doModal();
+	self.mYouWinDlg:doModal(stars);
 end
 
 --------------------------------

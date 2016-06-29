@@ -175,9 +175,9 @@ function LevelScene:winOpenLevel()
 end
 
 ---------------------------------
-function LevelScene:onStateWin()
+function LevelScene:onStateWin(stars)
     self:winOpenLevel();
-	self.mMainUI:onStateWin();
+	self.mMainUI:onStateWin(stars);
 end
 
 ---------------------------------

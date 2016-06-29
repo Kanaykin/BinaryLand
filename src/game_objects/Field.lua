@@ -37,6 +37,8 @@ Field.mId = nil;
 Field.mCustomProperties = nil;
 Field.mEnemyEnterTriggerListener = nil;
 
+Field.mLevelStatistic = nil;
+
 -- smooth camera moving
 Field.mMaxScroll = 5;
 Field.mPlayerPosY = nil;
@@ -338,7 +340,46 @@ function Field:onEnterBonusRoomDoor(player, pos, trigger)
 end
 
 ---------------------------------
+function Field:addCoinsObject(object)
+    self.mLevelStatistic.startCountCoins = self.mLevelStatistic.startCountCoins and self.mLevelStatistic.startCountCoins + 1 or 1;
+    self:addObject(object);
+end
+
+---------------------------------
+function Field:computeStars()
+    local trapStar = self.mLevelStatistic.enterTrap and 0 or 1;
+
+    local time = (self.mLevelStatistic.startTimeLevel - self.mTime) / self.mLevelStatistic.startTimeLevel;
+    debug_log("Field:computeStars ", time)
+
+    local timeStar = 0;
+    if time <= 1.0 / 3.0 then
+        timeStar = 3;
+    elseif time <= 1.0 / 2.0 then
+        timeStar = 2;
+    elseif time <= 2.0 / 3.0 then
+        timeStar = 1;
+    end
+    local coinsStar = self.mLevelStatistic.startCountCoins == self.mLevelStatistic.countCoins and 1 or 0;
+    debug_log("Field:computeStars trapStar ", trapStar)
+    debug_log("Field:computeStars timeStar ", timeStar)
+    debug_log("Field:computeStars coinsStar ", coinsStar)
+    return {trapStar = trapStar,
+    timeStar = timeStar,
+    coinsStar = coinsStar}
+end
+
+---------------------------------
 function Field:onStateWin()
+
+    --self.mLevelStatistic.countCoins
+    --self.mLevelStatistic.enterTrap
+    --self.mLevelStatistic.startTimeLevel
+    debug_log("Field:onStateWin countCoins ", self.mLevelStatistic.countCoins);
+    debug_log("Field:onStateWin enterTrap ", self.mLevelStatistic.enterTrap);
+    debug_log("Field:onStateWin startTimeLevel ", self.mLevelStatistic.startTimeLevel);
+
+    local stars = self:computeStars();
 
 	self.mState = Field.WIN;
 	info_log("WIN !!! ", self.mBonusLevelFile);
@@ -347,7 +388,7 @@ function Field:onStateWin()
         if self.mBonusLevel or self.mBonusLevelFile then
             self.mStateListener:onStateBonusStart();
         else
-            self.mStateListener:onStateWin();
+            self.mStateListener:onStateWin(stars);
         end
 	end
 
@@ -511,6 +552,7 @@ end
 --------------------------------
 function Field:addScore(score)
     self.mScore = self.mScore + score;
+    self.mLevelStatistic.countCoins = self.mLevelStatistic.countCoins and self.mLevelStatistic.countCoins + 1 or 1;
 end
 
 --------------------------------
@@ -651,6 +693,7 @@ function Field:onPlayerEnterHiddenTrap(player, pos)
     info_log("onPlayerEnterHiddenTrap ");
     -- if player is primary then game over
     player:enterHiddenTrap(pos);
+    self.mLevelStatistic.enterTrap = self.mLevelStatistic.enterTrap and self.mLevelStatistic.enterTrap + 1 or 1;
 end
 
 --------------------------------
@@ -658,6 +701,7 @@ function Field:onPlayerEnterWeb(player, pos)
 	info_log("onPlayerEnterWeb ");
 	-- if player is primary then game over
 	player:enterCage(pos);
+    self.mLevelStatistic.enterTrap = self.mLevelStatistic.enterTrap and self.mLevelStatistic.enterTrap + 1 or 1;
 end
 
 --------------------------------
@@ -665,12 +709,14 @@ function Field:onPlayerEnterMob(player, pos)
 	info_log("onPlayerEnterMob ");
 	-- if player is primary then game over
 	player:enterTrap(nil);
+    self.mLevelStatistic.enterTrap = self.mLevelStatistic.enterTrap and self.mLevelStatistic.enterTrap + 1 or 1;
 end
 
 --------------------------------
 function Field:onPlayerEnterNet(player, pos)
     info_log("Field:onPlayerEnterNet ");
     player:enterNet();
+    self.mLevelStatistic.enterTrap = self.mLevelStatistic.enterTrap and self.mLevelStatistic.enterTrap + 1 or 1;
 end
 
 --------------------------------
@@ -874,6 +920,7 @@ function Field:init(fieldNode, layer, fieldData, game)
 	self.mLeftBottom = Vector.new(0, 0);
 	self.mFieldNode = FieldNode:create();
 	self.mFieldNode:init(fieldNode, layer, self);
+    self.mLevelStatistic = {};
 
 	local children = self.mFieldNode:getChildren();
 	local count = children:count();
@@ -928,7 +975,10 @@ function Field:init(fieldNode, layer, fieldData, game)
 	self:fillFreePoint();
 	self:printField();
 
+    debug_log("fieldData.time !!! ", fieldData.time);
 	if fieldData.time then
 		self.mTime = fieldData.time;
 	end
+    self.mLevelStatistic.startTimeLevel = self.mTime;
+
 end
