@@ -18,6 +18,7 @@ Field.mMainUi = nil;
 Field.mBonusLevel = nil;
 Field.mBonusLevelFile = nil;
 Field.mIsBonusLevel = nil;
+Field.mIsTutorialLevel = nil;
 Field.mObjectsById = nil;
 Field.mBrickObjects = nil;
 
@@ -349,16 +350,19 @@ end
 function Field:computeStars()
     local trapStar = self.mLevelStatistic.enterTrap and 0 or 1;
 
-    local time = (self.mLevelStatistic.startTimeLevel - self.mTime) / self.mLevelStatistic.startTimeLevel;
-    debug_log("Field:computeStars ", time)
+    local timeStar = 3;
+    if self.mTime then
+        local time = (self.mLevelStatistic.startTimeLevel - self.mTime) / self.mLevelStatistic.startTimeLevel;
+        debug_log("Field:computeStars ", time)
 
-    local timeStar = 0;
-    if time <= 1.0 / 3.0 then
-        timeStar = 3;
-    elseif time <= 1.0 / 2.0 then
-        timeStar = 2;
-    elseif time <= 2.0 / 3.0 then
-        timeStar = 1;
+        timeStar = 0;
+        if time <= 1.0 / 3.0 then
+            timeStar = 3;
+        elseif time <= 1.0 / 2.0 then
+            timeStar = 2;
+        elseif time <= 2.0 / 3.0 then
+            timeStar = 1;
+        end
     end
     local coinsStar = self.mLevelStatistic.startCountCoins == self.mLevelStatistic.countCoins and 1 or 0;
     debug_log("Field:computeStars trapStar ", trapStar)
@@ -689,11 +693,18 @@ function Field:onPlayerLeaveWeb(player)
 end
 
 --------------------------------
+function Field:incEnterTrapCounter()
+    if not self.mIsTutorialLevel then
+        self.mLevelStatistic.enterTrap = self.mLevelStatistic.enterTrap and self.mLevelStatistic.enterTrap + 1 or 1;
+    end
+end
+
+--------------------------------
 function Field:onPlayerEnterHiddenTrap(player, pos)
     info_log("onPlayerEnterHiddenTrap ");
     -- if player is primary then game over
     player:enterHiddenTrap(pos);
-    self.mLevelStatistic.enterTrap = self.mLevelStatistic.enterTrap and self.mLevelStatistic.enterTrap + 1 or 1;
+    self:incEnterTrapCounter();
 end
 
 --------------------------------
@@ -701,7 +712,7 @@ function Field:onPlayerEnterWeb(player, pos)
 	info_log("onPlayerEnterWeb ");
 	-- if player is primary then game over
 	player:enterCage(pos);
-    self.mLevelStatistic.enterTrap = self.mLevelStatistic.enterTrap and self.mLevelStatistic.enterTrap + 1 or 1;
+    self:incEnterTrapCounter();
 end
 
 --------------------------------
@@ -709,14 +720,14 @@ function Field:onPlayerEnterMob(player, pos)
 	info_log("onPlayerEnterMob ");
 	-- if player is primary then game over
 	player:enterTrap(nil);
-    self.mLevelStatistic.enterTrap = self.mLevelStatistic.enterTrap and self.mLevelStatistic.enterTrap + 1 or 1;
+    self:incEnterTrapCounter();
 end
 
 --------------------------------
 function Field:onPlayerEnterNet(player, pos)
     info_log("Field:onPlayerEnterNet ");
     player:enterNet();
-    self.mLevelStatistic.enterTrap = self.mLevelStatistic.enterTrap and self.mLevelStatistic.enterTrap + 1 or 1;
+    self:incEnterTrapCounter();
 end
 
 --------------------------------
@@ -900,6 +911,7 @@ function Field:init(fieldNode, layer, fieldData, game)
     self.mBonusLevel = fieldData.bonusLevel;
     self.mBonusLevelFile = fieldData.BonusLevelFile;
     self.mIsBonusLevel = fieldData.isBonus;
+    self.mIsTutorialLevel = fieldData.tutorial;
     info_log("Field:init self.mBonusLevel ", self.mBonusLevel);
 
 	local objectType = _G[fieldData.playerType];
