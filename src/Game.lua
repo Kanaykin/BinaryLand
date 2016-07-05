@@ -97,7 +97,16 @@ function Game:isLocationOpened(locationId)
 end
 
 ---------------------------------
+function Game:getLevelStar(locationId, level)
+	return self.mLocations[locationId].mLevels[level]:getCountStar();
+end
+
+---------------------------------
 function Game:setLevelStar(locationId, level, star)
+	local old_stars = self:getLevelStar(locationId, level); 
+	if old_stars then
+		star = math.max(star, old_stars);
+	end
     self.mLocations[locationId].mLevels[level]:setCountStar(star);
 	CCUserDefault:getInstance():setIntegerForKey(locationId .. tostring(level) .. "_star", star);
 end

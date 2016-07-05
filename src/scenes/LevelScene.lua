@@ -151,7 +151,7 @@ function LevelScene:onStateBonusStart()
 end
 
 ---------------------------------
-function LevelScene:winOpenLevel()
+function LevelScene:winOpenLevel(stars)
     info_log("LevelScene: WIN !!!");
     local locationId = self.mLevel:getLocation():getId();
     info_log("LevelScene:winOpenLevel: locationId ", locationId);
@@ -168,7 +168,12 @@ function LevelScene:winOpenLevel()
     end
 
     self.mSceneManager.mGame:openLevel(newLocationIndex, newLevelIndex);
-    self.mSceneManager.mGame:setLevelStar(locationId, self.mLevel:getIndex(), 2);
+    if stars then
+        self.mSceneManager.mGame:setLevelStar(locationId, self.mLevel:getIndex(), stars.trapStar +
+            stars.coinsStar + stars.timeStar);
+    else
+        self.mSceneManager.mGame:setLevelStar(locationId, self.mLevel:getIndex(), 2);
+    end
 
     SimpleAudioEngine:getInstance():playMusic(gSounds.VICTORY_MUSIC, false)
     --SimpleAudioEngine:getInstance():playEffect(gSounds.VICTORY_MUSIC)
@@ -176,7 +181,7 @@ end
 
 ---------------------------------
 function LevelScene:onStateWin(stars)
-    self:winOpenLevel();
+    self:winOpenLevel(stars);
 	self.mMainUI:onStateWin(stars);
 end
 

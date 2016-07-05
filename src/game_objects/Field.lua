@@ -370,7 +370,8 @@ function Field:computeStars()
     debug_log("Field:computeStars coinsStar ", coinsStar)
     return {trapStar = trapStar,
     timeStar = timeStar,
-    coinsStar = coinsStar}
+    coinsStar = coinsStar,
+    allStar = trapStar + timeStar + coinsStar}
 end
 
 ---------------------------------

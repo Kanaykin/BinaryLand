@@ -18,6 +18,8 @@ Level.mIndex = nil;
 Level.mCountStar = 0;
 Level.mStarAnimations = nil;
 
+Level.MAX_COUNT_STAR = 5;
+
 -----------------------------------
 function Level:setCountStar(countStar)
     self.mCountStar = countStar;
@@ -115,7 +117,7 @@ function Level:initFlashAnimation(primaryAnimator, animManager, nameFrame, node)
     end
 
     self.mStarAnimations = {}
-    for i = 1, 3 do
+    for i = 1, Level.MAX_COUNT_STAR do
         local star = node:getChildByTag(Level.FIRST_STAR_TAG + (i - 1));
 
         local animationBegin = PlistAnimation:create();
@@ -163,8 +165,9 @@ function Level:initVisual(primaryAnimator, animManager, nameFrame, node, showed)
 
     -- show blue star
     if self:isOpened() then
-        for i = 1, 3 do
+        for i = 1, Level.MAX_COUNT_STAR do
             local star = node:getChildByTag(Level.BLUE_STAR_TAG + (i - 1));
+            debug_log("Level:initVisual ", i, " star ", star);
             star:setVisible(true);
         end
     end

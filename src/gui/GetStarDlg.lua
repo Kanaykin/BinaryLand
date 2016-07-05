@@ -2,6 +2,8 @@ require "src/gui/CCBBaseDlg"
 
 GetStarDlg = inheritsFrom(CCBBaseDialog)
 GetStarDlg.mAnimation = nil;
+GetStarDlg.mStarsCount = nil;
+GetStarDlg.mMainUI = nil;
 
 GetStarDlg.BASE_NODE_TAG = 49;
 GetStarDlg.WORK_PLACE = 72;
@@ -12,22 +14,19 @@ GetStarDlg.BUTTON_NO = 101;
 GetStarDlg.ANIM_SPRITE = 75;
 
 --------------------------------
-function GetStarDlg:init(game, uiLayer)
+function GetStarDlg:init(game, uiLayer, mainUI)
 	self:superClass().init(self, game, uiLayer, "VictoryDlgAds");
 
+	self.mMainUI = mainUI;
 	self:initGuiElements();
 end
 
 --------------------------------
-function GetStarDlg:initButton(nodeBase, tag)
+function GetStarDlg:initButton(nodeBase, tag, action)
 	local button = tolua.cast(nodeBase:getChildByTag(tag), "cc.ControlButton");
 	local label = button:getTitleLabelForState(0);
 
-    local function onButtonPress()
-        debug_log("GetStarDlg:initButton onButtonPress ");
-        self.mGame.mSceneMan:runNextLevelScene();
-    end
-    button:registerControlEventHandler(onButtonPress, 1);
+    button:registerControlEventHandler(action, 1);
 
 	label = tolua.cast(label, "cc.Label");
     if label then
@@ -63,6 +62,34 @@ function GetStarDlg:tick(dt)
 end
 
 --------------------------------
+function GetStarDlg:saveStars()
+    local level = self.mGame.mSceneMan:getCurrentScene():getLevel();
+    local location = level:getLocation();
+    debug_log("GetStarDlg:initButton onButtonPress Location Id ", location:getId());
+    debug_log("GetStarDlg:initButton onButtonPress level Id ", level:getIndex());
+    self.mGame:setLevelStar(location:getId(), level:getIndex(), self.mStarsCount.allStar);
+end
+
+--------------------------------
+function GetStarDlg:onYesPressed()
+    self.mStarsCount.allStar = self.mStarsCount.allStar + 1;
+    self:saveStars();
+    self.mMainUI:showWinDlg(self.mStarsCount, true);
+end
+
+--------------------------------
+function GetStarDlg:onNoPressed()
+	self.mGame.mSceneMan:runNextLevelScene();
+end
+
+--------------------------------
+function GetStarDlg:doModal(stars)
+	info_log("GetStarDlg:doModal");
+	self:superClass().doModal(self);
+    self.mStarsCount = stars;
+end
+
+--------------------------------
 function GetStarDlg:initGuiElements()
 	local nodeBase = self.mNode:getChildByTag(GetStarDlg.BASE_NODE_TAG);
 	info_log("GetStarDlg:initGuiElements nodeBase ", nodeBase );
@@ -83,7 +110,7 @@ function GetStarDlg:initGuiElements()
         setDefaultFont(label, self.mGame:getScale());
     end
 
-    self:initButton(nodeBase, GetStarDlg.BUTTON_YES);
-    self:initButton(nodeBase, GetStarDlg.BUTTON_NO);
+    self:initButton(nodeBase, GetStarDlg.BUTTON_YES, function() self:onYesPressed() end);
+    self:initButton(nodeBase, GetStarDlg.BUTTON_NO, function() self:onNoPressed() end);
     self:initAnimation(nodeBase);
 end

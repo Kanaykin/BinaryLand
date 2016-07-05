@@ -65,7 +65,14 @@ end
 function MainUI:onGetStarDlgPressed()
     info_log("MainUI:onGetStarDlgPressed ");
     self.mYouWinDlg:hide();
-    self.mGetStarDlg:doModal();
+    self.mGetStarDlg:doModal(self.mYouWinDlg:getStars());
+end
+
+--------------------------------
+function MainUI:showWinDlg(stars, lastStar)
+    info_log("MainUI:showWinDlg ");
+    self.mGetStarDlg:hide();
+    self.mYouWinDlg:doModal(stars, lastStar);
 end
 
 ---------------------------------
@@ -86,7 +93,7 @@ end
 function MainUI:onStateWin(stars)
     debug_log("MainUI:onStateWin ", stars);
 	self.mJoystick:release();
-	self.mYouWinDlg:doModal(stars);
+	self:showWinDlg(stars);
 end
 
 --------------------------------
@@ -212,7 +219,7 @@ function MainUI:init(game, uiLayer, ccbFile)
 
     -------------------------
     self.mGetStarDlg = GetStarDlg:create();
-    self.mGetStarDlg:init(self.mGame, self.mUILayer);
+    self.mGetStarDlg:init(self.mGame, self.mUILayer, self);
 
 	-------------------------
     self.mTimer = LevelTimer:create();
