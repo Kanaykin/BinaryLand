@@ -124,7 +124,7 @@ gLocations = {
 		id = 2,
 		description = "Sand",
 		position = Coord(0.32, 0.5, 0, -215),
-        opened = false,
+        opened = true,
         levels = {
             {
                 opened = false,
@@ -220,7 +220,7 @@ gLocations = {
 		id = 3,
 		description = "Snow",
 		position = Coord(0.52, 0.5, 0, -235),
-        opened = false,
+        opened = true,
         levels = {
             {
                 opened = false,
@@ -260,10 +260,10 @@ gLocations = {
 		id = 4,
 		description = "Forest",
 		position = Coord(0.78, 0.5, 0, -120),
-        opened = false,
+        opened = true,
         levels = {
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level4_1p1", "Level2_1p2"},
                 tileMap = "Level4_1_map.tmx",
                 cellSize = 32,

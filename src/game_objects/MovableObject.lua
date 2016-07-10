@@ -129,6 +129,12 @@ function MovableObject:IsMoving()
 end
 
 --------------------------------
+function MovableObject:setVelocity(velocity)
+	debug_log("MovableObject:setVelocity ", velocity)
+	self.mVelocity = velocity * self.mField.mGame:getScale();
+end
+
+--------------------------------
 function MovableObject:tick(dt)
 	MovableObject:superClass().tick(self, dt);
 	if self.mDelta then
