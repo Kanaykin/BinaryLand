@@ -21,6 +21,7 @@ ItemsDataMap_t fillItemsData() {
 	result[DiagramItem::BONUS_DOOR_ITEN] = { ":images/BonusDoor.png", "BonusDoor", 112 };
 	result[DiagramItem::TORNADO_ITEN] = { ":images/Tornado.png", "Tornado", 116 };
 	result[DiagramItem::ICE_GROUND_ITEN] = { ":images/IceGround.png", "IceGround", 117 };
+	result[DiagramItem::SWAMP_GROUND_ITEN] = { ":images/SwampGround.png", "SwampGround", 118 };
 
 	return result;
 };

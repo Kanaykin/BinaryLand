@@ -19,5 +19,6 @@
          <file>images/BonusDoor.png</file>
          <file>images/Tornado.png</file>
          <file>images/IceGround.png</file>
+         <file>images/SwampGround.png</file>
      </qresource>
      </RCC>

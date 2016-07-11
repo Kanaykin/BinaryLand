@@ -16,6 +16,7 @@ EditorFileLoader.BONUS_TREE_ID = 14;
 EditorFileLoader.BONUS_DOOR_ID = 15;
 EditorFileLoader.TORNADO_ID = 16;
 EditorFileLoader.ICE_GROUND_ID = 17;
+EditorFileLoader.SWAMP_GROUND_ID = 18;
 
 EditorFileLoader.MAX_WIDTH = 15;
 
@@ -232,6 +233,18 @@ function EditorFileLoader:createIceGround(pos, cellSize)
     return tree;
 end
 
+--------------------------------
+function EditorFileLoader:createSwampGround(pos, cellSize)
+	local obj = CCSprite:create("SwampGround.png");
+    
+    info_log("EditorFileLoader:createSwampGround obj ", obj);
+    --tree:setAnchorPoint(cc.p(0.5, 0.0));
+    pos.y = pos.y + cellSize / 2.0;
+    obj:setPosition(pos);
+	obj:setTag(FactoryObject.SWAMP_GROUND_TAG);
+    return obj;
+end
+
 
 --------------------------------
 EditorFileLoader.CreateFunctions = {
@@ -249,7 +262,8 @@ EditorFileLoader.CreateFunctions = {
 	[EditorFileLoader.BONUS_TREE_ID] = EditorFileLoader.createBonusTree,
 	[EditorFileLoader.BONUS_DOOR_ID] = EditorFileLoader.createBonusDoor,
 	[EditorFileLoader.TORNADO_ID] = EditorFileLoader.createTornado,
-	[EditorFileLoader.ICE_GROUND_ID] = EditorFileLoader.createIceGround
+	[EditorFileLoader.ICE_GROUND_ID] = EditorFileLoader.createIceGround,
+	[EditorFileLoader.SWAMP_GROUND_ID] = EditorFileLoader.createSwampGround
 };
 
 --------------------------------

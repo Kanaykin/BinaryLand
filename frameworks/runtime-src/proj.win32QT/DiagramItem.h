@@ -26,7 +26,8 @@ public:
 		BONUS_TREE_ITEN,
 		BONUS_DOOR_ITEN,
 		TORNADO_ITEN,
-		ICE_GROUND_ITEN
+		ICE_GROUND_ITEN,
+		SWAMP_GROUND_ITEN
 	};
 	struct ItemData {
 		std::string mIconName;

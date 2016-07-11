@@ -44,6 +44,7 @@ public:
     QPushButton *bonusDoorButton;
     QPushButton *tornadoButton;
     QPushButton *iceGroundButton;
+    QPushButton *swampGroundButton;
 
     void setupUi(QWidget *ButtonsForm)
     {
@@ -210,6 +211,13 @@ public:
 
         gridLayout_3->addWidget(iceGroundButton, 6, 1, 1, 1);
 
+        swampGroundButton = new QPushButton(frame);
+        swampGroundButton->setObjectName(QStringLiteral("swampGroundButton"));
+        swampGroundButton->setMinimumSize(QSize(90, 90));
+        swampGroundButton->setIconSize(QSize(80, 80));
+
+        gridLayout_3->addWidget(swampGroundButton, 6, 2, 1, 1);
+
 
         gridLayout->addWidget(frame, 0, 1, 1, 1);
 
@@ -239,6 +247,7 @@ public:
         bonusDoorButton->setText(QString());
         tornadoButton->setText(QString());
         iceGroundButton->setText(QString());
+        swampGroundButton->setText(QString());
     } // retranslateUi
 
 };

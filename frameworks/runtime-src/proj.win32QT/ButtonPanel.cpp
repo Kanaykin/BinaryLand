@@ -28,6 +28,7 @@ mSignalMapper(0)
 	initButton(group, DiagramItem::BONUS_DOOR_ITEN, "bonusDoorButton");
 	initButton(group, DiagramItem::TORNADO_ITEN, "tornadoButton");
 	initButton(group, DiagramItem::ICE_GROUND_ITEN, "iceGroundButton");
+	initButton(group, DiagramItem::SWAMP_GROUND_ITEN, "swampGroundButton");
 	
 	connect(mSignalMapper, SIGNAL(mapped(int)), mainWnd, SLOT(onButtonCheck(int)));
 	
