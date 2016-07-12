@@ -175,12 +175,13 @@ void MainWindow::onTimer()
 void MainWindow::runCocos()
 {
 	if (mApp) {
+		cocos2d::FontAtlasCache::releaseAllFontAtlas();
+
 		mApp.reset();
 
 		cocos2d::Director* dir = cocos2d::Director::getInstance();
 		if (dir)
 			dir->release();
-		cocos2d::FontAtlasCache::releaseAllFontAtlas();
 	}
 	mApp = std::make_shared<QTAplication>(this);
 	int ret = cocos2d::Application::getInstance()->run();

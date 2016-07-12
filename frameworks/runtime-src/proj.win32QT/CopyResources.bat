@@ -1,5 +1,5 @@
 @echo off
-SET PATH_RES="Debug.win32"
+SET PATH_RES="Release.win32"
 echo %PATH_RES%
 
 REM LIST_DIRS=(../../../src )
