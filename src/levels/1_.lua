@@ -1,7 +1,7 @@
-local map = {0,0,8,0,0,0,0,0,0,0,0,0,14,0,0,0,0,15,12,0,0,0,0,12,13,0,0,0,0,0,0,0,5,6,0,0}
+local map = {0,0,8,0,0,0,0,0,0,0,0,0,14,0,18,17,0,15,12,0,18,17,0,12,13,0,18,17,0,0,0,0,5,6,0,0}
 local level = {
 time = 120,
-BonusLevelFile = require "src/levels/bonus"
+BonusLevel = ''
 }
 local CustomProperties = {
 ["1_4_112"] = {

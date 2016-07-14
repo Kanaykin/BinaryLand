@@ -6,6 +6,12 @@ function round(n)
   return math.floor((math.floor(n*2) + 1)/2)
 end
 
+--------------------------------
+function IceGround:init(field, node, enterCallback, leaveCallback)
+	IceGround:superClass().init(self, field, node, enterCallback, leaveCallback);
+	self:updateOrder();
+end
+
 ---------------------------------
 function IceGround:otherObjectInTrap(playerIn, gridPos)
     local other = nil
@@ -33,9 +39,9 @@ function IceGround:onEnter(player)
 	-- info_log("IceGround:onEnter -0.94 ", round(-0.94));
 	-- info_log("IceGround:onEnter 0.12 ", round(0.12));
 	-- info_log("IceGround:onEnter -0.12 ", round(-0.12));
-	info_log("IceGround:onEnter ");
+	info_log("IceGround:onEnter id ", player:getId());
 	IceGround:superClass().onEnter(self, player);
-	self:updateOrder();
+	--self:updateOrder();
 	--local delta = player.mDelta;
 	info_log("IceGround:onEnter delta ", player:getLastButtonPressed());
 	if player.mDelta or (player:getLastButtonPressed() and DIRECTIONS[player:getLastButtonPressed()]) then

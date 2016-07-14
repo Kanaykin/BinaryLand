@@ -2,13 +2,17 @@ require "src/game_objects/Trigger"
 
 SwampGround = inheritsFrom(Trigger)
 
+--------------------------------
+function SwampGround:init(field, node, enterCallback, leaveCallback)
+	SwampGround:superClass().init(self, field, node, enterCallback, leaveCallback);
+	self:updateOrder();
+end
+
 ---------------------------------
 function SwampGround:onEnter(player)
-	info_log("SwampGround:onEnter ", FoxObject.mVelocity);
+	info_log("SwampGround:onEnter ", player:getTag());
 	SwampGround:superClass().onEnter(self, player);
-	self:updateOrder();
-
-	--player:setVelocity(FoxObject.mVelocity / 2.0);
+	--self:updateOrder();
 end
 
 --------------------------------
@@ -25,13 +29,15 @@ end
 function SwampGround:onLeave()
 	info_log("SwampGround:onLeave ", FoxObject.mVelocity);
 	self.mContainedObj:setVelocity(FoxObject.mVelocity);
+
 	SwampGround:superClass().onLeave(self);
 end
 
 --------------------------------
 function SwampGround:tick(dt)
-	if self.mContainedObj then
-		self.mContainedObj:setVelocity(FoxObject.mVelocity / 2.0);
+	local obj = self.mContainedObj;
+	if obj then
+		obj:setVelocity(FoxObject.mVelocity / 2.0);
 	end
 	SwampGround:superClass().tick(self, dt);
 end

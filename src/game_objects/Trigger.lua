@@ -8,7 +8,7 @@ Trigger.mLeaveCallback = nil;
 Trigger.mContainedObj = nil;
 Trigger.mSize = nil;
 Trigger.mDebugBox = nil;
-Trigger.mNeedDebugBox = false;
+Trigger.mNeedDebugBox = true;
 
 --------------------------------
 function Trigger:getContainedObj()

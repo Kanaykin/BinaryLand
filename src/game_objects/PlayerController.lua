@@ -36,10 +36,9 @@ end
 function PlayerController:touchObject(object, point)
 	local pos = object:getScreenPos();
 	
-	local scale = self.mField.mGame:getScale();
+	local box = object:getBoundingBox();
 
-	local width = PlayerController.mClickSize * scale;
-	local box = cc.rect(pos.x - width / 2, pos.y - width / 2, width, width);
+	box = cc.rect(pos.x - box.width / 2, pos.y - box.height / 2, box.width, box.height);
 	return Rect.new(box):containsPoint(cc.p(point.x, point.y));
 end
 
@@ -51,7 +50,7 @@ end
 
 ----------------------------------------
 function PlayerController:onTouchBegan(point)
-	--info_log("PlayerController:onTouchBegan (", point.x, " ,", point.y, ")");
+	info_log("PlayerController:onTouchBegan (", point.x, " ,", point.y, ")");
 
 	self:resetData();
 	self.mObjectCaptured = nil;
@@ -62,7 +61,7 @@ function PlayerController:onTouchBegan(point)
 		local pos = object:getScreenPos();
 		--info_log("PlayerController:onTouchBegan  x ", pos.x, " y ", pos.y);
 		if not object:isInTrap() and self:touchObject(object, point) then
-			info_log("self:touchObject ");
+			info_log("self:touchObject ", object:getTag());
 			self.mObjectCaptured = object;
 			self.mDeltaCapturedPos = Vector.new(point.x, point.y) - Vector.new(object.mNode:getPosition());
 		end
@@ -73,10 +72,10 @@ end
 function PlayerController:getJoystickButton(direction)
 	local horProj = direction:projectOn(Vector.new(1, 0));
 	local horProjLen = horProj:len();
-	info_log("PlayerController:getJoystickButton horProj ", horProjLen);
+	--info_log("PlayerController:getJoystickButton horProj ", horProjLen);
 	local verProj = direction:projectOn(Vector.new(0, 1));
 	local verProjLen = verProj:len();
-	info_log("PlayerController:getJoystickButton verProj ", verProjLen);
+	--info_log("PlayerController:getJoystickButton verProj ", verProjLen);
 
 	if horProjLen == 0 and verProjLen == 0 then
 		return nil;
@@ -101,7 +100,9 @@ function PlayerController:onTouchMoved(point)
 		self.mDestPos.x = dest.x + self.mField.mCellSize / 2;
 		self.mDestPos.y = dest.y + self.mField.mCellSize / 2;
 
-		local newObjPos = Vector.new(self.mObjectCaptured.mNode:getPosition()) + self.mDeltaCapturedPos;
+		local playerPos = Vector.new(self.mObjectCaptured.mNode:getPosition());
+
+		local newObjPos = playerPos + self.mDeltaCapturedPos;
 		local objGridPos = Vector.new(self.mField:positionToGrid(newObjPos));
 		local button = self:getJoystickButton((objGridPos - gridPos) * self.mObjectCaptured:getReverse());
 		info_log("PlayerController:onTouchMoved objGridPos ", objGridPos.y);
@@ -126,15 +127,24 @@ function PlayerController:positionChanged()
 	end
 
 	local result = false;
-	local index = 1;
-	for _, object in ipairs(self.mPlayerObjects) do
-		local pos = Vector.new(object.mNode:getPosition());
-		
-		if object == self.mObjectCaptured and (pos - self.mPrevObjectPosition[index]):len() > 0 then
+	if self.mObjectCaptured then
+		local pos = Vector.new(self.mObjectCaptured.mNode:getPosition());
+
+		if not self.mPrevObjectPosition[self.mObjectCaptured] then
 			result = true;
+		else
+			local prevPos = self.mPrevObjectPosition[self.mObjectCaptured];
+			debug_log("PlayerController:positionChanged pos ", pos.x, " ", pos.y);
+			debug_log("PlayerController:positionChanged prevPos ", prevPos.x, " ", prevPos.y);
+
+			local dist = (pos - prevPos):len();
+			debug_log("PlayerController:positionChanged dist ", dist);
+			if dist > 0 then
+				result = true;
+			end
 		end
-		self.mPrevObjectPosition[index] = pos;
-		index = index + 1;
+		self.mPrevObjectPosition[self.mObjectCaptured] = pos;
+		debug_log("PlayerController:positionChanged ", result);
 	end
 	return result;
 end
@@ -148,8 +158,8 @@ function PlayerController:tick(dt)
 	if self.mDestPos ~= nil then
 		-- get directional of moving
 		local newObjPos = Vector.new(self.mObjectCaptured.mNode:getPosition()) + self.mDeltaCapturedPos;
-		info_log("PlayerController:onTouchMoved newObjPos x ", newObjPos.x, " y ", newObjPos.y);
-		info_log("PlayerController:onTouchMoved mDestPos x ", self.mDestPos.x, " y ", self.mDestPos.y);
+		info_log("PController:onTouchMoved newObjPos x ", newObjPos.x , " y ", newObjPos.y );
+		info_log("PController:onTouchMoved mDestPos2 x ", self.mDestPos.x , " y ", self.mDestPos.y );		
 		
 		local objGridPos = Vector.new(self.mField:positionToGrid(newObjPos));
 		local destGridPos = Vector.new(self.mField:positionToGrid(self.mDestPos));
@@ -159,8 +169,8 @@ function PlayerController:tick(dt)
 		--self.mJoystick:setButtonPressed(button);
 
 		local button = self:getJoystickButton((newObjPos - self.mDestPos) * self.mObjectCaptured:getReverse());
-		info_log("PlayerController:onTouchMoved button ", button);
-		info_log("PlayerController:onTouchMoved mJoystick ", self.mJoystick:getButtonPressed());
+		info_log("PController:onTouchMoved button ", button);
+		info_log("PController:onTouchMoved mJoystick ", self.mJoystick:getButtonPressed());
 
 		if button ~= self.mJoystick:getButtonPressed() or not self:positionChanged() then
 			self:resetData();
@@ -170,14 +180,14 @@ end
 
 ----------------------------------------
 function PlayerController:onTouchEnded(point)
-	--info_log("PlayerController:onTouchEnded ");
+	info_log("PlayerController:onTouchEnded ");
 	--self.mObjectCaptured = nil
 	--self.mJoystick:setButtonPressed(nil);
 	self.mPrevObjectPosition = {}
 
-	for _, object in ipairs(self.mPlayerObjects) do
-		local pos = Vector.new(object.mNode:getPosition());
-		info_log("PlayerController:onTouchEnded  x ", pos.x, " y ", pos.y);
-		self.mPrevObjectPosition[#self.mPrevObjectPosition + 1] = pos;
-	end
+	-- for _, object in ipairs(self.mPlayerObjects) do
+	-- 	local pos = Vector.new(object.mNode:getPosition());
+	-- 	info_log("PlayerController:onTouchEnded  x ", pos.x, " y ", pos.y);
+	-- 	self.mPrevObjectPosition[#self.mPrevObjectPosition + 1] = pos;
+	-- end
 end

@@ -130,7 +130,7 @@ end
 
 --------------------------------
 function MovableObject:setVelocity(velocity)
-	debug_log("MovableObject:setVelocity ", velocity)
+	--debug_log("MovableObject:setVelocity ", velocity)
 	self.mVelocity = velocity * self.mField.mGame:getScale();
 end
 
