@@ -365,6 +365,7 @@ function Field:computeStars()
         end
     end
     local coinsStar = self.mLevelStatistic.startCountCoins == self.mLevelStatistic.countCoins and 1 or 0;
+    debug_log("Field:computeStars startCountCoins ", self.mLevelStatistic.startCountCoins)
     debug_log("Field:computeStars trapStar ", trapStar)
     debug_log("Field:computeStars timeStar ", timeStar)
     debug_log("Field:computeStars coinsStar ", coinsStar)

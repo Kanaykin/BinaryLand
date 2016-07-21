@@ -1,6 +1,6 @@
 local CustomProperties = {
-    ["7_3_106"] = {dog_id = "12_1_107"},
-    ["4_9_106"] = {dog_id = "5_5_107"}
+    ["5_3_106"] = {CanAttack=true},
+    ["7_6_106"] = {CanAttack=true}
 }
 
 return CustomProperties;
