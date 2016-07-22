@@ -46,6 +46,12 @@ function BulletObject:init(field, pos, goalPos)
 	self.mVelocity = 400;
 	self.mDir = dir;
 	self:moveTo(goalPos + dir * delta);
+
+	-- update box 
+	debug_log("BulletObject:init width ", self.mTrigger.mSize.width);
+	debug_log("BulletObject:init height ", self.mTrigger.mSize.height);
+	self.mTrigger.mSize.width = self.mTrigger.mSize.width * 1.2
+	self.mTrigger.mSize.height = self.mTrigger.mSize.height * 1.2
 end
 
 --------------------------------

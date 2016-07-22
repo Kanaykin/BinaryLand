@@ -13,3 +13,10 @@ function Rect:containsPoint(point)
     return point.x >= self.x and point.y >= self.y
         and point.x <= self.x + self.width and point.y <= self.y + self.height;
 end
+
+function Rect:intersectsRect(rect)
+    return not(     (self.x + self.width) < rect.x or
+             (rect.x + rect.width) <      self.x or
+                  (self.y + self.height) < rect.y or
+             (rect.y + rect.height) <      self.y);
+end
