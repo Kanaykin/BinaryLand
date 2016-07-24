@@ -167,6 +167,7 @@ end
 ---------------------------------
 function DogObject:setFoundPlayerPos(pos)
     self.mFoundPlayerPos = pos;
+    self.mField:onDogFoundPlayer(self, pos);
 end
 
 ---------------------------------

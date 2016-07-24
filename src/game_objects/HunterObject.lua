@@ -5,15 +5,14 @@ require "src/base/Log"
 require "src/game_objects/HunterStates"
 
 HunterObject = inheritsFrom(MobObject)
-HunterObject.mDogId = nil;
-HunterObject.mDog = nil;
 HunterObject.oldVelocity = nil;
 HunterObject.FOUND_PLAYER = MobObject.LAST_STATE + 1;
-HunterObject.mFoundPlayerPos = nil;
 HunterObject.mGridPosGetTrace = nil;
 HunterObject.mFoxGoalPos = nil;
 HunterObject.mFoxGridGoalPos = nil;
 HunterObject.mCanAttack = false;
+HunterObject.mDog = nil;
+HunterObject.mIsDead = false;
 
 --shot constants
 HunterObject.SHOT_PIXELS_DELTA = 10
@@ -112,10 +111,6 @@ function HunterObject:setCustomProperties(properties)
 
     HunterObject:superClass().setCustomProperties(self, properties);
 
-    if properties.dog_id then
-        info_log("HunterObject:setCustomProperties dog_id ", properties.dog_id);
-        self.mDogId = properties.dog_id;
-    end
     if properties.CanAttack then
         self.mCanAttack = properties.CanAttack;
     end
@@ -135,32 +130,28 @@ end
 ---------------------------------
 function HunterObject:onEnterFightTriggerImpl()
     HunterObject:superClass().onEnterFightTriggerImpl(self);
-
-    if self.mDog then
-        self.mDog:onHunterDead();
-    end
+    self.mIsDead = true;
+    self.mField:onHunterDead(self);
 end
 
 --------------------------------
-function HunterObject:updateDog()
-    -- get dog by id
-    if self.mDogId and not self.mDog then
-        self.mDog = self.mField:getObjectById(self.mDogId);
-        info_log("HunterObject:updateDog self.mDog ", self.mDog);
-    end
+function HunterObject:isDead()
+    return self.mIsDead;
+end
 
-    if self.mDog then
-        local playerPos = self.mDog:getFoundPlayerPos();
-        if playerPos and not self.mFoundPlayerPos then
-            debug_log("self.mStateMachine:onDogPlayerFound");
-            self.mStateMachine:onDogPlayerFound(playerPos);
-            self.mFoundPlayerPos = playerPos;
-        elseif not playerPos and self.mFoundPlayerPos then
-            debug_log("self.mStateMachine:onDogPlayerRunAway");
-            self.mStateMachine:onDogPlayerRunAway();
-            self.mFoundPlayerPos = nil;
-        end
+--------------------------------
+function HunterObject:onDogFoundPlayer(dog, pos)
+    if dog then
+        self.mStateMachine:onDogPlayerFound(pos);
+    elseif self.mDog then
+        self.mStateMachine:onDogPlayerRunAway();
     end
+    self.mDog = dog;
+end
+
+--------------------------------
+function HunterObject:getDog()
+    return self.mDog
 end
 
 --------------------------------
@@ -272,7 +263,6 @@ end
 
 --------------------------------
 function HunterObject:tick(dt)
-    self:updateDog();
     HunterObject:superClass().tick(self, dt);
 
     if self.mCanAttack then

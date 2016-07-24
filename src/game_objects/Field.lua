@@ -893,6 +893,80 @@ function Field:setCustomProperties(customProperties)
 end
 
 --------------------------------
+function Field:resetDogInHunter(dog)
+    debug_log("Field:resetDogInHunter ")
+    local hunters = self:getObjectsByTag(FactoryObject.HUNTER_TAG);
+    for i, hunter in ipairs(hunters) do
+        if hunter:getDog() == dog then
+            hunter:onDogFoundPlayer(nil);
+        end
+    end
+end
+
+--------------------------------
+function Field:onHunterDead(hunter)
+    debug_log("Field:onHunterDead ");
+    -- reset hunter's dog
+    local dog = hunter:getDog();
+    if dog then
+        dog:onPlayerLeave();
+    end
+
+    -- run away dogs
+    local hunters = self:getObjectsByTag(FactoryObject.HUNTER_TAG);
+    local dogs = self:getObjectsByTag(FactoryObject.DOG_TAG);
+    if #hunters <=1 then
+        -- remove all
+        for i, dog in ipairs(dogs) do
+            dog:onHunterDead();
+        end
+    elseif #dogs >= 1 and #dogs >= #hunters then
+        if dog then
+            dog:onHunterDead();
+        else
+            dogs[1]:onHunterDead();
+        end
+    end
+end
+
+--------------------------------
+function Field:getNearestHunter(pos)
+    -- get all hunter
+    local hunters = self:getObjectsByTag(FactoryObject.HUNTER_TAG);
+    local resHunter = nil;
+    local resDist = 9999;
+    for i, hunter in ipairs(hunters) do
+        if not hunter:isDead() then
+            local hunterPos = hunter:getGridPosition();
+            debug_log("Field:getNearestHunter hunterPos x ", hunterPos.x, " y ", hunterPos.y);
+            debug_log("Field:getNearestHunter pos x ", pos.x, " y ", pos.y);
+            local dist = (hunterPos - pos):lenSq();
+            debug_log("Field:getNearestHunter dist ", dist);
+            if dist < resDist then
+                resDist = dist;
+                resHunter = hunter;
+            end
+        end
+    end
+    return resHunter;
+end
+
+--------------------------------
+function Field:onDogFoundPlayer(dog, pos)
+    info_log("Field::onDogFoundPlayer ");
+    self:resetDogInHunter(dog);
+    if pos then
+        -- found nearest hunter
+        local hunter = self:getNearestHunter(pos);
+        debug_log("Field:onDogFoundPlayer hunter ", hunter);
+        -- set dog to hunter
+        if hunter then
+            hunter:onDogFoundPlayer(dog, pos);
+        end
+    end
+end
+
+--------------------------------
 function Field:loadCustomProperties(fieldData)
     info_log("Field:loadCustomProperties( ", fieldData.determinedCustomProperties);
     if fieldData.determinedCustomProperties then
