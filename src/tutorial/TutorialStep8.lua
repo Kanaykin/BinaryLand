@@ -15,7 +15,7 @@ function TutorialStep8:init(gameScene, field, tutorialManager)
 
 	self.mTutorialManager:getMainUI():getJoystick():clearBlockedButtons();
 
-	self:foxBabyAnimation();
+	--self:foxAnimation();
 	self.mTriggers = self.mField:getObjectsByTag(FactoryObject.FINISH_TAG);
 
 	self:initFinger(gameScene, field);

@@ -17,7 +17,7 @@ function TutorialStep5_1:init(gameScene, field, tutorialManager)
 
 	self.mTutorialManager:getMainUI():getJoystick():clearBlockedButtons();
 
-	self:foxBabyAnimation();
+	--self:foxBabyAnimation();
 
 	local label = tolua.cast(self.mNode:getChildByTag(TutorialStep1.LABEL_TAG), "cc.Label");
     if label then

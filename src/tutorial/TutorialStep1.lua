@@ -66,7 +66,7 @@ function TutorialStep1:init(gameScene, field, tutorialManager)
 
 	self.mTutorialManager:getMainUI():getFightButton():setBlocked(true);
 
-    self:foxBabyAnimation();
+    --self:foxAnimation("Fox");
 end
 
 --------------------------------

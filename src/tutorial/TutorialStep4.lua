@@ -16,7 +16,7 @@ function TutorialStep4:init(gameScene, field, tutorialManager)
 	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.BOTTOM);
 	self.mTutorialManager:getMainUI():getJoystick():resetButtonPressed();
 
-	self:foxBabyAnimation();
+	self:foxAnimation("Fox");
 
     local player = self.mField:getPlayerObjects()[self.mPlayerIndex];
     player:resetMovingParams();

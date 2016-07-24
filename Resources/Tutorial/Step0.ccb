@@ -85,7 +85,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>help_big.png</string>
+							<string>help_big_right.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -153,6 +153,8 @@
 						<real>0.0</real>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -176,7 +178,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>100</real>
+							<real>0.0</real>
 							<real>7.1875</real>
 							<integer>4</integer>
 						</array>
@@ -188,7 +190,7 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>1.1499999761581421</real>
+							<real>-0.15000000596046448</real>
 							<real>0.0</real>
 						</array>
 					</dict>
@@ -221,7 +223,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>bubble.png</string>
+							<string>bubble_right.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -449,7 +451,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>100</real>
+							<real>0.0</real>
 							<real>14.875</real>
 							<integer>4</integer>
 						</array>
@@ -461,7 +463,7 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
+							<real>0.0</real>
 							<real>0.5</real>
 						</array>
 					</dict>
@@ -503,6 +505,17 @@
 						<array>
 							<string></string>
 							<string>FoxGirlTutor.png</string>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>flip</string>
+						<key>type</key>
+						<string>Flip</string>
+						<key>value</key>
+						<array>
+							<true/>
+							<false/>
 						</array>
 					</dict>
 				</array>

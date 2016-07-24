@@ -28,20 +28,18 @@ function TutorialStepBase:destroy()
 end
 
 --------------------------------
-function TutorialStepBase:foxBabyAnimation()
-    info_log("TutorialStep1:foxBabyAnimation self.mNode ", self.mNode);
-    if true then
-    	return;
-    end
+function TutorialStepBase:foxAnimation(animName)--FoxBaby
+    info_log("TutorialStep1:foxAnimation self.mNode ", animName);
+
     if not self.mNode then
     	return;
     end
     local foxBaby = self.mNode:getChildByTag(TutorialStep1.FOX_BABY_TAG);
-    info_log("TutorialStep1:foxBabyAnimation ", foxBaby);
+    info_log("TutorialStep1:foxAnimation ", foxBaby);
 
     if foxBaby then
         local animation = PlistAnimation:create();
-        animation:init("FoxBabyTutorAnim.plist", foxBaby, foxBaby:getAnchorPoint());
+        animation:init(animName .. "TutorAnim.plist", foxBaby, foxBaby:getAnchorPoint(), nil, 0.2);
 
         local repeatAnimation = RepeatAnimation:create();
         repeatAnimation:init(animation);

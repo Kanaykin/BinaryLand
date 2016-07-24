@@ -21,7 +21,7 @@ function TutorialStep6:init(gameScene, field, tutorialManager)
 	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.BOTTOM);
 	self.mTutorialManager:getMainUI():getJoystick():resetButtonPressed();
 
-	self:foxBabyAnimation();
+	self:foxAnimation("FoxGirl");
 
 	self.mTutorialManager:getMainUI():getFightButton():setBlocked(false);
 

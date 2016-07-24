@@ -14,7 +14,7 @@ function TutorialStep5:init(gameScene, field, tutorialManager)
 	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.LEFT);
 	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.BOTTOM);
 
-	self:foxBabyAnimation();
+	self:foxAnimation("FoxGirl");
 end
 
 --------------------------------
