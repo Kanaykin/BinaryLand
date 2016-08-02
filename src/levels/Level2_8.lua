@@ -1,8 +1,9 @@
 local CustomProperties = {
-    ["5_6_106"] = {dog_id = "2_7_107"},
-    ["2_9_106"] = {dog_id = "4_11_107"},
-    ["12_3_106"] = {dog_id = "13_6_107"},
-    ["9_11_106"] = {dog_id = "14_12_107"}
+    ["5_8_116"] = {DestPoint = "3,8"},
+    ["7_6_116"] = {DestPoint = "13,6"},
+    ["13_1_116"] = {DestPoint = "10,1"},
+    ["13_11_116"] = {DestPoint = "13,8"},
+    ["13_6_107"] = {CanSearch = true}
 }
 
 return CustomProperties;
