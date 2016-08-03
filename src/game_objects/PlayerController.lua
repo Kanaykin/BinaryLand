@@ -36,10 +36,11 @@ end
 function PlayerController:touchObject(object, point)
 	local pos = object:getScreenPos();
 	
-	local box = object:getBoundingBox();
+	local scale = self.mField.mGame:getScale();
 
-	box = cc.rect(pos.x - box.width / 2, pos.y - box.height / 2, box.width, box.height);
-	return Rect.new(box):containsPoint(cc.p(point.x, point.y));
+	local width = PlayerController.mClickSize * scale;
+	local box = cc.rect(pos.x - width / 2, pos.y - width / 2, width, width);
+    return Rect.new(box):containsPoint(cc.p(point.x, point.y));
 end
 
 ----------------------------------------
