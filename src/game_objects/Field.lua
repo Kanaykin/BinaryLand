@@ -938,9 +938,12 @@ function Field:getNearestHunter(pos)
     for i, hunter in ipairs(hunters) do
         if not hunter:isDead() then
             local hunterPos = hunter:getGridPosition();
+            local cloneArray = self:cloneArray();
+            local path = WavePathFinder.buildPath(pos, hunterPos, cloneArray, self.mSize);
+
             debug_log("Field:getNearestHunter hunterPos x ", hunterPos.x, " y ", hunterPos.y);
             debug_log("Field:getNearestHunter pos x ", pos.x, " y ", pos.y);
-            local dist = (hunterPos - pos):lenSq();
+            local dist = #path--(hunterPos - pos):lenSq();
             debug_log("Field:getNearestHunter dist ", dist);
             if dist < resDist then
                 resDist = dist;
