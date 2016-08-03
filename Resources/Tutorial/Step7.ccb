@@ -312,7 +312,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>46.5</real>
+							<real>56.5</real>
 							<real>10.699999809265137</real>
 							<integer>4</integer>
 						</array>
@@ -425,6 +425,8 @@
 						<string>Спасибо, Фредерик, теперь давай освободим лисёнка.</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
