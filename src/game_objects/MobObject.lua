@@ -15,6 +15,7 @@ MobObject.mState = MobObject.IDLE;
 MobObject.mPath = nil;
 MobObject.mTrigger = nil;
 MobObject.mStateMachine = nil;
+MobObject.mFreePoints = nil;
 
 MobObject.DIRECTIONS = {
     SIDE = 1,
@@ -173,12 +174,21 @@ function MobObject:init(field, node)
 
     -- create animation
 	self:initAnimation();
+
+    self:fillFreePoint();
 end
+
+--------------------------------
+function MobObject:fillFreePoint()
+    self.mFreePoints = {};
+    self.mField:fillFreePoint(self.mGridPosition, self.mFreePoints);
+end
+
 
 --------------------------------
 function MobObject:getDestPoint()
     local points = {}
-	local freePoints = self.mField:getFreePoints();
+	local freePoints = self.mFreePoints; --self.mField:getFreePoints();
 
     for i, point in ipairs(freePoints) do
         if point ~= self.mGridPosition then

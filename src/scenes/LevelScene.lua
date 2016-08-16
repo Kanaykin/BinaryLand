@@ -260,12 +260,12 @@ function LevelScene:init(sceneMan, params)
 end
 
 --------------------------------
-function LevelScene:loadTileMap(tileMapName)
+function LevelScene:loadTileMap(tileMapName, levelData)
 
     local tileMap = cc.TMXTiledMap:create(tileMapName);
     local visibleSize = CCDirector:getInstance():getVisibleSize();
     tileMap:setAnchorPoint(cc.p(0.5, 0.0));
-    tileMap:setPosition(cc.p(visibleSize.width / 2.0, 0));
+    tileMap:setPosition(cc.p(visibleSize.width / 2.0 - levelData.cellSize * self.mSceneManager.mGame:getScale() / 2, 0));
 
     if self.mScrollView then
         self.mScrollView:addChild(tileMap);
@@ -291,7 +291,7 @@ function LevelScene:initScene(levelData)
 		local node = ccpproxy:readCCBFromFile(levelData.ccbFile, reader, false);
 
         if levelData.tileMap then
-            self:loadTileMap(levelData.tileMap);
+            self:loadTileMap(levelData.tileMap, levelData);
         end
 
         self.mSceneGame:addChild(node);
@@ -324,7 +324,7 @@ function LevelScene:initScene(levelData)
 		self.mScrollView:setTouchEnabled(false);
 
         if levelData.tileMap then
-            self:loadTileMap(levelData.tileMap);
+            self:loadTileMap(levelData.tileMap, levelData);
         end
 
 		self.mSceneGame:addChild(self.mScrollView.mScroll);

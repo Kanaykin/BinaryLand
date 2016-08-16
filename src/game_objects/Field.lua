@@ -471,19 +471,15 @@ function Field:tick(dt)
 end
 
 --------------------------------
-function Field:fillFreePoint()
+function Field:fillFreePoint(gridPos, points)
     local cloneArray = self:cloneArray();
-    local players = self:getPlayerObjects();
+    WavePathFinder.fillArray({gridPos}, Vector.new(-1, -1), cloneArray, self.mSize,
+        WavePathFinder.FIRST_INDEX + 1);
 
-    if #players ~= 0 then
-        WavePathFinder.fillArray({players[1].mGridPosition}, Vector.new(-1, -1), cloneArray, self.mSize,
-            WavePathFinder.FIRST_INDEX + 1);
-
-        for j = 0, self.mSize.y do
-            for i = 0, self.mSize.x do
-                if cloneArray[COORD(i, j, self.mSize.x)] > 1 then
-                    table.insert(self.mFreePoints, Vector.new(i, j));
-                end
+    for j = 0, self.mSize.y do
+        for i = 0, self.mSize.x do
+            if cloneArray[COORD(i, j, self.mSize.x)] > 1 then
+                table.insert(points, Vector.new(i, j));
             end
         end
     end
@@ -913,7 +909,10 @@ function Field:onHunterDead(hunter)
     end
 
     -- run away dogs
-    local hunters = self:getObjectsByTag(FactoryObject.HUNTER_TAG);
+    --local hunters = self:getObjectsByTag(FactoryObject.HUNTER_TAG);
+    local hunters = self:getNearestHunters(hunter:getGridPosition());
+    -- get avalable hunters
+    -- #todo:
     local dogs = self:getObjectsByTag(FactoryObject.DOG_TAG);
     if #hunters <=1 then
         -- remove all
@@ -930,28 +929,36 @@ function Field:onHunterDead(hunter)
 end
 
 --------------------------------
-function Field:getNearestHunter(pos)
-    -- get all hunter
+function Field:getNearestHunters(pos)
+    local nearestHunters = {};
     local hunters = self:getObjectsByTag(FactoryObject.HUNTER_TAG);
-    local resHunter = nil;
-    local resDist = 9999;
     for i, hunter in ipairs(hunters) do
         if not hunter:isDead() then
             local hunterPos = hunter:getGridPosition();
             local cloneArray = self:cloneArray();
             local path = WavePathFinder.buildPath(pos, hunterPos, cloneArray, self.mSize);
 
-            debug_log("Field:getNearestHunter hunterPos x ", hunterPos.x, " y ", hunterPos.y);
-            debug_log("Field:getNearestHunter pos x ", pos.x, " y ", pos.y);
             local dist = #path--(hunterPos - pos):lenSq();
-            debug_log("Field:getNearestHunter dist ", dist);
-            if dist < resDist then
-                resDist = dist;
-                resHunter = hunter;
+            if dist > 1 then
+                table.insert(nearestHunters, {obj = hunter, dist = dist});
             end
         end
     end
-    return resHunter;
+    table.sort(nearestHunters, function(a,b) return a.dist < b.dist end )
+    for i, val in ipairs(nearestHunters) do
+        debug_log("Field:getNearestHunters dist ", val.dist);
+    end
+    return nearestHunters;
+end
+
+--------------------------------
+function Field:getNearestHunter(pos)
+    -- get all hunter
+    local hunters = self:getNearestHunters(pos)
+    if #hunters == 0 then
+        return nil
+    end
+    return hunters[1].obj;
 end
 
 --------------------------------
@@ -1063,7 +1070,11 @@ function Field:init(fieldNode, layer, fieldData, game)
 	self:addArrayBorder();
 
 	-- fill free point it is point where objects can move
-	self:fillFreePoint();
+    local players = self:getPlayerObjects();
+    if #players ~= 0 then
+	   self:fillFreePoint(players[1].mGridPosition, self.mFreePoints);
+       
+    end
 	self:printField();
 
     debug_log("fieldData.time !!! ", fieldData.time);
