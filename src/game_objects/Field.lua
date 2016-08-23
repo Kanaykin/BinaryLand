@@ -476,6 +476,10 @@ function Field:fillFreePoint(gridPos, points)
     WavePathFinder.fillArray({gridPos}, Vector.new(-1, -1), cloneArray, self.mSize,
         WavePathFinder.FIRST_INDEX + 1);
 
+    local p = cloneArray[COORD(16, 5, self.mSize.x)];
+    info_log("££££££ ", p)
+    PRINT_FIELD(cloneArray, self.mSize);
+
     for j = 0, self.mSize.y do
         for i = 0, self.mSize.x do
             if cloneArray[COORD(i, j, self.mSize.x)] > 1 then
@@ -1068,6 +1072,11 @@ function Field:init(fieldNode, layer, fieldData, game)
 	end
 
 	self:addArrayBorder();
+
+    -- post init
+    for i, obj in ipairs(self.mObjects) do
+        obj:postInit();
+    end
 
 	-- fill free point it is point where objects can move
     local players = self:getPlayerObjects();

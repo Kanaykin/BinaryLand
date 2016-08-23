@@ -379,9 +379,9 @@ function EditorFileLoader:loadEditorFile(levelData, G_EditorScene, levelScene)
         levelScene.mScrollView:setTouchEnabled(false);
 
         if G_EditorScene.levelParams and G_EditorScene.levelParams.tileMap then
-            levelScene:loadTileMap(G_EditorScene.levelParams.tileMap);
+            levelScene:loadTileMap(G_EditorScene.levelParams.tileMap, levelData);
         else
-            levelScene:loadTileMap("Level1_2_map.tmx");
+            levelScene:loadTileMap("Level1_2_map.tmx", levelData);
         end
 
         self:createObjects(G_EditorScene, nodes[1], cellSize);

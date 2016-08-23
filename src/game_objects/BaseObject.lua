@@ -134,3 +134,7 @@ end
 function BaseObject:setVisible(visible)
 	self.mNode:setVisible(visible);
 end
+
+--------------------------------
+function BaseObject:postInit()
+end

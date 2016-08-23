@@ -175,6 +175,11 @@ function MobObject:init(field, node)
     -- create animation
 	self:initAnimation();
 
+    --self:fillFreePoint();
+end
+
+--------------------------------
+function MobObject:postInit()
     self:fillFreePoint();
 end
 
@@ -182,6 +187,7 @@ end
 function MobObject:fillFreePoint()
     self.mFreePoints = {};
     self.mField:fillFreePoint(self.mGridPosition, self.mFreePoints);
+    info_log("MobObject:fillFreePoint id ", self:getId(), " free points ", #self.mFreePoints);
 end
 
 
@@ -257,7 +263,7 @@ function MobObject:startMoving(destPoint)
         table.remove(self.mPath, 1);
     end
     info_log ("MobObject:startMoving end");
-    self:moveToNextPoint();
+    return self:moveToNextPoint();
 end
 
 --------------------------------
