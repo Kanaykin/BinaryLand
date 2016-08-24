@@ -914,7 +914,8 @@ function Field:onHunterDead(hunter)
 
     -- run away dogs
     --local hunters = self:getObjectsByTag(FactoryObject.HUNTER_TAG);
-    local hunters = self:getNearestHunters(hunter:getGridPosition());
+    local hunters = self:getNearestHunters(hunter:getGridPosition(), false);
+    debug_log("Field:onHunterDead hunters count ", #hunters);
     -- get avalable hunters
     -- #todo:
     local dogs = self:getObjectsByTag(FactoryObject.DOG_TAG);
@@ -933,19 +934,20 @@ function Field:onHunterDead(hunter)
 end
 
 --------------------------------
-function Field:getNearestHunters(pos)
+function Field:getNearestHunters(pos, onlyAlive)
     local nearestHunters = {};
     local hunters = self:getObjectsByTag(FactoryObject.HUNTER_TAG);
     for i, hunter in ipairs(hunters) do
-        if not hunter:isDead() then
+        debug_log("Field:getNearestHunters hunter isDead ", hunter:isDead());
+        if not onlyAlive or not hunter:isDead() then
             local hunterPos = hunter:getGridPosition();
             local cloneArray = self:cloneArray();
             local path = WavePathFinder.buildPath(pos, hunterPos, cloneArray, self.mSize);
 
             local dist = #path--(hunterPos - pos):lenSq();
-            if dist > 1 then
+            --if dist > 1 then
                 table.insert(nearestHunters, {obj = hunter, dist = dist});
-            end
+            --end
         end
     end
     table.sort(nearestHunters, function(a,b) return a.dist < b.dist end )
@@ -958,7 +960,7 @@ end
 --------------------------------
 function Field:getNearestHunter(pos)
     -- get all hunter
-    local hunters = self:getNearestHunters(pos)
+    local hunters = self:getNearestHunters(pos, true)
     if #hunters == 0 then
         return nil
     end
