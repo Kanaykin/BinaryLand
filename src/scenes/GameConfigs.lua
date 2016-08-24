@@ -150,7 +150,7 @@ gLocations = {
             },
             {
                 opened = true,
-                ccbFile = {"Level2_3p1", "Level2_1p2"},
+                ccbFile = "Level2_3p1",
                 tileMap = "Level2_1_map.tmx",
                 cellSize = 32,
                 tutorial = false,
@@ -161,7 +161,7 @@ gLocations = {
             },
             {
                 opened = true,
-                ccbFile = {"Level2_4p1", "Level2_1p2"},
+                ccbFile = "Level2_4p1",-- "Level2_1p2"},
                 tileMap = "Level2_1_map.tmx",
                 cellSize = 32,
                 tutorial = false,
@@ -194,7 +194,7 @@ gLocations = {
             },
             {
                 opened = true,
-                ccbFile = "Level2_7p1",--, "Level2_7p2"},
+                ccbFile = {"Level2_7p1", "Level2_1p2"},
                 tileMap = "Level2_7_map.tmx",
                 cellSize = 32,
                 tutorial = false,
