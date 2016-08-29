@@ -48,7 +48,7 @@ end
 
 ----------------------------
 function DelayAnimationSoftImpl:play()
-	info_log("DelayAnimationSoftImpl:play ", self.mTextureName)
+	--info_log("DelayAnimationSoftImpl:play ", self.mTextureName)
 	if self.mTexture then
         if self.mTextureName then
             local sprite = GuiHelper.getSpriteFrame(self.mTextureName, self.mTextureSize);

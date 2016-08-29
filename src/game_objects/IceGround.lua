@@ -35,6 +35,9 @@ end
 
 ---------------------------------
 function IceGround:onEnter(player)
+	if player:isInTrap() then
+		return;
+	end
 	-- info_log("IceGround:onEnter 0.94 ", round(0.94));
 	-- info_log("IceGround:onEnter -0.94 ", round(-0.94));
 	-- info_log("IceGround:onEnter 0.12 ", round(0.12));

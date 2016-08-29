@@ -36,6 +36,6 @@ end
 
 --------------------------------
 function RandomAnimation:play()
-	info_log("RandomAnimation:play");
+	--info_log("RandomAnimation:play");
 	self:playNext();
 end

@@ -63,7 +63,7 @@ end
 
 --------------------------------
 function SequenceAnimation:play()
-	info_log("SequenceAnimation:play");
+	--info_log("SequenceAnimation:play");
     self.mCurrentAnimation = nil;
 	self:playNext();
 end

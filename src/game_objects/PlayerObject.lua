@@ -125,14 +125,20 @@ end
 function PlayerObject:leaveTrap(pos)
 	info_log("PlayerObject:leaveTrap");
 	self:playAnimation(nil);
-	self.mInTrap = false;
+	self:setInTrap(false);
+end
+
+---------------------------------
+function PlayerObject:setInTrap(inTrap)
+    debug_log("PlayerObject:setInTrap ", inTrap);
+    self.mInTrap = inTrap
 end
 
 ---------------------------------
 function PlayerObject:enterTrap(pos, stateInTrap)
-	
+    debug_log("PlayerObject:enterTrap ", pos, " stateInTrap ", stateInTrap);
 	self.mStateInTrap = stateInTrap and stateInTrap or PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP;
-	self.mInTrap = true;
+    self:setInTrap(true);
 
     if self.mLastButtonPressed ~= self.mStateInTrap then
         self:playAnimation(nil);
@@ -143,7 +149,8 @@ function PlayerObject:enterTrap(pos, stateInTrap)
 		local posTo = Vector.new(self.mField:positionToGrid(pos));
 		self:moveTo(posTo, Callback.new(self, PlayerObject.onMoveToTrapFinished));
 	else
-		self:playAnimation(self.mStateInTrap);
+		self:resetMovingParams();
+        self:playAnimation(self.mStateInTrap);
 	end
 
     info_log("PlayerObject:enterTrap ???");
@@ -195,10 +202,10 @@ end
 
 --------------------------------
 function PlayerObject:playAnimation(button)
-	--debug_log("PlayerObject:playAnimation ", self.mLastButtonPressed);
+	--debug_log("PlayerObject:playAnimation ", self.mLastButtonPressed, " button ", button);
 	if self.mLastButtonPressed ~= button and self.mNode then
 		self.mLastButtonPressed = button;
-		info_log("PlayerObject:playAnimation2 ", self.mLastButtonPressed, " button ", button);
+		--info_log("PlayerObject:playAnimation2 ", self.mLastButtonPressed, " button ", button);
 		self:getAnimationNode():stopAllActions();
 		button = (button == nil) and -1 or button;
 		self.mAnimations[button]:play();

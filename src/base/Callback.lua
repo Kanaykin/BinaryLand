@@ -10,7 +10,7 @@ function unpack_arg(...)
 		for i = 1, select("#",...) do
 			arg[#arg+1] = select(i,...)
 		end
-		info_log("Callback.new arg ", #arg)
+		--info_log("Callback.new arg ", #arg)
 		return arg
 	else
 		return arg
@@ -26,7 +26,7 @@ end
 
 -----------------------------------
 function Callback.__call(a, ...)
-    info_log("Callback.__call a.mObj ", a.mObj, " a.mArgs ", a.mArgs)
+    --info_log("Callback.__call a.mObj ", a.mObj, " a.mArgs ", a.mArgs)
     local params = {}
 	local arg = unpack_arg(...)
 	for i,v in ipairs(arg) do

@@ -10,7 +10,7 @@ getSpriteFrame = function(name, size)
     local frame = cache:getSpriteFrame(name);
 
     if not frame then
-        info_log("getSpriteFrame not found frame ", name);
+        --info_log("getSpriteFrame not found frame ", name);
         local texture = cc.Director:getInstance():getTextureCache():addImage(name);
         frame = cc.SpriteFrame:createWithTexture(texture, size);
     end

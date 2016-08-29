@@ -96,7 +96,7 @@ function FoxObject:restore(data)
     FoxObject:superClass().restore(self, data);
     --self.mLastButtonPressed = data.lastButtonPressed;
     if self.mInTrap and not data.inTrap then
-        self.mInTrap = data.inTrap;
+        self:setInTrap(data.inTrap);
         self:playAnimation(-1);
     end
 end
@@ -112,7 +112,7 @@ function FoxObject:setCustomProperties(properties)
         info_log("FoxObject:setCustomProperties self.mLastButtonPressed ", self.mLastButtonPressed);
         info_log("FoxObject:setCustomProperties self.mAnimations[self.mLastButtonPressed] ", self.mAnimations[self.mLastButtonPressed]);
         self.mAnimations[self.mLastButtonPressed]:setCurrentAnimation(2);
-        self.mInTrap = true;
+        self:setInTrap(true);
         self.mField:createSnareTrigger(Vector.new(self.mNode:getPosition()));
     end
 end
@@ -362,7 +362,7 @@ end
 
 --------------------------------
 function FoxObject:playInTrapAnimation()
-    debug_log("FoxObject:playAnimation self:isInTrap() ", self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT])
+    debug_log("FoxObject:playAnimation ", self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT])
     if self.mTypeCage == FoxObject.CAGE_TYPE.CT_CAGE then
         self:playInTrapCageAnimation();
     elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_HIDDEN then
@@ -522,7 +522,7 @@ end
 function FoxObject:enterIceGround(pos)
     self:enterTrap(pos);
     self.mMoveFinishCallback = nil;
-    self.mInTrap = false;
+    self:setInTrap(false);
 end
 
 --------------------------------
@@ -544,7 +544,7 @@ function FoxObject:enterCage(pos)
     self.mTypeCage = FoxObject.CAGE_TYPE.CT_CAGE;
 
     self:enterTrap(pos);
-
+    --self:resetMovingParams();
     --self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT];
 end
 
@@ -553,6 +553,7 @@ function FoxObject:enterNet(pos)
     self.mTypeCage = FoxObject.CAGE_TYPE.CT_NET;
 
     self:enterTrap(pos);
+    --self:resetMovingParams();
 
     --self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT];
 end
