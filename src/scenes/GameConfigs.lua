@@ -267,7 +267,15 @@ gLocations = {
                 id = "3_4"
             },
             {
-
+                opened = true,
+                ccbFile = {"Level3_5p1", "Level3_5p2"}, 
+                tileMap = "Level3_5_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                customProperties = "src/levels/Level3_5",
+                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                id = "3_5"
             },
             {
 
