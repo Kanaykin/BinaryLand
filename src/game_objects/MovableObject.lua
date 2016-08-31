@@ -18,6 +18,8 @@ function MovableObject:init(field, node)
 	MovableObject:superClass().init(self, field, node);
 
 	self:createDebugBox();
+
+    self:updateOrder();
 end
 
 ---------------------------------
