@@ -157,10 +157,15 @@ function PlayerObject:enterTrap(pos, stateInTrap)
 end
 
 --------------------------------
-function PlayerObject:onMoveToTrapFinished()
-	info_log("PlayerObject:onMoveToTrapFinished ")
+function PlayerObject:onMoveToTrapFinishedImpl()
 	self:playAnimation(self.mStateInTrap);
 	self.mDelta = nil;
+end
+
+--------------------------------
+function PlayerObject:onMoveToTrapFinished()
+	info_log("PlayerObject:onMoveToTrapFinished ")
+	self:onMoveToTrapFinishedImpl();
 end
 
 --------------------------------

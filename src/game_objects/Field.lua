@@ -702,6 +702,14 @@ function Field:incEnterTrapCounter()
 end
 
 --------------------------------
+function Field:onPlayerEnterTornadoTrap(player, pos, trigger)
+    info_log("onPlayerEnterTornadoTrap trigger ", trigger);
+    -- if player is primary then game over
+    player:enterTornadoTrap(pos, trigger);
+    self:incEnterTrapCounter();
+end
+
+--------------------------------
 function Field:onPlayerEnterHiddenTrap(player, pos)
     info_log("onPlayerEnterHiddenTrap ");
     -- if player is primary then game over
@@ -757,6 +765,17 @@ function Field:createSpirit(pos, player)
     local spirit = SpiritObject:create();
     spirit:init(self, node, player);
     self:addObject(spirit);
+end
+
+--------------------------------
+function Field:createTornadoTrigger(node)
+    info_log("Field:createTornadoTrigger");
+    local web = SnareTrigger:create();
+    local enterCallback = Callback.new(self, Field.onPlayerEnterTornadoTrap);
+    local leaveCallback = Callback.new(self, Field.onPlayerLeaveWeb)
+    web:init(self, node, enterCallback, leaveCallback);
+    table.insert(self.mObjects, web);
+    table.insert(self.mEnemyObjects, web);
 end
 
 --------------------------------
@@ -890,6 +909,16 @@ end
 --------------------------------
 function Field:setCustomProperties(customProperties)
     self.mCustomProperties = customProperties;
+end
+
+--------------------------------
+function Field:deleteTornadoInPos(pos)
+    local tornados = self:getObjectsByTag(FactoryObject.TORNADO_TAG);
+    for i, tornado in ipairs(tornados) do
+        if tornado:getGridPosition() == pos then
+            --tornado:setVisible(false);
+        end
+    end
 end
 
 --------------------------------

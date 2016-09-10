@@ -23,6 +23,13 @@ function TornadoObject:init(field, node)
 end
 
 --------------------------------
+function TornadoObject:releaseNode()
+	local node = self.mNode;
+	self.mNode = nil;
+	return node;
+end
+
+--------------------------------
 function TornadoObject:getDestPoint()
 	if self.mPoints[self.mDestIndex].x == self.mGridPosition.x and 
 		self.mPoints[self.mDestIndex].y == self.mGridPosition.y then
@@ -34,7 +41,25 @@ function TornadoObject:getDestPoint()
 end
 
 --------------------------------
+function TornadoObject:createAnimation()
+	local animation = PlistAnimation:create();
+    animation:init("TornadoAnimation.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.18);
+
+    local sideAnimation = RepeatAnimation:create();
+    sideAnimation:init(animation);
+
+    return sideAnimation;
+end
+
+--------------------------------
 function TornadoObject:initAnimation()
+	debug_log("TornadoObject:initAnimation ");
+	self.mAnimations = {};
+
+    self.mAnimations[MobObject.DIRECTIONS.SIDE] = self:createAnimation();
+    self.mAnimations[MobObject.DIRECTIONS.FRONT] = self:createAnimation();
+    self.mAnimations[MobObject.DIRECTIONS.BACK] = self:createAnimation();
+    debug_log("TornadoObject:initAnimation 2");
 end
 
 ---------------------------------

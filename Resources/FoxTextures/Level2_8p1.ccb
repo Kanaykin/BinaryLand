@@ -5491,7 +5491,7 @@
 								<key>value</key>
 								<array>
 									<real>208</real>
-									<real>224</real>
+									<real>240</real>
 									<integer>5</integer>
 								</array>
 							</dict>
@@ -5503,7 +5503,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>0.0</real>
+									<real>0.20000000298023224</real>
 								</array>
 							</dict>
 							<dict>
@@ -5571,7 +5571,7 @@
 								<key>value</key>
 								<array>
 									<real>208</real>
-									<real>160</real>
+									<real>176</real>
 									<integer>5</integer>
 								</array>
 							</dict>
@@ -5583,7 +5583,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>0.0</real>
+									<real>0.20000000298023224</real>
 								</array>
 							</dict>
 							<dict>
@@ -5811,7 +5811,7 @@
 								<key>value</key>
 								<array>
 									<real>400</real>
-									<real>0.0</real>
+									<real>16</real>
 									<integer>5</integer>
 								</array>
 							</dict>
@@ -5823,7 +5823,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>0.0</real>
+									<real>0.20000000298023224</real>
 								</array>
 							</dict>
 							<dict>

@@ -22,6 +22,11 @@ function LinearInterpolator:getCurrent()
 end
 
 -------------------------------------
+function LinearInterpolator:isDone()
+	return self.mCurrent == self.mTo;
+end
+
+-------------------------------------
 function LinearInterpolator:tick(dt)
 	self.mCurTime = (self.mCurTime + dt);
 	local t = math.min(self.mCurTime / self.mMaxTime, 1);

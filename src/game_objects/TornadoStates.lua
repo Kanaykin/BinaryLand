@@ -25,10 +25,14 @@ function TornadoCatchState:enter(params)
     debug_log("TornadoCatchState:enter");
 
     if not params.player:isInTrap() then
-        params.field:createSnareTrigger(Vector.new(params.player.mNode:getPosition()));
+        local node = self.mObject:releaseNode();
+        --params.field:createSnareTrigger(Vector.new(params.player.mNode:getPosition()));
+        params.field:createTornadoTrigger(node);
     end
 
     self.mObject:resetMovingParams();
+
+    params.field:delayDelete(self.mObject);
 end
 
 ------------------------------------

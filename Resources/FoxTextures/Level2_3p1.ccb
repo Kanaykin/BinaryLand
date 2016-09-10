@@ -2565,8 +2565,6 @@
 								<string>Fox.ccb</string>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -3249,7 +3247,7 @@
 								<key>value</key>
 								<array>
 									<real>176</real>
-									<real>64</real>
+									<real>80</real>
 									<integer>5</integer>
 								</array>
 							</dict>
@@ -3261,7 +3259,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>0.0</real>
+									<real>0.20000000298023224</real>
 								</array>
 							</dict>
 							<dict>

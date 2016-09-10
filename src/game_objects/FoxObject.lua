@@ -44,13 +44,15 @@ FoxObject.FOX_STATE = {
     PS_IN_SIDE_NET_LEFT = PlayerObject.PLAYER_STATE.PS_LAST + 4,
     PS_IN_SIDE_NET_RIGHT = PlayerObject.PLAYER_STATE.PS_LAST + 5,
     PS_IN_SIDE_NET_TOP = PlayerObject.PLAYER_STATE.PS_LAST + 6,
-    PS_IN_SIDE_NET_DOWN = PlayerObject.PLAYER_STATE.PS_LAST + 7
+    PS_IN_SIDE_NET_DOWN = PlayerObject.PLAYER_STATE.PS_LAST + 7,
+    PS_IN_TORNADO_CAGE = PlayerObject.PLAYER_STATE.PS_LAST + 8
 };
 
 FoxObject.CAGE_TYPE = {
     CT_CAGE = 1,
     CT_HIDDEN = 2,
-    CT_NET = 3
+    CT_NET = 3,
+    CT_TORNADO = 4
 }
 
 --------------------------------
@@ -220,14 +222,13 @@ end
 --------------------------------
 function FoxObject:updateAnchorPoint(dt)
     if self.mAnchorInterpolation then
-        local anchor = self:getAnchorInHiddenCageAnimation();
-
+        
         self.mAnchorInterpolation:tick(dt);
         local cur = self.mAnchorInterpolation:getCurrent();
         debug_log("FoxObject:updateAnchorPoint x ", cur.x, " y ", cur.y);
         self.mAnimationNode:setAnchorPoint(cc.p(cur.x, cur.y));
-
-        if cur.x == anchor.x and cur.y == anchor.y then
+        
+        if self.mAnchorInterpolation:isDone() then
             self.mAnchorInterpolation = nil
         end
     end
@@ -361,6 +362,15 @@ function FoxObject:playInTrapNetAnimation()
 end
 
 --------------------------------
+function FoxObject:onMoveToTrapFinishedImpl()
+    FoxObject:superClass().onMoveToTrapFinishedImpl(self);
+    if self.mTypeCage == FoxObject.CAGE_TYPE.CT_TORNADO then
+        debug_log(" remove tornado !!! ");
+        self.mField:deleteTornadoInPos(self.mGridPosition);
+    end
+end
+
+--------------------------------
 function FoxObject:playInTrapAnimation()
     debug_log("FoxObject:playAnimation ", self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT])
     if self.mTypeCage == FoxObject.CAGE_TYPE.CT_CAGE then
@@ -368,6 +378,8 @@ function FoxObject:playInTrapAnimation()
     elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_HIDDEN then
         self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_HIDDEN_CAGE];
         --self.mCallbackOnDone:start();
+    elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_TORNADO then
+        self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE];
     elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_NET then
         self:playInTrapNetAnimation();        
     else
@@ -526,6 +538,18 @@ function FoxObject:enterIceGround(pos)
 end
 
 --------------------------------
+function FoxObject:enterTornadoTrap(pos, trigger)
+    self:enterCage(pos);
+    self.mTypeCage = FoxObject.CAGE_TYPE.CT_TORNADO;
+
+    local anchor = self:getAnchorInTornadoAnimation();
+    local curAnchor = self.mAnimationNode:getAnchorPoint();
+
+    self.mAnchorInterpolation = LinearInterpolator:create();
+    self.mAnchorInterpolation:init(Vector.new(curAnchor.x, curAnchor.y), Vector.new(anchor.x, anchor.y), 0.2);
+end
+
+--------------------------------
 function FoxObject:enterHiddenTrap(pos)
     self:enterCage(pos);
 
@@ -585,10 +609,24 @@ end
 --------------------------------
 function FoxObject:getAnchorInHiddenCageAnimation()
     if self.mIsFemale then
-        return { x = 0.48, y = 0.15};
+        return { x = 0.48, y = 0.3};
     else
-        return { x = 0.48, y = 0.15};
+        return { x = 0.48, y = 0.3};
     end
+end
+
+--------------------------------
+function FoxObject:getAnchorInTornadoAnimation()
+    local sprite = tolua.cast(self.mAnimationNode, "cc.Sprite");
+    info_log("FoxObject:getAnchorInTornadoAnimation ", sprite:isFlippedX());
+
+    local size = self.mAnimationNode:getBoundingBox();
+    local anch = self.mAnimationNode:getAnchorPoint();
+    debug_log("FoxObject:getAnchorInTornadoAnimation anch ", anch.x, " y ", anch.y);
+
+    local mult = sprite:isFlippedX() and -1 or 1;
+
+    return {x=0.5 - 0.15 * mult,y=0.37};
 end
 
 --------------------------------
@@ -609,6 +647,18 @@ function FoxObject:onHiddenAnimDone()
     if other and not other:isInTrap() then
         self.mField:createSpirit(pos, other);
     end
+end
+
+--------------------------------
+function FoxObject:createInTornadoCageAnimation()
+    local animation = PlistAnimation:create();
+    local anchor = self:getAnchorInTornadoAnimation(); 
+    animation:init(self:getPrefixTexture().."InTornadoTrap.plist", self.mAnimationNode, anchor, nil, 0.2);
+
+    local repeatAnimation = RepeatAnimation:create();
+    repeatAnimation:init(animation, soft);
+
+    self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE] = repeatAnimation;
 end
 
 --------------------------------
@@ -690,6 +740,7 @@ function FoxObject:createInCageAnimation()
     self:createInCageSideAnimation("Left", FoxObject.FOX_STATE.PS_IN_CAGE_LEFT);
     self:createInCageSideAnimation("Right", FoxObject.FOX_STATE.PS_IN_CAGE_RIGHT);
     self:createInHiddenCageAnimation();
+    self:createInTornadoCageAnimation();
 end
 
 --------------------------------

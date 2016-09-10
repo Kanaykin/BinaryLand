@@ -10,7 +10,7 @@ MovableObject.mSrcPos = nil;
 MovableObject.mPrevOrderPos = nil;
 
 MovableObject.mDebugBox = nil;
-MovableObject.mNeedDebugBox = false;
+MovableObject.mNeedDebugBox = true;
 MovableObject.mMoveFinishCallback = nil;
 
 --------------------------------
@@ -81,13 +81,9 @@ function MovableObject:stopMoving()
 end
 
 --------------------------------
-function MovableObject:moveTo(posDest, moveFinishCallback)
-	-- compute real position
-	info_log("[MovableObject:moveTo] posDest.x ", posDest.x, "posDest.y ", posDest.y);
+function MovableObject:moveToFieldPos(dest, moveFinishCallback)
 	self.mMoveFinishCallback = moveFinishCallback;
-	local dest = self.mField:gridPosToReal(posDest);
-	dest.x= dest.x + self.mField.mCellSize / 2;
-	dest.y= dest.y + self.mField.mCellSize / 2;
+
 	local src = Vector.new(self.mNode:getPosition()); --self.mField:gridPosToReal(self.mGridPosition);
 	info_log("[MovableObject:moveTo] src.x ", src.x, " src.y ", src.y);
 	info_log("[MovableObject:moveTo] dest.x ", dest.x, " dest.y ", dest.y);
@@ -98,7 +94,21 @@ function MovableObject:moveTo(posDest, moveFinishCallback)
 	info_log("[MovableObject:moveTo] moveTime ", self.mMoveTime);
 	local x, y = self.mNode:getPosition();
 	self.mSrcPos = Vector.new(x, y);
-	self.mDestGridPos = posDest;
+
+	self.mDestGridPos = Vector.new(self.mField:positionToGrid(dest));
+end
+
+--------------------------------
+function MovableObject:moveTo(posDest, moveFinishCallback)
+	-- compute real position
+	info_log("[MovableObject:moveTo] posDest.x ", posDest.x, "posDest.y ", posDest.y);
+	
+	local dest = self.mField:gridPosToReal(posDest);
+	dest.x= dest.x + self.mField.mCellSize / 2;
+	dest.y= dest.y + self.mField.mCellSize / 2;
+
+	self:moveToFieldPos(dest, moveFinishCallback);
+	--self.mDestGridPos = posDest;
 end
 
 --------------------------------
