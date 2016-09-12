@@ -1,5 +1,6 @@
 require "src/game_objects/MobObject"
-require "src/game_objects/TornadoStates.lua"
+require "src/game_objects/TornadoStates"
+require "src/math/Algorithm"
 
 TornadoObject = inheritsFrom(MobObject)
 TornadoObject.mPoints = nil;
@@ -31,8 +32,16 @@ end
 
 --------------------------------
 function TornadoObject:getDestPoint()
-	if self.mPoints[self.mDestIndex].x == self.mGridPosition.x and 
-		self.mPoints[self.mDestIndex].y == self.mGridPosition.y then
+	--debug_log("TornadoObject:getDestPoint dest x ", self.mPoints[self.mDestIndex].x);
+	--debug_log("TornadoObject:getDestPoint dest y ", self.mPoints[self.mDestIndex].y);
+
+	--debug_log("TornadoObject:getDestPoint cur x ", self.mGridPosition.x);
+	--debug_log("TornadoObject:getDestPoint cur y ", self.mGridPosition.y);
+
+	--debug_log("TornadoObject:getDestPoint dest index ", self.mPoints[self.mDestIndex].x == self.mGridPosition.x);
+	--debug_log("TornadoObject:getDestPoint dest index ", self.mPoints[self.mDestIndex].y == self.mGridPosition.y);
+	if Algorithm.equal(self.mPoints[self.mDestIndex].x, self.mGridPosition.x) and 
+		Algorithm.equal(self.mPoints[self.mDestIndex].y, self.mGridPosition.y) then
 		self.mDestIndex = self.mDestIndex == 1 and 2 or 1;
 	end
 	debug_log("TornadoObject:getDestPoint ", self.mDestIndex)

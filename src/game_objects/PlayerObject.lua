@@ -147,7 +147,8 @@ function PlayerObject:enterTrap(pos, stateInTrap)
 	if pos then
 		info_log("PlayerObject:enterTrap x= ", pos.x, " y= ", pos.y);
 		local posTo = Vector.new(self.mField:positionToGrid(pos));
-		self:moveTo(posTo, Callback.new(self, PlayerObject.onMoveToTrapFinished));
+        --self:move(posTo, Callback.new(self, PlayerObject.onMoveToTrapFinished));
+		self:moveToFieldPos(pos, Callback.new(self, PlayerObject.onMoveToTrapFinished));
 	else
 		self:resetMovingParams();
         self:playAnimation(self.mStateInTrap);

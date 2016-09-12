@@ -539,6 +539,7 @@ end
 
 --------------------------------
 function FoxObject:enterTornadoTrap(pos, trigger)
+    self:createInTornadoCageAnimation();
     self:enterCage(pos);
     self.mTypeCage = FoxObject.CAGE_TYPE.CT_TORNADO;
 
@@ -624,9 +625,14 @@ function FoxObject:getAnchorInTornadoAnimation()
     local anch = self.mAnimationNode:getAnchorPoint();
     debug_log("FoxObject:getAnchorInTornadoAnimation anch ", anch.x, " y ", anch.y);
 
-    local mult = sprite:isFlippedX() and -1 or 1;
+    local delta = sprite:isFlippedX() and -0.1 or 0;
 
-    return {x=0.5 - 0.15 * mult,y=0.37};
+    if self.mIsFemale then
+        delta = sprite:isFlippedX() and 0 or 0.1;
+        return {x=0.5  + delta, y=0.37};
+    else
+        return {x=0.5 + delta , y=0.37};
+    end
 end
 
 --------------------------------
@@ -651,6 +657,9 @@ end
 
 --------------------------------
 function FoxObject:createInTornadoCageAnimation()
+    if self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE] then
+        self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE]:destroy();
+    end
     local animation = PlistAnimation:create();
     local anchor = self:getAnchorInTornadoAnimation(); 
     animation:init(self:getPrefixTexture().."InTornadoTrap.plist", self.mAnimationNode, anchor, nil, 0.2);
@@ -740,7 +749,7 @@ function FoxObject:createInCageAnimation()
     self:createInCageSideAnimation("Left", FoxObject.FOX_STATE.PS_IN_CAGE_LEFT);
     self:createInCageSideAnimation("Right", FoxObject.FOX_STATE.PS_IN_CAGE_RIGHT);
     self:createInHiddenCageAnimation();
-    self:createInTornadoCageAnimation();
+    --self:createInTornadoCageAnimation();
 end
 
 --------------------------------

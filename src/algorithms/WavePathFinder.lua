@@ -176,7 +176,13 @@ WavePathFinder = {
 		WavePathFinder.findPath(path, array, sizeArray);
 
 		local pathReversed = WavePathFinder.reversePath(path);
-        info_log("buildPath final path");
+        info_log("buildPath final path 1 ", path[1].x, " y ", path[1].y);
+        info_log("buildPath final path 2 ", path[#path].x, " y ", path[#path].y);
+        info_log("buildPath final dist ", #path);
+        if(path[#path].x ~= pointFrom.x or path[#path].y ~= pointFrom.y ) then
+        	info_log("not found path !!! ");
+        	return {}
+        end
 		WavePathFinder.printPath(pathReversed);
 		return pathReversed;
 	end

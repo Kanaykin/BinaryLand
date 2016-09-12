@@ -10,7 +10,7 @@ MovableObject.mSrcPos = nil;
 MovableObject.mPrevOrderPos = nil;
 
 MovableObject.mDebugBox = nil;
-MovableObject.mNeedDebugBox = true;
+MovableObject.mNeedDebugBox = false;
 MovableObject.mMoveFinishCallback = nil;
 
 --------------------------------
@@ -163,7 +163,7 @@ function MovableObject:tick(dt)
 			local dest = self.mField:gridPosToReal(self.mDestGridPos);
 			dest.x= dest.x + self.mField.mCellSize / 2;
 			dest.y= dest.y + self.mField.mCellSize / 2;
-			self.mNode:setPosition(cc.p(dest.x, dest.y));
+			--self.mNode:setPosition(cc.p(dest.x, dest.y));
 
 			self.mGridPosition = self.mDestGridPos;--Vector.new(self.mField:getGridPosition(self.mNode));
 			--debug_log("[MovableObject:moveTo] grid pos ", self.mGridPosition.x, " y ", self.mGridPosition.y);

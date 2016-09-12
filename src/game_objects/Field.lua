@@ -712,8 +712,14 @@ end
 --------------------------------
 function Field:onPlayerEnterHiddenTrap(player, pos)
     info_log("onPlayerEnterHiddenTrap ");
+
+    local gridPos = Vector.new(self:positionToGrid(pos));
+    local dest = self:gridPosToReal(gridPos);
+    dest.x= dest.x + self.mCellSize / 2;
+    dest.y= dest.y + self.mCellSize / 2;
+
     -- if player is primary then game over
-    player:enterHiddenTrap(pos);
+    player:enterHiddenTrap(dest);
     self:incEnterTrapCounter();
 end
 
@@ -916,7 +922,7 @@ function Field:deleteTornadoInPos(pos)
     local tornados = self:getObjectsByTag(FactoryObject.TORNADO_TAG);
     for i, tornado in ipairs(tornados) do
         if tornado:getGridPosition() == pos then
-            --tornado:setVisible(false);
+            tornado:setVisible(false);
         end
     end
 end
@@ -974,9 +980,10 @@ function Field:getNearestHunters(pos, onlyAlive)
             local path = WavePathFinder.buildPath(pos, hunterPos, cloneArray, self.mSize);
 
             local dist = #path--(hunterPos - pos):lenSq();
-            --if dist > 1 then
+            debug_log("Field:getNearestHunters dist ", dist);
+            if dist > 0 then
                 table.insert(nearestHunters, {obj = hunter, dist = dist});
-            --end
+            end
         end
     end
     table.sort(nearestHunters, function(a,b) return a.dist < b.dist end )

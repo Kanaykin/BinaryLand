@@ -62,7 +62,12 @@ function IceGround:onEnter(player)
 		info_log("IceGround:onEnter2 gridPos.x ", gridPos.x, " gridPos.y ", gridPos.y);
 		--player:playAnimation(nil);
 		--player:moveTo(gridPos);
-		player:enterIceGround(self.mField:gridPosToReal(gridPos));
+
+        local dest = self.mField:gridPosToReal(gridPos);
+        dest.x= dest.x + self.mField.mCellSize / 2;
+        dest.y= dest.y + self.mField.mCellSize / 2;
+
+		player:enterIceGround(dest);
 	end
 end
 
