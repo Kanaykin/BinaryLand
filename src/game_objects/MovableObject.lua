@@ -5,7 +5,7 @@ MovableObject = inheritsFrom(BaseObject)
 MovableObject.mVelocity = 15;
 MovableObject.mMoveTime = nil;
 MovableObject.mDelta = nil;
-MovableObject.mDestGridPos = nil;
+MovableObject.mDestMovePos = nil;
 MovableObject.mSrcPos = nil;
 MovableObject.mPrevOrderPos = nil;
 
@@ -95,7 +95,7 @@ function MovableObject:moveToFieldPos(dest, moveFinishCallback)
 	local x, y = self.mNode:getPosition();
 	self.mSrcPos = Vector.new(x, y);
 
-	self.mDestGridPos = Vector.new(self.mField:positionToGrid(dest));
+	self.mDestMovePos = dest;
 end
 
 --------------------------------
@@ -108,7 +108,6 @@ function MovableObject:moveTo(posDest, moveFinishCallback)
 	dest.y= dest.y + self.mField.mCellSize / 2;
 
 	self:moveToFieldPos(dest, moveFinishCallback);
-	--self.mDestGridPos = posDest;
 end
 
 --------------------------------
@@ -157,18 +156,18 @@ function MovableObject:tick(dt)
 		self.mNode:setPosition(cc.p(cur.x, cur.y));
 		self.mMoveTime = self.mMoveTime - dt;
 		--debug_log("[MovableObject:moveTo] tick mMoveTime ", self.mMoveTime, "id ", self:getId());
+		--debug_log("[MovableObject:moveTo] tick mDestMovePos ", self.mDestMovePos);
+
 		self.mGridPosition = Vector.new(self.mField:getGridPosition(self.mNode));
 		self:updateOrder();
 		if self.mMoveTime <= 0 then
-			local dest = self.mField:gridPosToReal(self.mDestGridPos);
-			dest.x= dest.x + self.mField.mCellSize / 2;
-			dest.y= dest.y + self.mField.mCellSize / 2;
-			--self.mNode:setPosition(cc.p(dest.x, dest.y));
+			self.mNode:setPosition(cc.p(self.mDestMovePos.x, self.mDestMovePos.y));
 
-			self.mGridPosition = self.mDestGridPos;--Vector.new(self.mField:getGridPosition(self.mNode));
+			self.mGridPosition = Vector.new(self.mField:getGridPosition(self.mNode));
 			--debug_log("[MovableObject:moveTo] grid pos ", self.mGridPosition.x, " y ", self.mGridPosition.y);
 			self.mDelta = nil;
 			self:onMoveFinished();
+			--self.mDestMovePos = nil;
 			--self:updateOrder();
 		end
 	end

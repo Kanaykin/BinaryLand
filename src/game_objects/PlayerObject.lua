@@ -339,9 +339,7 @@ function PlayerObject:onEnterBonusRoomDoor()
     info_log("PlayerObject:onEnterBonusRoomDoor");
     info_log("PlayerObject:onEnterBonusRoomDoor mGridPosition ", self.mGridPosition.x, "y ", self.mGridPosition.y);
     info_log("PlayerObject:onEnterBonusRoomDoor mDelta ", self.mDelta);
-    if self.mDestGridPos then
-        info_log("PlayerObject:onEnterBonusRoomDoor mDestGridPos ", self.mDestGridPos.x, "y ", self.mDestGridPos.y);
-    end
+
     if self.mLastDir then
         info_log("PlayerObject:onEnterBonusRoomDoor self.mLastDir ", self.mLastDir);
 

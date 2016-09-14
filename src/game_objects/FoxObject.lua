@@ -628,7 +628,7 @@ function FoxObject:getAnchorInTornadoAnimation()
     local delta = sprite:isFlippedX() and -0.1 or 0;
 
     if self.mIsFemale then
-        delta = sprite:isFlippedX() and 0 or 0.1;
+        --delta = sprite:isFlippedX() and -0.1 or 0;
         return {x=0.5  + delta, y=0.37};
     else
         return {x=0.5 + delta , y=0.37};
