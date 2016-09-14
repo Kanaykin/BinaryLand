@@ -320,7 +320,7 @@ gLocations = {
         levels = {
             {
                 opened = true,
-                ccbFile = {"Level4_1p1", "Level2_1p2"},
+                ccbFile = {"Level4_1p1", "Level4_1p2"},
                 tileMap = "Level4_1_map.tmx",
                 cellSize = 32,
                 tutorial = false,
@@ -330,7 +330,15 @@ gLocations = {
                 id = "4_1"
             },
             {
-
+                opened = true,
+                ccbFile = {"Level4_2p1", "Level4_2p2"},
+                tileMap = "Level4_2_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                customProperties = "src/levels/Level4_2",
+                id = "4_2"
             },
             {
 

@@ -940,7 +940,7 @@ end
 
 --------------------------------
 function Field:onHunterDead(hunter)
-    debug_log("Field:onHunterDead ");
+    debug_log("Field:onHunterDead ", hunter);
     -- reset hunter's dog
     local dog = hunter:getDog();
     if dog then
@@ -948,8 +948,8 @@ function Field:onHunterDead(hunter)
     end
 
     -- run away dogs
-    --local hunters = self:getObjectsByTag(FactoryObject.HUNTER_TAG);
-    local hunters = self:getNearestHunters(hunter:getGridPosition(), false);
+    local hunters = self:getObjectsByTag(FactoryObject.HUNTER_TAG);
+    --local hunters = self:getNearestHunters(hunter:getGridPosition(), false);
     debug_log("Field:onHunterDead hunters count ", #hunters);
     -- get avalable hunters
     -- #todo:
@@ -959,38 +959,57 @@ function Field:onHunterDead(hunter)
         for i, dog in ipairs(dogs) do
             dog:onHunterDead();
         end
+
     elseif #dogs >= 1 and #dogs >= #hunters then
         if dog then
             dog:onHunterDead();
         else
-            dogs[1]:onHunterDead();
+            local nearDogs = self:getNearestDogs(hunter:getGridPosition());
+            debug_log("Field:onHunterDead dogs count ", #nearDogs);
+            nearDogs[1].obj:onHunterDead();
         end
     end
 end
 
 --------------------------------
-function Field:getNearestHunters(pos, onlyAlive)
-    local nearestHunters = {};
-    local hunters = self:getObjectsByTag(FactoryObject.HUNTER_TAG);
-    for i, hunter in ipairs(hunters) do
-        debug_log("Field:getNearestHunters hunter isDead ", hunter:isDead());
-        if not onlyAlive or not hunter:isDead() then
-            local hunterPos = hunter:getGridPosition();
+function Field:getNearestObjects(pos, objects, predicate)
+    debug_log("Field:getNearestObjects ");
+    local nearestObjects = {};
+    for i, object in ipairs(objects) do
+        if predicate(object) then
+            local objectPos = object:getGridPosition();
             local cloneArray = self:cloneArray();
-            local path = WavePathFinder.buildPath(pos, hunterPos, cloneArray, self.mSize);
+            local path = WavePathFinder.buildPath(pos, objectPos, cloneArray, self.mSize);
 
             local dist = #path--(hunterPos - pos):lenSq();
-            debug_log("Field:getNearestHunters dist ", dist);
+            debug_log("Field:getNearestObjects dist ", dist);
             if dist > 0 then
-                table.insert(nearestHunters, {obj = hunter, dist = dist});
+                table.insert(nearestObjects, {obj = object, dist = dist});
             end
         end
     end
-    table.sort(nearestHunters, function(a,b) return a.dist < b.dist end )
-    for i, val in ipairs(nearestHunters) do
-        debug_log("Field:getNearestHunters dist ", val.dist);
+    table.sort(nearestObjects, function(a,b) return a.dist < b.dist end )
+    for i, val in ipairs(nearestObjects) do
+        debug_log("Field:getNearestObjects dist ", val.dist, " object ", val.obj:getId());
     end
-    return nearestHunters;
+    return nearestObjects;
+
+end
+
+--------------------------------
+function Field:getNearestDogs(pos)
+    local dogs = self:getObjectsByTag(FactoryObject.DOG_TAG);
+    return self:getNearestObjects(pos, dogs, function(object)
+        return true;
+        end);
+end
+
+--------------------------------
+function Field:getNearestHunters(pos, onlyAlive)
+    local hunters = self:getObjectsByTag(FactoryObject.HUNTER_TAG);
+    return self:getNearestObjects(pos, hunters, function(object) 
+        return (not onlyAlive or not object:isDead());
+        end);
 end
 
 --------------------------------

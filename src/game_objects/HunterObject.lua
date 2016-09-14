@@ -107,10 +107,9 @@ end
 
 ---------------------------------
 function HunterObject:setCustomProperties(properties)
-    info_log("HunterObject:setCustomProperties ");
-
     HunterObject:superClass().setCustomProperties(self, properties);
 
+    info_log("HunterObject:setCustomProperties CanAttack ", properties.CanAttack);
     if properties.CanAttack then
         self.mCanAttack = properties.CanAttack;
     end

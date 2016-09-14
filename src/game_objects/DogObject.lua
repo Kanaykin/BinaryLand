@@ -136,6 +136,8 @@ end
 
 ---------------------------------
 function DogObject:getSafePlayerPoints()
+    -- #todo: valid point for dog
+    -- fill array and find point 
     info_log("DogObject:getSafePlayerPoints id ", self:getId());
     local freePoints = self.mField:getFreePoints();
     local safePoints = {};
@@ -214,17 +216,24 @@ end
 ---------------------------------
 function DogObject:getAwayPoint()
     info_log("DogObject:getAwayPoint id ", self:getId());
-    local freePoints = self.mField:getFreePoints();
     local awayPoints = {};
 
-    debug_log("self.mGridPosition x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
-    for i, point in ipairs(freePoints) do
-        if point.y == 1 and self:inThisHalf(point) and point ~= self.mGridPosition then
-            debug_log("i ", i, "x ", point.x, "y ", point.y);
-            table.insert(awayPoints, Vector.new(point.x, point.y));
+    -- fill grid and find all point on first line
+    local cloneArray = self.mField:cloneArray();
+    local fieldSize = self.mField:getSize();
+    WavePathFinder.fillArray({self.mGridPosition}, Vector.new(-1, -1), cloneArray, fieldSize,
+        WavePathFinder.FIRST_INDEX + 1);
+
+    for i = 1, fieldSize.x do
+        local val = cloneArray[COORD(i, 1, fieldSize.x)];
+        debug_log(" point i= ", i, " y= 1 val= ", val);
+        if val > 1 then
+            table.insert(awayPoints, Vector.new(i, 1));
         end
     end
 
+    debug_log("self.mGridPosition x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
+    
     return awayPoints[math.random(#awayPoints)];
 end
 
