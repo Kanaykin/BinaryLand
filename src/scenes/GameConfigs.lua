@@ -363,10 +363,26 @@ gLocations = {
                 id = "4_4"
             },
             {
-
+                opened = true,
+                ccbFile = {"Level4_4p1", "Level2_1p2"},
+                tileMap = "Level4_4_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                customProperties = "src/levels/Level4_4",
+                id = "4_5"
             },
             {
-
+                opened = true,
+                ccbFile = {"Level4_4p1", "Level2_1p2"},
+                tileMap = "Level4_4_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                customProperties = "src/levels/Level4_4",
+                id = "4_6"
             },
             {
 
