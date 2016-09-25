@@ -101,7 +101,7 @@ end
 function MultiTrigger:findCollisionObjects(dt)
     local players = self:getCollisionObjects()
     for i, player in ipairs(players) do
-        info_log("MultiTrigger:findCollisionObjects ", player:getId(), " contained ", self:isContainedObject(player));
+        --info_log("MultiTrigger:findCollisionObjects ", player:getId(), " contained ", self:isContainedObject(player));
         if not self:isContainedObject(player) then
             local pointX, pointY = player.mNode:getPosition();
             pointX = player.mNode:getBoundingBox().x + player.mNode:getBoundingBox().width / 2;
@@ -109,7 +109,7 @@ function MultiTrigger:findCollisionObjects(dt)
             --info_log("Trigger:tick obj x ", pointX, " y ", pointY);
             --info_log("Trigger:tick x ", self.mNode:getBoundingBox().x, " y ", self.mNode:getBoundingBox().y );
             local contained = self:contained(Vector.new(pointX, pointY));
-            info_log("contained ", contained);
+            --info_log("contained ", contained);
             if contained then
                 --info_log("self:onEnter begin ");
                 self:onEnter(player)

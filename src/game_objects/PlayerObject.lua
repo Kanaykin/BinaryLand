@@ -155,6 +155,8 @@ function PlayerObject:enterTrap(pos, stateInTrap)
 	end
 
     info_log("PlayerObject:enterTrap ???");
+
+	self:setFightActivated(false);
 end
 
 --------------------------------
@@ -299,6 +301,10 @@ end
 
 --------------------------------
 function PlayerObject:setFightActivated(activated)
+	if self.mFightTrigger:isActivated() ~= activated and self.mIsFemale then
+		debug_log("PlayerObject:setFightActivated ", self:getId(), " activated ", activated);
+	end
+	
 	self.mFightTrigger:setActivated(activated);
 end
 
@@ -308,7 +314,7 @@ function PlayerObject:fight()
 		return false;
 	end
 	if self.mFightButton:isPressed() then
-
+		debug_log("PlayerObject:fight isPressed ", " id ", self:getId(), " in trap ", self:isInTrap());
 		if not self.mFightTrigger:isActivated() then 
 			self:playAnimation(self.mLastDir + PlayerObject.mFightButtonOffset);
 
