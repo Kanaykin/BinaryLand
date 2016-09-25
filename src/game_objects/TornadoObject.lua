@@ -51,8 +51,11 @@ end
 
 --------------------------------
 function TornadoObject:createAnimation()
+	local textureEmpty = cc.Director:getInstance():getTextureCache():getFileNameForTexture(tolua.cast(self.mNode, "cc.Sprite"):getTexture());
+	local _, file = string.match(textureEmpty, '(.+)/(.+)%..+');
+
 	local animation = PlistAnimation:create();
-    animation:init("TornadoAnimation.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.18);
+    animation:init(file.."Animation.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.18);
 
     local sideAnimation = RepeatAnimation:create();
     sideAnimation:init(animation);

@@ -4547,10 +4547,12 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Tornado.png</string>
+									<string>TornadoSnow.png</string>
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
