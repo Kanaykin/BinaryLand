@@ -137,6 +137,7 @@ function Trigger:tick(dt)
                     --info_log("self:onEnter begin ");
 					self:onEnter(player)
                     --info_log("self:onEnter end ");
+                    break;
 				end
 			end
 		end

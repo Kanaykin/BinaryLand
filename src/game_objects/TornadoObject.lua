@@ -6,6 +6,7 @@ TornadoObject = inheritsFrom(MobObject)
 TornadoObject.mPoints = nil;
 TornadoObject.mDestIndex = 2;
 TornadoObject.mVelocity = 40;
+TornadoObject.mPlayerContained = false;
 
 --------------------------------
 function TornadoObject:init(field, node)
@@ -99,6 +100,9 @@ end
 
 --------------------------------
 function TornadoObject:onPlayerEnterImpl(player, pos)
-	info_log("TornadoObject.onPlayerEnterImpl ", player.mNode:getTag());
-	TornadoObject:superClass().onPlayerEnterImpl(self, player, pos);
+	info_log("TornadoObject.onPlayerEnterImpl ", player:getId(), " ", self.mPlayerContained);
+	if not self.mPlayerContained then
+		TornadoObject:superClass().onPlayerEnterImpl(self, player, pos);
+		self.mPlayerContained = true;
+	end
 end

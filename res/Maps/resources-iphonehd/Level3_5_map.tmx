@@ -4,11 +4,11 @@
   <image source="sand_tile.png" width="256" height="256"/>
  </tileset>
  <tileset firstgid="17" name="snow_tile" tilewidth="64" tileheight="64">
-  <image source="snow_tile.png" width="256" height="512"/>
+  <image source="snow_tile.png" width="256" height="704"/>
  </tileset>
  <layer name="Tile Layer 1" width="20" height="16">
   <data encoding="base64" compression="zlib">
-   eJwTYWBgEBnBWA6INUjAygTMUwBiQRKwPBHmqZOAtelsniYWP8kAsQQUi1NoHsgsaSAWgmIxCsxDN4tS84TRzBps5skCsSQaFqVC/KLjoWweABYjHyc=
+   eJwTYWBgEBnBWA6INUjAygTMUwBiQSxYF4e4PBHmqaNhKyC2BmILLHLaZJiHDxMyTxOLn6hpHjXdR23/DmXzDIDYmMz4xRbfJkBsSkXzjIDYkIrm4Qo/AGSeIfg=
   </data>
  </layer>
 </map>

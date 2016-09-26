@@ -539,6 +539,7 @@ end
 
 --------------------------------
 function FoxObject:enterTornadoTrap(pos, trigger)
+    debug_log("FoxObject:enterTornadoTrap ", self:getId());
     self:createInTornadoCageAnimation();
     self:enterCage(pos);
     self.mTypeCage = FoxObject.CAGE_TYPE.CT_TORNADO;

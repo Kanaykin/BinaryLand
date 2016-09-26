@@ -10,6 +10,7 @@ end
 function IceGround:init(field, node, enterCallback, leaveCallback)
 	IceGround:superClass().init(self, field, node, enterCallback, leaveCallback);
 	self:updateOrder();
+	self.mNode:setVisible(false);
 end
 
 ---------------------------------
