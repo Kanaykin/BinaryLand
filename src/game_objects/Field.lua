@@ -939,6 +939,14 @@ function Field:resetDogInHunter(dog)
 end
 
 --------------------------------
+function Field:getHuntersForDogs(hunter)
+    local hunters = self:getNearestHunters(hunter:getGridPosition(), false);
+    for i, hunter in ipairs(hunters) do
+        debug_log("Field:getHuntersForDogs dist ", hunter.dist);
+    end
+end
+
+--------------------------------
 function Field:onHunterDead(hunter)
     debug_log("Field:onHunterDead ", hunter);
     -- reset hunter's dog
@@ -949,6 +957,7 @@ function Field:onHunterDead(hunter)
 
     -- run away dogs
     local hunters = self:getObjectsByTag(FactoryObject.HUNTER_TAG);
+    self:getHuntersForDogs(hunter);
     --local hunters = self:getNearestHunters(hunter:getGridPosition(), false);
     debug_log("Field:onHunterDead hunters count ", #hunters);
     -- get avalable hunters
