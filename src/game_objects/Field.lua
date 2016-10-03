@@ -940,10 +940,12 @@ end
 
 --------------------------------
 function Field:getHuntersForDogs(hunter)
+    --local hunters = self:getObjectsByTag(FactoryObject.HUNTER_TAG);
     local hunters = self:getNearestHunters(hunter:getGridPosition(), false);
     for i, hunter in ipairs(hunters) do
         debug_log("Field:getHuntersForDogs dist ", hunter.dist);
     end
+    return hunters
 end
 
 --------------------------------
@@ -956,9 +958,8 @@ function Field:onHunterDead(hunter)
     end
 
     -- run away dogs
-    local hunters = self:getObjectsByTag(FactoryObject.HUNTER_TAG);
-    self:getHuntersForDogs(hunter);
-    --local hunters = self:getNearestHunters(hunter:getGridPosition(), false);
+    
+    local hunters = self:getHuntersForDogs(hunter);
     debug_log("Field:onHunterDead hunters count ", #hunters);
     -- get avalable hunters
     -- #todo:
