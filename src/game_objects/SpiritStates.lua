@@ -31,7 +31,7 @@ function FirstAppear:enter(params)
 
 	self.mAnimation = self.mObject:getAnimation(SpiritObject.ANIMATION_STATE.AS_FIRST_APPEAR);
 	self.mObject:setPlayerPosition();
-	self.mObject:setPlayerFlip();
+	--self.mObject:setPlayerFlip();
 end
 
 ------------------------------------

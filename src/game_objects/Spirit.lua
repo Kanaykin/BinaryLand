@@ -52,6 +52,17 @@ function SpiritObject:destroy()
 end
 
 --------------------------------
+function SpiritObject:updateOrder()
+    local newOrderPos = -self.mGridPosition.y * 1;
+    if self.mPrevOrderPos ~= newOrderPos then
+        self.mPrevOrderPos = newOrderPos;
+        local parent = self.mNode:getParent();
+        parent:removeChild(self.mNode, false);
+        parent:addChild(self.mNode, self.mPrevOrderPos);
+    end
+end
+
+--------------------------------
 function SpiritObject:playAnimation(animation)
 	info_log("SpiritObject:playAnimation ", animation);
 	if self.mCurrentAnimation ~= animation then
@@ -189,9 +200,17 @@ end
 
 --------------------------------
 function SpiritObject:setPlayerFlip()
+    debug_log("SpiritObject:setPlayerFlip ");
 	local flip = not self.mPlayer:isFlipped();
 
-	local sprite = tolua.cast(self.mNode, "cc.Sprite");
+    self:setFlip(flip);
+end
+
+--------------------------------
+function SpiritObject:setFlip(flip)
+    debug_log("SpiritObject:setFlip ");
+
+    local sprite = tolua.cast(self.mNode, "cc.Sprite");
     if flip ~= sprite:isFlippedX() then
         sprite:setFlippedX(flip);
     end
@@ -208,10 +227,22 @@ end
 --------------------------------
 function SpiritObject:setPlayerPosition()
 	local pos = self.mPlayer:getPosition();
+    local gridPos = self.mPlayer:getGridPosition();
 	--debug_log("SpiritObject:setPlayerPosition pos ", pos.x, ", ", pos.y);
 
-    pos.y = pos.y + self.mField.mCellSize / 1.2;
-	self.mNode:setPosition(pos.x, pos.y);
+    local halfWidthField = self.mField:getSize().x / 2;
+
+    local newX = 0;
+    if (gridPos.x - halfWidthField) < 0 then
+        newX = gridPos.x + 1.5 ;
+        self:setFlip(false);
+    else
+        newX = gridPos.x - 1 ;
+        self:setFlip(true);
+    end
+
+    pos.y = pos.y - self.mField.mCellSize / 2;
+    self.mNode:setPosition(self.mField:gridPosToReal(Vector.new(newX, 0)).x , pos.y);
 end
 
 --------------------------------
