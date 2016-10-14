@@ -13,6 +13,7 @@ require "src/game_objects/Spirit"
 require "src/game_objects/TornadoObject"
 require "src/game_objects/IceGround"
 require "src/game_objects/SwampGround"
+require "src/game_objects/LavaGround"
 require "src/tutorial/TutorialTrigger"
 require "src/base/Log"
 
@@ -40,6 +41,7 @@ FactoryObject.SPIRIT_TAG = 115;
 FactoryObject.TORNADO_TAG = 116;
 FactoryObject.ICE_GROUND_TAG = 117;
 FactoryObject.SWAMP_GROUND_TAG = 118;
+FactoryObject.LAVA_GROUND_TAG = 119;
 
 -- tutorial
 FactoryObject.TUTORIAL_TRIGGER_1 = 200;
@@ -138,6 +140,15 @@ end
 function FactoryObject:createSwampGround(field, node)
 	info_log("FactoryObject:createSwampGround ", field, ", ", node);
 	local web = SwampGround:create();
+	web:init(field, node);
+	field:addObject(web);
+	return web;
+end
+
+------------------------------
+function FactoryObject:createLavaGround(field, node)
+	info_log("FactoryObject:createLavaGround ", field, ", ", node);
+	local web = LavaGround:create();
 	web:init(field, node);
 	field:addObject(web);
 	return web;
@@ -260,5 +271,6 @@ FactoryObject.CreateFunctions = {
 	[FactoryObject.BONUS_ROOM_DOOR_TAG] = FactoryObject.createBonusRoomDoor,
 	[FactoryObject.TORNADO_TAG] = FactoryObject.createTornado,
 	[FactoryObject.ICE_GROUND_TAG] = FactoryObject.createIceGround,
-	[FactoryObject.SWAMP_GROUND_TAG] = FactoryObject.createSwampGround
+	[FactoryObject.SWAMP_GROUND_TAG] = FactoryObject.createSwampGround,
+    [FactoryObject.LAVA_GROUND_TAG] = FactoryObject.createLavaGround
 }

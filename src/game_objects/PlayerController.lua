@@ -34,6 +34,10 @@ end
 
 ----------------------------------------
 function PlayerController:touchObject(object, point)
+	if self.mField:getState() == Field.LOSE then
+		return;
+	end
+	
 	local pos = object:getScreenPos();
 	
 	local scale = self.mField.mGame:getScale();
@@ -45,12 +49,19 @@ end
 
 ----------------------------------------
 function PlayerController:onDoubleTouch(point)
+	if self.mField:getState() == Field.LOSE then
+		return;
+	end
 	info_log("PlayerController:onDoubleTouch ");
 	self.mFightButton:setPressed(true);
 end
 
 ----------------------------------------
 function PlayerController:onTouchBegan(point)
+	if self.mField:getState() == Field.LOSE then
+		return;
+	end
+
 	info_log("PlayerController:onTouchBegan (", point.x, " ,", point.y, ")");
 
 	self:resetData();
@@ -91,6 +102,10 @@ end
 
 ----------------------------------------
 function PlayerController:onTouchMoved(point)
+	if self.mField:getState() == Field.LOSE then
+		return;
+	end
+
 	--debug_log("PlayerController:onTouchMoved x ", point.x, " y ", point.y);
 	local gridPos = Vector.new(self.mField:positionToGrid(Vector.new(point.x, point.y)));
 	--debug_log("PlayerController:onTouchMoved gridPos x ", gridPos.x, " y ", gridPos.y);
@@ -155,6 +170,10 @@ function PlayerController:tick(dt)
 	self:superClass().tick(self, dt);
 
 	self.mFightButton:setPressed(false);
+
+	if self.mField:getState() == Field.LOSE then
+		self:resetData();
+	end
 
 	if self.mDestPos ~= nil then
 		-- get directional of moving
