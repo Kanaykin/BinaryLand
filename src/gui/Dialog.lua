@@ -6,7 +6,7 @@ BaseDialog = inheritsFrom(nil)
 ---------------------------------
 function BaseDialog:show(scene)
 
-	info_log("BaseDialog:show ", scene.mGuiLayer);
+	info_log("BaseDialog:show ", scene:getGuiLayer());
 
 	local sprite = CCScale9Sprite:create("status_frame.png");
 	sprite:setPreferredSize(cc.size(400,320));
@@ -18,7 +18,7 @@ function BaseDialog:show(scene)
 	local closeButtonItem = CCMenuItemImage:create("close_button.png", "close_button_pressed.png");
 	local closeButton = cc.Menu:createWithItem(closeButtonItem);
 
-	local layer = scene.mGuiLayer;
+	local layer = scene:getGuiLayer();
 	local function onCloseButtonPressed()
     	info_log("onCloseButtonPressed");
     	layer:removeChild(sprite, true);
@@ -29,7 +29,7 @@ function BaseDialog:show(scene)
 	sprite:addChild(closeButton);
 	setPosition(closeButton, Coord(1.0, 1.0, 0, 0));
 
-	scene.mGuiLayer:addChild(sprite);
+	scene:getGuiLayer():addChild(sprite);
 
 	setPosition(sprite, Coord(0.5, 0.5, 0, 0));
 end

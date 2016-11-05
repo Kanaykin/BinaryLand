@@ -40,6 +40,7 @@ function Game:tick(dt)
 	--if not self.mDialogManager:hasModalDlg() then
 		self.mGameTime = self.mGameTime + dt;
 		self.mSceneMan:tick(dt);
+		self.mDialogManager:tick(dt);
 	--end
 end
 
@@ -107,7 +108,7 @@ function Game:setLevelStar(locationId, level, star)
 	if old_stars then
 		star = math.max(star, old_stars);
 	end
-    self.mLocations[locationId].mLevels[level]:setCountStar(star);
+    self.mLocations[locationId]:getLevel(level):setCountStar(star);
 	CCUserDefault:getInstance():setIntegerForKey(locationId .. tostring(level) .. "_star", star);
 end
 
@@ -219,6 +220,7 @@ function Game:init()
 
 	-- create gui manager
 	self.mDialogManager = DialogManager:create();
+	self.mDialogManager:init();
 
 	local g_game = self;
 	

@@ -33,6 +33,11 @@ function BaseScene:createGameObjectLayer()
 end
 
 ---------------------------------
+function BaseScene:getGuiLayer()
+	return self.mGuiLayer;
+end
+
+---------------------------------
 function BaseScene:createGuiLayer()
 	self.mGuiLayer = CCLayer:create();
 	self.mSceneGame:addChild(self.mGuiLayer, LAYER_ORDER.MENU);

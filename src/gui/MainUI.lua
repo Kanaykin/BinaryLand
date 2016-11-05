@@ -221,7 +221,7 @@ function MainUI:init(game, uiLayer, ccbFile)
     self.mGetStarDlg = GetStarDlg:create();
     self.mGetStarDlg:init(self.mGame, self.mUILayer, self);
 
-	-------------------------
+    -------------------------
     self.mTimer = LevelTimer:create();
     self.mTimer:init(self.mNode:getChildByTag(MainUI.TIMER_TAG), game);
     self.mTimer:setVisible(false);

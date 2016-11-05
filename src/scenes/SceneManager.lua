@@ -66,12 +66,12 @@ function SceneManager:runScene(index, params)
 end
 
 ---------------------------------
-function SceneManager:runNextScene(params)
+function SceneManager:runNextScene(params, nextIndex)
 	local index = 0;
-	if self.mCurrentSceneId == nil then
-		index = 0;		
-	else
-		index = self.mCurrentSceneId + 1;
+	if nextIndex then
+		index = nextIndex;
+	else 
+		index = self.mCurrentSceneId and self.mCurrentSceneId + 1 or 0;
 	end
 
 	info_log("SceneManager:runNextScene index ", index);
@@ -102,18 +102,32 @@ end
 function SceneManager:runNextLevelScene()
 	local level = self:getCurrentScene():getLevel();
 	local locationId = level:getLocation():getId();
-
-    local countLevels = #level:getLocation():getLevels();
+	local location = level:getLocation();
+    local countLevels = #location:getLevels();
 
     -- TODO: open location
 	local index = level:getIndex() + 1;
-    if countLevels < index then
+	local bonusLevel = location:getBonusLevel();
+	
+	local locations = self.mGame:getLocations();
+	local level = locations[locationId]:getLevels()[index];
+	
+	if countLevels < index then
+		-- open bonus level
+		if bonusLevel and not bonusLevel:isOpened() then
+			self.mGame:openLevel(location:getId(), bonusLevel:getIndex());
+		end
+		-- check count stars for next location
         index = 1;
         locationId = locationId + 1;
+        if locations[locationId]:isLocked() then
+        	self:runNextScene(nil, SCENE_TYPE_ID.CHOOSE_LOCATION);
+        	return;
+        end
+        level = locations[locationId]:getLevels()[index];
     end
 
-	local locations = self.mGame:getLocations();
-	self:runLevelScene(locations[locationId]:getLevels()[index]);
+	self:runLevelScene(level);
 end
 
 ---------------------------------

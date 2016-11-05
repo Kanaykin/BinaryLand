@@ -161,7 +161,9 @@ function Level:initVisual(primaryAnimator, animManager, nameFrame, node, showed)
     self:initButton(node);
 
     local lock = node:getChildByTag(Level.LOCK_TAG);
-    lock:setVisible(not self:isOpened());
+    if lock then
+        lock:setVisible(not self:isOpened());
+    end
 
     -- show blue star
     if self:isOpened() then
@@ -173,12 +175,13 @@ function Level:initVisual(primaryAnimator, animManager, nameFrame, node, showed)
     end
 
     local label = node:getChildByTag(Level.LABEL_TAG);
-    label:setVisible(self:isOpened());
+    if label then
+        label:setVisible(self:isOpened());
+        local textureName = "LevelLabel" .. tostring(self.mIndex).. ".png";
+        local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
+        tolua.cast(label, "cc.Sprite"):setTexture(texture);
+    end
 
-    local textureName = "LevelLabel" .. tostring(self.mIndex).. ".png";
-    local texture = cc.Director:getInstance():getTextureCache():addImage(textureName);
-    tolua.cast(label, "cc.Sprite"):setTexture(texture);
-    
     --------
     if self.mStarAnimations then
         for i, animation in pairs(self.mStarAnimations) do

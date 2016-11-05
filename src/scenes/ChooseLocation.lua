@@ -16,10 +16,11 @@ start scene - loading screen
 ChooseLocation = inheritsFrom(BaseScene)
 ChooseLocation.mScrollView = nil;
 ChooseLocation.mBabyInTrapAnimations = nil
+ChooseLocation.mNode = nil;
 
 ChooseLocation.LABEL_BEGIN = 1;
 ChooseLocation.LABEL_TAG = 2;
-ChooseLocation.LABEL_ENG = 5;
+ChooseLocation.COUNT_LOCATION = 4;
 
 ChooseLocation.LOCATION_BEGIN = 10;
 ChooseLocation.LOCATION_FOX_ANIMATION_DELTA = 3;
@@ -29,6 +30,13 @@ ChooseLocation.LOCATION_SPRITE_BEGIN = 100;
 ChooseLocation.BACK_MENU = 7;
 ChooseLocation.BACK_MENU_ITEM = 8;
 ChooseLocation.TUTORIAL_FRAME = 20;
+
+ChooseLocation.COUNT_STAR_LABEL_BEGIN = 90;
+ChooseLocation.LOCK_IMAGE_TAG = 50;
+
+ChooseLocation.BONUS_NODE = 500;
+ChooseLocation.BONUS_MENU = 70;
+ChooseLocation.BONUS_MENU_ITEM = 71;
 
 local MovieText = "Пришло время помочь взрослым лисам вернуть своё потомство!"
 
@@ -69,6 +77,73 @@ function ChooseLocation:createBabyFreeAnimation(node)
 end
 
 --------------------------------
+function ChooseLocation:showBonusRoom(location, sprite)
+    local bonusNode = sprite:getChildByTag(ChooseLocation.BONUS_NODE);
+    if bonusNode then
+        bonusNode:setVisible(false);
+    end
+    local bonusLevel = location:getBonusLevel();
+    debug_log("ChooseLocation:showBonusRoom bonusLevel ", bonusLevel);
+    if not bonusLevel or not bonusLevel:isOpened() then
+        return;
+    end
+
+    bonusNode:setVisible(true);
+    local countStarLabel = bonusNode:getChildByTag(ChooseLocation.COUNT_STAR_LABEL_BEGIN);
+    if countStarLabel then
+        setDefaultFont(countStarLabel, self.mSceneManager.mGame:getScale());
+
+        local countStar = bonusLevel:getCountStar();
+        countStarLabel:setString(tostring(countStar).." stars");
+    end
+
+    local function onBonusLevelPressed()
+        info_log("onBonusLevelPressed ");
+        self.mSceneManager:runLevelScene(bonusLevel);
+    end
+
+    setMenuCallback(bonusNode, ChooseLocation.BONUS_MENU , ChooseLocation.BONUS_MENU_ITEM, onBonusLevelPressed);
+end
+
+--------------------------------
+function ChooseLocation:showLocation(sprite, i)
+    debug_log("ChooseLocation:showLocation ", i);
+
+    local locations = self.mSceneManager.mGame:getLocations();
+    local location = locations[i];
+    if not location:isLocked() then
+        self:setCountStar(location:getCountStar(), i);
+    end
+
+    self:showBonusRoom(location, sprite);
+    --local foxInTrap = sprite:getChildByTag(ChooseLocation.LOCATION_BEGIN * locationNum);
+    --foxInTrap:setVisible(false);
+    local animNode = sprite:getChildByTag(ChooseLocation.LOCATION_BEGIN * i + ChooseLocation.LOCATION_FOX_ANIMATION_DELTA);
+    if animNode then
+        local anim = nil;
+        local lockImage = sprite:getChildByTag(ChooseLocation.LOCK_IMAGE_TAG);
+        lockImage:setVisible(false);
+
+        if (#locations >= (i + 1) and locations[i + 1]:isOpened()) then 
+            local back = sprite:getChildByTag(ChooseLocation.LOCATION_BEGIN * i + ChooseLocation.LOCATION_FOX_BACK_DELTA);
+            if back then
+                back:setVisible(false);
+            end
+            anim = self:createBabyFreeAnimation(animNode);
+        else
+            anim = self:createBabyAnimation(animNode);
+
+            if location:isLocked() then
+                lockImage:setVisible(true);
+            end
+        end
+        anim:play();
+        self.mBabyInTrapAnimations[i] = anim;
+    end
+
+end
+
+--------------------------------
 function ChooseLocation:createLocationImages(node)
     info_log("ChooseLocation:createLocationImages node ", node);
 
@@ -79,11 +154,11 @@ function ChooseLocation:createLocationImages(node)
     local lastVisited = self.mSceneManager.mGame:getLastVisitLocation();
     local scrollVisitedOffset = nil;
 	for i, location in ipairs(locations) do
-        local sprite = node:getChildByTag(ChooseLocation.LOCATION_SPRITE_BEGIN * locationNum);
+        local sprite = node:getChildByTag(ChooseLocation.LOCATION_SPRITE_BEGIN * i);
         info_log("ChooseLocation:createLocationImages location ID ", location:getId(), " isOpened ", location:isOpened());
 
         local function onLocationPressed()
-            info_log("onLocationPressed");
+            info_log("onLocationPressed ", self.mGuiLayer);
             location:onLocationPressed();
             self.mSceneManager.mGame:setLastVisitLocation(location:getId());
         end
@@ -95,23 +170,7 @@ function ChooseLocation:createLocationImages(node)
 
         -- TODO: check all opened
         if  location:isOpened() then
-            --local foxInTrap = sprite:getChildByTag(ChooseLocation.LOCATION_BEGIN * locationNum);
-            --foxInTrap:setVisible(false);
-            local animNode = sprite:getChildByTag(ChooseLocation.LOCATION_BEGIN * locationNum + ChooseLocation.LOCATION_FOX_ANIMATION_DELTA);
-            if animNode then
-                local anim = nil;
-                if (#locations >= (i + 1) and locations[i + 1]:isOpened()) then 
-                    local back = sprite:getChildByTag(ChooseLocation.LOCATION_BEGIN * locationNum + ChooseLocation.LOCATION_FOX_BACK_DELTA);
-                    if back then
-                        back:setVisible(false);
-                    end
-                    anim = self:createBabyFreeAnimation(animNode);
-                else
-                    anim = self:createBabyAnimation(animNode);
-                end
-                anim:play();
-                self.mBabyInTrapAnimations[i] = anim;
-            end
+            self:showLocation(sprite, i);
             if not lastVisited then
                 local positionNode = Vector.new(sprite:getPosition());
                 scrollVisitedOffset = positionNode.x - sprite:getContentSize().width / 2;
@@ -119,7 +178,7 @@ function ChooseLocation:createLocationImages(node)
         else -- if location is locked
             sprite:setVisible(false);
         end
-        setMenuCallback(sprite, ChooseLocation.LOCATION_BEGIN * locationNum , ChooseLocation.LOCATION_BEGIN * locationNum + 1, onLocationPressed);
+        setMenuCallback(sprite, ChooseLocation.LOCATION_BEGIN * i , ChooseLocation.LOCATION_BEGIN * i + 1, onLocationPressed);
 
         info_log("ChooseLocation:createLocationImages scrollVisitedOffset ", scrollVisitedOffset);
         if scrollVisitedOffset then
@@ -180,14 +239,41 @@ function ChooseLocation:createLocations()
     local reader = ccpproxy:createCCBReader();
     local node = ccpproxy:readCCBFromFile("ChooseLocation", reader, false);
     self.mScrollView:addChild(node);
+    self.mNode = node;
 
     self:updateLabels(node);
+    self:updateCountStarLabels(node);
     self:createLocationImages(node);
 end
 
 --------------------------------
+function ChooseLocation:setCountStar(countStar, i)
+    info_log("ChooseLocation:setCountStar (", countStar, " , ", i, ")");
+    local label = tolua.cast(self.mNode:getChildByTag(ChooseLocation.COUNT_STAR_LABEL_BEGIN + i), "cc.Label");
+    info_log("ChooseLocation:setCountStar label ", label);
+    if label then
+        label:setVisible(true);
+        label:setString(tostring(countStar).." stars");
+    end
+end
+
+--------------------------------
+function ChooseLocation:updateCountStarLabels(node)
+    for i = ChooseLocation.COUNT_STAR_LABEL_BEGIN, ChooseLocation.COUNT_STAR_LABEL_BEGIN + ChooseLocation.COUNT_LOCATION, 1 do
+        local label = tolua.cast(node:getChildByTag(i + 1), "cc.Label");
+        info_log("ChooseLocation:updateLabels label ", label);
+
+        if label then
+            setDefaultFont(label, self.mSceneManager.mGame:getScale());
+            label:setVisible(false);
+        end
+    end
+
+end
+
+--------------------------------
 function ChooseLocation:updateLabels(node)
-    for i = ChooseLocation.LABEL_BEGIN, ChooseLocation.LABEL_ENG, 1 do
+    for i = ChooseLocation.LABEL_BEGIN, ChooseLocation.LABEL_BEGIN + ChooseLocation.COUNT_LOCATION, 1 do
         local label = tolua.cast(node:getChildByTag(i), "cc.Label");
         info_log("ChooseLocation:updateLabels label ", label);
 
