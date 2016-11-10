@@ -150,7 +150,7 @@ void MainWindow::onOpen()
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 		return;
 	mCurrentFile = file.fileName();
-
+	setWindowTitle(mCurrentFile);
 	QString result;
 	QTextStream instream(&file);
 	while (!instream.atEnd()) {
