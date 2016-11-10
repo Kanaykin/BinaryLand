@@ -457,7 +457,7 @@ gLocations = {
             {
                 opened = true,
                 ccbFile = {"Level5_5p1", "Level5_5p2"},
-                tileMap = "Level5_4_map.tmx",
+                tileMap = "Level5_5_map.tmx",
                 cellSize = 32,
                 tutorial = false,
                 time = 120,
