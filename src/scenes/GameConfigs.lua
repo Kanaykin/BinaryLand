@@ -213,7 +213,7 @@ gLocations = {
 		id = 3,
 		description = "Snow",
 		position = Coord(0.52, 0.5, 0, -235),
-        opened = false,
+        opened = true,
         countStars = 30,
         levels = {
             {
@@ -310,7 +310,7 @@ gLocations = {
 		id = 4,
 		description = "Forest",
 		position = Coord(0.78, 0.5, 0, -120),
-        opened = false,
+        opened = true,
         countStars = 30,
         levels = {
             {
@@ -407,11 +407,11 @@ gLocations = {
         id = 5,
         description = "Vulcano",
         position = Coord(0.9, 0.5, 0, -120),
-        opened = false,
+        opened = true,
         countStars = 30,
         levels = {
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level5_1p1", "Level2_1p2"},
                 tileMap = "Level5_1_map.tmx",
                 cellSize = 32,
@@ -422,7 +422,7 @@ gLocations = {
                 id = "5_1"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level5_2p1", "Level5_2p2"},
                 tileMap = "Level5_2_map.tmx",
                 cellSize = 32,
@@ -433,7 +433,7 @@ gLocations = {
                 id = "5_2"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level5_3p1", "Level5_3p2"},
                 tileMap = "Level5_3_map.tmx",
                 cellSize = 32,
@@ -444,7 +444,7 @@ gLocations = {
                 id = "5_3"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level5_4p1", "Level5_4p2"},
                 tileMap = "Level5_4_map.tmx",
                 cellSize = 32,
@@ -455,7 +455,15 @@ gLocations = {
                 id = "5_4"
             },
             {
-
+                opened = true,
+                ccbFile = {"Level5_5p1", "Level5_5p2"},
+                tileMap = "Level5_4_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                customProperties = "src/levels/Level5_5",
+                id = "5_5"
             },
             {
 

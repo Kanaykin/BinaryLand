@@ -164,7 +164,7 @@
 								<key>type</key>
 								<string>Integer</string>
 								<key>value</key>
-								<integer>50</integer>
+								<integer>150</integer>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -724,8 +724,6 @@
 												</array>
 											</dict>
 										</array>
-										<key>selected</key>
-										<true/>
 									</dict>
 								</array>
 								<key>customClass</key>
@@ -1095,7 +1093,7 @@
 								<key>type</key>
 								<string>Integer</string>
 								<key>value</key>
-								<integer>50</integer>
+								<integer>150</integer>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1615,7 +1613,7 @@
 								<key>type</key>
 								<string>Integer</string>
 								<key>value</key>
-								<integer>50</integer>
+								<integer>150</integer>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -2135,7 +2133,7 @@
 								<key>type</key>
 								<string>Integer</string>
 								<key>value</key>
-								<integer>50</integer>
+								<integer>150</integer>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -2667,7 +2665,7 @@
 								<key>type</key>
 								<string>Integer</string>
 								<key>value</key>
-								<integer>50</integer>
+								<integer>150</integer>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -2689,6 +2687,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>

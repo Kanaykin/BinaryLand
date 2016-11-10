@@ -64,12 +64,13 @@ end
 
 -----------------------------
 function setMenuCallback(nodeBase, menuTag, menuItemTag, callback)
+    debug_log("setMenuCallback menuTag ", menuTag, " menuItemTag ", menuItemTag);
 	local settingsButton = nodeBase:getChildByTag(menuTag);
 	if settingsButton then
 		local settingsItem = settingsButton:getChildByTag(menuItemTag);
 		
 		settingsItem = tolua.cast(settingsItem, "cc.MenuItem");
-		info_log("SettingsDlg:init ", settingsItem);
+		info_log("setMenuCallback ", settingsItem);
 		if settingsItem then
     		settingsItem:registerScriptTapHandler(callback);
     	end

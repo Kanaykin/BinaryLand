@@ -103,7 +103,7 @@ end
 --------------------------------
 function RepeatAnimationHardImpl:tick(dt)
 	if self.mPlaying and self:isDone() and not self.mStopAfterDone then
-		info_log("RepeatAnimationHardImpl:tick replay ");
+		--info_log("RepeatAnimationHardImpl:tick replay ");
 		self:play();
 	end
 end

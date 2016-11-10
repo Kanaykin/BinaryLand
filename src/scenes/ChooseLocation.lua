@@ -32,7 +32,7 @@ ChooseLocation.BACK_MENU_ITEM = 8;
 ChooseLocation.TUTORIAL_FRAME = 20;
 
 ChooseLocation.COUNT_STAR_LABEL_BEGIN = 90;
-ChooseLocation.LOCK_IMAGE_TAG = 50;
+ChooseLocation.LOCK_IMAGE_TAG = 150;
 
 ChooseLocation.BONUS_NODE = 500;
 ChooseLocation.BONUS_MENU = 70;
@@ -132,11 +132,11 @@ function ChooseLocation:showLocation(sprite, i)
             anim = self:createBabyFreeAnimation(animNode);
         else
             anim = self:createBabyAnimation(animNode);
-
-            if location:isLocked() then
-                lockImage:setVisible(true);
-            end
         end
+        if location:isLocked() then
+            lockImage:setVisible(true);
+        end
+
         anim:play();
         self.mBabyInTrapAnimations[i] = anim;
     end
@@ -178,6 +178,7 @@ function ChooseLocation:createLocationImages(node)
         else -- if location is locked
             sprite:setVisible(false);
         end
+        debug_log("ChooseLocation:createLocationImages i ", i);
         setMenuCallback(sprite, ChooseLocation.LOCATION_BEGIN * i , ChooseLocation.LOCATION_BEGIN * i + 1, onLocationPressed);
 
         info_log("ChooseLocation:createLocationImages scrollVisitedOffset ", scrollVisitedOffset);
