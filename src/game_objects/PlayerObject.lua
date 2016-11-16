@@ -141,7 +141,7 @@ function PlayerObject:enterTrap(pos, stateInTrap)
     self:setInTrap(true);
 
     if self.mLastButtonPressed ~= self.mStateInTrap then
-        self:playAnimation(nil);
+        self:resetMovingParams();
     end
 
 	if pos then
@@ -150,7 +150,6 @@ function PlayerObject:enterTrap(pos, stateInTrap)
         --self:move(posTo, Callback.new(self, PlayerObject.onMoveToTrapFinished));
 		self:moveToFieldPos(pos, Callback.new(self, PlayerObject.onMoveToTrapFinished));
 	else
-		self:resetMovingParams();
         self:playAnimation(self.mStateInTrap);
 	end
 

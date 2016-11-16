@@ -217,7 +217,7 @@ gLocations = {
         countStars = 30,
         levels = {
             {
-                opened = false,
+                opened = true,
                 ccbFile = "Level3_1p1",
                 tileMap = "Level3_1_map.tmx",
                 cellSize = 32,
@@ -228,7 +228,7 @@ gLocations = {
                 id = "3_1"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = "Level3_2p1", 
                 tileMap = "Level3_2_map.tmx",
                 cellSize = 32,
@@ -239,7 +239,7 @@ gLocations = {
                 id = "3_2"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level3_3p1", "Level3_3p2"}, 
                 tileMap = "Level3_3_map.tmx",
                 cellSize = 32,
@@ -250,7 +250,7 @@ gLocations = {
                 id = "3_3"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level3_4p1", "Level3_4p2"}, 
                 tileMap = "Level3_4_map.tmx",
                 cellSize = 32,
@@ -261,7 +261,7 @@ gLocations = {
                 id = "3_4"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level3_5p1", "Level3_5p2"}, 
                 tileMap = "Level3_5_map.tmx",
                 cellSize = 32,
@@ -272,7 +272,7 @@ gLocations = {
                 id = "3_5"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = { "Level3_6p1", "Level2_1p2"},
                 tileMap = "Level3_6_map.tmx",
                 cellSize = 32,
@@ -283,7 +283,7 @@ gLocations = {
                 id = "3_6"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level3_7p1", "Level2_1p2"},
                 tileMap = "Level3_7_map.tmx",
                 cellSize = 32,

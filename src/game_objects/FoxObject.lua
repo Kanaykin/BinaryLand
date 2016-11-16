@@ -110,12 +110,12 @@ function FoxObject:setCustomProperties(properties)
     FoxObject:superClass().setCustomProperties(self, properties);
 
     if properties.InTrap then
+        self.mField:createSnareTrigger(Vector.new(self.mNode:getPosition()));
         self:playAnimation(PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP);
         info_log("FoxObject:setCustomProperties self.mLastButtonPressed ", self.mLastButtonPressed);
         info_log("FoxObject:setCustomProperties self.mAnimations[self.mLastButtonPressed] ", self.mAnimations[self.mLastButtonPressed]);
         self.mAnimations[self.mLastButtonPressed]:setCurrentAnimation(2);
         self:setInTrap(true);
-        self.mField:createSnareTrigger(Vector.new(self.mNode:getPosition()));
     end
 end
 
@@ -308,8 +308,8 @@ end
 --------------------------------
 function FoxObject:playInTrapCageAnimation()
     local sprite = tolua.cast(self.mAnimationNode, "cc.Sprite");
-    debug_log("FoxObject:playAnimation sprite:isFlippedX() ", sprite:isFlippedX())
-    debug_log("FoxObject:playAnimation self.mLastDir ", self.mLastDir)
+    debug_log("FoxObject:playInTrapCageAnimation sprite:isFlippedX() ", sprite:isFlippedX())
+    debug_log("FoxObject:playInTrapCageAnimation self.mLastDir ", self.mLastDir)
     if sprite:isFlippedX() then
         debug_log("FoxObject:playAnimation right ")
         self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_RIGHT];
