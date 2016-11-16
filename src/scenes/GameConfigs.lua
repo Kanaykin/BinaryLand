@@ -466,13 +466,37 @@ gLocations = {
                 id = "5_5"
             },
             {
-
+                opened = true,
+                ccbFile = {"Level5_5p1", "Level5_5p2"},
+                tileMap = "Level5_5_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                customProperties = "src/levels/Level5_5",
+                id = "5_6"
             },
             {
-
+                opened = true,
+                ccbFile = {"Level5_5p1", "Level5_5p2"},
+                tileMap = "Level5_5_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                customProperties = "src/levels/Level5_5",
+                id = "5_7"
             },
             {
-
+                opened = true,
+                ccbFile = {"Level5_8p1", "Level5_8p2"},
+                tileMap = "Level5_8_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                customProperties = "src/levels/Level5_5",
+                id = "5_8"
             }
         }
     },
