@@ -7,11 +7,11 @@
   <image source="snow_tile.png" width="256" height="704"/>
  </tileset>
  <tileset firstgid="61" name="vulcan_tile" tilewidth="64" tileheight="64">
-  <image source="vulcan_tile.png" width="256" height="256"/>
+  <image source="vulcan_tile.png" width="256" height="512"/>
  </tileset>
  <layer name="Tile Layer 1" width="20" height="16">
   <data encoding="base64" compression="zlib">
-   eJzzZGBg8BzFgxrbkYCJMc+RBDzSzLMdNW9EmQcAqGtXBA==
+   eJzzZGBg8BzFgxrbkYCJMc+RBDzSzLMdNY/m5vkCsQ8Qe0P1eEFpXyQxGJvW7gMA0O9XWg==
   </data>
  </layer>
 </map>

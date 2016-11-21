@@ -495,7 +495,7 @@ gLocations = {
                 tutorial = false,
                 time = 120,
                 backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
-                customProperties = "src/levels/Level5_5",
+                customProperties = "src/levels/Level5_8",
                 id = "5_8"
             }
         }

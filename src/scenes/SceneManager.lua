@@ -120,6 +120,9 @@ function SceneManager:runNextLevelScene()
 		-- check count stars for next location
         index = 1;
         locationId = locationId + 1;
+        if not locations[locationId] then
+            locationId = 1;
+        end
         if locations[locationId]:isLocked() then
         	self:runNextScene(nil, SCENE_TYPE_ID.CHOOSE_LOCATION);
         	return;

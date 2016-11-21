@@ -6,6 +6,7 @@ LavaGround = inheritsFrom(Trigger)
 function LavaGround:init(field, node, enterCallback, leaveCallback)
 	LavaGround:superClass().init(self, field, node, enterCallback, leaveCallback);
 	self:updateOrder();
+	self.mNode:setVisible(false);
 end
 
 ---------------------------------

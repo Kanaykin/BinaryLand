@@ -3207,8 +3207,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -4013,7 +4011,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>0.20000000298023224</real>
+									<real>0.5</real>
 								</array>
 							</dict>
 							<dict>
@@ -4035,7 +4033,7 @@
 								<key>type</key>
 								<string>Integer</string>
 								<key>value</key>
-								<integer>116</integer>
+								<integer>119</integer>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -4053,10 +4051,12 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Tornado.png</string>
+									<string>LavaGround.png</string>
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
