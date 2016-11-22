@@ -150,7 +150,7 @@ function FactoryObject:createLavaGround(field, node)
 	info_log("FactoryObject:createLavaGround ", field, ", ", node);
 	local web = LavaGround:create();
 	web:init(field, node);
-	field:addObject(web);
+	field:addLava(web);
 	return web;
 end
 

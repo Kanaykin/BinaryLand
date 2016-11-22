@@ -823,6 +823,14 @@ function Field:addArrayBorder()
 end
 
 --------------------------------
+function Field:addLava(lava)
+    self:addObject(lava);
+    local x, y = self:getGridPosition(lava:getNode());
+    self.mArray[COORD(x, y, self.mSize.x)] = 1;
+    self.mPlayerFreeArray[COORD(x, y, self.mSize.x)] = 1;
+end
+
+--------------------------------
 function Field:addBrick(brick)
     table.insert(self.mBrickObjects, brick);
 	local x, y = self:getGridPosition(brick:getNode());
