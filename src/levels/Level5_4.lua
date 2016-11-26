@@ -7,6 +7,7 @@ local CustomProperties = {
  --    ["12_2_116"] = {DestPoint = "12,2"},
  --    ["9_2_116"] = {DestPoint = "9,2"},
  --    ["10_2_116"] = {DestPoint = "10,2"}
+ 	["7_10_106"] = {CanAttack=true}
 }
 
 return CustomProperties;

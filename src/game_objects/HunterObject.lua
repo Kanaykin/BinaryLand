@@ -17,7 +17,7 @@ HunterObject.mIsDead = false;
 --shot constants
 HunterObject.SHOT_PIXELS_DELTA = 10
 HunterObject.SHOT_MIN_GRID_DELTA = 3
-HunterObject.SHOT_MAX_GRID_DELTA = 6
+HunterObject.SHOT_MAX_GRID_DELTA = 16
 
 HunterObject.DIRECTIONS = {
     CAUTION = MobObject.DIRECTIONS.BACK + 1,
@@ -202,7 +202,7 @@ function HunterObject:tryShotGun()
                 local all_point_free = true;
                 local delta = self.mGridPosition.y > pos.y and 1 or -1;
                 for j = pos.y, self.mGridPosition.y, delta do
-                    if not self.mField:isFreePoint( Vector.new(pos.x, j) ) then
+                    if not self.mField:isFreePointForPlayer( Vector.new(pos.x, j) ) then
                         all_point_free = false;
                     end
                 end
@@ -217,7 +217,7 @@ function HunterObject:tryShotGun()
                     if math.abs(player:getPosition().x - self:getPosition().x) < HunterObject.SHOT_PIXELS_DELTA then
                         self.mFoxGoalPos = pos;
                         local newPos = Vector.new(self.mFoxGoalPos.x, self.mFoxGoalPos.y - delta);
-                        while self.mField:isFreePoint( newPos ) do
+                        while self.mField:isFreePointForPlayer( newPos ) do
                             self.mFoxGoalPos = newPos;
                             newPos = Vector.new(self.mFoxGoalPos.x, self.mFoxGoalPos.y - delta);
                         end
@@ -231,7 +231,7 @@ function HunterObject:tryShotGun()
                 local all_point_free = true;
                 local delta = self.mGridPosition.x > pos.x and 1 or -1;
                 for j = pos.x, self.mGridPosition.x, delta do
-                    if not self.mField:isFreePoint( Vector.new(j, pos.y) ) then
+                    if not self.mField:isFreePointForPlayer( Vector.new(j, pos.y) ) then
                         all_point_free = false;
                     end
                 end
@@ -245,7 +245,7 @@ function HunterObject:tryShotGun()
                     if math.abs(player:getPosition().y - self:getPosition().y) < HunterObject.SHOT_PIXELS_DELTA then
                         self.mFoxGoalPos = pos;
                         local newPos = Vector.new(self.mFoxGoalPos.x - delta, self.mFoxGoalPos.y );
-                        while self.mField:isFreePoint( newPos ) do
+                        while self.mField:isFreePointForPlayer( newPos ) do
                             self.mFoxGoalPos = newPos;
                             debug_log("self.mField:isFreePoint self.mFoxGoalPos.x ", self.mFoxGoalPos.x);
                             newPos = Vector.new(self.mFoxGoalPos.x - delta, self.mFoxGoalPos.y );

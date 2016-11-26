@@ -129,7 +129,7 @@ end
 
 ---------------------------------
 function PlayerController:resetData()
-	info_log("PlayerController:resetData");
+	--info_log("PlayerController:resetData");
 	self.mDestPos = nil;
 	self.mJoystick:setButtonPressed(nil);
 	self.mPrevObjectPosition = nil;

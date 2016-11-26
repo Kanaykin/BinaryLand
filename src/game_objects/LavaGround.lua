@@ -16,7 +16,9 @@ function LavaGround:onEnter(player)
 	--self:updateOrder();
 	local players = self.mField:getPlayerObjects();
     for i, p in pairs(players) do
-    	p:resetMovingParams();
+    	if not p:isInTrap() then
+    		p:resetMovingParams();
+    	end
     end
     self.mField:onStateLose();
 end
@@ -39,6 +41,6 @@ function LavaGround:onLeave()
 end
 
 --------------------------------
-function SwampGround:tick(dt)
+function LavaGround:tick(dt)
 	LavaGround:superClass().tick(self, dt);
 end
