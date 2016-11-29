@@ -14,6 +14,7 @@ require "src/game_objects/TornadoObject"
 require "src/game_objects/IceGround"
 require "src/game_objects/SwampGround"
 require "src/game_objects/LavaGround"
+require "src/game_objects/FireTornadoObject"
 require "src/tutorial/TutorialTrigger"
 require "src/base/Log"
 
@@ -42,6 +43,7 @@ FactoryObject.TORNADO_TAG = 116;
 FactoryObject.ICE_GROUND_TAG = 117;
 FactoryObject.SWAMP_GROUND_TAG = 118;
 FactoryObject.LAVA_GROUND_TAG = 119;
+FactoryObject.FIRE_TORNADO_TAG = 120;
 
 -- tutorial
 FactoryObject.TUTORIAL_TRIGGER_1 = 200;
@@ -95,6 +97,15 @@ end
 function FactoryObject:createMob(field, node)
 	info_log("FactoryObject:createMob ", field, ", ", node);
 	local mob = MobObject:create();
+	mob:init(field, node);
+	field:addMob(mob);
+	return mob;
+end
+
+------------------------------
+function FactoryObject:createFireTornado(field, node)
+	info_log("FactoryObject:createFireTornado ", field, ", ", node);
+	local mob = FireTornadoObject:create();
 	mob:init(field, node);
 	field:addMob(mob);
 	return mob;
@@ -272,5 +283,6 @@ FactoryObject.CreateFunctions = {
 	[FactoryObject.TORNADO_TAG] = FactoryObject.createTornado,
 	[FactoryObject.ICE_GROUND_TAG] = FactoryObject.createIceGround,
 	[FactoryObject.SWAMP_GROUND_TAG] = FactoryObject.createSwampGround,
-    [FactoryObject.LAVA_GROUND_TAG] = FactoryObject.createLavaGround
+    [FactoryObject.LAVA_GROUND_TAG] = FactoryObject.createLavaGround,
+    [FactoryObject.FIRE_TORNADO_TAG] = FactoryObject.createFireTornado
 }

@@ -278,6 +278,7 @@ end
 function Field:onStateLose()
 	self.mState = Field.LOSE;
 	info_log("LOSE !!!");
+    --self:delayDestroyObjects();
 	if self.mStateListener then
         if self.mIsBonusLevel then
             self.mStateListener:onStateWin();
@@ -435,16 +436,22 @@ function Field:updateState()
 end
 
 ---------------------------------
-function Field:tick(dt)
-	self:updateState();
-
-    --debug_log("Field:tick self.mId ", self.mId);
+function Field:delayDestroyObjects()
     for i, obj in ipairs(self.mNeedDestroyObjects) do
+        debug_log("Field:delayDestroyObjects ", obj:getId());
         self:removeObject(obj);
         self:removeEnemy(obj);
         obj:destroy();
     end
     self.mNeedDestroyObjects = {}
+end
+
+---------------------------------
+function Field:tick(dt)
+	self:updateState();
+
+    self:delayDestroyObjects();
+    --debug_log("Field:tick self.mId ", self.mId);
 
     --self:updateCameraMove(dt);
 
@@ -928,6 +935,12 @@ end
 --------------------------------
 function Field:deleteTornadoInPos(pos)
     local tornados = self:getObjectsByTag(FactoryObject.TORNADO_TAG);
+    for i, tornado in ipairs(tornados) do
+        if tornado:getGridPosition() == pos then
+            tornado:setVisible(false);
+        end
+    end
+    local tornados = self:getObjectsByTag(FactoryObject.FIRE_TORNADO_TAG);
     for i, tornado in ipairs(tornados) do
         if tornado:getGridPosition() == pos then
             tornado:setVisible(false);

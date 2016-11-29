@@ -3345,7 +3345,7 @@
 								<key>type</key>
 								<string>Integer</string>
 								<key>value</key>
-								<integer>116</integer>
+								<integer>120</integer>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -3363,7 +3363,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Tornado.png</string>
+									<string>FireTornadoVulcano.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3425,7 +3425,7 @@
 								<key>type</key>
 								<string>Integer</string>
 								<key>value</key>
-								<integer>116</integer>
+								<integer>120</integer>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -3443,7 +3443,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Tornado.png</string>
+									<string>FireTornadoVulcano.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3505,7 +3505,7 @@
 								<key>type</key>
 								<string>Integer</string>
 								<key>value</key>
-								<integer>116</integer>
+								<integer>120</integer>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -3523,10 +3523,12 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Tornado.png</string>
+									<string>FireTornadoVulcano.png</string>
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -3607,8 +3609,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -3667,7 +3667,7 @@
 								<key>type</key>
 								<string>Integer</string>
 								<key>value</key>
-								<integer>116</integer>
+								<integer>120</integer>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -3685,7 +3685,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Tornado.png</string>
+									<string>FireTornadoVulcano.png</string>
 								</array>
 							</dict>
 						</array>
