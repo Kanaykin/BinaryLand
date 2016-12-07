@@ -106,7 +106,7 @@ gLocations = {
                 tutorial = false,
                 time = 120,
                 backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
-                customProperties = "src/levels/Level1_8",
+                customProperties = "src/levels/Level1_bonus",
                 id = "1_bonus"
             }
 
@@ -116,7 +116,7 @@ gLocations = {
 		id = 2,
 		description = "Sand",
 		position = Coord(0.32, 0.5, 0, -215),
-        opened = true,
+        opened = false,
         countStars = 30,
         levels = {
             {
@@ -213,7 +213,7 @@ gLocations = {
 		id = 3,
 		description = "Snow",
 		position = Coord(0.52, 0.5, 0, -235),
-        opened = true,
+        opened = false,
         countStars = 30,
         levels = {
             {
@@ -310,7 +310,7 @@ gLocations = {
 		id = 4,
 		description = "Forest",
 		position = Coord(0.78, 0.5, 0, -120),
-        opened = true,
+        opened = false,
         countStars = 30,
         levels = {
             {
@@ -407,7 +407,7 @@ gLocations = {
         id = 5,
         description = "Vulcano",
         position = Coord(0.9, 0.5, 0, -120),
-        opened = true,
+        opened = false,
         countStars = 30,
         levels = {
             {

@@ -44,7 +44,7 @@ function Location:getCountStar(withBonus)
 	if withBonus and self.mBonusLevel then
 		countStar = countStar + self.mBonusLevel:getCountStar();
 	end
-	return countStar + 34;
+	return countStar + 30;
 end
 
 -----------------------------------

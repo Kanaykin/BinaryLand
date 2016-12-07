@@ -94,7 +94,7 @@ function ChooseLocation:showBonusRoom(location, sprite)
         setDefaultFont(countStarLabel, self.mSceneManager.mGame:getScale());
 
         local countStar = bonusLevel:getCountStar();
-        countStarLabel:setString(tostring(countStar).." stars");
+        countStarLabel:setString(tostring(countStar));
     end
 
     local function onBonusLevelPressed()
@@ -254,7 +254,7 @@ function ChooseLocation:setCountStar(countStar, i)
     info_log("ChooseLocation:setCountStar label ", label);
     if label then
         label:setVisible(true);
-        label:setString(tostring(countStar).." stars");
+        label:setString(tostring(countStar));
     end
 end
 
@@ -266,7 +266,7 @@ function ChooseLocation:updateCountStarLabels(node)
 
         if label then
             setDefaultFont(label, self.mSceneManager.mGame:getScale());
-            label:setVisible(false);
+            --label:setVisible(false);
         end
     end
 
