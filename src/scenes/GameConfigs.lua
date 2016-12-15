@@ -131,7 +131,7 @@ gLocations = {
                 id = "2_1"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = "Level2_2p1",--{"Level2_1p1", "Level2_1p2"},
                 tileMap = "Level2_1_map.tmx",
                 cellSize = 32,
@@ -142,7 +142,7 @@ gLocations = {
                 id = "2_2"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = "Level2_3p1",
                 tileMap = "Level2_1_map.tmx",
                 cellSize = 32,
@@ -153,7 +153,7 @@ gLocations = {
                 id = "2_3"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = "Level2_4p1",-- "Level2_1p2"},
                 tileMap = "Level2_1_map.tmx",
                 cellSize = 32,
@@ -164,7 +164,7 @@ gLocations = {
                 id = "2_4"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level2_5p1", "Level2_1p2"},
                 tileMap = "Level2_1_map.tmx",
                 cellSize = 32,
@@ -175,7 +175,7 @@ gLocations = {
                 id = "2_5"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = "Level2_6p1",-- "Level2_1p2"},
                 tileMap = "Level2_1_map.tmx",
                 cellSize = 32,
@@ -186,7 +186,7 @@ gLocations = {
                 id = "2_6"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level2_7p1", "Level2_1p2"},
                 tileMap = "Level2_7_map.tmx",
                 cellSize = 32,
@@ -197,7 +197,7 @@ gLocations = {
                 id = "2_7"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level2_8p1", "Level2_8p2"},
                 tileMap = "Level2_7_map.tmx",
                 cellSize = 32,
@@ -207,6 +207,19 @@ gLocations = {
                 backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
                 id = "2_7"
             },
+            {
+                opened = true,
+                isBonus = true,
+                ccbFile = "Level2_bonusp1",
+                --ccbFile = "Level1_1p1",
+                tileMap = "Level2_7_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                customProperties = "src/levels/Level2_bonus",
+                id = "2_bonus"
+            }
         }
 	},
 	{
@@ -294,7 +307,7 @@ gLocations = {
                 id = "3_7"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level3_8p1", "Level3_8p2"},
                 tileMap = "Level3_8_map.tmx",
                 cellSize = 32,
@@ -303,6 +316,19 @@ gLocations = {
                 customProperties = "src/levels/Level3_8",
                 backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
                 id = "3_8"
+            },
+            {
+                opened = true,
+                isBonus = true,
+                ccbFile = {"Level3_bonusp1", "Level3_bonusp2"},
+                --ccbFile = "Level1_1p1",
+                tileMap = "Level3_bonus_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                customProperties = "src/levels/Level2_bonus",
+                id = "3_bonus"
             }
         }
 	},
@@ -314,7 +340,7 @@ gLocations = {
         countStars = 30,
         levels = {
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level4_1p1", "Level4_1p2"},
                 tileMap = "Level4_1_map.tmx",
                 cellSize = 32,
@@ -325,7 +351,7 @@ gLocations = {
                 id = "4_1"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level4_2p1", "Level4_2p2"},
                 tileMap = "Level4_2_map.tmx",
                 cellSize = 32,
@@ -336,7 +362,7 @@ gLocations = {
                 id = "4_2"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level4_3p1", "Level2_1p2"},
                 tileMap = "Level4_3_map.tmx",
                 cellSize = 32,
@@ -347,7 +373,7 @@ gLocations = {
                 id = "4_3"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level4_4p1", "Level2_1p2"},
                 tileMap = "Level4_4_map.tmx",
                 cellSize = 32,
@@ -358,7 +384,7 @@ gLocations = {
                 id = "4_4"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level4_5p1", "Level4_5p2"},
                 tileMap = "Level4_4_map.tmx",
                 cellSize = 32,
@@ -369,7 +395,7 @@ gLocations = {
                 id = "4_5"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level4_6p1", "Level4_6p2"},
                 tileMap = "Level4_6_map.tmx",
                 cellSize = 32,
@@ -380,7 +406,7 @@ gLocations = {
                 id = "4_6"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = "Level4_7p1",
                 tileMap = "Level4_7_map.tmx",
                 cellSize = 32,
@@ -391,7 +417,7 @@ gLocations = {
                 id = "4_7"
             },
             {
-                opened = false,
+                opened = true,
                 ccbFile = {"Level4_8p1", "Level4_8p2"},
                 tileMap = "Level4_8_map.tmx",
                 cellSize = 32,
@@ -400,6 +426,19 @@ gLocations = {
                 backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
                 customProperties = "src/levels/Level4_8",
                 id = "4_8"
+            },
+            {
+                opened = true,
+                isBonus = true,
+                ccbFile = {"Level3_bonusp1", "Level3_bonusp2"},
+                --ccbFile = "Level1_1p1",
+                tileMap = "Level3_bonus_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                customProperties = "src/levels/Level2_bonus",
+                id = "4_bonus"
             }
         }
 	},
@@ -407,7 +446,7 @@ gLocations = {
         id = 5,
         description = "Vulcano",
         position = Coord(0.9, 0.5, 0, -120),
-        opened = false,
+        opened = true,
         countStars = 30,
         levels = {
             {
@@ -497,6 +536,19 @@ gLocations = {
                 backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
                 customProperties = "src/levels/Level5_8",
                 id = "5_8"
+            },
+            {
+                opened = true,
+                isBonus = true,
+                ccbFile = {"Level3_bonusp1", "Level3_bonusp2"},
+                --ccbFile = "Level1_1p1",
+                tileMap = "Level3_bonus_map.tmx",
+                cellSize = 32,
+                tutorial = false,
+                time = 120,
+                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                customProperties = "src/levels/Level2_bonus",
+                id = "4_bonus"
             }
         }
     },

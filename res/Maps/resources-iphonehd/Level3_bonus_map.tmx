@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="16" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="sand_tile" tilewidth="64" tileheight="64">
+  <image source="sand_tile.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="17" name="snow_tile" tilewidth="64" tileheight="64">
+  <image source="snow_tile.png" width="256" height="768"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="20" height="16">
+  <data encoding="base64" compression="zlib">
+   eJzVk7sKgDAMRQOi4FjwC3So4gMfi+///ywzpBhDhzabw6GU0kOS26YAkP6ABMmU5MxT/JAS2ZENuWldkVpQBfoaxCAW6Wh19OysjfQZ8hnPXuubqV/HxHy9ol8r6rPwnYXGJ9H4dsrU53PZX4E+niHvU9Y3BPpkpj5i8h3YvZF6W2jPaz8j58ffh3s3B7z/xVffA+d0Has=
+  </data>
+ </layer>
+</map>
