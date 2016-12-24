@@ -281,7 +281,8 @@ function Field:onStateLose()
     --self:delayDestroyObjects();
 	if self.mStateListener then
         if self.mIsBonusLevel then
-            self.mStateListener:onStateWin();
+            local stars = self:computeStars();
+            self.mStateListener:onStateWin(stars);
         else
             self.mStateListener:onStateLose();
         end

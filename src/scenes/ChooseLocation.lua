@@ -31,6 +31,7 @@ ChooseLocation.BACK_MENU = 7;
 ChooseLocation.BACK_MENU_ITEM = 8;
 ChooseLocation.TUTORIAL_FRAME = 20;
 
+ChooseLocation.PLANE_STAR_BEGIN = 80;
 ChooseLocation.COUNT_STAR_LABEL_BEGIN = 90;
 ChooseLocation.LOCK_IMAGE_TAG = 150;
 
@@ -256,17 +257,27 @@ function ChooseLocation:setCountStar(countStar, i)
         label:setVisible(true);
         label:setString(tostring(countStar));
     end
+    local plane = tolua.cast(self.mNode:getChildByTag(ChooseLocation.PLANE_STAR_BEGIN + i), "cc.Node");
+    if plane then
+        plane:setVisible(true);
+    end
 end
 
 --------------------------------
 function ChooseLocation:updateCountStarLabels(node)
-    for i = ChooseLocation.COUNT_STAR_LABEL_BEGIN, ChooseLocation.COUNT_STAR_LABEL_BEGIN + ChooseLocation.COUNT_LOCATION, 1 do
-        local label = tolua.cast(node:getChildByTag(i + 1), "cc.Label");
+    for i = 0, ChooseLocation.COUNT_LOCATION, 1 do
+        local indexLabel = i + ChooseLocation.COUNT_STAR_LABEL_BEGIN;
+        local label = tolua.cast(node:getChildByTag(indexLabel + 1), "cc.Label");
         info_log("ChooseLocation:updateLabels label ", label);
 
         if label then
             setDefaultFont(label, self.mSceneManager.mGame:getScale());
-            --label:setVisible(false);
+            label:setVisible(false);
+        end
+        local indexPlane = i + ChooseLocation.PLANE_STAR_BEGIN;
+        local plane = tolua.cast(node:getChildByTag(indexPlane + 1), "cc.Node");
+        if plane then
+            plane:setVisible(false);
         end
     end
 

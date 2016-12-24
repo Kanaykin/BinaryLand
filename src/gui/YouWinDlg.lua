@@ -39,7 +39,7 @@ end
 
 --------------------------------
 function YouWinDlg:doModal(stars, lastStar)
-	info_log("YouWinDlg:doModal");
+	info_log("YouWinDlg:doModal ", stars);
 	self:superClass().doModal(self);
     self.mStarsCount = stars;
     self:destroyStarAnimations();

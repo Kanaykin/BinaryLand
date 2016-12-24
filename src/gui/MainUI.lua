@@ -70,7 +70,7 @@ end
 
 --------------------------------
 function MainUI:showWinDlg(stars, lastStar)
-    info_log("MainUI:showWinDlg ");
+    info_log("MainUI:showWinDlg stars ", stars, "lastStar ", lastStar);
     self.mGetStarDlg:hide();
     self.mYouWinDlg:doModal(stars, lastStar);
 end
