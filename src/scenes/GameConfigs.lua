@@ -97,7 +97,7 @@ gLocations = {
                 id = "1_8"
             },
             {
-                opened = false,
+                opened = true,
                 isBonus = true,
                 ccbFile = {"Level1_bonusp1", "Level1_bonusp2"},
                 --ccbFile = "Level1_1p1",
@@ -116,11 +116,11 @@ gLocations = {
 		id = 2,
 		description = "Sand",
 		position = Coord(0.32, 0.5, 0, -215),
-        opened = false,
+        opened = true,
         countStars = 30,
         levels = {
             {
-                opened = false,
+                opened = true,
                 ccbFile = "Level2_1p1_new",--{"Level2_1p1", "Level2_1p2"},
                 tileMap = "Level2_1_map.tmx",
                 cellSize = 32,
@@ -226,7 +226,7 @@ gLocations = {
 		id = 3,
 		description = "Snow",
 		position = Coord(0.52, 0.5, 0, -235),
-        opened = false,
+        opened = true,
         countStars = 30,
         levels = {
             {
@@ -336,7 +336,7 @@ gLocations = {
 		id = 4,
 		description = "Forest",
 		position = Coord(0.78, 0.5, 0, -120),
-        opened = false,
+        opened = true,
         countStars = 30,
         levels = {
             {
@@ -547,8 +547,8 @@ gLocations = {
                 tutorial = false,
                 time = 120,
                 backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
-                customProperties = "src/levels/Level2_bonus",
-                id = "4_bonus"
+                customProperties = "src/levels/Level5_bonus",
+                id = "5_bonus"
             }
         }
     },

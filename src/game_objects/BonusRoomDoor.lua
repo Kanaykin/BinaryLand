@@ -92,7 +92,9 @@ function BonusRoomDoor:setCustomProperties(properties)
     info_log("BonusRoomDoor:setCustomProperties animated ", properties.bonusAnimation);
 
     BonusRoomDoor:superClass().setCustomProperties(self, properties);
-    self.mBonusFile = properties.BonusFile;
+    if properties.BonusFile then
+        self.mBonusFile = properties.BonusFile;
+    end
 end
 
 --------------------------------

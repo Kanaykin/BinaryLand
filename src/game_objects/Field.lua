@@ -343,7 +343,13 @@ function Field:onEnterBonusRoomDoor(player, pos, trigger)
 end
 
 ---------------------------------
+function Field:incCoinsObjects()
+    self.mLevelStatistic.startCountCoins = self.mLevelStatistic.startCountCoins and self.mLevelStatistic.startCountCoins + 1 or 1;
+end
+
+---------------------------------
 function Field:addCoinsObject(object)
+    self:incCoinsObjects();
     self.mLevelStatistic.startCountCoins = self.mLevelStatistic.startCountCoins and self.mLevelStatistic.startCountCoins + 1 or 1;
     self:addObject(object);
 end
@@ -1154,9 +1160,7 @@ function Field:init(fieldNode, layer, fieldData, game)
             local tag = brick:getTag();
             info_log("create tag ", tag);
             local properties = self:getCustomProperties(gridPosX, gridPosY, tag);
-            if properties then
-                object:setCustomProperties(properties);
-            end
+            object:setCustomProperties(properties ~= nil and properties or {});
         end
 	end
 
