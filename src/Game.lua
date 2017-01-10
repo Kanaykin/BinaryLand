@@ -132,6 +132,16 @@ function Game:initResolution()
 	-- compute resolution scale
 	local visibleSize = CCDirector:getInstance():getVisibleSize();
 
+    if visibleSize.width == 0 or visibleSize.height then
+        -- create desktop gl view
+        local glview = cc.GLViewImpl:createWithRect("Desktop", cc.rect(0, 0, 960, 640));
+        info_log("Game:initResolution glview ", glview);
+        CCDirector:getInstance():setOpenGLView(glview);
+        visibleSize = CCDirector:getInstance():getVisibleSize();
+    end
+    info_log("Game:initResolution width ", visibleSize.width);
+    info_log("Game:initResolution height ", visibleSize.height);
+
 	local resolutionInfo = nil;
 	for i = #SUPPORTED_RESOLUTION, 1, -1  do
 		if visibleSize.width >= SUPPORTED_RESOLUTION[i].size.width and visibleSize.height >= SUPPORTED_RESOLUTION[i].size.height then

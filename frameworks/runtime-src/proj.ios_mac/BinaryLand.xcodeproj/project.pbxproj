@@ -132,6 +132,10 @@
 		F293B3D915EB7BE500256477 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D815EB7BE500256477 /* Foundation.framework */; };
 		F293B3DB15EB7BE500256477 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3DA15EB7BE500256477 /* CoreGraphics.framework */; };
 		F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F293BB7E15EB831F00256477 /* AppDelegate.cpp */; };
+		F65AF43A1E1D81CA0094C6FA /* res in Resources */ = {isa = PBXBuildFile; fileRef = A5C7527219FEBDB900389E67 /* res */; };
+		F65AF43B1E1D81D50094C6FA /* src in Resources */ = {isa = PBXBuildFile; fileRef = A5C6DF6219FADBD400EA4747 /* src */; };
+		F65AF43C1E1D83160094C6FA /* lua_module_extend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5C752791A0354A600389E67 /* lua_module_extend.cpp */; };
+		F65AF43D1E1D83610094C6FA /* Statistic.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5CAB5521A052BA600660D14 /* Statistic.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -574,7 +578,7 @@
 				LastUpgradeCheck = 0500;
 				TargetAttributes = {
 					F293B3C715EB7BE500256477 = {
-						DevelopmentTeam = MDDB52YB8L;
+						DevelopmentTeam = AE4A83B4C4;
 					};
 				};
 			};
@@ -667,6 +671,7 @@
 				15AA96C1199C66A100725633 /* DeprecatedCocoStudioClass.lua in Resources */,
 				15AA96C3199C66A100725633 /* DeprecatedCocoStudioFunc.lua in Resources */,
 				15D1FE6D1998732700302043 /* DeprecatedCocosDenshionFunc.lua in Resources */,
+				F65AF43B1E1D81D50094C6FA /* src in Resources */,
 				15D1FE4C1998730800302043 /* Cocos2d.lua in Resources */,
 				15AA96CD199C66B500725633 /* DeprecatedExtensionEnum.lua in Resources */,
 				15AA96DD199C66D500725633 /* NetworkConstants.lua in Resources */,
@@ -676,6 +681,7 @@
 				5023817617EBBE3400990C9B /* Icon.icns in Resources */,
 				15AA96BF199C66A100725633 /* CocoStudio.lua in Resources */,
 				15AA96B9199C668400725633 /* DeprecatedCocosBuilderClass.lua in Resources */,
+				F65AF43A1E1D81CA0094C6FA /* res in Resources */,
 				15D1FE621998730800302043 /* Opengl.lua in Resources */,
 				15AA96DB199C66D500725633 /* DeprecatedNetworkFunc.lua in Resources */,
 			);
@@ -777,6 +783,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F65AF43C1E1D83160094C6FA /* lua_module_extend.cpp in Sources */,
+				F65AF43D1E1D83610094C6FA /* Statistic.mm in Sources */,
 				C06E23C418CEF9740093C81A /* main.cpp in Sources */,
 				5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */,
 				A5BFD9A01A1FC71700A6A552 /* GoogleAnalitics.mm in Sources */,
@@ -842,6 +850,7 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = mac/Info.plist;
 				LIBRARY_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = (
 					"-image_base",
 					100000000,
@@ -868,6 +877,7 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = mac/Info.plist;
 				LIBRARY_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = (
 					"-image_base",
 					100000000,
@@ -934,6 +944,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = AE4A83B4C4;
+				ENABLE_BITCODE = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
@@ -943,8 +955,12 @@
 				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5;
 				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lsqlite3",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos/platform/ios";
@@ -958,6 +974,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = AE4A83B4C4;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -966,8 +984,12 @@
 				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5;
 				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lsqlite3",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos/platform/ios";
