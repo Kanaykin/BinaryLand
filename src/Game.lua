@@ -132,7 +132,7 @@ function Game:initResolution()
 	-- compute resolution scale
 	local visibleSize = CCDirector:getInstance():getVisibleSize();
 
-    if visibleSize.width == 0 or visibleSize.height then
+    if visibleSize.width == 0 or visibleSize.height == 0 then
         -- create desktop gl view
         local glview = cc.GLViewImpl:createWithRect("Desktop", cc.rect(0, 0, 960, 640));
         info_log("Game:initResolution glview ", glview);
