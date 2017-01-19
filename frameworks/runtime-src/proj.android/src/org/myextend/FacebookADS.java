@@ -11,7 +11,12 @@ import com.facebook.ads.*;
 public class FacebookADS {
 	public FacebookADS(final Activity activity) {
 		Application app = activity.getApplication();
-		FacebookSdk.sdkInitialize(app.getApplicationContext());
+		FacebookSdk.sdkInitialize(activity);
         AppEventsLogger.activateApp(app);
+	}
+	
+	public void showADS() 
+	{
+		
 	}
 }

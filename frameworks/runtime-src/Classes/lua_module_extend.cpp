@@ -1,6 +1,7 @@
 
 #include "lua_module_extend.h"
 #include "Statistic.h"
+#include "Advertisement.h"
 #include "LuaBasicConversions.h"
 
 //--------------------------------------
@@ -90,6 +91,62 @@ tolua_lerror:
     return 0;
 }
 
+//--------------------------------------
+int lua_cocos2dx_Advertisement_getInstance(lua_State* tolua_S)
+{
+    int argc = 0;
+    bool ok  = true;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+    
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertable(tolua_S,1,"extend.Advertisement",0,&tolua_err)) goto tolua_lerror;
+#endif
+    
+    argc = lua_gettop(tolua_S) - 1;
+    
+    if (argc == 0)
+    {
+        if(!ok)
+            return 0;
+        myextend::Advertisement* ret = myextend::Advertisement::getInstance();
+        object_to_luaval<myextend::Advertisement>(tolua_S, "extend.Advertisement", (myextend::Advertisement*)ret);
+        return 1;
+    }
+    CCLOG("%s has wrong number of arguments: %d, was expecting %d\n ", "extend.Statistic:getInstance",argc, 0);
+    return 0;
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_Statistic_getInstance'.",&tolua_err);
+#endif
+    return 0;
+}
+
+//--------------------------------------
+int lua_cocos2dx_Advertisement_showADS(lua_State* tolua_S)
+{
+    return 0;
+}
+
+//--------------------------------------
+int lua_register_advertisement(lua_State* tolua_S)
+{
+    tolua_usertype(tolua_S,"extend.Advertisement");
+    tolua_cclass(tolua_S,"Advertisement","extend.Advertisement","",nullptr);
+    
+    tolua_beginmodule(tolua_S,"Advertisement");
+    tolua_function(tolua_S, "getInstance", lua_cocos2dx_Advertisement_getInstance);
+    tolua_function(tolua_S, "showADS", lua_cocos2dx_Advertisement_showADS);
+    tolua_endmodule(tolua_S);
+    std::string typeName = typeid(myextend::Advertisement).name();
+    g_luaType[typeName] = "extend.Advertisement";
+    g_typeCast["Advertisement"] = "extend.Advertisement";
+
+    return 1;
+}
+
 
 //--------------------------------------
 int lua_register_statistic(lua_State* tolua_S)
@@ -101,12 +158,9 @@ int lua_register_statistic(lua_State* tolua_S)
     tolua_function(tolua_S, "getInstance", lua_cocos2dx_Statistic_getInstance);
     tolua_function(tolua_S, "sendEvent", lua_cocos2dx_Statistic_sendEvent);
     tolua_endmodule(tolua_S);
-    std::string typeName = typeid(cocos2d::Mesh).name();
+    std::string typeName = typeid(myextend::Statistic).name();
     g_luaType[typeName] = "extend.Statistic";
-    g_typeCast["Mesh"] = "extend.Statistic";
-    return 1;
-
-    
+    g_typeCast["Statistic"] = "extend.Statistic";
     return 1;
 }
 
@@ -122,6 +176,7 @@ int register_extend_module(lua_State* L)
         tolua_beginmodule(L, "extend");
         
         lua_register_statistic(L);
+        lua_register_advertisement(L);
         
         tolua_endmodule(L);
 

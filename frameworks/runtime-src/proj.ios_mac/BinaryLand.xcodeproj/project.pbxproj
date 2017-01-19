@@ -132,6 +132,10 @@
 		F293B3D915EB7BE500256477 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D815EB7BE500256477 /* Foundation.framework */; };
 		F293B3DB15EB7BE500256477 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3DA15EB7BE500256477 /* CoreGraphics.framework */; };
 		F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F293BB7E15EB831F00256477 /* AppDelegate.cpp */; };
+		F63895E61E2EBCB000F8ABEA /* FacebookADS.mm in Sources */ = {isa = PBXBuildFile; fileRef = F63895E41E2EBCB000F8ABEA /* FacebookADS.mm */; };
+		F63895E71E2EBCB000F8ABEA /* FacebookADS.mm in Sources */ = {isa = PBXBuildFile; fileRef = F63895E41E2EBCB000F8ABEA /* FacebookADS.mm */; };
+		F63895E91E2EBDB700F8ABEA /* Advertisement.mm in Sources */ = {isa = PBXBuildFile; fileRef = F63895E81E2EBDB700F8ABEA /* Advertisement.mm */; };
+		F63895EA1E2EBDB700F8ABEA /* Advertisement.mm in Sources */ = {isa = PBXBuildFile; fileRef = F63895E81E2EBDB700F8ABEA /* Advertisement.mm */; };
 		F65AF43A1E1D81CA0094C6FA /* res in Resources */ = {isa = PBXBuildFile; fileRef = A5C7527219FEBDB900389E67 /* res */; };
 		F65AF43B1E1D81D50094C6FA /* src in Resources */ = {isa = PBXBuildFile; fileRef = A5C6DF6219FADBD400EA4747 /* src */; };
 		F65AF43C1E1D83160094C6FA /* lua_module_extend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5C752791A0354A600389E67 /* lua_module_extend.cpp */; };
@@ -295,6 +299,10 @@
 		F293B3DA15EB7BE500256477 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F293BB7E15EB831F00256477 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		F293BB7F15EB831F00256477 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
+		F63895E11E2EB5BF00F8ABEA /* Advertisement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Advertisement.h; path = "/Volumes/Seagate/MyGames/BinaryLand/frameworks/runtime-src/Classes/Advertisement.h"; sourceTree = "<absolute>"; };
+		F63895E41E2EBCB000F8ABEA /* FacebookADS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FacebookADS.mm; sourceTree = "<group>"; };
+		F63895E51E2EBCB000F8ABEA /* FacebookADS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookADS.h; sourceTree = "<group>"; };
+		F63895E81E2EBDB700F8ABEA /* Advertisement.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Advertisement.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -408,6 +416,9 @@
 				5023811717EBBCAC00990C9B /* RootViewController.mm */,
 				A5BFD99D1A1FC6F000A6A552 /* GoogleAnalitics.h */,
 				A5BFD99E1A1FC71700A6A552 /* GoogleAnalitics.mm */,
+				F63895E41E2EBCB000F8ABEA /* FacebookADS.mm */,
+				F63895E51E2EBCB000F8ABEA /* FacebookADS.h */,
+				F63895E81E2EBDB700F8ABEA /* Advertisement.mm */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -504,6 +515,7 @@
 		F293BB7C15EB830F00256477 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F63895E11E2EB5BF00F8ABEA /* Advertisement.h */,
 				A5C752781A03522400389E67 /* lua_module_extend.h */,
 				15427C7E198F201A00DC375D /* lua_module_register.h */,
 				F293BB7E15EB831F00256477 /* AppDelegate.cpp */,
@@ -783,8 +795,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F63895E71E2EBCB000F8ABEA /* FacebookADS.mm in Sources */,
 				F65AF43C1E1D83160094C6FA /* lua_module_extend.cpp in Sources */,
 				F65AF43D1E1D83610094C6FA /* Statistic.mm in Sources */,
+				F63895EA1E2EBDB700F8ABEA /* Advertisement.mm in Sources */,
 				C06E23C418CEF9740093C81A /* main.cpp in Sources */,
 				5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */,
 				A5BFD9A01A1FC71700A6A552 /* GoogleAnalitics.mm in Sources */,
@@ -796,8 +810,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5C7527A1A0354A600389E67 /* lua_module_extend.cpp in Sources */,
+				F63895E91E2EBDB700F8ABEA /* Advertisement.mm in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
 				A5BFD99F1A1FC71700A6A552 /* GoogleAnalitics.mm in Sources */,
+				F63895E61E2EBCB000F8ABEA /* FacebookADS.mm in Sources */,
 				A513F1571A3E2983001D052A /* Logger.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
