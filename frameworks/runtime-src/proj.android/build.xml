@@ -39,6 +39,9 @@
          application and should be checked into Version Control Systems. -->
     <loadproperties srcFile="project.properties" />
 
+    <property name="android.library" value="false" />
+    <property name="android.library.reference.2" value="sdk/facebook-android-sdk-4.14.0/facebook/" />
+
     <!-- quick check on sdk.dir -->
     <fail
             message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through an env var"
