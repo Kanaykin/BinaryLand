@@ -127,6 +127,35 @@ tolua_lerror:
 //--------------------------------------
 int lua_cocos2dx_Advertisement_showADS(lua_State* tolua_S)
 {
+    myextend::Advertisement* cobj = nullptr;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+    
+    
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"extend.Advertisement",0,&tolua_err)) goto tolua_lerror;
+#endif
+    
+    cobj = (myextend::Advertisement*)tolua_tousertype(tolua_S,1,0);
+    
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_extension_ScrollView_setClippingToBounds'", nullptr);
+        return 0;
+    }
+#endif
+    
+    cobj->showADS();
+    return 0;
+    
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_Advertisement_showADS'.",&tolua_err);
+#endif
+    
     return 0;
 }
 

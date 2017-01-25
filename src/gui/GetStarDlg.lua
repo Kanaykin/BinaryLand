@@ -72,8 +72,9 @@ end
 
 --------------------------------
 function GetStarDlg:onYesPressed()
+    debug_log("GetStarDlg:onYesPressed ");
     local advertisement = extend.Advertisement:getInstance();
-    advertisement.showADS();
+    advertisement:showADS();
     self.mStarsCount.allStar = self.mStarsCount.allStar + 1;
     self:saveStars();
     self.mMainUI:showWinDlg(self.mStarsCount, true);

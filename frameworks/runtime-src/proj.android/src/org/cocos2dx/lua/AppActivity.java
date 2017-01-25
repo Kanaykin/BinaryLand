@@ -40,8 +40,6 @@ import android.app.Application;
 
 import org.myextend.MyExtendHelper;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.Scopes;
@@ -223,10 +221,6 @@ GoogleApiClient.OnConnectionFailedListener
         //.addApi(Plus.API)
         //.addScope(Plus.SCOPE_PLUS_LOGIN)
         //.build();*/
-        
-		Application app = getApplication();
-		FacebookSdk.sdkInitialize(app.getApplicationContext());
-        AppEventsLogger.activateApp(app);
 
 		MyExtendHelper.init(this);
 	}

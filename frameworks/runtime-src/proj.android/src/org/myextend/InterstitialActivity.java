@@ -1,6 +1,8 @@
 package org.myextend;
 
 import android.app.Activity;
+import android.os.Bundle;
+
 import com.facebook.ads.*;
 
 public class InterstitialActivity extends Activity implements InterstitialAdListener 
@@ -11,6 +13,12 @@ public class InterstitialActivity extends Activity implements InterstitialAdList
 	    interstitialAd = new InterstitialAd(this, "1763334180655470_1764632917192263");
 	    interstitialAd.setAdListener(this);
 	    interstitialAd.loadAd();
+	}
+	
+	@Override
+	protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        loadInterstitialAd();
 	}
 	
 	@Override
