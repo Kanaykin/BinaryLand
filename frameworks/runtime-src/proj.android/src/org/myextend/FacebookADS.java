@@ -1,22 +1,21 @@
 package org.myextend;
 
 import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-
 import com.facebook.ads.*;
-import org.myextend.InterstitialActivity;
+import com.facebook.appevents.AppEventsLogger;
+import org.myextend.Logger;
 
 public class FacebookADS implements InterstitialAdListener{
 	private Activity mActivity;
 	private InterstitialAd interstitialAd;
 	public FacebookADS(final Activity activity) {
-		Log.e("INFO", "FacebookADS::FacebookADS");
+		Logger.info("FacebookADS::FacebookADS");
 		
 		Application app = activity.getApplication();
 		FacebookSdk.sdkInitialize(activity);
@@ -31,6 +30,7 @@ public class FacebookADS implements InterstitialAdListener{
 	
 	public void showADS() 
 	{
+		Logger.info("FacebookADS::showADS");
 		interstitialAd.show();
 		//interstitialAd.loadAd();
 		//interstitialAd.loadAd();
@@ -46,6 +46,7 @@ public class FacebookADS implements InterstitialAdListener{
 	
 	@Override
 	public void onAdLoaded(Ad ad) {
+		//Logger.info("FacebookADS::onAdLoaded");
 	    // Ad is loaded and ready to be displayed
 	    // You can now display the full screen add using this code:
 	    //interstitialAd.show();

@@ -14,7 +14,8 @@ LOCAL_SRC_FILES := hellolua/main.cpp \
 		   GoogleAnalitics.cpp \
 		   Events.cpp \
 		   Advertisement.cpp \
-		   FacebookADS.cpp
+		   FacebookADS.cpp \
+		   LoggerJni.cpp
 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

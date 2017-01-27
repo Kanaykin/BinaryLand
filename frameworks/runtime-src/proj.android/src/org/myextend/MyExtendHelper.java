@@ -1,6 +1,6 @@
 package org.myextend;
 
-//import org.myextend.My;
+import org.myextend.Logger;
 import org.myextend.GoogleStatistic;
 import org.myextend.FacebookADS;
 import android.app.Activity;
@@ -21,7 +21,7 @@ public class MyExtendHelper {
 	}
 	
 	public static void showADS() {
-		Log.e("INFO", "MyExtendHelper:showADS");
+		Logger.info("MyExtendHelper:showADS");
 		MyExtendHelper.sFacebookADS.showADS();
 	}
 
