@@ -127,6 +127,9 @@ tolua_lerror:
 //--------------------------------------
 int lua_cocos2dx_Advertisement_showADS(lua_State* tolua_S)
 {
+    int argc = 0;
+    bool ok  = true;
+
     myextend::Advertisement* cobj = nullptr;
     
 #if COCOS2D_DEBUG >= 1
@@ -148,9 +151,17 @@ int lua_cocos2dx_Advertisement_showADS(lua_State* tolua_S)
     }
 #endif
     
-    cobj->showADS();
-    return 0;
-    
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0)
+    {
+        if(!ok)
+            return 0;
+        CCLOG("lua_cocos2dx_Advertisement_showADS");
+        bool result = cobj->showADS();
+        tolua_pushboolean(tolua_S,(bool)result);
+        return 1;
+    }
+
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
     tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_Advertisement_showADS'.",&tolua_err);

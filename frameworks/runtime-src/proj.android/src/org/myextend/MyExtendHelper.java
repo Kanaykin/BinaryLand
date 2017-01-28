@@ -20,9 +20,9 @@ public class MyExtendHelper {
 		MyExtendHelper.sGoogleStatistic.sendEvent(eventName, eventValue);
 	}
 	
-	public static void showADS() {
+	public static boolean showADS() {
 		Logger.info("MyExtendHelper:showADS");
-		MyExtendHelper.sFacebookADS.showADS();
+		return MyExtendHelper.sFacebookADS.showADS();
 	}
 
 }

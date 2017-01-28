@@ -9,7 +9,7 @@ namespace myextend {
         class FacebookADS: public Advertisement
         {
         public:
-            void showADS();
+            bool showADS();
         };
         
     }

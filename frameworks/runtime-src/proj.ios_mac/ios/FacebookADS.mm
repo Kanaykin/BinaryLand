@@ -3,8 +3,9 @@
 namespace myextend {
     namespace ios {
         
-        void FacebookADS::showADS()
+        bool FacebookADS::showADS()
         {
+            return false;
         }
         
     }

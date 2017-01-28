@@ -9,15 +9,16 @@ namespace myextend {
     namespace android {
 
 //-------------------------------
-void FacebookADS::showADS()
+bool FacebookADS::showADS()
 {
     cocos2d::JniMethodInfo methodInfo;
     
-    if (!getJNIStaticMethodInfo(methodInfo, "showADS", "()V")) {
-        return;
+    if (!getJNIStaticMethodInfo(methodInfo, "showADS", "()Z")) {
+        return false;
     }
-    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID);
+    jboolean ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID);
     methodInfo.env->DeleteLocalRef(methodInfo.classID);
+    return ret;
 }
 
 //-------------------------------

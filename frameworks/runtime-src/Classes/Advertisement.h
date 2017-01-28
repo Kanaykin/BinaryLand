@@ -12,7 +12,7 @@ namespace myextend {
          */
         static Advertisement* getInstance();
         
-        virtual void showADS() = 0;
+        virtual bool showADS() = 0;
         
         virtual ~Advertisement(){}
     };

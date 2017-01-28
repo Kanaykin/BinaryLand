@@ -13,31 +13,32 @@ import org.myextend.Logger;
 
 public class FacebookADS implements InterstitialAdListener{
 	private Activity mActivity;
-	private InterstitialAd interstitialAd;
+	private InterstitialAd mInterstitialAd;
+	private boolean mAdLoaded = false;
 	public FacebookADS(final Activity activity) {
 		Logger.info("FacebookADS::FacebookADS");
-		
 		Application app = activity.getApplication();
 		FacebookSdk.sdkInitialize(activity);
         AppEventsLogger.activateApp(app);
         
         this.mActivity = activity;
         
-	    interstitialAd = new InterstitialAd(this.mActivity, "1763334180655470_1764632917192263");
-	    interstitialAd.setAdListener(this);
-	    interstitialAd.loadAd();
+        this.mInterstitialAd = new InterstitialAd(this.mActivity, "1763334180655470_1764632917192263");
+        this.mInterstitialAd.setAdListener(this);
+        this.mInterstitialAd.loadAd();
 	}
 	
-	public void showADS() 
+	public boolean showADS() 
 	{
 		Logger.info("FacebookADS::showADS");
-		interstitialAd.show();
+		this.mInterstitialAd.show();
 		//interstitialAd.loadAd();
 		//interstitialAd.loadAd();
 
 	    
 		//Intent intent = new Intent(this.mActivity, InterstitialActivity.class);
 		//this.mActivity.startActivity(intent);
+		return mAdLoaded;
 	}
 	@Override
 	public void onError(Ad ad, AdError error) {
@@ -46,6 +47,7 @@ public class FacebookADS implements InterstitialAdListener{
 	
 	@Override
 	public void onAdLoaded(Ad ad) {
+		this.mAdLoaded = true;
 		//Logger.info("FacebookADS::onAdLoaded");
 	    // Ad is loaded and ready to be displayed
 	    // You can now display the full screen add using this code:
@@ -63,8 +65,9 @@ public class FacebookADS implements InterstitialAdListener{
 	
 	@Override
 	public void onInterstitialDisplayed(Ad ad) {
-		interstitialAd = new InterstitialAd(this.mActivity, "1763334180655470_1764632917192263");
-	    interstitialAd.setAdListener(this);
-	    interstitialAd.loadAd();
+		mAdLoaded = false;
+		mInterstitialAd = new InterstitialAd(this.mActivity, "1763334180655470_1764632917192263");
+		mInterstitialAd.setAdListener(this);
+		mInterstitialAd.loadAd();
 	}
 }
