@@ -77,9 +77,18 @@ function GetStarDlg:onYesPressed()
     if advertisement:showADS() then
         self.mStarsCount.allStar = self.mStarsCount.allStar + 1;
         self:saveStars();
+        self.mMainUI:showWinDlg(self.mStarsCount, true);
     else
+        self:hide();
+        local message_params = {
+            text = "Ошибка загрузки.\nПопробуйте позже.",
+            ok_text = "Ok",
+            ok_callback = function()
+                self.mGame.mSceneMan:runNextLevelScene();
+            end
+        };
+        self.mMainUI:showMessageBox(message_params);
     end
-    self.mMainUI:showWinDlg(self.mStarsCount, true);
 end
 
 --------------------------------

@@ -8,6 +8,7 @@ require "src/gui/LevelScore"
 require "src/gui/GettingBonusEffect"
 require "src/gui/BonusDlg"
 require "src/gui/GetStarDlg"
+require "src/gui/MessageBoxDlg"
 require "src/base/Log"
 
 MainUI = inheritsFrom(CCBBaseDialog)
@@ -19,6 +20,7 @@ MainUI.mYouLooseDlg = nil;
 MainUI.mYouWinDlg = nil;
 MainUI.mGetStarDlg = nil;
 MainUI.mBonusDlg = nil;
+MainUI.mMessageBoxDlg = nil;
 MainUI.mTimeLabel = nil;
 MainUI.mTimer = nil;
 MainUI.mScore = nil;
@@ -184,6 +186,11 @@ function MainUI:setScore(score)
     self.mScore:setValue(score);
 end
 
+---------------------------------
+function MainUI:showMessageBox(params)
+    self.mMessageBoxDlg:doModal(params);
+end
+
 --------------------------------
 function MainUI:init(game, uiLayer, ccbFile)
 	self:superClass().init(self, game, uiLayer, ccbFile);
@@ -220,6 +227,10 @@ function MainUI:init(game, uiLayer, ccbFile)
     -------------------------
     self.mGetStarDlg = GetStarDlg:create();
     self.mGetStarDlg:init(self.mGame, self.mUILayer, self);
+
+    -------------------------
+    self.mMessageBoxDlg = MessageBoxDlg:create();
+    self.mMessageBoxDlg:init(self.mGame, self.mUILayer);
 
     -------------------------
     self.mTimer = LevelTimer:create();
