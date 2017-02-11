@@ -4,7 +4,7 @@ TutorialStep2 =  inheritsFrom(TutorialStep1)
 TutorialStep2.mCCBFileName = "Step2";
 --TutorialStep2.mFinishPosition = Vector.new(7, 6);
 TutorialStep2.mTriggerTag = FactoryObject.TUTORIAL_TRIGGER_2;
-TutorialStep2.mPlayerIndex = 2;
+TutorialStep2.mPlayerIndex = 1;
 TutorialStep2.LABEL_TAG2 = 3;
 
 --------------------------------

@@ -68,7 +68,7 @@ function TutorialStep8:findAcrossFinish()
 		local delta1 = math.abs(deltaRight1 - deltaLeft1);
 		local delta2 = math.abs(deltaRight2 - deltaLeft2);
 
-		if delta1 == delta2 then
+		if delta1 == delta2 and pos1.x ~= pos2.x then
 			return false;
 		end
 		if maxDelta > delta1 then
@@ -105,6 +105,7 @@ end
 --------------------------------
 function TutorialStep8:findPlayer()
 	local across = self:findAcrossFinish();
+	info_log("TutorialStep8:findPlayer across ", across)
 	if not across then
 		for i, trigger in ipairs(self.mTriggers) do
 			if trigger:getContainedObj() ~= nil then

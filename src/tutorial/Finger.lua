@@ -8,12 +8,14 @@ Finger.mVelocity = 60;
 Finger.mIsMoving = false;
 Finger.mAnimator = nil;
 Finger.mDestPos = nil;
+Finger.mNode = nil;
 
 --------------------------------
 function Finger:init(gameScene, field)
 	local ccpproxy = CCBProxy:create();
 	local reader = ccpproxy:createCCBReader();
 	local node = ccpproxy:readCCBFromFile("Finger", reader, false);
+	self.mNode = node;
 
 	field:getFieldNode():addChild(node);
 	--gameScene:addChild(node);
@@ -52,6 +54,7 @@ function Finger:init(gameScene, field)
 	local callFuncDoubleTap = CCCallFunc:create(callbackDoubleTapFinish);
 	self.mAnimator:setCallFuncForLuaCallbackNamed(callFuncDoubleTap, "0:DoubleTapfinish");
 	---------
+	self.mNode:setVisible(false);
 end
 
 --------------------------------
@@ -84,6 +87,7 @@ end
 
 --------------------------------
 function Finger:moveTo(dest)
+	self.mNode:setVisible(true);
 	local src = Vector.new(self.mNode:getPosition()); --self.mField:gridPosToReal(self.mGridPosition);
 	info_log("[Finger:moveTo] src.x ", src.x, " src.y ", src.y);
 	info_log("[Finger:moveTo] dest.x ", dest.x, " dest.y ", dest.y);

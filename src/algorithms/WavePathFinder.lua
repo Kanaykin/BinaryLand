@@ -93,14 +93,14 @@ WavePathFinder = {
 
 	-----------------------------------
 	normalizePath = function(path)
-		debug_log("normalizePath ", #path);
+		--debug_log("normalizePath ", #path);
 		if #path < 2 then
 			return path
 		end
 		local result = {};
 		local lastDir = Vector.new(0, 0);
 		for i = 2, #path do
-			debug_log("normalizePath i ", i);
+			--debug_log("normalizePath i ", i);
 			local first = path[i - 1];
 			local second = path[i];
 			local dir = (second - first):normalized();
@@ -148,7 +148,7 @@ WavePathFinder = {
 
 	-----------------------------------
 	printPath = function(path)
-        info_log("printPath ");
+        --info_log("printPath ");
 		for i, val in ipairs(path) do
 			info_log(" i = ", i, "val.x ", val.x , "val.y ", val.y);
 		end
@@ -171,19 +171,19 @@ WavePathFinder = {
 		array[COORD(pointFrom.x, pointFrom.y, sizeArray.x)] = WavePathFinder.FIRST_INDEX;
 		WavePathFinder.fillArray(srcPoints, pointTo, array, sizeArray, WavePathFinder.FIRST_INDEX + 1);
 		PRINT_FIELD(array, sizeArray);
-        info_log("!!!111 ", array[COORD(pointTo.x, pointTo.y, sizeArray.x)]);
+        --info_log("!!!111 ", array[COORD(pointTo.x, pointTo.y, sizeArray.x)]);
 		local path = {pointTo};
 		WavePathFinder.findPath(path, array, sizeArray);
 
 		local pathReversed = WavePathFinder.reversePath(path);
-        info_log("buildPath final path 1 ", path[1].x, " y ", path[1].y);
-        info_log("buildPath final path 2 ", path[#path].x, " y ", path[#path].y);
-        info_log("buildPath final dist ", #path);
+        --info_log("buildPath final path 1 ", path[1].x, " y ", path[1].y);
+        --info_log("buildPath final path 2 ", path[#path].x, " y ", path[#path].y);
+        --info_log("buildPath final dist ", #path);
         if(path[#path].x ~= pointFrom.x or path[#path].y ~= pointFrom.y ) then
         	info_log("not found path !!! ");
         	return {}
         end
-		WavePathFinder.printPath(pathReversed);
+		--WavePathFinder.printPath(pathReversed);
 		return pathReversed;
 	end
 

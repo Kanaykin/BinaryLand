@@ -19,7 +19,7 @@ end
 
 --------------------------------
 function TutorialStep5:getNextStep()
-	return "TutorialStep5_1";
+	return "TutorialStep6";
 end
 
 --------------------------------

@@ -1,25 +1,14 @@
-require "src/tutorial/TutorialStepBase"
+require "src/tutorial/TutorialStepPath"
 
-TutorialStep4 =  inheritsFrom(TutorialStepBase)
+TutorialStep4 =  inheritsFrom(TutorialStepPath)
 TutorialStep4.mCCBFileName = "Step4";
 TutorialStep4.STEP_DURATION = 3;
 TutorialStep4.mPlayerIndex = 2;
+TutorialStep4.mTriggerTags = {FactoryObject.TUTORIAL_TRIGGER_5};
 
 --------------------------------
 function TutorialStep4:init(gameScene, field, tutorialManager)
 	TutorialStep4:superClass().init(self, gameScene, field, tutorialManager, self.mCCBFileName, TutorialStep4.STEP_DURATION);
-
-	self.mTutorialManager:getMainUI():getJoystick():clearBlockedButtons();
-	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.TOP);
-	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.RIGHT);
-	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.LEFT);
-	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.BOTTOM);
-	self.mTutorialManager:getMainUI():getJoystick():resetButtonPressed();
-
-	self:foxAnimation("Fox");
-
-    local player = self.mField:getPlayerObjects()[self.mPlayerIndex];
-    player:resetMovingParams();
 end
 
 --------------------------------

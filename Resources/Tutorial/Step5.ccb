@@ -422,8 +422,7 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Быть может мы сможем открыть клетку вместе. 
-Помоги мне выбраться</string>
+						<string>Махни хвостом, быстро нажав дважды по экрану</string>
 					</dict>
 				</array>
 			</dict>
@@ -650,7 +649,7 @@
 						<key>type</key>
 						<string>Byte</string>
 						<key>value</key>
-						<integer>255</integer>
+						<integer>0</integer>
 					</dict>
 				</array>
 				<key>seqExpanded</key>
@@ -788,7 +787,7 @@
 						<key>type</key>
 						<string>Byte</string>
 						<key>value</key>
-						<integer>240</integer>
+						<integer>0</integer>
 					</dict>
 				</array>
 				<key>seqExpanded</key>
@@ -927,7 +926,7 @@
 						<key>type</key>
 						<string>Byte</string>
 						<key>value</key>
-						<integer>240</integer>
+						<integer>0</integer>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1117,7 +1116,7 @@
 						<key>type</key>
 						<string>Byte</string>
 						<key>value</key>
-						<integer>240</integer>
+						<integer>0</integer>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1373,9 +1372,9 @@
 			<key>name</key>
 			<string>animation</string>
 			<key>offset</key>
-			<real>0.053128242492675781</real>
+			<real>0.0</real>
 			<key>position</key>
-			<real>0.96666663885116577</real>
+			<real>0.0</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
