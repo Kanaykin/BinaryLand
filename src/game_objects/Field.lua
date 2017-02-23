@@ -39,6 +39,7 @@ Field.mCustomProperties = nil;
 Field.mEnemyEnterTriggerListener = nil;
 
 Field.mLevelStatistic = nil;
+Field.mDisableScrollForPlayer = nil;
 
 -- smooth camera moving
 Field.mMaxScroll = 5;
@@ -189,6 +190,9 @@ function Field:updateScrollPos()
 	for i, val in ipairs(self.mPlayerObjects) do
         local x, y = val.mNode:getPosition();
         --debug_log("Field:updateScrollPos x ", x, " y ", y)
+        if i == self.mDisableScrollForPlayer then
+            goto continue
+        end
         if not val:isInTrap() then
             min = math.min(min, y);
             max = math.max(max, y);
@@ -209,6 +213,8 @@ function Field:updateScrollPos()
             dir = (self.mPlayerPosY[i] - y) / yMax;
         end
         self.mPlayerPosY[i] = y;
+
+        ::continue::
 	end
 
     if equal then
@@ -1097,6 +1103,7 @@ function Field:init(fieldNode, layer, fieldData, game)
     self.mBonusLevelFile = fieldData.BonusLevelFile;
     self.mIsBonusLevel = fieldData.isBonus;
     self.mIsTutorialLevel = fieldData.tutorial;
+    self.mDisableScrollForPlayer = fieldData.disableScrollForPlayer;
     info_log("Field:init self.mBonusLevel ", self.mBonusLevel);
 
 	local objectType = _G[fieldData.playerType];

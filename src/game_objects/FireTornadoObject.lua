@@ -13,5 +13,7 @@ function FireTornadoObject:onPlayerEnterImpl(player, pos)
     		p:resetMovingParams();
     	end
     end
-    self.mField:onStateLose();
+    if self.mField:getState() == Field.IN_GAME then
+    	self.mField:onStateLose();
+    end
 end

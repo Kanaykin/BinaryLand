@@ -264,7 +264,11 @@ function LevelScene:loadTileMap(tileMapName, levelData)
 
     local tileMap = cc.TMXTiledMap:create(tileMapName);
     local visibleSize = CCDirector:getInstance():getVisibleSize();
-    tileMap:setAnchorPoint(cc.p(0.5, 0.0));
+    if levelData.customTiledAnchor then
+        tileMap:setAnchorPoint(levelData.customTiledAnchor);
+    else
+        tileMap:setAnchorPoint(cc.p(0.5, 0.0));
+    end
     tileMap:setPosition(cc.p(visibleSize.width / 2.0 - levelData.cellSize * self.mSceneManager.mGame:getScale() / 2, 0));
 
     if self.mScrollView then

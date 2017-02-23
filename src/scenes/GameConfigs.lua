@@ -517,13 +517,15 @@ gLocations = {
             },
             {
                 opened = true,
-                ccbFile = {"Level5_5p1", "Level5_5p2"},
-                tileMap = "Level5_5_map.tmx",
+                ccbFile = {"Level5_7p1", "Level5_7p2"},
+                tileMap = "Level5_7_map.tmx",
                 cellSize = 32,
                 tutorial = false,
                 time = 120,
                 backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
-                customProperties = "src/levels/Level5_5",
+                customProperties = "src/levels/Level5_7",
+                customTiledAnchor = cc.p(0.53, 0.0),
+                disableScrollForPlayer = 2,
                 id = "5_7"
             },
             {
