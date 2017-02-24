@@ -430,14 +430,14 @@ gLocations = {
             {
                 opened = true,
                 isBonus = true,
-                ccbFile = {"Level3_bonusp1", "Level3_bonusp2"},
+                ccbFile = {"Level4_bonusp1", "Level4_bonusp2"},
                 --ccbFile = "Level1_1p1",
-                tileMap = "Level3_bonus_map.tmx",
+                tileMap = "Level4_8_map.tmx",
                 cellSize = 32,
                 tutorial = false,
                 time = 120,
                 backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
-                customProperties = "src/levels/Level2_bonus",
+                customProperties = "src/levels/Level4_bonus",
                 id = "4_bonus"
             }
         }

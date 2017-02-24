@@ -3165,7 +3165,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Tornado.png</string>
+									<string>TornadoVulcano.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3245,7 +3245,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Tornado.png</string>
+									<string>TornadoVulcano.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3325,7 +3325,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Tornado.png</string>
+									<string>TornadoVulcano.png</string>
 								</array>
 							</dict>
 						</array>
@@ -3405,12 +3405,10 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Tornado.png</string>
+									<string>TornadoVulcano.png</string>
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
