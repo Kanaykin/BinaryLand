@@ -351,12 +351,12 @@ end
 ---------------------------------
 function Field:incCoinsObjects()
     self.mLevelStatistic.startCountCoins = self.mLevelStatistic.startCountCoins and self.mLevelStatistic.startCountCoins + 1 or 1;
+    info_log("Field:incCoinsObjects ", self.mLevelStatistic.startCountCoins);
 end
 
 ---------------------------------
 function Field:addCoinsObject(object)
     self:incCoinsObjects();
-    self.mLevelStatistic.startCountCoins = self.mLevelStatistic.startCountCoins and self.mLevelStatistic.startCountCoins + 1 or 1;
     self:addObject(object);
 end
 

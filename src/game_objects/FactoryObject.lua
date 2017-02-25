@@ -215,7 +215,7 @@ function FactoryObject:createBonusObject(field, node)
     info_log("FactoryObject:createBonusObject ", field, ", ", node);
     local bonus = BonusObject:create();
     bonus:init(field, node, nil, BonusObject.COINS_TYPE);
-    field:addObject(bonus);
+    field:addCoinsObject(bonus);
     return bonus;
 end
 

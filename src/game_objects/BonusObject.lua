@@ -166,7 +166,7 @@ function BonusObject:setCustomProperties(properties)
         info_log("BonusObject:setCustomProperties chestBonusType ", properties.ChestType);
         self.mChestType = properties.ChestType;
     end
-    if self.mChestType == BonusObject.CHEST_COINS_TYPE then
+    if self.mType == BonusObject.CHEST_TYPE and self.mChestType == BonusObject.CHEST_COINS_TYPE then
         self.mField:incCoinsObjects();
     end
 end
