@@ -141,7 +141,9 @@ end
 function MobObject:onStatePause()
     info_log("MobObject:onStatePause");
     MobObject:superClass().onStatePause(self);
-    self.mAnimations[self.mAnimation]:stop();
+    if self.mAnimation then
+        self.mAnimations[self.mAnimation]:stop();
+    end
 end
 
 ---------------------------------

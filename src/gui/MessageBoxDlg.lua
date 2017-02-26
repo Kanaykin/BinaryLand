@@ -35,7 +35,11 @@ function MessageBoxDlg:initButton(tag, action, text)
     local button = tolua.cast(nodeBase:getChildByTag(tag), "cc.ControlButton");
     local label = button:getTitleLabelForState(0);
 
-    button:registerControlEventHandler(action, 1);
+    local ok_button_action = function ()
+        self.mGame.mDialogManager:deactivateModal(self);
+        action()
+    end
+    button:registerControlEventHandler(ok_button_action, 1);
 
     label = tolua.cast(label, "cc.Label");
     if label then

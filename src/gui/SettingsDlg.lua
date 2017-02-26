@@ -32,6 +32,7 @@ function SettingsDlg:hidePanel()
 	info_log("SettingsDlg:hidePanel");
 	function callback()
 		info_log("SettingsDlg:callback");
+        self:hide();
 		self.mGame.mDialogManager:deactivateModal(self);
 	end
 
