@@ -352,5 +352,5 @@ function ChooseLocation:init(sceneMan, params)
 	SimpleAudioEngine:getInstance():playMusic(gSounds.CHOOSE_LOCATION_MUSIC, true)
 
     local statistic = extend.Statistic:getInstance();
-    statistic:sendEvent("setScreenName", "ChooseLocation");
+    statistic:sendScreenName("ChooseLocation");
 end

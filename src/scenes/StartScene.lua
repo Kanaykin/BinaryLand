@@ -29,7 +29,7 @@ function StartScene:init(sceneMan, params)
 	self:createMenuElements();
 
     local statistic = extend.Statistic:getInstance();
-    statistic:sendEvent("setScreenName", "StartScene");
+    statistic:sendScreenName("StartScene");
 
     self:loadScene(sceneMan.mGame);
 end

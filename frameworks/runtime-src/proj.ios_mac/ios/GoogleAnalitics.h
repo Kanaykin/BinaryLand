@@ -10,7 +10,10 @@ namespace myextend {
         class GoogleAnalitics: public Statistic
         {
         public:
-            void sendEvent(const std::string& eventName, const std::string& eventValue);
+            virtual void sendEvent(const std::string& category, const std::string& action,
+                           const std::string& label) override;
+            
+            virtual void sendScreenName(const std::string& screenName) override;
         };
         
     }

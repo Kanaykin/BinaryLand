@@ -13,11 +13,15 @@ public class MyExtendHelper {
 	
 	public static void init(final Activity activity) {
 		MyExtendHelper.sGoogleStatistic = new GoogleStatistic(activity);
-		MyExtendHelper.sFacebookADS = new FacebookADS(activity);
+		MyExtendHelper.sFacebookADS = new FacebookADS(activity, MyExtendHelper.sGoogleStatistic);
 	}
 	
-	public static void sendEventToStatistic(final String eventName, final String eventValue) {
-		MyExtendHelper.sGoogleStatistic.sendEvent(eventName, eventValue);
+	public static void sendEventToStatistic(final String category, final String action, final String label) {
+		MyExtendHelper.sGoogleStatistic.sendEvent(category, action, label);
+	}
+	
+	public static void sendScreenNameToStatistic(final String screenName) {
+		MyExtendHelper.sGoogleStatistic.sendScreenName(screenName);
 	}
 	
 	public static boolean showADS() {

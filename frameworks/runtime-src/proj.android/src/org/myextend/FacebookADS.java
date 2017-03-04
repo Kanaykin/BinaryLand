@@ -14,12 +14,19 @@ import android.util.Log;
 import com.facebook.ads.*;
 import com.facebook.appevents.AppEventsLogger;
 import org.myextend.Logger;
+import org.myextend.GoogleStatistic;
 
 public class FacebookADS implements InterstitialAdListener{
 	private Activity mActivity;
 	private InterstitialAd mInterstitialAd;
 	private boolean mAdLoaded = false;
-	public FacebookADS(final Activity activity) {
+	private GoogleStatistic mGoogleStatistic;
+	private String mErrorMessage;
+	
+	public FacebookADS(final Activity activity,
+			final GoogleStatistic googleStatistic) 
+	{
+		mGoogleStatistic = googleStatistic;
 		Logger.info("FacebookADS::FacebookADS");
 		Application app = activity.getApplication();
 		FacebookSdk.sdkInitialize(activity);
@@ -66,6 +73,14 @@ public class FacebookADS implements InterstitialAdListener{
 	public boolean showADS() 
 	{
 		Logger.info("FacebookADS::showADS");
+		if(mAdLoaded)
+		{
+			mGoogleStatistic.sendEvent("showADS", "success", "");
+		}
+		else {
+			mGoogleStatistic.sendEvent("showADS", "error", mErrorMessage);
+			mErrorMessage = "";
+		}
 		this.mInterstitialAd.show();
 		//interstitialAd.loadAd();
 		//interstitialAd.loadAd();
@@ -78,6 +93,7 @@ public class FacebookADS implements InterstitialAdListener{
 	@Override
 	public void onError(Ad ad, AdError error) {
 	    // Ad failed to load
+		mErrorMessage = error.getErrorMessage();
 		Logger.info("FacebookADS::onError "+ error.getErrorMessage());
 	}
 	

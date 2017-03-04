@@ -8,17 +8,35 @@ namespace myextend {
     namespace android {
 
 //-----------------------------
-void GoogleAnalitics::sendEvent(const std::string& eventName, const std::string& eventValue)
+void GoogleAnalitics::sendEvent(const std::string& category, const std::string& action,
+                                        const std::string& label)
 {
     cocos2d::JniMethodInfo methodInfo;
     
-    if (!getJNIStaticMethodInfo(methodInfo, "sendEventToStatistic", "(Ljava/lang/String;Ljava/lang/String;)V")) {
+    if (!getJNIStaticMethodInfo(methodInfo, "sendEventToStatistic", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")) {
         return;
     }
     
-    jstring stringArg = methodInfo.env->NewStringUTF(eventName.c_str());
-    jstring stringArgValue = methodInfo.env->NewStringUTF(eventValue.c_str());
-    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, stringArg, stringArgValue);
+    jstring stringCategory = methodInfo.env->NewStringUTF(category.c_str());
+    jstring stringAction = methodInfo.env->NewStringUTF(action.c_str());
+    jstring stringLabel = methodInfo.env->NewStringUTF(label.c_str());
+    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, stringCategory,
+                                         stringAction, stringLabel);
+    methodInfo.env->DeleteLocalRef(methodInfo.classID);
+}
+        
+//-----------------------------
+void GoogleAnalitics::sendScreenName(const std::string& screenName)
+{
+    cocos2d::JniMethodInfo methodInfo;
+    
+    if (!getJNIStaticMethodInfo(methodInfo, "sendScreenNameToStatistic", "(Ljava/lang/String;)V")) {
+        return;
+    }
+    
+    jstring stringScreenName = methodInfo.env->NewStringUTF(screenName.c_str());
+    
+    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, stringScreenName);
     methodInfo.env->DeleteLocalRef(methodInfo.classID);
 }
 

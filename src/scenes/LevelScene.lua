@@ -243,7 +243,7 @@ function LevelScene:postInitScene(levelData)
     end
 
     local statistic = extend.Statistic:getInstance();
-    statistic:sendEvent("setScreenName", "LevelScene"..levelData.id);
+    statistic:sendScreenName("LevelScene"..levelData.id);
 end
 
 --------------------------------

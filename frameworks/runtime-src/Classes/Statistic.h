@@ -13,7 +13,10 @@ namespace myextend {
          */
         static Statistic* getInstance();
         
-        virtual void sendEvent(const std::string& eventName, const std::string& eventValue) = 0;
+        virtual void sendEvent(const std::string& category, const std::string& action,
+                               const std::string& label) = 0;
+        
+        virtual void sendScreenName(const std::string& screenName) = 0;
         
         virtual ~Statistic(){}
     };

@@ -29,7 +29,7 @@ function ChooseLevel:init(sceneMan, params)
 	SimpleAudioEngine:getInstance():playMusic(gSounds.CHOOSE_LEVEL_MUSIC, true)
 
     local statistic = extend.Statistic:getInstance();
-    statistic:sendEvent("setScreenName", "ChooseLevel");
+    statistic:sendScreenName("ChooseLevel");
 end
 
 ---------------------------------

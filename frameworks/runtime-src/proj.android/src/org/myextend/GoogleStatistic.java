@@ -22,19 +22,18 @@ public class GoogleStatistic {
 		
 //		mTracker.setSessionStart(true);
 		
-		//mTracker.set("sss", "Parent Fragment");
-		//mTracker.send(MapBuilder.createAppView().build());
-		
-		//mTracker.setScreenName("Temp");
-		//mTracker.send(new HitBuilders.AppViewBuilder().build());
 	}
 	
-	public static void sendEvent(final String eventName, final String eventValue) {
-		if(eventName.equals("setScreenName")) {
-			mTracker.setScreenName(eventValue);
-			mTracker.send(new HitBuilders.AppViewBuilder().build());
-		}
-		//mTracker.send(new HitBuilders.EventBuilder().setCategory("Temp")
-        //        .setAction(eventName).setLabel("aaa").build());
+	public static void sendScreenName(final String eventValue) {
+		mTracker.setScreenName(eventValue);
+		mTracker.send(new HitBuilders.AppViewBuilder().build());		
+	}
+	
+	public static void sendEvent(final String category, final String action, final String label) {
+        mTracker.send(new HitBuilders.EventBuilder()
+         .setCategory(category)
+         .setAction(action)
+         .setLabel(label)
+         .build());
 	}
 }

@@ -5,6 +5,55 @@
 #include "LuaBasicConversions.h"
 
 //--------------------------------------
+int lua_cocos2dx_Statistic_sendScreenName(lua_State* tolua_S)
+{
+    int argc = 0;
+    myextend::Statistic* cobj = nullptr;
+    bool ok  = true;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+    
+    
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"extend.Statistic",0,&tolua_err)) goto tolua_lerror;
+#endif
+    
+    cobj = (myextend::Statistic*)tolua_tousertype(tolua_S,1,0);
+    
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_extension_ScrollView_setClippingToBounds'", nullptr);
+        return 0;
+    }
+#endif
+    
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1)
+    {
+        std::string arg0;
+        
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "myextend:Statistic:sendScreenName");
+        if(!ok)
+            return 0;
+        
+        cobj->sendScreenName(arg0);
+        return 0;
+    }
+    CCLOG("%s has wrong number of arguments: %d, was expecting %d \n", "myextend:Statistic:sendScreenName",argc, 1);
+    return 0;
+    
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_Statistic_sendScreenName'.",&tolua_err);
+#endif
+    
+    return 0;
+}
+
+//--------------------------------------
 int lua_cocos2dx_Statistic_sendEvent(lua_State* tolua_S)
 {
     int argc = 0;
@@ -31,7 +80,7 @@ int lua_cocos2dx_Statistic_sendEvent(lua_State* tolua_S)
 #endif
     
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 2)
+    if (argc == 3)
     {
         std::string arg0;
         
@@ -39,12 +88,18 @@ int lua_cocos2dx_Statistic_sendEvent(lua_State* tolua_S)
         if(!ok)
             return 0;
         
-        std::string arg2;
+        std::string arg1;
         
-        ok &= luaval_to_std_string(tolua_S, 3,&arg2, "myextend:Statistic:sendEvent");
+        ok &= luaval_to_std_string(tolua_S, 3,&arg1, "myextend:Statistic:sendEvent");
         if(!ok)
             return 0;
-        cobj->sendEvent(arg0, arg2);
+        
+        std::string arg2;
+        
+        ok &= luaval_to_std_string(tolua_S, 4, &arg2, "myextend:Statistic:sendEvent");
+        if(!ok)
+            return 0;
+        cobj->sendEvent(arg0, arg1, arg2);
         return 0;
     }
     CCLOG("%s has wrong number of arguments: %d, was expecting %d \n", "myextend:Statistic:sendEvent",argc, 1);
@@ -197,6 +252,7 @@ int lua_register_statistic(lua_State* tolua_S)
     tolua_beginmodule(tolua_S,"Statistic");
     tolua_function(tolua_S, "getInstance", lua_cocos2dx_Statistic_getInstance);
     tolua_function(tolua_S, "sendEvent", lua_cocos2dx_Statistic_sendEvent);
+    tolua_function(tolua_S, "sendScreenName", lua_cocos2dx_Statistic_sendScreenName);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(myextend::Statistic).name();
     g_luaType[typeName] = "extend.Statistic";

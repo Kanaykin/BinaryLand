@@ -796,7 +796,7 @@
 								<key>value</key>
 								<array>
 									<real>50</real>
-									<real>32</real>
+									<real>36</real>
 									<integer>4</integer>
 								</array>
 							</dict>
@@ -1458,8 +1458,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -1763,6 +1761,8 @@
 						<false/>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>

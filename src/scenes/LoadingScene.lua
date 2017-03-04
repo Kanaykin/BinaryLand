@@ -50,7 +50,7 @@ function LoadingScene:init(sceneMan, params)
 	info_log("LoadingScene:init");
 
     local statistic = extend.Statistic:getInstance();
-    statistic:sendEvent("setScreenName", "LoadingScene");
+    statistic:sendScreenName("LoadingScene");
 
     self:loadScene();
 end
