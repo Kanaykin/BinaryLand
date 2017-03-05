@@ -16,8 +16,9 @@ public class MyExtendHelper {
 		MyExtendHelper.sFacebookADS = new FacebookADS(activity, MyExtendHelper.sGoogleStatistic);
 	}
 	
-	public static void sendEventToStatistic(final String category, final String action, final String label) {
-		MyExtendHelper.sGoogleStatistic.sendEvent(category, action, label);
+	public static void sendEventToStatistic(final String category, final String action, 
+											final String label, int value) {
+		MyExtendHelper.sGoogleStatistic.sendEvent(category, action, label, value);
 	}
 	
 	public static void sendScreenNameToStatistic(final String screenName) {

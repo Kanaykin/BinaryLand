@@ -11,7 +11,7 @@ namespace myextend {
         {
         public:
             virtual void sendEvent(const std::string& category, const std::string& action,
-                           const std::string& label) override;
+                           const std::string& label, int value) override;
             
             virtual void sendScreenName(const std::string& screenName) override;
             

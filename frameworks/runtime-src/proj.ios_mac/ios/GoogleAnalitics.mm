@@ -6,7 +6,7 @@ namespace myextend {
         
         //-----------------------------------------------
         void GoogleAnalitics::sendEvent(const std::string& category, const std::string& action,
-                                        const std::string& label)
+                                        const std::string& label, int value)
         {
         }
         

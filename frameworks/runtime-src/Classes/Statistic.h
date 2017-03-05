@@ -14,7 +14,7 @@ namespace myextend {
         static Statistic* getInstance();
         
         virtual void sendEvent(const std::string& category, const std::string& action,
-                               const std::string& label) = 0;
+                               const std::string& label, int value) = 0;
         
         virtual void sendScreenName(const std::string& screenName) = 0;
         

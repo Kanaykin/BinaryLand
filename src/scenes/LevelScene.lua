@@ -182,6 +182,15 @@ end
 ---------------------------------
 function LevelScene:onStateWin(stars)
     self:winOpenLevel(stars);
+    -- send star to statistic
+    local statistic = extend.Statistic:getInstance();
+    local id = "Level_" .. self.mLevel:getData().id;
+
+    statistic:sendEvent(id, "stars", "trapStar", stars.trapStar);
+    statistic:sendEvent(id, "stars", "timeStar", stars.timeStar);
+    statistic:sendEvent(id, "stars", "coinsStar", stars.coinsStar);
+    statistic:sendEvent(id, "stars", "allStar", stars.allStar);
+
 	self.mMainUI:onStateWin(stars);
 end
 

@@ -29,12 +29,16 @@ public class GoogleStatistic {
 		mTracker.send(new HitBuilders.AppViewBuilder().build());		
 	}
 	
-	public static void sendEvent(final String category, final String action, final String label) {
-        mTracker.send(new HitBuilders.EventBuilder()
-         .setCategory(category)
-         .setAction(action)
-         .setLabel(label)
-         .setValue(35)
-         .build());
+	public static void sendEvent(final String category, final String action, 
+			final String label, final int value) {
+		
+		HitBuilders.EventBuilder builder = new HitBuilders.EventBuilder()
+		         .setCategory(category)
+		         .setAction(action)
+		         .setLabel(label); 
+		if(value != -1) {
+			builder.setValue(value);
+		}
+        mTracker.send(builder.build());
 	}
 }

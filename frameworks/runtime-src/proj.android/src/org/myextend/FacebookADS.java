@@ -75,10 +75,10 @@ public class FacebookADS implements InterstitialAdListener{
 		Logger.info("FacebookADS::showADS");
 		if(mAdLoaded)
 		{
-			mGoogleStatistic.sendEvent("showADS", "success", "");
+			mGoogleStatistic.sendEvent("showADS", "success", "", -1);
 		}
 		else {
-			mGoogleStatistic.sendEvent("showADS", "error", mErrorMessage);
+			mGoogleStatistic.sendEvent("showADS", "error", mErrorMessage, -1);
 			mErrorMessage = "";
 		}
 		this.mInterstitialAd.show();

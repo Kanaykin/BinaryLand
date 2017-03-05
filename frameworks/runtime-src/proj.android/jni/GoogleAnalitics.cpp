@@ -9,11 +9,11 @@ namespace myextend {
 
 //-----------------------------
 void GoogleAnalitics::sendEvent(const std::string& category, const std::string& action,
-                                        const std::string& label)
+                                        const std::string& label, int value)
 {
     cocos2d::JniMethodInfo methodInfo;
     
-    if (!getJNIStaticMethodInfo(methodInfo, "sendEventToStatistic", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")) {
+    if (!getJNIStaticMethodInfo(methodInfo, "sendEventToStatistic", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)V")) {
         return;
     }
     
@@ -21,7 +21,7 @@ void GoogleAnalitics::sendEvent(const std::string& category, const std::string& 
     jstring stringAction = methodInfo.env->NewStringUTF(action.c_str());
     jstring stringLabel = methodInfo.env->NewStringUTF(label.c_str());
     methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, stringCategory,
-                                         stringAction, stringLabel);
+                                         stringAction, stringLabel, value);
     methodInfo.env->DeleteLocalRef(methodInfo.classID);
 }
         
