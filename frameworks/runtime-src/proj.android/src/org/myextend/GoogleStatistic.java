@@ -34,6 +34,7 @@ public class GoogleStatistic {
          .setCategory(category)
          .setAction(action)
          .setLabel(label)
+         .setValue(35)
          .build());
 	}
 }

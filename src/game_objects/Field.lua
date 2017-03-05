@@ -190,31 +190,28 @@ function Field:updateScrollPos()
 	for i, val in ipairs(self.mPlayerObjects) do
         local x, y = val.mNode:getPosition();
         --debug_log("Field:updateScrollPos x ", x, " y ", y)
-        if i == self.mDisableScrollForPlayer then
-            goto continue
-        end
-        if not val:isInTrap() then
-            min = math.min(min, y);
-            max = math.max(max, y);
-        end
-        if self.mPlayerPosY[i] ~= y then
-            equal = false;
-        end
+        if i ~= self.mDisableScrollForPlayer then
+            if not val:isInTrap() then
+                min = math.min(min, y);
+                max = math.max(max, y);
+            end
+            if self.mPlayerPosY[i] ~= y then
+                equal = false;
+            end
 
-        if not self.mPlayerPosY[i] then
-        	forceUpdate = true;
-        end
+            if not self.mPlayerPosY[i] then
+            	forceUpdate = true;
+            end
 
-        if self.mPlayerPosY[i] and yMax < math.abs(self.mPlayerPosY[i] - y) then
-            yMax = math.abs(self.mPlayerPosY[i] - y);
-            --debug_log ("Field:updateScrollPos yMax ", yMax);
-            --debug_log ("Field:updateScrollPos self.mPlayerPosY[i] ", self.mPlayerPosY[i]);
-            --debug_log ("Field:updateScrollPos y ", y);
-            dir = (self.mPlayerPosY[i] - y) / yMax;
+            if self.mPlayerPosY[i] and yMax < math.abs(self.mPlayerPosY[i] - y) then
+                yMax = math.abs(self.mPlayerPosY[i] - y);
+                --debug_log ("Field:updateScrollPos yMax ", yMax);
+                --debug_log ("Field:updateScrollPos self.mPlayerPosY[i] ", self.mPlayerPosY[i]);
+                --debug_log ("Field:updateScrollPos y ", y);
+                dir = (self.mPlayerPosY[i] - y) / yMax;
+            end
+            self.mPlayerPosY[i] = y;
         end
-        self.mPlayerPosY[i] = y;
-
-        ::continue::
 	end
 
     if equal then
