@@ -21,6 +21,11 @@ public class MyExtendHelper {
 		MyExtendHelper.sGoogleStatistic.sendEvent(category, action, label, value);
 	}
 	
+	public static void sendTimeToStatistic(	final String category, final String label, 
+											final String variable, int value) {
+		MyExtendHelper.sGoogleStatistic.sendTime(category, label, variable, value);
+	}
+	
 	public static void sendScreenNameToStatistic(final String screenName) {
 		MyExtendHelper.sGoogleStatistic.sendScreenName(screenName);
 	}

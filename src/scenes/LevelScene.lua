@@ -34,7 +34,12 @@ end
 function LevelScene:onStateLose()
 	info_log("LevelScene: LOSE !!!");
 	self.mMainUI:onStateLose();
-	SimpleAudioEngine:getInstance():playMusic(gSounds.GAME_OVER_MUSIC, false)
+	SimpleAudioEngine:getInstance():playMusic(gSounds.GAME_OVER_MUSIC, false);
+
+    local id = "Level_" .. self.mLevel:getData().id;
+    local statistic = extend.Statistic:getInstance();
+
+    statistic:sendTime(id, "lose", "time", (self.mLevel:getData().time - self.mField:getTimer()) * 1000);
 end
 
 ---------------------------------
@@ -190,6 +195,10 @@ function LevelScene:onStateWin(stars)
     statistic:sendEvent(id, "stars", "timeStar", stars.timeStar);
     statistic:sendEvent(id, "stars", "coinsStar", stars.coinsStar);
     statistic:sendEvent(id, "stars", "allStar", stars.allStar);
+
+    if self.mLevel:getData().time then
+        statistic:sendTime(id, "win", "time", (self.mLevel:getData().time - self.mField:getTimer()) * 1000);
+    end
 
 	self.mMainUI:onStateWin(stars);
 end

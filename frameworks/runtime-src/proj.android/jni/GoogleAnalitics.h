@@ -15,6 +15,8 @@ namespace myextend {
             
             virtual void sendScreenName(const std::string& screenName) override;
             
+            virtual void sendTime(const std::string& category, const std::string& label,
+                                  const std::string& variable, int value) override;
         private :
             static bool getJNIStaticMethodInfo(cocos2d::JniMethodInfo &methodinfo,
                                                const char *methodName,

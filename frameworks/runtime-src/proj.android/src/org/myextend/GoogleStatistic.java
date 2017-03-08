@@ -29,6 +29,16 @@ public class GoogleStatistic {
 		mTracker.send(new HitBuilders.AppViewBuilder().build());		
 	}
 	
+	public static void sendTime(	final String category, final String label, 
+			final String variable, int value) {
+		HitBuilders.TimingBuilder tb = new HitBuilders.TimingBuilder()
+		         .setCategory(category)
+		         .setLabel(label)
+		         .setValue(value)
+		         .setVariable(variable);
+		mTracker.send(tb.build());
+	}
+	
 	public static void sendEvent(final String category, final String action, 
 			final String label, final int value) {
 		
