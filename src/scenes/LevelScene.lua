@@ -40,6 +40,7 @@ function LevelScene:onStateLose()
     local statistic = extend.Statistic:getInstance();
 
     statistic:sendTime(id, "lose", "time", (self.mLevel:getData().time - self.mField:getTimer()) * 1000);
+    statistic:sendEvent(id, "finish", "lose", -1);
 end
 
 ---------------------------------
@@ -195,6 +196,7 @@ function LevelScene:onStateWin(stars)
     statistic:sendEvent(id, "stars", "timeStar", stars.timeStar);
     statistic:sendEvent(id, "stars", "coinsStar", stars.coinsStar);
     statistic:sendEvent(id, "stars", "allStar", stars.allStar);
+    statistic:sendEvent(id, "finish", "win", -1);
 
     if self.mLevel:getData().time then
         statistic:sendTime(id, "win", "time", (self.mLevel:getData().time - self.mField:getTimer()) * 1000);

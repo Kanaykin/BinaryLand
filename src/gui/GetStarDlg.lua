@@ -73,6 +73,12 @@ end
 --------------------------------
 function GetStarDlg:onYesPressed()
     debug_log("GetStarDlg:onYesPressed ");
+
+    local statistic = extend.Statistic:getInstance();
+    local currentScene = self.mGame.mSceneMan:getCurrentScene();
+    local id = "Level_" .. currentScene:getLevel():getData().id;
+    statistic:sendEvent(id, "GetStarDlg", "YesPressed", -1);
+
     local advertisement = extend.Advertisement:getInstance();
     if advertisement:showADS() then
         self.mStarsCount.allStar = self.mStarsCount.allStar + 1;
@@ -93,6 +99,11 @@ end
 
 --------------------------------
 function GetStarDlg:onNoPressed()
+    local statistic = extend.Statistic:getInstance();
+    local currentScene = self.mGame.mSceneMan:getCurrentScene();
+    local id = "Level_" .. currentScene:getLevel():getData().id;
+    statistic:sendEvent(id, "GetStarDlg", "NoPressed", -1);
+    
 	self.mGame.mSceneMan:runNextLevelScene();
 end
 
