@@ -20,5 +20,10 @@ namespace myextend {
                                        const std::string& variable, int value)
         {
         }
+        
+        //-----------------------------------------------
+        void GoogleAnalitics::sendException(const std::string& description, bool fatal)
+        {
+        }
     }
 }

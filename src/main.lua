@@ -8,10 +8,20 @@ cclog = function(...)
 error_log(string.format(...))
 end
 
+local sended_exception = {}
+
 -- for CCLuaEngine traceback
 function __G__TRACKBACK__(msg)
 cclog("----------------------------------------")
 cclog("LUA ERROR: " .. tostring(msg) .. "\n")
+
+if not sended_exception[tostring(msg)] then
+    local statistic = extend.Statistic:getInstance();
+    statistic:sendException(tostring(msg), true);
+
+    sended_exception[tostring(msg)] = 1
+end
+
 cclog(debug.traceback())
 cclog("----------------------------------------")
 return msg

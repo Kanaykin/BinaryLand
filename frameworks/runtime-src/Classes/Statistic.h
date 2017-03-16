@@ -21,6 +21,8 @@ namespace myextend {
         virtual void sendTime(const std::string& category, const std::string& label,
                               const std::string& variable, int value) = 0;
         
+        virtual void sendException(const std::string& description, bool fatal) = 0;
+        
         virtual ~Statistic(){}
     };
 }

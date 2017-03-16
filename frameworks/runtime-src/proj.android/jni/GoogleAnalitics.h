@@ -17,6 +17,8 @@ namespace myextend {
             
             virtual void sendTime(const std::string& category, const std::string& label,
                                   const std::string& variable, int value) override;
+            
+            virtual void sendException(const std::string& description, bool fatal) override;
         private :
             static bool getJNIStaticMethodInfo(cocos2d::JniMethodInfo &methodinfo,
                                                const char *methodName,

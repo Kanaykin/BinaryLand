@@ -72,6 +72,62 @@ tolua_lerror:
 }
 
 //--------------------------------------
+int lua_cocos2dx_Statistic_sendException(lua_State* tolua_S)
+{
+    int argc = 0;
+    myextend::Statistic* cobj = nullptr;
+    bool ok  = true;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+    
+    
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"extend.Statistic",0,&tolua_err)) goto tolua_lerror;
+#endif
+    
+    cobj = (myextend::Statistic*)tolua_tousertype(tolua_S,1,0);
+    
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_Statistic_sendException'", nullptr);
+        return 0;
+    }
+#endif
+    
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2)
+    {
+        std::string arg0;
+        
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "myextend:Statistic:sendException");
+        if(!ok)
+            return 0;
+        
+        bool arg1(false);
+        
+        ok &= luaval_to_boolean(tolua_S, 3,&arg1, "myextend:Statistic:sendException");
+        if(!ok)
+            return 0;
+        
+        cobj->sendException(arg0, arg1);
+        return 0;
+    }
+    CCLOG("%s has wrong number of arguments: %d, was expecting %d \n", "myextend:Statistic:sendScreenName",argc, 1);
+    return 0;
+    
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_Statistic_sendScreenName'.",&tolua_err);
+#endif
+    
+    return 0;
+}
+
+
+//--------------------------------------
 int lua_cocos2dx_Statistic_sendScreenName(lua_State* tolua_S)
 {
     int argc = 0;
@@ -328,6 +384,7 @@ int lua_register_statistic(lua_State* tolua_S)
     tolua_function(tolua_S, "sendEvent", lua_cocos2dx_Statistic_sendEvent);
     tolua_function(tolua_S, "sendScreenName", lua_cocos2dx_Statistic_sendScreenName);
     tolua_function(tolua_S, "sendTime", lua_cocos2dx_Statistic_sendTime);
+    tolua_function(tolua_S, "sendException", lua_cocos2dx_Statistic_sendException);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(myextend::Statistic).name();
     g_luaType[typeName] = "extend.Statistic";

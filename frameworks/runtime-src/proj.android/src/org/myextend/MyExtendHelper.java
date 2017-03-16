@@ -26,6 +26,10 @@ public class MyExtendHelper {
 		MyExtendHelper.sGoogleStatistic.sendTime(category, label, variable, value);
 	}
 	
+	public static void sendExceptionToStatistic(final String description, boolean fatal) {
+		MyExtendHelper.sGoogleStatistic.sendException(description, fatal);
+	}
+	
 	public static void sendScreenNameToStatistic(final String screenName) {
 		MyExtendHelper.sGoogleStatistic.sendScreenName(screenName);
 	}

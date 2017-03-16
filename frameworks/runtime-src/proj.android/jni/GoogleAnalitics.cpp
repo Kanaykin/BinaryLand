@@ -25,6 +25,21 @@ void GoogleAnalitics::sendTime(const std::string& category, const std::string& l
     methodInfo.env->DeleteLocalRef(methodInfo.classID);
 
 }
+
+//-----------------------------
+void GoogleAnalitics::sendException(const std::string& description, bool fatal)
+{
+    cocos2d::JniMethodInfo methodInfo;
+    
+    if (!getJNIStaticMethodInfo(methodInfo, "sendExceptionToStatistic", "(Ljava/lang/String;Z)V")) {
+        return;
+    }
+    
+    jstring stringDescription = methodInfo.env->NewStringUTF(description.c_str());
+    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, stringDescription, fatal);
+    methodInfo.env->DeleteLocalRef(methodInfo.classID);
+
+}
         
 //-----------------------------
 void GoogleAnalitics::sendEvent(const std::string& category, const std::string& action,

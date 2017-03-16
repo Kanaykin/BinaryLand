@@ -13,6 +13,7 @@ public class GoogleStatistic {
 	
     private static Tracker mTracker;
     
+    //-----------------------------------------------------
 	public GoogleStatistic(final Context pContext) {
 		GoogleAnalytics analytics = GoogleAnalytics.getInstance(pContext);
 		analytics.getLogger().setLogLevel(Logger.LogLevel.VERBOSE);
@@ -24,11 +25,13 @@ public class GoogleStatistic {
 		
 	}
 	
+	//-----------------------------------------------------
 	public static void sendScreenName(final String eventValue) {
 		mTracker.setScreenName(eventValue);
 		mTracker.send(new HitBuilders.AppViewBuilder().build());		
 	}
 	
+	//-----------------------------------------------------
 	public static void sendTime(	final String category, final String label, 
 			final String variable, int value) {
 		HitBuilders.TimingBuilder tb = new HitBuilders.TimingBuilder()
@@ -39,6 +42,15 @@ public class GoogleStatistic {
 		mTracker.send(tb.build());
 	}
 	
+	//-----------------------------------------------------
+	public static void sendException(final String description, boolean fatal) {
+		HitBuilders.ExceptionBuilder exc = new HitBuilders.ExceptionBuilder()
+		         .setDescription(description)
+		         .setFatal(fatal);
+		mTracker.send(exc.build());
+	}
+	
+	//-----------------------------------------------------
 	public static void sendEvent(final String category, final String action, 
 			final String label, final int value) {
 		
