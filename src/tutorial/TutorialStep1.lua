@@ -58,6 +58,7 @@ function TutorialStep1:init(gameScene, field, tutorialManager)
 	self.mFingerFinishPosition = dest;
 
 	self:initFinger(gameScene, field);
+	self:initArrow(gameScene, field);
 
 	self.mTutorialManager:getMainUI():getJoystick():clearBlockedButtons();
 	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.LEFT);
@@ -78,6 +79,8 @@ function TutorialStep1:tick(dt)
 	end
 
 	self.mFinger:tick(dt);
+
+	self.mArrow:setPositions(self:getPlayerPos(), self.mFingerFinishPosition);
 
 	if self.mCurrentFingerTime ~= nil then
   --       --info_log("TutorialStep1:tick ContainedObj ", self.mTrigger:getContainedObj())

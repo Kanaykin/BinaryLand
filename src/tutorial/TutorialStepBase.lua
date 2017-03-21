@@ -1,9 +1,11 @@
 require "src/base/Inheritance"
 require "src/tutorial/Finger"
+require "src/tutorial/Arrow"
 require "src/base/Log"
 
 TutorialStepBase =  inheritsFrom(nil)
 TutorialStepBase.mFinger = nil
+TutorialStepBase.mArrow = nil
 TutorialStepBase.mField = nil;
 TutorialStepBase.mTutorialManager = nil
 TutorialStepBase.mIsFinished = false
@@ -17,6 +19,11 @@ function TutorialStepBase:destroy()
 	if self.mFinger then
 		self.mFinger:destroy();
 		self.mFinger = nil;
+	end
+
+	if self.mArrow then
+		self.mArrow:destroy();
+		self.mArrow = nil;
 	end
 
 	if self.mNode then
@@ -124,6 +131,12 @@ end
 function TutorialStepBase:initFinger(gameScene, field)
 	self.mFinger = Finger:create();
 	self.mFinger:init(gameScene, field);
+end
+
+--------------------------------
+function TutorialStepBase:initArrow(gameScene, field)
+	self.mArrow = Arrow:create();
+	self.mArrow:init(gameScene, field);
 end
 
 --------------------------------
