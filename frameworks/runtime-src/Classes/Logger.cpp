@@ -7,6 +7,7 @@
 #include "cocos/platform/CCPlatformMacros.h"
 #include "cocos/base/CCConsole.h"
 #include "cocos/base/CCDirector.h"
+#include "platform/CCFileUtils.h"
 
 namespace myextend {
     Logger::Logger(){
@@ -34,15 +35,30 @@ namespace myextend {
             //fprintf(stdout, "cocos2d: %s", "temp");
             //fflush(stdout);
             //stdout = fopen(doc_path.c_str(), "w");
-            CCLOG("[LUA-print] Logger::setLogFile %s", "");
+            CCLOG("[LUA-print] Logger::setLogFile %p", mFile);
         }
     private:
         FILE * mFile;
     };
     
     //---------------------------------
+    void Logger::initLogger()
+    {
+        //return;
+        cocos2d::FileUtils* fu = cocos2d::FileUtils::getInstance();
+        CCLOG("[LUA-print] Logger::initLogger %s", fu->getWritablePath().c_str());
+        
+        cocos2d::Console* console = cocos2d::Director::getInstance()->getConsole();
+        delete console;
+        HackConsole* hack = new HackConsole();
+        cocos2d::Director::getInstance()->setConsole(hack);
+        hack->init(fu->getWritablePath());
+    }
+    
+    //---------------------------------
     void Logger::setLogFile(const std::string& doc_path)
     {
+        return;
         //std::ofstream out(doc_path);
         //std::streambuf *coutbuf = std::cout.rdbuf(); //save old buf
         //std::cout.rdbuf(out.rdbuf()); //redirect std::cout to out.txt!

@@ -142,6 +142,15 @@ function Game:initResolution()
     info_log("Game:initResolution width ", visibleSize.width);
     info_log("Game:initResolution height ", visibleSize.height);
 
+    -- if width > 
+    if visibleSize.width < visibleSize.height then
+    	local tmp = visibleSize.width;
+    	visibleSize.width = visibleSize.height;
+    	visibleSize.height = tmp;
+
+    	--CCDirector:getInstance():getOpenGLView().setFrameSize(visibleSize.width, visibleSize.height);
+    end
+
 	local resolutionInfo = nil;
 	for i = #SUPPORTED_RESOLUTION, 1, -1  do
 		if visibleSize.width >= SUPPORTED_RESOLUTION[i].size.width and visibleSize.height >= SUPPORTED_RESOLUTION[i].size.height then

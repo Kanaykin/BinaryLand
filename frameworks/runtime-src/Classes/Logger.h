@@ -12,6 +12,8 @@ namespace myextend {
         
         static void setLogFile(const std::string& doc_path);
         
+        static void initLogger();
+        
         virtual ~Logger(){}
     };
 }

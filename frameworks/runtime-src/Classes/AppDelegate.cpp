@@ -3,6 +3,9 @@
 #include "SimpleAudioEngine.h"
 #include "cocos2d.h"
 #include "lua_module_register.h"
+#include "Logger.h"
+#include "CCDirector.h"
+#include "cocos/2d/CCFontAtlasCache.h"
 
 using namespace CocosDenshion;
 
@@ -29,8 +32,17 @@ void AppDelegate::initGLContextAttrs()
     GLView::setGLContextAttrs(glContextAttrs);
 }
 
+void AppDelegate::applicationScreenSizeChanged(int newWidth, int newHeight)
+{
+    cocos2d::Application::applicationScreenSizeChanged(newWidth, newHeight);
+    CCLOG("AppDelegate::applicationScreenSizeChanged w %d h %d", newWidth, newHeight);
+    //Director::getInstance()->getOpenGLView()->setFrameSize(newWidth, newHeight);
+    cocos2d::FontAtlasCache::releaseAllFontAtlas();
+}
+
 bool AppDelegate::applicationDidFinishLaunching()
 {
+    myextend::Logger::initLogger();
     auto engine = LuaEngine::getInstance();
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
     lua_State* L = engine->getLuaStack()->getLuaState();
