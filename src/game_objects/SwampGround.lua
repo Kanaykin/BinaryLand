@@ -37,7 +37,7 @@ end
 function SwampGround:tick(dt)
 	local obj = self.mContainedObj;
 	if obj then
-		obj:setVelocity(FoxObject.mVelocity / 2.0);
+		obj:setVelocity(FoxObject.mVelocity / 2);
 	end
 	SwampGround:superClass().tick(self, dt);
 end

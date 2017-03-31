@@ -36,6 +36,9 @@ FoxObject.mTrace = nil;
 FoxObject.mAnchorInterpolation = nil;
 FoxObject.mCallbackOnDone = nil;
 FoxObject.mBulletDir = nil;
+FoxObject.mSwampSoundVelocityCounter = 0;
+FoxObject.mIceSoundVelocityCounter = 0;
+FoxObject.inIceTrap = 0
 
 FoxObject.FOX_STATE = {
     PS_IN_CAGE_LEFT = PlayerObject.PLAYER_STATE.PS_LAST + 1,
@@ -174,7 +177,16 @@ function FoxObject:setFightActivated(activated)
 	if activated then
 		--self.mEffectAnimations[1]:play();
 		--self.mEffectAnimations[1]:setStopAfterDone(false);
-		SimpleAudioEngine:getInstance():playEffect(gSounds.PLAYER_ATTACK_SOUND)
+
+        -- play only for first character
+        if (not self.mField:getPlayerObjects()[1]:isInTrap() and not self.mField:getPlayerObjects()[2]:isInTrap()) then
+            if self == self.mField:getPlayerObjects()[1] then
+                SimpleAudioEngine:getInstance():playEffect(gSounds.PLAYER_ATTACK_SOUND);
+                info_log("FoxObject:setFightActivated PLAYER_ATTACK_SOUND ");
+            end
+        else
+		  SimpleAudioEngine:getInstance():playEffect(gSounds.PLAYER_ATTACK_SOUND);
+        end
 	else
 		--self.mEffectNode:stopAllActions();
 		--self.mEffectAnimations[1]:stop();
@@ -235,6 +247,30 @@ function FoxObject:updateAnchorPoint(dt)
 end
 
 --------------------------------
+function FoxObject:updateSoundActions(dt)
+    local halfVelocity = FoxObject.mVelocity / 2 * self.mField.mGame:getScale();
+    if self.mVelocity == halfVelocity then
+        if self.mSwampSoundVelocityCounter > 10 then
+            SimpleAudioEngine:getInstance():playEffect(gSounds.ENTER_SWAMP_SOUND);
+        end
+        self.mSwampSoundVelocityCounter = 0;
+    else
+        self.mSwampSoundVelocityCounter = self.mSwampSoundVelocityCounter + 1;
+    end
+
+    if self.inIceTrap > 0 then
+        debug_log("mIceSoundVelocityCounter ", self.mIceSoundVelocityCounter);
+        debug_log("self.inIceTrap ", self.inIceTrap);
+        if self.mIceSoundVelocityCounter > 10 then
+            SimpleAudioEngine:getInstance():playEffect(gSounds.ENTER_ICE_SOUND);
+        end
+        self.mIceSoundVelocityCounter = 0;
+    else
+        self.mIceSoundVelocityCounter = self.mIceSoundVelocityCounter + 1;
+    end
+end
+
+--------------------------------
 function FoxObject:tick(dt)
 	FoxObject:superClass().tick(self, dt);
     if self.mFirstUpdate <= 2 then
@@ -259,6 +295,8 @@ function FoxObject:tick(dt)
 
     self:updateAnchorPoint(dt);
     self.mCallbackOnDone:tick(dt);
+
+    self:updateSoundActions(dt);
 end
 
 --------------------------------
@@ -375,15 +413,20 @@ function FoxObject:playInTrapAnimation()
     debug_log("FoxObject:playAnimation ", self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT])
     if self.mTypeCage == FoxObject.CAGE_TYPE.CT_CAGE then
         self:playInTrapCageAnimation();
+        SimpleAudioEngine:getInstance():playEffect(gSounds.FOX_PETRIFICATION_SOUND);
     elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_HIDDEN then
         self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_HIDDEN_CAGE];
         --self.mCallbackOnDone:start();
+        SimpleAudioEngine:getInstance():playEffect(gSounds.ENTER_TRAP_SOUND);
     elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_TORNADO then
         self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE];
+        SimpleAudioEngine:getInstance():playEffect(gSounds.ENTER_TORNADO_SOUND);
     elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_NET then
-        self:playInTrapNetAnimation();        
+        self:playInTrapNetAnimation();
+        SimpleAudioEngine:getInstance():playEffect(gSounds.FOX_PETRIFICATION_SOUND);
     else
         self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP];
+        SimpleAudioEngine:getInstance():playEffect(gSounds.FOX_PETRIFICATION_SOUND);
     end
 end
 
@@ -531,10 +574,16 @@ function FoxObject:leaveTrap(pos)
 end
 
 --------------------------------
+function FoxObject:leaveIceGround()
+    self.inIceTrap = self.inIceTrap - 1;
+end
+
+--------------------------------
 function FoxObject:enterIceGround(pos)
     self:enterTrap(pos);
     self.mMoveFinishCallback = nil;
     self:setInTrap(false);
+    self.inIceTrap = self.inIceTrap + 1;
 end
 
 --------------------------------

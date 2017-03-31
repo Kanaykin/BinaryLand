@@ -174,6 +174,8 @@ function HunterObject:createBullet(goalPos)
     debug_log("HunterObject:createBullet selfPos ", hubterpos.x, ", ", hubterpos.y)
     bullet:init(self.mField, selfPos, goalPos);
     self.mField:addObject(bullet);
+
+    SimpleAudioEngine:getInstance():playEffect(gSounds.HUNTER_SHOT_SOUND);
 end
 
 --------------------------------

@@ -85,5 +85,6 @@ end
 ---------------------------------
 function IceGround:onLeave()
 	info_log("IceGround:onLeave ");
+	self.mContainedObj:leaveIceGround();
 	IceGround:superClass().onLeave(self);
 end
