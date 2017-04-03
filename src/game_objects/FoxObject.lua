@@ -114,7 +114,7 @@ function FoxObject:setCustomProperties(properties)
 
     if properties.InTrap then
         self.mField:createSnareTrigger(Vector.new(self.mNode:getPosition()));
-        self:playAnimation(PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP);
+        self:playAnimation(PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP, true);
         info_log("FoxObject:setCustomProperties self.mLastButtonPressed ", self.mLastButtonPressed);
         info_log("FoxObject:setCustomProperties self.mAnimations[self.mLastButtonPressed] ", self.mAnimations[self.mLastButtonPressed]);
         self.mAnimations[self.mLastButtonPressed]:setCurrentAnimation(2);
@@ -409,29 +409,45 @@ function FoxObject:onMoveToTrapFinishedImpl()
 end
 
 --------------------------------
-function FoxObject:playInTrapAnimation()
-    debug_log("FoxObject:playAnimation ", self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT])
+function FoxObject:playInTrapSound(mute)
+    debug_log("FoxObject:playInTrapSound mute ", mute, " id ", self:getId())
+    if mute then
+        return  
+    end
     if self.mTypeCage == FoxObject.CAGE_TYPE.CT_CAGE then
-        self:playInTrapCageAnimation();
         SimpleAudioEngine:getInstance():playEffect(gSounds.FOX_PETRIFICATION_SOUND);
     elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_HIDDEN then
-        self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_HIDDEN_CAGE];
-        --self.mCallbackOnDone:start();
         SimpleAudioEngine:getInstance():playEffect(gSounds.ENTER_TRAP_SOUND);
     elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_TORNADO then
-        self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE];
         SimpleAudioEngine:getInstance():playEffect(gSounds.ENTER_TORNADO_SOUND);
     elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_NET then
-        self:playInTrapNetAnimation();
         SimpleAudioEngine:getInstance():playEffect(gSounds.FOX_PETRIFICATION_SOUND);
     else
-        self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP];
         SimpleAudioEngine:getInstance():playEffect(gSounds.FOX_PETRIFICATION_SOUND);
     end
+
 end
 
 --------------------------------
-function FoxObject:playAnimation(button)
+function FoxObject:playInTrapAnimation(mute)
+    debug_log("FoxObject:playAnimation ", self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT])
+    if self.mTypeCage == FoxObject.CAGE_TYPE.CT_CAGE then
+        self:playInTrapCageAnimation();
+    elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_HIDDEN then
+        self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_HIDDEN_CAGE];
+        --self.mCallbackOnDone:start();
+    elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_TORNADO then
+        self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE];
+    elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_NET then
+        self:playInTrapNetAnimation();
+    else
+        self.mAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP] = self.mCageAnimations[PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP];
+    end
+    self:playInTrapSound(mute);
+end
+
+--------------------------------
+function FoxObject:playAnimation(button, mute)
     if button == PlayerObject.PLAYER_STATE.PS_TOP then
 		self.mAnimations[-1] = self.mBackIdleAnimation;
 	elseif button == PlayerObject.PLAYER_STATE.PS_LEFT or 
@@ -440,7 +456,7 @@ function FoxObject:playAnimation(button)
     elseif button == PlayerObject.PLAYER_STATE.PS_BOTTOM then
         self.mAnimations[-1] = self.mFrontIdleAnimation;
     elseif button == PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP then
-        self:playInTrapAnimation();
+        self:playInTrapAnimation(mute);
 	end
 	FoxObject:superClass().playAnimation(self, button);
 end
@@ -571,6 +587,7 @@ end
 function FoxObject:leaveTrap(pos)
     FoxObject:superClass().leaveTrap(self, pos);
     self.mTypeCage = nil;
+    SimpleAudioEngine:getInstance():playEffect(gSounds.FOX_POWERUP_SOUND);
 end
 
 --------------------------------

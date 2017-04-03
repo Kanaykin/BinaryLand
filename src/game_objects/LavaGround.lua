@@ -13,6 +13,7 @@ end
 function LavaGround:onEnter(player)
 	info_log("LavaGround:onEnter ", player:getTag());
 	LavaGround:superClass().onEnter(self, player);
+	SimpleAudioEngine:getInstance():playEffect(gSounds.ENTER_LAVA_SOUND);
 	--self:updateOrder();
 	local players = self.mField:getPlayerObjects();
     for i, p in pairs(players) do

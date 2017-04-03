@@ -6,6 +6,7 @@ FireTornadoObject = inheritsFrom(TornadoObject)
 function FireTornadoObject:onPlayerEnterImpl(player, pos)
 	info_log("FireTornadoObject.onPlayerEnterImpl ", player:getId(), " ", self.mPlayerContained);
 	FireTornadoObject:superClass().onPlayerEnterImpl(self, player, pos);
+    --SimpleAudioEngine:getInstance():playEffect(gSounds.ENTER_LAVA_SOUND);
 
 	local players = self.mField:getPlayerObjects();
     for i, p in pairs(players) do

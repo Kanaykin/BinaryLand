@@ -587,7 +587,7 @@ end
 function Field:onEnterBonusTrigger(player)
     info_log("Field:onEnterBonusTrigger ");
 --    self.mScore = self.mScore + 100;
-    SimpleAudioEngine:getInstance():playEffect(gSounds.BONUS_SOUND);
+    --SimpleAudioEngine:getInstance():playEffect(gSounds.BONUS_SOUND);
 end
 
 --------------------------------
@@ -613,7 +613,7 @@ end
 --------------------------------
 function Field:onEnemyEnterTrigger(enemy)
 	info_log("Field:onEnemyEnterTrigger ", enemy);
-	SimpleAudioEngine:getInstance():playEffect(gSounds.MOB_DEATH_SOUND)
+	--SimpleAudioEngine:getInstance():playEffect(gSounds.MOB_DEATH_SOUND)
 
     enemy:onEnterFightTrigger();
     if self.mEnemyEnterTriggerListener then

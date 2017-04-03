@@ -293,9 +293,22 @@ function BonusObject:store(data)
 end
 
 ---------------------------------
+function BonusObject:playSound()
+    if(self.mType == BonusObject.CHEST_TYPE) then
+        SimpleAudioEngine:getInstance():playEffect(gSounds.CHEST_OPEN_SOUND);
+    elseif self.mType == BonusObject.COINS_TYPE then
+        SimpleAudioEngine:getInstance():playEffect(gSounds.COINS_SOUND);
+    elseif self.mType == BonusObject.TIME_TYPE then
+        SimpleAudioEngine:getInstance():playEffect(gSounds.TIME_BONUS_SOUND);
+    end
+end
+
+---------------------------------
 function BonusObject:onEnter(player)
     BonusObject:superClass().onEnter(self, player);
     info_log("BonusObject:onEnter type ", self.mType);
+
+    self:playSound();
 
     self.mListOpenAnimation = List.new();
     if self.mType == BonusObject.COINS_TYPE or ( self.mType == BonusObject.CHEST_TYPE and self.mChestType == BonusObject.CHEST_COINS_TYPE) then

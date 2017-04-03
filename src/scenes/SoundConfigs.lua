@@ -11,7 +11,15 @@ gSounds = {
 	ENTER_TORNADO_SOUND = "sounds/Effects/6_tornado.wav",
 	HUNTER_SHOT_SOUND = "sounds/Effects/7_shot_1.wav",
 	FOX_PETRIFICATION_SOUND = "sounds/Effects/8_petrification.wav",
-
-	MOB_DEATH_SOUND = "sounds/Effects/Death7.wav",
-	BONUS_SOUND = "sounds/Effects/bucks_count.mp3"
+	CHEST_OPEN_SOUND = "sounds/Effects/9_micro_fanfars.wav",
+	COINS_SOUND = "sounds/Effects/10_coin_1.wav",
+	TIME_BONUS_SOUND = "sounds/Effects/11_hourglass.wav",
+	DOG_BARK_SOUND = "sounds/Effects/13_bark_1.wav",
+	DOG_WHINING_SOUND = "sounds/Effects/14_whining.wav",
+	ENTER_LAVA_SOUND = "sounds/Effects/15_lava.wav",
+	HUNTER_DEATH_SOUND = "sounds/Effects/16_hunter_disappearance.wav",
+	FOX_POWERUP_SOUND = "sounds/Effects/17_power_up.wav",
+	
+	--MOB_DEATH_SOUND = "sounds/Effects/Death7.wav",
+	--BONUS_SOUND = "sounds/Effects/bucks_count.mp3"
 }

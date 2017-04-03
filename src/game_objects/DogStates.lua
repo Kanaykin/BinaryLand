@@ -22,6 +22,7 @@ end]]
 
 --[[///////////////////////////]]
 RunAwayState = inheritsFrom(MoveState)
+RunAwayState.mWhiningSound = nil
 
 ------------------------------------
 function RunAwayState:enter(params)
@@ -30,12 +31,14 @@ function RunAwayState:enter(params)
     info_log ("RunAwayState:enter point.x ", point.x, " point.y ", point.y);
     self.mObject:runAway(point);
     self.mObject:swapAnimations();
+    self.mWhiningSound = SimpleAudioEngine:getInstance():playEffect(gSounds.DOG_WHINING_SOUND, true);
 end
 
 ------------------------------------
 function RunAwayState:leave(state)
     debug_log("RunAwayState:leave");
     self.mObject:swapAnimations();
+    SimpleAudioEngine:getInstance():stopEffect(self.mWhiningSound);
     return true;
 end
 
@@ -65,6 +68,7 @@ function HunterDeadState:enter(params)
     self.mObject:runAway(awayPoint);
     self.mObject:swapAnimations();
     self.mObject:updateRunAwayPath();
+    self.mWhiningSound = SimpleAudioEngine:getInstance():playEffect(gSounds.DOG_WHINING_SOUND, true);
 end
 
 ------------------------------------
@@ -168,6 +172,7 @@ end
 --[[///////////////////////////]]
 DogPlayerFoundState = inheritsFrom(BaseMobState)
 DogPlayerFoundState.mFoundPlayer = nil
+DogPlayerFoundState.mBarkSound = nil
 
 ------------------------------------
 function DogPlayerFoundState:enter(params)
@@ -175,12 +180,15 @@ function DogPlayerFoundState:enter(params)
     self.mFoundPlayer = params.player;
     self.mObject:resetMovingParams();
     self.mObject:setFoundPlayerPos(self.mObject.mGridPosition);
+    --DOG_BARK_SOUND
+    self.mBarkSound = SimpleAudioEngine:getInstance():playEffect(gSounds.DOG_BARK_SOUND, true);
 end
 
 ------------------------------------
 function DogPlayerFoundState:leave(state)
     debug_log("DogPlayerFoundState:leave");
     self.mObject:setFoundPlayerPos(nil);
+    SimpleAudioEngine:getInstance():stopEffect(self.mBarkSound);
     return true;
 end
 
