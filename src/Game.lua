@@ -205,7 +205,7 @@ end
 
 ---------------------------------
 function Game:getMusicEnabled()
-    local musicVolume = CCUserDefault:getInstance():getIntegerForKey("MusicValue", 1);
+    local musicVolume = CCUserDefault:getInstance():getIntegerForKey("MusicValue", 0);
     info_log("Game:getMusicEnabled musicVolume ", musicVolume);
     return musicVolume ~= 0;
 end
