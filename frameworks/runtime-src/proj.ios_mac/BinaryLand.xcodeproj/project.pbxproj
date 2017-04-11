@@ -98,7 +98,6 @@
 		5023812417EBBCAC00990C9B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5023811417EBBCAC00990C9B /* main.m */; };
 		5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5023811717EBBCAC00990C9B /* RootViewController.mm */; };
 		5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F293BB7E15EB831F00256477 /* AppDelegate.cpp */; };
-		5023813717EBBCE400990C9B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF4C402178663F200122817 /* libz.dylib */; };
 		5023813E17EBBCE400990C9B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
 		5023814017EBBCE400990C9B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D015EB7BE500256477 /* OpenAL.framework */; };
 		5023814117EBBCE400990C9B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D215EB7BE500256477 /* AudioToolbox.framework */; };
@@ -132,6 +131,7 @@
 		F293B3D915EB7BE500256477 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D815EB7BE500256477 /* Foundation.framework */; };
 		F293B3DB15EB7BE500256477 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3DA15EB7BE500256477 /* CoreGraphics.framework */; };
 		F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F293BB7E15EB831F00256477 /* AppDelegate.cpp */; };
+		F614F3991E96DD40009D6E25 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A513F1561A3E2983001D052A /* Logger.cpp */; };
 		F63895E61E2EBCB000F8ABEA /* FacebookADS.mm in Sources */ = {isa = PBXBuildFile; fileRef = F63895E41E2EBCB000F8ABEA /* FacebookADS.mm */; };
 		F63895E71E2EBCB000F8ABEA /* FacebookADS.mm in Sources */ = {isa = PBXBuildFile; fileRef = F63895E41E2EBCB000F8ABEA /* FacebookADS.mm */; };
 		F63895E91E2EBDB700F8ABEA /* Advertisement.mm in Sources */ = {isa = PBXBuildFile; fileRef = F63895E81E2EBDB700F8ABEA /* Advertisement.mm */; };
@@ -316,7 +316,6 @@
 				50D7C97017EBBEEC005D0B91 /* IOKit.framework in Frameworks */,
 				50D7C96E17EBBEE6005D0B91 /* AppKit.framework in Frameworks */,
 				50D7C96C17EBBEDF005D0B91 /* OpenGL.framework in Frameworks */,
-				5023813717EBBCE400990C9B /* libz.dylib in Frameworks */,
 				5023813E17EBBCE400990C9B /* QuartzCore.framework in Frameworks */,
 				5023814017EBBCE400990C9B /* OpenAL.framework in Frameworks */,
 				5023814117EBBCE400990C9B /* AudioToolbox.framework in Frameworks */,
@@ -798,6 +797,7 @@
 				F63895E71E2EBCB000F8ABEA /* FacebookADS.mm in Sources */,
 				F65AF43C1E1D83160094C6FA /* lua_module_extend.cpp in Sources */,
 				F65AF43D1E1D83610094C6FA /* Statistic.mm in Sources */,
+				F614F3991E96DD40009D6E25 /* Logger.cpp in Sources */,
 				F63895EA1E2EBDB700F8ABEA /* Advertisement.mm in Sources */,
 				C06E23C418CEF9740093C81A /* main.cpp in Sources */,
 				5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */,
@@ -872,6 +872,8 @@
 					100000000,
 					"-pagezero_size",
 					10000,
+					"-lz",
+					"-lsqlite3",
 				);
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos/platform/mac $(SRCROOT)/../../cocos2d-x/external/glfw3/include/mac";
@@ -899,6 +901,8 @@
 					100000000,
 					"-pagezero_size",
 					10000,
+					"-lz",
+					"-lsqlite3",
 				);
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos/platform/mac $(SRCROOT)/../../cocos2d-x/external/glfw3/include/mac";

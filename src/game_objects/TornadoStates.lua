@@ -26,8 +26,9 @@ function TornadoCatchState:enter(params)
 
     if not params.player:isInTrap() then
         local node = self.mObject:releaseNode();
+        local fireTornado = self.mObject:isFireTornado();
         --params.field:createSnareTrigger(Vector.new(params.player.mNode:getPosition()));
-        params.field:createTornadoTrigger(node);
+        params.field:createTornadoTrigger(node, fireTornado);
     end
 
     self.mObject:resetMovingParams();

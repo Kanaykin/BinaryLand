@@ -18,3 +18,8 @@ function FireTornadoObject:onPlayerEnterImpl(player, pos)
     	self.mField:onStateLose();
     end
 end
+
+--------------------------------
+function FireTornadoObject:isFireTornado()
+    return true;
+end

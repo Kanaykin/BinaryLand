@@ -604,13 +604,13 @@ function FoxObject:enterIceGround(pos)
 end
 
 --------------------------------
-function FoxObject:enterTornadoTrap(pos, trigger)
-    debug_log("FoxObject:enterTornadoTrap ", self:getId());
-    self:createInTornadoCageAnimation();
+function FoxObject:enterTornadoTrap(pos, trigger, isFireTornado)
+    debug_log("FoxObject:enterTornadoTrap ", self:getId(), isFireTornado);
+    self:createInTornadoCageAnimation(isFireTornado);
     self:enterCage(pos);
     self.mTypeCage = FoxObject.CAGE_TYPE.CT_TORNADO;
 
-    local anchor = self:getAnchorInTornadoAnimation();
+    local anchor = self:getAnchorInTornadoAnimation(isFireTornado);
     local curAnchor = self.mAnimationNode:getAnchorPoint();
 
     self.mAnchorInterpolation = LinearInterpolator:create();
@@ -684,7 +684,7 @@ function FoxObject:getAnchorInHiddenCageAnimation()
 end
 
 --------------------------------
-function FoxObject:getAnchorInTornadoAnimation()
+function FoxObject:getAnchorInTornadoAnimation(isFireTornado)
     local sprite = tolua.cast(self.mAnimationNode, "cc.Sprite");
     info_log("FoxObject:getAnchorInTornadoAnimation ", sprite:isFlippedX());
 
@@ -693,6 +693,14 @@ function FoxObject:getAnchorInTornadoAnimation()
     debug_log("FoxObject:getAnchorInTornadoAnimation anch ", anch.x, " y ", anch.y);
 
     local delta = sprite:isFlippedX() and -0.1 or 0;
+
+    if isFireTornado then
+        if self.mIsFemale then
+            return {x = 0.5 + delta, y = 0.16};
+        else
+            return {x = 0.5 + delta, y = 0.16};
+        end
+    end
 
     if self.mIsFemale then
         --delta = sprite:isFlippedX() and -0.1 or 0;
@@ -723,18 +731,49 @@ function FoxObject:onHiddenAnimDone()
 end
 
 --------------------------------
-function FoxObject:createInTornadoCageAnimation()
-    if self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE] then
-        self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE]:destroy();
-    end
+function FoxObject:createInFireTornadoAnimationImpl()
+    local animation = PlistAnimation:create();
+    local anchor = self:getAnchorInTornadoAnimation(true); 
+    animation:init(self:getPrefixTexture().."InFireTornadoTrap.plist", self.mAnimationNode, anchor, nil, 0.16);
+
+    local animationTornado = PlistAnimation:create();
+    animationTornado:init("FireTornadoVulcanoAnimation.plist", self.mAnimationNode, {x = 0.5 , y = 0.3}, nil, 0.18);
+
+    local repeatAnimation = RepeatAnimation:create();
+    repeatAnimation:init(animationTornado, soft);
+
+    local sequence = SequenceAnimation:create();
+    sequence:init();
+
+    sequence:addAnimation(animation);
+    sequence:addAnimation(repeatAnimation);
+
+    self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE] = sequence;
+end
+
+--------------------------------
+function FoxObject:createInTornadoAnimationImpl()
     local animation = PlistAnimation:create();
     local anchor = self:getAnchorInTornadoAnimation(); 
-    animation:init(self:getPrefixTexture().."InTornadoTrap.plist", self.mAnimationNode, anchor, nil, 0.2);
+    local animName = "InTornadoTrap.plist"
+    animation:init(self:getPrefixTexture()..animName, self.mAnimationNode, anchor, nil, 0.2);
 
     local repeatAnimation = RepeatAnimation:create();
     repeatAnimation:init(animation, soft);
 
     self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE] = repeatAnimation;
+end
+
+--------------------------------
+function FoxObject:createInTornadoCageAnimation(isFireTornado)
+    if self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE] then
+        self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE]:destroy();
+    end
+    if isFireTornado then
+        self:createInFireTornadoAnimationImpl();
+    else
+        self:createInTornadoAnimationImpl();
+    end
 end
 
 --------------------------------

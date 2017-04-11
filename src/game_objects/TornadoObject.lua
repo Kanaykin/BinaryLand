@@ -32,6 +32,11 @@ function TornadoObject:releaseNode()
 end
 
 --------------------------------
+function TornadoObject:isFireTornado()
+	return false;
+end
+
+--------------------------------
 function TornadoObject:getDestPoint()
 	--debug_log("TornadoObject:getDestPoint dest x ", self.mPoints[self.mDestIndex].x);
 	--debug_log("TornadoObject:getDestPoint dest y ", self.mPoints[self.mDestIndex].y);

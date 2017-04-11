@@ -719,10 +719,10 @@ function Field:incEnterTrapCounter()
 end
 
 --------------------------------
-function Field:onPlayerEnterTornadoTrap(player, pos, trigger)
-    info_log("onPlayerEnterTornadoTrap trigger ", trigger);
+function Field:onPlayerEnterTornadoTrap(player, pos, trigger, isFireTornado)
+    info_log("onPlayerEnterTornadoTrap trigger ", trigger, " isFireTornado ", isFireTornado);
     -- if player is primary then game over
-    player:enterTornadoTrap(pos, trigger);
+    player:enterTornadoTrap(pos, trigger, isFireTornado);
     self:incEnterTrapCounter();
 end
 
@@ -791,10 +791,10 @@ function Field:createSpirit(pos, player)
 end
 
 --------------------------------
-function Field:createTornadoTrigger(node)
+function Field:createTornadoTrigger(node, isFireTornado)
     info_log("Field:createTornadoTrigger");
     local web = SnareTrigger:create();
-    local enterCallback = Callback.new(self, Field.onPlayerEnterTornadoTrap);
+    local enterCallback = Callback.new(self, Field.onPlayerEnterTornadoTrap, isFireTornado);
     local leaveCallback = Callback.new(self, Field.onPlayerLeaveWeb)
     web:init(self, node, enterCallback, leaveCallback);
     table.insert(self.mObjects, web);
