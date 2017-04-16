@@ -33,7 +33,7 @@ function FramesAnimation:init(textureName, frames, node, texture, anchor)
 	self.mAnimation:setDelayPerUnit(1 / 10);
 	self.mAnimation:setRestoreOriginalFrame(true);
 
-	local action = CCAnimate:create(self.mAnimation);
+	local action = cc.Animate:create(self.mAnimation);
 	self.mAction = CCRepeatForever:create(action);
 
 	self.mAction:retain();

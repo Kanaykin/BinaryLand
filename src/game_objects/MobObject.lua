@@ -96,7 +96,7 @@ function MobObject:initAnimation()
 	animation:setDelayPerUnit(1 / 2);
 	animation:setRestoreOriginalFrame(true);
 
-	local action = CCAnimate:create(animation);
+	local action = cc.Animate:create(animation);
 	local repeatForever = CCRepeatForever:create(action);
 	self.mNode:runAction(repeatForever);
 end

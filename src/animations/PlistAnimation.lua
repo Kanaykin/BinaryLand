@@ -41,7 +41,9 @@ function PlistAnimation:play()
 --	debug_log("PlistAnimation:play");
 	PlistAnimation:superClass().play(self);
 
-	self.mNode:stopAction(self.mAction);
+    if not self.mAction:isDone() then
+        self.mNode:stopAction(self.mAction);
+    end
 	--debug_log("PlistAnimation:play mNode ", self.mNode);
 	--debug_log("PlistAnimation:play mAction ", self.mAction);
 	self.mNode:runAction(self.mAction);
@@ -61,8 +63,10 @@ end
 
 ----------------------------
 function PlistAnimation:stop()
-  debug_log("PlistAnimation:stop ");
-	self.mNode:stopAction(self.mAction);
+    debug_log("PlistAnimation:stop ");
+    if not self.mAction:isDone() then
+        self.mNode:stopAction(self.mAction);
+    end
 end
 
 --------------------------------
@@ -109,7 +113,7 @@ function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
     self.mAnimation:setDelayPerUnit(delayPerUnit);
     self.mAnimation:setRestoreOriginalFrame(true);
 
-    local action = CCAnimate:create(self.mAnimation);
+    local action = cc.Animate:create(self.mAnimation);
     self.mAction = action;--CCActionInterval:create(action, 1);
     self.mAction:retain();
 end

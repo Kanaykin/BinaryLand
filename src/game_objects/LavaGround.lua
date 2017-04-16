@@ -21,6 +21,7 @@ function LavaGround:onEnter(player)
     		p:resetMovingParams();
     	end
     end
+    player:enterLavaGround();
     self.mField:onStateLose();
 end
 

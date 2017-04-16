@@ -430,7 +430,7 @@ end
 
 --------------------------------
 function FoxObject:playInTrapAnimation(mute)
-    debug_log("FoxObject:playAnimation ", self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_CAGE_LEFT])
+    debug_log("FoxObject:playInTrapAnimation ", self.mTypeCage)
     if self.mTypeCage == FoxObject.CAGE_TYPE.CT_CAGE then
         self:playInTrapCageAnimation();
     elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_HIDDEN then
@@ -596,6 +596,16 @@ function FoxObject:leaveIceGround()
 end
 
 --------------------------------
+function FoxObject:enterLavaGround()
+    if self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE] then
+        self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE]:destroy();
+    end
+    self.mTypeCage = FoxObject.CAGE_TYPE.CT_TORNADO;
+    self:createInFireTornadoAnimationImpl("EmpltyFireTornadoTrap.plist");
+    self:playAnimation(PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP);
+end
+
+--------------------------------
 function FoxObject:enterIceGround(pos)
     self:enterTrap(pos);
     self.mMoveFinishCallback = nil;
@@ -731,13 +741,13 @@ function FoxObject:onHiddenAnimDone()
 end
 
 --------------------------------
-function FoxObject:createInFireTornadoAnimationImpl()
+function FoxObject:createInFireTornadoAnimationImpl(finishTornadoAnim)
     local animation = PlistAnimation:create();
     local anchor = self:getAnchorInTornadoAnimation(true); 
     animation:init(self:getPrefixTexture().."InFireTornadoTrap.plist", self.mAnimationNode, anchor, nil, 0.16);
 
     local animationTornado = PlistAnimation:create();
-    animationTornado:init("FireTornadoVulcanoAnimation.plist", self.mAnimationNode, {x = 0.5 , y = 0.3}, nil, 0.18);
+    animationTornado:init(finishTornadoAnim, self.mAnimationNode, {x = 0.5 , y = 0.3}, nil, 0.18);
 
     local repeatAnimation = RepeatAnimation:create();
     repeatAnimation:init(animationTornado, soft);
@@ -770,7 +780,7 @@ function FoxObject:createInTornadoCageAnimation(isFireTornado)
         self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE]:destroy();
     end
     if isFireTornado then
-        self:createInFireTornadoAnimationImpl();
+        self:createInFireTornadoAnimationImpl("FireTornadoVulcanoAnimation.plist");
     else
         self:createInTornadoAnimationImpl();
     end
