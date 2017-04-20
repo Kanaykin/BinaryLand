@@ -372,7 +372,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>27</real>
+							<real>24</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -422,12 +422,10 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Фредерик, смотри, а вот и первый лисенок!
- Быстрее, спасем его!</string>
+						<string>Мы с тобой — волшебные лисы. Но сильны как прежде
+ мы станем тогда, когда спасем всех лисят</string>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -452,7 +450,7 @@
 						<key>value</key>
 						<array>
 							<real>80</real>
-							<real>9</real>
+							<real>9.1000003814697266</real>
 							<integer>4</integer>
 						</array>
 					</dict>
@@ -564,6 +562,8 @@
 						<string>Нажми для продолжения</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>

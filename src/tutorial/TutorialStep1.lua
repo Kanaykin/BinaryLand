@@ -24,7 +24,7 @@ end
 
 --------------------------------
 function TutorialStep1:getNextStep()
-	return "TutorialStep2";
+	return "TutorialStep1_1";
 end
 
 --------------------------------

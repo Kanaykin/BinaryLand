@@ -1,6 +1,8 @@
 require "src/base/Inheritance"
 require "src/tutorial/TutorialStep0"
 require "src/tutorial/TutorialStep1"
+require "src/tutorial/TutorialStep1_1"
+require "src/tutorial/TutorialStep1_2"
 require "src/tutorial/TutorialStep2"
 require "src/tutorial/TutorialStep3"
 require "src/tutorial/TutorialStep3_1"

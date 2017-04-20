@@ -2,6 +2,7 @@ require "src/base/Inheritance"
 require "src/tutorial/Finger"
 require "src/tutorial/Arrow"
 require "src/base/Log"
+require "src/gui/TouchWidget"
 
 TutorialStepBase =  inheritsFrom(nil)
 TutorialStepBase.mFinger = nil
@@ -11,6 +12,8 @@ TutorialStepBase.mTutorialManager = nil
 TutorialStepBase.mIsFinished = false
 TutorialStepBase.mNode = nil;
 TutorialStepBase.mCurrentTime = nil;
+
+TutorialStepBase.LAYER_TAG = 10;
 
 ---------------------------------
 function TutorialStepBase:destroy()
@@ -71,8 +74,10 @@ function TutorialStepBase:initBeginAnimation(animator)
 	animator:runAnimationsForSequenceNamed("animation");
 end
 
---------------------------------
-function TutorialStepBase:onTouchHandler()
+-- --------------------------------
+function TutorialStepBase:onTouchHandler(action)
+	info_log("TutorialStepBase:onTouchHandler action ", action);
+--	self.mIsFinished = true;
 end
 
 ---------------------------------
@@ -90,13 +95,23 @@ function TutorialStepBase:initFromCCB(ccbfile, gameScene)
 
 	gameScene:addChild(node);
 
-	local layer = tolua.cast(node, "cc.Layer");
+	local layer = tolua.cast(node:getChildByTag(TutorialStepBase.LAYER_TAG), "cc.Layer");
 	info_log("TutorialStepBase:init layer ", layer);
 
 	local function onTouchHandler(action, var)
-		info_log("onTouchHandler ");
-		self:onTouchHandler();
+		info_log("TutorialStepBase:onTouchHandler action ", action);
+		if action == "ended" then
+			self.mIsFinished = true;
+		end
+		return false--self.mTouch:onTouchHandler(action, var);
 	end
+	-- self.mTouch = TouchWidget:create();
+	-- self.mTouch:init(layer:getBoundingBox());
+
+	if layer then
+    	layer:registerScriptTouchHandler(onTouchHandler, true, 2, false);
+    	layer:setTouchEnabled(true);
+    end
 end
 
 --------------------------------
@@ -119,12 +134,12 @@ end
 
 --------------------------------
 function TutorialStepBase:tick(dt)
-	if self.mCurrentTime then
-	    self.mCurrentTime = self.mCurrentTime - dt;
-		if self.mCurrentTime <= 0 then
-			self.mIsFinished = true;
-		end
-	end
+	-- if self.mCurrentTime then
+	--     self.mCurrentTime = self.mCurrentTime - dt;
+	-- 	if self.mCurrentTime <= 0 then
+	-- 		self.mIsFinished = true;
+	-- 	end
+	-- end
 end
 
 --------------------------------

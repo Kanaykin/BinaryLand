@@ -57,9 +57,10 @@ local fallback_tbl = setmetatable(ListenerGlue, {__index = func_example})
 
 -----------------------------------
 function ListenerGlue.new(firstListener, secondListener)
-return setmetatable({ mFirstListener = firstListener, mSecondListener = secondListener,
+    debug_log("ListenerGlue.new firstListener ", firstListener, " secondListener ", secondListener);
+    return setmetatable({ mFirstListener = firstListener, mSecondListener = secondListener,
     callback = function(a1, var, ...)
-        info_log("ListenerGlue.callback ", a1.mFirstListener)
+        info_log("ListenerGlue.callback ", a1.mFirstListener, " second ", a1.mSecondListener, " nameFunc ", a1.nameFunc)
         a1.mFirstListener[a1.nameFunc](a1.mFirstListener, ...);
         a1.mSecondListener[a1.nameFunc](a1.mSecondListener, ...);
     end

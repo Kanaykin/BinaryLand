@@ -134,6 +134,7 @@ end
 
 --------------------------------
 function MainUI:addTouchListener(listener)
+    debug_log("MainUI:addTouchListener ", listener)
     if self.mListener then
         local newListener = ListenerGlue.new(self.mListener, listener);
         self.mListener = newListener;
