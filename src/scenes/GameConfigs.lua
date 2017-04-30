@@ -10,7 +10,7 @@ gLocations = {
 		levels = {
 			{
 				--opened = false,
-				ccbFile = "Level1_1p1_new",
+				ccbFile = {"Level1_1p1_new", "Level1_1p2"},
 				tileMap = "Level1_1_map.tmx",
 				cellSize = 32,
 				tutorial = true,

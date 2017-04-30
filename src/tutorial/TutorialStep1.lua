@@ -61,9 +61,9 @@ function TutorialStep1:init(gameScene, field, tutorialManager)
 	self:initArrow(gameScene, field);
 
 	self.mTutorialManager:getMainUI():getJoystick():clearBlockedButtons();
-	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.LEFT);
-	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.TOP);
-	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.BOTTOM);
+	-- self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.LEFT);
+	-- self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.TOP);
+	-- self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.BOTTOM);
 
 	self.mTutorialManager:getMainUI():getFightButton():setBlocked(true);
 

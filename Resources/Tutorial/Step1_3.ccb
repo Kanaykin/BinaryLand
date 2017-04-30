@@ -422,10 +422,12 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Мы с тобой — волшебные лисы. Но сильны как прежде
- мы станем тогда, когда спасем всех лисят</string>
+						<string>Поэтому сейчас нам приходиться мириться
+ с некоторыми неудобствами</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -562,8 +564,6 @@
 						<string>Нажми для продолжения</string>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -1600,7 +1600,7 @@
 			<key>name</key>
 			<string>animation</string>
 			<key>offset</key>
-			<real>0.0</real>
+			<real>0.018751144409179688</real>
 			<key>position</key>
 			<real>0.96666663885116577</real>
 			<key>resolution</key>

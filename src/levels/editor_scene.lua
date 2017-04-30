@@ -1,1 +1,1 @@
-return --require "src/levels/lvls/5-6"
+return require --"src/levels/lvls/lvl_1_1"
