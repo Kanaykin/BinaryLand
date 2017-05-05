@@ -42,17 +42,23 @@ function StartMovieStep:init(sceneGame, stepName, callback, game, startScene)
 
     animator:runAnimationsForSequenceNamed("Movie");
 
-    self:initLabel(node, game);
+    self:initLabel(node, game, stepName);
     self:initDoubleTouch(node, startScene);
 end
 
 --------------------------------
-function StartMovieStep:initLabel(node, game)
+function StartMovieStep:initLabel(node, game, stepName)
 	local label = tolua.cast(node:getChildByTag(StartMovieStep.LABEL_TAG), "cc.Label");
     info_log("StartMovieStep:loadScene label ", label);
 
+    local localizationManager = game:getLocalizationManager();
+    local text = localizationManager:getStringForKey(stepName.."Text");
+    debug_log("StartMovieStep:initLabel text ", text);
     if label then
         setDefaultFont(label, game:getScale());
+        if text then
+            label:setString(text);
+        end
     end
 end
 

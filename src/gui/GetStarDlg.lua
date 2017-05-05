@@ -13,6 +13,8 @@ GetStarDlg.BUTTON_YES = 100;
 GetStarDlg.BUTTON_NO = 101;
 GetStarDlg.ANIM_SPRITE = 75;
 
+GetStarDlg.ErrorLoadingText = "ErrorLoadingText";
+
 --------------------------------
 function GetStarDlg:init(game, uiLayer, mainUI)
 	self:superClass().init(self, game, uiLayer, "VictoryDlgAds");
@@ -30,6 +32,9 @@ function GetStarDlg:initButton(nodeBase, tag, action)
 
 	label = tolua.cast(label, "cc.Label");
     if label then
+        
+        setLocalizedText(label, self.mGame);
+
         setDefaultFont(label, self.mGame:getScale());
     end
 end
@@ -86,8 +91,12 @@ function GetStarDlg:onYesPressed()
         self.mMainUI:showWinDlg(self.mStarsCount, true);
     else
         self:hide();
+        
+        local localizationManager = self.mGame:getLocalizationManager();
+        local text = localizationManager:getStringForKey(GetStarDlg.ErrorLoadingText);
+
         local message_params = {
-            text = "Ошибка загрузки.\nПопробуйте позже.",
+            text = text,
             ok_text = "Ok",
             ok_callback = function()
                 self.mGame.mSceneMan:runNextLevelScene();
@@ -132,6 +141,9 @@ function GetStarDlg:initGuiElements()
 
     local label = tolua.cast(nodeBase:getChildByTag(GetStarDlg.LABEL), "cc.Label");
     if label then
+
+        setLocalizedText(label, self.mGame);
+
         setDefaultFont(label, self.mGame:getScale());
     end
 

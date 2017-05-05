@@ -4,6 +4,7 @@ require "src/scenes/Location"
 require "src/gui/DialogManager"
 require "CCBReaderLoad"
 require "src/base/Log"
+require "src/LocalizationManager"
 
 --[[
 It is main class for game.
@@ -15,6 +16,7 @@ Game.mGameTime = 0
 Game.mScale = 1
 Game.mLocations = nil
 Game.mLastVisitLocation = nil
+Game.mLocalizationManager = nil
 
 local SUPPORTED_RESOLUTION = {
 	{ size = cc.size(480, 320), scale = 1, searchPath = "resources-iphone"},
@@ -217,6 +219,11 @@ function Game:setConfiguration()
 end
 
 ---------------------------------
+function Game:getLocalizationManager()
+	return self.mLocalizationManager
+end
+
+---------------------------------
 function Game:init()
 
 	self.mLocations = {}
@@ -226,6 +233,9 @@ function Game:init()
 	info_log("Game:init xmlFilePath ", xmlFilePath);
 
 	self:initResolution();
+
+	self.mLocalizationManager = LocalizationManager:create()
+	self.mLocalizationManager:init()
 
     -- set game configuration
     self:setConfiguration();

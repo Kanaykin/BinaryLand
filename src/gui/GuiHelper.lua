@@ -43,6 +43,14 @@ function setDefaultFont(label, scale)
 end
 
 -----------------------------
+function setLocalizedText(label, game)
+    local textTag = label:getString();
+    local localizationManager = game:getLocalizationManager();
+    local text = localizationManager:getStringForKey(textTag);
+    label:setString(text);
+end
+
+-----------------------------
 function changeMenuItemFrame(menuItem, name_normal, name_pressed)
     local frame_normal = GuiHelper.getSpriteFrame(name_normal, menuItem:getContentSize());
     local frame_pressed = GuiHelper.getSpriteFrame(name_pressed, menuItem:getContentSize());

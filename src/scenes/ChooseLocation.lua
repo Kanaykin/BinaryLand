@@ -39,7 +39,7 @@ ChooseLocation.BONUS_NODE = 500;
 ChooseLocation.BONUS_MENU = 70;
 ChooseLocation.BONUS_MENU_ITEM = 71;
 
-local MovieText = "Пришло время помочь взрослым лисам вернуть своё потомство!"
+local MovieText = "StartMovieStep6Text";
 
 
 --------------------------------
@@ -321,7 +321,10 @@ function ChooseLocation:initGui(params)
 
             if label then
                 setDefaultFont(label, game:getScale());
-                label:setString(MovieText);
+
+                local localizationManager = game:getLocalizationManager();
+                local text = localizationManager:getStringForKey(MovieText);
+                label:setString(text);
             end
         else
             layer:setVisible(false);

@@ -688,8 +688,7 @@
 								<key>type</key>
 								<string>Text</string>
 								<key>value</key>
-								<string>Посмотреть ролик 
-и получить звезду</string>
+								<string>WatchAdsText</string>
 							</dict>
 						</array>
 					</dict>
@@ -796,7 +795,7 @@
 								<key>value</key>
 								<array>
 									<real>50</real>
-									<real>36</real>
+									<real>34</real>
 									<integer>4</integer>
 								</array>
 							</dict>
@@ -1336,7 +1335,7 @@
 								<key>type</key>
 								<string>String</string>
 								<key>value</key>
-								<string>Да</string>
+								<string>YesText</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1458,6 +1457,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -1552,7 +1553,7 @@
 								<key>type</key>
 								<string>String</string>
 								<key>value</key>
-								<string>Нет</string>
+								<string>NoText</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1761,8 +1762,6 @@
 						<false/>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>

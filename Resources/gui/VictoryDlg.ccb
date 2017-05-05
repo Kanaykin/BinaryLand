@@ -731,7 +731,7 @@
 								<key>type</key>
 								<string>Text</string>
 								<key>value</key>
-								<string>Ловушки:</string>
+								<string>VictoryDlgTrapText</string>
 							</dict>
 						</array>
 					</dict>
@@ -1529,7 +1529,7 @@
 								<key>type</key>
 								<string>String</string>
 								<key>value</key>
-								<string>Далее</string>
+								<string>NextButtonText</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1651,6 +1651,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -1975,7 +1977,7 @@
 								<key>type</key>
 								<string>Text</string>
 								<key>value</key>
-								<string>Монеты:</string>
+								<string>VictoryDlgCoinsText</string>
 							</dict>
 						</array>
 					</dict>
@@ -2111,7 +2113,7 @@
 								<key>type</key>
 								<string>Text</string>
 								<key>value</key>
-								<string>Время:</string>
+								<string>VictoryDlgTimeText</string>
 							</dict>
 						</array>
 					</dict>
@@ -2914,8 +2916,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -3049,7 +3049,7 @@
 								<key>type</key>
 								<string>Text</string>
 								<key>value</key>
-								<string>Всего:</string>
+								<string>VictoryDlgAllText</string>
 							</dict>
 						</array>
 					</dict>

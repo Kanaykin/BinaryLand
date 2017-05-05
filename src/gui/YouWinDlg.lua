@@ -109,6 +109,7 @@ function YouWinDlg:initLabels(nodeBase)
         info_log("YouWinDlg:initGuiElements label ", label);
 
         if label then
+            setLocalizedText(label, self.mGame);
             setDefaultFont(label, self.mGame:getScale());
         end
     end
@@ -134,6 +135,8 @@ function YouWinDlg:initButtonOk(nodeBase)
 
     label = tolua.cast(label, "cc.Label");
     if label then
+        setLocalizedText(label, self.mGame);
+
         setDefaultFont(label, self.mGame:getScale());
     end
 end

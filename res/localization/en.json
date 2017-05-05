@@ -1,0 +1,26 @@
+{
+    "main_menu_play_button_label":"Play",
+    "mode_selection_menu_label":"Select mode",
+    "pause_layer_pause_title":"Pause",
+
+    "StartMovieStep1Text": "StartMovieStep1Text",
+    "StartMovieStep2Text": "StartMovieStep2Text",
+    "StartMovieStep3Text": "StartMovieStep3Text",
+    "StartMovieStep4Text": "StartMovieStep4Text",
+    "StartMovieStep5Text": "StartMovieStep5Text",
+    "StartMovieStep6Text": "StartMovieStep6Text",
+
+    "VictoryDlgTrapText": "Traps:",
+    "VictoryDlgCoinsText": "Coins:",
+    "VictoryDlgTimeText": "Time:",
+    "VictoryDlgAllText": "All:",
+
+    "NextButtonText": "Next",
+
+    "WatchAdsText": "WatchAdsText",
+
+    "YesText": "Yes",
+    "NoText": "No",
+
+    "ErrorLoadingText" : "ErrorLoadingText"
+}

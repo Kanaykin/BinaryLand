@@ -1,0 +1,26 @@
+{
+    "main_menu_play_button_label":"Играть",
+    "mode_selection_menu_label":"Выберете режим",
+    "pause_layer_pause_title":"Пауза",
+
+    "StartMovieStep1Text": "Далеко-далеко, на краю мира, раскинулся Вечный Лес... место, где до сих пор жива магия природы.",
+    "StartMovieStep2Text": "Здесь, под сенью древних деревьев, живет дивный народ волшебных лис.",
+    "StartMovieStep3Text": "Тысячи лет они охраняли Вечный Лес и его обитателей от посягательств извне.",
+    "StartMovieStep4Text": "Но злые охотники хитростью проникли в зачарованную чащу и похитили всех беззащитных лисят.",
+    "StartMovieStep5Text": "Теперь клетки с ними разбросаны и по Вечному Лесу, и далеко за его пределами...",
+    "StartMovieStep6Text": "Пришло время помочь взрослым лисам вернуть свое потомство!",
+    
+    "VictoryDlgTrapText": "Ловушки:",
+    "VictoryDlgCoinsText": "Монеты:",
+    "VictoryDlgTimeText": "Время:",
+    "VictoryDlgAllText": "Всего:",
+
+    "NextButtonText": "Далее",
+
+    "WatchAdsText": "Посмотреть ролик\n и получить звезду",
+
+    "YesText": "Да",
+    "NoText": "Нет",
+
+    "ErrorLoadingText" : "Ошибка загрузки.\nПопробуйте позже."
+}
