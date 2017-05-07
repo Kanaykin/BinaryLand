@@ -582,8 +582,7 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Фелиция, почему ты идешь в другую сторону?
-  </string>
+						<string>TutorialStep1_1Text</string>
 					</dict>
 				</array>
 				<key>selected</key>
@@ -721,7 +720,7 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Нажми для продолжения</string>
+						<string>PressToContinueText</string>
 					</dict>
 				</array>
 			</dict>

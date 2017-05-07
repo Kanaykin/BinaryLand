@@ -422,8 +422,7 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Фредерик, смотри, а вот и первый лисенок!
- Быстрее, спасем его!</string>
+						<string>TutorialStep0Text</string>
 					</dict>
 				</array>
 				<key>selected</key>
@@ -561,7 +560,7 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Нажми для продолжения</string>
+						<string>PressToContinueText</string>
 					</dict>
 				</array>
 			</dict>

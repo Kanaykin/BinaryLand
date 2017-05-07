@@ -22,5 +22,9 @@
     "YesText": "Yes",
     "NoText": "No",
 
-    "ErrorLoadingText" : "ErrorLoadingText"
+    "ErrorLoadingText" : "ErrorLoadingText",
+
+    "PressToContinueText" : "PressToContinueText",
+    "TutorialStep0Text" : "TutorialStep0Text",
+    "TutorialStep1_1Text" : "TutorialStep1_1Text"
 }

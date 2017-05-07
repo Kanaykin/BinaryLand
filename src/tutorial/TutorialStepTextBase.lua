@@ -33,6 +33,7 @@ function TutorialStepTextBase:init(gameScene, field, tutorialManager)
 
     local label = tolua.cast(self.mNode:getChildByTag(self.LABEL_NEXT_TAG), "cc.Label");
     if label then
+    	setLocalizedText(label, field.mGame);
         setDefaultFont(label, field.mGame:getScale());
     end
 end

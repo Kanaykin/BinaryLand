@@ -400,6 +400,8 @@
 										</array>
 									</dict>
 								</array>
+								<key>selected</key>
+								<true/>
 							</dict>
 						</array>
 						<key>customClass</key>
@@ -619,7 +621,7 @@
 								<key>value</key>
 								<array>
 									<real>10</real>
-									<real>71.900001525878906</real>
+									<real>76.199996948242188</real>
 									<integer>4</integer>
 								</array>
 							</dict>
@@ -818,7 +820,7 @@
 								<key>value</key>
 								<array>
 									<real>10</real>
-									<real>50</real>
+									<real>58.700000762939453</real>
 									<integer>4</integer>
 								</array>
 							</dict>
@@ -1017,7 +1019,7 @@
 								<key>value</key>
 								<array>
 									<real>10</real>
-									<real>6.1999998092651367</real>
+									<real>23.700000762939453</real>
 									<integer>4</integer>
 								</array>
 							</dict>
@@ -1216,7 +1218,7 @@
 								<key>value</key>
 								<array>
 									<real>10</real>
-									<real>28.100000381469727</real>
+									<real>41.200000762939453</real>
 									<integer>4</integer>
 								</array>
 							</dict>
@@ -1354,6 +1356,64 @@
 							</dict>
 						</array>
 					</dict>
+					<dict>
+						<key>baseClass</key>
+						<string>CCBFile</string>
+						<key>children</key>
+						<array/>
+						<key>customClass</key>
+						<string></string>
+						<key>displayName</key>
+						<string>LangButton</string>
+						<key>memberVarAssignmentName</key>
+						<string></string>
+						<key>memberVarAssignmentType</key>
+						<integer>0</integer>
+						<key>properties</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>position</string>
+								<key>type</key>
+								<string>Position</string>
+								<key>value</key>
+								<array>
+									<real>10</real>
+									<real>6.1999998092651367</real>
+									<integer>4</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>scale</string>
+								<key>type</key>
+								<string>ScaleLock</string>
+								<key>value</key>
+								<array>
+									<real>1</real>
+									<real>1</real>
+									<false/>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>tag</string>
+								<key>type</key>
+								<string>Integer</string>
+								<key>value</key>
+								<integer>30</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>ccbFile</string>
+								<key>type</key>
+								<string>CCBFile</string>
+								<key>value</key>
+								<string>ChooseLang.ccb</string>
+							</dict>
+						</array>
+					</dict>
 				</array>
 				<key>customClass</key>
 				<string></string>
@@ -1435,8 +1495,6 @@
 						<false/>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
