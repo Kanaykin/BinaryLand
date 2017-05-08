@@ -20,6 +20,9 @@ function LocalizationManager:init()
 	local curr = CCUserDefault:getInstance():getIntegerForKey("Language", -1);
 	if curr ~= -1 then
 		self.mCurrentLang = curr;
+	else
+		local statistic = extend.Statistic:getInstance();
+		statistic:sendEvent("Game", "Language", lang == LocalizationManager.RUSSIAN_LANG and "rus" or "usa", -1);
 	end
 	self:setCurrentLanguage(self.mCurrentLang);
 
