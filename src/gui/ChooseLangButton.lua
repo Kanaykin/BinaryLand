@@ -78,6 +78,11 @@ function ChooseLangButton:onChangeLangPressed()
 	local currLang = localizationManager:getCurrentLanguage();
 	local lang = currLang == LocalizationManager.ENGLISH_LANG and LocalizationManager.RUSSIAN_LANG or LocalizationManager.ENGLISH_LANG;
 	localizationManager:setCurrentLanguage(lang);
+
+	local scene = self.mGame.mSceneMan:getCurrentScene();
+	local layer = scene:getGuiLayer();
+	localizationManager:updateLabels(scene.mSceneGame)--layer);
+
 	self:updateButtonImages();
 end
 

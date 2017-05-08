@@ -6,10 +6,12 @@ LocalizationManager.mCurrentLang = nil;
 LocalizationManager.RUSSIAN_LANG = 7;
 LocalizationManager.ENGLISH_LANG = 0;
 LocalizationManager.mStrings = nil;
+LocalizationManager.mLabelKeys = nil;
 
 ---------------------------------
 function LocalizationManager:init()
-	self.mStrings = {}
+	self.mStrings = {};
+	self.mLabelKeys = {};
 
 	local lang = cc.Application:getInstance():getCurrentLanguage();
 	info_log("LocalizationManager:init lang ", lang);
@@ -37,6 +39,33 @@ function LocalizationManager:loadStrings(lang, fileName)
 		self.mStrings[lang] = parseTable;
 	end
 
+end
+
+---------------------------------
+function LocalizationManager:cacheKey(label, key)
+	self.mLabelKeys[label] = key;
+end
+
+-------------------------------------------------
+function LocalizationManager:updateLabels(node)
+	local children = node:getChildren();
+	debug_log("LocalizationManager:updateAllLabels children ", children);
+	for i, child in ipairs(children) do
+		self:updateLabels(child);
+		local Type = tolua.type(child);
+		if Type == "cc.Label" then
+			local key = self.mLabelKeys[child];
+			if key then
+				debug_log("LocalizationManager:updateAllLabels key ", key);
+				local label = tolua.cast(child, "cc.Label");
+				local text = self:getStringForKey(key);
+			    label:setString(text);
+			end
+		-- if tolua.inherit(child, "cc.Label") then
+		-- 	debug_log("ChooseLangButton:updateLabels tolua.inherit ");
+		-- end
+		end
+	end
 end
 
 ---------------------------------

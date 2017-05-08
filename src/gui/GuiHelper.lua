@@ -47,6 +47,7 @@ function setLocalizedText(label, game)
     local textTag = label:getString();
     local localizationManager = game:getLocalizationManager();
     local text = localizationManager:getStringForKey(textTag);
+    localizationManager:cacheKey(label, textTag);
     label:setString(text);
 end
 
