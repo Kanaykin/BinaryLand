@@ -23,6 +23,8 @@ end]]
 --[[///////////////////////////]]
 RunAwayState = inheritsFrom(MoveState)
 RunAwayState.mWhiningSound = nil
+RunAwayState.mSoundCountPlayed = 0
+RunAwayState.mTimeForWhining = 0
 
 ------------------------------------
 function RunAwayState:enter(params)
@@ -31,14 +33,12 @@ function RunAwayState:enter(params)
     info_log ("RunAwayState:enter point.x ", point.x, " point.y ", point.y);
     self.mObject:runAway(point);
     self.mObject:swapAnimations();
-    self.mWhiningSound = SimpleAudioEngine:getInstance():playEffect(gSounds.DOG_WHINING_SOUND, true);
 end
 
 ------------------------------------
 function RunAwayState:leave(state)
     debug_log("RunAwayState:leave");
     self.mObject:swapAnimations();
-    SimpleAudioEngine:getInstance():stopEffect(self.mWhiningSound);
     return true;
 end
 
@@ -58,6 +58,19 @@ function RunAwayState:onHunterDead()
 	self.mStateMachine:setState(DogStates.DS_HUNTER_DEAD);
 end
 
+------------------------------------
+function RunAwayState:tick(dt)
+    debug_log("HunterDeadState:tick ", dt);
+    RunAwayState:superClass().tick(self, dt);
+
+    self.mTimeForWhining = self.mTimeForWhining - dt;
+    if self.mTimeForWhining < 0 and self.mSoundCountPlayed < 2 then
+        self.mWhiningSound = SimpleAudioEngine:getInstance():playEffect(gSounds.DOG_WHINING_SOUND);
+        self.mTimeForWhining = 1.2
+        self.mSoundCountPlayed = self.mSoundCountPlayed + 1
+    end
+end
+
 --[[///////////////////////////]]
 HunterDeadState = inheritsFrom(RunAwayState)
 
@@ -68,7 +81,12 @@ function HunterDeadState:enter(params)
     self.mObject:runAway(awayPoint);
     self.mObject:swapAnimations();
     self.mObject:updateRunAwayPath();
-    self.mWhiningSound = SimpleAudioEngine:getInstance():playEffect(gSounds.DOG_WHINING_SOUND, true);
+end
+
+------------------------------------
+function HunterDeadState:tick(dt)
+    debug_log("HunterDeadState:tick ", dt);
+    HunterDeadState:superClass().tick(self, dt);
 end
 
 ------------------------------------

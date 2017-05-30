@@ -19,6 +19,7 @@ gSounds = {
 	ENTER_LAVA_SOUND = "sounds/Effects/15_lava.wav",
 	HUNTER_DEATH_SOUND = "sounds/Effects/16_hunter_disappearance.wav",
 	FOX_POWERUP_SOUND = "sounds/Effects/17_power_up.wav",
+	SPIRIT_SOUND = "sounds/Effects/3_rinda.wav"
 	
 	--MOB_DEATH_SOUND = "sounds/Effects/Death7.wav",
 	--BONUS_SOUND = "sounds/Effects/bucks_count.mp3"

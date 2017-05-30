@@ -26,5 +26,9 @@
 
     "PressToContinueText" : "PressToContinueText",
     "TutorialStep0Text" : "TutorialStep0Text",
-    "TutorialStep1_1Text" : "TutorialStep1_1Text"
+    "TutorialStep1_1Text" : "TutorialStep1_1Text",
+    "TutorialStep1_2Text" : "TutorialStep1_2Text",
+    "TutorialStep1_3Text" : "TutorialStep1_3Text",
+    "TutorialStep1_4Text" : "TutorialStep1_4Text",
+    "TutorialStep1_5Text" : "TutorialStep1_5Text"
 }

@@ -76,8 +76,10 @@ end
 
 -- --------------------------------
 function TutorialStepBase:onTouchHandler(action)
-	info_log("TutorialStepBase:onTouchHandler action ", action);
---	self.mIsFinished = true;
+	info_log("TutorialStepBase:onTouchHandler 2 action ", action);
+	if action == "ended" then
+		self.mIsFinished = true;
+	end
 end
 
 ---------------------------------
@@ -99,10 +101,8 @@ function TutorialStepBase:initFromCCB(ccbfile, gameScene)
 	info_log("TutorialStepBase:init layer ", layer);
 
 	local function onTouchHandler(action, var)
-		info_log("TutorialStepBase:onTouchHandler action ", action);
-		if action == "ended" then
-			self.mIsFinished = true;
-		end
+		info_log("TutorialStepBase:onTouchHandler 1 action ", action);
+		self:onTouchHandler(action);
 		return false--self.mTouch:onTouchHandler(action, var);
 	end
 	-- self.mTouch = TouchWidget:create();

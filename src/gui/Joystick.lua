@@ -106,6 +106,7 @@ end
 
 --------------------------------
 function Joystick:clearBlockedButtons()
+	self.mButtonPressed = nil;
 	self.mBlockedButton = {};
 end
 

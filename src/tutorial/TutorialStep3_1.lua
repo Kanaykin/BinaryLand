@@ -8,7 +8,7 @@ TutorialStep3_1.LABEL_TAG2 = 3;
 
 --------------------------------
 function TutorialStep3_1:init(gameScene, field, tutorialManager)
-	TutorialStep3:superClass().init(self, gameScene, field, tutorialManager);
+	TutorialStep3_1:superClass().init(self, gameScene, field, tutorialManager);
 
 	self.mTutorialManager:getMainUI():getJoystick():clearBlockedButtons();
 	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.LEFT);

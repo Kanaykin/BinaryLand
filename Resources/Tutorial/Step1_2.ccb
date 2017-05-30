@@ -422,10 +422,11 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Мы с тобой — волшебные лисы. Но сильны как прежде
- мы станем тогда, когда спасем всех лисят</string>
+						<string>TutorialStep1_2Text</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -559,11 +560,9 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Нажми для продолжения</string>
+						<string>PressToContinueText</string>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>

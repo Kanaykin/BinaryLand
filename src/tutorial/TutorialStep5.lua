@@ -1,28 +1,22 @@
-require "src/tutorial/TutorialStepBase"
+require "src/tutorial/TutorialStep1"
 
-TutorialStep5 =  inheritsFrom(TutorialStepBase)
+TutorialStep5 =  inheritsFrom(TutorialStep1)
 TutorialStep5.mCCBFileName = "Step5";
-TutorialStep5.STEP_DURATION = 3;
+TutorialStep5.mTriggerTag = FactoryObject.TUTORIAL_TRIGGER_6;
+TutorialStep5.mPlayerIndex = 2;
 
 --------------------------------
 function TutorialStep5:init(gameScene, field, tutorialManager)
-	TutorialStep5:superClass().init(self, gameScene, field, tutorialManager, self.mCCBFileName, TutorialStep5.STEP_DURATION);
+	TutorialStep5:superClass().init(self, gameScene, field, tutorialManager);
 
 	self.mTutorialManager:getMainUI():getJoystick():clearBlockedButtons();
 	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.TOP);
-	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.RIGHT);
 	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.LEFT);
 	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.BOTTOM);
 
-	self:foxAnimation("FoxGirl");
 end
 
 --------------------------------
 function TutorialStep5:getNextStep()
-	return "TutorialStep6";
-end
-
---------------------------------
-function TutorialStep5:tick(dt)
-	TutorialStep5:superClass().tick(self, dt);
+	return "TutorialStep5_1";
 end

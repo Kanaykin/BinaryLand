@@ -61,9 +61,9 @@ function TutorialStep1:init(gameScene, field, tutorialManager)
 	self:initArrow(gameScene, field);
 
 	self.mTutorialManager:getMainUI():getJoystick():clearBlockedButtons();
-	-- self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.LEFT);
-	-- self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.TOP);
-	-- self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.BOTTOM);
+	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.LEFT);
+	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.TOP);
+	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.BOTTOM);
 
 	self.mTutorialManager:getMainUI():getFightButton():setBlocked(true);
 
@@ -76,6 +76,7 @@ function TutorialStep1:tick(dt)
 	if self.mTrigger:getContainedObj() ~= nil then
 		info_log("TutorialStep1:tick FINISH Step");
 		self.mIsFinished = true;
+		self.mTrigger:getContainedObj():stopMoving();
 	end
 
 	self.mFinger:tick(dt);

@@ -37,7 +37,7 @@ function Arrow:setPositions(posFrom, posTo)
 	local sprite = tolua.cast(sprite, "ccui.Scale9Sprite");
 	info_log("[Arrow:setPositions] sprite ", sprite);
 	local oldPreferredSize = sprite:getPreferredSize();
-	sprite:setPreferredSize(cc.size(oldPreferredSize.width, math.max(vec.x, vec.y)));
+	sprite:setPreferredSize(cc.size(oldPreferredSize.width, math.max(math.abs(vec.x), math.abs(vec.y))));
 	--sprite:updateWithSprite(sprite:getSprite(), cc.rect(0,0, 18, vec.x), true, cc.rect(0,0, 0, 0));
 
 	-- compute rotation
