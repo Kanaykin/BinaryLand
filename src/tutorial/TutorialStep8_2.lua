@@ -1,14 +1,13 @@
 require "src/tutorial/TutorialStep1"
 
-TutorialStep8 =  inheritsFrom(TutorialStep1)
-TutorialStep8.mCCBFileName = "Step8";
-TutorialStep8.mTriggerTag = FactoryObject.TUTORIAL_TRIGGER_8;
-TutorialStep8.mPlayerIndex = 2;
-TutorialStep8.LABEL_TAG2 = 3;
+TutorialStep8_2 =  inheritsFrom(TutorialStep1)
+TutorialStep8_2.mCCBFileName = "Step8";
+TutorialStep8_2.mTriggerTag = FactoryObject.TUTORIAL_TRIGGER_10;
+TutorialStep8_2.mPlayerIndex = 2;
 
 --------------------------------
-function TutorialStep8:init(gameScene, field, tutorialManager)
-	TutorialStep8:superClass().init(self, gameScene, field, tutorialManager);
+function TutorialStep8_2:init(gameScene, field, tutorialManager)
+	TutorialStep8_2:superClass().init(self, gameScene, field, tutorialManager);
 
 	self.mTutorialManager:getMainUI():getJoystick():clearBlockedButtons();
 	self.mTutorialManager:getMainUI():getJoystick():addBlockedButton(Joystick.BUTTONS.LEFT);
@@ -18,7 +17,7 @@ function TutorialStep8:init(gameScene, field, tutorialManager)
 end
 
 --------------------------------
-function TutorialStep8:getNextStep()
-	return "TutorialStep8_1";
+function TutorialStep8_2:getNextStep()
+	return "TutorialStep8_3";
 end
 

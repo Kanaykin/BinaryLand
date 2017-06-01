@@ -53,6 +53,12 @@ FactoryObject.TUTORIAL_TRIGGER_4 = 203;
 FactoryObject.TUTORIAL_TRIGGER_5 = 204;
 FactoryObject.TUTORIAL_TRIGGER_6 = 205;
 FactoryObject.TUTORIAL_TRIGGER_7 = 206;
+FactoryObject.TUTORIAL_TRIGGER_8 = 207;
+FactoryObject.TUTORIAL_TRIGGER_9 = 208;
+FactoryObject.TUTORIAL_TRIGGER_10 = 209;
+FactoryObject.TUTORIAL_TRIGGER_11 = 210;
+FactoryObject.TUTORIAL_TRIGGER_12 = 211;
+FactoryObject.TUTORIAL_TRIGGER_13 = 212;
 
 ------------------------------
 function FactoryObject:createObject(field, node)
@@ -276,6 +282,7 @@ FactoryObject.CreateFunctions = {
 	[FactoryObject.BONUS_TAG] = FactoryObject.createBonusObject,
 	[FactoryObject.BONUS_TIME_TAG] = FactoryObject.createBonusTimerObject,
 	[FactoryObject.BONUS_CHEST_TAG] = FactoryObject.createBonusChestObject,
+	
 	[FactoryObject.TUTORIAL_TRIGGER_1] = FactoryObject.createMoveInTrigger,
 	[FactoryObject.TUTORIAL_TRIGGER_2] = FactoryObject.createTrigger,
 	[FactoryObject.TUTORIAL_TRIGGER_3] = FactoryObject.createTrigger,
@@ -283,6 +290,13 @@ FactoryObject.CreateFunctions = {
 	[FactoryObject.TUTORIAL_TRIGGER_5] = FactoryObject.createTrigger,
 	[FactoryObject.TUTORIAL_TRIGGER_6] = FactoryObject.createTrigger,
 	[FactoryObject.TUTORIAL_TRIGGER_7] = FactoryObject.createTrigger,
+	[FactoryObject.TUTORIAL_TRIGGER_8] = FactoryObject.createTrigger,
+	[FactoryObject.TUTORIAL_TRIGGER_9] = FactoryObject.createTrigger,
+	[FactoryObject.TUTORIAL_TRIGGER_10] = FactoryObject.createTrigger,
+	[FactoryObject.TUTORIAL_TRIGGER_11] = FactoryObject.createTrigger,
+	[FactoryObject.TUTORIAL_TRIGGER_12] = FactoryObject.createTrigger,
+	[FactoryObject.TUTORIAL_TRIGGER_13] = FactoryObject.createTrigger,
+
 	[FactoryObject.BONUS_ROOM_DOOR_TAG] = FactoryObject.createBonusRoomDoor,
 	[FactoryObject.TORNADO_TAG] = FactoryObject.createTornado,
 	[FactoryObject.ICE_GROUND_TAG] = FactoryObject.createIceGround,

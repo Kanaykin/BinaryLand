@@ -79,6 +79,10 @@ function TutorialStep1:tick(dt)
 		self.mTrigger:getContainedObj():stopMoving();
 	end
 
+	if self.mIsFinished then
+		return
+	end
+
 	self.mFinger:tick(dt);
 
 	self.mArrow:setPositions(self:getPlayerPos(), self.mFingerFinishPosition);
