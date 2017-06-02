@@ -596,12 +596,33 @@ function FoxObject:leaveIceGround()
 end
 
 --------------------------------
+function FoxObject:createInLavaGroundAnimationImpl()
+    local animation = PlistAnimation:create();
+    local anchor = self:getAnchorInTornadoAnimation(true); 
+    local anch = self.mAnimationNode:getAnchorPoint();
+    animation:init(self:getPrefixTexture().."InLavaGroundTrapAnimation.plist", self.mAnimationNode, anch, nil, 0.1);
+
+    local emptyAnim = EmptyAnimation:create();
+    emptyAnim:init(nil, self.mAnimationNode, anch);
+    emptyAnim:setFrame(animation:getLastFrame());
+
+    local sequence = SequenceAnimation:create();
+    sequence:init();
+
+    sequence:addAnimation(animation);
+    sequence:addAnimation(emptyAnim);
+
+    self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE] = sequence;
+end
+
+--------------------------------
 function FoxObject:enterLavaGround()
     if self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE] then
         self.mCageAnimations[FoxObject.FOX_STATE.PS_IN_TORNADO_CAGE]:destroy();
     end
     self.mTypeCage = FoxObject.CAGE_TYPE.CT_TORNADO;
-    self:createInFireTornadoAnimationImpl("EmpltyFireTornadoTrap.plist");
+    --self:createInFireTornadoAnimationImpl("EmpltyFireTornadoTrap.plist");
+    self:createInLavaGroundAnimationImpl();
     self:playAnimation(PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP);
 end
 
