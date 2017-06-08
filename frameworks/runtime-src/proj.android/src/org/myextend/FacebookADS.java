@@ -16,12 +16,16 @@ import com.facebook.appevents.AppEventsLogger;
 import org.myextend.Logger;
 import org.myextend.GoogleStatistic;
 
+import org.myextend.AdMobADS;
+
+
 public class FacebookADS implements InterstitialAdListener{
 	private Activity mActivity;
 	private InterstitialAd mInterstitialAd;
 	private boolean mAdLoaded = false;
 	private GoogleStatistic mGoogleStatistic;
 	private String mErrorMessage;
+	private AdMobADS mAdMob;
 	
 	public FacebookADS(final Activity activity,
 			final GoogleStatistic googleStatistic) 
@@ -42,6 +46,9 @@ public class FacebookADS implements InterstitialAdListener{
         this.mActivity = activity;
         
         this.mInterstitialAd = new InterstitialAd(this.mActivity, "1763334180655470_1764632917192263");
+
+        this.mAdMob = new AdMobADS(activity, googleStatistic);
+
         this.mInterstitialAd.setAdListener(this);
         this.mInterstitialAd.loadAd();
 	}
@@ -81,13 +88,10 @@ public class FacebookADS implements InterstitialAdListener{
 			mGoogleStatistic.sendEvent("FacebookADS", "show", "error:"+mErrorMessage, -1);
 			mErrorMessage = "";
 		}
-		this.mInterstitialAd.show();
-		//interstitialAd.loadAd();
-		//interstitialAd.loadAd();
+		//this.mInterstitialAd.show();
 
-	    
-		//Intent intent = new Intent(this.mActivity, InterstitialActivity.class);
-		//this.mActivity.startActivity(intent);
+		this.mAdMob.showADS();
+
 		return mAdLoaded;
 	}
 	@Override
