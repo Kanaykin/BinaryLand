@@ -83,16 +83,15 @@ public class FacebookADS implements InterstitialAdListener{
 		if(mAdLoaded)
 		{
 			mGoogleStatistic.sendEvent("FacebookADS", "show", "success", -1);
+			this.mInterstitialAd.show();
+			return true;
 		}
 		else {
 			mGoogleStatistic.sendEvent("FacebookADS", "show", "error:"+mErrorMessage, -1);
 			mErrorMessage = "";
 		}
-		//this.mInterstitialAd.show();
 
-		this.mAdMob.showADS();
-
-		return mAdLoaded;
+		return this.mAdMob.showADS();
 	}
 	@Override
 	public void onError(Ad ad, AdError error) {
@@ -105,9 +104,6 @@ public class FacebookADS implements InterstitialAdListener{
 	public void onAdLoaded(Ad ad) {
 		this.mAdLoaded = true;
 		Logger.info("FacebookADS::onAdLoaded");
-	    // Ad is loaded and ready to be displayed
-	    // You can now display the full screen add using this code:
-	    //interstitialAd.show();
 	}
 	
 	@Override

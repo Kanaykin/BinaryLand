@@ -13,10 +13,14 @@ import org.myextend.Logger;
 public class AdMobADS extends AdListener {
 	private InterstitialAd mInterstitialAd;
 	private Activity mActivity;
+	private boolean mAdLoaded = false;
+	private GoogleStatistic mGoogleStatistic;
+	private int mErrorCode = -1;
 
 	public AdMobADS(final Activity activity,
 			final GoogleStatistic googleStatistic) 
 	{
+		mGoogleStatistic = googleStatistic;
 		// Initialize the Mobile Ads SDK.
         MobileAds.initialize(activity, "ca-app-pub-7659372211727082~6359254059");
         mInterstitialAd = new InterstitialAd(activity);
@@ -46,7 +50,8 @@ public class AdMobADS extends AdListener {
 	@Override
 	public void onAdClosed()
 	{
-
+		loadADS();
+		mAdLoaded = false;
 	}
 
 	//----------------------------------
@@ -55,6 +60,7 @@ public class AdMobADS extends AdListener {
 	public void onAdFailedToLoad(int errorCode)
 	{
 		Logger.info("AdMobADS::onAdFailedToLoad");
+		mErrorCode = errorCode;
 	}
 
 	//----------------------------------
@@ -64,6 +70,7 @@ public class AdMobADS extends AdListener {
 	{
 		Logger.info("AdMobADS::onAdLoaded");
 		//mInterstitialAd.show();
+		mAdLoaded = true;
 	}
 
 	//----------------------------------
@@ -76,16 +83,20 @@ public class AdMobADS extends AdListener {
 	//----------------------------------
 	public boolean showADS() 
 	{
+		if(!mAdLoaded) {
+			mGoogleStatistic.sendEvent("adMob", "show", "error", mErrorCode);
+			return false;
+		}
 		Logger.info("AdMobADS::showADS");
+		mGoogleStatistic.sendEvent("adMob", "show", "success", -1);
 		//mInterstitialAd.show();
 		final InterstitialAd interstitial = mInterstitialAd;
 		this.mActivity.runOnUiThread(new Runnable() {
         @Override public void run() {
             if (interstitial.isLoaded()) {
               interstitial.show();
-         }
-        }
-    });
+         	}
+        }});
 		return true;
 	}
 }
