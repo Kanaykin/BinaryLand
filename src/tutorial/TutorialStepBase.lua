@@ -172,7 +172,7 @@ function TutorialStepBase:init(gameScene, field, tutorialManager, ccbfile, step_
 
 	local label = tolua.cast(self.mNode:getChildByTag(TutorialStep1.LABEL_TAG), "cc.Label");
     if label then
-    	setLocalizedText(label, field.mGame);
+    	setLabelLocalizedText(label, field.mGame);
         setDefaultFont(label, field.mGame:getScale());
     end
     self.mCurrentTime = step_duration;

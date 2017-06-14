@@ -41,7 +41,7 @@ end
 --------------------------------
 function LocationLockedDlg:initButton(nodeBase, tag, action)
 	local button = tolua.cast(nodeBase:getChildByTag(tag), "cc.ControlButton");
-	local label = button:getTitleLabelForState(0);
+	local label = button:getTitleLabelForState(1);
 
     button:registerControlEventHandler(action, 1);
 

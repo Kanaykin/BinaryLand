@@ -26,17 +26,8 @@ end
 --------------------------------
 function GetStarDlg:initButton(nodeBase, tag, action)
 	local button = tolua.cast(nodeBase:getChildByTag(tag), "cc.ControlButton");
-	local label = button:getTitleLabelForState(0);
-
+    setControlButtonLocalizedText(button, self.mGame);
     button:registerControlEventHandler(action, 1);
-
-	label = tolua.cast(label, "cc.Label");
-    if label then
-        
-        setLocalizedText(label, self.mGame);
-
-        setDefaultFont(label, self.mGame:getScale());
-    end
 end
 
 --------------------------------
@@ -142,7 +133,7 @@ function GetStarDlg:initGuiElements()
     local label = tolua.cast(nodeBase:getChildByTag(GetStarDlg.LABEL), "cc.Label");
     if label then
 
-        setLocalizedText(label, self.mGame);
+        setLabelLocalizedText(label, self.mGame);
 
         setDefaultFont(label, self.mGame:getScale());
     end

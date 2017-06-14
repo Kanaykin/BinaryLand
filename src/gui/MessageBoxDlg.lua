@@ -33,18 +33,19 @@ function MessageBoxDlg:initButton(tag, action, text)
     local nodeBase = self.mNode:getChildByTag(MessageBoxDlg.BASE_NODE_TAG);
 
     local button = tolua.cast(nodeBase:getChildByTag(tag), "cc.ControlButton");
-    local label = button:getTitleLabelForState(0);
 
     local ok_button_action = function ()
         self.mGame.mDialogManager:deactivateModal(self);
         action()
     end
     button:registerControlEventHandler(ok_button_action, 1);
+    button:setTitleForState(text, 1);
+    button:setTitleForState(text, 2);
 
+    local label = button:getTitleLabelForState(1);
     label = tolua.cast(label, "cc.Label");
     if label then
         setDefaultFont(label, self.mGame:getScale());
-        label:setString(text);
     end
 end
 

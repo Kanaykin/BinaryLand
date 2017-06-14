@@ -43,12 +43,30 @@ function setDefaultFont(label, scale)
 end
 
 -----------------------------
-function setLocalizedText(label, game)
+function setLabelLocalizedText(label, game)
     local textTag = label:getString();
     local localizationManager = game:getLocalizationManager();
     local text = localizationManager:getStringForKey(textTag);
     localizationManager:cacheKey(label, textTag);
     label:setString(text);
+    return text;
+end
+
+-----------------------------
+function setControlButtonLocalizedText(button, game)
+    info_log("setControlButtonLocalizedText button ", button);
+
+    local label = button:getTitleLabelForState(1);
+
+    label = tolua.cast(label, "cc.Label");
+    if label then
+        local text = setLabelLocalizedText(label, game);
+
+        setDefaultFont(label, game:getScale());
+
+        button:setTitleForState(text, 1);
+        button:setTitleForState(text, 2);
+    end
 end
 
 -----------------------------

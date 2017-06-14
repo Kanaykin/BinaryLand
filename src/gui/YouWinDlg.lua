@@ -109,7 +109,7 @@ function YouWinDlg:initLabels(nodeBase)
         info_log("YouWinDlg:initGuiElements label ", label);
 
         if label then
-            setLocalizedText(label, self.mGame);
+            setLabelLocalizedText(label, self.mGame);
             setDefaultFont(label, self.mGame:getScale());
         end
     end
@@ -119,8 +119,10 @@ end
 function YouWinDlg:initButtonOk(nodeBase)
     local button = tolua.cast(nodeBase:getChildByTag(YouWinDlg.BUTTON_OK), "cc.ControlButton");
     debug_log("YouWinDlg:initButtonOk button ", button);
-    local label = button:getTitleLabelForState(0);
-    debug_log("YouWinDlg:initButtonOk label ", label);
+
+    setControlButtonLocalizedText(button, self.mGame);
+
+    --self:initButtonLabel(label1);
 
     local function onButtonPress()
         debug_log("YouWinDlg:initButtonOk onButtonPress ");
@@ -133,12 +135,7 @@ function YouWinDlg:initButtonOk(nodeBase)
     end
     button:registerControlEventHandler(onButtonPress, 1);
 
-    label = tolua.cast(label, "cc.Label");
-    if label then
-        setLocalizedText(label, self.mGame);
-
-        setDefaultFont(label, self.mGame:getScale());
-    end
+    
 end
 
 ---------------------------------
