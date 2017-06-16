@@ -7,6 +7,8 @@ REM LIST_DIRS=(../../../src )
 xcopy %cd%\..\..\..\src %cd%\%PATH_RES%\src /S/E/I/Y
 
 xcopy %cd%\..\..\..\res\fonts %cd%\%PATH_RES%\res\fonts /S/E/I/Y
+xcopy %cd%\..\..\..\res\sounds %cd%\%PATH_RES%\res\sounds /S/E/I/Y
+xcopy %cd%\..\..\..\res\localization %cd%\%PATH_RES%\res\localization /S/E/I/Y
 
 REM xcopy %cd%\..\..\..\res\Published-iOS %cd%\%PATH_RES% /S/E/I
 

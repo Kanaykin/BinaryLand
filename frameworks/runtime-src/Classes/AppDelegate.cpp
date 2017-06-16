@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 #include "lua_module_register.h"
 #include "Logger.h"
-#include "CCDirector.h"
+#include "cocos/base/CCDirector.h"
 #include "cocos/2d/CCFontAtlasCache.h"
 
 using namespace CocosDenshion;
@@ -34,7 +34,9 @@ void AppDelegate::initGLContextAttrs()
 
 void AppDelegate::applicationScreenSizeChanged(int newWidth, int newHeight)
 {
+#if CC_TARGET_PLATFORM != CC_PLATFORM_WIN32
     cocos2d::Application::applicationScreenSizeChanged(newWidth, newHeight);
+#endif
     CCLOG("AppDelegate::applicationScreenSizeChanged w %d h %d", newWidth, newHeight);
     //Director::getInstance()->getOpenGLView()->setFrameSize(newWidth, newHeight);
     cocos2d::FontAtlasCache::releaseAllFontAtlas();

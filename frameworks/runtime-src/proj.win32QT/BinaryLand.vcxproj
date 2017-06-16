@@ -186,6 +186,7 @@ xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\ui" "$(P
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"D:\$(Configuration).win32\moc_%(Filename)%(Extension)"</Outputs>
     </ClInclude>
     <ClInclude Include="ExplorerPanel.h" />
+    <ClInclude Include="FacebookADS.h" />
     <ClInclude Include="gen\ButtonPanel.h" />
     <ClInclude Include="gen\GettingSize.h" />
     <ClInclude Include="GettingSizeDialog.h" />
@@ -212,9 +213,11 @@ xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\ui" "$(P
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Logger.cpp" />
     <ClCompile Include="..\Classes\lua_module_extend.cpp" />
+    <ClCompile Include="Advertisement.cpp" />
     <ClCompile Include="ButtonPanel.cpp" />
     <ClCompile Include="DiagramItem.cpp" />
     <ClCompile Include="ExplorerPanel.cpp" />
+    <ClCompile Include="FacebookADS.cpp" />
     <ClCompile Include="gen\moc_DiagramScene.cpp" />
     <ClCompile Include="gen\moc_ExplorerPanel.cpp" />
     <ClCompile Include="gen\moc_GettingSizeDialog.cpp" />
