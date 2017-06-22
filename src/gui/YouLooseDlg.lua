@@ -73,6 +73,7 @@ function YouLooseDlg:initGuiElements()
     info_log("YouLooseDlg:initGuiElements label ", label);
 
     if label then
+        setLabelLocalizedText(label, self.mGame);
         setDefaultFont(label, self.mGame:getScale());
     end
 

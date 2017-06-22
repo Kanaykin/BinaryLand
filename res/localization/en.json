@@ -14,6 +14,7 @@
     "VictoryDlgCoinsText": "Coins:",
     "VictoryDlgTimeText": "Time:",
     "VictoryDlgAllText": "All:",
+    "LooseDlgText": "Level Failed !!!",
 
     "NextButtonText": "Next",
 
@@ -30,5 +31,10 @@
     "TutorialStep1_2Text" : "TutorialStep1_2Text",
     "TutorialStep1_3Text" : "TutorialStep1_3Text",
     "TutorialStep1_4Text" : "TutorialStep1_4Text",
-    "TutorialStep1_5Text" : "TutorialStep1_5Text"
+    "TutorialStep1_5Text" : "TutorialStep1_5Text",
+    "TutorialStep4Text" : "TutorialStep4Text",
+    "TutorialStep4_1Text" : "TutorialStep4_1Text",
+    "TutorialStep6Text" : "TutorialStep6Text",
+    "TutorialStep7Text" : "TutorialStep7Text",
+    "TutorialStep9Text" : "TutorialStep9Text"
 }

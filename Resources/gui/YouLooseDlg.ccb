@@ -1209,9 +1209,11 @@
 								<key>type</key>
 								<string>Text</string>
 								<key>value</key>
-								<string>Level Failed !!!</string>
+								<string>LooseDlgText</string>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
