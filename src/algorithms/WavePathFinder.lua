@@ -185,6 +185,19 @@ WavePathFinder = {
         end
 		--WavePathFinder.printPath(pathReversed);
 		return pathReversed;
-	end
+	end,
 
+	-----------------------------------
+	lengthPath = function(path)
+		if #path <= 1 then
+			return 0
+		end
+		local dist = 0;
+		local pos = path[1];
+		for i = 2, #path do
+			dist = dist + (path[i] - pos):lenSq();
+			pos = path[i];
+		end
+		return dist;
+	end
 }

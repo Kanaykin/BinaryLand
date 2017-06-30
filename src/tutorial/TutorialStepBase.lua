@@ -115,15 +115,21 @@ function TutorialStepBase:initFromCCB(ccbfile, gameScene)
 end
 
 --------------------------------
-function TutorialStepBase:getPlayerPos()
-	local playerGridPosition = Vector.new(self.mField:getGridPosition(self.mPlayer.mNode));
+function TutorialStepBase:getPlayerPosImpl(player)
+	local playerGridPosition = Vector.new(self.mField:getGridPosition(player.mNode));
 	--[[info_log("playerGridPosition ", playerGridPosition.x);
 	local dest = self.mField:gridPosToReal(playerGridPosition);
 	dest.x= dest.x + self.mField.mCellSize / 2;
 	dest.y= dest.y + self.mField.mCellSize / 2;
 
 	return dest;]]
-	return Vector.new(self.mPlayer.mNode:getPosition());
+	return Vector.new(player.mNode:getPosition());
+
+end
+
+--------------------------------
+function TutorialStepBase:getPlayerPos()
+	return self:getPlayerPosImpl(self.mPlayer);
 end
 
 --------------------------------

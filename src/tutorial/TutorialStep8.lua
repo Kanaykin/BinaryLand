@@ -19,6 +19,6 @@ end
 
 --------------------------------
 function TutorialStep8:getNextStep()
-	return "TutorialStep8_1";
+	return "";
 end
 

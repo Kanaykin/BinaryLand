@@ -17,6 +17,7 @@ require "src/tutorial/TutorialStep5_1"
 require "src/tutorial/TutorialStep5_2"
 require "src/tutorial/TutorialStep6"
 require "src/tutorial/TutorialStep7"
+require "src/tutorial/TutorialStep7_free"
 require "src/tutorial/TutorialStep7_1"
 require "src/tutorial/TutorialStep8"
 require "src/tutorial/TutorialStep8_1"
@@ -24,6 +25,7 @@ require "src/tutorial/TutorialStep8_2"
 require "src/tutorial/TutorialStep8_3"
 require "src/tutorial/TutorialStep8_4"
 require "src/tutorial/TutorialStep9"
+require "src/tutorial/TutorialStep9_free"
 require "src/tutorial/TutorialStep9_1"
 require "src/tutorial/TutorialStep9_2"
 require "src/tutorial/TutorialStep9_3"
@@ -53,15 +55,21 @@ end
 
 --------------------------------
 function TutorialManager:tick(dt)
+	if self.mCurrentStep == nil then
+		return
+	end
 	self.mCurrentStep:tick(dt);
 
 	if self.mCurrentStep:finished() then
 		local nextStepNext = self.mCurrentStep:getNextStep();
-        info_log("TutorialManager:tick nextStepNext ", nextStepNext);
 		self.mCurrentStep:destroy();
-		self.mCurrentStep = _G[nextStepNext]:create();
-		info_log("TutorialManager:tick nextStepNext ", nextStepNext);
-		self.mCurrentStep:init(self.mGameScene, self.mField, self);
+		self.mCurrentStep = nil;
+		if nextStepNext then
+	        info_log("TutorialManager:tick nextStepNext ", nextStepNext);
+			self.mCurrentStep = _G[nextStepNext]:create();
+			info_log("TutorialManager:tick nextStepNext ", nextStepNext);
+			self.mCurrentStep:init(self.mGameScene, self.mField, self);
+		end
 	end
 end
 
