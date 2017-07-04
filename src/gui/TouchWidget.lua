@@ -63,7 +63,7 @@ function TouchWidget:onTouchHandler(action, var)
 
 	local arrayPoints = self:convertToPoints(var);
 
-	info_log("TouchWidget.mTouchId ", self.mTouchId, " var ", var);
+	info_log("TouchWidget.mTouchId 1 ", self.mTouchId, " var ", var);
 
 	if self.mTouchId ~= nil and not arrayPoints[self.mTouchId] then
 		return;
@@ -77,6 +77,7 @@ function TouchWidget:onTouchHandler(action, var)
 			self.mTouchId = indx;
 		end
 	elseif action == "moved" then
+		-- oldTouchId = nil;
 		if self.mTouchId == nil then
 			local indx = findContainPoint(self.mBBox, arrayPoints);
 			self.mTouchId = indx;
@@ -88,6 +89,8 @@ function TouchWidget:onTouchHandler(action, var)
 	else
 		self.mTouchId = nil;
 	end
+
+	info_log("TouchWidget.mTouchId 2 ", self.mTouchId, " var ", var);
 
 	if not oldTouchId and self.mTouchId then 
 		self:onTouchBegan(arrayPoints[self.mTouchId]);
@@ -113,5 +116,5 @@ end
 --------------------------------
 function TouchWidget:init(bbox)
 	self.mBBox = bbox;
-	self.mDeltaTime = 0;
+	self.mDeltaTime = 99999;
 end

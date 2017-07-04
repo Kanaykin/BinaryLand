@@ -28,6 +28,7 @@ function TutorialStep9_free:init(gameScene, field, tutorialManager)
     for i, tag in ipairs(TutorialStep9_free.mTriggerTags) do
     	self.mTriggers[i] = self.mField:getObjectsByTag(tag)[1];
     end
+
 end
 
 --------------------------------
@@ -71,16 +72,25 @@ end
 
 --------------------------------
 function TutorialStep9_free:checkFinish()
-	if self.mAcross then
-		return;
+	if self.mField:getState() == Field.WIN then
+		self.mIsFinished = true;
+
+		local finishTriggers = self.mField:getObjectsByTag(FactoryObject.FINISH_TAG);
+    	for i, trigger in ipairs(finishTriggers) do
+    		trigger:hideBacklight();
+    	end
 	end
-	self.mIsFinished = true;
-	for i, trigger in ipairs(self.mTriggers) do
-		if trigger:getContainedObj() == nil  then
-			self.mIsFinished = false;
-			return;
-		end
-	end
+
+	-- if self.mAcross then
+	-- 	return;
+	-- end
+	-- self.mIsFinished = true;
+	-- for i, trigger in ipairs(self.mTriggers) do
+	-- 	if trigger:getContainedObj() == nil  then
+	-- 		self.mIsFinished = false;
+	-- 		return;
+	-- 	end
+	-- end
 end
 
 --------------------------------

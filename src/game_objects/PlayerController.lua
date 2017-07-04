@@ -25,6 +25,7 @@ end
 
 --------------------------------
 function PlayerController:init(bbox, players, field, joystick, fightButton)
+	info_log("PlayerController:init ");
 	self:superClass().init(self, bbox);
 	self.mPlayerObjects = players;
 	self.mField = field;
@@ -62,7 +63,7 @@ function PlayerController:onTouchBegan(point)
 		return;
 	end
 
-	info_log("PlayerController:onTouchBegan (", point.x, " ,", point.y, ")");
+	info_log("PlayerController:onTouchBegan ", self, " ( ",  point.x, " ,", point.y, ")");
 
 	self:resetData();
 	self.mObjectCaptured = nil;
