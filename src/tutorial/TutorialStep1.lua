@@ -68,6 +68,8 @@ function TutorialStep1:init(gameScene, field, tutorialManager)
 	self.mTutorialManager:getMainUI():getFightButton():setBlocked(true);
 
     --self:foxAnimation("Fox");
+
+    self.mArrow:setTransform(self:getPlayerPos(), self.mFingerFinishPosition, true);
 end
 
 --------------------------------
@@ -85,7 +87,7 @@ function TutorialStep1:tick(dt)
 
 	self.mFinger:tick(dt);
 
-	self.mArrow:setPositions(self:getPlayerPos(), self.mFingerFinishPosition);
+    self.mArrow:setTransform(self:getPlayerPos(), self.mFingerFinishPosition, false);
 
 	if self.mCurrentFingerTime ~= nil then
   --       --info_log("TutorialStep1:tick ContainedObj ", self.mTrigger:getContainedObj())

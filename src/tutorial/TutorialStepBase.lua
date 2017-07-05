@@ -12,6 +12,7 @@ TutorialStepBase.mTutorialManager = nil
 TutorialStepBase.mIsFinished = false
 TutorialStepBase.mNode = nil;
 TutorialStepBase.mCurrentTime = nil;
+TutorialStepBase.mTouchBegan = false;
 
 TutorialStepBase.LAYER_TAG = 10;
 
@@ -77,7 +78,11 @@ end
 -- --------------------------------
 function TutorialStepBase:onTouchHandler(action)
 	info_log("TutorialStepBase:onTouchHandler 2 action ", action);
-	if action == "ended" then
+	if action == "began" then
+		self.mTouchBegan = true;
+	end
+
+	if self.mTouchBegan and action == "ended" then
 		self.mIsFinished = true;
 	end
 end

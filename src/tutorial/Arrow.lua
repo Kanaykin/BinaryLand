@@ -21,7 +21,7 @@ function Arrow:init(gameScene, field)
 end
 
 --------------------------------
-function Arrow:setPositions(posFrom, posTo)
+function Arrow:setTransform(posFrom, posTo, needRotate)
 	-- set node position
 	self.mNode:setPosition(cc.p(posFrom.x, posFrom.y));
 	--self.mGridPosition = Vector.new(self.mField:getGridPosition(self.mNode));
@@ -40,10 +40,12 @@ function Arrow:setPositions(posFrom, posTo)
 	sprite:setPreferredSize(cc.size(oldPreferredSize.width, math.max(math.abs(vec.x), math.abs(vec.y))));
 	--sprite:updateWithSprite(sprite:getSprite(), cc.rect(0,0, 18, vec.x), true, cc.rect(0,0, 0, 0));
 
-	-- compute rotation
-	local angle = math.atan2(vecDelta.x, vecDelta.y);
-	if vecDelta:lenSq() <= 0.01 then
-		angle = math.atan2(vec.x, vec.y);
+	if needRotate then
+		-- compute rotation
+		local angle = math.atan2(vecDelta.x, vecDelta.y);
+		if vecDelta:lenSq() <= 0.01 then
+			angle = math.atan2(vec.x, vec.y);
+		end
+		self.mNode:setRotation(math.deg(angle));
 	end
-	self.mNode:setRotation(math.deg(angle));
 end
