@@ -5,7 +5,7 @@ require "src/algorithms/WavePathFinder"
 TutorialStep7_free =  inheritsFrom(TutorialStepBase)
 
 TutorialStep7_free.mCCBFileName = "Step5_1";
-TutorialStep7_free.mNextStep = "TutorialStep8";
+TutorialStep7_free.mNextStep = nil;
 TutorialStep7_free.mFoxAnimation = "Fox";
 
 TutorialStep7_free.FREE_TIME = 2.0;
@@ -16,6 +16,8 @@ TutorialStep7_free.mPlayers = nil;
 function TutorialStep7_free:init(gameScene, field, tutorialManager)
 	TutorialStep7_free:superClass().init(self, gameScene, field, tutorialManager, self.mCCBFileName);
 
+	self.mNextStep = "TutorialStep9";
+
 	self.mTutorialManager:getMainUI():getJoystick():clearBlockedButtons();
 
 	self.mPlayer = self.mField:getPlayerObjects()[2];
@@ -25,7 +27,8 @@ end
 
 --------------------------------
 function TutorialStep7_free:getNextStep()
-	return "TutorialStep9";
+	info_log("TutorialStep7_free:getNextStep ", self.mNextStep);
+	return self.mNextStep;
 end
 
 --------------------------------
@@ -65,10 +68,19 @@ end
 
 --------------------------------
 function TutorialStep7_free:checkFinish()
+	info_log("TutorialStep7_free:checkFinish ");
 	local coins = self.mField:getObjectsByTag(FactoryObject.BONUS_TAG);
 	if type(coins) ~= "table" or #coins == 0 then
 		self.mIsFinished = true;
 	end
+
+	--------------------------------
+	if self.mField:getState() == Field.WIN then
+		self.mIsFinished = true;
+		self.mNextStep = nil;
+		info_log("TutorialStep7_free:checkFinish self.mNextStep ", self.mNextStep);
+	end
+
 end
 
 --------------------------------

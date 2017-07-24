@@ -162,7 +162,8 @@ end
 --------------------------------
 function TutorialStepBase:initArrow(gameScene, field)
 	self.mArrow = Arrow:create();
-	self.mArrow:init(gameScene, field);
+	
+	self.mArrow:init(gameScene, field, self:getPlayerPos(), self.mFingerFinishPosition);
 end
 
 --------------------------------

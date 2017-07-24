@@ -62,6 +62,7 @@ function TutorialManager:tick(dt)
 
 	if self.mCurrentStep:finished() then
 		local nextStepNext = self.mCurrentStep:getNextStep();
+		info_log("TutorialManager:tick ", nextStepNext);
 		self.mCurrentStep:destroy();
 		self.mCurrentStep = nil;
 		if nextStepNext then

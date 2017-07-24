@@ -117,7 +117,7 @@ end
 
 --------------------------------
 function HunterObject:onMoveFinished( )
-    info_log ("HunterObject:onMoveFinished #self.mPath ", #self.mPath);
+    --info_log ("HunterObject:onMoveFinished #self.mPath ", #self.mPath);
     if self.oldVelocity and #self.mPath == 0 then
         debug_log("self.mGridPosition x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
         self.mVelocity = self.oldVelocity;
@@ -180,7 +180,7 @@ end
 
 --------------------------------
 function HunterObject:checkShotLine(playerPosGrid, selfPosGrid, delta)
-    debug_log("HunterObject:checkShotLine ", playerPosGrid, ", ", selfPosGrid);
+    --debug_log("HunterObject:checkShotLine ", playerPosGrid, ", ", selfPosGrid);
     return playerPosGrid == selfPosGrid and delta > HunterObject.SHOT_MIN_GRID_DELTA and delta < HunterObject.SHOT_MAX_GRID_DELTA;
 end
 
@@ -249,7 +249,7 @@ function HunterObject:tryShotGun()
                         local newPos = Vector.new(self.mFoxGoalPos.x - delta, self.mFoxGoalPos.y );
                         while self.mField:isFreePointForPlayer( newPos ) do
                             self.mFoxGoalPos = newPos;
-                            debug_log("self.mField:isFreePoint self.mFoxGoalPos.x ", self.mFoxGoalPos.x);
+                            --debug_log("self.mField:isFreePoint self.mFoxGoalPos.x ", self.mFoxGoalPos.x);
                             newPos = Vector.new(self.mFoxGoalPos.x - delta, self.mFoxGoalPos.y );
                         end
                     end

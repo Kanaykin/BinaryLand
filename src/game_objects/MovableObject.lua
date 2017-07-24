@@ -85,13 +85,13 @@ function MovableObject:moveToFieldPos(dest, moveFinishCallback)
 	self.mMoveFinishCallback = moveFinishCallback;
 
 	local src = Vector.new(self.mNode:getPosition()); --self.mField:gridPosToReal(self.mGridPosition);
-	info_log("[MovableObject:moveTo] src.x ", src.x, " src.y ", src.y);
-	info_log("[MovableObject:moveTo] dest.x ", dest.x, " dest.y ", dest.y);
+	--info_log("[MovableObject:moveTo] src.x ", src.x, " src.y ", src.y);
+	--info_log("[MovableObject:moveTo] dest.x ", dest.x, " dest.y ", dest.y);
 	local delta = dest - src;
 	self.mMoveTime = delta:len() / self.mVelocity;
 	self.mDelta = delta;
-	info_log("[MovableObject:moveTo] delta.x ", delta.x, " delta.y ", delta.y);
-	info_log("[MovableObject:moveTo] moveTime ", self.mMoveTime);
+	--info_log("[MovableObject:moveTo] delta.x ", delta.x, " delta.y ", delta.y);
+	--info_log("[MovableObject:moveTo] moveTime ", self.mMoveTime);
 	local x, y = self.mNode:getPosition();
 	self.mSrcPos = Vector.new(x, y);
 
@@ -101,7 +101,7 @@ end
 --------------------------------
 function MovableObject:moveTo(posDest, moveFinishCallback)
 	-- compute real position
-	info_log("[MovableObject:moveTo] posDest.x ", posDest.x, "posDest.y ", posDest.y);
+	--info_log("[MovableObject:moveTo] posDest.x ", posDest.x, "posDest.y ", posDest.y);
 	
 	local dest = self.mField:gridPosToReal(posDest);
 	dest.x= dest.x + self.mField.mCellSize / 2;
