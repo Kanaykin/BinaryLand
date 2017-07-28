@@ -266,7 +266,7 @@ end
 function HunterObject:tick(dt)
     HunterObject:superClass().tick(self, dt);
 
-    if self.mCanAttack then
+    if self.mCanAttack and not self:isDead() then
         self:tryShotGun();
     end
 end

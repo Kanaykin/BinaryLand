@@ -10,3 +10,9 @@ table.copy = function(obj, seen)
     for k, v in pairs(obj) do res[table.copy(k, s)] = table.copy(v, s) end
     return res
 end
+
+table.length = function(table)
+    local count = 0
+    for _ in pairs(table) do count = count + 1 end
+    return count
+end

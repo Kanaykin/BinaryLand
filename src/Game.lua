@@ -38,6 +38,11 @@ function Game:getLocations()
 end
 
 ---------------------------------
+function Game:getLocation(idLocation)
+    return self.mLocations[idLocation];
+end
+
+---------------------------------
 function Game:tick(dt)
 	--if not self.mDialogManager:hasModalDlg() then
 		self.mGameTime = self.mGameTime + dt;

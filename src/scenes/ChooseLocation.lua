@@ -6,6 +6,7 @@ require "src/scenes/SoundConfigs"
 require "src/base/Log"
 require "src/gui/GuiHelper"
 require "src/gui/TouchWidget"
+require "src/gui/NotEnoughStarsDlg"
 
 local LOADSCEENIMAGE = "GlobalMapBack.png"
 local GLOBALMAP = "GlobalMap.png"
@@ -201,6 +202,7 @@ function ChooseLocation:destroy()
 	ChooseLocation:superClass().destroy(self);
 
 	SimpleAudioEngine:getInstance():stopMusic(true);
+
 end
 
 --------------------------------
@@ -296,6 +298,28 @@ function ChooseLocation:updateLabels(node)
 end
 
 --------------------------------
+function ChooseLocation:setVisibleTutorialLayer(node, visible)
+    local layer = node:getChildByTag(ChooseLocation.TUTORIAL_FRAME);
+    if not layer then 
+        return
+    end
+    layer:setVisible(visible);
+
+    if visible then
+        local label = tolua.cast(layer:getChildByTag(ChooseLocation.LABEL_TAG), "cc.Label");
+
+        if label then
+            setDefaultFont(label, self.mSceneManager.mGame:getScale());
+
+            local localizationManager = self.mSceneManager.mGame:getLocalizationManager();
+            local text = localizationManager:getStringForKey(MovieText);
+            label:setString(text);
+        end
+    end
+
+end
+
+--------------------------------
 function ChooseLocation:initGui(params)
     self:createGuiLayer();
 
@@ -305,7 +329,6 @@ function ChooseLocation:initGui(params)
     self.mGuiLayer:addChild(node);
 
     local choseLevel = self;
-
     local function onReturnPressed()
     	info_log("onReturnPressed");
     	choseLevel.mSceneManager:runPrevScene();
@@ -313,22 +336,12 @@ function ChooseLocation:initGui(params)
 
     setMenuCallback(node, ChooseLocation.BACK_MENU, ChooseLocation.BACK_MENU_ITEM, onReturnPressed);
 
-    local layer = node:getChildByTag(ChooseLocation.TUTORIAL_FRAME);
-    if layer then 
-        if params and params.fromTutorial then
-            local label = tolua.cast(layer:getChildByTag(ChooseLocation.LABEL_TAG), "cc.Label");
-            info_log("ChooseLocation:loadScene label ", params );
+    self:setVisibleTutorialLayer(node, params and params.fromTutorial);
 
-            if label then
-                setDefaultFont(label, game:getScale());
-
-                local localizationManager = game:getLocalizationManager();
-                local text = localizationManager:getStringForKey(MovieText);
-                label:setString(text);
-            end
-        else
-            layer:setVisible(false);
-        end
+    if params and params.locationLocked then
+        local notEnoughStarsDlg = NotEnoughStarsDlg:create();
+        notEnoughStarsDlg:init(self.mSceneManager.mGame, self.mGuiLayer, params.locationLocked);
+        notEnoughStarsDlg:doModal();
     end
 end
 

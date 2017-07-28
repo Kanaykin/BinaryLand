@@ -20,7 +20,7 @@ gLocations = {
                 id = "1_1"
 			},
 			{
-				opened = openedVal,
+				opened = true,
 				--ccbFile = {"Level1_2p1", "Level1_2p2"},
                 ccbFile = "Level1_2p1_new",
 				tileMap = "Level1_2_map.tmx",
@@ -32,7 +32,7 @@ gLocations = {
                  id = "1_2"
 			},
 			{
-                opened = openedVal,
+                opened = true,
                 ccbFile = "Level1_3p1",--"Level1_3p1",
                 tileMap = "Level1_1_map.tmx",
                 cellSize = 32,
@@ -42,7 +42,7 @@ gLocations = {
                 id = "1_3"
 			},
 			{
-                opened = openedVal,
+                opened = true,
                 ccbFile = "Level1_4p1",--{"Level1_2p1", "Level1_2p2"},
                 tileMap = "Level1_2_map.tmx",
                 cellSize = 32,
@@ -53,7 +53,7 @@ gLocations = {
                 id = "1_4"
 			},
 			{
-                opened = openedVal,
+                opened = true,
                 ccbFile = {"Level1_5p1", "LevelEmpty_p2"},--{"Level1_2p1", "Level1_2p2"},
                 tileMap = "Level1_2_map.tmx",
                 cellSize = 32,
@@ -64,7 +64,7 @@ gLocations = {
                 id = "1_5"
             },
             {
-                opened = openedVal,
+                opened = true,
                 ccbFile = {"Level1_6p1", "Level2_1p2"},
                 tileMap = "Level1_2_map.tmx",
                 cellSize = 32,
@@ -75,7 +75,7 @@ gLocations = {
                 id = "1_6"
             },
             {
-                opened = openedVal,
+                opened = true,
                 ccbFile = "Level1_7p1",
                 tileMap = "Level1_2_map.tmx",
                 cellSize = 32,
@@ -86,7 +86,7 @@ gLocations = {
                 id = "1_7"
             },
             {
-                opened = openedVal,
+                opened = true,
                 ccbFile = {"Level1_8p1", "Level1_8p2"},
                 --ccbFile = "Level1_1p1",
                 tileMap = "Level1_2_map.tmx",

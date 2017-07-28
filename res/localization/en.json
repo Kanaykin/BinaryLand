@@ -36,5 +36,9 @@
     "TutorialStep4_1Text" : "TutorialStep4_1Text",
     "TutorialStep6Text" : "TutorialStep6Text",
     "TutorialStep7Text" : "TutorialStep7Text",
-    "TutorialStep9Text" : "TutorialStep9Text"
+    "TutorialStep9Text" : "TutorialStep9Text",
+    "NotEnoughStartsTitleText" : "NotEnoughStartsTitleText",
+    "TextAllStarsText" : "TextAllStarsText",
+    "CurrentLocStarsText" : "CurrentLocStarsText",
+    "TakeMoreStarsText" : "TakeMoreStarsText"
 }
