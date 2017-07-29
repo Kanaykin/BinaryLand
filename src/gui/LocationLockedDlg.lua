@@ -7,7 +7,7 @@ LocationLockedDlg.WORK_PLACE = 72;
 LocationLockedDlg.LABEL_BACK = 74;
 LocationLockedDlg.LABEL = 2;
 LocationLockedDlg.BUTTON_YES = 100;
-LocationLockedDlg.TEXT = "Чтобы открыть локацию\n\n надо %s звезд.\n\n У вас %s.";
+LocationLockedDlg.TEXT = "LocationLockedDlgText";
 
 LocationLockedDlg.mNeedStars = 0;
 LocationLockedDlg.mCurStars = 0;
@@ -63,7 +63,11 @@ function LocationLockedDlg:initLabel(nodeBase)
     label = tolua.cast(label, "cc.Label");
     if label then
         setDefaultFont(label, self.mGame:getScale());
-        label:setString(string.format(LocationLockedDlg.TEXT, self.mNeedStars, self.mCurStars));
+
+        local localizationManager = self.mGame:getLocalizationManager();
+    	local text = localizationManager:getStringForKey(LocationLockedDlg.TEXT);
+
+        label:setString(string.format(text, self.mNeedStars, self.mCurStars));
     end
 end
 

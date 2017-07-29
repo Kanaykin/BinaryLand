@@ -40,5 +40,6 @@
     "NotEnoughStartsTitleText" : "NotEnoughStartsTitleText",
     "TextAllStarsText" : "TextAllStarsText",
     "CurrentLocStarsText" : "CurrentLocStarsText",
-    "TakeMoreStarsText" : "TakeMoreStarsText"
+    "TakeMoreStarsText" : "TakeMoreStarsText",
+    "LocationLockedDlgText" : "Need %s stars for open.\n\n You have %s."
 }
