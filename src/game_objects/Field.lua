@@ -1099,7 +1099,7 @@ function Field:init(fieldNode, layer, fieldData, game)
     self.mBonusLevel = fieldData.bonusLevel;
     self.mBonusLevelFile = fieldData.BonusLevelFile;
     self.mIsBonusLevel = fieldData.isBonus;
-    self.mIsTutorialLevel = fieldData.tutorial;
+    self.mIsTutorialLevel = fieldData.tutorial ~= false and fieldData.tutorial ~= nil;
     self.mDisableScrollForPlayer = fieldData.disableScrollForPlayer;
     info_log("Field:init self.mBonusLevel ", self.mBonusLevel);
 

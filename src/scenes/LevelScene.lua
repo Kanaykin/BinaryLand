@@ -228,6 +228,11 @@ function LevelScene:destroy()
 
 	LevelScene:superClass().destroy(self);
 
+    if self.mTutorial then
+        self.mTutorial:destroy();
+        self.mTutorial = nil;
+    end
+
 	SimpleAudioEngine:getInstance():stopMusic(true);
 end
 
@@ -236,7 +241,7 @@ function LevelScene:postInitScene(levelData)
     info_log("LevelScene:postInitScene ", levelData.isFemale);
     if levelData.tutorial then
         self.mTutorial = TutorialManager:create();
-        self.mTutorial:init(self.mSceneGame, self.mField, self.mMainUI);
+        self.mTutorial:init(self.mSceneGame, self.mField, self.mMainUI, levelData.tutorial);
     end
 
     -- set joystick to players

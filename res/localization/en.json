@@ -41,5 +41,12 @@
     "TextAllStarsText" : "TextAllStarsText",
     "CurrentLocStarsText" : "CurrentLocStarsText",
     "TakeMoreStarsText" : "TakeMoreStarsText",
-    "LocationLockedDlgText" : "Need %s stars for open.\n\n You have %s."
+    "LocationLockedDlgText" : "Need %s stars for open.\n\n You have %s.",
+    "TutorialStep2Lvl_1Text" : "TutorialStep2Lvl_1Text",
+    "TutorialStep2Lvl_2Text" : "TutorialStep2Lvl_2Text",
+    "TutorialStep2Lvl_3Text" : "TutorialStep2Lvl_3Text",
+    "TutorialStep3Lvl_1Text" : "TutorialStep3Lvl_1Text",
+    "TutorialStep4Lvl_1Text" : "TutorialStep4Lvl_1Text",
+    "TutorialStep4Lvl_2Text" : "TutorialStep4Lvl_2Text",
+    "TutorialStep5Lvl_1Text" : "TutorialStep5Lvl_1Text"
 }

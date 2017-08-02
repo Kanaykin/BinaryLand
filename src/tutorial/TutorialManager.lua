@@ -29,6 +29,14 @@ require "src/tutorial/TutorialStep9_free"
 require "src/tutorial/TutorialStep9_1"
 require "src/tutorial/TutorialStep9_2"
 require "src/tutorial/TutorialStep9_3"
+
+require "src/tutorial/TutorialStep2Lvl_1"
+require "src/tutorial/TutorialStep2Lvl_2"
+require "src/tutorial/TutorialStep2Lvl_3"
+require "src/tutorial/TutorialStep3Lvl_1"
+require "src/tutorial/TutorialStep4Lvl_1"
+require "src/tutorial/TutorialStep4Lvl_2"
+require "src/tutorial/TutorialStep5Lvl_1"
 require "src/base/Log"
 
 TutorialManager =  inheritsFrom(nil)
@@ -43,13 +51,20 @@ function TutorialManager:getMainUI()
 end
 
 --------------------------------
-function TutorialManager:init(gameScene, field, mainUi)
+function TutorialManager:destroy()
+	if self.mCurrentStep then
+		self.mCurrentStep:destroy();
+	end
+end
+
+--------------------------------
+function TutorialManager:init(gameScene, field, mainUi, tutorialStep)
 	info_log("TutorialManager:init()");
 	self.mField = field;
 	self.mGameScene = gameScene;
 	self.mMainUi = mainUi;
 
-	self.mCurrentStep = TutorialStep0:create();
+	self.mCurrentStep = _G[tutorialStep]:create();
 	self.mCurrentStep:init(gameScene, self.mField, self);
 end
 
@@ -65,7 +80,7 @@ function TutorialManager:tick(dt)
 		info_log("TutorialManager:tick ", nextStepNext);
 		self.mCurrentStep:destroy();
 		self.mCurrentStep = nil;
-		if nextStepNext then
+		if nextStepNext and _G[nextStepNext] then
 	        info_log("TutorialManager:tick nextStepNext ", nextStepNext);
 			self.mCurrentStep = _G[nextStepNext]:create();
 			info_log("TutorialManager:tick nextStepNext ", nextStepNext);
