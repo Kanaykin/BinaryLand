@@ -68,7 +68,7 @@ end
 
 --------------------------------
 function TutorialStep7_free:checkFinish()
-	info_log("TutorialStep7_free:checkFinish ");
+	--info_log("TutorialStep7_free:checkFinish ");
 	local coins = self.mField:getObjectsByTag(FactoryObject.BONUS_TAG);
 	if type(coins) ~= "table" or #coins == 0 then
 		self.mIsFinished = true;
@@ -78,7 +78,7 @@ function TutorialStep7_free:checkFinish()
 	if self.mField:getState() == Field.WIN then
 		self.mIsFinished = true;
 		self.mNextStep = nil;
-		info_log("TutorialStep7_free:checkFinish self.mNextStep ", self.mNextStep);
+		--info_log("TutorialStep7_free:checkFinish self.mNextStep ", self.mNextStep);
 	end
 
 end

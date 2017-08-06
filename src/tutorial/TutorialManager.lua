@@ -37,6 +37,8 @@ require "src/tutorial/TutorialStep3Lvl_1"
 require "src/tutorial/TutorialStep4Lvl_1"
 require "src/tutorial/TutorialStep4Lvl_2"
 require "src/tutorial/TutorialStep5Lvl_1"
+require "src/tutorial/TutorialStep7Lvl_1"
+require "src/tutorial/TutorialStep9Lvl_1"
 require "src/base/Log"
 
 TutorialManager =  inheritsFrom(nil)

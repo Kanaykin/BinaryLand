@@ -95,7 +95,7 @@ end
 function Field:getObjectsByTag(tag)
     local result = {};
 	for _, obj in ipairs(self.mObjects) do
-		info_log("Field:getObjectsByTag tag ", obj:getTag())
+		--info_log("Field:getObjectsByTag tag ", obj:getTag())
 		if obj:getTag() == tag then
 			table.insert(result, obj);
 		end
