@@ -50,8 +50,9 @@ function BulletObject:init(field, pos, goalPos)
 	-- update box 
 	debug_log("BulletObject:init width ", self.mTrigger.mSize.width);
 	debug_log("BulletObject:init height ", self.mTrigger.mSize.height);
-	self.mTrigger.mSize.width = self.mTrigger.mSize.width * 1.2
-	self.mTrigger.mSize.height = self.mTrigger.mSize.height * 1.2
+	self.mTrigger.mSize.width = self.mTrigger.mSize.width * 1.3;
+	self.mTrigger.mSize.height = self.mTrigger.mSize.height * 1.3;
+	self.mTrigger:updateDebugBox();
 end
 
 --------------------------------

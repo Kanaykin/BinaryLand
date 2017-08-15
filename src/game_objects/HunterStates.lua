@@ -32,6 +32,9 @@ function ShotGunState:enter(params)
     local foxPos = params.foxPos;
     self.mFoxPos = foxPos;
 
+    local hunterPos = self.mObject:getPosition();
+    debug_log("ShotGunState:enter hunterPos.x ", hunterPos.x, " hunterPos.y ",  hunterPos.y);
+
     if foxPos.y < curPos.y then
         self.mDir = HunterObject.DIRECTIONS.SHOT_FRONT;
     elseif foxPos.y > curPos.y then

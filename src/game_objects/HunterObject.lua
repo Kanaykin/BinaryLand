@@ -15,7 +15,7 @@ HunterObject.mDog = nil;
 HunterObject.mIsDead = false;
 
 --shot constants
-HunterObject.SHOT_PIXELS_DELTA = 10
+HunterObject.SHOT_PIXELS_DELTA = 2
 HunterObject.SHOT_MIN_GRID_DELTA = 3
 HunterObject.SHOT_MAX_GRID_DELTA = 16
 
