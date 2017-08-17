@@ -13,9 +13,10 @@ HunterObject.mFoxGridGoalPos = nil;
 HunterObject.mCanAttack = false;
 HunterObject.mDog = nil;
 HunterObject.mIsDead = false;
+HunterObject.mBullet = nil;
 
 --shot constants
-HunterObject.SHOT_PIXELS_DELTA = 2
+HunterObject.SHOT_PIXELS_DELTA = 10
 HunterObject.SHOT_MIN_GRID_DELTA = 3
 HunterObject.SHOT_MAX_GRID_DELTA = 16
 
@@ -176,6 +177,8 @@ function HunterObject:createBullet(goalPos)
     self.mField:addObject(bullet);
 
     SimpleAudioEngine:getInstance():playEffect(gSounds.HUNTER_SHOT_SOUND);
+
+    self.mBullet = bullet;
 end
 
 --------------------------------
@@ -189,7 +192,7 @@ function HunterObject:tryShotGun()
     
     if self.mGridPosGetTrace ~= self.mGridPosition or self.mFoxGridGoalPos == self.mGridPosGetTrace then
         self.mGridPosGetTrace = self.mGridPosition;
-        debug_log("self.mField:isFreePoint check trace x ", self.mGridPosGetTrace.x, " y ", self.mGridPosGetTrace.y);
+        -- debug_log("self.mField:isFreePoint check trace x ", self.mGridPosGetTrace.x, " y ", self.mGridPosGetTrace.y);
         self.mFoxGoalPos = nil;
         self.mFoxGridGoalPos = nil;
 
@@ -210,9 +213,9 @@ function HunterObject:tryShotGun()
                 end
 
                 if all_point_free then
-                    --debug_log("self.mField:isFreePoint FREE X !!!");
-                    --debug_log("self.mField:isFreePoint player postion x ", pos.x, " y ", pos.y);
-                    --debug_log("self.mField:isFreePoint hunter postion x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
+                    -- debug_log("self.mField:isFreePoint FREE X !!!");
+                    -- debug_log("self.mField:isFreePoint player postion x ", pos.x, " y ", pos.y);
+                    -- debug_log("self.mField:isFreePoint hunter postion x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
                     
                     self.mFoxGridGoalPos = self.mGridPosGetTrace;
 
@@ -239,17 +242,22 @@ function HunterObject:tryShotGun()
                 end
 
                 if all_point_free then
-                    --debug_log("self.mField:isFreePoint FREE Y !!!");
-                    --debug_log("self.mField:isFreePoint player postion x ", pos.x, " y ", pos.y);
-                    --debug_log("self.mField:isFreePoint hunter postion x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
+                    -- debug_log("self.mField:isFreePoint FREE Y !!!");
+                    -- debug_log("self.mField:isFreePoint player postion x ", pos.x, " y ", pos.y);
+                    -- debug_log("self.mField:isFreePoint hunter postion x ", self.mGridPosition.x, " y ", self.mGridPosition.y);
                     self.mFoxGridGoalPos = self.mGridPosGetTrace;
+
+                    -- debug_log("self.mField:isFreePoint player postion y ", player:getPosition().y);
+                    -- debug_log("self.mField:isFreePoint hunter postion y ", self:getPosition().y);
 
                     if math.abs(player:getPosition().y - self:getPosition().y) < HunterObject.SHOT_PIXELS_DELTA then
                         self.mFoxGoalPos = pos;
                         local newPos = Vector.new(self.mFoxGoalPos.x - delta, self.mFoxGoalPos.y );
+                        -- debug_log("self.mField:isFreePoint newPos ", newPos.x, " newPos ", newPos.y);
+                        -- debug_log("self.mField:isFreePoint mField:isFreePointForPlayer ", self.mField:isFreePointForPlayer( newPos ));
                         while self.mField:isFreePointForPlayer( newPos ) do
                             self.mFoxGoalPos = newPos;
-                            --debug_log("self.mField:isFreePoint self.mFoxGoalPos.x ", self.mFoxGoalPos.x);
+                            -- debug_log("self.mField:isFreePoint self.mFoxGoalPos.x ", self.mFoxGoalPos.x);
                             newPos = Vector.new(self.mFoxGoalPos.x - delta, self.mFoxGoalPos.y );
                         end
                     end
@@ -263,10 +271,32 @@ function HunterObject:tryShotGun()
 end
 
 --------------------------------
+function HunterObject:canAttack()
+
+    if not self.mCanAttack then
+        return false;
+    end
+
+    -- debug_log("HunterObject:canAttack self.mBullet ", self.mBullet);
+    if not self.mBullet then
+        return true;
+    end
+
+    -- debug_log("HunterObject:canAttack self.mBullet:getNode ", self.mBullet:getNode());
+    -- if bullet detroyed 
+    if not self.mBullet:getNode() then
+        self.mBullet = nil;
+        return true;
+    end
+
+    return false;
+end
+
+--------------------------------
 function HunterObject:tick(dt)
     HunterObject:superClass().tick(self, dt);
 
-    if self.mCanAttack and not self:isDead() then
+    if self:canAttack() and not self:isDead() then
         self:tryShotGun();
     end
 end

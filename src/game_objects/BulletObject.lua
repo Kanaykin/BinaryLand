@@ -35,7 +35,7 @@ function BulletObject:init(field, pos, goalPos)
 	node:setContentSize(cc.size(field:getCellSize(), field:getCellSize()));
 
 	field:getFieldNode():addChild(node);
-	node:setAnchorPoint(cc.p(0.5, 0.0));
+	node:setAnchorPoint(cc.p(0.5, 0.5));
 
 	debug_log("BulletObject:getAnchorByDir dir y ", dir.y, " x ", dir.x);
 	--self.mAnimationNode:setAnchorPoint(cc.p(0.5 + dir.x, 0.5 + dir.y) );
@@ -50,8 +50,8 @@ function BulletObject:init(field, pos, goalPos)
 	-- update box 
 	debug_log("BulletObject:init width ", self.mTrigger.mSize.width);
 	debug_log("BulletObject:init height ", self.mTrigger.mSize.height);
-	self.mTrigger.mSize.width = self.mTrigger.mSize.width * 1.3;
-	self.mTrigger.mSize.height = self.mTrigger.mSize.height * 1.3;
+	self.mTrigger.mSize.width = self.mTrigger.mSize.width * 1.5-- * self.mField.mGame:getScale();
+	self.mTrigger.mSize.height = self.mTrigger.mSize.height * 1.5-- * self.mField.mGame:getScale();
 	self.mTrigger:updateDebugBox();
 end
 
@@ -100,13 +100,13 @@ function BulletObject:getAnchorByDir(dir)
 	debug_log("BulletObject:getAnchorByDir dir y ", dir.y, " x ", dir.x);
     if dir then
         if dir.y >= 0.9 then
-            return cc.p(0.15, -0.5);
+            return cc.p(0.15, -0.75);
         elseif dir.y <= -0.9 then
-            return cc.p(0.2, -0.35);
+            return cc.p(0.2, -0.55);
         elseif dir.x >= 0.9 then
-            return cc.p(-0.7, 0.0);
+            return cc.p(-0.7, -0.25);
         elseif dir.x <= -0.9 then
-            return cc.p(0.9, 0.0);
+            return cc.p(1.3, -0.25);
         end
     end
     return cc.p(0.7, 0.2);
