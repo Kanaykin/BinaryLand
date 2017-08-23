@@ -178,6 +178,22 @@ function DogObject:getFoundPlayerPos()
 end
 
 ---------------------------------
+function DogObject:onStatePause()
+    info_log("DogObject:onStatePause ");
+    DogObject:superClass().onStatePause(self);
+
+    self.mStateMachine:onStatePause();
+end
+
+---------------------------------
+function DogObject:onStateInGame()
+    info_log("DogObject:onStateInGame ");
+    DogObject:superClass().onStateInGame(self);
+
+    self.mStateMachine:onStateInGame();
+end
+
+---------------------------------
 function DogObject:runAway(point)
     if point and not self.oldVelocity then
         self.oldVelocity = self.mVelocity;

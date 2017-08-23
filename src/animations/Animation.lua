@@ -1,4 +1,5 @@
 require "src/base/Inheritance"
+require "src/base/Utils"
 
 IAnimation = inheritsFrom(nil)
 
@@ -18,6 +19,12 @@ end
 ---------------------------------
 function IAnimation:destroy()
 	
+end
+
+---------------------------------
+function IAnimation:pause()
+	debug_log("IAnimation:pause ", utils.getfield(self:class()));
+	self:assert()
 end
 
 ---------------------------------

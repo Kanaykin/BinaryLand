@@ -5,6 +5,7 @@ RandomAnimation = inheritsFrom(IAnimation)
 
 RandomAnimation.mAnimations = nil
 RandomAnimation.mCurrentAnimation = nil
+RandomAnimation.mPaused = false;
 
 --------------------------------
 function RandomAnimation:init()
@@ -18,10 +19,21 @@ end
 
 --------------------------------
 function RandomAnimation:tick(dt)
+	if self.mPaused then
+		return;
+	end
 	if self.mCurrentAnimation then
 		self.mCurrentAnimation:tick(dt);
 	end
 	self:playNext();
+end
+
+----------------------------
+function RandomAnimation:pause()
+	self.mPaused = true;
+  	if self.mCurrentAnimation then
+		self.mCurrentAnimation:pause();
+	end
 end
 
 --------------------------------
@@ -36,6 +48,13 @@ end
 
 --------------------------------
 function RandomAnimation:play()
+	if self.mPaused then
+		self.mPaused = false;
+  		if self.mCurrentAnimation then
+			self.mCurrentAnimation:play();
+		end
+		return;
+	end
 	--info_log("RandomAnimation:play");
 	self:playNext();
 end

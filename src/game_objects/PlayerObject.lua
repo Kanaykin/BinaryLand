@@ -219,6 +219,30 @@ function PlayerObject:playAnimation(button)
 	end
 end
 
+---------------------------------
+function PlayerObject:onStatePause()
+	info_log("PlayerObject:onStatePause ", self.mLastButtonPressed);
+	PlayerObject:superClass().onStatePause(self);
+
+	local button = self.mLastButtonPressed;
+	button = (button == nil) and -1 or button;
+	if button and self.mAnimations[button] then
+		self.mAnimations[button]:pause()
+	end
+end
+
+---------------------------------
+function PlayerObject:onStateInGame()
+	info_log("PlayerObject:onStateInGame ", self.mLastButtonPressed);
+	PlayerObject:superClass().onStateInGame(self);
+
+	local button = self.mLastButtonPressed;
+	button = (button == nil) and -1 or button;
+	if button and self.mAnimations[button] then
+		self.mAnimations[button]:play()
+	end
+end
+
 --------------------------------
 function PlayerObject:getReverse()
 	return self.mReverse;

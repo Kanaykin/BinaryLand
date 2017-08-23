@@ -10,6 +10,7 @@ DelayAnimationSoftImpl.mAnimation = nil
 DelayAnimationSoftImpl.mTexture = nil
 DelayAnimationSoftImpl.mTextureName = nil
 DelayAnimationSoftImpl.mAnchor = nil
+DelayAnimationSoftImpl.mPaused = false;
 
 --------------------------------
 function DelayAnimationSoftImpl:init(animation, delay, texture, textureSize, textureName, anchor)
@@ -46,6 +47,15 @@ function DelayAnimationSoftImpl:destroy()
 	self.mAnimation:destroy();
 end
 
+---------------------------------
+function DelayAnimationSoftImpl:pause()
+	local node = self.mAnimation:getAction():getTarget();
+	if node then
+		self.mPaused = true;
+		node:getActionManager():pauseTarget(node);
+	end
+end
+
 ----------------------------
 function DelayAnimationSoftImpl:play()
 	--info_log("DelayAnimationSoftImpl:play ", self.mTextureName)
@@ -62,7 +72,15 @@ function DelayAnimationSoftImpl:play()
     if self.mAnchor then
         self.mNode:setAnchorPoint(self.mAnchor);
     end
+    if self.mPaused then
+		self.mPaused  = false;
+		local node = self.mAnimation:getAction():getTarget();
+		if node then
+			node:getActionManager():resumeTarget(node);
+		end
+	end
 	self.mAnimation:play();
+	
 end
 
 --////////////////////////////////////////
@@ -72,6 +90,7 @@ DelayAnimationHardImpl.mAnimation = nil
 DelayAnimationHardImpl.mCurrentDelay = nil
 DelayAnimationHardImpl.mDelay = nil
 DelayAnimationHardImpl.mPlaying = false
+DelayAnimationHardImpl.mPaused = false;
 
 function DelayAnimationHardImpl:init(animation, delay)
 	self.mDelay = delay;
@@ -88,17 +107,26 @@ function DelayAnimationHardImpl:destroy()
 	self.mAnimation:destroy();
 end
 
+-- ---------------------------------
+-- function DelayAnimationHardImpl:pause()
+-- 	self.mPaused = true;
+-- end
+
 ----------------------------
 function DelayAnimationHardImpl:play()
 	info_log("DelayAnimationHardImpl:play ", self.mTextureName)
-	self.mCurrentDelay = self.mDelay;
-	self.mPlaying = false;
+	if self.mPaused then
+		self.mPaused = false;
+	else
+		self.mCurrentDelay = self.mDelay;
+		self.mPlaying = false;
+	end
 end
 
 --------------------------------
 function DelayAnimationHardImpl:tick(dt)
 	--debug_log("DelayAnimationHardImpl:tick ", self.mCurrentDelay)
-	if self.mCurrentDelay then
+	if self.mCurrentDelay and not self.mPaused then
 		
 		self.mCurrentDelay = self.mCurrentDelay - dt;
 		
@@ -126,6 +154,11 @@ end
 --------------------------------
 function DelayAnimation:tick(dt)
 	self.mImpl:tick(dt);
+end
+
+---------------------------------
+function DelayAnimation:pause()
+	self.mImpl:pause();
 end
 
 ---------------------------------

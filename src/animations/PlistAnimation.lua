@@ -6,6 +6,7 @@ PlistAnimation.mAnimation = nil;
 PlistAnimation.mAction = nil;
 PlistAnimation.mLastFrame = nil;
 PlistAnimation.mPlayed = nil;
+PlistAnimation.mPaused = false;
 
 --------------------------------
 function PlistAnimation:getAction()
@@ -41,12 +42,18 @@ function PlistAnimation:play()
 --	debug_log("PlistAnimation:play");
 	PlistAnimation:superClass().play(self);
 
-    if not self.mAction:isDone() then
+  if not self.mPaused then
+      if not self.mAction:isDone() then
         self.mNode:stopAction(self.mAction);
-    end
+      end
+      self.mNode:runAction(self.mAction);
+  else 
+      self.mNode:getActionManager():resumeTarget(self.mNode);
+  end
+  self.mPaused = false
+
 	--debug_log("PlistAnimation:play mNode ", self.mNode);
 	--debug_log("PlistAnimation:play mAction ", self.mAction);
-	self.mNode:runAction(self.mAction);
 end
 
 ---------------------------------
@@ -64,9 +71,16 @@ end
 ----------------------------
 function PlistAnimation:stop()
     debug_log("PlistAnimation:stop ");
+    self.mPaused = false;
     if not self.mAction:isDone() then
         self.mNode:stopAction(self.mAction);
     end
+end
+
+----------------------------
+function PlistAnimation:pause()
+  self.mNode:getActionManager():pauseTarget(self.mNode);
+  self.mPaused = true;
 end
 
 --------------------------------

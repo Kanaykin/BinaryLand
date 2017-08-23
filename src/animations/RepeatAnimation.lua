@@ -26,6 +26,12 @@ function RepeatAnimationSoftImpl:play()
 	self.mAnimation:play();
 end
 
+---------------------------------
+function RepeatAnimationSoftImpl:pause()
+	local node = self.mAction:getTarget();
+	node:getActionManager():pauseTarget(node);
+end
+
 ----------------------------
 function RepeatAnimationSoftImpl:stop()
 	debug_log("RepeatAnimationSoftImpl:stop ");
@@ -69,6 +75,7 @@ RepeatAnimationHardImpl = inheritsFrom(IAnimation)
 RepeatAnimationHardImpl.mAnimation = nil
 RepeatAnimationHardImpl.mPlaying = false
 RepeatAnimationHardImpl.mStopAfterDone = false
+RepeatAnimationHardImpl.mPaused = false;
 
 --------------------------------
 function RepeatAnimationHardImpl:init(animation)
@@ -77,6 +84,7 @@ end
 
 ----------------------------
 function RepeatAnimationHardImpl:play()
+	self.mPaused = false
 	self.mAnimation:play();
 	self.mPlaying = true
 end
@@ -102,10 +110,19 @@ end
 
 --------------------------------
 function RepeatAnimationHardImpl:tick(dt)
+	if self.mPaused then
+		return;
+	end
 	if self.mPlaying and self:isDone() and not self.mStopAfterDone then
 		--info_log("RepeatAnimationHardImpl:tick replay ");
 		self:play();
 	end
+end
+
+---------------------------------
+function RepeatAnimationHardImpl:pause()
+	self.mPaused = true;
+	self.mAnimation:pause();
 end
 
 ---------------------------------
@@ -154,6 +171,11 @@ end
 function RepeatAnimation:stop()
 	debug_log("RepeatAnimation:stop ");
 	self.mImpl:stop();
+end
+
+---------------------------------
+function RepeatAnimation:pause()
+	self.mImpl:pause();
 end
 
 ---------------------------------

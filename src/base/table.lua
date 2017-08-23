@@ -16,3 +16,4 @@ table.length = function(table)
     for _ in pairs(table) do count = count + 1 end
     return count
 end
+

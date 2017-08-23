@@ -5,6 +5,7 @@ SequenceAnimation = inheritsFrom(IAnimation)
 
 SequenceAnimation.mAnimations = nil
 SequenceAnimation.mCurrentAnimation = nil
+SequenceAnimation.mPaused = nil;
 
 --------------------------------
 function SequenceAnimation:init()
@@ -28,6 +29,9 @@ end
 
 --------------------------------
 function SequenceAnimation:tick(dt)
+	if self.mPaused then
+		return;
+	end
     --debug_log("SequenceAnimation:tick self.mCurrentAnimation ", self.mCurrentAnimation);
 	if self.mCurrentAnimation and self.mAnimations[self.mCurrentAnimation] then
 		self.mAnimations[self.mCurrentAnimation]:tick(dt)
@@ -61,9 +65,20 @@ function SequenceAnimation:playNext()
 	end
 end
 
+----------------------------
+function SequenceAnimation:pause()
+	self.mPaused = true;
+	self.mAnimations[self.mCurrentAnimation]:pause();
+end
+
 --------------------------------
 function SequenceAnimation:play()
 	--info_log("SequenceAnimation:play");
-    self.mCurrentAnimation = nil;
-	self:playNext();
+	if not self.mPaused then
+    	self.mCurrentAnimation = nil;
+		self:playNext();
+	else
+		self.mAnimations[self.mCurrentAnimation]:play();
+		self.mPaused = false;
+	end
 end

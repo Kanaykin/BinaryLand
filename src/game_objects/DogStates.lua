@@ -202,6 +202,16 @@ function DogPlayerFoundState:enter(params)
     self.mBarkSound = SimpleAudioEngine:getInstance():playEffect(gSounds.DOG_BARK_SOUND, true);
 end
 
+---------------------------------
+function DogPlayerFoundState:onStatePause()
+    SimpleAudioEngine:getInstance():stopEffect(self.mBarkSound);
+end
+
+---------------------------------
+function DogPlayerFoundState:onStateInGame()
+    self.mBarkSound = SimpleAudioEngine:getInstance():playEffect(gSounds.DOG_BARK_SOUND, true);
+end
+
 ------------------------------------
 function DogPlayerFoundState:leave(state)
     debug_log("DogPlayerFoundState:leave");
@@ -273,6 +283,20 @@ end]]
 function DogStateMachine:onHunterDead()
 	if self.mActive.onHunterDead then
         self.mActive:onHunterDead(player);
+    end
+end
+
+---------------------------------
+function DogStateMachine:onStatePause()
+    if self.mActive.onStatePause then
+        self.mActive:onStatePause(player);
+    end
+end
+
+---------------------------------
+function DogStateMachine:onStateInGame()
+    if self.mActive.onStateInGame then
+        self.mActive:onStateInGame(player);
     end
 end
 
