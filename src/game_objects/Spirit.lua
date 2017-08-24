@@ -73,6 +73,26 @@ function SpiritObject:playAnimation(animation)
 	end
 end
 
+---------------------------------
+function SpiritObject:onStatePause()
+    info_log("SpiritObject:onStatePause ");
+    SpiritObject:superClass().onStatePause(self);
+
+    if self.mCurrentAnimation then
+        self.mAnimations[self.mCurrentAnimation]:pause();
+    end
+end
+
+---------------------------------
+function SpiritObject:onStateInGame()
+    info_log("SpiritObject:onStateInGame ");
+    SpiritObject:superClass().onStateInGame(self);
+
+    if self.mCurrentAnimation then
+        self.mAnimations[self.mCurrentAnimation]:play();
+    end
+end
+
 --------------------------------
 function SpiritObject:getAnimation(animation)
 	return self.mAnimations[animation];

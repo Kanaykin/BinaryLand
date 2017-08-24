@@ -66,6 +66,9 @@ function ScrollView:setClickable(clickable)
 	if clickable then
 		--------------------
 		local function onTouchHandler(action, var1, var2)
+            if not var1 or not var2 then
+                return false;
+            end
 			info_log("onTouchHandler ", action, "var1 ", var, "var2 ", var2);
 			info_log("onTouchHandler ", action, "x = ", var1, " y = ", var2);
     		scrollView:onTouchHandler(action, cc.p(var1, var2));

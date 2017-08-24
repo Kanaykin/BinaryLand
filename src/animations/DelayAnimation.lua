@@ -108,15 +108,21 @@ function DelayAnimationHardImpl:destroy()
 end
 
 -- ---------------------------------
--- function DelayAnimationHardImpl:pause()
--- 	self.mPaused = true;
--- end
+function DelayAnimationHardImpl:pause()
+	self.mPaused = true;
+	if self.mPlaying then
+		self.mAnimation:pause();
+	end
+end
 
 ----------------------------
 function DelayAnimationHardImpl:play()
 	info_log("DelayAnimationHardImpl:play ", self.mTextureName)
 	if self.mPaused then
 		self.mPaused = false;
+		if self.mPlaying then
+			self.mAnimation:play();
+		end
 	else
 		self.mCurrentDelay = self.mDelay;
 		self.mPlaying = false;

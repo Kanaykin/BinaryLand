@@ -68,6 +68,22 @@ function HiddenTrap:initAnimation()
 end
 
 ---------------------------------
+function HiddenTrap:onStatePause()
+    info_log("HiddenTrap:onStatePause ");
+    HiddenTrap:superClass().onStatePause(self);
+
+    self.mOpenAnimation:pause();
+end
+
+---------------------------------
+function HiddenTrap:onStateInGame()
+    info_log("HiddenTrap:onStateInGame ");
+    HiddenTrap:superClass().onStateInGame(self);
+
+    self.mOpenAnimation:play();
+end
+
+---------------------------------
 function HiddenTrap:onEnter(player)
 	HiddenTrap:superClass().onEnter(self, player);
 	self.mOpenAnimation:play();

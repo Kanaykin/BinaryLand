@@ -68,7 +68,9 @@ end
 ----------------------------
 function SequenceAnimation:pause()
 	self.mPaused = true;
-	self.mAnimations[self.mCurrentAnimation]:pause();
+	if self.mCurrentAnimation then
+		self.mAnimations[self.mCurrentAnimation]:pause();
+	end
 end
 
 --------------------------------
@@ -78,7 +80,9 @@ function SequenceAnimation:play()
     	self.mCurrentAnimation = nil;
 		self:playNext();
 	else
-		self.mAnimations[self.mCurrentAnimation]:play();
-		self.mPaused = false;
+		if self.mCurrentAnimation then
+			self.mAnimations[self.mCurrentAnimation]:play();
+			self.mPaused = false;
+		end
 	end
 end

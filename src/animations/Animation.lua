@@ -23,8 +23,8 @@ end
 
 ---------------------------------
 function IAnimation:pause()
-	debug_log("IAnimation:pause ", utils.getfield(self:class()));
-	self:assert()
+--	debug_log("IAnimation:pause ", utils.getfield(self:class()));
+--	self:assert()
 end
 
 ---------------------------------

@@ -35,6 +35,22 @@ function FinishObject:createIdleAnimation(animation, nameAnimation, node, textur
     animation:addAnimation(repeat_idle);
 end
 
+---------------------------------
+function FinishObject:onStatePause()
+    info_log("FinishObject:onStatePause ", self.mLastButtonPressed);
+    FinishObject:superClass().onStatePause(self);
+
+    self.mAnimation:pause();
+end
+
+---------------------------------
+function FinishObject:onStateInGame()
+    info_log("FinishObject:onStateInGame ", self.mLastButtonPressed);
+    FinishObject:superClass().onStateInGame(self);
+
+    self.mAnimation:play();
+end
+
 --------------------------------
 function FinishObject:init(field, node)
 	info_log("FinishObject:init ");

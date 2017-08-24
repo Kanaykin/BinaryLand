@@ -102,6 +102,22 @@ function BonusObject:initAnimation()
     self.mAnimation:play();
 end
 
+---------------------------------
+function BonusObject:onStatePause()
+    info_log("BonusObject:onStatePause ");
+    BonusObject:superClass().onStatePause(self);
+
+    self.mAnimation:pause();
+end
+
+---------------------------------
+function BonusObject:onStateInGame()
+    info_log("BonusObject:onStateInGame ");
+    BonusObject:superClass().onStateInGame(self);
+
+    self.mAnimation:play();
+end
+
 --------------------------------
 function BonusObject:updateOpenAnimation(dt)
     if not self.mListOpenAnimation then

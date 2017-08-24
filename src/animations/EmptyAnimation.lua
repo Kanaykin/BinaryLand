@@ -49,11 +49,11 @@ end
 
 ---------------------------------
 function EmptyAnimation:pause()
-	local className = utils.getfield(self:class());
-	debug_log("EmptyAnimation:pause ", className);
-	if className ~= "EmptyAnimation" then
-		self:assert()
-	end
+	--local className = utils.getfield(self:class());
+	--debug_log("EmptyAnimation:pause ", className);
+	--if className ~= "EmptyAnimation" then
+	--	self:assert()
+	--end
 end
 
 ----------------------------
