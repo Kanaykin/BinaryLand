@@ -9,7 +9,7 @@ BonusObject.mAnimationWait = nil;
 
 BonusObject.mListOpenAnimation = nil;
 
-BonusObject.mScore = 10;
+BonusObject.mScore = 1;
 BonusObject.mType = nil;
 BonusObject.mTimeLabel = nil;
 BonusObject.mOpened = nil;

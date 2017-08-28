@@ -117,7 +117,7 @@ end
 
 --------------------------------
 function MobObject:getBonus()
-    return 100;
+    return 1;
 end
 
 --------------------------------
