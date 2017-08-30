@@ -60,7 +60,7 @@ end
 
 ------------------------------------
 function RunAwayState:tick(dt)
-    debug_log("HunterDeadState:tick ", dt);
+    --debug_log("HunterDeadState:tick ", dt);
     RunAwayState:superClass().tick(self, dt);
 
     self.mTimeForWhining = self.mTimeForWhining - dt;
@@ -85,7 +85,7 @@ end
 
 ------------------------------------
 function HunterDeadState:tick(dt)
-    debug_log("HunterDeadState:tick ", dt);
+    --debug_log("HunterDeadState:tick ", dt);
     HunterDeadState:superClass().tick(self, dt);
 end
 

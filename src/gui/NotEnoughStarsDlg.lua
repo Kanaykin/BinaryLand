@@ -8,9 +8,7 @@ NotEnoughStarsDlg.BASE_NODE_TAG = 49;
 NotEnoughStarsDlg.WORK_PLACE = 72;
 NotEnoughStarsDlg.BUTTON_YES = 100;
 NotEnoughStarsDlg.TEXT_TITLE_LABEL = 2;
-NotEnoughStarsDlg.TEXT_ALL_STARS_LABEL = 4;
 NotEnoughStarsDlg.TEXT_CURRENT_LOC_STARS_LABEL = 5;
-NotEnoughStarsDlg.ALL_STARS_LABEL_VAL = 3;
 NotEnoughStarsDlg.CURRENT_LOC_STARS_LABEL_VAL = 6;
 
 --------------------------------
@@ -40,11 +38,6 @@ function NotEnoughStarsDlg:updateLocationInfo(nodeBase)
     local needStars = location:getNeedStars();
     debug_log("NotEnoughStarsDlg:updateLocationInfo needStars ", needStars);
     local countStars = location:getPredLocationStar(true);
-
-    local label = tolua.cast(nodeBase:getChildByTag(NotEnoughStarsDlg.ALL_STARS_LABEL_VAL), "cc.Label");
-    if label then
-        label:setString(tostring(countStars).."/40");
-    end
 
     local label = tolua.cast(nodeBase:getChildByTag(NotEnoughStarsDlg.CURRENT_LOC_STARS_LABEL_VAL), "cc.Label");
     if label then
@@ -76,9 +69,7 @@ function NotEnoughStarsDlg:initGuiElements()
     button:registerControlEventHandler(onOKButtonPressed, 1);
 
     self:updateLabel(nodeBase, NotEnoughStarsDlg.TEXT_TITLE_LABEL);
-    self:updateLabel(nodeBase, NotEnoughStarsDlg.TEXT_ALL_STARS_LABEL);
     self:updateLabel(nodeBase, NotEnoughStarsDlg.TEXT_CURRENT_LOC_STARS_LABEL);
-    self:updateLabel(nodeBase, NotEnoughStarsDlg.ALL_STARS_LABEL_VAL);
     self:updateLabel(nodeBase, NotEnoughStarsDlg.CURRENT_LOC_STARS_LABEL_VAL);
 
     self:updateLocationInfo(nodeBase);

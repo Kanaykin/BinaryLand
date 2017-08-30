@@ -11,7 +11,7 @@ RepeatAnimationSoftImpl.mAction = nil;
 
 --------------------------------
 function RepeatAnimationSoftImpl:init(animation, times)
-    info_log("RepeatAnimationSoftImpl:init ( ", times);
+    --info_log("RepeatAnimationSoftImpl:init ( ", times);
 
 	local action = animation:getAction();
 	local repeatAction = times ~= nil and CCRepeat:create(action, times) or CCRepeatForever:create(action);

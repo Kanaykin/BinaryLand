@@ -713,7 +713,7 @@ end
 
 --------------------------------
 function Field:incEnterTrapCounter()
-    if not self.mIsTutorialLevel then
+    if self.mId ~= "1_1" and self.mId ~= "1_bonus" then
         self.mLevelStatistic.enterTrap = self.mLevelStatistic.enterTrap and self.mLevelStatistic.enterTrap + 1 or 1;
     end
 end

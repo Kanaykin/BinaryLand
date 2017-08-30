@@ -94,7 +94,7 @@ function Level:getIndex()
 end
 
 -----------------------------------
-function Level:initFlashAnimation(primaryAnimator, animManager, nameFrame, node)
+function Level:initFlashAnimation(primaryAnimator, animManager, nameFrame, node, showedStars)
     local loc_self = self;
     local loc_animManager = animManager;
     function callback()
@@ -106,18 +106,21 @@ function Level:initFlashAnimation(primaryAnimator, animManager, nameFrame, node)
 
     for i = 1, self:getCountStar() do
         function star_callback()
-            info_log("star_callback ", i);
-            local star = node:getChildByTag(Level.FIRST_STAR_TAG + (i - 1));
-            star:setVisible(true);
-            self.mStarAnimations[i]:play();
+            -- if i > showedStars then
+                info_log("star_callback ", i);
+                local star = node:getChildByTag(Level.FIRST_STAR_TAG + (i - 1));
+                star:setVisible(true);
+                self.mStarAnimations[i]:play();
+            -- end
         end
 
         local starCallFunc = CCCallFunc:create(star_callback);
         animManager:setCallFuncForLuaCallbackNamed(starCallFunc, "0:starframe"..tostring(i));
     end
 
-    self.mStarAnimations = {}
-    for i = 1, Level.MAX_COUNT_STAR do
+    for i = showedStars + 1, self:getCountStar() do
+        info_log("Level:initFlashAnimation ", i);
+        
         local star = node:getChildByTag(Level.FIRST_STAR_TAG + (i - 1));
 
         local animationBegin = PlistAnimation:create();
@@ -140,23 +143,26 @@ function Level:initFlashAnimation(primaryAnimator, animManager, nameFrame, node)
 end
 
 -----------------------------------
-function Level:initFireAnimation(node)
-    self.mStarAnimations = {}
-
-    for i = 1, self:getCountStar() do
+function Level:initFireAnimation(node, starsCount)
+    info_log("Level:initFireAnimation starsCount ", starsCount);
+    
+    for i = 1, starsCount do
+        info_log("Level:initFireAnimation i ", i);
         local star = node:getChildByTag(Level.FIRST_STAR_TAG + (i - 1));
-        local animation = PlistAnimation:create();
-        animation:init("LevelStar.plist", star, star:getAnchorPoint(), nil, 0.1);
-        local repAnimation = RepeatAnimation:create();
-        repAnimation:init(animation);
-        self.mStarAnimations[i] = repAnimation;
-        star:setVisible(true);
-        self.mStarAnimations[i]:play();
+        if star then
+            local animation = PlistAnimation:create();
+            animation:init("LevelStar.plist", star, star:getAnchorPoint(), nil, 0.1);
+            local repAnimation = RepeatAnimation:create();
+            repAnimation:init(animation);
+            self.mStarAnimations[i] = repAnimation;
+            star:setVisible(true);
+            self.mStarAnimations[i]:play();
+        end
     end
 end
 
 -----------------------------------
-function Level:initVisual(primaryAnimator, animManager, nameFrame, node, showed)
+function Level:initVisual(primaryAnimator, animManager, nameFrame, node, needShowed)
 
     self:initButton(node);
 
@@ -191,12 +197,14 @@ function Level:initVisual(primaryAnimator, animManager, nameFrame, node, showed)
         end
     end
 
-    if not showed then
-        self:initFlashAnimation(primaryAnimator, animManager, nameFrame, node);
-    else
-        self:initFireAnimation(node);
-    end
+    self.mStarAnimations = {};
+    local currentStars = self:getCountStar();
+    info_log("Level:initVisual index ", self:getIndex(), " currentStars ", currentStars);
+    info_log("Level:initVisual index ", self:getIndex(), " needShowed ", needShowed);
     
+    self:initFireAnimation(node, currentStars - needShowed);
+
+    self:initFlashAnimation(primaryAnimator, animManager, nameFrame, node, currentStars - needShowed);
 end
 
 ---------------------------------

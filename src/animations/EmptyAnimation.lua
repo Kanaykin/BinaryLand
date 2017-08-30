@@ -18,12 +18,12 @@ function EmptyAnimation:init(texture, node, anchor)
     if texture then
         self.mTextureSize = texture:getContentSize();
     end
-	info_log("EmptyAnimation:init ", self.mTextureSize.width, ", ", self.mTextureSize.height);
+	--info_log("EmptyAnimation:init ", self.mTextureSize.width, ", ", self.mTextureSize.height);
 end
 
 --------------------------------
 function EmptyAnimation:setFrame(frame)
-	debug_log("EmptyAnimation:setFrame ", frame);
+	--debug_log("EmptyAnimation:setFrame ", frame);
 	self.mFrame = frame
 end
 

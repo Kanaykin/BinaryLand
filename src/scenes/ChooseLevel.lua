@@ -83,20 +83,20 @@ function ChooseLevel:initScene()
 
         local showedCountStar = self.mSceneManager.mGame:getLevelStarShowed(self.mCurLocation:getId(), self.mCurLocation.mLevels[i]:getIndex());
         local countStar = self.mCurLocation.mLevels[i]:getCountStar();
-        local showed = countStar == showedCountStar;
-        debug_log("ChooseLevel: showed !!!! ", showed );
+        local need_showed = countStar - showedCountStar;
+        debug_log("ChooseLevel: showed !!!! ", need_showed );
         self.mSceneManager.mGame:setLevelStarShowed(self.mCurLocation:getId(), 
             self.mCurLocation.mLevels[i]:getIndex(),
             countStar);
 
         --info_log("animManager:getRootNode() ", animManager:getRootNode():getTag());
         local nameFrame = "0:frame"..frameIndex;
-        if not showed then
+        if need_showed > 0 then
             frameIndex = frameIndex + 1;
         end
 
         local child = node:getChildByTag(i);
-		self.mCurLocation.mLevels[i]:initVisual(animator, animManager, nameFrame, child, showed);
+		self.mCurLocation.mLevels[i]:initVisual(animator, animManager, nameFrame, child, need_showed);
 	end
 
 	animator:runAnimationsForSequenceNamed("Default Timeline");
