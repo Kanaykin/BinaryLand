@@ -40,6 +40,7 @@
     "NotEnoughStartsTitleText" : "Локация пройдена!",
     "TextAllStarsText" : "Звезд собрано:",
     "CurrentLocStarsText" : "Не достаточно звезд\n\nдля перехода\n\nна следующую локацию:",
+    "CurrentLocStarsTextEnough" : "Собрано всего звезд:",
     "TakeMoreStarsText" : "Собрать больше звезд",
     "LocationLockedDlgText" : "Чтобы открыть локацию\n\nнадо %s звезд.\n\nУ вас %s.",
     "TutorialStep2Lvl_1Text" : "Фелиция, смотри сколько наших монет обронили\n эти недотепы охотники!",

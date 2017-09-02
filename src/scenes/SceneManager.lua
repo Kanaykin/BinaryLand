@@ -112,7 +112,7 @@ function SceneManager:runNextLevelScene()
 	local locations = self.mGame:getLocations();
 	local level = locations[locationId]:getLevels()[index];
 	
-	if countLevels < index then
+	-- if countLevels < index then
 		-- open bonus level
 		if bonusLevel and not bonusLevel:isOpened() then
 			info_log("SceneManager:runNextLevelScene open bonus level ");
@@ -125,14 +125,14 @@ function SceneManager:runNextLevelScene()
             locationId = 1;
         end
         -- check count stars for next location
-        if locations[locationId]:isLocked() then
+        -- if locations[locationId]:isLocked() then
         	self:runNextScene({locationLocked = locationId}, SCENE_TYPE_ID.CHOOSE_LOCATION);
-        	return;
-        end
-        level = locations[locationId]:getLevels()[index];
-    end
+    --     	return;
+    --     end
+    --     level = locations[locationId]:getLevels()[index];
+    -- end
 
-	self:runLevelScene(level);
+	-- self:runLevelScene(level);
 end
 
 ---------------------------------
