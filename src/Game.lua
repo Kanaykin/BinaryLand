@@ -130,6 +130,16 @@ function Game:getLevelStarShowed(locationId, level)
 end
 
 ---------------------------------
+function Game:getLocationUnlockShowed(locationId)
+	return CCUserDefault:getInstance():getBoolForKey(locationId .. "_showed_unlock");
+end
+
+---------------------------------
+function Game:setLocationUnlockShowed(locationId, val)
+	return CCUserDefault:getInstance():setBoolForKey(locationId .. "_showed_unlock", val);
+end
+
+---------------------------------
 function Game:getLevelStar(locationId, level)
     return CCUserDefault:getInstance():getIntegerForKey(locationId .. tostring(level) .. "_star", 0);
 end

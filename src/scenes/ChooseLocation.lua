@@ -342,6 +342,8 @@ function ChooseLocation:initGui(params)
         local notEnoughStarsDlg = NotEnoughStarsDlg:create();
         notEnoughStarsDlg:init(self.mSceneManager.mGame, self.mGuiLayer, params.locationLocked);
         notEnoughStarsDlg:doModal();
+    else
+        self:hideNotEnoughStarsDlg();
     end
 end
 
@@ -352,6 +354,54 @@ function ChooseLocation:tick(dt)
     for key, anim in ipairs(self.mBabyInTrapAnimations) do
         anim:tick(dt);
     end
+end
+
+--------------------------------
+function ChooseLocation:showUnlockAnimation()
+    local locations = self.mSceneManager.mGame:getLocations();
+
+    for i, location in ipairs(locations) do
+        if i > 1 then 
+            local locked = location:isLocked();
+            if not locked then
+                local showedUnlock = self.mSceneManager.mGame:getLocationUnlockShowed(location:getId());
+                info_log("ChooseLocation:showUnlockAnimation i ", i, " showedUnlock ", showedUnlock);
+
+                if not showedUnlock then
+                    local sprite = self.mNode:getChildByTag(ChooseLocation.LOCATION_SPRITE_BEGIN * i);
+                    local animNode = sprite:getChildByTag(ChooseLocation.LOCATION_BEGIN * i + ChooseLocation.LOCATION_FOX_ANIMATION_DELTA);
+                    if animNode then
+                        local sequence = SequenceAnimation:create();
+                        sequence:init();
+
+                        -- unlock animation
+                        local idle = PlistAnimation:create();
+                        idle:init("LocationOpenAnim.plist", animNode, {x=0.5, y=0.61}, nil, 0.1   );
+                        sequence:addAnimation(idle);
+
+                        local anim = self:createBabyAnimation(animNode);
+                        sequence:addAnimation(anim);
+                        if self.mBabyInTrapAnimations[i] ~= nil then
+                            self.mBabyInTrapAnimations[i]:stop();
+                            self.mBabyInTrapAnimations[i]:destroy();
+                        end
+                        animNode:stopAllActions();
+
+                        sequence:play();
+                        self.mBabyInTrapAnimations[i] = sequence;
+                        self.mSceneManager.mGame:setLocationUnlockShowed(location:getId(), true);
+                    end
+                end
+            end
+        end
+    end
+end
+
+--------------------------------
+function ChooseLocation:hideNotEnoughStarsDlg(locationLockedId)
+    info_log("ChooseLocation:hideNotEnoughStarsDlg ", locationLockedId);
+
+    self:showUnlockAnimation();
 end
 
 --------------------------------

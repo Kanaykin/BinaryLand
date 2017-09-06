@@ -88,6 +88,18 @@ function NotEnoughStarsDlg:initOkButton(nodeBase, buttonTag)
     button:registerControlEventHandler(onOKButtonPressed, 1);
 end
 
+---------------------------------
+function NotEnoughStarsDlg:destroy()
+    self:superClass().destroy(self);
+    self.mGame.mSceneMan:getCurrentScene():hideNotEnoughStarsDlg(self.mLocationLockedId);
+end
+
+--------------------------------
+function NotEnoughStarsDlg:hide()
+    self:superClass().hide(self);
+    self.mGame.mSceneMan:getCurrentScene():hideNotEnoughStarsDlg(self.mLocationLockedId);
+end
+
 --------------------------------
 function NotEnoughStarsDlg:initGuiElements()
     local nodeBase = self.mNode:getChildByTag(GetStarDlg.BASE_NODE_TAG);
