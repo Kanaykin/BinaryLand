@@ -25,7 +25,7 @@ end
 ---------------------------------
 function FinishTrigger:initAnimation()
 	local animation = PlistAnimation:create();
-	animation:init("FinishTriggerBacklightAnim.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.1);
+	animation:init("FinishTriggerBacklightAnim.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.15);
 
 	local repeatAnimation = RepeatAnimation:create();
 	repeatAnimation:init(animation, false);
