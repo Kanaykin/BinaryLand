@@ -259,7 +259,7 @@ HunterDieState.mDir = nil
 function HunterDieState:enter(params)
     debug_log("HunterDieState:enter");
     HunterDieState:superClass().enter(self, params);
-    SimpleAudioEngine:getInstance():playEffect(gSounds.HUNTER_DEATH_SOUND)
+    self.mObject:getField():getGame():getSoundManager():playEffect(gSounds.HUNTER_DEATH_SOUND)
 
     local dirMoving = self.mObject:getCurrentAnimationDir();
     if dirMoving == MobObject.DIRECTIONS.FRONT then

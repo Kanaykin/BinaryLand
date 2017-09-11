@@ -57,7 +57,7 @@ function FollowPlayer:enter(params)
 	info_log("FollowPlayer:enter ");
 	self.mObject:playAnimation(SpiritObject.ANIMATION_STATE.AS_FOLLOW_PLAYER);
 	self.mObject:setSourcePosition();
-	SimpleAudioEngine:getInstance():playEffect(gSounds.SPIRIT_SOUND);
+    self.mObject:getField():getGame():getSoundManager():playEffect(gSounds.SPIRIT_SOUND);
 end
 
 ------------------------------------

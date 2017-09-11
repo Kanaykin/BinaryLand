@@ -5,6 +5,8 @@ require "src/gui/DialogManager"
 require "CCBReaderLoad"
 require "src/base/Log"
 require "src/LocalizationManager"
+require "src/SimpleAudioEngineAdapter"
+require "src/ExpAudioEngineAdapter"
 
 --[[
 It is main class for game.
@@ -17,6 +19,7 @@ Game.mScale = 1
 Game.mLocations = nil
 Game.mLastVisitLocation = nil
 Game.mLocalizationManager = nil
+Game.mSoundManager = nil
 
 local SUPPORTED_RESOLUTION = {
 	{ size = cc.size(480, 320), scale = 1, searchPath = "resources-iphone"},
@@ -202,7 +205,7 @@ function Game:setSoundEnabled(enabled)
     info_log("Game:setSoundEnabled ", enabled);
     local value = enabled and 1 or 0;
 	CCUserDefault:getInstance():setIntegerForKey("SoundValue", value);
-    cc.SimpleAudioEngine:getInstance():setEffectsVolume(value);
+    self.mSoundManager:setEffectsVolume(value);
 end
 
 ---------------------------------
@@ -217,7 +220,7 @@ function Game:setMusicEnabled(enabled)
     info_log("Game:setMusicEnabled ", enabled);
     local value = enabled and 1 or 0;
 	CCUserDefault:getInstance():setIntegerForKey("MusicValue", value);
-    cc.SimpleAudioEngine:getInstance():setMusicVolume(value);
+    self.mSoundManager:setMusicVolume(value);
 end
 
 ---------------------------------
@@ -239,6 +242,11 @@ function Game:getLocalizationManager()
 end
 
 ---------------------------------
+function Game:getSoundManager()
+	return self.mSoundManager;
+end
+
+---------------------------------
 function Game:init()
 
 	self.mLocations = {}
@@ -251,6 +259,9 @@ function Game:init()
 
 	self.mLocalizationManager = LocalizationManager:create()
 	self.mLocalizationManager:init()
+
+	self.mSoundManager = SimpleAudioEngineAdapter:create();--ExpAudioEngineAdapter:create();
+	self.mSoundManager:init();
 
     -- set game configuration
     self:setConfiguration();

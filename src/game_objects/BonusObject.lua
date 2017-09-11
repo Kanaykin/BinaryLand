@@ -311,11 +311,11 @@ end
 ---------------------------------
 function BonusObject:playSound()
     if(self.mType == BonusObject.CHEST_TYPE) then
-        SimpleAudioEngine:getInstance():playEffect(gSounds.CHEST_OPEN_SOUND);
+        self:getField():getGame():getSoundManager():playEffect(gSounds.CHEST_OPEN_SOUND);
     elseif self.mType == BonusObject.COINS_TYPE then
-        SimpleAudioEngine:getInstance():playEffect(gSounds.COINS_SOUND);
+        self:getField():getGame():getSoundManager():playEffect(gSounds.COINS_SOUND);
     elseif self.mType == BonusObject.TIME_TYPE then
-        SimpleAudioEngine:getInstance():playEffect(gSounds.TIME_BONUS_SOUND);
+        self:getField():getGame():getSoundManager():playEffect(gSounds.TIME_BONUS_SOUND);
     end
 end
 

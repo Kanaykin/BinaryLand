@@ -26,7 +26,7 @@ function ChooseLevel:init(sceneMan, params)
 
 	self:initGui();
 
-	SimpleAudioEngine:getInstance():playMusic(gSounds.CHOOSE_LEVEL_MUSIC, true)
+    self:getGame():getSoundManager():playMusic(gSounds.CHOOSE_LEVEL_MUSIC, true);
 
     local statistic = extend.Statistic:getInstance();
     statistic:sendScreenName("ChooseLevel");
@@ -36,7 +36,7 @@ end
 function ChooseLevel:destroy()
 	ChooseLevel:superClass().destroy(self);
 
-	SimpleAudioEngine:getInstance():stopMusic(true);
+	self:getGame():getSoundManager():stopMusic(true);
 end
 
 --------------------------------

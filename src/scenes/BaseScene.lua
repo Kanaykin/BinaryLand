@@ -50,6 +50,11 @@ function BaseScene:destroy()
 end
 
 ---------------------------------
+function BaseScene:getGame()
+	return self.mSceneManager.mGame;
+end
+
+---------------------------------
 function BaseScene:init(sceneMan, params)
 	local  backgroundImageName = nil;
 	if type(params) == "table" then

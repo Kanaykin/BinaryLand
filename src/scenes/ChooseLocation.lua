@@ -201,7 +201,7 @@ end
 function ChooseLocation:destroy()
 	ChooseLocation:superClass().destroy(self);
 
-	SimpleAudioEngine:getInstance():stopMusic(true);
+	self:getGame():getSoundManager():stopMusic(true);
 
 end
 
@@ -354,6 +354,10 @@ function ChooseLocation:tick(dt)
     for key, anim in ipairs(self.mBabyInTrapAnimations) do
         anim:tick(dt);
     end
+
+    --if  not SimpleAudioEngine:getInstance():isMusicPlaying() then
+        --self:getGame():getSoundManager():playMusic(gSounds.CHOOSE_LOCATION_MUSIC, true)
+    --end
 end
 
 --------------------------------
@@ -415,7 +419,8 @@ function ChooseLocation:init(sceneMan, params)
 	-- init gui
 	self:initGui(params);
 
-	SimpleAudioEngine:getInstance():playMusic(gSounds.CHOOSE_LOCATION_MUSIC, true)
+    --ccexp.AudioEngine:setFinishCallback(function () end);
+    self:getGame():getSoundManager():playMusic(gSounds.CHOOSE_LOCATION_MUSIC, true)
 
     local statistic = extend.Statistic:getInstance();
     statistic:sendScreenName("ChooseLocation");

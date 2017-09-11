@@ -34,7 +34,7 @@ end
 function LevelScene:onStateLose()
 	info_log("LevelScene: LOSE !!!");
 	self.mMainUI:onStateLose();
-	SimpleAudioEngine:getInstance():playMusic(gSounds.GAME_OVER_MUSIC, false);
+	self:getGame():getSoundManager():playMusic(gSounds.GAME_OVER_MUSIC, false);
 
     local id = "Level_" .. self.mLevel:getData().id;
     local statistic = extend.Statistic:getInstance();
@@ -181,8 +181,7 @@ function LevelScene:winOpenLevel(stars)
         self.mSceneManager.mGame:setLevelStar(locationId, self.mLevel:getIndex(), 2);
     end
 
-    SimpleAudioEngine:getInstance():playMusic(gSounds.VICTORY_MUSIC, false)
-    --SimpleAudioEngine:getInstance():playEffect(gSounds.VICTORY_MUSIC)
+    self:getGame():getSoundManager():playMusic(gSounds.VICTORY_MUSIC, false);
 end
 
 ---------------------------------
@@ -233,7 +232,7 @@ function LevelScene:destroy()
         self.mTutorial = nil;
     end
 
-	SimpleAudioEngine:getInstance():stopMusic(true);
+	self:getGame():getSoundManager():stopMusic(true);
 end
 
 --------------------------------
@@ -264,7 +263,7 @@ function LevelScene:postInitScene(levelData)
 
     -- play music
     if levelData.backgroundMusic then
-        SimpleAudioEngine:getInstance():playMusic(self.mLevel:getData().backgroundMusic, true)
+        self:getGame():getSoundManager():playMusic(self.mLevel:getData().backgroundMusic, true)
     end
 
     local statistic = extend.Statistic:getInstance();

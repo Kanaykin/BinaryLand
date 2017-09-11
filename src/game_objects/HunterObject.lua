@@ -176,7 +176,7 @@ function HunterObject:createBullet(goalPos)
     bullet:init(self.mField, selfPos, goalPos);
     self.mField:addObject(bullet);
 
-    SimpleAudioEngine:getInstance():playEffect(gSounds.HUNTER_SHOT_SOUND);
+    self:getField():getGame():getSoundManager():playEffect(gSounds.HUNTER_SHOT_SOUND);
 
     self.mBullet = bullet;
 end

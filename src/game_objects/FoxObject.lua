@@ -181,11 +181,11 @@ function FoxObject:setFightActivated(activated)
         -- play only for first character
         if (not self.mField:getPlayerObjects()[1]:isInTrap() and not self.mField:getPlayerObjects()[2]:isInTrap()) then
             if self == self.mField:getPlayerObjects()[1] then
-                SimpleAudioEngine:getInstance():playEffect(gSounds.PLAYER_ATTACK_SOUND);
+                self:getField():getGame():getSoundManager():playEffect(gSounds.PLAYER_ATTACK_SOUND);
                 info_log("FoxObject:setFightActivated PLAYER_ATTACK_SOUND ");
             end
         else
-		  SimpleAudioEngine:getInstance():playEffect(gSounds.PLAYER_ATTACK_SOUND);
+		  self:getField():getGame():getSoundManager():playEffect(gSounds.PLAYER_ATTACK_SOUND);
         end
 	else
 		--self.mEffectNode:stopAllActions();
@@ -251,7 +251,7 @@ function FoxObject:updateSoundActions(dt)
     local halfVelocity = FoxObject.mVelocity / 2 * self.mField.mGame:getScale();
     if self.mVelocity == halfVelocity then
         if self.mSwampSoundVelocityCounter > 10 then
-            SimpleAudioEngine:getInstance():playEffect(gSounds.ENTER_SWAMP_SOUND);
+            self:getField():getGame():getSoundManager():playEffect(gSounds.ENTER_SWAMP_SOUND);
         end
         self.mSwampSoundVelocityCounter = 0;
     else
@@ -262,7 +262,7 @@ function FoxObject:updateSoundActions(dt)
         debug_log("mIceSoundVelocityCounter ", self.mIceSoundVelocityCounter);
         debug_log("self.inIceTrap ", self.inIceTrap);
         if self.mIceSoundVelocityCounter > 10 then
-            SimpleAudioEngine:getInstance():playEffect(gSounds.ENTER_ICE_SOUND);
+            self:getField():getGame():getSoundManager():playEffect(gSounds.ENTER_ICE_SOUND);
         end
         self.mIceSoundVelocityCounter = 0;
     else
@@ -415,15 +415,15 @@ function FoxObject:playInTrapSound(mute)
         return  
     end
     if self.mTypeCage == FoxObject.CAGE_TYPE.CT_CAGE then
-        SimpleAudioEngine:getInstance():playEffect(gSounds.FOX_PETRIFICATION_SOUND);
+        self:getField():getGame():getSoundManager():playEffect(gSounds.FOX_PETRIFICATION_SOUND);
     elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_HIDDEN then
-        SimpleAudioEngine:getInstance():playEffect(gSounds.ENTER_TRAP_SOUND);
+        self:getField():getGame():getSoundManager():playEffect(gSounds.ENTER_TRAP_SOUND);
     elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_TORNADO then
-        SimpleAudioEngine:getInstance():playEffect(gSounds.ENTER_TORNADO_SOUND);
+        self:getField():getGame():getSoundManager():playEffect(gSounds.ENTER_TORNADO_SOUND);
     elseif self.mTypeCage == FoxObject.CAGE_TYPE.CT_NET then
-        SimpleAudioEngine:getInstance():playEffect(gSounds.FOX_PETRIFICATION_SOUND);
+        self:getField():getGame():getSoundManager():playEffect(gSounds.FOX_PETRIFICATION_SOUND);
     else
-        SimpleAudioEngine:getInstance():playEffect(gSounds.FOX_PETRIFICATION_SOUND);
+        self:getField():getGame():getSoundManager():playEffect(gSounds.FOX_PETRIFICATION_SOUND);
     end
 
 end
@@ -587,7 +587,7 @@ end
 function FoxObject:leaveTrap(pos)
     FoxObject:superClass().leaveTrap(self, pos);
     self.mTypeCage = nil;
-    SimpleAudioEngine:getInstance():playEffect(gSounds.FOX_POWERUP_SOUND);
+    self:getField():getGame():getSoundManager():playEffect(gSounds.FOX_POWERUP_SOUND);
 end
 
 --------------------------------

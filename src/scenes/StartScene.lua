@@ -1,5 +1,6 @@
 require "src/scenes/BaseScene"
 require "src/scenes/StartMovieStep"
+require "src/scenes/SoundConfigs"
 require "src/base/Log"
 
 
@@ -32,11 +33,22 @@ function StartScene:init(sceneMan, params)
     statistic:sendScreenName("StartScene");
 
     self:loadScene(sceneMan.mGame);
+
+    --SimpleAudioEngine:getInstance();--:playMusic(gSounds.START_MOVIE_MUSIC, false)
+    --ccexp.AudioEngine:play2d(gSounds.START_MOVIE_MUSIC, false)
+    self:getGame():getSoundManager():playMusic(gSounds.START_MOVIE_MUSIC, false)
 end
 
 --------------------------------
 function StartScene:skipMovie()
     self.mSceneManager:runNextScene();
+end
+
+---------------------------------
+function StartScene:destroy()
+    StartScene:superClass().destroy(self);
+
+    self:getGame():getSoundManager():stopMusic(true);
 end
 
 --------------------------------
