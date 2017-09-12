@@ -5,8 +5,8 @@ require "src/gui/DialogManager"
 require "CCBReaderLoad"
 require "src/base/Log"
 require "src/LocalizationManager"
-require "src/SimpleAudioEngineAdapter"
-require "src/ExpAudioEngineAdapter"
+require "src/sound/SimpleAudioEngineAdapter"
+require "src/sound/ExpAudioEngineAdapter"
 
 --[[
 It is main class for game.

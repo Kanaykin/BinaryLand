@@ -8,7 +8,7 @@ end
 
 ---------------------------------
 function SimpleAudioEngineAdapter:playEffect(filePath, loop)
-	cc.SimpleAudioEngine:getInstance():playEffect(filePath, loop);
+	return cc.SimpleAudioEngine:getInstance():playEffect(filePath, loop);
 end
 
 ---------------------------------
@@ -18,7 +18,7 @@ end
 
 ---------------------------------
 function SimpleAudioEngineAdapter:playMusic(filePath, loop)
-	cc.SimpleAudioEngine:getInstance():playMusic(filePath, loop);
+	return cc.SimpleAudioEngine:getInstance():playMusic(filePath, loop);
 end
 
 ---------------------------------
