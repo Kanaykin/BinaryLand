@@ -48,7 +48,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
+    <OutDir>$(SolutionDir)../../../bin/$(Configuration).win32\</OutDir>
     <IntDir>$(Configuration).win32\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(IncludePath)</IncludePath>
@@ -56,7 +56,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
+    <OutDir>$(SolutionDir)../../../bin/$(Configuration).win32\</OutDir>
     <IntDir>$(Configuration).win32\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
@@ -85,8 +85,9 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(OutDir)../../lib/$(Configuration).win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Qt5Guid.lib;Qt5Cored.lib;Qt5Widgetsd.lib;libcurl_imp.lib;lua51.lib;websockets.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -106,13 +107,8 @@
       </DllDataFileName>
     </Midl>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\cocos2d" "$(ProjectDir)..\..\..\" /e /Y
-xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\cocosdenshion" "$(ProjectDir)..\..\..\" /e /Y
-xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\cocosbuilder" "$(ProjectDir)..\..\..\" /e /Y
-xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\cocostudio" "$(ProjectDir)..\..\..\" /e /Y
-xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\extension" "$(ProjectDir)..\..\..\" /e /Y
-xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\network" "$(ProjectDir)..\..\..\" /e /Y
-xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\ui" "$(ProjectDir)..\..\..\" /e /Y</Command>
+      <Command>
+      </Command>
       <Message>copy files</Message>
     </PreBuildEvent>
     <PreLinkEvent>
@@ -137,9 +133,10 @@ xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\ui" "$(P
     <Link>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(OutDir)../../lib/$(Configuration).win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libcurl_imp.lib;lua51.lib;websockets.lib;Qt5Gui.lib;Qt5Core.lib;Qt5Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -159,13 +156,8 @@ xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\ui" "$(P
       </DllDataFileName>
     </Midl>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\cocos2d" "$(ProjectDir)..\..\..\" /e /Y
-xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\cocosdenshion" "$(ProjectDir)..\..\..\" /e /Y
-xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\cocosbuilder" "$(ProjectDir)..\..\..\" /e /Y
-xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\cocostudio" "$(ProjectDir)..\..\..\" /e /Y
-xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\extension" "$(ProjectDir)..\..\..\" /e /Y
-xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\network" "$(ProjectDir)..\..\..\" /e /Y
-xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\lua-bindings\script\ui" "$(ProjectDir)..\..\..\" /e /Y</Command>
+      <Command>
+      </Command>
       <Message>copy files</Message>
     </PreBuildEvent>
     <PreLinkEvent>
