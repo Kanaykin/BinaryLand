@@ -1,5 +1,9 @@
 bin
 lib
+obj
 *.suo
 *.opensdf
 *.sdf
+*.vcxproj.user
+Debug.win32
+Release.win32

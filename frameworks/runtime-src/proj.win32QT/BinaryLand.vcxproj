@@ -80,6 +80,12 @@
       <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AssemblerListingLocation>$(IntDir)../../../../obj/$(Configuration).win32</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)../../../../obj/$(Configuration).win32/</ObjectFileName>
+      <XMLDocumentationFileName>$(IntDir)../../../../obj</XMLDocumentationFileName>
+      <ProgramDataBaseFileName>$(IntDir)../../../../obj/vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <BrowseInformationFile>$(IntDir)../../../../obj/$(Configuration).win32</BrowseInformationFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)../../../../obj/$(Configuration).win32/$(TargetName).pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -88,6 +94,7 @@
       <AdditionalLibraryDirectories>$(QTDIR)\lib;$(OutDir)../../lib/$(Configuration).win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Qt5Guid.lib;Qt5Cored.lib;Qt5Widgetsd.lib;libcurl_imp.lib;lua51.lib;websockets.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <ManifestFile>$(IntDir)../../../../obj/$(Configuration).win32/$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -129,6 +136,12 @@
       <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGSNDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AssemblerListingLocation>$(IntDir)../../../../obj/$(Configuration).win32</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)../../../../obj/$(Configuration).win32/</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)../../../../obj/vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(IntDir)../../../../obj</XMLDocumentationFileName>
+      <BrowseInformationFile>$(IntDir)../../../../obj/$(Configuration).win32</BrowseInformationFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)../../../../obj/$(Configuration).win32/$(TargetName).pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,6 +150,7 @@
       <AdditionalDependencies>libcurl_imp.lib;lua51.lib;websockets.lib;Qt5Gui.lib;Qt5Core.lib;Qt5Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <ManifestFile>$(IntDir)../../../../obj/$(Configuration).win32/$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
