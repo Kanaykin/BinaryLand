@@ -94,6 +94,10 @@ mParentView(0)
 	//view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	mView = view;
 	updateSize(0, 0);
+
+	QString filePath = QDir::currentPath() + "\\resorces";
+	std::string path = filePath.toStdString();
+	QDir::setCurrent(filePath);
 }
 
 void MainWindow::createFileMenu(QMenuBar *menuBar)
