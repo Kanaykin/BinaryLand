@@ -8,3 +8,4 @@ obj
 *.vcxproj.filters
 Debug.win32
 Release.win32
+gen
