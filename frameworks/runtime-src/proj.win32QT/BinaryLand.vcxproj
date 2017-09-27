@@ -187,31 +187,90 @@
     <ClInclude Include="..\Classes\Statistic.h" />
     <ClInclude Include="ButtonPanel.h" />
     <ClInclude Include="DiagramItem.h" />
-    <ClInclude Include="DiagramScene.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR5)\bin\moc.exe "%(FullPath)" -o "$(SolutionDir)$(Configuration).win32\moc_%(Filename)%(Extension)"</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"D:\$(Configuration).win32\moc_%(Filename)%(Extension)"</Outputs>
-    </ClInclude>
-    <ClInclude Include="ExplorerPanel.h" />
+    <CustomBuild Include="DiagramScene.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/moc.exe" DiagramScene.h -o $(SolutionDir)/gen/moc_DiagramScene.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/moc_DiagramScene.cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/moc.exe" DiagramScene.h -o $(SolutionDir)/gen/moc_DiagramScene.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/moc_DiagramScene.cpp</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="ExplorerPanel.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/moc.exe" ExplorerPanel.h -o $(SolutionDir)/gen/moc_ExplorerPanel.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/moc_ExplorerPanel.cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/moc.exe" ExplorerPanel.h -o $(SolutionDir)/gen/moc_ExplorerPanel.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/moc_ExplorerPanel.cpp</Outputs>
+    </CustomBuild>
     <ClInclude Include="FacebookADS.h" />
     <ClInclude Include="gen\ButtonPanel.h" />
     <ClInclude Include="gen\GettingSize.h" />
-    <ClInclude Include="GettingSizeDialog.h" />
-    <ClInclude Include="GlWindow.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR5)\bin\moc.exe "%(FullPath)" -o "%(FullPath)_moc"</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%(FullPath)_moc.obj"</Outputs>
-    </ClInclude>
+    <CustomBuild Include="GettingSizeDialog.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/moc.exe" GettingSizeDialog.h -o $(SolutionDir)/gen/moc_GettingSizeDialog.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/moc_GettingSizeDialog.cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/moc.exe" GettingSizeDialog.h -o $(SolutionDir)/gen/moc_GettingSizeDialog.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/moc_GettingSizeDialog.cpp</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="GlWindow.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/moc.exe" GlWindow.h -o $(SolutionDir)/gen/moc_GlWindow.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/moc_GlWindow.cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/moc.exe" GlWindow.h -o $(SolutionDir)/gen/moc_GlWindow.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/moc_GlWindow.cpp</Outputs>
+    </CustomBuild>
     <ClInclude Include="GoogleAnalitics.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="MainWindow.h" />
+    <CustomBuild Include="MainWindow.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/moc.exe" MainWindow.h -o $(SolutionDir)/gen/moc_MainWindow.cpp</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/moc.exe" MainWindow.h -o $(SolutionDir)/gen/moc_MainWindow.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/moc_MainWindow.cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/moc_MainWindow.cpp</Outputs>
+    </CustomBuild>
     <ClInclude Include="QtApplication.h" />
-    <ClInclude Include="QtPropertyBrowser\qtbuttonpropertybrowser.h" />
-    <ClInclude Include="QtPropertyBrowser\qteditorfactory.h" />
-    <ClInclude Include="QtPropertyBrowser\qtgroupboxpropertybrowser.h" />
-    <ClInclude Include="QtPropertyBrowser\qtpropertybrowser.h" />
-    <ClInclude Include="QtPropertyBrowser\qtpropertybrowserutils_p.h" />
-    <ClInclude Include="QtPropertyBrowser\qtpropertymanager.h" />
-    <ClInclude Include="QtPropertyBrowser\qttreepropertybrowser.h" />
-    <ClInclude Include="QtPropertyBrowser\qtvariantproperty.h" />
+    <CustomBuild Include="QtPropertyBrowser\qtbuttonpropertybrowser.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qtbuttonpropertybrowser.h -o $(SolutionDir)/gen/moc_qtbuttonpropertybrowser.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/moc_qtbuttonpropertybrowser.cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qtbuttonpropertybrowser.h -o $(SolutionDir)/gen/moc_qtbuttonpropertybrowser.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/moc_qtbuttonpropertybrowser.cpp</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="QtPropertyBrowser\qteditorfactory.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qteditorfactory.h -o $(SolutionDir)/gen/moc_qteditorfactory.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/moc_qteditorfactory.cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qteditorfactory.h -o $(SolutionDir)/gen/moc_qteditorfactory.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/moc_qteditorfactory.cpp</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="QtPropertyBrowser\qtgroupboxpropertybrowser.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qtgroupboxpropertybrowser.h -o $(SolutionDir)/gen/moc_qtgroupboxpropertybrowser.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/moc_qtgroupboxpropertybrowser.cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qtgroupboxpropertybrowser.h -o $(SolutionDir)/gen/moc_qtgroupboxpropertybrowser.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/moc_qtgroupboxpropertybrowser.cpp</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="QtPropertyBrowser\qtpropertybrowser.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qtpropertybrowser.h -o $(SolutionDir)/gen/moc_qtpropertybrowser.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/moc_qtpropertybrowser.cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qtpropertybrowser.h -o $(SolutionDir)/gen/moc_qtpropertybrowser.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/moc_qtpropertybrowser.cpp</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="QtPropertyBrowser\qtpropertybrowserutils_p.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qtpropertybrowserutils_p.h -o $(SolutionDir)/gen/moc_qtpropertybrowserutils_p.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/moc_qtpropertybrowserutils_p.cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qtpropertybrowserutils_p.h -o $(SolutionDir)/gen/moc_qtpropertybrowserutils_p.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/moc_qtpropertybrowserutils_p.cpp</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="QtPropertyBrowser\qtpropertymanager.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qtpropertymanager.h -o $(SolutionDir)/gen/moc_qtpropertymanager.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/moc_qtpropertymanager.cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qtpropertymanager.h -o $(SolutionDir)/gen/moc_qtpropertymanager.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/moc_qtpropertymanager.cpp</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="QtPropertyBrowser\qttreepropertybrowser.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qttreepropertybrowser.h -o $(SolutionDir)/gen/moc_qttreepropertybrowser.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/moc_qttreepropertybrowser.cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qttreepropertybrowser.h -o $(SolutionDir)/gen/moc_qttreepropertybrowser.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/moc_qttreepropertybrowser.cpp</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="QtPropertyBrowser\qtvariantproperty.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qtvariantproperty.h -o $(SolutionDir)/gen/moc_qtvariantproperty.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/moc_qtvariantproperty.cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/moc.exe" QtPropertyBrowser/qtvariantproperty.h -o $(SolutionDir)/gen/moc_qtvariantproperty.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/moc_qtvariantproperty.cpp</Outputs>
+    </CustomBuild>
     <ClInclude Include="resource.h" />
     <ClInclude Include="SceneLoader.h" />
   </ItemGroup>
@@ -1630,6 +1689,38 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(Identity) $(SolutionDir)..\..\..\bin\$(Configuration).win32\resorces\src\levels</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\..\..\bin\$(Configuration).win32\resorces\src\levels\%(Identity)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\..\..\bin\$(Configuration).win32\resorces\src\levels\%(Identity)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\resorces.qrc">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/rcc.exe" res/resorces.qrc -o $(SolutionDir)/gen/rc_resorces.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/rc_resorces.cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/rcc.exe" res/resorces.qrc -o $(SolutionDir)/gen/rc_resorces.cpp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/rc_resorces.cpp</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\ui\ButtonPanel.ui">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/uic.exe" res/ui/ButtonPanel.ui -o $(SolutionDir)/gen/ButtonPanel.h</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/ButtonPanel.h</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/uic.exe" res/ui/ButtonPanel.ui -o $(SolutionDir)/gen/ButtonPanel.h</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/ButtonPanel.h</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="res\ui\ExplorerPanel.ui">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/uic.exe" res/ui/ExplorerPanel.ui -o $(SolutionDir)/gen/ExplorerPanel.h</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/uic.exe" res/ui/ExplorerPanel.ui -o $(SolutionDir)/gen/ExplorerPanel.h</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/ExplorerPanel.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/ExplorerPanel.h</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="res\ui\GettingSize.ui">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"%QTDIR%/bin/uic.exe" res/ui/GettingSize.ui -o $(SolutionDir)/gen/GettingSize.h</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/gen/GettingSize.h</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"%QTDIR%/bin/uic.exe" res/ui/GettingSize.ui -o $(SolutionDir)/gen/GettingSize.h</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/gen/GettingSize.h</Outputs>
     </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
