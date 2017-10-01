@@ -95,7 +95,7 @@ mParentView(0)
 	mView = view;
 	updateSize(0, 0);
 
-	QString filePath = QDir::currentPath() + "\\resorces";
+	QString filePath = QDir::currentPath() + "\\resources";
 	std::string path = filePath.toStdString();
 	QDir::setCurrent(filePath);
 }
