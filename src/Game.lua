@@ -7,6 +7,7 @@ require "src/base/Log"
 require "src/LocalizationManager"
 require "src/sound/SimpleAudioEngineAdapter"
 require "src/sound/ExpAudioEngineAdapter"
+require "src/sound/EmptyAudioEngineAdapter"
 
 --[[
 It is main class for game.
@@ -143,6 +144,11 @@ function Game:setLocationUnlockShowed(locationId, val)
 end
 
 ---------------------------------
+function Game:getBonusUnlockShowed(locationId)
+	return CCUserDefault:getInstance():getBoolForKey(locationId .. "_bonus__showed_unlock");
+end
+
+---------------------------------
 function Game:getLevelStar(locationId, level)
     return CCUserDefault:getInstance():getIntegerForKey(locationId .. tostring(level) .. "_star", 0);
 end
@@ -260,7 +266,7 @@ function Game:init()
 	self.mLocalizationManager = LocalizationManager:create()
 	self.mLocalizationManager:init()
 
-	self.mSoundManager = SimpleAudioEngineAdapter:create();--ExpAudioEngineAdapter:create();
+	self.mSoundManager = EmptyAudioEngineAdapter:create()--SimpleAudioEngineAdapter:create();--ExpAudioEngineAdapter:create();
 	self.mSoundManager:init();
 
     -- set game configuration

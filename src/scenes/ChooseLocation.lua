@@ -38,6 +38,7 @@ ChooseLocation.LOCK_IMAGE_TAG = 150;
 
 ChooseLocation.BONUS_NODE = 500;
 ChooseLocation.BONUS_MENU = 70;
+ChooseLocation.BONUS_ANIM_NODE = 80;
 ChooseLocation.BONUS_MENU_ITEM = 71;
 
 local MovieText = "StartMovieStep6Text";
@@ -361,10 +362,34 @@ function ChooseLocation:tick(dt)
 end
 
 --------------------------------
+function ChooseLocation:showUnlockBonusAnimation()
+    local locations = self.mSceneManager.mGame:getLocations();
+
+    for i, location in ipairs(locations) do
+        local bonusLevel = location:getBonusLevel();
+        if bonusLevel then --and bonusLevel:isOpened() then
+            local showedUnlock = self.mSceneManager.mGame:getBonusUnlockShowed(location:getId());
+            info_log("ChooseLocation:showUnlockBonusAnimation i ", i, " showedUnlock ", showedUnlock);
+            if not showedUnlock then
+                local sprite = self.mNode:getChildByTag(ChooseLocation.LOCATION_SPRITE_BEGIN * i);
+                local bonusNode = sprite:getChildByTag(ChooseLocation.BONUS_ANIM_NODE);
+                if bonusNode then
+                    bonusNode:setVisible(true);
+                    local idle = PlistAnimation:create();
+                    idle:init("BonusLevelIconAnim.plist", bonusNode, {x=0.5, y=0.61}, nil, 0.1   );
+                    idle:play();
+                end
+            end
+        end
+    end
+end
+
+--------------------------------
 function ChooseLocation:showUnlockAnimation()
     local locations = self.mSceneManager.mGame:getLocations();
 
     for i, location in ipairs(locations) do
+        debug_log("ChooseLocation:showUnlockAnimation i " .. i)
         if i > 1 then 
             local locked = location:isLocked();
             if not locked then
@@ -399,6 +424,7 @@ function ChooseLocation:showUnlockAnimation()
             end
         end
     end
+    debug_log("ChooseLocation:showUnlockAnimation end " )
 end
 
 --------------------------------
@@ -406,6 +432,7 @@ function ChooseLocation:hideNotEnoughStarsDlg(locationLockedId)
     info_log("ChooseLocation:hideNotEnoughStarsDlg ", locationLockedId);
 
     self:showUnlockAnimation();
+    self:showUnlockBonusAnimation();
 end
 
 --------------------------------
