@@ -1,6 +1,6 @@
 require "src/base/AlignmentHelper"
 
-local openedVal = false
+local openedVal = true
 gLocations = {
 	{
 		id = 1,
@@ -328,7 +328,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
-                customProperties = "src/levels/Level2_bonus",
+                customProperties = "src/levels/Level3_bonus",
                 id = "3_bonus"
             }
         }

@@ -21,7 +21,8 @@ function GettingBonusEffect:init(game, uiLayer, bonus)
 
     if self.mLabel then
         setDefaultFont(self.mLabel, self.mGame:getScale());
-        self.mLabel:setString(tostring(bonus));
+        local sign = bonus > 0 and "+" or "";
+        self.mLabel:setString(sign..tostring(bonus));
     end
 
     local animator = self.mReader:getActionManager();

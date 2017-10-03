@@ -675,14 +675,6 @@
 									</dict>
 									<dict>
 										<key>name</key>
-										<string>tag</string>
-										<key>type</key>
-										<string>Integer</string>
-										<key>value</key>
-										<integer>80</integer>
-									</dict>
-									<dict>
-										<key>name</key>
 										<string>displayFrame</string>
 										<key>type</key>
 										<string>SpriteFrame</string>
@@ -1758,19 +1750,19 @@
 									</dict>
 									<dict>
 										<key>name</key>
-										<string>ignoreAnchorPointForPosition</string>
-										<key>type</key>
-										<string>Check</string>
-										<key>value</key>
-										<false/>
-									</dict>
-									<dict>
-										<key>name</key>
 										<string>tag</string>
 										<key>type</key>
 										<string>Integer</string>
 										<key>value</key>
 										<integer>80</integer>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>ignoreAnchorPointForPosition</string>
+										<key>type</key>
+										<string>Check</string>
+										<key>value</key>
+										<false/>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -2767,19 +2759,19 @@
 									</dict>
 									<dict>
 										<key>name</key>
-										<string>ignoreAnchorPointForPosition</string>
-										<key>type</key>
-										<string>Check</string>
-										<key>value</key>
-										<false/>
-									</dict>
-									<dict>
-										<key>name</key>
 										<string>tag</string>
 										<key>type</key>
 										<string>Integer</string>
 										<key>value</key>
 										<integer>80</integer>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>ignoreAnchorPointForPosition</string>
+										<key>type</key>
+										<string>Check</string>
+										<key>value</key>
+										<false/>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -3868,19 +3860,19 @@
 									</dict>
 									<dict>
 										<key>name</key>
-										<string>ignoreAnchorPointForPosition</string>
-										<key>type</key>
-										<string>Check</string>
-										<key>value</key>
-										<false/>
-									</dict>
-									<dict>
-										<key>name</key>
 										<string>tag</string>
 										<key>type</key>
 										<string>Integer</string>
 										<key>value</key>
 										<integer>80</integer>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>ignoreAnchorPointForPosition</string>
+										<key>type</key>
+										<string>Check</string>
+										<key>value</key>
+										<false/>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -5037,19 +5029,19 @@
 									</dict>
 									<dict>
 										<key>name</key>
-										<string>ignoreAnchorPointForPosition</string>
-										<key>type</key>
-										<string>Check</string>
-										<key>value</key>
-										<false/>
-									</dict>
-									<dict>
-										<key>name</key>
 										<string>tag</string>
 										<key>type</key>
 										<string>Integer</string>
 										<key>value</key>
 										<integer>80</integer>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>ignoreAnchorPointForPosition</string>
+										<key>type</key>
+										<string>Check</string>
+										<key>value</key>
+										<false/>
 									</dict>
 									<dict>
 										<key>name</key>

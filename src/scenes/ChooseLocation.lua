@@ -17,6 +17,7 @@ start scene - loading screen
 ChooseLocation = inheritsFrom(BaseScene)
 ChooseLocation.mScrollView = nil;
 ChooseLocation.mBabyInTrapAnimations = nil
+ChooseLocation.mBonusAnimations = nil
 ChooseLocation.mNode = nil;
 
 ChooseLocation.LABEL_BEGIN = 1;
@@ -150,7 +151,8 @@ end
 function ChooseLocation:createLocationImages(node)
     info_log("ChooseLocation:createLocationImages node ", node);
 
-    self.mBabyInTrapAnimations = {}
+    self.mBabyInTrapAnimations = {};
+    self.mBonusAnimations = {};
     local locations = self.mSceneManager.mGame:getLocations();
     local locationNum = 1;
 
@@ -200,10 +202,18 @@ end
 
 ---------------------------------
 function ChooseLocation:destroy()
+    debug_log("ChooseLocation:destroy");
 	ChooseLocation:superClass().destroy(self);
 
 	self:getGame():getSoundManager():stopMusic(true);
 
+    for key, anim in ipairs(self.mBabyInTrapAnimations) do
+        anim:destroy();
+    end
+
+    for key, anim in ipairs(self.mBonusAnimations) do
+        anim:destroy();
+    end
 end
 
 --------------------------------
@@ -356,6 +366,10 @@ function ChooseLocation:tick(dt)
         anim:tick(dt);
     end
 
+    for key, anim in ipairs(self.mBonusAnimations) do
+        anim:tick(dt);
+    end
+
     --if  not SimpleAudioEngine:getInstance():isMusicPlaying() then
         --self:getGame():getSoundManager():playMusic(gSounds.CHOOSE_LOCATION_MUSIC, true)
     --end
@@ -373,11 +387,17 @@ function ChooseLocation:showUnlockBonusAnimation()
             if not showedUnlock then
                 local sprite = self.mNode:getChildByTag(ChooseLocation.LOCATION_SPRITE_BEGIN * i);
                 local bonusNode = sprite:getChildByTag(ChooseLocation.BONUS_ANIM_NODE);
+                local itemNode = sprite:getChildByTag(ChooseLocation.BONUS_NODE);
+                if itemNode then
+                    itemNode:setVisible(true);
+                end
+                debug_log("ChooseLocation:showUnlockBonusAnimation bonusNode ", bonusNode);
                 if bonusNode then
-                    bonusNode:setVisible(true);
+                    bonusNode:setVisible(false);
                     local idle = PlistAnimation:create();
                     idle:init("BonusLevelIconAnim.plist", bonusNode, {x=0.5, y=0.61}, nil, 0.1   );
                     idle:play();
+                    self.mBonusAnimations[i] = idle;
                 end
             end
         end
