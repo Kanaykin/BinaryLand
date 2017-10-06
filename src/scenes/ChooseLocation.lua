@@ -381,23 +381,32 @@ function ChooseLocation:showUnlockBonusAnimation()
 
     for i, location in ipairs(locations) do
         local bonusLevel = location:getBonusLevel();
-        if bonusLevel then --and bonusLevel:isOpened() then
+        if bonusLevel and bonusLevel:isOpened() then
             local showedUnlock = self.mSceneManager.mGame:getBonusUnlockShowed(location:getId());
             info_log("ChooseLocation:showUnlockBonusAnimation i ", i, " showedUnlock ", showedUnlock);
             if not showedUnlock then
                 local sprite = self.mNode:getChildByTag(ChooseLocation.LOCATION_SPRITE_BEGIN * i);
-                local bonusNode = sprite:getChildByTag(ChooseLocation.BONUS_ANIM_NODE);
                 local itemNode = sprite:getChildByTag(ChooseLocation.BONUS_NODE);
-                if itemNode then
-                    itemNode:setVisible(true);
-                end
+                local bonusNode = itemNode:getChildByTag(ChooseLocation.BONUS_ANIM_NODE);
                 debug_log("ChooseLocation:showUnlockBonusAnimation bonusNode ", bonusNode);
                 if bonusNode then
-                    bonusNode:setVisible(false);
+                    local sequence = SequenceAnimation:create();
+                    sequence:init();
+
                     local idle = PlistAnimation:create();
-                    idle:init("BonusLevelIconAnim.plist", bonusNode, {x=0.5, y=0.61}, nil, 0.1   );
-                    idle:play();
-                    self.mBonusAnimations[i] = idle;
+                    local anchor = {x=0.5, y=0.61};
+                    idle:init("BonusLevelIconAnim.plist", bonusNode, anchor, nil, 0.1   );
+                    sequence:addAnimation(idle);
+                    
+                    local emptyAnim = EmptyAnimation:create();
+                    emptyAnim:init(nil, bonusNode, anchor);
+                    emptyAnim:setFrame(idle:getLastFrame());
+                    sequence:addAnimation(emptyAnim);
+
+                    sequence:play();
+                    self.mBonusAnimations[i] = sequence;
+
+                    self.mSceneManager.mGame:setLocationUnlockShowed(location:getId(), true);
                 end
             end
         end

@@ -140,12 +140,17 @@ end
 
 ---------------------------------
 function Game:setLocationUnlockShowed(locationId, val)
-	return CCUserDefault:getInstance():setBoolForKey(locationId .. "_showed_unlock", val);
+	CCUserDefault:getInstance():setBoolForKey(locationId .. "_showed_unlock", val);
 end
 
 ---------------------------------
 function Game:getBonusUnlockShowed(locationId)
 	return CCUserDefault:getInstance():getBoolForKey(locationId .. "_bonus__showed_unlock");
+end
+
+---------------------------------
+function Game:setBonusUnlockShowed(locationId, val)
+	CCUserDefault:getInstance():setBoolForKey(locationId .. "_bonus__showed_unlock", val);
 end
 
 ---------------------------------
