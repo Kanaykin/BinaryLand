@@ -3564,7 +3564,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>FrameBackPing.png</string>
+							<string>bubble_right_two.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -3605,7 +3605,7 @@
 						<key>type</key>
 						<string>Float</string>
 						<key>value</key>
-						<real>10</real>
+						<real>50</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -3621,7 +3621,7 @@
 						<key>type</key>
 						<string>Float</string>
 						<key>value</key>
-						<real>10</real>
+						<real>50</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -3857,8 +3857,6 @@
 						<true/>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
