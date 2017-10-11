@@ -109,7 +109,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>close_normal.png</string>
+									<string>pause_button_normal.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -120,7 +120,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>close_pressed.png</string>
+									<string>pause_button_pressed.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -131,7 +131,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string></string>
+									<string>pause_button_pressed.png</string>
 								</array>
 							</dict>
 						</array>
@@ -155,7 +155,7 @@
 						<key>value</key>
 						<array>
 							<real>5</real>
-							<real>50</real>
+							<real>92.800003051757812</real>
 							<integer>4</integer>
 						</array>
 					</dict>
