@@ -23,7 +23,7 @@ local MovieTexts = {"  Далеко-далеко, на краю мира, рас
 
 --------------------------------
 function StartScene:init(sceneMan, params)
-	self:superClass().init(self, sceneMan, {background = LOADSCEENIMAGE});
+	StartScene:superClass().init(self, sceneMan, {background = LOADSCEENIMAGE});
 	info_log("StartScene:init");
 
 	-- create menu elements
@@ -78,7 +78,7 @@ end
 
 ---------------------------------
 function StartScene:tick(dt)
-	self:superClass().tick(self, dt);
+	StartScene:superClass().tick(self, dt);
     if self.mCurrentStep then
         self.mCurrentStep:tick(dt);
     end

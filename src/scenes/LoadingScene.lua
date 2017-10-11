@@ -19,7 +19,7 @@ LoadingScene.PROGRESS_PARENT_TAG = 30;
 
 ---------------------------------
 function LoadingScene:destroy()
-	self:superClass().destroy(self);
+	LoadingScene:superClass().destroy(self);
 end
 
 --------------------------------
@@ -46,7 +46,7 @@ end
 
 --------------------------------
 function LoadingScene:init(sceneMan, params)
-	self:superClass().init(self, sceneMan, {});
+	LoadingScene:superClass().init(self, sceneMan, {});
 	info_log("LoadingScene:init");
 
     local statistic = extend.Statistic:getInstance();
@@ -57,7 +57,7 @@ end
 
 ---------------------------------
 function LoadingScene:tick(dt)
-	self:superClass().tick(self, dt);
+	LoadingScene:superClass().tick(self, dt);
     self.mTimer = self.mTimer - dt;
     if self.mTimer <= 0 then
         self.mSceneManager:runNextScene();

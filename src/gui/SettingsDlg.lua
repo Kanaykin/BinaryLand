@@ -27,7 +27,7 @@ SettingsDlg.mChooseLangButton = nil;
 
 --------------------------------
 function SettingsDlg:doModal()
-	self:superClass().doModal(self);
+	SettingsDlg:superClass().doModal(self);
 	self.mAnimator:runAnimationsForSequenceNamed("Show");
 end
 
@@ -169,8 +169,9 @@ function SettingsDlg:initGuiElements()
 end
 
 --------------------------------
-function SettingsDlg:init(game, uiLayer)
-	self:superClass().init(self, game, uiLayer, "SettingsDlg");
+function SettingsDlg:init(game, uiLayer, ccbFile)
+    local ccbFile = ccbFile and ccbFile or "SettingsDlg";
+	SettingsDlg:superClass().init(self, game, uiLayer, ccbFile);
 
     self.mAnimator = self.mReader:getActionManager();
 	self:initGuiElements();

@@ -201,7 +201,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>close_normal.png</string>
+									<string>pause_button_normal.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -212,7 +212,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>close_pressed.png</string>
+									<string>pause_button_pressed.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -223,7 +223,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>close_pressed.png</string>
+									<string>pause_button_pressed.png</string>
 								</array>
 							</dict>
 						</array>
@@ -239,14 +239,6 @@
 				<integer>0</integer>
 				<key>properties</key>
 				<array>
-					<dict>
-						<key>name</key>
-						<string>visible</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<false/>
-					</dict>
 					<dict>
 						<key>name</key>
 						<string>position</string>
@@ -594,8 +586,6 @@
 								<real>8</real>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>

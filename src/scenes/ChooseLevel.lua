@@ -1,9 +1,11 @@
 require "src/scenes/BaseScene"
 require "src/scenes/SoundConfigs"
 require "src/base/Log"
+require "src/gui/SettingsDlgLvl"
 
 ChooseLevel = inheritsFrom(BaseScene)
 ChooseLevel.mCurLocation = nil;
+ChooseLevel.mSettingsDlg = nil;
 
 ChooseLevel.BACK_MENU_TAG = 10;
 ChooseLevel.BACK_MENU_ITEM_TAG = 11;
@@ -37,6 +39,7 @@ function ChooseLevel:destroy()
 	ChooseLevel:superClass().destroy(self);
 
 	self:getGame():getSoundManager():stopMusic(true);
+    self.mSettingsDlg:destroy();
 end
 
 --------------------------------
@@ -113,7 +116,8 @@ end
 function ChooseLevel:initChooseLevelButton(nodeBase)
     local function onReturnPressed(val, val2)
         info_log("onReturnPressed");
-        self.mSceneManager:runPrevScene();
+        --self.mSceneManager:runPrevScene();
+        self.mSettingsDlg:doModal();
     end
 
     setMenuCallback(nodeBase, ChooseLevel.BACK_MENU_TAG, ChooseLevel.BACK_MENU_ITEM_TAG, onReturnPressed);
@@ -125,4 +129,7 @@ function ChooseLevel:initGui()
     
     self:createGuiLayer();
 
+    -------------------------
+    self.mSettingsDlg = SettingsDlgLvl:create();
+    self.mSettingsDlg:init(self.mSceneManager.mGame, self.mGuiLayer);
 end

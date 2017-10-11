@@ -7,7 +7,7 @@ StartSceneTouchWidget.mTouch = nil;
 
 ----------------------------------------
 function StartSceneTouchWidget:init(bbox, scene)
-    self:superClass().init(self, bbox);
+    StartSceneTouchWidget:superClass().init(self, bbox);
     self.mScene = scene;
 end
 

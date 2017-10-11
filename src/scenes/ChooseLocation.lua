@@ -7,6 +7,7 @@ require "src/base/Log"
 require "src/gui/GuiHelper"
 require "src/gui/TouchWidget"
 require "src/gui/NotEnoughStarsDlg"
+require "src/gui/SettingsDlg"
 
 local LOADSCEENIMAGE = "GlobalMapBack.png"
 local GLOBALMAP = "GlobalMap.png"
@@ -19,6 +20,7 @@ ChooseLocation.mScrollView = nil;
 ChooseLocation.mBabyInTrapAnimations = nil
 ChooseLocation.mBonusAnimations = nil
 ChooseLocation.mNode = nil;
+ChooseLocation.mSettingsDlg = nil;
 
 ChooseLocation.LABEL_BEGIN = 1;
 ChooseLocation.LABEL_TAG = 2;
@@ -214,6 +216,8 @@ function ChooseLocation:destroy()
     for key, anim in ipairs(self.mBonusAnimations) do
         anim:destroy();
     end
+
+    self.mSettingsDlg:destroy();
 end
 
 --------------------------------
@@ -342,7 +346,8 @@ function ChooseLocation:initGui(params)
     local choseLevel = self;
     local function onReturnPressed()
     	info_log("onReturnPressed");
-    	choseLevel.mSceneManager:runPrevScene();
+    	--choseLevel.mSceneManager:runPrevScene();
+        self.mSettingsDlg:doModal();
     end
 
     setMenuCallback(node, ChooseLocation.BACK_MENU, ChooseLocation.BACK_MENU_ITEM, onReturnPressed);
@@ -356,6 +361,10 @@ function ChooseLocation:initGui(params)
     else
         self:hideNotEnoughStarsDlg();
     end
+
+    -------------------------
+    self.mSettingsDlg = SettingsDlg:create();
+    self.mSettingsDlg:init(self.mSceneManager.mGame, self.mGuiLayer, "SettingsDlgLoc");
 end
 
 ---------------------------------
