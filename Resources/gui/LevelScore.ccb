@@ -89,7 +89,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>score_icon.png</string>
+							<string>coin_gui_v3.png</string>
 						</array>
 					</dict>
 				</array>
@@ -116,8 +116,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>32</real>
-							<real>0.0</real>
+							<real>96</real>
+							<real>6</real>
 							<integer>5</integer>
 						</array>
 					</dict>
@@ -128,7 +128,7 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
+							<real>1</real>
 							<real>0.0</real>
 						</array>
 					</dict>
@@ -229,6 +229,8 @@
 						<string>000575</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

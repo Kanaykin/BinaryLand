@@ -20,5 +20,5 @@ end
 
 --------------------------------
 function LevelScore:setValue(score)
-    self.mLabelScore:setString(string.format("%07d", score));
+    self.mLabelScore:setString(string.format("%01d", score));
 end
