@@ -6,6 +6,7 @@ NotEnoughStarsDlg.mLocationLockedId = nil;
 
 NotEnoughStarsDlg.BASE_NODE_TAG = 49;
 NotEnoughStarsDlg.WORK_PLACE = 72;
+NotEnoughStarsDlg.LABEL_BACK = 74;
 NotEnoughStarsDlg.NOT_ENOUGH = {
     BUTTON_YES = 100,
     TEXT_CURRENT_LOC_STARS_LABEL = 5
@@ -112,6 +113,9 @@ function NotEnoughStarsDlg:initGuiElements()
     local workPlace = nodeBase:getChildByTag(NotEnoughStarsDlg.WORK_PLACE);    
     self:setTouchBBox(workPlace:getBoundingBox());
     GuiHelper.updateScale9SpriteByScale(workPlace, self.mGame:getScale());
+
+	local back = nodeBase:getChildByTag(NotEnoughStarsDlg.LABEL_BACK);
+	GuiHelper.updateScale9SpriteByScale(back, self.mGame:getScale());
 
     self:initOkButton(nodeBase, NotEnoughStarsDlg.NOT_ENOUGH.BUTTON_YES);
     self:initOkButton(nodeBase, NotEnoughStarsDlg.ENOUGH.BUTTON_YES);
