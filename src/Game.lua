@@ -271,7 +271,7 @@ function Game:init()
 	self.mLocalizationManager = LocalizationManager:create()
 	self.mLocalizationManager:init()
 
-	self.mSoundManager = EmptyAudioEngineAdapter:create()--SimpleAudioEngineAdapter:create();--ExpAudioEngineAdapter:create();
+	self.mSoundManager = SimpleAudioEngineAdapter:create()-- EmptyAudioEngineAdapter:create()--SimpleAudioEngineAdapter:create();--ExpAudioEngineAdapter:create();
 	self.mSoundManager:init();
 
     -- set game configuration

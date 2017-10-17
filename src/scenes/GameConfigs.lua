@@ -15,7 +15,7 @@ gLocations = {
 				tileMap = "Level1_1_map.tmx",
 				cellSize = 32,
 				tutorial = "TutorialStep0",
-				backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+				backgroundMusic = "sounds/Music/level_music_2.mp3",
                 customProperties = "src/levels/Level1_1",
                 id = "1_1"
 			},
@@ -27,7 +27,7 @@ gLocations = {
 				cellSize = 32,
 				tutorial = "TutorialStep2Lvl_1",
 				time = 300,
-				backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+				backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 customProperties = "src/levels/Level1_2",
                  id = "1_2"
 			},
@@ -38,7 +38,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = "TutorialStep3Lvl_1",
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 id = "1_3"
 			},
 			{
@@ -48,7 +48,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = "TutorialStep4Lvl_1",
                 time = 300,
-                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 customProperties = "src/levels/Level1_4",
                 id = "1_4"
 			},
@@ -59,7 +59,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = "TutorialStep5Lvl_1",
                 time = 300,
-                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 customProperties = "src/levels/Level1_5",
                 id = "1_5"
             },
@@ -70,7 +70,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 customProperties = "src/levels/Level1_6",
                 id = "1_6"
             },
@@ -81,7 +81,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = "TutorialStep7Lvl_1",
                 time = 300,
-                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 customProperties = "src/levels/Level1_7",
                 id = "1_7"
             },
@@ -93,7 +93,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 customProperties = "src/levels/Level1_8",
                 id = "1_8"
             },
@@ -106,7 +106,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 customProperties = "src/levels/Level1_bonus",
                 id = "1_bonus"
             }
@@ -128,7 +128,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 customProperties = "src/levels/Level2_1",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 id = "2_1"
             },
             {
@@ -139,7 +139,7 @@ gLocations = {
                 tutorial = "TutorialStep9Lvl_1",
                 time = 300,
                 customProperties = "src/levels/Level2_2",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 id = "2_2"
             },
             {
@@ -150,7 +150,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 customProperties = "src/levels/Level2_3",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 id = "2_3"
             },
             {
@@ -161,7 +161,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 customProperties = "src/levels/Level2_4",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 id = "2_4"
             },
             {
@@ -172,7 +172,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 customProperties = "src/levels/Level2_5",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 id = "2_5"
             },
             {
@@ -183,7 +183,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 customProperties = "src/levels/Level2_6",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 id = "2_6"
             },
             {
@@ -194,7 +194,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 customProperties = "src/levels/Level2_7",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 id = "2_7"
             },
             {
@@ -205,7 +205,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 customProperties = "src/levels/Level2_8",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 id = "2_8"
             },
             {
@@ -217,7 +217,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 customProperties = "src/levels/Level2_bonus",
                 id = "2_bonus"
             }
@@ -238,7 +238,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 customProperties = "src/levels/Level3_1",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 id = "3_1"
             },
             {
@@ -249,7 +249,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 --customProperties = "src/levels/Level3_1",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 id = "3_2"
             },
             {
@@ -260,7 +260,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 customProperties = "src/levels/Level3_3",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 id = "3_3"
             },
             {
@@ -271,7 +271,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 --customProperties = "src/levels/Level3_3",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 id = "3_4"
             },
             {
@@ -282,7 +282,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 customProperties = "src/levels/Level3_5",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 id = "3_5"
             },
             {
@@ -293,7 +293,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 customProperties = "src/levels/Level3_6",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 id = "3_6"
             },
             {
@@ -304,7 +304,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 customProperties = "src/levels/Level3_7",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 id = "3_7"
             },
             {
@@ -315,7 +315,7 @@ gLocations = {
                 tutorial = false,
                 time = 300,
                 customProperties = "src/levels/Level3_8",
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 id = "3_8"
             },
             {
@@ -327,7 +327,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 customProperties = "src/levels/Level3_bonus",
                 id = "3_bonus"
             }
@@ -347,7 +347,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 customProperties = "src/levels/Level4_1",
                 id = "4_1"
             },
@@ -358,7 +358,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 customProperties = "src/levels/Level4_2",
                 id = "4_2"
             },
@@ -369,7 +369,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 customProperties = "src/levels/Level4_3",
                 id = "4_3"
             },
@@ -380,7 +380,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 customProperties = "src/levels/Level4_4",
                 id = "4_4"
             },
@@ -391,7 +391,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 customProperties = "src/levels/Level4_5",
                 id = "4_5"
             },
@@ -402,7 +402,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 customProperties = "src/levels/Level4_6",
                 id = "4_6"
             },
@@ -413,7 +413,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 customProperties = "src/levels/Level4_7",
                 id = "4_7"
             },
@@ -424,7 +424,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 180,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 customProperties = "src/levels/Level4_8",
                 id = "4_8"
             },
@@ -437,7 +437,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 customProperties = "src/levels/Level4_bonus",
                 id = "4_bonus"
             }
@@ -457,7 +457,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 customProperties = "src/levels/Level5_1",
                 id = "5_1"
             },
@@ -468,7 +468,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 customProperties = "src/levels/Level5_2",
                 id = "5_2"
             },
@@ -479,7 +479,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 customProperties = "src/levels/Level5_3",
                 id = "5_3"
             },
@@ -490,7 +490,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 customProperties = "src/levels/Level5_4",
                 id = "5_4"
             },
@@ -501,7 +501,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 customProperties = "src/levels/Level5_5",
                 id = "5_5"
             },
@@ -512,7 +512,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 customProperties = "src/levels/Level5_6",
                 id = "5_6"
             },
@@ -523,7 +523,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_2.mp3",
                 customProperties = "src/levels/Level5_7",
                 customTiledAnchor = cc.p(0.53, 0.0),
                 disableScrollForPlayer = 2,
@@ -536,7 +536,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 customProperties = "src/levels/Level5_8",
                 id = "5_8"
             },
@@ -549,7 +549,7 @@ gLocations = {
                 cellSize = 32,
                 tutorial = false,
                 time = 300,
-                backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+                backgroundMusic = "sounds/Music/level_music_loop_1.mp3",
                 customProperties = "src/levels/Level5_bonus",
                 id = "5_bonus"
             }
