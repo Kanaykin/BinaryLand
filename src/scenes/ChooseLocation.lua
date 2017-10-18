@@ -394,6 +394,8 @@ function ChooseLocation:showUnlockBonusAnimation()
             local showedUnlock = self.mSceneManager.mGame:getBonusUnlockShowed(location:getId());
             info_log("ChooseLocation:showUnlockBonusAnimation i ", i, " showedUnlock ", showedUnlock);
             if not showedUnlock then
+                self.mSceneManager.mGame:setBonusUnlockShowed(location:getId(), true);
+
                 local sprite = self.mNode:getChildByTag(ChooseLocation.LOCATION_SPRITE_BEGIN * i);
                 local itemNode = sprite:getChildByTag(ChooseLocation.BONUS_NODE);
                 local bonusNode = itemNode:getChildByTag(ChooseLocation.BONUS_ANIM_NODE);
