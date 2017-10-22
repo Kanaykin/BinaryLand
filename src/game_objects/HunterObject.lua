@@ -15,6 +15,9 @@ HunterObject.mDog = nil;
 HunterObject.mIsDead = false;
 HunterObject.mBullet = nil;
 
+
+HunterObject.mAnimationPrefix = "Hunter"
+
 --shot constants
 HunterObject.SHOT_PIXELS_DELTA = 10
 HunterObject.SHOT_MIN_GRID_DELTA = 3
@@ -64,46 +67,50 @@ function HunterObject:initAnimation()
 
 	info_log("HunterObject Texture ", tolua.cast(self.mNode, "cc.Sprite"):getTexture():getName());
 
-	local sideAnimation = self:createRepeateAnimation("HunterWalkSide.plist", MobObject.DIRECTIONS.SIDE);
-	sideAnimation:play();
+    ------------------------
+    -- caution animation
+    self:createPlistAnimation(self.mAnimationPrefix.."Caution.plist", HunterObject.DIRECTIONS.CAUTION, 0.3);
+
+    ------------------------
+    -- Shot animation
+    self:createPlistAnimation(self.mAnimationPrefix.."ShotSide.plist", HunterObject.DIRECTIONS.SHOT_SIDE, 0.15);
+
+    ------------------------
+    -- Shot animation
+    self:createPlistAnimation(self.mAnimationPrefix.."ShotFront.plist", HunterObject.DIRECTIONS.SHOT_FRONT, 0.15);
+
+    ------------------------
+    -- Shot animation
+    self:createPlistAnimation(self.mAnimationPrefix.."ShotBack.plist", HunterObject.DIRECTIONS.SHOT_BACK, 0.15);
+
+end
+
+--------------------------------
+function HunterObject:initSecondPartAnimation()
+    local sideAnimation = self:createRepeateAnimation(self.mAnimationPrefix.."WalkSide.plist", MobObject.DIRECTIONS.SIDE);
+    sideAnimation:play();
 
     self.mAnimation = MobObject.DIRECTIONS.SIDE;
 
     ------------------------
     -- Front animation
-    self:createRepeateAnimation("HunterWalkFront.plist", MobObject.DIRECTIONS.FRONT);
+    self:createRepeateAnimation(self.mAnimationPrefix.."WalkFront.plist", MobObject.DIRECTIONS.FRONT);
 
     ------------------------
     -- Back animation
-    self:createRepeateAnimation("HunterWalkBack.plist", MobObject.DIRECTIONS.BACK);
-
-    ------------------------
-    -- caution animation
-    self:createPlistAnimation("HunterCaution.plist", HunterObject.DIRECTIONS.CAUTION, 0.3);
-
-    ------------------------
-    -- Shot animation
-    self:createPlistAnimation("HunterShotSide.plist", HunterObject.DIRECTIONS.SHOT_SIDE, 0.15);
-
-    ------------------------
-    -- Shot animation
-    self:createPlistAnimation("HunterShotFront.plist", HunterObject.DIRECTIONS.SHOT_FRONT, 0.15);
-
-    ------------------------
-    -- Shot animation
-    self:createPlistAnimation("HunterShotBack.plist", HunterObject.DIRECTIONS.SHOT_BACK, 0.15);
+    self:createRepeateAnimation(self.mAnimationPrefix.."WalkBack.plist", MobObject.DIRECTIONS.BACK);
 
     ------------------------
     -- Dead animation
-    self:createPlistAnimation("HunterDieSide.plist", HunterObject.DIRECTIONS.DEAD_SIDE, 0.06);
+    self:createPlistAnimation(self.mAnimationPrefix.."DieSide.plist", HunterObject.DIRECTIONS.DEAD_SIDE, 0.06);
 
     ------------------------
     -- Dead animation
-    self:createPlistAnimation("HunterDieFront.plist", HunterObject.DIRECTIONS.DEAD_FRONT, 0.06);
+    self:createPlistAnimation(self.mAnimationPrefix.."DieFront.plist", HunterObject.DIRECTIONS.DEAD_FRONT, 0.06);
 
     ------------------------
     -- Dead animation
-    self:createPlistAnimation("HunterDieBack.plist", HunterObject.DIRECTIONS.DEAD_BACK, 0.06);
+    self:createPlistAnimation(self.mAnimationPrefix.."DieBack.plist", HunterObject.DIRECTIONS.DEAD_BACK, 0.06);
 end
 
 ---------------------------------
@@ -113,7 +120,10 @@ function HunterObject:setCustomProperties(properties)
     info_log("HunterObject:setCustomProperties CanAttack ", properties.CanAttack);
     if properties.CanAttack then
         self.mCanAttack = properties.CanAttack;
+    else
+        self.mAnimationPrefix = "HunterWithout";
     end
+    self:initSecondPartAnimation();
 end
 
 --------------------------------

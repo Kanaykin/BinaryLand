@@ -206,7 +206,7 @@ HunterIdleState.mNeedCautionAnim = false;
 function HunterIdleState:enter(params)
     HunterIdleState:superClass().enter(self, params);
     local dirMoving = self.mObject:getCurrentAnimationDir();
-    if dirMoving ~= MobObject.DIRECTIONS.BACK and params.prevState == MobStates.MS_MOVE then
+    if dirMoving ~= MobObject.DIRECTIONS.BACK and params.prevState == MobStates.MS_MOVE and self.mObject.mCanAttack then
         local rand = math.random(100) % 2;
         debug_log("HunterIdleState:enter rand ", rand);
         if rand == 0 then
