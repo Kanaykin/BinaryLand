@@ -472,7 +472,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>42.5</real>
+							<real>10</real>
 							<real>10.699999809265137</real>
 							<integer>4</integer>
 						</array>
@@ -484,7 +484,7 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
+							<real>0.0</real>
 							<real>0.5</real>
 						</array>
 					</dict>
@@ -532,7 +532,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>27</real>
+							<real>26</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -585,6 +585,8 @@
 						<string>TutorialStep2Lvl_1Text</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -608,7 +610,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>70</real>
+							<real>84</real>
 							<real>9</real>
 							<integer>4</integer>
 						</array>
@@ -620,7 +622,7 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
+							<real>1</real>
 							<real>0.5</real>
 						</array>
 					</dict>

@@ -312,7 +312,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>48.200000762939453</real>
+							<real>16</real>
 							<real>10.5</real>
 							<integer>4</integer>
 						</array>
@@ -324,7 +324,7 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
+							<real>0.0</real>
 							<real>0.44999998807907104</real>
 						</array>
 					</dict>
@@ -372,7 +372,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>28</real>
+							<real>26</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -448,7 +448,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>80</real>
+							<real>93</real>
 							<real>9.1999998092651367</real>
 							<integer>4</integer>
 						</array>
@@ -460,7 +460,7 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
+							<real>1</real>
 							<real>0.5</real>
 						</array>
 					</dict>

@@ -312,7 +312,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>46</real>
+							<real>13</real>
 							<real>10.699999809265137</real>
 							<integer>4</integer>
 						</array>
@@ -324,7 +324,7 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
+							<real>0.0</real>
 							<real>0.44999998807907104</real>
 						</array>
 					</dict>
@@ -450,7 +450,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>76</real>
+							<real>90</real>
 							<real>9.1999998092651367</real>
 							<integer>4</integer>
 						</array>
@@ -462,7 +462,7 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
+							<real>1</real>
 							<real>0.5</real>
 						</array>
 					</dict>

@@ -126,7 +126,11 @@ function SceneManager:runNextLevelScene()
         end
         -- if last level on location run location scene
         -- if locations[locationId]:isLocked() then
-        self:runNextScene({locationLocked = locationId}, SCENE_TYPE_ID.CHOOSE_LOCATION);
+        local params = nil;
+        if locations[locationId]:isLocked() then
+        	params = {locationLocked = locationId};
+        end
+        self:runNextScene(params, SCENE_TYPE_ID.CHOOSE_LOCATION);
         return;
     --     end
     --     level = locations[locationId]:getLevels()[index];

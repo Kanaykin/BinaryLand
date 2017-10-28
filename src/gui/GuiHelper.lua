@@ -32,10 +32,11 @@ end
 
 -----------------------------
 function setDefaultFont(label, scale)
-    info_log("setDefaultFont scale ", scale);
     local config = label:getTTFConfig();
     config.fontFilePath = DEFAULT_FONT;
     config.fontSize = label:getSystemFontSize();
+
+    info_log("setDefaultFont scale ", scale, " fontSize ", config.fontSize);
     if scale then
         config.fontSize = config.fontSize * scale / 2;
     end

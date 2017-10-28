@@ -457,8 +457,6 @@
 								<real>15</real>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -858,8 +856,8 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>10</real>
-									<integer>1</integer>
+									<real>30</real>
+									<integer>0</integer>
 								</array>
 							</dict>
 							<dict>
@@ -963,6 +961,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -1346,8 +1346,8 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>10</real>
-									<integer>1</integer>
+									<real>30</real>
+									<integer>0</integer>
 								</array>
 							</dict>
 							<dict>
