@@ -35,7 +35,7 @@
   "CurrentLocStarsText": "You don't have enough stars\n\nto enter\n\nto the next location:",
   "CurrentLocStarsTextEnough": "Total stars earned:",
   "TakeMoreStarsText": "Take more stars",
-  "LocationLockedDlgText": "You need %s stars to enter location.\n\nYou have %s stars.",
+  "LocationLockedDlgText": "You need %s stars\n\n to enter location.\n\nYou have %s stars.",
   "TutorialStep2Lvl_1Text": "Felicia, look! How many coins dropped\n these clumsy hunters!",
   "TutorialStep2Lvl_2Text": "Hurry, we must save all little foxes as quick as possible.\n  ",
   "TutorialStep2Lvl_3Text": "To earn more stars you should pass levels quick\n and collect all coins.",
