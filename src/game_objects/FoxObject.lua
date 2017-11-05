@@ -113,8 +113,8 @@ function FoxObject:setCustomProperties(properties)
     FoxObject:superClass().setCustomProperties(self, properties);
 
     if properties.InTrap then
-        self.mField:createSnareTrigger(Vector.new(self.mNode:getPosition()));
         self:playAnimation(PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP, true);
+        self.mField:createSnareTrigger(Vector.new(self.mNode:getPosition()));
         info_log("FoxObject:setCustomProperties self.mLastButtonPressed ", self.mLastButtonPressed);
         info_log("FoxObject:setCustomProperties self.mAnimations[self.mLastButtonPressed] ", self.mAnimations[self.mLastButtonPressed]);
         self.mAnimations[self.mLastButtonPressed]:setCurrentAnimation(2);
@@ -448,15 +448,17 @@ end
 
 --------------------------------
 function FoxObject:playAnimation(button, mute)
-    if button == PlayerObject.PLAYER_STATE.PS_TOP then
-		self.mAnimations[-1] = self.mBackIdleAnimation;
-	elseif button == PlayerObject.PLAYER_STATE.PS_LEFT or 
-		button == PlayerObject.PLAYER_STATE.PS_RIGHT then
-		self.mAnimations[-1] = self.mSideIdleAnimation;
-    elseif button == PlayerObject.PLAYER_STATE.PS_BOTTOM then
-        self.mAnimations[-1] = self.mFrontIdleAnimation;
-    elseif button == PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP then
-        self:playInTrapAnimation(mute);
+	if self.mLastButtonPressed ~= button then
+		if button == PlayerObject.PLAYER_STATE.PS_TOP then
+			self.mAnimations[-1] = self.mBackIdleAnimation;
+		elseif button == PlayerObject.PLAYER_STATE.PS_LEFT or
+			button == PlayerObject.PLAYER_STATE.PS_RIGHT then
+			self.mAnimations[-1] = self.mSideIdleAnimation;
+		elseif button == PlayerObject.PLAYER_STATE.PS_BOTTOM then
+			self.mAnimations[-1] = self.mFrontIdleAnimation;
+		elseif button == PlayerObject.PLAYER_STATE.PS_OBJECT_IN_TRAP then
+			self:playInTrapAnimation(mute);
+		end
 	end
 	FoxObject:superClass().playAnimation(self, button);
 end
