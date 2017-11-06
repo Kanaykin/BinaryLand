@@ -77,9 +77,12 @@ end
 ---------------------------------
 function Field:destroy()
     debug_log("Field:destroy")
+    -- local oldEffectValue = self:getGame():getSoundManager():getEffectsVolume();
+    -- self:getGame():getSoundManager():setEffectsVolume(0);
 	for i, obj in ipairs(self.mObjects) do
-		obj:destroy();
+		obj:destroy(true);
 	end
+    -- self:getGame():getSoundManager():setEffectsVolume(oldEffectValue);
 end
 
 --------------------------------

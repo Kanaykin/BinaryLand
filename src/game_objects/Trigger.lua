@@ -87,11 +87,13 @@ function Trigger:onEnter(player)
 end
 
 ---------------------------------
-function Trigger:destroy()
+function Trigger:destroy(fieldDestroyed)
 	Trigger:superClass().destroy(self);
 
-	if self.mLeaveCallback and self.mContainedObj then
-		self.mLeaveCallback(self.mContainedObj);
+	if not fieldDestroyed then 
+		if self.mLeaveCallback and self.mContainedObj then
+			self.mLeaveCallback(self.mContainedObj);
+		end
 	end
 	self.mContainedObj = nil;
 end

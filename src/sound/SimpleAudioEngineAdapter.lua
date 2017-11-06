@@ -32,6 +32,11 @@ function SimpleAudioEngineAdapter:setEffectsVolume(value)
 end
 
 ---------------------------------
+function SimpleAudioEngineAdapter:getEffectsVolume()
+	return cc.SimpleAudioEngine:getInstance():getEffectsVolume();
+end
+
+---------------------------------
 function SimpleAudioEngineAdapter:setMusicVolume(value)
 	cc.SimpleAudioEngine:getInstance():setMusicVolume(value);
 end

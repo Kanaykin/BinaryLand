@@ -33,6 +33,11 @@ function EmptyAudioEngineAdapter:setEffectsVolume(value)
 end
 
 ---------------------------------
+function EmptyAudioEngineAdapter:getEffectsVolume()
+
+end
+
+---------------------------------
 function EmptyAudioEngineAdapter:setMusicVolume(value)
 	
 end
