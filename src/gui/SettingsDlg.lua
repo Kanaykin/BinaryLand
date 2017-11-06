@@ -111,7 +111,12 @@ function SettingsDlg:initChooseLevelButton(nodeBase)
 	local function onChooseLevelPressed(val, val2)
     	info_log("onChooseLevelPressed ");
         self.mChooseLangButton:close();
-    	self.mGame.mSceneMan:runPrevScene({location = self.mGame.mSceneMan:getCurrentScene():getLevel():getLocation()});
+        local level = self.mGame.mSceneMan:getCurrentScene():getLevel();
+        if level:getData().isBonus then
+            self.mGame.mSceneMan:runNextScene(nil, SCENE_TYPE_ID.CHOOSE_LOCATION);
+        else
+    	   self.mGame.mSceneMan:runPrevScene({location = level:getLocation()});
+        end
     end
 
     setMenuCallback(nodeBase, SettingsDlg.CHOOSE_LEVEL_MENU_TAG, SettingsDlg.CHOOSE_LEVEL_MENU_ITEM_TAG, onChooseLevelPressed);
