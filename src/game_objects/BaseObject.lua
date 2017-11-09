@@ -46,11 +46,18 @@ function BaseObject:onStateInGame()
 end
 
 --------------------------------
+function BaseObject:destroyNodeImpl(node)
+	if node then
+		local parent = node:getParent();
+		parent:removeChild(node, true);
+		node:release();
+	end
+end
+
+--------------------------------
 function BaseObject:destroyNode()
 	if self.mNode then
-		local parent = self.mNode:getParent();
-		parent:removeChild(self.mNode, true);
-		self.mNode:release();
+		self:destroyNodeImpl(self.mNode);
 		self.mNode = nil;
 	end
 end

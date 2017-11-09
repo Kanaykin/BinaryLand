@@ -28,6 +28,7 @@ BonusObject.CHEST_COINS_TYPE = 0;
 BonusObject.CHEST_TIME_TYPE = 1;
 
 BonusObject.mChestType = BonusObject.CHEST_COINS_TYPE;
+BonusObject.mBonusImage = nil;
 
 --------------------------------
 function BonusObject:initTimeBonus(animation)
@@ -204,6 +205,11 @@ end
 function BonusObject:destroy()
     info_log("BonusObject:destroy ");
 
+    if self.mBonusImage then
+        self:destroyNodeImpl(self.mBonusImage);
+        self.mBonusImage = nil;
+    end
+
     BonusObject:superClass().destroy(self);
 
     if self.mAnimation then
@@ -213,6 +219,7 @@ function BonusObject:destroy()
     --[[if self.mOpenAnimation then
         self.mOpenAnimation:destroy();
     end]]
+
 end
 
 --------------------------------
@@ -244,11 +251,15 @@ function BonusObject:createBonusSprite()
     local texture = cc.Director:getInstance():getTextureCache():addImage(
         self.mChestType == BonusObject.CHEST_COINS_TYPE and "Coin.png" or "TimeEmpty.png");
     local sprite = cc.Sprite:createWithTexture(texture);
-    sprite:setAnchorPoint(self.mChestType == BonusObject.CHEST_COINS_TYPE and { x = -0.25, y = -0.5}
-        or { x = -0.5, y = -0.3});
+    sprite:setAnchorPoint(self.mChestType == BonusObject.CHEST_COINS_TYPE and { x = 0.5, y = -0.5}
+         or { x = 0.5, y = -0.3});
     --sprite:setOpacity(100);
     sprite:setVisible(false);
-    self.mNode:addChild(sprite);
+    --self.mNode:addChild(sprite);
+    local posX, posY = self.mNode:getPosition();
+    sprite:setPosition(cc.p(posX, posY));
+    self:getField():getFieldNode():addChild(sprite);
+    sprite:retain();
     return sprite;
 end
 
@@ -281,6 +292,7 @@ function BonusObject:createOpenAnimation()
     List.pushright(self.mListOpenAnimation, playAnimation);
 
     local bonusImage = self:createBonusSprite();
+    self.mBonusImage = bonusImage;
     local showBonus = {}
     showBonus.mImage = bonusImage;
     showBonus.tick = function(self, dt)
@@ -292,7 +304,7 @@ function BonusObject:createOpenAnimation()
 
     local opacityBonus = {}
     opacityBonus.mImage = bonusImage;
-    opacityBonus.mVelocity = 255 / 0.25;
+    opacityBonus.mVelocity = 255 / 0.35;
     opacityBonus.mOpacity = 0
     opacityBonus.tick = function(self, dt)
         self.mOpacity = self.mOpacity + dt * self.mVelocity;
