@@ -67,6 +67,7 @@ function PlayerController:onTouchBegan(point)
 
 	self:resetData();
 	self.mObjectCaptured = nil;
+	local centerBox = nil;
 	for _, object in ipairs(self.mPlayerObjects) do
 		--local box = object:getBoundingBox();
 		--debug_log("PlayerController:onTouchBegan  x ", box.origin.x, " y ", box.origin.y);
@@ -74,16 +75,33 @@ function PlayerController:onTouchBegan(point)
 		local pos = object:getScreenPos();
 		--info_log("PlayerController:onTouchBegan  x ", pos.x, " y ", pos.y);
 		if not object:isInTrap() and self:touchObject(object, point) then
-			local delta = Vector.new(point.x, point.y) - Vector.new(object.mNode:getPosition());
+			local objPos = Vector.new(object.mNode:getPosition());
+			local delta = Vector.new(point.x, point.y) - objPos;
 			info_log("self:touchObject ", object:getTag(), " delta ", delta);
+
+			local box = Rect.new(object:getBoundingBox());
+
+        	local size = object.mNode:getBoundingBox();
+        	local anchor = object.mNode:getAnchorPoint();
+        	box.x = 0;
+        	box.y = 0;
+        	local center = cc.p(objPos.x + anchor.x * size.width , objPos.y + anchor.y * size.height);
+
+			local newCenter = Vector.new(center.x + box.width / 2, center.y + box.height / 2);
+			local deltaCenter = (newCenter - point):len();
+			info_log("self:touchObject deltaCenter ", deltaCenter);
+			
 			if self.mObjectCaptured then
-				if math.abs(delta) < math.abs(self.mDeltaCapturedPos) then
+
+				if deltaCenter < centerBox then
 					self.mObjectCaptured = object;
 					self.mDeltaCapturedPos = delta;
+					centerBox = deltaCenter;
 				end
 			else
 				self.mObjectCaptured = object;
 				self.mDeltaCapturedPos = delta;
+				centerBox = deltaCenter;
 			end
 		end
 	end
