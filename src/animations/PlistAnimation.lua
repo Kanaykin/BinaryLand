@@ -84,6 +84,24 @@ function PlistAnimation:pause()
 end
 
 --------------------------------
+function PlistAnimation:loadFramesFromFile(plistName, arrayFrames)
+    local array = cc.FileUtils:getInstance():getValueMapFromFile(plistName);
+    local frames = array["frames"];
+    info_log("PlistAnimation:init ", array["frames"]);
+
+    local cache = CCSpriteFrameCache:getInstance();
+    cache:addSpriteFrames(plistName);
+
+    for key, val in pairs(frames) do
+        --info_log("PlistAnimation:init key ", key);
+        --info_log("PlistAnimation:init val ", val);
+
+      local nameStr = key;
+      table.insert(arrayFrames, nameStr);
+    end
+end
+
+--------------------------------
 function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
 
 	PlistAnimation:superClass().init(self, texture, node, anchor);
@@ -92,28 +110,16 @@ function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
         delayPerUnit = 1 / 10;
     end
 
-    local array = cc.FileUtils:getInstance():getValueMapFromFile(plistName);
-    local frames = array["frames"];
-    --info_log("PlistAnimation:init ", array["frames"]);
+    local arrayFrames = {};
+    self:loadFramesFromFile(plistName, arrayFrames);
 
     local cache = CCSpriteFrameCache:getInstance();
-    cache:addSpriteFrames(plistName);
-
-   	self.mAnimation = CCAnimation:create();
-
-   	local arrayFrames = {};
-    for key, val in pairs(frames) do
-        --info_log("PlistAnimation:init key ", key);
-        --info_log("PlistAnimation:init val ", val);
-
-      local nameStr = key;
-   		table.insert(arrayFrames, nameStr);
-   	end
 
    	table.sort( arrayFrames, function(x, y)
    		return y > x;
    	end );
     
+    self.mAnimation = CCAnimation:create();
     self.mLastFrame = cache:getSpriteFrame(arrayFrames[#arrayFrames]);
     for i, val in ipairs(arrayFrames) do
    		local frame = cache:getSpriteFrame(val);

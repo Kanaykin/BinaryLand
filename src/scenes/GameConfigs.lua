@@ -1,6 +1,6 @@
 require "src/base/AlignmentHelper"
 
-local openedVal = false
+local openedVal = true
 gLocations = {
 	{
 		id = 1,

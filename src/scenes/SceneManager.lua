@@ -1,6 +1,7 @@
 require "src/scenes/BaseScene"
 require "src/scenes/LoadingScene"
 require "src/scenes/StartScene"
+require "src/scenes/EndScene"
 require "src/scenes/ChooseLocation"
 require "src/scenes/ChooseLevel"
 require "src/scenes/LevelScene"
@@ -21,6 +22,7 @@ SCENE_TYPE_ID = {
 	CHOOSE_LOCATION = 2;
 	CHOOSE_LEVEL = 3;
 	LEVEL = 4;
+	END_SCENE = 5;
 };
 
 ---------------------------------
@@ -122,7 +124,9 @@ function SceneManager:runNextLevelScene()
         locationId = locationId + 1;
         if not locations[locationId] then
         	info_log("SceneManager:runNextLevelScene all location completed ");
-            locationId = 1;
+            --locationId = 1;
+            self:runNextScene(nil, SCENE_TYPE_ID.END_SCENE);
+            return;
         end
         -- if last level on location run location scene
         -- if locations[locationId]:isLocked() then
@@ -175,6 +179,9 @@ function SceneManager:init(game)
 
 	-- choice level scene initialize
 	self.mScenes[SCENE_TYPE_ID.CHOOSE_LEVEL] = ChooseLevel:create();
+
+	-- end scene initialize
+	self.mScenes[SCENE_TYPE_ID.END_SCENE] = EndScene:create();
 
 	
 	self:runNextScene();

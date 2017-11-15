@@ -21,7 +21,7 @@
 	<key>generatedSpriteSheets</key>
 	<dict/>
 	<key>javascriptBased</key>
-	<true/>
+	<false/>
 	<key>javascriptMainCCB</key>
 	<string></string>
 	<key>needRepublish</key>
@@ -97,6 +97,10 @@
 		<dict>
 			<key>path</key>
 			<string>Resources/StartMovie</string>
+		</dict>
+		<dict>
+			<key>path</key>
+			<string>Resources/EndMovie</string>
 		</dict>
 	</array>
 	<key>versionStr</key>
