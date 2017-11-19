@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Story_end_scene01_0014_Layer-Comp-15.png</key>
+            <key>Story_end_scene02_0006_Layer-Comp-7.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Story_end_scene01_0015_Layer-Comp-16.png</key>
+            <key>Story_end_scene02_0007_Layer-Comp-8.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -34,7 +34,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>Story_end_scene01_0016_Layer-Comp-17.png</key>
+            <key>Story_end_scene02_0008_Layer-Comp-9.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -59,13 +59,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>EndMovieAnim5.png</string>
+            <string>EndMovieAnim22.png</string>
             <key>size</key>
             <string>{2004,1404}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:9c62d13a70e662ed13957bad11228bb1:004c77f90aac0626906e28d95997bbc8:11174110d13bbe6268f21313a3b4d3f9$</string>
+            <string>$TexturePacker:SmartUpdate:f2c38ee34e3368da4f73d62326d83862:7932c5d7cf2dfe78aa1f3255d73b5c75:1003e733f7517f32ca6439f5fed44c75$</string>
             <key>textureFileName</key>
-            <string>EndMovieAnim5.png</string>
+            <string>EndMovieAnim22.png</string>
         </dict>
     </dict>
 </plist>
