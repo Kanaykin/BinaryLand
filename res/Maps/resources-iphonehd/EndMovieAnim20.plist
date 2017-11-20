@@ -4,6 +4,21 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>Story_end_scene02_0000_Layer-Comp-1 copy.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{1300,700}</string>
+                <key>spriteSourceSize</key>
+                <string>{1300,700}</string>
+                <key>textureRect</key>
+                <string>{{1,1},{1300,700}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>Story_end_scene02_0000_Layer-Comp-1.png</key>
             <dict>
                 <key>aliases</key>
@@ -19,6 +34,21 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>Story_end_scene02_0001_Layer-Comp-2 copy.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{1300,700}</string>
+                <key>spriteSourceSize</key>
+                <string>{1300,700}</string>
+                <key>textureRect</key>
+                <string>{{1303,1},{1300,700}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
             <key>Story_end_scene02_0001_Layer-Comp-2.png</key>
             <dict>
                 <key>aliases</key>
@@ -33,6 +63,21 @@
                 <string>{{1303,1},{1300,700}}</string>
                 <key>textureRotated</key>
                 <true/>
+            </dict>
+            <key>Story_end_scene02_0002_Layer-Comp-3 copy.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{1300,700}</string>
+                <key>spriteSourceSize</key>
+                <string>{1300,700}</string>
+                <key>textureRect</key>
+                <string>{{1,703},{1300,700}}</string>
+                <key>textureRotated</key>
+                <false/>
             </dict>
             <key>Story_end_scene02_0002_Layer-Comp-3.png</key>
             <dict>
@@ -63,7 +108,7 @@
             <key>size</key>
             <string>{2004,1404}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:f2c38ee34e3368da4f73d62326d83862:7932c5d7cf2dfe78aa1f3255d73b5c75:1003e733f7517f32ca6439f5fed44c75$</string>
+            <string>$TexturePacker:SmartUpdate:dd71b06fafc93d75df54b224cc8a32a7:340744132881207665153b83fce59431:1003e733f7517f32ca6439f5fed44c75$</string>
             <key>textureFileName</key>
             <string>EndMovieAnim20.png</string>
         </dict>

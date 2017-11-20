@@ -1,13 +1,44 @@
 require "src/scenes/BaseScene"
 require "src/animations/MultyPlistAnimation"
+require "src/gui/TouchWidget"
+
+EndSceneTouchWidget = inheritsFrom(TouchWidget);
+EndSceneTouchWidget.mEnabled = false
+EndSceneTouchWidget.mSceneMan = nil
+
+
+----------------------------------------
+function EndSceneTouchWidget:init(bbox, sceneMan)
+    EndSceneTouchWidget:superClass().init(self, bbox);
+    self.mSceneMan = sceneMan;
+end
+
+----------------------------------------
+function EndSceneTouchWidget:onTouchEnded(point)
+    debug_log("EndSceneTouchWidget:onTouchEnded");
+    -- self.mScene:skipMovie();
+    if self.mEnabled then
+    	self.mSceneMan:runNextScene(nil, SCENE_TYPE_ID.CHOOSE_LOCATION);
+    end
+end
+
+----------------------------------------
+function EndSceneTouchWidget:enableTouch()
+	self.mEnabled = true;
+end
 
 EndScene = inheritsFrom(BaseScene)
 EndScene.mAnimation1 = nil
 EndScene.mNodeStep1 = nil
 EndScene.mNodeStep2 = nil
+EndScene.mTouch = nil
 
 EndScene.SPRITE1_TAG = 10
 EndScene.SPRITE2_TAG = 12
+
+EndScene.LABEL_TAG = 2;
+EndScene.LAYER_TAG = 3;
+
 
 --------------------------------
 function EndScene:init(sceneMan, params)
@@ -43,12 +74,20 @@ function EndScene:loadScene()
     	-- sceneGame:removeChild(node);
     	-- callback();
     	self.mAnimation2:play();
+    	self:initLabel(node, self.mSceneManager.mGame, "EndStep2");
+    	if self.mTouch then
+    		self.mTouch:enableTouch();
+    	end
     end
 
     local callFunc = CCCallFunc:create(loc_callback);
     animator:setCallFuncForLuaCallbackNamed(callFunc, "0:finishStep");
 
     animator:runAnimationsForSequenceNamed("Animation");
+
+    self:initLabel(node, self.mSceneManager.mGame, "EndStep1");
+
+    self:initTouch(node);
 end
 
 --------------------------------
@@ -57,7 +96,7 @@ function EndScene:initAnimationStep2()
  --    sequence:init();
 
 	local animation = MultyPlistAnimation:create();
-	animation:init("EndMovieAnim2{n}.plist", self.mNodeStep2, nil, nil, 0.2, 2);
+	animation:init("EndMovieAnim2{n}.plist", self.mNodeStep2, nil, nil, 0.1, 2);
 
 	-- local delay = DelayAnimation:create();
 	-- delay:init(animation, 0.2);
@@ -75,6 +114,22 @@ function EndScene:initAnimationStep2()
 	self.mAnimation2 = repeate;
 
 	-- self.mAnimation2:play();
+end
+
+--------------------------------
+function EndScene:initLabel(node, game, stepName)
+	local label = tolua.cast(node:getChildByTag(EndScene.LABEL_TAG), "cc.Label");
+    info_log("EndScene:loadScene label ", label);
+
+    local localizationManager = game:getLocalizationManager();
+    local text = localizationManager:getStringForKey(stepName.."Text");
+    debug_log("EndScene:initLabel text ", text);
+    if label then
+        setDefaultFont(label, game:getScale());
+        if text then
+            label:setString(text);
+        end
+    end
 end
 
 --------------------------------
@@ -111,4 +166,24 @@ function EndScene:tick(dt)
 	if self.mAnimation2 then
 		self.mAnimation2:tick(dt);
 	end
+end
+
+--------------------------------
+function EndScene:initTouch(node, startScene)
+	local function onTouchHandler(action, var)
+        info_log("EndScene::onTouchHandler ", action);
+    --    return self:onTouchHandler(action, var);
+        return self.mTouch:onTouchHandler(action, var);
+    end
+
+    local layer = tolua.cast(node:getChildByTag(EndScene.LAYER_TAG), "cc.Layer");
+    if layer then
+        self.mTouch = EndSceneTouchWidget:create();
+        self.mTouch:init(layer:getBoundingBox(), self.mSceneManager);
+
+        layer:registerScriptTouchHandler(onTouchHandler, true, 2, false);
+        layer:setTouchEnabled(true);
+    else
+        info_log("ERROR: StartMovieStep:loadScene not found layer !!!");
+    end
 end
