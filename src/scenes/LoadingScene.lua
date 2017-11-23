@@ -12,10 +12,13 @@ LoadingScene = inheritsFrom(BaseScene)
 LoadingScene.mTimer = TIME_SHOWING;
 LoadingScene.mProgress = nil;
 LoadingScene.mTimeLabel = nil;
+LoadingScene.mAnimation = nil;
+
 LoadingScene.PROGRESS_TAG = 31;
 LoadingScene.LABEL_TAG = 32;
 LoadingScene.PERCENT_IMAGE_TAG = 33;
 LoadingScene.PROGRESS_PARENT_TAG = 30;
+LoadingScene.SPRITE_TAG = 10;
 
 ---------------------------------
 function LoadingScene:destroy()
@@ -42,6 +45,24 @@ function LoadingScene:loadScene()
     local percent_image = node:getChildByTag(LoadingScene.PERCENT_IMAGE_TAG);
     local labelSize = self.mTimeLabel:getContentSize();
     percent_image:setPositionX(parentSize.width / 2 + labelSize.width);
+
+    self:initAnimation(node);
+end
+
+--------------------------------
+function LoadingScene:initAnimation(node)
+    local nodeSprite = node:getChildByTag(LoadingScene.SPRITE_TAG);
+    if nodeSprite then
+        local animation = PlistAnimation:create();
+        animation:init("LoadingPageAnim0.plist", nodeSprite);
+
+        local repeateAnimation = RepeatAnimation:create();
+        repeateAnimation:init(animation);
+
+        repeateAnimation:play();
+
+        self.mAnimation = repeateAnimation;
+    end
 end
 
 --------------------------------
@@ -67,4 +88,6 @@ function LoadingScene:tick(dt)
 
     local textLabel = tostring(math.floor(percent * 100 / 5) * 5);
     self.mTimeLabel:setString(textLabel.."%");
+
+    self.mAnimation:tick(dt);
 end
