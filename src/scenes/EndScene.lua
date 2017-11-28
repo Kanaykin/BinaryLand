@@ -6,7 +6,9 @@ EndSceneTouchWidget = inheritsFrom(TouchWidget);
 EndSceneTouchWidget.mEnabled = false
 EndSceneTouchWidget.mSceneMan = nil
 
-
+-- "EndStep1Text" : "Молодцы, вы спасли всех лисят.\n Теперь они могут вернуться домой.",
+--   "EndStep2Text" : "И они жили долго и счастливо.\n "
+  
 ----------------------------------------
 function EndSceneTouchWidget:init(bbox, sceneMan)
     EndSceneTouchWidget:superClass().init(self, bbox);
