@@ -2,6 +2,7 @@ require "src/scenes/BaseScene"
 require "src/scenes/LoadingScene"
 require "src/scenes/StartScene"
 require "src/scenes/EndScene"
+require "src/scenes/CreditsScene"
 require "src/scenes/ChooseLocation"
 require "src/scenes/ChooseLevel"
 require "src/scenes/LevelScene"
@@ -23,6 +24,7 @@ SCENE_TYPE_ID = {
 	CHOOSE_LEVEL = 3;
 	LEVEL = 4;
 	END_SCENE = 5;
+	CREDITS_SCENE = 6;
 };
 
 ---------------------------------
@@ -182,6 +184,9 @@ function SceneManager:init(game)
 
 	-- end scene initialize
 	self.mScenes[SCENE_TYPE_ID.END_SCENE] = EndScene:create();
+
+	-- credits scene initialize
+	self.mScenes[SCENE_TYPE_ID.CREDITS_SCENE] = CreditsScene:create();
 
 	
 	self:runNextScene();

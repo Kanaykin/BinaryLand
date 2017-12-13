@@ -6,9 +6,7 @@ EndSceneTouchWidget = inheritsFrom(TouchWidget);
 EndSceneTouchWidget.mEnabled = false
 EndSceneTouchWidget.mSceneMan = nil
 
--- "EndStep1Text" : "Молодцы, вы спасли всех лисят.\n Теперь они могут вернуться домой.",
---   "EndStep2Text" : "И они жили долго и счастливо.\n "
-  
+
 ----------------------------------------
 function EndSceneTouchWidget:init(bbox, sceneMan)
     EndSceneTouchWidget:superClass().init(self, bbox);
@@ -20,7 +18,7 @@ function EndSceneTouchWidget:onTouchEnded(point)
     debug_log("EndSceneTouchWidget:onTouchEnded");
     -- self.mScene:skipMovie();
     if self.mEnabled then
-    	self.mSceneMan:runNextScene(nil, SCENE_TYPE_ID.CHOOSE_LOCATION);
+    	self.mSceneMan:runNextScene(nil, SCENE_TYPE_ID.CREDITS_SCENE);
     end
 end
 
@@ -34,6 +32,7 @@ EndScene.mAnimation1 = nil
 EndScene.mNodeStep1 = nil
 EndScene.mNodeStep2 = nil
 EndScene.mTouch = nil
+EndScene.mNode = nil;
 
 EndScene.SPRITE1_TAG = 10
 EndScene.SPRITE2_TAG = 12
@@ -90,6 +89,7 @@ function EndScene:loadScene()
     self:initLabel(node, self.mSceneManager.mGame, "EndStep1");
 
     self:initTouch(node);
+    self.mNode = node;
 end
 
 --------------------------------
@@ -170,8 +170,22 @@ function EndScene:tick(dt)
 	end
 end
 
+---------------------------------
+function EndScene:destroy()
+	info_log("EndScene:destroy ");
+
+	-- self.mTouch:release();
+
+	local layer = tolua.cast(self.mNode:getChildByTag(EndScene.LAYER_TAG), "cc.Layer");
+    if layer then
+		layer:unregisterScriptTouchHandler();
+	end
+
+	EndScene:superClass().destroy(self);
+end
+
 --------------------------------
-function EndScene:initTouch(node, startScene)
+function EndScene:initTouch(node)
 	local function onTouchHandler(action, var)
         info_log("EndScene::onTouchHandler ", action);
     --    return self:onTouchHandler(action, var);

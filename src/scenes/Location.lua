@@ -37,6 +37,9 @@ end
 
 -----------------------------------
 function Location:getCountStar(withBonus)
+	do 
+	return 30
+	end
 	local countStar = 0;
 	for i, level in ipairs(self.mLevels) do
 		countStar = countStar + level:getCountStar();
