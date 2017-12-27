@@ -135,7 +135,10 @@ function SceneManager:runNextLevelScene()
         local params = nil;
         if locations[locationId]:isLocked() then
         	params = {locationLocked = locationId};
+        else
+        	params = {locationOpen = locationId};
         end
+        params = {locationLocked = locationId};
         self:runNextScene(params, SCENE_TYPE_ID.CHOOSE_LOCATION);
         return;
     --     end

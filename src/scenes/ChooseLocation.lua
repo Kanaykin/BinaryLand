@@ -7,6 +7,7 @@ require "src/base/Log"
 require "src/gui/GuiHelper"
 require "src/gui/TouchWidget"
 require "src/gui/NotEnoughStarsDlg"
+require "src/gui/LocationOpenDlg"
 require "src/gui/SettingsDlg"
 
 local LOADSCEENIMAGE = "GlobalMapBack.png"
@@ -21,6 +22,7 @@ ChooseLocation.mBabyInTrapAnimations = nil
 ChooseLocation.mBonusAnimations = nil
 ChooseLocation.mNode = nil;
 ChooseLocation.mSettingsDlg = nil;
+ChooseLocation.mNotEnoughStarsDlg = nil;
 
 ChooseLocation.LABEL_BEGIN = 1;
 ChooseLocation.LABEL_TAG = 2;
@@ -358,6 +360,11 @@ function ChooseLocation:initGui(params)
         local notEnoughStarsDlg = NotEnoughStarsDlg:create();
         notEnoughStarsDlg:init(self.mSceneManager.mGame, self.mGuiLayer, params.locationLocked);
         notEnoughStarsDlg:doModal();
+        self.mNotEnoughStarsDlg = notEnoughStarsDlg;
+    elseif params and params.locationOpen then
+        local dlg = LocationOpenDlg:create();
+        dlg:init(self.mSceneManager.mGame, self.mGuiLayer, params.locationOpen);
+        dlg:doModal();
     else
         self:hideNotEnoughStarsDlg();
     end
@@ -377,6 +384,10 @@ function ChooseLocation:tick(dt)
 
     for key, anim in ipairs(self.mBonusAnimations) do
         anim:tick(dt);
+    end
+
+    if self.mNotEnoughStarsDlg then
+        self.mNotEnoughStarsDlg:tick(dt);
     end
 
     --if  not SimpleAudioEngine:getInstance():isMusicPlaying() then
@@ -468,11 +479,18 @@ function ChooseLocation:showUnlockAnimation()
 end
 
 --------------------------------
-function ChooseLocation:hideNotEnoughStarsDlg(locationLockedId)
+function ChooseLocation:hideNotEnoughStarsDlg(locationLockedId, dlgDestroyed)
     info_log("ChooseLocation:hideNotEnoughStarsDlg ", locationLockedId);
 
     self:showUnlockAnimation();
     self:showUnlockBonusAnimation();
+
+    if self.mNotEnoughStarsDlg then
+		if not dlgDestroyed then
+			self.mNotEnoughStarsDlg:destroy();
+		end
+        self.mNotEnoughStarsDlg = nil
+    end
 end
 
 --------------------------------
