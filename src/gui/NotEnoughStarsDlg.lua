@@ -105,7 +105,7 @@ function NotEnoughStarsDlg:hideUnnecessaryElements()
     local needStars = location:getNeedStars();
     local countStars = location:getPredLocationStar(true);
 
-    local notEnough = needStars < countStars;
+    local notEnough = needStars > countStars;
     debug_log("NotEnoughStarsDlg:hideUnnecessaryElements notEnough ", notEnough);
 
     local nodeBase = self.mNode:getChildByTag(NotEnoughStarsDlg.BASE_NODE_TAG);
