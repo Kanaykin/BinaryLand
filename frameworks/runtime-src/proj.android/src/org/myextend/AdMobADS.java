@@ -10,12 +10,19 @@ import com.google.android.gms.ads.InterstitialAd;
 
 import org.myextend.Logger;
 
-public class AdMobADS extends AdListener {
+import org.myextend.IADS;
+import org.myextend.IADSListener;
+import org.myextend.AdsStatus;
+
+public class AdMobADS extends AdListener implements IADS
+{
 	private InterstitialAd mInterstitialAd;
 	private Activity mActivity;
-	private boolean mAdLoaded = false;
 	private GoogleStatistic mGoogleStatistic;
 	private int mErrorCode = -1;
+	private IADSListener mListener = null;
+	private AdsStatus mStatus = AdsStatus.NONE;
+	private boolean mCanceled = false;
 
 	public AdMobADS(final Activity activity,
 			final GoogleStatistic googleStatistic) 
@@ -28,7 +35,6 @@ public class AdMobADS extends AdListener {
 		mInterstitialAd.setAdUnitId("ca-app-pub-7659372211727082/4753442858");
 
 		mInterstitialAd.setAdListener(this);
-		loadADS();
 		this.mActivity = activity;
 	}
 
@@ -50,8 +56,6 @@ public class AdMobADS extends AdListener {
 	@Override
 	public void onAdClosed()
 	{
-		loadADS();
-		mAdLoaded = false;
 	}
 
 	//----------------------------------
@@ -61,6 +65,12 @@ public class AdMobADS extends AdListener {
 	{
 		Logger.info("AdMobADS::onAdFailedToLoad");
 		mErrorCode = errorCode;
+		mStatus = AdsStatus.FAILED;
+
+		if(mListener != null)
+		{
+			mListener.OnError("");
+		}
 	}
 
 	//----------------------------------
@@ -69,8 +79,17 @@ public class AdMobADS extends AdListener {
 	public void onAdLoaded()
 	{
 		Logger.info("AdMobADS::onAdLoaded");
-		//mInterstitialAd.show();
-		mAdLoaded = true;
+
+		if(!mCanceled)
+		{
+			mInterstitialAd.show();
+		}
+
+		if(mListener != null)
+		{
+			mListener.OnSuccess();
+		}
+		mStatus = AdsStatus.LOADED;
 	}
 
 	//----------------------------------
@@ -81,22 +100,65 @@ public class AdMobADS extends AdListener {
 	}
 
 	//----------------------------------
-	public boolean showADS() 
+	@Override
+	public void Cancel()
 	{
-		if(!mAdLoaded) {
-			mGoogleStatistic.sendEvent("adMob", "show", "error", mErrorCode);
-			return false;
-		}
+		mCanceled = true;
+	}
+
+	//----------------------------------
+	@Override
+	public boolean Show()
+	{
 		Logger.info("AdMobADS::showADS");
-		mGoogleStatistic.sendEvent("adMob", "show", "success", -1);
-		//mInterstitialAd.show();
-		final InterstitialAd interstitial = mInterstitialAd;
+
+		if(mInterstitialAd.isLoaded() && mCanceled)
+		{
+			mCanceled = false;
+			mStatus = AdsStatus.LOADING;
+
+			final InterstitialAd ad = mInterstitialAd;
+
+			this.mActivity.runOnUiThread(new Runnable() {
+				@Override public void run()
+				{
+					ad.show();
+
+					mStatus = AdsStatus.LOADED;
+
+					if(mListener != null)
+					{
+						mListener.OnSuccess();
+					}
+				}});
+
+			return true;
+		}
+
+		mCanceled = false;
+//		mGoogleStatistic.sendEvent("adMob", "show", "success", -1);
+
+		mStatus = AdsStatus.LOADING;
+		final AdMobADS self = this;
 		this.mActivity.runOnUiThread(new Runnable() {
-        @Override public void run() {
-            if (interstitial.isLoaded()) {
-              interstitial.show();
-         	}
+        @Override public void run()
+		{
+			self.loadADS();
         }});
 		return true;
+	}
+
+	//----------------------------------
+	@Override
+	public int GetStatus()
+	{
+		return mStatus.GetValue();
+	}
+
+	//----------------------------------
+	@Override
+	public void SetListener(IADSListener listener)
+	{
+		mListener = listener;
 	}
 }

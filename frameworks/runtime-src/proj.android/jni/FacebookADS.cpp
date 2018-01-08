@@ -22,6 +22,33 @@ bool FacebookADS::showADS()
 }
 
 //-------------------------------
+void FacebookADS::cancelADS()
+{
+    cocos2d::JniMethodInfo methodInfo;
+    
+    if (!getJNIStaticMethodInfo(methodInfo, "cancelADS", "()V")) {
+        return;
+    }
+
+    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID);
+    methodInfo.env->DeleteLocalRef(methodInfo.classID);  
+}
+
+//-------------------------------
+int FacebookADS::getStatusADS()
+{
+    cocos2d::JniMethodInfo methodInfo;
+    
+    if (!getJNIStaticMethodInfo(methodInfo, "getStatusADS", "()I")) {
+        return false;
+    }
+
+    jint ret = methodInfo.env->CallStaticIntMethod(methodInfo.classID, methodInfo.methodID);
+    methodInfo.env->DeleteLocalRef(methodInfo.classID);
+    return ret;
+}
+
+//-------------------------------
 bool FacebookADS::getJNIStaticMethodInfo(cocos2d::JniMethodInfo &methodinfo,
                                              const char *methodName,
                                              const char *paramCode) {

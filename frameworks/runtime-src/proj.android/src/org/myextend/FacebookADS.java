@@ -16,16 +16,21 @@ import com.facebook.appevents.AppEventsLogger;
 import org.myextend.Logger;
 import org.myextend.GoogleStatistic;
 
-import org.myextend.AdMobADS;
+import org.myextend.IADS;
+import org.myextend.IADSListener;
+import org.myextend.AdsStatus;
 
 
-public class FacebookADS implements InterstitialAdListener{
+public class FacebookADS implements InterstitialAdListener, IADS
+{
 	private Activity mActivity;
 	private InterstitialAd mInterstitialAd;
-	private boolean mAdLoaded = false;
+	private boolean mCanceled = false;
 	private GoogleStatistic mGoogleStatistic;
 	private String mErrorMessage;
-	private AdMobADS mAdMob;
+
+	private IADSListener mListener = null;
+	private AdsStatus mStatus = AdsStatus.NONE;
 	
 	public FacebookADS(final Activity activity,
 			final GoogleStatistic googleStatistic) 
@@ -47,13 +52,12 @@ public class FacebookADS implements InterstitialAdListener{
         
         this.mInterstitialAd = new InterstitialAd(this.mActivity, "1763334180655470_1764632917192263");
 
-        this.mAdMob = new AdMobADS(activity, googleStatistic);
-
         this.mInterstitialAd.setAdListener(this);
-        this.mInterstitialAd.loadAd();
+//        this.mInterstitialAd.loadAd();
 	}
 	
-	public static final String md5(final String s) {
+	public static final String md5(final String s)
+	{
 	    try {
 	        // Create MD5 Hash
 	        MessageDigest digest = java.security.MessageDigest
@@ -76,33 +80,105 @@ public class FacebookADS implements InterstitialAdListener{
 	    }
 	    return "";
 	}
-	
-	public boolean showADS() 
+
+	@Override
+	public int GetStatus()
+	{
+		return mStatus.GetValue();
+	}
+
+	@Override
+	public void Cancel()
+	{
+		mCanceled = true;
+	}
+
+	//----------------------------------
+	@Override
+	public void SetListener(IADSListener listener)
+	{
+		mListener = listener;
+	}
+
+	@Override
+	public boolean Show()
 	{
 		Logger.info("FacebookADS::showADS");
-		if(mAdLoaded)
+		if(mInterstitialAd.isAdLoaded() && mCanceled)
 		{
-			mGoogleStatistic.sendEvent("FacebookADS", "show", "success", -1);
-			this.mInterstitialAd.show();
+			mCanceled = false;
+			mStatus = AdsStatus.LOADING;
+
+			final InterstitialAd ad = mInterstitialAd;
+
+			this.mActivity.runOnUiThread(new Runnable() {
+				@Override public void run()
+				{
+					ad.show();
+
+					mStatus = AdsStatus.LOADED;
+
+					if(mListener != null)
+					{
+						mListener.OnSuccess();
+					}
+				}});
+
 			return true;
 		}
-		else {
-			mGoogleStatistic.sendEvent("FacebookADS", "show", "error:"+mErrorMessage, -1);
-			mErrorMessage = "";
-		}
+		mCanceled = false;
+//		this.mInterstitialAd.loadAd();
 
-		return this.mAdMob.showADS();
+		mStatus = AdsStatus.LOADING;
+		final InterstitialAd ad = mInterstitialAd;
+		this.mActivity.runOnUiThread(new Runnable() {
+			@Override public void run()
+			{
+				ad.loadAd();
+			}});
+
+//		if(mAdLoaded)
+//		{
+//			mGoogleStatistic.sendEvent("FacebookADS", "show", "success", -1);
+//			this.mInterstitialAd.show();
+//			return true;
+//		}
+//		else {
+//			mGoogleStatistic.sendEvent("FacebookADS", "show", "error:"+mErrorMessage, -1);
+//			mErrorMessage = "";
+//		}
+
+		return true;
 	}
+
 	@Override
-	public void onError(Ad ad, AdError error) {
+	public void onError(Ad ad, AdError error)
+	{
 	    // Ad failed to load
 		mErrorMessage = error.getErrorMessage();
 		Logger.info("FacebookADS::onError "+ error.getErrorMessage());
+
+		mStatus = AdsStatus.FAILED;
+
+		if(mListener != null)
+		{
+			mListener.OnError(mErrorMessage);
+		}
 	}
 	
 	@Override
-	public void onAdLoaded(Ad ad) {
-		this.mAdLoaded = true;
+	public void onAdLoaded(Ad ad)
+	{
+		if(!mCanceled)
+		{
+			this.mInterstitialAd.show();
+		}
+		mStatus = AdsStatus.LOADED;
+
+		if(mListener != null)
+		{
+			mListener.OnSuccess();
+		}
 		Logger.info("FacebookADS::onAdLoaded");
 	}
 	
@@ -117,7 +193,6 @@ public class FacebookADS implements InterstitialAdListener{
 	
 	@Override
 	public void onInterstitialDisplayed(Ad ad) {
-		mAdLoaded = false;
 		mInterstitialAd = new InterstitialAd(this.mActivity, "1763334180655470_1764632917192263");
 		mInterstitialAd.setAdListener(this);
 		mInterstitialAd.loadAd();

@@ -5,8 +5,18 @@ namespace myextend {
         
         bool FacebookADS::showADS()
         {
-            return false;
+            return true;
         }
+		
+		int FacebookADS::getStatusADS()
+		{
+			return 2;
+		}
+		
+		void FacebookADS::cancelADS()
+		{
+			
+		}
         
     }
 }

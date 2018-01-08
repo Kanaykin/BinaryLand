@@ -11,6 +11,10 @@ namespace myextend {
         {
         public:
             bool showADS();
+
+            int getStatusADS();
+
+            void cancelADS();
             
         private:
             //-------------------------------

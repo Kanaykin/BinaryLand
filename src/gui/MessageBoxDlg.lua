@@ -10,10 +10,11 @@ MessageBoxDlg.WORK_PLACE = 72;
 MessageBoxDlg.LABEL_BACK = 74;
 MessageBoxDlg.LABEL = 2;
 MessageBoxDlg.BUTTON_YES = 100;
+MessageBoxDlg.BUTTON_CANCEL = 101;
 
 --------------------------------
 function MessageBoxDlg:init(game, uiLayer)
-    self:superClass().init(self, game, uiLayer, "MessageBox");
+    MessageBoxDlg:superClass().init(self, game, uiLayer, "MessageBox");
 
     self:initGuiElements();
 end
@@ -21,18 +22,27 @@ end
 --------------------------------
 function MessageBoxDlg:doModal(params)
     info_log("MessageDlg:doModal ", params);
-    self:superClass().doModal(self);
+    MessageBoxDlg:superClass().doModal(self);
     --self.mAnimator:runAnimationsForSequenceNamed(self.mAnimationShow);
 
-    self.mText:setString(params.text);
-    self:initButton(MessageBoxDlg.BUTTON_YES, params.ok_callback, params.ok_text);
+    if params then
+        self.mText:setString(params.text);
+        self:initButton(MessageBoxDlg.BUTTON_YES, params.ok_callback, params.ok_text);
+        self:initButton(MessageBoxDlg.BUTTON_CANCEL, params.cancel_callback, params.cancel_callback);
+    end
 end
 
 --------------------------------
 function MessageBoxDlg:initButton(tag, action, text)
+
     local nodeBase = self.mNode:getChildByTag(MessageBoxDlg.BASE_NODE_TAG);
 
     local button = tolua.cast(nodeBase:getChildByTag(tag), "cc.ControlButton");
+
+    if not action then
+        button:setVisible(false);
+        return;
+    end
 
     local ok_button_action = function ()
         self.mGame.mDialogManager:deactivateModal(self);
@@ -46,6 +56,13 @@ function MessageBoxDlg:initButton(tag, action, text)
     label = tolua.cast(label, "cc.Label");
     if label then
         setDefaultFont(label, self.mGame:getScale());
+
+        -- local size = label:getContentSize();
+        -- info_log("MessageDlg:initButton size ", size.width, " ", size.height);
+        -- label:updateContent();
+        -- size = label:getContentSize();
+        -- info_log("MessageDlg:initButton size ", size.width, " ", size.height);
+        -- button:setContentSize(size)
     end
 end
 

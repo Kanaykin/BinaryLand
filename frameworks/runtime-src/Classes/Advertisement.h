@@ -13,6 +13,8 @@ namespace myextend {
         static Advertisement* getInstance();
         
         virtual bool showADS() = 0;
+		virtual int getStatusADS() = 0;
+		virtual void cancelADS() = 0;
         
         virtual ~Advertisement(){}
     };

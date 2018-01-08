@@ -8,6 +8,7 @@ require "src/gui/LevelScore"
 require "src/gui/GettingBonusEffect"
 require "src/gui/BonusDlg"
 require "src/gui/GetStarDlg"
+require "src/gui/WaitAdsDlg"
 require "src/gui/MessageBoxDlg"
 require "src/base/Log"
 
@@ -26,6 +27,7 @@ MainUI.mTimer = nil;
 MainUI.mScore = nil;
 MainUI.mListener = nil;
 MainUI.mEffects = nil;
+MainUI.mWaitAdsDlg = nil;
 
 MainUI.SETTINGS_MENU_TAG = 50;
 MainUI.SETTINGS_MENU_ITEM_TAG = 51;
@@ -52,6 +54,7 @@ function MainUI:destroy()
 	self.mYouWinDlg:destroy();
     self.mBonusDlg:destroy();
     self.mGetStarDlg:destroy();
+    self.mWaitAdsDlg:destroy();
 
 	self:superClass().destroy(self);
 end
@@ -74,7 +77,14 @@ end
 function MainUI:showWinDlg(stars, lastStar)
     info_log("MainUI:showWinDlg stars ", stars, "lastStar ", lastStar);
     self.mGetStarDlg:hide();
+    self.mWaitAdsDlg:hide();
     self.mYouWinDlg:doModal(stars, lastStar);
+end
+
+--------------------------------
+function MainUI:showWaitAdsDlg(stars)
+    self.mGetStarDlg:hide();
+    self.mWaitAdsDlg:doModal(stars);
 end
 
 ---------------------------------
@@ -180,6 +190,10 @@ function MainUI:tick(dt)
     if self.mGame.mDialogManager:isModal(self.mGetStarDlg) then
         self.mGetStarDlg:tick(dt);
     end
+    if self.mGame.mDialogManager:isModal(self.mWaitAdsDlg) then
+        self.mWaitAdsDlg:tick(dt);
+    end
+
 end
 
 --------------------------------
@@ -241,6 +255,10 @@ function MainUI:init(game, uiLayer, ccbFile)
 
     self.mScore = LevelScore:create();
     self.mScore:init(self.mNode:getChildByTag(MainUI.SCORE_TAG), game);
+
+
+    self.mWaitAdsDlg = WaitAdsDlg:create();
+    self.mWaitAdsDlg:init(self.mGame, self.mUILayer, self);
     -------------------------
 
     local function onTouchHandler(action, var)
