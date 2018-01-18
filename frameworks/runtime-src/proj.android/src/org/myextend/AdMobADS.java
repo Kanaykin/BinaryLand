@@ -30,18 +30,24 @@ public class AdMobADS extends AdListener implements IADS
 		mGoogleStatistic = googleStatistic;
 		// Initialize the Mobile Ads SDK.
         MobileAds.initialize(activity, "ca-app-pub-7659372211727082~6359254059");
-        mInterstitialAd = new InterstitialAd(activity);
+
+		this.mActivity = activity;
+		createInterstitialAd();
+	}
+
+	private void createInterstitialAd()
+	{
+		mInterstitialAd = new InterstitialAd(this.mActivity);
 
 		mInterstitialAd.setAdUnitId("ca-app-pub-7659372211727082/4753442858");
 
 		mInterstitialAd.setAdListener(this);
-		this.mActivity = activity;
 	}
 
 	//----------------------------------
 	public void loadADS() 
 	{
-		if (!mInterstitialAd.isLoading() && !mInterstitialAd.isLoaded()) {
+		if (!mInterstitialAd.isLoading() /*&& !mInterstitialAd.isLoaded()*/) {
             AdRequest adRequest = new AdRequest.Builder().build();
             Logger.info("AdMobADS::loadADS ");
             mInterstitialAd.loadAd(adRequest);
@@ -66,6 +72,8 @@ public class AdMobADS extends AdListener implements IADS
 		Logger.info("AdMobADS::onAdFailedToLoad");
 		mErrorCode = errorCode;
 		mStatus = AdsStatus.FAILED;
+
+		createInterstitialAd();
 
 		if(mListener != null)
 		{
@@ -96,7 +104,9 @@ public class AdMobADS extends AdListener implements IADS
 	@Override
 	public void onAdOpened() 
 	{
+		createInterstitialAd();
 
+//		loadADS();
 	}
 
 	//----------------------------------
@@ -104,6 +114,7 @@ public class AdMobADS extends AdListener implements IADS
 	public void Cancel()
 	{
 		mCanceled = true;
+		createInterstitialAd();
 	}
 
 	//----------------------------------
@@ -112,7 +123,7 @@ public class AdMobADS extends AdListener implements IADS
 	{
 		Logger.info("AdMobADS::showADS");
 
-		if(mInterstitialAd.isLoaded() && mCanceled)
+		/*if(mInterstitialAd.isLoaded() && mCanceled)
 		{
 			mCanceled = false;
 			mStatus = AdsStatus.LOADING;
@@ -133,7 +144,7 @@ public class AdMobADS extends AdListener implements IADS
 				}});
 
 			return true;
-		}
+		}*/
 
 		mCanceled = false;
 //		mGoogleStatistic.sendEvent("adMob", "show", "success", -1);

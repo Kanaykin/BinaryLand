@@ -16,14 +16,14 @@ public class MyExtendHelper {
 	public static void init(final Activity activity) {
 		MyExtendHelper.sGoogleStatistic = new GoogleStatistic(activity);
 
-		FacebookADS facebookADS = new FacebookADS(activity, MyExtendHelper.sGoogleStatistic);
+//		FacebookADS facebookADS = new FacebookADS(activity, MyExtendHelper.sGoogleStatistic);
 		AdMobADS adMobADS = new AdMobADS(activity, MyExtendHelper.sGoogleStatistic);
 
-		ADSContainer adsContainer = new ADSContainer();
-		adsContainer.Add(facebookADS);
-		adsContainer.Add(adMobADS);
+//		ADSContainer adsContainer = new ADSContainer();
+//		adsContainer.Add(facebookADS);
+//		adsContainer.Add(adMobADS);
 
-		MyExtendHelper.sADS = adsContainer;
+		MyExtendHelper.sADS = adMobADS;
 	}
 	
 	public static void sendEventToStatistic(final String category, final String action, 

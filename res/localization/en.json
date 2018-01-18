@@ -17,6 +17,7 @@
   "WatchAdsText": "Watch the video\nand get the star",
   "YesText": "Yes",
   "NoText": "No",
+  "CancelText": "Cancel",
   "ErrorLoadingText": "Fail to connect.\nTry again later.",
   "PressToContinueText": "Touch to continue",
   "TutorialStep0Text": "Frederic, look, it's the forst little fox!\n Hurry! Save him!",
@@ -47,5 +48,6 @@
   "TutorialStep7Lvl_1Text": "These hunters have deadly weapon!\n You should go away from their sight.",
   "TutorialStep9Lvl_1Text": "You can't break down tornado with your tail, Felicia!\n But i can let you out if you will get inside it.",
   "EndStep1Text" : "",
-  "EndStep2Text" : ""
+  "EndStep2Text" : "",
+  "PleaseWaitText" : "Please wait"
 }

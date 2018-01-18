@@ -26,10 +26,15 @@ function MessageBoxDlg:doModal(params)
     --self.mAnimator:runAnimationsForSequenceNamed(self.mAnimationShow);
 
     if params then
-        self.mText:setString(params.text);
+        self:setText(params.text);
         self:initButton(MessageBoxDlg.BUTTON_YES, params.ok_callback, params.ok_text);
-        self:initButton(MessageBoxDlg.BUTTON_CANCEL, params.cancel_callback, params.cancel_callback);
+        self:initButton(MessageBoxDlg.BUTTON_CANCEL, params.cancel_callback, params.cancel_text);
     end
+end
+
+--------------------------------
+function MessageBoxDlg:setText(text)
+    self.mText:setString(text);
 end
 
 --------------------------------

@@ -4,6 +4,8 @@ require "src/base/Log"
 WaitAdsDlg = inheritsFrom(MessageBoxDlg)
 WaitAdsDlg.mStarsCount = nil
 WaitAdsDlg.mMainUI = nil;
+WaitAdsDlg.mPointTime = 0;
+WaitAdsDlg.mDefaultText = "PleaseWaitText";
 
 --------------------------------
 function WaitAdsDlg:init(game, uiLayer, mainUI)
@@ -11,13 +13,17 @@ function WaitAdsDlg:init(game, uiLayer, mainUI)
 
     -- self:initGuiElements();
     self.mMainUI = mainUI;
+    self.mPointTime = 0;
 end
 
 --------------------------------
 function WaitAdsDlg:doModal(stars)
+	local localizationManager = game:getLocalizationManager();
+    self.mDefaultText = localizationManager:getStringForKey(WaitAdsDlg.mDefaultText);
+
     info_log("WaitAdsDlg:doModal ");
     local params = {};
-    params.text = "please wait";
+    params.text = self.mDefaultText;
     params.cancel_callback = function() 
     	local advertisement = extend.Advertisement:getInstance();
     	advertisement:cancelADS();
@@ -25,7 +31,7 @@ function WaitAdsDlg:doModal(stars)
     	self:hide();
     	self.mGame.mSceneMan:runNextLevelScene();
     end;
-    params.cancel_text = "cancel";
+    params.cancel_text = localizationManager:getStringForKey("CancelText");
     WaitAdsDlg:superClass().doModal(self, params);
 
     self.mStarsCount = stars;
@@ -41,17 +47,28 @@ function WaitAdsDlg:saveStars()
 end
 
 ---------------------------------
+function WaitAdsDlg:updateText(dt)
+	self.mPointTime = self.mPointTime + dt;
+	local numbTime = math.floor(self.mPointTime);
+	-- info_log("WaitAdsDlg:updateText numbTime ", numbTime);
+	local countPoint = numbTime % 3 + 1;
+	self:setText(self.mDefaultText .. string.rep(".", countPoint) .. string.rep(" ", (3 - countPoint)));
+
+end
+
+---------------------------------
 function WaitAdsDlg:tick(dt)
 
 	local advertisement = extend.Advertisement:getInstance();
 	local status = advertisement:getStatusADS();
 
-	info_log("WaitAdsDlg:doModal status ", status);
+	-- info_log("WaitAdsDlg:tick status ", status);
 
 	if status == 3 then -- LOADED(3),
 		self.mStarsCount.allStar = self.mStarsCount.allStar + 1;
         self:saveStars();
 		self.mMainUI:showWinDlg(self.mStarsCount, true);
+
 	elseif status == 4 then -- FAILED(4)
 		self:hide();
         
@@ -66,7 +83,8 @@ function WaitAdsDlg:tick(dt)
             end
         };
         self.mMainUI:showMessageBox(message_params);
-
+    elseif status == 2 then -- LOADING(4)
+    	self:updateText(dt);
 	end
 end
 

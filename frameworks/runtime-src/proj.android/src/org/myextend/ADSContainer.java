@@ -11,6 +11,7 @@ public class ADSContainer implements IADS, IADSListener
     private ArrayList<IADS> mAdvertisements;
     private int mCurrentAdsIndex = -1;
     private AdsStatus mStatus = AdsStatus.NONE;
+    private boolean mCanceled = false;
 
     public ADSContainer()
     {
@@ -21,6 +22,7 @@ public class ADSContainer implements IADS, IADSListener
     @Override
     public boolean Show()
     {
+        mCanceled = false;
         mCurrentAdsIndex = 0;
         mStatus = AdsStatus.LOADING;
         return ShowImpl();
@@ -37,6 +39,7 @@ public class ADSContainer implements IADS, IADSListener
     @Override
     public void Cancel()
     {
+        mCanceled = true;
         if( mStatus == AdsStatus.LOADING)
         {
             IADS ads = mAdvertisements.get(mCurrentAdsIndex - 1);
@@ -68,7 +71,14 @@ public class ADSContainer implements IADS, IADSListener
         }
         else
         {
-            ShowImpl();
+            if ( ! mCanceled )
+            {
+                ShowImpl();
+            }
+            else
+            {
+                mStatus = AdsStatus.LOADED;
+            }
         }
     }
 
