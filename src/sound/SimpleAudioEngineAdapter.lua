@@ -18,6 +18,7 @@ end
 
 ---------------------------------
 function SimpleAudioEngineAdapter:playMusic(filePath, loop)
+	self:stopMusic(false);
 	return cc.SimpleAudioEngine:getInstance():playMusic(filePath, loop);
 end
 
