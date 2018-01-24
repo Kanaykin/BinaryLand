@@ -1,6 +1,6 @@
 gSounds = {
 	CHOOSE_LEVEL_MUSIC = "sounds/Music/Town.mp3",
-	START_MOVIE_MUSIC = "sounds/Music/StartGameTheme.wav",
+	START_MOVIE_MUSIC = "sounds/Music/start_game_theme.mp3",
 	CHOOSE_LOCATION_MUSIC = "sounds/Music/SleepOfIsis.mp3",
 	VICTORY_MUSIC = "sounds/Music/Victory.mp3",
 	GAME_OVER_MUSIC = "sounds/Music/14-game-over.mp3",

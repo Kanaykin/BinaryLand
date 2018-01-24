@@ -505,7 +505,7 @@ function ChooseLocation:init(sceneMan, params)
 	self:initGui(params);
 
     --ccexp.AudioEngine:setFinishCallback(function () end);
-    self:getGame():getSoundManager():playMusic(gSounds.CHOOSE_LOCATION_MUSIC, true)
+    --self:getGame():getSoundManager():playMusic(gSounds.CHOOSE_LOCATION_MUSIC, true)
 
     local statistic = extend.Statistic:getInstance();
     statistic:sendScreenName("ChooseLocation");

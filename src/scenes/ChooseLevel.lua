@@ -28,7 +28,7 @@ function ChooseLevel:init(sceneMan, params)
 
 	self:initGui();
 
-    self:getGame():getSoundManager():playMusic(gSounds.CHOOSE_LEVEL_MUSIC, true);
+    --self:getGame():getSoundManager():playMusic(gSounds.CHOOSE_LEVEL_MUSIC, true);
 
     local statistic = extend.Statistic:getInstance();
     statistic:sendScreenName("ChooseLevel");
