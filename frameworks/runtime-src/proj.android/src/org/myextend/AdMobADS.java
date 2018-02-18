@@ -73,6 +73,8 @@ public class AdMobADS extends AdListener implements IADS
 		mErrorCode = errorCode;
 		mStatus = AdsStatus.FAILED;
 
+		mGoogleStatistic.sendEvent("adMob", "show", "error", mErrorCode);
+
 		createInterstitialAd();
 
 		if(mListener != null)
@@ -87,6 +89,7 @@ public class AdMobADS extends AdListener implements IADS
 	public void onAdLoaded()
 	{
 		Logger.info("AdMobADS::onAdLoaded");
+		mGoogleStatistic.sendEvent("adMob", "show", "success", -1);
 
 		if(!mCanceled)
 		{
@@ -105,14 +108,13 @@ public class AdMobADS extends AdListener implements IADS
 	public void onAdOpened() 
 	{
 		createInterstitialAd();
-
-//		loadADS();
 	}
 
 	//----------------------------------
 	@Override
 	public void Cancel()
 	{
+		mGoogleStatistic.sendEvent("adMob", "show", "cancel", -1);
 		mCanceled = true;
 		createInterstitialAd();
 	}
@@ -123,31 +125,8 @@ public class AdMobADS extends AdListener implements IADS
 	{
 		Logger.info("AdMobADS::showADS");
 
-		/*if(mInterstitialAd.isLoaded() && mCanceled)
-		{
-			mCanceled = false;
-			mStatus = AdsStatus.LOADING;
-
-			final InterstitialAd ad = mInterstitialAd;
-
-			this.mActivity.runOnUiThread(new Runnable() {
-				@Override public void run()
-				{
-					ad.show();
-
-					mStatus = AdsStatus.LOADED;
-
-					if(mListener != null)
-					{
-						mListener.OnSuccess();
-					}
-				}});
-
-			return true;
-		}*/
-
 		mCanceled = false;
-//		mGoogleStatistic.sendEvent("adMob", "show", "success", -1);
+		mGoogleStatistic.sendEvent("adMob", "show", "load", -1);
 
 		mStatus = AdsStatus.LOADING;
 		final AdMobADS self = this;
