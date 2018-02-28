@@ -309,6 +309,7 @@ function ChooseLocation:updateLabels(node)
         info_log("ChooseLocation:updateLabels label ", label);
 
         if label then
+            setLabelLocalizedText(label, self.mSceneManager.mGame);
             setDefaultFont(label, self.mSceneManager.mGame:getScale());
         end
     end

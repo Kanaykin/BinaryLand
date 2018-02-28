@@ -685,8 +685,6 @@
 										</array>
 									</dict>
 								</array>
-								<key>selected</key>
-								<true/>
 							</dict>
 							<dict>
 								<key>baseClass</key>
@@ -5055,6 +5053,8 @@
 										</array>
 									</dict>
 								</array>
+								<key>selected</key>
+								<true/>
 							</dict>
 							<dict>
 								<key>baseClass</key>
@@ -5528,7 +5528,7 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Forest</string>
+						<string>ForestText</string>
 					</dict>
 				</array>
 			</dict>
@@ -5868,7 +5868,7 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Desert</string>
+						<string>DesertText</string>
 					</dict>
 				</array>
 			</dict>
@@ -6208,7 +6208,7 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>SnowLand</string>
+						<string>SnowLandText</string>
 					</dict>
 				</array>
 			</dict>
@@ -6548,7 +6548,7 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Jungle</string>
+						<string>JungleText</string>
 					</dict>
 				</array>
 			</dict>
@@ -6888,7 +6888,7 @@
 						<key>type</key>
 						<string>Text</string>
 						<key>value</key>
-						<string>Vulcano</string>
+						<string>VulcanoText</string>
 					</dict>
 				</array>
 			</dict>

@@ -49,5 +49,10 @@
   "TutorialStep9Lvl_1Text": "You can't break down tornado with your tail, Felicia!\n But i can let you out if you will get inside it.",
   "EndStep1Text" : "Well done! You just saved all of these little foxes.\n They can come home now!",
   "EndStep2Text" : "Felicia and Frederic are appreciating to you.\n Thank you for playing!",
-  "PleaseWaitText" : "Please wait"
+  "PleaseWaitText" : "Please wait",
+  "ForestText" : "Forest",
+  "DesertText" : "Desert",
+  "SnowLandText" : "SnowLand",
+  "JungleText" : "Jungle",
+  "VulcanoText" : "Vulcano"
 }
