@@ -5,6 +5,7 @@ import org.myextend.GoogleStatistic;
 import org.myextend.FacebookADS;
 import org.myextend.ADSContainer;
 import org.myextend.AdMobADS;
+import org.myextend.RewardedVideoAdMobADS;
 import android.app.Activity;
 import android.app.Application;
 import android.util.Log;
@@ -18,12 +19,13 @@ public class MyExtendHelper {
 
 //		FacebookADS facebookADS = new FacebookADS(activity, MyExtendHelper.sGoogleStatistic);
 		AdMobADS adMobADS = new AdMobADS(activity, MyExtendHelper.sGoogleStatistic);
+		RewardedVideoAdMobADS adMobVideo = new RewardedVideoAdMobADS(activity, MyExtendHelper.sGoogleStatistic);
 
 //		ADSContainer adsContainer = new ADSContainer();
 //		adsContainer.Add(facebookADS);
 //		adsContainer.Add(adMobADS);
 
-		MyExtendHelper.sADS = adMobADS;
+		MyExtendHelper.sADS = adMobVideo;
 	}
 	
 	public static void sendEventToStatistic(final String category, final String action, 
