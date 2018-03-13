@@ -30,11 +30,14 @@ public class RewardedVideoAdMobADS implements RewardedVideoAdListener, IADS
 
         this.mActivity = activity;
 
+        createInterstitialAd();
+    }
+
+    private void createInterstitialAd()
+    {
         // Use an activity context to get the rewarded video instance.
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this.mActivity);
         mRewardedVideoAd.setRewardedVideoAdListener(this);
-
-        //loadRewardedVideoAd();
     }
 
     private void loadRewardedVideoAd()
@@ -67,7 +70,7 @@ public class RewardedVideoAdMobADS implements RewardedVideoAdListener, IADS
 
         mGoogleStatistic.sendEvent("RewardedVideoAdMob", "show", "error", errorCode);
 
-        //createInterstitialAd();
+        createInterstitialAd();
 
         if(mListener != null)
         {
@@ -105,7 +108,7 @@ public class RewardedVideoAdMobADS implements RewardedVideoAdListener, IADS
     @Override
     public void onRewardedVideoAdOpened()
     {
-
+        createInterstitialAd();
     }
 
     @Override
@@ -139,7 +142,7 @@ public class RewardedVideoAdMobADS implements RewardedVideoAdListener, IADS
     {
         mGoogleStatistic.sendEvent("RewardedVideoAdMob", "show", "cancel", -1);
         mCanceled = true;
-        //createInterstitialAd();
+        createInterstitialAd();
     }
 
     //----------------------------------
