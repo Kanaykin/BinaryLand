@@ -1,6 +1,7 @@
 require "src/base/Log"
 
 local DEFAULT_FONT = "res/fonts/UpheavalPro.ttf"--"res/fonts/Minecrafter.ttf";
+--local DEFAULT_FONT = "res/fonts/Minecrafter.ttf"
 
 GuiHelper = {
 

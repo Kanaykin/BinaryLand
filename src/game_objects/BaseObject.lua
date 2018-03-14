@@ -86,20 +86,29 @@ end
 
 --------------------------------
 function BaseObject:setOrder(orderPos)
-    local parent = self.mNode:getParent();
-    parent:removeChild(self.mNode, false);
-    parent:addChild(self.mNode, orderPos);
+	if self.mNode then
+    	local parent = self.mNode:getParent();
+    	parent:removeChild(self.mNode, false);
+    	parent:addChild(self.mNode, orderPos);
+    end
 end
 
 ---------------------------------
 function BaseObject:getScreenPos()
-	local point = self.mNode:convertToWorldSpace(cc.p(0, 0)); --self.mField:fieldToScreen(Vector.new(self.mNode:getPosition()));
-	return Vector.new(point.x, point.y);
+	if self.mNode then
+		local point = self.mNode:convertToWorldSpace(cc.p(0, 0)); --self.mField:fieldToScreen(Vector.new(self.mNode:getPosition()));
+		return Vector.new(point.x, point.y);
+	end
+	
+	return Vector.new(0, 0);
 end
 
 ---------------------------------
 function BaseObject:getPosition()
-    return Vector.new(self.mNode:getPosition());
+	if self.mNode then
+    	return Vector.new(self.mNode:getPosition());
+    end
+    return Vector.new(0, 0);
 end
 
 ---------------------------------
@@ -108,7 +117,11 @@ end
 
 ---------------------------------
 function BaseObject:getBoundingBox()
-	return self.mNode:getBoundingBox();
+	if self.mNode then
+		return self.mNode:getBoundingBox();
+	end
+
+	return 0, 0, 0, 0
 end
 
 --------------------------------
@@ -139,7 +152,9 @@ end
 
 --------------------------------
 function BaseObject:setVisible(visible)
-	self.mNode:setVisible(visible);
+	if self.mNode then
+		self.mNode:setVisible(visible);
+	end
 end
 
 --------------------------------

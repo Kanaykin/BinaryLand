@@ -12,6 +12,9 @@ TouchWidget.DOUBLE_TOUCH_DELTA = 0.3;
 ----------------------------------------
 function TouchWidget:convertToPoints(var)
 	local array_points = {};
+	if type(var) ~= "table" then
+		return array_points;
+	end
 	
 	for i = 1, #var, 3 do
 		--info_log("onTouchHandler [", var[i + 2], "]=", var[i], ", ", var[i + 1]);
