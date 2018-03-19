@@ -43,10 +43,10 @@ public class FacebookADS implements InterstitialAdListener, IADS
         
         String android_id = Settings.Secure.getString(app.getContentResolver(), Settings.Secure.ANDROID_ID);
         Logger.info("FacebookADS::FacebookADS android_id " + android_id);
-        String deviceId = md5(android_id).toUpperCase();
-        Logger.info("FacebookADS::FacebookADS deviceId " + deviceId);
+//        String deviceId = md5(android_id).toUpperCase();
+//        Logger.info("FacebookADS::FacebookADS deviceId " + deviceId);
         //AdSettings.addTestDevice("adf6e3f989077bbec4fe6cc6ee6fa05e");
-        AdSettings.addTestDevice(deviceId);
+//        AdSettings.addTestDevice(deviceId);
         
         this.mActivity = activity;
         
@@ -90,6 +90,7 @@ public class FacebookADS implements InterstitialAdListener, IADS
 	@Override
 	public void Cancel()
 	{
+		mGoogleStatistic.sendEvent("FacebookADS", "show", "cancel", -1);
 		mCanceled = true;
 	}
 
@@ -104,7 +105,7 @@ public class FacebookADS implements InterstitialAdListener, IADS
 	public boolean Show()
 	{
 		Logger.info("FacebookADS::showADS");
-		if(mInterstitialAd.isAdLoaded() && mCanceled)
+		/*if(mInterstitialAd.isAdLoaded() && mCanceled)
 		{
 			mCanceled = false;
 			mStatus = AdsStatus.LOADING;
@@ -125,8 +126,9 @@ public class FacebookADS implements InterstitialAdListener, IADS
 				}});
 
 			return true;
-		}
+		}*/
 		mCanceled = false;
+		mGoogleStatistic.sendEvent("FacebookADS", "show", "load", -1);
 //		this.mInterstitialAd.loadAd();
 
 		mStatus = AdsStatus.LOADING;
@@ -157,6 +159,7 @@ public class FacebookADS implements InterstitialAdListener, IADS
 	    // Ad failed to load
 		mErrorMessage = error.getErrorMessage();
 		Logger.info("FacebookADS::onError "+ error.getErrorMessage());
+		mGoogleStatistic.sendEvent("FacebookADS", "show", mErrorMessage, -1);
 
 		mStatus = AdsStatus.FAILED;
 
