@@ -4,7 +4,6 @@ require "src/scenes/SoundConfigs"
 require "src/base/Log"
 
 
-local LOADSCEENIMAGE = "StartScene.png"
 --[[
 start scene - loading screen
 --]]
@@ -23,7 +22,7 @@ local MovieTexts = {"  Далеко-далеко, на краю мира, рас
 
 --------------------------------
 function StartScene:init(sceneMan, params)
-	StartScene:superClass().init(self, sceneMan, {background = LOADSCEENIMAGE});
+	StartScene:superClass().init(self, sceneMan);
 	info_log("StartScene:init");
 
 	-- create menu elements
