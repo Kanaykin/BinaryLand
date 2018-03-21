@@ -11,7 +11,9 @@ require "src/gui/LocationOpenDlg"
 require "src/gui/SettingsDlg"
 
 local LOADSCEENIMAGE = "GlobalMapBack.png"
-local GLOBALMAP = "GlobalMap.png"
+
+local GLOBALMAP1 = "GlobalMap1.png"
+local GLOBALMAP2 = "GlobalMap2.png"
 
 --[[
 start scene - loading screen
@@ -225,8 +227,15 @@ end
 --------------------------------
 function ChooseLocation:initScene()
 
-    local globalMap = CCSprite:create(GLOBALMAP);
-    local imageMapSize = globalMap:getContentSize();
+    local globalMap1 = CCSprite:create(GLOBALMAP1);
+    local globalMap2 = CCSprite:create(GLOBALMAP2);
+
+    local imageMapSize1 = globalMap1:getContentSize();
+    local imageMapSize2 = globalMap2:getContentSize();
+    local imageMapSize = imageMapSize1;
+    imageMapSize.width = imageMapSize.width + imageMapSize2.width;
+
+
     local visibleSize = CCDirector:getInstance():getVisibleSize();
 
 	self.mScrollView = ScrollView:create();
@@ -248,8 +257,11 @@ function ChooseLocation:initScene()
 
 	parallax:addChild(grass, 1, cc.p(0.4, 1.0), getPosition(grass, pos));
 
-    globalMap:setAnchorPoint(cc.p(0, 0));
-    self.mScrollView:addChild(globalMap);
+    globalMap1:setAnchorPoint(cc.p(0, 0));
+    self.mScrollView:addChild(globalMap1);
+
+    globalMap2:setAnchorPoint(cc.p(-1, 0));
+    self.mScrollView:addChild(globalMap2);
 
     self:createLocations();
 end

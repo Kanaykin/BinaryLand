@@ -23,7 +23,7 @@ Game.mLocalizationManager = nil
 Game.mSoundManager = nil
 
 local SUPPORTED_RESOLUTION = {
-	{ size = cc.size(480, 320), scale = 1, searchPath = "resources-iphone"},
+	{ size = cc.size(480, 320), scale = 1, searchPath = "resources-iphonehd"},
 	{ size = cc.size(700, 350), scale = 2, searchPath = "resources-iphonehd"}, -- for android 480x800
 	{ size = cc.size(960, 640), scale = 2, searchPath = "resources-iphonehd"},
 	{ size = cc.size(1024, 768), scale = 2, searchPath = "resources-iphonehd"},
