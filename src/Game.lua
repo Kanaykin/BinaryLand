@@ -8,6 +8,7 @@ require "src/LocalizationManager"
 require "src/sound/SimpleAudioEngineAdapter"
 require "src/sound/ExpAudioEngineAdapter"
 require "src/sound/EmptyAudioEngineAdapter"
+require "src/math/Utils"
 
 --[[
 It is main class for game.
@@ -174,13 +175,13 @@ function Game:initResolution()
     info_log("Game:initResolution height ", visibleSize.height);
 
     -- if width > 
-    if visibleSize.width < visibleSize.height then
-    	local tmp = visibleSize.width;
-    	visibleSize.width = visibleSize.height;
-    	visibleSize.height = tmp;
+    -- if visibleSize.width  visibleSize.height then
+    -- 	local tmp = visibleSize.width;
+    -- 	visibleSize.width = visibleSize.height;
+    -- 	visibleSize.height = tmp;
 
-    	--CCDirector:getInstance():getOpenGLView().setFrameSize(visibleSize.width, visibleSize.height);
-    end
+    -- 	--CCDirector:getInstance():getOpenGLView().setFrameSize(visibleSize.width, visibleSize.height);
+    -- end
 
 	local resolutionInfo = nil;
 	for i = #SUPPORTED_RESOLUTION, 1, -1  do

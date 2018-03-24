@@ -1,5 +1,6 @@
 require "src/base/Inheritance"
 require "src/math/Vector"
+require "src/math/Utils"
 require "src/game_objects/FieldNode"
 require "src/game_objects/FactoryObject"
 require "src/base/Log"
@@ -496,8 +497,6 @@ function Field:fillFreePoint(gridPos, points)
     WavePathFinder.fillArray({gridPos}, Vector.new(-1, -1), cloneArray, self.mSize,
         WavePathFinder.FIRST_INDEX + 1);
 
-    local p = cloneArray[COORD(16, 5, self.mSize.x)];
-    info_log("££££££ ", p)
     PRINT_FIELD(cloneArray, self.mSize);
 
     for j = 0, self.mSize.y do
@@ -688,13 +687,18 @@ end
 
 --------------------------------
 function Field:positionToGrid(position)
+    -- debug_log("Field:positionToGrid x ", position.x, " y ", position.y);
 	local leftBottom = Vector.new(position.x - self.mLeftBottom.x, position.y - self.mLeftBottom.y);
-	return math.floor(leftBottom.x / self.mCellSize) + 1, math.floor(leftBottom.y / self.mCellSize) + 1;
+    -- debug_log("Field:leftBottom x ", leftBottom.x, " y ", leftBottom.y);
+	local x, y = math.floor(leftBottom.x / self.mCellSize) + 1, math.floor(Utils.roundNumber(leftBottom.y / self.mCellSize, 2)) + 1;
+    -- debug_log("Field x ", x, " y ", y);
+    return x, y
 end
 
 --------------------------------
 function Field:getGridPosition(node)
 	local posX, posY = node:getPosition();
+    -- debug_log("Field:getGridPosition posX ", posX, " posY ", posY);
 	local anchor = cc.p(0, 0);--node:getAnchorPoint();
 	local nodeSize = node:getContentSize();
 	
@@ -852,6 +856,7 @@ end
 
 --------------------------------
 function Field:addBrick(brick)
+    --debug_log("Field:addBrick")
     table.insert(self.mBrickObjects, brick);
 	local x, y = self:getGridPosition(brick:getNode());
 	self.mArray[COORD(x, y, self.mSize.x)] = 1;
