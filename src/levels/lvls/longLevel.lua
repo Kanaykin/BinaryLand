@@ -2,7 +2,7 @@ local map = {0,0,8,0,0,0,0,1,0,1,0,0,1,0,0,1,0,1,1,0,1,0,1,0,0,1,0,1,0,0,0,0,0,0
 local levelParams = {
 				tileMap = "Level2_7_map.tmx",
 				time = 20,
-				backgroundMusic = "sounds/Music/TrainOfConsequences.mp3",
+				backgroundMusic = "sounds/Music/level_theme.mp3",
 --                customProperties = "src/levels/Level1_2",
 --                id = "1_2",
                 bonusRoom = {
@@ -12,7 +12,7 @@ local levelParams = {
                     cellSize = 32,
                     tutorial = false,
 --                    time = 30,
-                    backgroundMusic = "sounds/Music/Hall_Of_The_Death_Angel.mp3",
+                    backgroundMusic = "sounds/Music/level_theme.mp3",
                     id = "1_2_bonus_room"
                 }
 			}
