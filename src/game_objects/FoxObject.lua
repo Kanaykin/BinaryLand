@@ -885,8 +885,8 @@ end
 
 --------------------------------
 function FoxObject:createInCageAnimation()
-    self:createInCageSideAnimation("Left", FoxObject.FOX_STATE.PS_IN_CAGE_LEFT);
-    self:createInCageSideAnimation("Right", FoxObject.FOX_STATE.PS_IN_CAGE_RIGHT);
+    --self:createInCageSideAnimation("Left", FoxObject.FOX_STATE.PS_IN_CAGE_LEFT);
+    --self:createInCageSideAnimation("Right", FoxObject.FOX_STATE.PS_IN_CAGE_RIGHT);
     self:createInHiddenCageAnimation();
     --self:createInTornadoCageAnimation();
 end
