@@ -215,7 +215,9 @@ function LevelScene:destroyLevelComponent()
         self.mField:destroy();
     end
 
-    self.mPlayerController:destroy();
+    if self.mPlayerController then
+        self.mPlayerController:destroy();
+    end
 
 end
 
@@ -256,10 +258,12 @@ function LevelScene:postInitScene(levelData)
         end
     end
 
-    self.mPlayerController = PlayerController:create();
-    self.mPlayerController:init(self.mGuiLayer:getBoundingBox(), self.mField:getPlayerObjects(), self.mField,
-    self.mMainUI:getJoystick(), self.mMainUI:getFightButton());
-    self.mMainUI:setTouchListener(self.mPlayerController);
+    if self.mPlayerController then
+        self.mPlayerController = PlayerController:create();
+        self.mPlayerController:init(self.mGuiLayer:getBoundingBox(), self.mField:getPlayerObjects(), self.mField,
+        self.mMainUI:getJoystick(), self.mMainUI:getFightButton());
+        self.mMainUI:setTouchListener(self.mPlayerController);
+    end
 
     -- play music
     if levelData.backgroundMusic then
@@ -367,7 +371,10 @@ end
 function LevelScene:tick(dt)
 	LevelScene:superClass().tick(self, dt);
 	self.mField:tick(dt);
-	self.mPlayerController:tick(dt);
+
+    if self.mPlayerController then
+	   self.mPlayerController:tick(dt);
+    end
 
 	if self.mTutorial then
 		self.mTutorial:tick(dt);

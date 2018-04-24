@@ -29,6 +29,9 @@ SCENE_TYPE_ID = {
 
 ---------------------------------
 function SceneManager:getCurrentScene()
+	if not self.mCurrentSceneId then
+		return nil
+	end
 	return self.mScenes[self.mCurrentSceneId];
 end
 

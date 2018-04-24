@@ -24,6 +24,8 @@ function LocalizationManager:init()
 		local statistic = extend.Statistic:getInstance();
 		statistic:sendEvent("Game", "Language", lang == LocalizationManager.RUSSIAN_LANG and "rus" or "usa", -1);
 	end
+	self.mCurrentLang = self.mCurrentLang == LocalizationManager.RUSSIAN_LANG and LocalizationManager.RUSSIAN_LANG
+						or LocalizationManager.ENGLISH_LANG
 	self:setCurrentLanguage(self.mCurrentLang);
 
 	local fileName = nil

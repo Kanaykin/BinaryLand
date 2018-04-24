@@ -87,6 +87,9 @@ end
 function PlistAnimation:loadFramesFromFile(plistName, arrayFrames)
     local array = cc.FileUtils:getInstance():getValueMapFromFile(plistName);
     local frames = array["frames"];
+    if not frames then
+      return;
+    end
     info_log("PlistAnimation:init ", array["frames"]);
 
     local cache = CCSpriteFrameCache:getInstance();
