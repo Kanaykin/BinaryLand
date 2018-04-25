@@ -258,12 +258,10 @@ function LevelScene:postInitScene(levelData)
         end
     end
 
-    if self.mPlayerController then
-        self.mPlayerController = PlayerController:create();
-        self.mPlayerController:init(self.mGuiLayer:getBoundingBox(), self.mField:getPlayerObjects(), self.mField,
-        self.mMainUI:getJoystick(), self.mMainUI:getFightButton());
-        self.mMainUI:setTouchListener(self.mPlayerController);
-    end
+	self.mPlayerController = PlayerController:create();
+	self.mPlayerController:init(self.mGuiLayer:getBoundingBox(), self.mField:getPlayerObjects(), self.mField,
+	self.mMainUI:getJoystick(), self.mMainUI:getFightButton());
+	self.mMainUI:setTouchListener(self.mPlayerController);
 
     -- play music
     if levelData.backgroundMusic then
