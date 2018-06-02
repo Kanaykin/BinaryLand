@@ -2,7 +2,7 @@ require "src/scenes/SceneManager"
 require "src/scenes/GameConfigs"
 require "src/scenes/Location"
 require "src/gui/DialogManager"
-require "CCBReaderLoad"
+require "script/cocosbuilder/CCBReaderLoad"
 require "src/base/Log"
 require "src/LocalizationManager"
 require "src/sound/SimpleAudioEngineAdapter"
@@ -91,22 +91,22 @@ end
 
 ---------------------------------
 function Game:isLevelOpened(locationId, level)
-    return CCUserDefault:getInstance():getBoolForKey(tostring(locationId) .. tostring(level));
+    return cc.UserDefault:getInstance():getBoolForKey(tostring(locationId) .. tostring(level));
 end
 
 ---------------------------------
 function Game:openLevel(locationId, level)
-	CCUserDefault:getInstance():setBoolForKey(tostring(locationId) .. tostring(level), true);
+	cc.UserDefault:getInstance():setBoolForKey(tostring(locationId) .. tostring(level), true);
 end
 
 ---------------------------------
 function Game:openLocation(locationId)
-    CCUserDefault:getInstance():setBoolForKey(tostring(locationId), true);
+    cc.UserDefault:getInstance():setBoolForKey(tostring(locationId), true);
 end
 
 ---------------------------------
 function Game:isLocationOpened(locationId)
-    return CCUserDefault:getInstance():getBoolForKey(tostring(locationId));
+    return cc.UserDefault:getInstance():getBoolForKey(tostring(locationId));
 end
 
 ---------------------------------
@@ -121,55 +121,55 @@ function Game:setLevelStar(locationId, level, star)
 		star = math.max(star, old_stars);
 	end
     self.mLocations[locationId]:getLevel(level):setCountStar(star);
-	CCUserDefault:getInstance():setIntegerForKey(locationId .. tostring(level) .. "_star", star);
+	cc.UserDefault:getInstance():setIntegerForKey(locationId .. tostring(level) .. "_star", star);
 end
 
 ---------------------------------
 function Game:setLevelStarShowed(locationId, level, count)
-    CCUserDefault:getInstance():setIntegerForKey(locationId .. tostring(level).. "_showed_star", count);
+    cc.UserDefault:getInstance():setIntegerForKey(locationId .. tostring(level).. "_showed_star", count);
 end
 
 ---------------------------------
 function Game:getLevelStarShowed(locationId, level)
-    return CCUserDefault:getInstance():getIntegerForKey(locationId .. tostring(level).. "_showed_star");
+    return cc.UserDefault:getInstance():getIntegerForKey(locationId .. tostring(level).. "_showed_star");
 end
 
 ---------------------------------
 function Game:getLocationUnlockShowed(locationId)
-	return CCUserDefault:getInstance():getBoolForKey(locationId .. "_showed_unlock");
+	return cc.UserDefault:getInstance():getBoolForKey(locationId .. "_showed_unlock");
 end
 
 ---------------------------------
 function Game:setLocationUnlockShowed(locationId, val)
-	CCUserDefault:getInstance():setBoolForKey(locationId .. "_showed_unlock", val);
+	cc.UserDefault:getInstance():setBoolForKey(locationId .. "_showed_unlock", val);
 end
 
 ---------------------------------
 function Game:getBonusUnlockShowed(locationId)
-	return CCUserDefault:getInstance():getBoolForKey(locationId .. "_bonus__showed_unlock");
+	return cc.UserDefault:getInstance():getBoolForKey(locationId .. "_bonus__showed_unlock");
 end
 
 ---------------------------------
 function Game:setBonusUnlockShowed(locationId, val)
-	CCUserDefault:getInstance():setBoolForKey(locationId .. "_bonus__showed_unlock", val);
+	cc.UserDefault:getInstance():setBoolForKey(locationId .. "_bonus__showed_unlock", val);
 end
 
 ---------------------------------
 function Game:getLevelStar(locationId, level)
-    return CCUserDefault:getInstance():getIntegerForKey(locationId .. tostring(level) .. "_star", 0);
+    return cc.UserDefault:getInstance():getIntegerForKey(locationId .. tostring(level) .. "_star", 0);
 end
 
 ---------------------------------
 function Game:initResolution()
 	-- compute resolution scale
-	local visibleSize = CCDirector:getInstance():getVisibleSize();
+	local visibleSize = cc.Director:getInstance():getVisibleSize();
 
     if visibleSize.width == 0 or visibleSize.height == 0 then
         -- create desktop gl view
-        local glview = cc.GLViewImpl:createWithRect("Desktop", cc.rect(0, 0, 960, 640));
+        local glview = cc.GLViewImpl:createWithRect("Desktop", cc.rect(0, 0, 1920, 1080));
         info_log("Game:initResolution glview ", glview);
-        CCDirector:getInstance():setOpenGLView(glview);
-        visibleSize = CCDirector:getInstance():getVisibleSize();
+        cc.Director:getInstance():setOpenGLView(glview);
+        visibleSize = cc.Director:getInstance():getVisibleSize();
     end
     info_log("Game:initResolution width ", visibleSize.width);
     info_log("Game:initResolution height ", visibleSize.height);
@@ -180,7 +180,7 @@ function Game:initResolution()
     -- 	visibleSize.width = visibleSize.height;
     -- 	visibleSize.height = tmp;
 
-    -- 	--CCDirector:getInstance():getOpenGLView().setFrameSize(visibleSize.width, visibleSize.height);
+    -- 	--cc.Director:getInstance():getOpenGLView().setFrameSize(visibleSize.width, visibleSize.height);
     -- end
 
 	local resolutionInfo = nil;
@@ -194,15 +194,15 @@ function Game:initResolution()
 	end
 
 	if resolutionInfo then 
-		--CCDirector:getInstance():getOpenGLView():setDesignResolutionSize(resolutionInfo.size.width, resolutionInfo.size.height, 1);
+		--cc.Director:getInstance():getOpenGLView():setDesignResolutionSize(resolutionInfo.size.width, resolutionInfo.size.height, 1);
 		local scale = math.min(visibleSize.width / DESIGN_RESOLUTION_SIZE.width, visibleSize.height / DESIGN_RESOLUTION_SIZE.height);
 		info_log("SCALE ", scale);
 		self.mScale = scale;
         info_log("CCBReader ", cc.CCBReader);
 
 		cc.CCBReader:setResolutionScale(scale);
-		CCDirector:getInstance():setContentScaleFactor( (1 / scale) * resolutionInfo.scale);
-		local fileUtils = CCFileUtils:getInstance();
+		cc.Director:getInstance():setContentScaleFactor( (1 / scale) * resolutionInfo.scale);
+		local fileUtils = cc.FileUtils:getInstance();
 		-- add resource directories
 		for i, val in ipairs(RESOURCE_DIRECTORIES) do
 			fileUtils:addSearchPath("res");
@@ -216,13 +216,13 @@ end
 function Game:setSoundEnabled(enabled)
     info_log("Game:setSoundEnabled ", enabled);
     local value = enabled and 1 or 0;
-	CCUserDefault:getInstance():setIntegerForKey("SoundValue", value);
+	cc.UserDefault:getInstance():setIntegerForKey("SoundValue", value);
     self.mSoundManager:setEffectsVolume(value);
 end
 
 ---------------------------------
 function Game:getSoundEnabled()
-    local soundVolume = CCUserDefault:getInstance():getIntegerForKey("SoundValue", 1);
+    local soundVolume = cc.UserDefault:getInstance():getIntegerForKey("SoundValue", 1);
     info_log("soundVolume ", soundVolume);
     return soundVolume ~= 0;
 end
@@ -231,13 +231,13 @@ end
 function Game:setMusicEnabled(enabled)
     info_log("Game:setMusicEnabled ", enabled);
     local value = enabled and 1 or 0;
-	CCUserDefault:getInstance():setIntegerForKey("MusicValue", value);
+	cc.UserDefault:getInstance():setIntegerForKey("MusicValue", value);
     self.mSoundManager:setMusicVolume(value);
 end
 
 ---------------------------------
 function Game:getMusicEnabled()
-    local musicVolume = CCUserDefault:getInstance():getIntegerForKey("MusicValue", 1);
+    local musicVolume = cc.UserDefault:getInstance():getIntegerForKey("MusicValue", 1);
     info_log("Game:getMusicEnabled musicVolume ", musicVolume);
     return musicVolume ~= 0;
 end
@@ -263,8 +263,8 @@ function Game:init()
 
 	self.mLocations = {}
 
-	CCUserDefault:getInstance();
-	local xmlFilePath = CCUserDefault:getXMLFilePath();
+	cc.UserDefault:getInstance();
+	local xmlFilePath = cc.UserDefault:getXMLFilePath();
 	info_log("Game:init xmlFilePath ", xmlFilePath);
 
 	self:initResolution();
@@ -292,9 +292,14 @@ function Game:init()
 	local g_game = self;
 	
 	function tick(dt)
+		info_log("tick dt ", dt);
+
+		if (dt > 0.2) then
+			dt = 1 / 60.0;
+		end
 		g_game:tick(dt);
 	end
 
-	CCDirector:getInstance():getScheduler():scheduleScriptFunc(tick, 0, false)
+	cc.Director:getInstance():getScheduler():scheduleScriptFunc(tick, 0, false)
 
 end

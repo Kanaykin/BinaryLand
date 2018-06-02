@@ -224,7 +224,7 @@ function Field:updateScrollPos()
 
 	--debug_log ("Field:updateScrollPos forceUpdate ", forceUpdate);
     if min ~= math.huge and max ~= -math.huge then
-        local visibleSize = CCDirector:getInstance():getVisibleSize();
+        local visibleSize = cc.Director:getInstance():getVisibleSize();
         local pos = (max - min) / 2 + min - visibleSize.height / 2;-- max - visibleSize.height / 2;
         pos = math.max(pos, 0);
 
@@ -782,7 +782,7 @@ end
 
 --------------------------------
 function Field:createSpirit(pos, player)
-    local node = CCSprite:create("Spirit.png");
+    local node = cc.Sprite:create("Spirit.png");
 
     --pos.y = pos.y + cellSize / 2.0;
 
@@ -811,7 +811,7 @@ end
 --------------------------------
 function Field:createSnareTrigger(pos, fromBullet)
 	info_log("Field:createSnareTrigger x= ", pos.x, " y= ", pos.y);
-	local node = CCNode:create();
+	local node = cc.Node:create();
 	node:setContentSize(cc.size(self:getCellSize(), self:getCellSize()));
 	self:getFieldNode():addChild(node);
 

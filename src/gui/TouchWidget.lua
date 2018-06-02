@@ -17,7 +17,7 @@ function TouchWidget:convertToPoints(var)
 	end
 	
 	for i = 1, #var, 3 do
-		--info_log("onTouchHandler [", var[i + 2], "]=", var[i], ", ", var[i + 1]);
+		info_log("onTouchHandler [", var[i + 2], "]=", var[i], ", ", var[i + 1]);
 		array_points[var[i + 2]] = Vector.new(var[i], var[i + 1]);
 	end
 

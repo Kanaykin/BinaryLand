@@ -48,16 +48,18 @@ function TutorialStep7_free:findFingerPositionToCoins(coins)
 		local cloneArray = self.mField:cloneArray();
 		local path = WavePathFinder.buildPath(player:getGridPosition(), triggerPos, cloneArray, self.mField.mSize);
     	path = WavePathFinder.normalizePath(path);
-    	--WavePathFinder.printPath(path);
+    	WavePathFinder.printPath(path);
 		
 		local dist = WavePathFinder.lengthPath(path);
 		info_log("TutorialStep7_free:findFingerPosition dist i ", i, " dist ", dist);
+		info_log("TutorialStep7_free:findFingerPosition #path ", #path);
 		if minDist > dist then
 			finishPosition = #path > 1 and path[2] or path[1];
 			minDist = dist;
 			minDistPlayer = player;
 		end
 	end
+	info_log("TutorialStep7_free:findFingerPosition finishPosition ", finishPosition);
 
 	finishPosition = self.mField:gridPosToReal(finishPosition);
 	finishPosition.x = finishPosition.x + self.mField:getCellSize() / 2;

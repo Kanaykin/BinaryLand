@@ -12,7 +12,7 @@ Finger.mNode = nil;
 
 --------------------------------
 function Finger:init(gameScene, field)
-	local ccpproxy = CCBProxy:create();
+	local ccpproxy = cc.CCBProxy:create();
 	local reader = ccpproxy:createCCBReader();
 	local node = ccpproxy:readCCBFromFile("Finger", reader, false);
 	self.mNode = node;
@@ -31,7 +31,7 @@ function Finger:init(gameScene, field)
 		self.mIsMoving = false;
 	end
 
-	local callFuncHide = CCCallFunc:create(callbackHideFinish);
+	local callFuncHide = cc.CallFunc:create(callbackHideFinish);
 	self.mAnimator:setCallFuncForLuaCallbackNamed(callFuncHide, "0:HideFinish");
 	---------
 
@@ -41,7 +41,7 @@ function Finger:init(gameScene, field)
 		self:moveTo(self.mDestPos);
 	end
 
-	local callFuncShow = CCCallFunc:create(callbackShowFinish);
+	local callFuncShow = cc.CallFunc:create(callbackShowFinish);
 	self.mAnimator:setCallFuncForLuaCallbackNamed(callFuncShow, "0:ShowFinish");
 	---------
 
@@ -51,7 +51,7 @@ function Finger:init(gameScene, field)
 		self.mIsMoving = false;
 	end
 
-	local callFuncDoubleTap = CCCallFunc:create(callbackDoubleTapFinish);
+	local callFuncDoubleTap = cc.CallFunc:create(callbackDoubleTapFinish);
 	self.mAnimator:setCallFuncForLuaCallbackNamed(callFuncDoubleTap, "0:DoubleTapfinish");
 	---------
 	self.mNode:setVisible(false);

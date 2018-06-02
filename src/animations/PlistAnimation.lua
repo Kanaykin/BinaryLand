@@ -58,9 +58,9 @@ end
 
 ---------------------------------
 function PlistAnimation:isDone()
-	--debug_log("PlistAnimation:isDone ", CCDirector:getInstance():getActionManager():numberOfRunningActionsInTarget(self.mAction:getTarget()));
+	--debug_log("PlistAnimation:isDone ", cc.Director:getInstance():getActionManager():numberOfRunningActionsInTarget(self.mAction:getTarget()));
 	return self.mPlayed and (self.mAction and self.mAction:isDone() or 
-		CCDirector:getInstance():getActionManager():getNumberOfRunningActionsInTarget(self.mAction:getTarget()) == 0);
+		cc.Director:getInstance():getActionManager():getNumberOfRunningActionsInTarget(self.mAction:getTarget()) == 0);
 end
 
 --------------------------------
@@ -92,7 +92,7 @@ function PlistAnimation:loadFramesFromFile(plistName, arrayFrames)
     end
     info_log("PlistAnimation:init ", array["frames"]);
 
-    local cache = CCSpriteFrameCache:getInstance();
+    local cache = cc.SpriteFrameCache:getInstance();
     cache:addSpriteFrames(plistName);
 
     for key, val in pairs(frames) do
@@ -116,13 +116,13 @@ function PlistAnimation:init(plistName, node, anchor, texture, delayPerUnit)
     local arrayFrames = {};
     self:loadFramesFromFile(plistName, arrayFrames);
 
-    local cache = CCSpriteFrameCache:getInstance();
+    local cache = cc.SpriteFrameCache:getInstance();
 
    	table.sort( arrayFrames, function(x, y)
    		return y > x;
    	end );
     
-    self.mAnimation = CCAnimation:create();
+    self.mAnimation = cc.Animation:create();
     self.mLastFrame = cache:getSpriteFrame(arrayFrames[#arrayFrames]);
     for i, val in ipairs(arrayFrames) do
    		local frame = cache:getSpriteFrame(val);

@@ -220,7 +220,7 @@ function YouWinDlg:initAnimation(nodeBase)
         self:showStars();
     end
 
-    local starCallFunc = CCCallFunc:create(start_callback);
+    local starCallFunc = cc.CallFunc:create(start_callback);
     self.mAnimator:setCallFuncForLuaCallbackNamed(starCallFunc, "0:animationStart");
 end
 

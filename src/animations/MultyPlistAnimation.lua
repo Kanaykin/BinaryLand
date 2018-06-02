@@ -23,9 +23,9 @@ function MultyPlistAnimation:init(plistName, node, anchor, texture, delayPerUnit
    		return y > x;
    	end );
 
-   	local cache = CCSpriteFrameCache:getInstance();
+   	local cache = cc.SpriteFrameCache:getInstance();
     
-    self.mAnimation = CCAnimation:create();
+    self.mAnimation = cc.Animation:create();
     self.mLastFrame = cache:getSpriteFrame(arrayFrames[#arrayFrames]);
     for i, val in ipairs(arrayFrames) do
    		local frame = cache:getSpriteFrame(val);

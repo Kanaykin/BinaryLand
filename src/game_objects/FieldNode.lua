@@ -80,7 +80,7 @@ function FieldNode:init(nodes, layer, field)
 	end
 
 	self.mSize = cc.size(width, height);
-	local newLayer = CCLayer:create();
+	local newLayer = cc.Layer:create();
 	newLayer:setContentSize(self.mSize);
 	info_log(" !!!!! size layer ", self.mSize.width, self.mSize.height);
 	self.mLayer = newLayer;

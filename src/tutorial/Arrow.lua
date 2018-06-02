@@ -7,7 +7,7 @@ Arrow.is_vertical = false;
 
 --------------------------------
 function Arrow:init(gameScene, field, playerPos, finishPos)
-	local ccpproxy = CCBProxy:create();
+	local ccpproxy = cc.CCBProxy:create();
 	local reader = ccpproxy:createCCBReader();
 	local node = ccpproxy:readCCBFromFile("Arrow", reader, false);
 	self.mNode = node;
@@ -36,7 +36,7 @@ function Arrow:updateLength(posFrom, posTo)
 	local vec = posTo - posFrom;
 	local sprite = self.mNode:getChildByTag(Arrow.SPRITE_TAG);
 	local sprite = tolua.cast(sprite, "ccui.Scale9Sprite");
-	info_log("[Arrow:setPositions] sprite ", sprite);
+	--info_log("[Arrow:setPositions] sprite ", sprite);
 	local oldPreferredSize = sprite:getPreferredSize();
 
 	sprite:setPreferredSize(cc.size(oldPreferredSize.width, math.max(math.abs(vec.x), math.abs(vec.y))));
@@ -52,7 +52,7 @@ function Arrow:setTransform(posFrom, posTo, needRotate)
 	local vec = posTo - posFrom;
 	local sprite = self.mNode:getChildByTag(Arrow.SPRITE_TAG);
 	local sprite = tolua.cast(sprite, "ccui.Scale9Sprite");
-	info_log("[Arrow:setPositions] sprite ", sprite);
+	--info_log("[Arrow:setPositions] sprite ", sprite);
 	local oldPreferredSize = sprite:getPreferredSize();
 	sprite:setPreferredSize(cc.size(oldPreferredSize.width, math.max(math.abs(vec.x), math.abs(vec.y))));
 
@@ -65,7 +65,7 @@ function Arrow:setTransform(posFrom, posTo, needRotate)
 		local posFromGrid = Vector.new(self.mField:positionToGrid(posFrom));
 		local posToGrid = Vector.new(self.mField:positionToGrid(posTo));
 		local vecDelta = posToGrid - posFromGrid;
-		info_log("[Arrow:setPositions] vecDelta.x ", vecDelta.x, " vecDelta.y ", vecDelta.y);
+		--info_log("[Arrow:setPositions] vecDelta.x ", vecDelta.x, " vecDelta.y ", vecDelta.y);
 
 		-- compute rotation
 		local angle = math.atan2(vecDelta.x, vecDelta.y);

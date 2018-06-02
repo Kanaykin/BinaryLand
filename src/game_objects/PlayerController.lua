@@ -133,9 +133,9 @@ function PlayerController:onTouchMoved(point)
 		return;
 	end
 
-	--debug_log("PlayerController:onTouchMoved x ", point.x, " y ", point.y);
+	debug_log("PlayerController:onTouchMoved x ", point.x, " y ", point.y);
 	local gridPos = Vector.new(self.mField:positionToGrid(Vector.new(point.x, point.y)));
-	--debug_log("PlayerController:onTouchMoved gridPos x ", gridPos.x, " y ", gridPos.y);
+	debug_log("PlayerController:onTouchMoved gridPos x ", gridPos.x, " y ", gridPos.y);
 
 	if self.mObjectCaptured ~= nil then
 		self.mDestPos = gridPos:clone();
@@ -148,8 +148,8 @@ function PlayerController:onTouchMoved(point)
 		local newObjPos = playerPos + self.mDeltaCapturedPos;
 		local objGridPos = Vector.new(self.mField:positionToGrid(newObjPos));
 		local button = self:getJoystickButton((objGridPos - gridPos) * self.mObjectCaptured:getReverse());
-		--info_log("PlayerController:onTouchMoved objGridPos ", objGridPos.y);
-		--info_log("PlayerController:onTouchMoved gridPos ", gridPos.y);
+		info_log("PlayerController:onTouchMoved objGridPos ", objGridPos.y);
+		info_log("PlayerController:onTouchMoved gridPos ", gridPos.y);
 		self.mJoystick:setButtonPressed(button);
 	end
 end

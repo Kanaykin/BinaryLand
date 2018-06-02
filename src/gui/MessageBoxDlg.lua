@@ -81,7 +81,7 @@ function MessageBoxDlg:initGuiElements()
     --     self:mCallBack();
     -- end
 
-    -- local callFunc = CCCallFunc:create(callback);
+    -- local callFunc = cc.CallFunc:create(callback);
     -- self.mAnimator:setCallFuncForLuaCallbackNamed(callFunc, "0:Finish");
 
     local nodeBase = self.mNode:getChildByTag(MessageBoxDlg.BASE_NODE_TAG);

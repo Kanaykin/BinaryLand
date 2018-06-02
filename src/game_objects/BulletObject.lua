@@ -14,7 +14,7 @@ function BulletObject:init(field, pos, goalPos)
 
 	debug_log("BulletObject:init delta ", delta)
 	local position = pos + dir * field:getCellSize() * delta;
-	local animationNode = CCSprite:create("Bullet.png");
+	local animationNode = cc.Sprite:create("Bullet.png");
 	self.mAnimationNode = animationNode;
 
 	debug_log("BulletObject:init pos x ", pos.x, " y ", pos.y)
@@ -22,7 +22,7 @@ function BulletObject:init(field, pos, goalPos)
 	--self.mAnimationNode:setAnchorPoint(cc.p(-2.5, 0.5));
 	--node:setPosition(position.x, position.y);
 
-	local node = CCNode:create();
+	local node = cc.Node:create();
     node:setContentSize(cc.size(field:getCellSize(), field:getCellSize()));
     node:setPosition(position.x, position.y);
     node:addChild(animationNode);

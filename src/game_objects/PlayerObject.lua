@@ -407,7 +407,12 @@ function PlayerObject:move(dt)
 		--local pos = self.mField:gridPosToReal(newGridPos);
 		local newDir = DIRECTIONS[button]:clone() * self.mReverse;
 		self.mLastButton = button;
-		if self:collisionDetect(DIRECTIONS[button] * self.mReverse, newDir) then --self.mField:isFreePoint(newGridPos) then
+		if self:collisionDetect(DIRECTIONS[button]:clone() * self.mReverse, newDir) then --self.mField:isFreePoint(newGridPos) then
+
+			debug_log("curPosition x ", curPosition.x, " y ", curPosition.y);
+			debug_log("self.mVelocity ", self.mVelocity);
+			debug_log("dt ", dt);
+			info_log("newDir !!!! x ", newDir.x, ", y", newDir.y);
 			curPosition = curPosition + newDir * self.mVelocity * dt;
 			if not self.mField:collideObject(self, curPosition) then
 				self.mNode:setPosition(cc.p(curPosition.x, curPosition.y));

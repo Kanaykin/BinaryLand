@@ -69,7 +69,7 @@ function TutorialStepBase:initBeginAnimation(animator)
 		self:onBeginAnimationFinished();
 	end
 
-	local callFunc = CCCallFunc:create(callback);
+	local callFunc = cc.CallFunc:create(callback);
 	animator:setCallFuncForLuaCallbackNamed(callFunc, "0:finish");
 
 	animator:runAnimationsForSequenceNamed("animation");
@@ -92,7 +92,7 @@ function TutorialStepBase:initFromCCB(ccbfile, gameScene)
 	if not ccbfile then
 		return;
 	end
-	local ccpproxy = CCBProxy:create();
+	local ccpproxy = cc.CCBProxy:create();
 	local reader = ccpproxy:createCCBReader();
 	local node = ccpproxy:readCCBFromFile(ccbfile, reader, false);
 	self.mNode = node;

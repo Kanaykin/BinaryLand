@@ -36,7 +36,7 @@ end
 
 --------------------------------
 function CreditsScene:loadScene()
-    local ccpproxy = CCBProxy:create();
+    local ccpproxy = cc.CCBProxy:create();
     local reader = ccpproxy:createCCBReader();
     local node = ccpproxy:readCCBFromFile("CreditsScene", reader, false);
     self.mNode = node;

@@ -8,7 +8,7 @@ FightTrigger.mNodeSecond = nil;
 
 --------------------------------
 function FightTrigger:init(field)
-	local node = CCNode:create();
+	local node = cc.Node:create();
     node:setContentSize(cc.size(field:getCellSize() * 1.5, field:getCellSize() * 3.2));
 	field:getFieldNode():addChild(node);
 
@@ -17,7 +17,7 @@ function FightTrigger:init(field)
 
 	FightTrigger:superClass().init(self, field, node, Callback.new(field, Field.onEnemyEnterTrigger), Callback.new(field, Field.onEnemyLeaveTrigger));
 
-    local nodeSecond = CCNode:create();
+    local nodeSecond = cc.Node:create();
     nodeSecond:setContentSize(cc.size(field:getCellSize() * 3.2, field:getCellSize() * 1.5));
     field:getFieldNode():addChild(nodeSecond);
 

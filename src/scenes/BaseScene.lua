@@ -22,13 +22,13 @@ end
 
 ---------------------------------
 function BaseScene:createBackgroundLayer()
-	self.mBackgroundLayer = CCLayer:create();
+	self.mBackgroundLayer = cc.Layer:create();
 	self.mSceneGame:addChild(self.mBackgroundLayer, LAYER_ORDER.BACKGROUND);
 end
 
 ---------------------------------
 function BaseScene:createGameObjectLayer()
-	self.mGameObjectLayer = CCLayer:create();
+	self.mGameObjectLayer = cc.Layer:create();
 	self.mSceneGame:addChild(self.mGameObjectLayer, LAYER_ORDER.ANIMATION);
 end
 
@@ -39,7 +39,7 @@ end
 
 ---------------------------------
 function BaseScene:createGuiLayer()
-	self.mGuiLayer = CCLayer:create();
+	self.mGuiLayer = cc.Layer:create();
 	self.mSceneGame:addChild(self.mGuiLayer, LAYER_ORDER.MENU);
 end
 
@@ -62,15 +62,15 @@ function BaseScene:init(sceneMan, params)
 	end
 	info_log("BaseScene:init ", backgroundImageName, sceneMan);
 	self.mSceneManager = sceneMan;
-	self.mSceneGame = CCScene:create();
+	self.mSceneGame = cc.Scene:create();
 	self.mSceneGame:retain();
 
 	self:createBackgroundLayer();
 	
 	if backgroundImageName ~= nil then
-		local visibleSize = CCDirector:getInstance():getVisibleSize();
+		local visibleSize = cc.Director:getInstance():getVisibleSize();
     
-		local bg = CCSprite:create(backgroundImageName);
+		local bg = cc.Sprite:create(backgroundImageName);
 
 		if bg ~= nil then
             local imageSize = bg:getContentSize();

@@ -15,7 +15,7 @@ FoxHelpEffect.LABEL_TAG = 12;
 
 --------------------------------
 function FoxHelpEffect:init(node, game)
-    local ccpproxy = CCBProxy:create();
+    local ccpproxy = cc.CCBProxy:create();
     local reader = ccpproxy:createCCBReader();
     local nodeCCB = ccpproxy:readCCBFromFile("FoxHelpEffect", reader, false);
 

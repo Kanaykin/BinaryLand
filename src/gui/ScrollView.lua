@@ -96,8 +96,8 @@ end
 
 ------------------------------
 function ScrollView:initLayers(layers)
-	local visibleSize = CCDirector:getInstance():getVisibleSize();
-	local scrollviewlayer = CCLayer:create();
+	local visibleSize = cc.Director:getInstance():getVisibleSize();
+	local scrollviewlayer = cc.Layer:create();
 
 	-- compute size
 	local height = 0;
@@ -109,7 +109,7 @@ function ScrollView:initLayers(layers)
 
 	scrollviewlayer:setContentSize(cc.size(visibleSize.width, height));
 
-	self.mScroll = CCScrollView:create(cc.size(visibleSize.width, visibleSize.height), scrollviewlayer);
+	self.mScroll = cc.ScrollView:create(cc.size(visibleSize.width, visibleSize.height), scrollviewlayer);
 	self.mScroll:setBounceable(false);
 	self.mScroll:setZoomScale(3.0, false);
 
@@ -129,18 +129,18 @@ end
 ------------------------------
 function ScrollView:init(sizeScale, images)
 	self.mClickableChildren = {};
-	local visibleSize = CCDirector:getInstance():getVisibleSize();
-	local scrollviewlayer = CCLayer:create();
+	local visibleSize = cc.Director:getInstance():getVisibleSize();
+	local scrollviewlayer = cc.Layer:create();
 	scrollviewlayer:setContentSize(cc.size(visibleSize.width * sizeScale.width, visibleSize.height * sizeScale.height));
 
-	self.mScroll = CCScrollView:create(cc.size(visibleSize.width, visibleSize.height), scrollviewlayer);
+	self.mScroll = cc.ScrollView:create(cc.size(visibleSize.width, visibleSize.height), scrollviewlayer);
 	self.mScroll:setBounceable(false);
 	self.mScroll:setZoomScale(3.0, false);
 
 	local textureOffset = 0;
 	-- add images to view scroll
 	for i, imageName in ipairs(images) do
-		local sp1 = CCSprite:create(imageName);
+		local sp1 = cc.Sprite:create(imageName);
 		info_log("sp1 ", sp1, " name ", imageName);
 		if not sp1 then 
 			break;

@@ -194,7 +194,7 @@ function ChooseLocation:createLocationImages(node)
 
         info_log("ChooseLocation:createLocationImages scrollVisitedOffset ", scrollVisitedOffset);
         if scrollVisitedOffset then
-            local visibleSize = CCDirector:getInstance():getVisibleSize();
+            local visibleSize = cc.Director:getInstance():getVisibleSize();
             --scrollVisitedOffset = math.min(scrollVisitedOffset, visibleSize.width);
             --scrollVisitedOffset = scrollVisitedOffset - visibleSize.width / 2;
             scrollVisitedOffset = math.max(scrollVisitedOffset, 0);
@@ -227,8 +227,8 @@ end
 --------------------------------
 function ChooseLocation:initScene()
 
-    local globalMap1 = CCSprite:create(GLOBALMAP1);
-    local globalMap2 = CCSprite:create(GLOBALMAP2);
+    local globalMap1 = cc.Sprite:create(GLOBALMAP1);
+    local globalMap2 = cc.Sprite:create(GLOBALMAP2);
 
     local imageMapSize1 = globalMap1:getContentSize();
     local imageMapSize2 = globalMap2:getContentSize();
@@ -236,7 +236,7 @@ function ChooseLocation:initScene()
     imageMapSize.width = imageMapSize.width + imageMapSize2.width;
 
 
-    local visibleSize = CCDirector:getInstance():getVisibleSize();
+    local visibleSize = cc.Director:getInstance():getVisibleSize();
 
 	self.mScrollView = ScrollView:create();
 	self.mScrollView:init(cc.size(imageMapSize.width / visibleSize.width, 1), {});
@@ -244,11 +244,11 @@ function ChooseLocation:initScene()
 	self.mSceneGame:addChild(self.mScrollView.mScroll);
 
 	--parallax
-	local parallax = CCParallaxNode:create();
+	local parallax = cc.ParallaxNode:create();
 	self.mScrollView:addChild(parallax);
 
 	local pos = Coord(0.8, 0.5, 0, 0);
-	local grass = CCSprite:create(LOADSCEENIMAGE);
+	local grass = cc.Sprite:create(LOADSCEENIMAGE);
 
     local imageSize = grass:getContentSize();
     local scale = visibleSize.height / imageSize.height;
@@ -268,7 +268,7 @@ end
 
 --------------------------------
 function ChooseLocation:createLocations()
-    local ccpproxy = CCBProxy:create();
+    local ccpproxy = cc.CCBProxy:create();
     local reader = ccpproxy:createCCBReader();
     local node = ccpproxy:readCCBFromFile("ChooseLocation", reader, false);
     self.mScrollView:addChild(node);
@@ -353,7 +353,7 @@ end
 function ChooseLocation:initGui(params)
     self:createGuiLayer();
 
-    local ccpproxy = CCBProxy:create();
+    local ccpproxy = cc.CCBProxy:create();
     local reader = ccpproxy:createCCBReader();
     local node = ccpproxy:readCCBFromFile("ChooseLocationUI", reader, false);
     self.mGuiLayer:addChild(node);

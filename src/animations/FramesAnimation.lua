@@ -23,7 +23,7 @@ function FramesAnimation:init(textureName, frames, node, texture, anchor)
 
 	FramesAnimation:superClass().init(self, texture, node, anchor);
 	
-	self.mAnimation = CCAnimation:create();
+	self.mAnimation = cc.Animation:create();
 
 	for i = 1, frames do
 		local fullName = textureName..tostring(i)..".png";
@@ -34,7 +34,7 @@ function FramesAnimation:init(textureName, frames, node, texture, anchor)
 	self.mAnimation:setRestoreOriginalFrame(true);
 
 	local action = cc.Animate:create(self.mAnimation);
-	self.mAction = CCRepeatForever:create(action);
+	self.mAction = cc.RepeatForever:create(action);
 
 	self.mAction:retain();
 end

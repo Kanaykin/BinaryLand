@@ -33,7 +33,7 @@ function GettingBonusEffect:init(game, uiLayer, bonus)
         self.mFinished = true;
     end
 
-    local callFunc = CCCallFunc:create(callback);
+    local callFunc = cc.CallFunc:create(callback);
     animator:setCallFuncForLuaCallbackNamed(callFunc, "0:finish");
 
     animator:runAnimationsForSequenceNamed("Default Timeline");

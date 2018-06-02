@@ -88,7 +88,7 @@ end
 function MobObject:initAnimation()
 	info_log("MobObject:initAnimation");
 
-	local animation = CCAnimation:create();
+	local animation = cc.Animation:create();
 	info_log("animation ", animation);
 	animation:addSpriteFrameWithFileName("spider_frame1.png"); 
 	animation:addSpriteFrameWithFileName("spider_frame2.png"); 
@@ -97,7 +97,7 @@ function MobObject:initAnimation()
 	animation:setRestoreOriginalFrame(true);
 
 	local action = cc.Animate:create(animation);
-	local repeatForever = CCRepeatForever:create(action);
+	local repeatForever = cc.RepeatForever:create(action);
 	self.mNode:runAction(repeatForever);
 end
 

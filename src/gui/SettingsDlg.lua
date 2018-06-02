@@ -40,7 +40,7 @@ function SettingsDlg:hidePanel()
 		self.mGame.mDialogManager:deactivateModal(self);
 	end
 
-	local callFunc = CCCallFunc:create(callback);
+	local callFunc = cc.CallFunc:create(callback);
 	self.mAnimator:setCallFuncForLuaCallbackNamed(callFunc, "0:finish");
 
 	self.mAnimator:runAnimationsForSequenceNamed("Hide");

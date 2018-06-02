@@ -27,15 +27,17 @@ end
 
 --------------------------------
 function LoadingScene:loadScene()
-    local ccpproxy = CCBProxy:create();
+    local ccpproxy = cc.CCBProxy:create();
     local reader = ccpproxy:createCCBReader();
     local node = ccpproxy:readCCBFromFile("LoadingScene", reader, false);
     self.mSceneGame:addChild(node);
 
     local parent = node:getChildByTag(LoadingScene.PROGRESS_PARENT_TAG);
-    local parentSize = CCDirector:getInstance():getVisibleSize();
+    local parentSize = cc.Director:getInstance():getVisibleSize();
     parent:setPositionX(parentSize.width / 2);
+	debug_log("LoadingScene:loadScene ", parent:getChildByTag(LoadingScene.PROGRESS_TAG))
     self.mProgress = tolua.cast(parent:getChildByTag(LoadingScene.PROGRESS_TAG), "ccui.Scale9Sprite");
+	debug_log("LoadingScene:loadScene ", self.mProgress)
     self.mProgress:setScaleX(0);
 
     self.mTimeLabel = node:getChildByTag(LoadingScene.LABEL_TAG);

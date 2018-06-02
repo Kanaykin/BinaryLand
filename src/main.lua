@@ -1,5 +1,5 @@
-require "Cocos2d"
-require "Cocos2dConstants"
+require "script/cocos2d/Cocos2d"
+require "script/cocos2d/Cocos2dConstants"
 require "src/Game"
 require "src/base/Log"
 

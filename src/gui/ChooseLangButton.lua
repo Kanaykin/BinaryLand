@@ -42,10 +42,10 @@ function ChooseLangButton:init(button, animManager, game)
     	self:onFinishCloseAnimation();
     end
 
-    local callFunc = CCCallFunc:create(onFinishOpenAnimation);
+    local callFunc = cc.CallFunc:create(onFinishOpenAnimation);
     self.mAnimator:setCallFuncForLuaCallbackNamed(callFunc, "0:finish");
 
-    local callFunc = CCCallFunc:create(onFinishCloseAnimation);
+    local callFunc = cc.CallFunc:create(onFinishCloseAnimation);
     self.mAnimator:setCallFuncForLuaCallbackNamed(callFunc, "0:finishClose");
 
     function onChangeLangPressed()

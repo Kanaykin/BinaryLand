@@ -101,7 +101,7 @@ function Level:initFlashAnimation(primaryAnimator, animManager, nameFrame, node,
         loc_self:runStartAnimation(loc_animManager, node);
     end
 
-    local callFunc = CCCallFunc:create(callback);
+    local callFunc = cc.CallFunc:create(callback);
     primaryAnimator:setCallFuncForLuaCallbackNamed(callFunc, nameFrame);
 
     for i = 1, self:getCountStar() do
@@ -114,7 +114,7 @@ function Level:initFlashAnimation(primaryAnimator, animManager, nameFrame, node,
             -- end
         end
 
-        local starCallFunc = CCCallFunc:create(star_callback);
+        local starCallFunc = cc.CallFunc:create(star_callback);
         animManager:setCallFuncForLuaCallbackNamed(starCallFunc, "0:starframe"..tostring(i));
     end
 

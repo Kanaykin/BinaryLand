@@ -70,7 +70,7 @@ end
 
 --------------------------------
 function CCBBaseDialog:init(game, uiLayer, ccbFile)
-	local ccpproxy = CCBProxy:create();
+	local ccpproxy = cc.CCBProxy:create();
 	local reader = ccpproxy:createCCBReader();
 	local node = ccpproxy:readCCBFromFile(ccbFile, reader, false);
 

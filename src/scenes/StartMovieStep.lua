@@ -23,7 +23,7 @@ StartMovieStep.LAYER_TAG = 3;
 
 --------------------------------
 function StartMovieStep:init(sceneGame, stepName, callback, game, startScene)
-	local ccpproxy = CCBProxy:create();
+	local ccpproxy = cc.CCBProxy:create();
     local reader = ccpproxy:createCCBReader();
     local node = ccpproxy:readCCBFromFile(stepName, reader, false);
     sceneGame:addChild(node);
@@ -37,7 +37,7 @@ function StartMovieStep:init(sceneGame, stepName, callback, game, startScene)
     	callback();
     end
 
-    local callFunc = CCCallFunc:create(loc_callback);
+    local callFunc = cc.CallFunc:create(loc_callback);
     animator:setCallFuncForLuaCallbackNamed(callFunc, "0:finishStep");
 
     animator:runAnimationsForSequenceNamed("Movie");

@@ -15,7 +15,7 @@ function getPosition(object, pos)
 	local parentSize = nil;
 	local parent = object:getParent();
 	if(parent == nil) then
-		parentSize = CCDirector:getInstance():getVisibleSize();
+		parentSize = cc.Director:getInstance():getVisibleSize();
 		parentPos = cc.p(0, 0);
 	else
 		parentSize = parent:getContentSize();

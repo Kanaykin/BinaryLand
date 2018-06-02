@@ -289,7 +289,7 @@ end
 function LevelScene:loadTileMap(tileMapName, levelData)
 
     local tileMap = cc.TMXTiledMap:create(tileMapName);
-    local visibleSize = CCDirector:getInstance():getVisibleSize();
+    local visibleSize = cc.Director:getInstance():getVisibleSize();
     if levelData.customTiledAnchor then
         tileMap:setAnchorPoint(levelData.customTiledAnchor);
     else
@@ -315,7 +315,7 @@ function LevelScene:initScene(levelData)
 
     debug_log("levelData.ccbFile ", levelData);
 	if type(levelData.ccbFile) == "string" then
-		local ccpproxy = CCBProxy:create();
+		local ccpproxy = cc.CCBProxy:create();
 		local reader = ccpproxy:createCCBReader();
 		
 		local node = ccpproxy:readCCBFromFile(levelData.ccbFile, reader, false);
@@ -335,7 +335,7 @@ function LevelScene:initScene(levelData)
 		local layers = {};
 		local nodes = {};
 		for i, fileName in ipairs(levelData.ccbFile) do
-			local ccpproxy = CCBProxy:create();
+			local ccpproxy = cc.CCBProxy:create();
 			local reader = ccpproxy:createCCBReader();
 			local node = ccpproxy:readCCBFromFile(fileName, reader, false);
 

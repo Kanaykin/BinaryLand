@@ -1,5 +1,5 @@
 require "src/base/Inheritance"
-require "json"
+require "script/cocos2d/json"
 
 LocalizationManager =  inheritsFrom(nil)
 LocalizationManager.mCurrentLang = nil;
@@ -17,7 +17,7 @@ function LocalizationManager:init()
 	info_log("LocalizationManager:init lang ", lang);
 
 	self.mCurrentLang = lang;
-	local curr = CCUserDefault:getInstance():getIntegerForKey("Language", -1);
+	local curr = cc.UserDefault:getInstance():getIntegerForKey("Language", -1);
 	if curr ~= -1 then
 		self.mCurrentLang = curr;
 	else
@@ -81,7 +81,7 @@ end
 ---------------------------------
 function LocalizationManager:setCurrentLanguage(lang)
 	self.mCurrentLang = lang;
-	CCUserDefault:getInstance():setIntegerForKey("Language", self.mCurrentLang);
+	cc.UserDefault:getInstance():setIntegerForKey("Language", self.mCurrentLang);
 end
 
 ---------------------------------

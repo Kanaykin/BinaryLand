@@ -33,7 +33,7 @@ BonusObject.mBonusImage = nil;
 --------------------------------
 function BonusObject:initTimeBonus(animation)
     --animation:init("TimeBonus.plist", self.mNode, self.mNode:getAnchorPoint(), nil, 0.1);
-    local ccpproxy = CCBProxy:create();
+    local ccpproxy = cc.CCBProxy:create();
     local reader = ccpproxy:createCCBReader();
     local node = ccpproxy:readCCBFromFile("TimeBonus", reader, false);
     self.mNode:addChild(node);
@@ -65,7 +65,7 @@ function BonusObject:initTimeBonus(animation)
             animator:runAnimationsForSequenceNamed("LoopAnimation");
         end
 
-        local callFunc = CCCallFunc:create(callback);
+        local callFunc = cc.CallFunc:create(callback);
         animator:setCallFuncForLuaCallbackNamed(callFunc, "0:finish");
         animator:runAnimationsForSequenceNamed("LoopAnimation");
 

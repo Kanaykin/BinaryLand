@@ -46,11 +46,11 @@ end
 function ChooseLevel:initScene()
     local nameTileMap = self.mCurLocation:getId() <= 5 and "ChoiceLevels" ..self.mCurLocation:getId().. ".tmx" or "ChoiceLevels1.tmx";
     local tileMap = cc.TMXTiledMap:create(nameTileMap);
-    local visibleSize = CCDirector:getInstance():getVisibleSize();
+    local visibleSize = cc.Director:getInstance():getVisibleSize();
     tileMap:setAnchorPoint(cc.p(0.5, 0.5));
     tileMap:setPosition(cc.p(visibleSize.width / 2.0, visibleSize.height / 2.0));
 
-	local ccpproxy = CCBProxy:create();
+	local ccpproxy = cc.CCBProxy:create();
 	local reader = ccpproxy:createCCBReader();
     local nameCCBFile = self.mCurLocation:getId() <= 5 and "MainScene" ..self.mCurLocation:getId() or "MainScene1";
 	local node = ccpproxy:readCCBFromFile(nameCCBFile, reader, false);
@@ -125,7 +125,7 @@ end
 
 --------------------------------
 function ChooseLevel:initGui()
-	local visibleSize = CCDirector:getInstance():getVisibleSize();
+	local visibleSize = cc.Director:getInstance():getVisibleSize();
     
     self:createGuiLayer();
 

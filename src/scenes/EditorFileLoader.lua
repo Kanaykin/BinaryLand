@@ -24,7 +24,7 @@ EditorFileLoader.MAX_WIDTH = 15;
 function EditorFileLoader:createLoveCage(pos, cellSize, fieldNode)
     info_log("EditorFileLoader:createLoveCage ");
 
-    local node = CCSprite:create("Baby.png");
+    local node = cc.Sprite:create("Baby.png");
 
     --pos.y = pos.y + cellSize / 2.0;
 
@@ -33,14 +33,14 @@ function EditorFileLoader:createLoveCage(pos, cellSize, fieldNode)
     node:setTag(FactoryObject.LOVE_CAGE_TAG);
 
     -- create trigers
-    local trigger1 = CCNode:create();
+    local trigger1 = cc.Node:create();
     trigger1:setContentSize(cc.size(cellSize * 1.2, cellSize * 1.2));
     trigger1:setPosition(cc.p(pos.x + cellSize, pos.y));
     trigger1:setAnchorPoint(cc.p(0.5, 0.0));
     trigger1:setTag(FactoryObject.FINISH_TAG);
     fieldNode:addChild(trigger1);
 
-    local trigger2 = CCNode:create();
+    local trigger2 = cc.Node:create();
     trigger2:setContentSize(cc.size(cellSize * 1.2, cellSize * 1.2));
     trigger2:setPosition(cc.p(pos.x - cellSize, pos.y));
     trigger2:setAnchorPoint(cc.p(0.5, 0.0));
@@ -54,11 +54,11 @@ end
 function EditorFileLoader:createTimeBonus(pos, cellSize)
 	info_log("EditorFileLoader:createTimeBonus ");
 
-    local node = CCSprite:create("Time.png");
+    local node = cc.Sprite:create("Time.png");
     node:setAnchorPoint(cc.p(0, 0));
     node:setTag(BonusObject.FAKE_NODE_TAG);
 
-    local mainNode = CCNode:create();
+    local mainNode = cc.Node:create();
     mainNode:addChild(node);
     mainNode:setContentSize(node:getContentSize());
 
@@ -74,7 +74,7 @@ end
 function EditorFileLoader:createChestBonus(pos, cellSize)
 	info_log("EditorFileLoader:createChestBonus ");
 
-    local node = CCSprite:create("Chest.png");
+    local node = cc.Sprite:create("Chest.png");
 
     --pos.y = pos.y + cellSize / 2.0;
 
@@ -88,7 +88,7 @@ end
 function EditorFileLoader:createCoin(pos, cellSize)
     info_log("EditorFileLoader:createCoin ");
 
-    local node = CCSprite:create("Coin.png");
+    local node = cc.Sprite:create("Coin.png");
 
     --pos.y = pos.y + cellSize / 2.0;
 
@@ -103,7 +103,7 @@ end
 function EditorFileLoader:createCage(pos, cellSize)
     info_log("EditorFileLoader:createCage ");
 
-    local node = CCSprite:create("cage.png");
+    local node = cc.Sprite:create("cage.png");
 
     pos.y = pos.y + cellSize / 2.0;
 
@@ -117,7 +117,7 @@ end
 function EditorFileLoader:createHiddenTrap(pos, cellSize)
     info_log("EditorFileLoader:createHiddenTrap ");
 
-    local node = CCSprite:create("HiddenTrapForest.png");
+    local node = cc.Sprite:create("HiddenTrapForest.png");
 
     pos.y = pos.y --+ cellSize / 2.0;
 
@@ -130,7 +130,7 @@ end
 function EditorFileLoader:createDog(pos, cellSize)
     info_log("EditorFileLoader:createDog ");
 
-    local node = CCSprite:create("Dog.png");
+    local node = cc.Sprite:create("Dog.png");
 
     pos.y = pos.y + cellSize / 2.0;
 
@@ -143,7 +143,7 @@ end
 --------------------------------
 function EditorFileLoader:createHunter(pos, cellSize)
     info_log("EditorFileLoader:createHunter ");
-    local node = CCSprite:create("Hunter.png");
+    local node = cc.Sprite:create("Hunter.png");
 
     pos.y = pos.y + cellSize / 2.0;
     node:setAnchorPoint(cc.p(0.5, 0.35));
@@ -155,7 +155,7 @@ end
 --------------------------------
 function EditorFileLoader:createBush(pos)
 	info_log("EditorFileLoader:createBush ");
-	local tree = CCSprite:create("bush.png");
+	local tree = cc.Sprite:create("bush.png");
     
     info_log("EditorFileLoader:loadEditorFile tree ", tree);
     tree:setAnchorPoint(cc.p(0.5, 0.0));
@@ -166,7 +166,7 @@ end
 --------------------------------
 function EditorFileLoader:createFox(pos, cellSize)
 
-    local ccpproxy = CCBProxy:create();
+    local ccpproxy = cc.CCBProxy:create();
     local reader = ccpproxy:createCCBReader();
     local node = ccpproxy:readCCBFromFile("Fox", reader, false);
     node:setTag(FactoryObject.FOX_TAG);
@@ -178,7 +178,7 @@ end
 --------------------------------
 function EditorFileLoader:createFoxGirl(pos, cellSize)
 
-    local ccpproxy = CCBProxy:create();
+    local ccpproxy = cc.CCBProxy:create();
     local reader = ccpproxy:createCCBReader();
     local node = ccpproxy:readCCBFromFile("Fox", reader, false);
     node:setTag(FactoryObject.FOX2_TAG);
@@ -189,7 +189,7 @@ end
 
 --------------------------------
 function EditorFileLoader:createBonusTree(pos, cellSize)
-	local tree = CCSprite:create("bush2.png");
+	local tree = cc.Sprite:create("bush2.png");
     
     info_log("EditorFileLoader:createBonusTree tree ", tree);
     tree:setAnchorPoint(cc.p(0.5, 0.0));
@@ -200,7 +200,7 @@ end
 
 --------------------------------
 function EditorFileLoader:createBonusDoor(pos, cellSize)
-	local tree = CCSprite:create("BonusDoorExit.png");
+	local tree = cc.Sprite:create("BonusDoorExit.png");
     
     info_log("EditorFileLoader:createBonusTree tree ", tree);
     tree:setAnchorPoint(cc.p(0.5, 0.0));
@@ -211,7 +211,7 @@ end
 
 --------------------------------
 function EditorFileLoader:createTornado(pos, cellSize)
-	local tree = CCSprite:create("Tornado.png");
+	local tree = cc.Sprite:create("Tornado.png");
     
     info_log("EditorFileLoader:createTornado tree ", tree);
     --tree:setAnchorPoint(cc.p(0.5, 0.0));
@@ -223,7 +223,7 @@ end
 
 --------------------------------
 function EditorFileLoader:createIceGround(pos, cellSize)
-	local tree = CCSprite:create("IceGround.png");
+	local tree = cc.Sprite:create("IceGround.png");
     
     info_log("EditorFileLoader:createIceGround tree ", tree);
     --tree:setAnchorPoint(cc.p(0.5, 0.0));
@@ -235,7 +235,7 @@ end
 
 --------------------------------
 function EditorFileLoader:createSwampGround(pos, cellSize)
-	local obj = CCSprite:create("SwampGround.png");
+	local obj = cc.Sprite:create("SwampGround.png");
     
     info_log("EditorFileLoader:createSwampGround obj ", obj);
     --tree:setAnchorPoint(cc.p(0.5, 0.0));
@@ -329,7 +329,7 @@ function EditorFileLoader:loadEditorFile(levelData, G_EditorScene, levelScene)
 
         --self.mField = Field:create();
 
-        local visibleSize = CCDirector:getInstance():getVisibleSize();
+        local visibleSize = cc.Director:getInstance():getVisibleSize();
 
         --compute size field
         local cellSize = levelData.cellSize * levelScene.mSceneManager.mGame:getScale();
@@ -352,7 +352,7 @@ function EditorFileLoader:loadEditorFile(levelData, G_EditorScene, levelScene)
         info_log("LevelScene:loadEditorFile count_display : ", count_display);
 
         for i = 1, count_display do
-            local node = CCNode:create();
+            local node = cc.Node:create();
             local anchor = node:getAnchorPoint();
             info_log("LevelScene:loadEditorFile anchor.x ", anchor.x, " anchor.y ", anchor.y);
             --node:setAnchorPoint(cc.p(0.5, 0.5));
@@ -361,7 +361,7 @@ function EditorFileLoader:loadEditorFile(levelData, G_EditorScene, levelScene)
             table.insert(layers, node);
             info_log("LevelScene:loadEditorFile create node ");
 
-            local fieldNode = CCNode:create();
+            local fieldNode = cc.Node:create();
             node:addChild(fieldNode);
 
             fieldNode:setTag(LevelScene.FIELD_NODE_TAG);

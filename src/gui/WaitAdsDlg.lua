@@ -62,7 +62,7 @@ function WaitAdsDlg:tick(dt)
 	local advertisement = extend.Advertisement:getInstance();
 	local status = advertisement:getStatusADS();
 
-	-- info_log("WaitAdsDlg:tick status ", status);
+	info_log("WaitAdsDlg:tick status ", status);
 
 	if status == 3 then -- LOADED(3),
 		self.mStarsCount.allStar = self.mStarsCount.allStar + 1;

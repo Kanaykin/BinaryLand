@@ -56,7 +56,7 @@ end
 
 --------------------------------
 function EndScene:loadScene()
-    local ccpproxy = CCBProxy:create();
+    local ccpproxy = cc.CCBProxy:create();
     local reader = ccpproxy:createCCBReader();
     local node = ccpproxy:readCCBFromFile("EndMovieStep1", reader, false);
     self.mSceneGame:addChild(node);
@@ -81,7 +81,7 @@ function EndScene:loadScene()
     	end
     end
 
-    local callFunc = CCCallFunc:create(loc_callback);
+    local callFunc = cc.CallFunc:create(loc_callback);
     animator:setCallFuncForLuaCallbackNamed(callFunc, "0:finishStep");
 
     animator:runAnimationsForSequenceNamed("Animation");

@@ -425,8 +425,6 @@
 						<string>TutorialStep1_4Text</string>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
