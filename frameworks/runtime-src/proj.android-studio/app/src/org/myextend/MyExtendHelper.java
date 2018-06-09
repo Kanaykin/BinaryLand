@@ -2,6 +2,7 @@ package org.myextend;
 
 import org.myextend.Logger;
 import org.myextend.GoogleStatistic;
+import org.myextend.FacebookStatistic;
 import org.myextend.FacebookADS;
 import org.myextend.ADSContainer;
 import org.myextend.AdMobADS;
@@ -12,10 +13,12 @@ import android.util.Log;
 
 public class MyExtendHelper {
 	private static GoogleStatistic 	sGoogleStatistic;
+	private static FacebookStatistic sFacebookStatistic;
 	private static IADS 	sADS;
 	
 	public static void init(final Activity activity) {
 		MyExtendHelper.sGoogleStatistic = new GoogleStatistic(activity);
+		MyExtendHelper.sFacebookStatistic = new FacebookStatistic(activity);
 
 //		FacebookADS facebookADS = new FacebookADS(activity, MyExtendHelper.sGoogleStatistic);
 		AdMobADS adMobADS = new AdMobADS(activity, MyExtendHelper.sGoogleStatistic);
@@ -31,19 +34,23 @@ public class MyExtendHelper {
 	public static void sendEventToStatistic(final String category, final String action, 
 											final String label, int value) {
 		MyExtendHelper.sGoogleStatistic.sendEvent(category, action, label, value);
+		MyExtendHelper.sFacebookStatistic.sendEvent(category, action, label, value);
 	}
 	
 	public static void sendTimeToStatistic(	final String category, final String label, 
 											final String variable, int value) {
 		MyExtendHelper.sGoogleStatistic.sendTime(category, label, variable, value);
+		MyExtendHelper.sFacebookStatistic.sendTime(category, label, variable, value);
 	}
 	
 	public static void sendExceptionToStatistic(final String description, boolean fatal) {
 		MyExtendHelper.sGoogleStatistic.sendException(description, fatal);
+		MyExtendHelper.sFacebookStatistic.sendException(description, fatal);
 	}
 	
 	public static void sendScreenNameToStatistic(final String screenName) {
 		MyExtendHelper.sGoogleStatistic.sendScreenName(screenName);
+		MyExtendHelper.sFacebookStatistic.sendScreenName(screenName);
 	}
 	
 	public static boolean showADS() {
