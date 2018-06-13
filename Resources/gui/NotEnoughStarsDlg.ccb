@@ -438,7 +438,7 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>15</real>
+								<real>8</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -454,9 +454,11 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>15</real>
+								<real>8</real>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>

@@ -166,7 +166,7 @@ function Game:initResolution()
 
     if visibleSize.width == 0 or visibleSize.height == 0 then
         -- create desktop gl view
-        local glview = cc.GLViewImpl:createWithRect("Desktop", cc.rect(0, 0, 1920, 1080));
+        local glview = cc.GLViewImpl:createWithRect("Desktop", cc.rect(0, 0, 960, 640));
         info_log("Game:initResolution glview ", glview);
         cc.Director:getInstance():setOpenGLView(glview);
         visibleSize = cc.Director:getInstance():getVisibleSize();
@@ -292,8 +292,6 @@ function Game:init()
 	local g_game = self;
 	
 	function tick(dt)
-		info_log("tick dt ", dt);
-
 		if (dt > 0.2) then
 			dt = 1 / 60.0;
 		end
