@@ -199,29 +199,6 @@ GoogleApiClient.OnConnectionFailedListener
 
         initUIImmersive();
 
-		/*mPlusClient =  new GoogleApiClient.Builder(this)
-	    	.addApi(Plus.API)
-	    	.addScope(Plus.SCOPE_PLUS_LOGIN)
-	    	.build();
-        int result = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        if((result != ConnectionResult.SERVICE_MISSING &&
-        		result != ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED &&
-        		result != ConnectionResult.SERVICE_DISABLED)) {
-        	
-        	GoogleApiClient.Builder builder = new GoogleApiClient.Builder(this, this, this);
-            builder.addApi(Games.API);
-            builder.addScope(Games.SCOPE_GAMES);
-			//builder.addApi(Plus.API);
-        	//builder.addScope(Plus.SCOPE_PLUS_LOGIN);
-        	//builder.addScope(Plus.SCOPE_PLUS_PROFILE);
-        	mPlusClient = builder.build();
-        }
-		
-		//mPlusClient = new GoogleApiClient.Builder(this)
-        //.addApi(Plus.API)
-        //.addScope(Plus.SCOPE_PLUS_LOGIN)
-        //.build();*/
-
 		MyExtendHelper.init(this);
 	}
 	

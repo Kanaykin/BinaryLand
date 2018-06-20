@@ -11,6 +11,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.util.Log;
 
+import com.google.ads.consent.*;
+
 public class MyExtendHelper {
 	private static GoogleStatistic 	sGoogleStatistic;
 	private static FacebookStatistic sFacebookStatistic;
@@ -29,6 +31,23 @@ public class MyExtendHelper {
 //		adsContainer.Add(adMobADS);
 
 		MyExtendHelper.sADS = adMobVideo;
+
+		ConsentInformation consentInformation = ConsentInformation.getInstance(activity);
+		String[] publisherIds = {"pub-7659372211727082"};
+
+		consentInformation.requestConsentInfoUpdate(publisherIds, new ConsentInfoUpdateListener() {
+			@Override
+			public void onConsentInfoUpdated(ConsentStatus consentStatus) {
+				// User's consent status successfully updated.
+				Logger.info("MyExtendHelper:init User's consent status successfully updated.");
+			}
+
+			@Override
+			public void onFailedToUpdateConsentInfo(String errorDescription) {
+				// User's consent status failed to update.
+				Logger.info("MyExtendHelper:init User's consent status failed to update.");
+			}
+		});
 	}
 	
 	public static void sendEventToStatistic(final String category, final String action, 
