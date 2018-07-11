@@ -6,6 +6,7 @@ import org.myextend.FacebookStatistic;
 import org.myextend.FacebookADS;
 import org.myextend.ADSContainer;
 import org.myextend.AdMobADS;
+import org.myextend.AppodealADS;
 import org.myextend.RewardedVideoAdMobADS;
 import android.app.Activity;
 import android.app.Application;
@@ -23,14 +24,15 @@ public class MyExtendHelper {
 		MyExtendHelper.sFacebookStatistic = new FacebookStatistic(activity);
 
 //		FacebookADS facebookADS = new FacebookADS(activity, MyExtendHelper.sGoogleStatistic);
-		AdMobADS adMobADS = new AdMobADS(activity, MyExtendHelper.sGoogleStatistic);
-		RewardedVideoAdMobADS adMobVideo = new RewardedVideoAdMobADS(activity, MyExtendHelper.sGoogleStatistic);
+//		AdMobADS adMobADS = new AdMobADS(activity, MyExtendHelper.sGoogleStatistic);
+//		RewardedVideoAdMobADS adMobVideo = new RewardedVideoAdMobADS(activity, MyExtendHelper.sGoogleStatistic);
 
 //		ADSContainer adsContainer = new ADSContainer();
 //		adsContainer.Add(facebookADS);
 //		adsContainer.Add(adMobADS);
 
-		MyExtendHelper.sADS = adMobVideo;
+		AppodealADS ads = new AppodealADS(activity, MyExtendHelper.sGoogleStatistic);
+		MyExtendHelper.sADS = ads;
 
 		ConsentInformation consentInformation = ConsentInformation.getInstance(activity);
 		String[] publisherIds = {"pub-7659372211727082"};

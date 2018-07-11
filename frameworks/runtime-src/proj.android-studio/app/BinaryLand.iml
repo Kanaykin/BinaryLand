@@ -421,7 +421,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/ndkBuild" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/pre-dexed" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
@@ -437,96 +436,119 @@
     <orderEntry type="jdk" jdkName="Android API 26 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="play-services-tagmanager-v4-impl-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="play-services-analytics-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="facebook-android-sdk-4.28.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-panorama-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="play-services-cast-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="exoplayer-dash-r2.4.2" level="project" />
     <orderEntry type="library" exported="" name="play-services-nearby-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="play-services-analytics-impl-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="play-services-instantapps-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="mobvista_mvnative-" level="project" />
+    <orderEntry type="library" exported="" name="facebook-places-4.28.0" level="project" />
+    <orderEntry type="library" exported="" name="mobvista_appwallext-" level="project" />
+    <orderEntry type="library" exported="" name="palette-v7-25.2.0" level="project" />
+    <orderEntry type="library" exported="" name="firebase-messaging-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="play-services-gass-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="support-compat-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="firebase-database-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="play-services-wallet-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="play-services-clearcut-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-gcm-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="firebase-storage-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="common-1.0.0" level="project" />
+    <orderEntry type="library" exported="" name="1_common-1.0.0" level="project" />
+    <orderEntry type="library" exported="" name="firebase-storage-common-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="exoplayer-core-r2.4.2" level="project" />
+    <orderEntry type="library" exported="" name="mobvista_mvjscommon-" level="project" />
+    <orderEntry type="library" exported="" name="startapp-3.6.7" level="project" />
+    <orderEntry type="library" exported="" name="firebase-common-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="support-core-ui-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="facebook-messenger-4.28.0" level="project" />
+    <orderEntry type="library" exported="" name="support-media-compat-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-auth-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />
+    <orderEntry type="library" exported="" name="applovin-7.5.0" level="project" />
+    <orderEntry type="library" exported="" name="facebook-common-4.28.0" level="project" />
+    <orderEntry type="library" exported="" name="unity_ads-2.1.0" level="project" />
+    <orderEntry type="library" exported="" name="firebase-iid-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="support-core-utils-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="bolts-tasks-1.4.0" level="project" />
+    <orderEntry type="library" exported="" name="mailru-4.6.17" level="project" />
+    <orderEntry type="library" exported="" name="android-support-v7-recyclerview-23.1.1" level="project" />
+    <orderEntry type="library" exported="" name="customtabs-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="firebase-auth-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="play-services-safetynet-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="play-services-base-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="mmedia-6.4.0-" level="project" />
+    <orderEntry type="library" exported="" name="facebook-core-4.28.0" level="project" />
+    <orderEntry type="library" exported="" name="yandex-metrica-2.73" level="project" />
+    <orderEntry type="library" exported="" name="play-services-maps-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="play-services-tagmanager-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="mediarouter-v7-25.2.0" level="project" />
+    <orderEntry type="library" exported="" name="ogury-2.1.15" level="project" />
+    <orderEntry type="library" exported="" name="play-services-auth-base-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="mobvista_common-" level="project" />
+    <orderEntry type="library" exported="" name="mobvista_interstitial-" level="project" />
+    <orderEntry type="library" exported="" name="mobvista_appwall-" level="project" />
+    <orderEntry type="library" exported="" name="play-services-analytics-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="facebook-android-sdk-4.28.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-cast-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="mobvista_videocommon-" level="project" />
     <orderEntry type="library" exported="" name="play-services-games-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="firebase-crash-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="core-3.3.0" level="project" />
-    <orderEntry type="library" exported="" name="play-services-analytics-impl-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="play-services-instantapps-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="mobvista_offerwall-" level="project" />
     <orderEntry type="library" exported="" name="play-services-ads-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="facebook-places-4.28.0" level="project" />
+    <orderEntry type="library" exported="" name="mobvista_playercommon-" level="project" />
     <orderEntry type="library" exported="" name="firebase-config-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-drive-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="bolts-android-1.4.0" level="project" />
     <orderEntry type="library" exported="" name="firebase-dynamic-links-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="palette-v7-25.2.0" level="project" />
-    <orderEntry type="library" exported="" name="firebase-messaging-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="consent-library-1.0.4" level="project" />
-    <orderEntry type="library" exported="" name="play-services-gass-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-location-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-vision-common-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="facebook-login-4.28.0" level="project" />
-    <orderEntry type="library" exported="" name="support-compat-26.1.0" level="project" />
     <orderEntry type="library" exported="" name="facebook-applinks-4.28.0" level="project" />
-    <orderEntry type="library" exported="" name="firebase-database-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="play-services-wallet-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="appodeal-2.1.11" level="project" />
     <orderEntry type="library" exported="" name="audience-network-sdk-4.28.0" level="project" />
-    <orderEntry type="library" exported="" name="play-services-clearcut-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="firebase-database-connection-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="chartboost-6.6.3" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-26.1.0" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-26.1.0" level="project" />
-    <orderEntry type="library" exported="" name="play-services-gcm-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="support-fragment-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="mobvista_reward-" level="project" />
     <orderEntry type="library" exported="" name="play-services-appinvite-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="firebase-storage-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="adcolony-sdk-3.2.1-" level="project" />
     <orderEntry type="library" exported="" name="play-services-plus-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="common-1.0.0" level="project" />
-    <orderEntry type="library" exported="" name="1_common-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-places-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="firebase-storage-common-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="bolts-applinks-1.4.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="exoplayer-core-r2.4.2" level="project" />
     <orderEntry type="library" exported="" name="gson-2.8.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-fitness-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-tasks-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="firebase-common-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-vision-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="support-core-ui-26.1.0" level="project" />
-    <orderEntry type="library" exported="" name="facebook-messenger-4.28.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-ads-lite-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="support-media-compat-26.1.0" level="project" />
-    <orderEntry type="library" exported="" name="play-services-auth-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-auth-api-phone-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="facebook-common-4.28.0" level="project" />
-    <orderEntry type="library" exported="" name="firebase-iid-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="support-vector-drawable-26.1.0" level="project" />
-    <orderEntry type="library" exported="" name="support-core-utils-26.1.0" level="project" />
-    <orderEntry type="library" exported="" name="bolts-tasks-1.4.0" level="project" />
+    <orderEntry type="library" exported="" name="inmobi-6.2.3" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="customtabs-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="firebase-auth-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="play-services-safetynet-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="mobvista_nativeex-" level="project" />
     <orderEntry type="library" exported="" name="play-services-tagmanager-api-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-awareness-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="mobvista_mvdownloads-" level="project" />
     <orderEntry type="library" exported="" name="play-services-basement-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="play-services-base-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="facebook-share-4.28.0" level="project" />
-    <orderEntry type="library" exported="" name="facebook-core-4.28.0" level="project" />
-    <orderEntry type="library" exported="" name="play-services-maps-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="play-services-tagmanager-11.0.4" level="project" />
+    <orderEntry type="library" exported="" name="mobvista_videofeeds-" level="project" />
     <orderEntry type="library" exported="" name="play-services-wearable-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-cast-framework-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="mediarouter-v7-25.2.0" level="project" />
     <orderEntry type="library" exported="" name="animated-vector-drawable-26.1.0" level="project" />
     <orderEntry type="library" exported="" name="runtime-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="firebase-appindexing-11.0.4" level="project" />
-    <orderEntry type="library" exported="" name="play-services-auth-base-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-26.1.0" level="project" />
     <orderEntry type="library" exported="" name="firebase-analytics-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="firebase-analytics-impl-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="mobvista_alphab-" level="project" />
     <orderEntry type="library" exported="" name="play-services-iid-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-identity-11.0.4" level="project" />
     <orderEntry type="module" module-name="libcocos2dx" exported="" />
-    <orderEntry type="library" exported="" name="EngineDataManager" level="project" />
-    <orderEntry type="library" exported="" name="com.android.vending.expansion.zipfile" level="project" />
-    <orderEntry type="library" exported="" name="httpclient-4.4.1.1" level="project" />
-    <orderEntry type="library" exported="" name="android-async-http-1.4.9" level="project" />
   </component>
 </module>

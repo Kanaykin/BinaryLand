@@ -6,6 +6,17 @@ android {
     compileSdkVersion PROP_COMPILE_SDK_VERSION.toInteger()
     buildToolsVersion "26.0.1"
 
+    packagingOptions {
+        exclude 'lib/x86/libadcolony.so'
+        exclude 'lib/x86/libjs.so'
+        exclude 'lib/x86_64/libadcolony.so'
+        exclude 'lib/x86_64/libjs.so'
+        exclude 'lib/arm64-v8a/libadcolony.so'
+        exclude 'lib/arm64-v8a/libjs.so'
+        exclude 'lib/armeabi-v7a/libadcolony.so'
+        exclude 'lib/armeabi-v7a/libjs.so'
+    }
+
     defaultConfig {
         applicationId "com.MyCompany.BinaryLand"
         minSdkVersion PROP_MIN_SDK_VERSION
@@ -68,6 +79,7 @@ android {
             }
         }
     }
+
 
     buildTypes {
         release {
@@ -238,6 +250,12 @@ android.applicationVariants.all { variant ->
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':libcocos2dx')
@@ -250,4 +268,21 @@ dependencies {
     compile 'com.google.android.gms:play-services:11.0.4'
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.google.android.ads.consent:consent-library:1.0.4'
+    compile 'com.squareup.picasso:picasso:2.5.2' //for Inmobi
+    compile name: 'adcolony-sdk-3.2.1', ext: 'aar'
+    compile name: 'mmedia-6.4.0', ext: 'aar'
+    compile name: 'mobvista_alphab', ext: 'aar'
+    compile name: 'mobvista_appwall', ext: 'aar'
+    compile name: 'mobvista_appwallext', ext: 'aar'
+    compile name: 'mobvista_common', ext: 'aar'
+    compile name: 'mobvista_interstitial', ext: 'aar'
+    compile name: 'mobvista_mvdownloads', ext: 'aar'
+    compile name: 'mobvista_mvjscommon', ext: 'aar'
+    compile name: 'mobvista_mvnative', ext: 'aar'
+    compile name: 'mobvista_nativeex', ext: 'aar'
+    compile name: 'mobvista_offerwall', ext: 'aar'
+    compile name: 'mobvista_playercommon', ext: 'aar'
+    compile name: 'mobvista_reward', ext: 'aar'
+    compile name: 'mobvista_videocommon', ext: 'aar'
+    compile name: 'mobvista_videofeeds', ext: 'aar'
 }
