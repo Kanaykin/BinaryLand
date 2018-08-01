@@ -24,6 +24,7 @@ public class AppodealADS implements RewardedVideoCallbacks, IADS
 	public AppodealADS(final Activity activity,
 		final GoogleStatistic googleStatistic) 
 	{
+		Logger.info("AppodealADS::AppodealADS");
 		mGoogleStatistic = googleStatistic;
 
 		mActivity = activity;
@@ -51,6 +52,7 @@ public class AppodealADS implements RewardedVideoCallbacks, IADS
 			mListener.OnSuccess();
 		}
 		mStatus = AdsStatus.LOADED;
+		Logger.info("AppodealADS::onRewardedVideoLoaded");
 	}
 	@Override
 	public void onRewardedVideoFailedToLoad()
@@ -69,6 +71,7 @@ public class AppodealADS implements RewardedVideoCallbacks, IADS
 	}
 	@Override
 	public void onRewardedVideoShown() {
+		Logger.info("AppodealADS::onRewardedVideoShown");
 		mGoogleStatistic.sendEvent("AppodealADS", "show", "success", -1);
 		mStatus = AdsStatus.LOADED;
 		createInterstitialAd();
@@ -76,12 +79,14 @@ public class AppodealADS implements RewardedVideoCallbacks, IADS
 	@Override
 	public void onRewardedVideoFinished(int amount, String name)
 	{
+		Logger.info("AppodealADS::onRewardedVideoFinished");
 		mStatus = AdsStatus.LOADED;
 		createInterstitialAd();
 	}
 	@Override
 	public void onRewardedVideoClosed(boolean finished)
 	{
+		Logger.info("AppodealADS::onRewardedVideoClosed");
 		mStatus = AdsStatus.LOADED;
 		createInterstitialAd();
 	}
@@ -92,8 +97,8 @@ public class AppodealADS implements RewardedVideoCallbacks, IADS
 	{
 		mCanceled = false;
 		mGoogleStatistic.sendEvent("AppodealADS", "show", "load", -1);
-//		createInterstitialAd();
-
+		createInterstitialAd();
+		mStatus = AdsStatus.LOADING;
 		this.mActivity.runOnUiThread(new Runnable() {
 			@Override public void run()
 			{
@@ -101,8 +106,13 @@ public class AppodealADS implements RewardedVideoCallbacks, IADS
 				{
 					mStatus = AdsStatus.FAILED;
 				}
+				else
+				{
+//					mStatus = AdsStatus.LOADED;
+				}
+				Logger.info("AppodealADS::Show 2");
 			}});
-		mStatus = AdsStatus.LOADING;
+		Logger.info("AppodealADS::Show");
 		return true;
 	}
 

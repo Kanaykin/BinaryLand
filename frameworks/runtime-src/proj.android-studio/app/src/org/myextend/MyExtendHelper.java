@@ -20,7 +20,9 @@ public class MyExtendHelper {
 	private static IADS 	sADS;
 	
 	public static void init(final Activity activity) {
-		MyExtendHelper.sGoogleStatistic = new GoogleStatistic(activity);
+		if(MyExtendHelper.sGoogleStatistic == null) {
+			MyExtendHelper.sGoogleStatistic = new GoogleStatistic(activity);
+		}
 //		MyExtendHelper.sFacebookStatistic = new FacebookStatistic(activity);
 
 //		FacebookADS facebookADS = new FacebookADS(activity, MyExtendHelper.sGoogleStatistic);
@@ -31,8 +33,10 @@ public class MyExtendHelper {
 //		adsContainer.Add(facebookADS);
 //		adsContainer.Add(adMobADS);
 
-		AppodealADS ads = new AppodealADS(activity, MyExtendHelper.sGoogleStatistic);
-		MyExtendHelper.sADS = ads;
+		if(MyExtendHelper.sADS == null) {
+			AppodealADS ads = new AppodealADS(activity, MyExtendHelper.sGoogleStatistic);
+			MyExtendHelper.sADS = ads;
+		}
 
 		ConsentInformation consentInformation = ConsentInformation.getInstance(activity);
 		String[] publisherIds = {"pub-7659372211727082"};
