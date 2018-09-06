@@ -14,6 +14,8 @@ LOCAL_SRC_FILES := hellolua/main.cpp \
 		   GoogleAnalitics.cpp \
 		   Events.cpp \
 		   Advertisement.cpp \
+		   Billing.cpp \
+		   AndroidBilling.cpp \
 		   FacebookADS.cpp \
 		   LoggerJni.cpp
 
