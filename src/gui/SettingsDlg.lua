@@ -1,4 +1,5 @@
 require "src/gui/CCBBaseDlg"
+require "src/gui/BuyCoffeeDlg"
 require "src/gui/GuiHelper"
 require "src/gui/ChooseLangButton"
 require "src/base/Log"
@@ -19,11 +20,14 @@ SettingsDlg.SOUND_MENU_ITEM_TAG = 11;
 SettingsDlg.MUSIC_MENU_TAG = 20;
 SettingsDlg.MUSIC_MENU_ITEM_TAG = 21;
 SettingsDlg.CHOOSE_LANG_BUTTON_TAG = 30;
+SettingsDlg.BUY_COFFEE_MENU_TAG = 180;
+SettingsDlg.BUY_COFFEE_MENU_ITEM_TAG = 181;
 
 SettingsDlg.mAnimator = nil;
 SettingsDlg.mSoundButton = nil;
 SettingsDlg.mMusicButton = nil;
 SettingsDlg.mChooseLangButton = nil;
+SettingsDlg.mBuyCoffeeDlg = nil;
 
 --------------------------------
 function SettingsDlg:doModal()
@@ -78,6 +82,22 @@ function SettingsDlg:updateMusicButton()
     else
         changeMenuItemFrame(self.mMusicButton, "music_normal.png", "music_pressed.png");
     end
+end
+
+--------------------------------
+function SettingsDlg:initBuyCoffeeButton(nodeBase)
+    info_log("SettingsDlg:initBuyCoffeeButton ");
+    local function onBuyCoffeeButtonPressed(val, val2)
+        info_log("onBuyCoffeeButtonPressed ");
+        self.mBuyCoffeeDlg:doModal();
+    end
+
+    setMenuCallback(nodeBase, SettingsDlg.BUY_COFFEE_MENU_TAG, SettingsDlg.BUY_COFFEE_MENU_ITEM_TAG, onBuyCoffeeButtonPressed);
+end
+
+---------------------------------
+function SettingsDlg:tick(dt)
+    self.mBuyCoffeeDlg:tick(dt);
 end
 
 --------------------------------
@@ -171,6 +191,22 @@ function SettingsDlg:initGuiElements()
     self:initMusicButton(nodeBase);
     self:initSoundButton(nodeBase);
     self:initChooseLangButton(nodeBase);
+    self:initBuyCoffeeButton(nodeBase);
+
+    self:initBuyCoffeeDlg();
+end
+
+--------------------------------
+function SettingsDlg:initBuyCoffeeDlg()
+    self.mBuyCoffeeDlg = BuyCoffeeDlg:create();
+    self.mBuyCoffeeDlg:init(self.mGame, self.mUILayer);
+end
+
+---------------------------------
+function SettingsDlg:destroy()
+    SettingsDlg:superClass().destroy(self);
+    self.mBuyCoffeeDlg:destroy()
+    self.mBuyCoffeeDlg = nil
 end
 
 --------------------------------

@@ -148,7 +148,8 @@ function SceneManager:runNextLevelScene()
     --     level = locations[locationId]:getLevels()[index];
     end
 
-	self:runLevelScene(level);
+	--self:runLevelScene(level);
+	self:runNextScene({location = location}, SCENE_TYPE_ID.CHOOSE_LEVEL);
 end
 
 ---------------------------------

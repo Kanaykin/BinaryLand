@@ -8,6 +8,7 @@ import org.myextend.ADSContainer;
 import org.myextend.AdMobADS;
 import org.myextend.AppodealADS;
 import org.myextend.RewardedVideoAdMobADS;
+import org.myextend.Billing;
 import android.app.Activity;
 import android.app.Application;
 import android.util.Log;
@@ -18,6 +19,7 @@ public class MyExtendHelper {
 	private static GoogleStatistic 	sGoogleStatistic;
 	private static FacebookStatistic sFacebookStatistic;
 	private static IADS 	sADS;
+	private static Billing 	sBilling;
 	
 	public static void init(final Activity activity) {
 		if(MyExtendHelper.sGoogleStatistic == null) {
@@ -54,6 +56,10 @@ public class MyExtendHelper {
 				Logger.info("MyExtendHelper:init User's consent status failed to update.");
 			}
 		});
+
+		if(MyExtendHelper.sBilling == null) {
+			MyExtendHelper.sBilling = new Billing(activity, MyExtendHelper.sGoogleStatistic);
+		}
 	}
 	
 	public static void sendEventToStatistic(final String category, final String action, 
@@ -93,4 +99,9 @@ public class MyExtendHelper {
 		return MyExtendHelper.sADS.GetStatus();
 	}
 
+	public static void purchase(final String skuId)
+	{
+		Logger.info("MyExtendHelper:Purchase");
+		MyExtendHelper.sBilling.InitiatePurchaseFlow(skuId);
+	}
 }

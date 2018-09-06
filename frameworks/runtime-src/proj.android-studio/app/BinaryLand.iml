@@ -444,6 +444,7 @@
     <orderEntry type="library" exported="" name="mobvista_videocommon-" level="project" />
     <orderEntry type="library" exported="" name="play-services-gass-10.0.1" level="project" />
     <orderEntry type="library" exported="" name="exoplayer-dash-r2.4.2" level="project" />
+    <orderEntry type="library" exported="" name="billing-1.1" level="project" />
     <orderEntry type="library" exported="" name="core-3.3.0" level="project" />
     <orderEntry type="library" exported="" name="mobvista_offerwall-" level="project" />
     <orderEntry type="library" exported="" name="play-services-basement-15.0.1" level="project" />
@@ -514,5 +515,9 @@
     <orderEntry type="library" exported="" name="play-services-audience-15.0.1" level="project" />
     <orderEntry type="library" exported="" name="mobvista_common-" level="project" />
     <orderEntry type="module" module-name="libcocos2dx" exported="" />
+    <orderEntry type="library" exported="" name="EngineDataManager" level="project" />
+    <orderEntry type="library" exported="" name="com.android.vending.expansion.zipfile" level="project" />
+    <orderEntry type="library" exported="" name="httpclient-4.4.1.1" level="project" />
+    <orderEntry type="library" exported="" name="android-async-http-1.4.9" level="project" />
   </component>
 </module>

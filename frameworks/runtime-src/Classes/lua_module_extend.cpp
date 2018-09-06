@@ -3,6 +3,7 @@
 #include "Statistic.h"
 #include "Advertisement.h"
 #include "LuaBasicConversions.h"
+#include "Billing.h"
 
 //--------------------------------------
 int lua_cocos2dx_Statistic_sendTime(lua_State* tolua_S)
@@ -466,6 +467,104 @@ int lua_register_advertisement(lua_State* tolua_S)
     return 1;
 }
 
+//--------------------------------------
+int lua_cocos2dx_Billing_getInstance(lua_State* tolua_S)
+{
+	int argc = 0;
+	bool ok  = true;
+	
+#if COCOS2D_DEBUG >= 1
+	tolua_Error tolua_err;
+#endif
+	
+#if COCOS2D_DEBUG >= 1
+	if (!tolua_isusertable(tolua_S,1,"extend.Billing",0,&tolua_err)) goto tolua_lerror;
+#endif
+	
+	argc = lua_gettop(tolua_S) - 1;
+	
+	if (argc == 0)
+	{
+		if(!ok)
+			return 0;
+		myextend::Billing* ret = myextend::Billing::getInstance();
+		object_to_luaval<myextend::Billing>(tolua_S, "extend.Billing", (myextend::Billing*)ret);
+		return 1;
+	}
+	CCLOG("%s has wrong number of arguments: %d, was expecting %d\n ", "extend.Statistic:getInstance",argc, 0);
+	return 0;
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+	tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_Statistic_getInstance'.",&tolua_err);
+#endif
+	return 0;
+}
+
+//--------------------------------------
+int lua_cocos2dx_Billing_purchase(lua_State* tolua_S)
+{
+	int argc = 0;
+	myextend::Billing* cobj = nullptr;
+	bool ok  = true;
+	
+#if COCOS2D_DEBUG >= 1
+	tolua_Error tolua_err;
+#endif
+	
+	
+#if COCOS2D_DEBUG >= 1
+	if (!tolua_isusertype(tolua_S,1,"extend.Billing",0,&tolua_err)) goto tolua_lerror;
+#endif
+	
+	cobj = (myextend::Billing*)tolua_tousertype(tolua_S,1,0);
+	
+#if COCOS2D_DEBUG >= 1
+	if (!cobj)
+	{
+		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_Billing_purchase'", nullptr);
+		return 0;
+	}
+#endif
+	
+	argc = lua_gettop(tolua_S)-1;
+	if (argc == 1)
+	{
+		std::string arg0;
+		
+		ok &= luaval_to_std_string(tolua_S, 2,&arg0, "myextend:Billing:purchase");
+		if(!ok)
+			return 0;
+		
+		bool result = cobj->purchase(arg0);
+		tolua_pushboolean(tolua_S,(bool)result);
+		return 1;
+	}
+	CCLOG("%s has wrong number of arguments: %d, was expecting %d \n", "myextend:Billing:purchase",argc, 1);
+	return 0;
+	
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+	tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_Billing_purchase'.",&tolua_err);
+#endif
+	
+	return 0;
+}
+
+//--------------------------------------
+int lua_register_billing(lua_State* tolua_S)
+{
+	tolua_usertype(tolua_S,"extend.Billing");
+	tolua_cclass(tolua_S,"Billing","extend.Billing","",nullptr);
+	
+	tolua_beginmodule(tolua_S,"Billing");
+	tolua_function(tolua_S, "getInstance", lua_cocos2dx_Billing_getInstance);
+	tolua_function(tolua_S, "purchase", lua_cocos2dx_Billing_purchase);
+	tolua_endmodule(tolua_S);
+	std::string typeName = typeid(myextend::Billing).name();
+	g_luaType[typeName] = "extend.Billing";
+	g_typeCast["Billing"] = "extend.Billing";
+	return 1;
+}
 
 //--------------------------------------
 int lua_register_statistic(lua_State* tolua_S)
@@ -499,6 +598,7 @@ int register_extend_module(lua_State* L)
         
         lua_register_statistic(L);
         lua_register_advertisement(L);
+		lua_register_billing(L);
         
         tolua_endmodule(L);
 

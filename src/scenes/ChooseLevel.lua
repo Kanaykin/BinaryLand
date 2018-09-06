@@ -2,10 +2,12 @@ require "src/scenes/BaseScene"
 require "src/scenes/SoundConfigs"
 require "src/base/Log"
 require "src/gui/SettingsDlgLvl"
+require "src/gui/BuyCoffeeDlg"
 
 ChooseLevel = inheritsFrom(BaseScene)
 ChooseLevel.mCurLocation = nil;
 ChooseLevel.mSettingsDlg = nil;
+ChooseLevel.mBuyCoffeeDlg = nil;
 
 ChooseLevel.BACK_MENU_TAG = 10;
 ChooseLevel.BACK_MENU_ITEM_TAG = 11;
@@ -132,4 +134,8 @@ function ChooseLevel:initGui()
     -------------------------
     self.mSettingsDlg = SettingsDlgLvl:create();
     self.mSettingsDlg:init(self.mSceneManager.mGame, self.mGuiLayer);
+
+    -------------------------
+    self.mBuyCoffeeDlg = BuyCoffeeDlg:create();
+    self.mBuyCoffeeDlg:init(self.mSceneManager.mGame, self.mGuiLayer);
 end

@@ -115,6 +115,8 @@
 		50D7C97017EBBEEC005D0B91 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7C96F17EBBEEC005D0B91 /* IOKit.framework */; };
 		9C1CA9CC20B99AB200AF1A36 /* script in Resources */ = {isa = PBXBuildFile; fileRef = 9C1CA9C920B99AB100AF1A36 /* script */; };
 		9C1CA9CD20B9F43300AF1A36 /* script in Resources */ = {isa = PBXBuildFile; fileRef = 9C1CA9C920B99AB100AF1A36 /* script */; };
+		9C1E2792213DEA5D004A86C4 /* Billing.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9C1E2791213DEA5D004A86C4 /* Billing.mm */; };
+		9C1E2793213DEA5D004A86C4 /* Billing.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9C1E2791213DEA5D004A86C4 /* Billing.mm */; };
 		9C42102F20ADBD6A005C53FC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C42102820ADBD6A005C53FC /* Security.framework */; };
 		9C42103120ADBF7D005C53FC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C42103020ADBF7D005C53FC /* Security.framework */; };
 		9C42103320ADBFEF005C53FC /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C42103220ADBFEE005C53FC /* CoreText.framework */; };
@@ -292,6 +294,9 @@
 		50D7C96D17EBBEE6005D0B91 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		50D7C96F17EBBEEC005D0B91 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		9C1CA9C920B99AB100AF1A36 /* script */ = {isa = PBXFileReference; lastKnownFileType = folder; name = script; path = "../../cocos2d-x/cocos/scripting/lua-bindings/script"; sourceTree = "<group>"; };
+		9C1E278D213DE5E2004A86C4 /* Advertisement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Advertisement.h; path = ../Classes/Advertisement.h; sourceTree = "<group>"; };
+		9C1E278E213DE5E2004A86C4 /* Billing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Billing.h; path = ../Classes/Billing.h; sourceTree = "<group>"; };
+		9C1E2791213DEA5D004A86C4 /* Billing.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Billing.mm; sourceTree = "<group>"; };
 		9C42102820ADBD6A005C53FC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9C42103020ADBF7D005C53FC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		9C42103220ADBFEE005C53FC /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
@@ -319,7 +324,6 @@
 		F293B3DA15EB7BE500256477 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F293BB7E15EB831F00256477 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		F293BB7F15EB831F00256477 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
-		F63895E11E2EB5BF00F8ABEA /* Advertisement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Advertisement.h; path = "/Volumes/Seagate/MyGames/BinaryLand/frameworks/runtime-src/Classes/Advertisement.h"; sourceTree = "<absolute>"; };
 		F63895E41E2EBCB000F8ABEA /* FacebookADS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FacebookADS.mm; sourceTree = "<group>"; };
 		F63895E51E2EBCB000F8ABEA /* FacebookADS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookADS.h; sourceTree = "<group>"; };
 		F63895E81E2EBDB700F8ABEA /* Advertisement.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Advertisement.mm; sourceTree = "<group>"; };
@@ -424,6 +428,7 @@
 		5023810617EBBCAC00990C9B /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				9C1E2791213DEA5D004A86C4 /* Billing.mm */,
 				A5CAB5521A052BA600660D14 /* Statistic.mm */,
 				5023810717EBBCAC00990C9B /* AppController.h */,
 				5023810817EBBCAC00990C9B /* AppController.mm */,
@@ -541,7 +546,8 @@
 		F293BB7C15EB830F00256477 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F63895E11E2EB5BF00F8ABEA /* Advertisement.h */,
+				9C1E278D213DE5E2004A86C4 /* Advertisement.h */,
+				9C1E278E213DE5E2004A86C4 /* Billing.h */,
 				A5C752781A03522400389E67 /* lua_module_extend.h */,
 				15427C7E198F201A00DC375D /* lua_module_register.h */,
 				F293BB7E15EB831F00256477 /* AppDelegate.cpp */,
@@ -844,6 +850,7 @@
 				C06E23C418CEF9740093C81A /* main.cpp in Sources */,
 				5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */,
 				A5BFD9A01A1FC71700A6A552 /* GoogleAnalitics.mm in Sources */,
+				9C1E2793213DEA5D004A86C4 /* Billing.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -852,6 +859,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5C7527A1A0354A600389E67 /* lua_module_extend.cpp in Sources */,
+				9C1E2792213DEA5D004A86C4 /* Billing.mm in Sources */,
 				F63895E91E2EBDB700F8ABEA /* Advertisement.mm in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
 				A5BFD99F1A1FC71700A6A552 /* GoogleAnalitics.mm in Sources */,

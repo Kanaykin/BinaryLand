@@ -21,8 +21,8 @@ android {
         applicationId "com.MyCompany.BinaryLand"
         minSdkVersion PROP_MIN_SDK_VERSION
         targetSdkVersion PROP_TARGET_SDK_VERSION
-        versionCode 13
-        versionName "2.3"
+        versionCode 14
+        versionName "2.4"
         multiDexEnabled  true
 
         externalNativeBuild {
@@ -275,6 +275,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.google.android.ads.consent:consent-library:1.0.4'
     compile 'com.squareup.picasso:picasso:2.5.2' //for Inmobi
+    compile 'com.android.billingclient:billing:1.1'
     compile name: 'adcolony-sdk-3.2.1', ext: 'aar'
     compile name: 'mmedia-6.4.0', ext: 'aar'
     compile name: 'mobvista_alphab', ext: 'aar'

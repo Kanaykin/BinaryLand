@@ -194,6 +194,11 @@ function MainUI:tick(dt)
         self.mWaitAdsDlg:tick(dt);
     end
 
+    if self.mGame.mDialogManager:isModal(self.mSettingsDlg) then
+        self.mSettingsDlg:tick(dt);
+    end
+
+
 end
 
 --------------------------------
