@@ -1369,7 +1369,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>sound_normal.png</string>
+											<string>coffee_normal.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -1380,7 +1380,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>sound_pressed.png</string>
+											<string>coffee_pressed.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -1395,6 +1395,8 @@
 										</array>
 									</dict>
 								</array>
+								<key>selected</key>
+								<true/>
 							</dict>
 						</array>
 						<key>customClass</key>
@@ -1480,8 +1482,6 @@
 								<true/>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>

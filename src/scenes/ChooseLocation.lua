@@ -403,6 +403,8 @@ function ChooseLocation:tick(dt)
         self.mNotEnoughStarsDlg:tick(dt);
     end
 
+    self.mSettingsDlg:tick(dt);
+
     --if  not SimpleAudioEngine:getInstance():isMusicPlaying() then
         --self:getGame():getSoundManager():playMusic(gSounds.CHOOSE_LOCATION_MUSIC, true)
     --end

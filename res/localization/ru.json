@@ -61,5 +61,6 @@
     "DesertText" : "Пустыня",
     "SnowLandText" : "Сугробы",
     "JungleText" : "Джунгли",
-    "VulcanoText" : "Вулканы"
+    "VulcanoText" : "Вулканы",
+    "BuyCoffeeDlgText" : "Купить кофе\nразработчикам?"
 }

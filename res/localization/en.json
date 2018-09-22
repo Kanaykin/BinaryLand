@@ -54,5 +54,6 @@
   "DesertText" : "Desert",
   "SnowLandText" : "SnowLand",
   "JungleText" : "Jungle",
-  "VulcanoText" : "Vulcano"
+  "VulcanoText" : "Vulcano",
+  "BuyCoffeeDlgText" : "Do you want buy coffee\nto developers??"
 }

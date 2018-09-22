@@ -7,11 +7,11 @@ require "src/gui/BuyCoffeeDlg"
 ChooseLevel = inheritsFrom(BaseScene)
 ChooseLevel.mCurLocation = nil;
 ChooseLevel.mSettingsDlg = nil;
-ChooseLevel.mBuyCoffeeDlg = nil;
 
 ChooseLevel.BACK_MENU_TAG = 10;
 ChooseLevel.BACK_MENU_ITEM_TAG = 11;
 ChooseLevel.BASE_NODE_TAG = 1;
+ChooseLevel.COUNT_ENTER_SCENE_BUY_COFFEE = 3;
 
 local LOADSCEENIMAGE = "GlobalMap.png"
 
@@ -105,6 +105,21 @@ function ChooseLevel:initScene()
 	end
 
 	animator:runAnimationsForSequenceNamed("Default Timeline");
+
+end
+
+---------------------------------
+function ChooseLevel:showBuyCoffeeIfNeed()
+    -- если покупка была ничего не показываем
+
+    local key = "CountShowChooseLevelScene";
+    local count = cc.UserDefault:getInstance():getIntegerForKey(key, 0);
+    count = count + 1;
+    cc.UserDefault:getInstance():setIntegerForKey(key, count);
+    
+    if count % ChooseLevel.COUNT_ENTER_SCENE_BUY_COFFEE == 0 then
+        self.mSettingsDlg:openBuyCoffeeDlg();
+    end
 end
 
 ---------------------------------
@@ -112,6 +127,7 @@ function ChooseLevel:tick(dt)
     for i, level in pairs(self.mCurLocation.mLevels) do
         level:tick(dt);
     end
+	self.mSettingsDlg:tick(dt)
 end
 
 --------------------------------
@@ -135,7 +151,5 @@ function ChooseLevel:initGui()
     self.mSettingsDlg = SettingsDlgLvl:create();
     self.mSettingsDlg:init(self.mSceneManager.mGame, self.mGuiLayer);
 
-    -------------------------
-    self.mBuyCoffeeDlg = BuyCoffeeDlg:create();
-    self.mBuyCoffeeDlg:init(self.mSceneManager.mGame, self.mGuiLayer);
+    self:showBuyCoffeeIfNeed();
 end

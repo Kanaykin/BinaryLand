@@ -178,7 +178,7 @@
 									<key>name</key>
 									<string>visible</string>
 									<key>time</key>
-									<real>3</real>
+									<real>1.1000000238418579</real>
 									<key>type</key>
 									<integer>1</integer>
 									<key>value</key>
@@ -638,7 +638,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>40</real>
+									<real>30</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -672,7 +672,7 @@
 								<key>type</key>
 								<string>IntegerLabeled</string>
 								<key>value</key>
-								<integer>0</integer>
+								<integer>1</integer>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -688,9 +688,11 @@
 								<key>type</key>
 								<string>Text</string>
 								<key>value</key>
-								<string>WatchAdsText</string>
+								<string>BuyCoffeeDlgText</string>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -839,7 +841,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>advertising.png</string>
+									<string>coffee.png</string>
 								</array>
 							</dict>
 						</array>
@@ -1895,7 +1897,7 @@
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
-			<real>1.6108808517456055</real>
+			<real>0.0</real>
 			<key>position</key>
 			<real>3</real>
 			<key>resolution</key>

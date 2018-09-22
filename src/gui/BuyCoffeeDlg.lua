@@ -54,15 +54,27 @@ function BuyCoffeeDlg:tick(dt)
 end
 
 --------------------------------
+function BuyCoffeeDlg:doModal()
+	self:superClass().doModal(self);
+
+    local statistic = extend.Statistic:getInstance();
+    statistic:sendScreenName("BuyCoffeeDlg");
+end
+
+--------------------------------
 function BuyCoffeeDlg:onNoPressed()
     self:hide();
     self.mGame.mDialogManager:deactivateModal(self);
+    local statistic = extend.Statistic:getInstance();
+	statistic:sendEvent("BuyCoffee", "No", "Pressed", -1);
 end
 
 --------------------------------
 function BuyCoffeeDlg:onYesPressed()
     local billing = extend.Billing:getInstance();
     billing:purchase("com.mycompany.binaryland.buycoffee");
+    local statistic = extend.Statistic:getInstance();
+	statistic:sendEvent("BuyCoffee", "Yes", "Pressed", -1);
 end
 
 --------------------------------

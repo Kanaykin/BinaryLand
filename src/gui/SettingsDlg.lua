@@ -89,10 +89,15 @@ function SettingsDlg:initBuyCoffeeButton(nodeBase)
     info_log("SettingsDlg:initBuyCoffeeButton ");
     local function onBuyCoffeeButtonPressed(val, val2)
         info_log("onBuyCoffeeButtonPressed ");
-        self.mBuyCoffeeDlg:doModal();
+        self:openBuyCoffeeDlg();
     end
 
     setMenuCallback(nodeBase, SettingsDlg.BUY_COFFEE_MENU_TAG, SettingsDlg.BUY_COFFEE_MENU_ITEM_TAG, onBuyCoffeeButtonPressed);
+end
+
+---------------------------------
+function SettingsDlg:openBuyCoffeeDlg()
+    self.mBuyCoffeeDlg:doModal();
 end
 
 ---------------------------------
