@@ -5,7 +5,8 @@ public enum AdsStatus
 	NONE(1),
 	LOADING(2),
 	LOADED(3),
-	FAILED(4);
+	FAILED(4),
+	CANCELED(5);
 
 	private final int value;
 	private AdsStatus(int value)

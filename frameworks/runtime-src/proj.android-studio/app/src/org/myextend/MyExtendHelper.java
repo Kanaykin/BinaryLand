@@ -104,4 +104,9 @@ public class MyExtendHelper {
 		Logger.info("MyExtendHelper:Purchase");
 		MyExtendHelper.sBilling.InitiatePurchaseFlow(skuId);
 	}
+
+	public static int getStatusBilling() {
+		Logger.info("MyExtendHelper:getStatusBilling");
+		return MyExtendHelper.sBilling.GetStatus();
+	}
 }

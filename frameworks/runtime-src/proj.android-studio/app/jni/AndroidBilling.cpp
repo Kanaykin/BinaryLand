@@ -8,7 +8,7 @@
 namespace myextend {
     namespace android {
 
-//------------------------------
+    //------------------------------
     bool AndroidBilling::purchase(const std::string& skuId)
     {
         cocos2d::JniMethodInfo methodInfo;
@@ -25,7 +25,22 @@ namespace myextend {
         return true;
     }
 
-//-------------------------------
+    //-------------------------------
+    int AndroidBilling::getStatus()
+    {
+        cocos2d::JniMethodInfo methodInfo;
+
+        if (!getJNIStaticMethodInfo(methodInfo, "getStatusBilling", "()I"))
+        {
+            return false;
+        }
+
+        jint ret = methodInfo.env->CallStaticIntMethod(methodInfo.classID, methodInfo.methodID);
+        methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        return ret;
+    }
+
+    //-------------------------------
     bool AndroidBilling::getJNIStaticMethodInfo(cocos2d::JniMethodInfo &methodinfo,
                                                  const char *methodName,
                                                  const char *paramCode) {

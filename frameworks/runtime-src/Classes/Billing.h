@@ -16,6 +16,8 @@ namespace myextend {
 		
 		virtual bool purchase(const std::string& /*skuId*/){ return false; }
 		
+		virtual int getStatus() {return 2;};
+		
 	};
 
 }

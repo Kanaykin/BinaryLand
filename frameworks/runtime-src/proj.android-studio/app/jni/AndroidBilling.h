@@ -11,6 +11,8 @@ namespace myextend {
         {
         public:
             bool purchase(const std::string& skuId) override ;
+
+            int getStatus() override;
         private:
             //-------------------------------
             bool getJNIStaticMethodInfo(cocos2d::JniMethodInfo &methodinfo,

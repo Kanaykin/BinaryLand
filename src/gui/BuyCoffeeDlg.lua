@@ -1,4 +1,5 @@
 require "src/gui/CCBBaseDlg"
+require "src/gui/MessageBoxDlg"
 
 BuyCoffeeDlg = inheritsFrom(CCBBaseDialog)
 
@@ -11,6 +12,7 @@ BuyCoffeeDlg.BUTTON_NO = 101;
 BuyCoffeeDlg.ANIM_SPRITE = 75;
 
 BuyCoffeeDlg.mAnimation = nil
+BuyCoffeeDlg.mBuyPressed = nil
 
 --------------------------------
 function BuyCoffeeDlg:init(game, uiLayer)
@@ -51,28 +53,86 @@ end
 ---------------------------------
 function BuyCoffeeDlg:tick(dt)
     self.mAnimation:tick(dt);
+
+    if not self.mGame.mDialogManager:isModal(self) then 
+    	return
+    end
+
+    if not self.mBuyPressed then
+    	return
+    end
+
+    local billing = extend.Billing:getInstance();
+	local status = billing:getStatus();
+
+	-- info_log("BuyCoffeeDlg:tick status ", status);
+
+	if status == 3 then -- success
+		self:close()
+		local messageBoxDlg = MessageBoxDlg:create();
+    	messageBoxDlg:init(self.mGame, self.mUILayer);
+
+    	cc.UserDefault:getInstance():setBoolForKey("alreadyPurchased", true);
+
+        local localizationManager = self.mGame:getLocalizationManager();
+        local text = localizationManager:getStringForKey("BuyCoffeeDlgSuccessText");
+
+    	local message_params = {
+            text = text,
+            ok_text = "Ok",
+            ok_callback = function()
+                messageBoxDlg:hide();
+    			self.mGame.mDialogManager:deactivateModal(messageBoxDlg);
+            end
+        };
+    	messageBoxDlg:doModal(message_params);
+    elseif status == 4 then -- FAILED(4)
+		self:close();
+        
+        local localizationManager = self.mGame:getLocalizationManager();
+        local text = localizationManager:getStringForKey(GetStarDlg.ErrorLoadingText);
+
+        local messageBoxDlg = MessageBoxDlg:create();
+    	messageBoxDlg:init(self.mGame, self.mUILayer);
+        local message_params = {
+            text = text,
+            ok_text = "Ok",
+            ok_callback = function()
+                messageBoxDlg:hide();
+    			self.mGame.mDialogManager:deactivateModal(messageBoxDlg);
+            end
+        };
+    	messageBoxDlg:doModal(message_params);
+	end
 end
 
 --------------------------------
 function BuyCoffeeDlg:doModal()
 	self:superClass().doModal(self);
+	self.mBuyPressed = false
 
     local statistic = extend.Statistic:getInstance();
     statistic:sendScreenName("BuyCoffeeDlg");
 end
 
 --------------------------------
-function BuyCoffeeDlg:onNoPressed()
-    self:hide();
+function BuyCoffeeDlg:close()
+	self:hide();
     self.mGame.mDialogManager:deactivateModal(self);
+end
+
+--------------------------------
+function BuyCoffeeDlg:onNoPressed()
+	self:close()
     local statistic = extend.Statistic:getInstance();
 	statistic:sendEvent("BuyCoffee", "No", "Pressed", -1);
 end
 
 --------------------------------
 function BuyCoffeeDlg:onYesPressed()
+	self.mBuyPressed = true
     local billing = extend.Billing:getInstance();
-    billing:purchase("com.mycompany.binaryland.buycoffee");
+    billing:purchase("com.mycompany.binaryland.buycoffee2");
     local statistic = extend.Statistic:getInstance();
 	statistic:sendEvent("BuyCoffee", "Yes", "Pressed", -1);
 end

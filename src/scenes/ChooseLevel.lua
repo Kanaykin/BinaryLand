@@ -111,6 +111,10 @@ end
 ---------------------------------
 function ChooseLevel:showBuyCoffeeIfNeed()
     -- если покупка была ничего не показываем
+    local  alreadyPurchased = cc.UserDefault:getInstance():getBoolForKey("alreadyPurchased");
+    if alreadyPurchased then
+        return;
+    end
 
     local key = "CountShowChooseLevelScene";
     local count = cc.UserDefault:getInstance():getIntegerForKey(key, 0);

@@ -551,6 +551,52 @@ tolua_lerror:
 }
 
 //--------------------------------------
+int lua_cocos2dx_Billing_getStatus(lua_State* tolua_S)
+{
+	int argc = 0;
+	bool ok  = true;
+	
+	myextend::Billing* cobj = nullptr;
+	
+#if COCOS2D_DEBUG >= 1
+	tolua_Error tolua_err;
+#endif
+	
+	
+#if COCOS2D_DEBUG >= 1
+	if (!tolua_isusertype(tolua_S,1,"extend.Billing",0,&tolua_err)) goto tolua_lerror;
+#endif
+	
+	cobj = (myextend::Billing*)tolua_tousertype(tolua_S,1,0);
+	
+#if COCOS2D_DEBUG >= 1
+	if (!cobj)
+	{
+		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_Billing_getStatus'", nullptr);
+		return 0;
+	}
+#endif
+	
+	argc = lua_gettop(tolua_S)-1;
+	if (argc == 0)
+	{
+		if(!ok)
+			return 0;
+		CCLOG("lua_cocos2dx_Billing_getStatus");
+		const int result = cobj->getStatus();
+		tolua_pushnumber(tolua_S, result);
+		return 1;
+	}
+	
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+	tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_Billing_getStatus'.",&tolua_err);
+#endif
+	
+	return 0;
+}
+
+//--------------------------------------
 int lua_register_billing(lua_State* tolua_S)
 {
 	tolua_usertype(tolua_S,"extend.Billing");
@@ -559,6 +605,7 @@ int lua_register_billing(lua_State* tolua_S)
 	tolua_beginmodule(tolua_S,"Billing");
 	tolua_function(tolua_S, "getInstance", lua_cocos2dx_Billing_getInstance);
 	tolua_function(tolua_S, "purchase", lua_cocos2dx_Billing_purchase);
+	tolua_function(tolua_S, "getStatus", lua_cocos2dx_Billing_getStatus);
 	tolua_endmodule(tolua_S);
 	std::string typeName = typeid(myextend::Billing).name();
 	g_luaType[typeName] = "extend.Billing";

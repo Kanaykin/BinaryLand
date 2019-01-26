@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../cocos2d-x/cocos/scripting/lua-bindings/auto/lua_cocos2dx_auto.cpp"
-            timestampString = "548028732.180258"
+            timestampString = "562623804.558774"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37288"
@@ -159,8 +159,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "343"
             endingLineNumber = "343"
-            landmarkName = "Text::enableOutline(const Color4B&amp; outlineColor,int outlineSize)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -170,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../cocos2d-x/cocos/scripting/lua-bindings/auto/lua_cocos2dx_auto.cpp"
-            timestampString = "548028732.1884021"
+            timestampString = "562623804.558901"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37301"
@@ -202,7 +202,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/lua_module_extend.cpp"
-            timestampString = "558565714.607693"
+            timestampString = "559428862.780897"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "506"
@@ -218,12 +218,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/lua_module_extend.cpp"
-            timestampString = "558565714.607765"
+            timestampString = "559428862.781345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "473"
-            endingLineNumber = "473"
-            landmarkName = "lua_cocos2dx_Billing_getInstance(lua_State* tolua_S)"
+            startingLineNumber = "556"
+            endingLineNumber = "556"
+            landmarkName = "lua_cocos2dx_Billing_getStatus(lua_State* tolua_S)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

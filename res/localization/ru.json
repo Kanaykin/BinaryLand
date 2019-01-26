@@ -62,5 +62,6 @@
     "SnowLandText" : "Сугробы",
     "JungleText" : "Джунгли",
     "VulcanoText" : "Вулканы",
-    "BuyCoffeeDlgText" : "Купить кофе\nразработчикам?"
+    "BuyCoffeeDlgText" : "Купить кофе\nразработчикам?",
+    "BuyCoffeeDlgSuccessText" : "Спасибо!"
 }

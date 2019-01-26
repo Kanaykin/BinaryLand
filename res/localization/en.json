@@ -55,5 +55,6 @@
   "SnowLandText" : "SnowLand",
   "JungleText" : "Jungle",
   "VulcanoText" : "Vulcano",
-  "BuyCoffeeDlgText" : "Do you want buy coffee\nto developers??"
+  "BuyCoffeeDlgText" : "Do you want buy coffee\nto developers??",
+  "BuyCoffeeDlgSuccessText" : "Thank you!"
 }
